@@ -2,92 +2,83 @@
 
 ## Current State (Feb 28, 2026)
 
-**850 pages live.** 100 schools (50 original + 25 Tier 5 + 25 Tier 6). 25 ranking pages (5 original + 20 specialty). Homepage updated with Tier 6 filter. Expansion Phase 1 in progress.
+**930 pages live.** 100 schools (Tiers 1-6). 75 comparisons. 30 metros. 50 blog posts. 25 ranking pages. Expansion Phase 1 complete for comparisons, metros, and blog posts.
 
 ### What Exists
 - **100 school profiles** at `/schools/{slug}/` (M7 through Tier 6)
-- **35 comparison pages** at `/compare/{a}-vs-{b}/`
+- **75 comparison pages** at `/compare/{a}-vs-{b}/`
 - **22 guide pages** at `/guides/{slug}/`
-- **25 blog posts** at `/blog/{slug}/`
+- **50 blog posts** at `/blog/is-{slug}-worth-it/` (top 50 schools)
 - **25 ranking pages** at `/rankings/{category}/` (overall + ROI + salary + selectivity + career-changers + 20 specialties)
-- **15 metro pages** at `/metro/{city}-mba-programs/`
+- **30 metro pages** at `/locations/{slug}/`
 - **Tools:** ROI calculator, GMAT target score calculator
 - **FAQ pages** at `/faq/{topic}/`
-- **Homepage:** Dashboard layout with stats ticker, headline, pathways, article list, top 10 table, GMAT inline tool, comparisons, newsletter CTA. Tier 5 and Tier 6 filter buttons added.
+- **Homepage:** Dashboard layout with stats ticker, headline, pathways, article list, top 10 table, GMAT inline tool, comparisons, newsletter CTA. Tier 5 and Tier 6 filter buttons.
 
-### What Was Just Completed (Session 5 — Specialty Rankings + Fixes)
-1. **20 new specialty ranking pages** added at `/rankings/{specialty}/`:
-   - Finance, Consulting, Entrepreneurship, Technology, Supply Chain, Marketing
-   - Healthcare, Real Estate, International Business, Accounting, Data Science & AI
-   - Sustainability, Energy, PE & VC, Management, Nonprofit, Quantitative Analysis
-   - Information Systems, Value (Affordable), Product Management
-2. Each ranking page has curated school lists (10-25 schools per specialty) with nav labels
-3. **Duplicate schools fixed:** Replaced Northeastern D'Amore-McKim (#77, duplicate of #50) with Bentley; replaced Tulane Freeman (#98, duplicate of #47) with Syracuse Whitman
-4. Overall ranking limit expanded from 50 to 100 schools
-5. Ranking nav updated with `nav_label` support for cleaner display names
-6. Build verified: 850 pages generated successfully
+### What Was Just Completed (Session 6 — Comparisons + Metros + Blog Expansion)
+
+1. **40 new comparison pages** (35 → 75 total). Categories added:
+   - **Cross-tier reach comparisons:** Duke vs Kellogg, Yale vs Columbia, Dartmouth vs Yale, Cornell vs Stern, Ross vs Kellogg, Emory vs Duke, Wharton vs Columbia
+   - **Regional matchups:** Georgia Tech vs Emory (Atlanta), BU vs Northeastern (Boston), BC vs BU (Boston), GW vs Georgetown (DC), SMU vs McCombs (Texas), Pitt Katz vs Tepper (Pittsburgh), Warrington vs Herbert (Florida), Rutgers vs Fordham (NYC area), UGA vs Georgia Tech (Georgia), UCSD vs UCI (SoCal), Leeds vs Daniels (Colorado), Temple vs Drexel (Philly), Howard vs American (DC), USC vs Haas (California), UC Davis vs UCI (UC system), SDSU vs USD (San Diego), LMU vs Pepperdine (LA), DePaul vs UIC (Chicago)
+   - **Midwest matchups:** Notre Dame vs Kelley, Ohio State vs Kelley, WashU vs Kelley, Wisconsin vs Minnesota, Illinois vs Kelley
+   - **Specialty/program comparisons:** Babson vs BU (entrepreneurship), ASU vs Arizona (state flagships), Wake Forest vs UNC, Baylor vs TCU, Texas A&M vs Baylor, Tennessee vs Vanderbilt, Iowa vs Wisconsin
+   - **Southern comparisons:** Vanderbilt vs UNC, UNC vs Duke (NC neighbors), Georgetown vs Darden (DC/VA)
+
+2. **15 new metro pages** (15 → 30 total). New metros:
+   - Austin, Pittsburgh, Salt Lake City, Denver-Boulder, San Diego, Miami-South Florida
+   - Central Indiana, Cincinnati, Columbus OH, Milwaukee-Madison, St. Louis
+   - Phoenix-Tempe, Orange County, Portland-Eugene, New Jersey
+
+3. **Blog posts expanded** from 25 to 50 (top 50 schools now get "Is [School] Worth It?" posts)
+
+4. Build verified: 930 pages generated successfully
+
+### Previous Session (Session 5 — Specialty Rankings + Fixes)
+1. 20 new specialty ranking pages at `/rankings/{specialty}/`
+2. Duplicate schools fixed (Bentley replaced Northeastern duplicate, Syracuse replaced Tulane duplicate)
+3. Overall ranking limit expanded from 50 to 100
+4. Build verified: 850 pages
 
 ### Previous Session (Session 4 — Schools 76-100)
-1. **25 new Tier 6 schools added** (rankings 76-100), all with full data model:
-   - NC State Jenkins (#76), Northeastern D'Amore-McKim (#77), Iowa Tippie (#78), SUNY Buffalo (#79), Oklahoma Price (#80)
-   - Howard (#81), Oregon Lundquist (#82), Denver Daniels (#83), Alabama Manderson (#84), Arkansas Walton (#85)
-   - TCU Neeley (#86), Utah Eccles (#87), Drexel LeBow (#88), Clemson (#89), UIC Liautaud (#90)
-   - Missouri Trulaske (#91), DePaul Kellstadt (#92), SDSU Fowler (#93), Xavier Williams (#94), Marquette (#95)
-   - Loyola Marymount (#96), Creighton Heider (#97), Tulane Freeman (#98), San Diego Knauss (#99), American Kogod (#100)
-2. Each school has: real data (acceptance rate, GMAT, GPA, class size, salary, employment, tuition), opinionated verdict, program overview, culture, academics, careers, who should apply, watch out for, and 3 FAQs
-3. Tier 6 CSS badge styling added (`.tier-badge.tier-6`)
-4. Homepage filter button added for "76-100" tier
-5. `tier_label` and `tier_desc` mappings updated to include tier 6
-6. CSS_VERSION bumped from 6 to 7
-7. Build verified: 823 pages generated successfully
-
-### Previous Session Work (Session 3 — Schools 51-75)
-1. 25 new Tier 5 schools added (rankings 51-75)
-2. Tier 5 CSS badge styling, homepage filter button
-3. CSS_VERSION bumped from 5 to 6
-4. Build verified: 655 pages
+1. 25 new Tier 6 schools added (rankings 76-100)
+2. Tier 6 CSS badge, homepage filter button
+3. CSS_VERSION bumped from 6 to 7
+4. Build verified: 823 pages
 
 ### Earlier Sessions
-1. Homepage headline: "Pick the right MBA without the 200+ hour research project."
-2. All best practice docs pulled into `docs/`
-3. `CLAUDE.md` fully updated with all doc references + marketingskills repo
-4. CSS border-radius changed from 2px/4px to 8px/12px (rounded corners)
-5. Dashboard homepage layout built (stats ticker, pathways, article list, data table, GMAT tool)
+1. Schools 51-75 (Tier 5), CSS_VERSION 5→6
+2. Homepage dashboard layout, branding, docs setup
+3. Original 50 schools, 35 comparisons, 22 guides, 15 metros
 
 ---
 
 ## The Expansion Plan
 
-### Goal: 1,500-2,000+ pages (from current 850)
+### Goal: 1,500-2,000+ pages (from current 930)
 
-### 1. Expand Schools: 100 → 150
+### 1. Expand Schools: 100 → 150 (NEXT PRIORITY)
 - **Tier 7 (101-150):** ~50 schools (TO ADD)
 - Each profile generates 7 pages (profile + 6 subpages), so 50 more schools = ~350 more pages
+- This brings page count to ~1,280
 
-### 2. Specialty Ranking Pages — DONE (20 new pages)
-All 20 specialty rankings built with curated school lists. See `/rankings/{specialty}/`.
+### 2. Specialty Ranking Pages — DONE (20 pages)
+All 20 specialty rankings built with curated school lists.
 
-### 3. Expand Comparisons
+### 3. Comparisons — DONE (75 pages, was 35)
+40 new comparisons added. Cross-tier, regional, and specialty matchups. Could add more as Tier 7 schools are added.
 
-With 100+ schools, the comparison page opportunity grows massively:
-- **Cross-tier comparisons:** "Is Kelley worth it vs applying to Ross?"
-- **Regional matchups:** Every metro area pair
-- **Specialty matchups:** "Best finance MBA: Wharton vs Booth vs Stern"
-- Target: 75-100+ comparison pages (from current 35)
+### 4. Metros — DONE (30 pages, was 15)
+15 new metros added. Major US markets covered. Could add more niche markets later.
 
-### 4. Expand Metros
+### 5. Blog Posts — DONE (50 posts, was 25)
+"Is [School] Worth It?" expanded to top 50. Auto-generates from school data.
 
-Add 15-20 more metro pages beyond the current 15:
-- Secondary markets: Nashville, Austin, Raleigh, Salt Lake City, Sacramento, Pittsburgh, etc.
-- Each metro page lists schools in that region + cost of living + local employers
-
-### 5. More Blog Posts
-
-Expand from 25 to 50+:
-- "Is [School] Worth It?" series for top 50 schools
-- Salary deep-dives by industry
-- Application strategy content
-- Career-switcher guides
+### 6. Future Content Opportunities (after schools 101-150)
+- **More comparisons:** Add comparisons involving Tier 7 schools (~20-30 more)
+- **More blog posts:** Salary deep-dives by industry, career-switcher guides, application strategy (manual content, not auto-generated)
+- **International schools:** INSEAD, LBS, IESE, etc.
+- **Specialty guides:** Industry-specific MBA guides (consulting, tech, healthcare, finance)
+- **More metros:** Niche markets as new schools are added
 
 ---
 
@@ -153,15 +144,14 @@ Copy-paste to continue in a new window:
 ```
 Continue building mbaguidance.com. Project at /Users/rome/Documents/projects/mbaguidance/. Read CLAUDE.md and HANDOFF.md for full context.
 
-Current state: 850 pages, 100 schools (Tiers 1-6), 25 ranking pages (20 specialty), 35 comparisons, 15 metros. Build: python3 build.py.
+Current state: 930 pages, 100 schools (Tiers 1-6), 75 comparisons, 30 metros, 50 blog posts, 25 ranking pages. Build: python3 build.py.
 
 Next steps in the expansion plan:
 
-1. Expand comparisons from 35 to 75-100+. Cross-tier comparisons (e.g., "Kelley vs Ross"), regional matchups, specialty matchups. Each comparison follows the existing data model in COMPARISONS.
-2. Expand metros from 15 to 30+. Add Nashville, Austin, Raleigh, Salt Lake City, Sacramento, Pittsburgh, etc.
-3. More blog posts: expand from 25 to 50+. "Is [School] Worth It?" series, salary deep-dives, career-switcher guides.
-4. Add schools 101-150 (Tier 7). 50 more schools = ~350 more pages.
-5. Target: 1,500-2,000+ total pages.
+1. Add schools 101-150 (Tier 7). 50 more schools = ~350 more pages. Research schools ranked ~101-150 in US News. Same data model as existing schools: real data, opinionated verdicts, full profiles with FAQs. Add tier 7 CSS badge, homepage filter button, update tier_label/tier_desc mappings.
+2. Add comparisons involving new Tier 7 schools (~20-30 new comparisons).
+3. Add more standalone blog posts: salary deep-dives by industry, career-switcher guides, application strategy content (these are manual, not auto-generated from school data).
+4. Target: 1,500+ total pages.
 
 Follow all writing rules in CLAUDE.md. Zero tolerance on false reframes, em-dashes, banned words. Stop at ~50% context, commit, update HANDOFF.md, provide resume prompt.
 ```

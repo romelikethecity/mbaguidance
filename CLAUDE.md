@@ -7,7 +7,7 @@
 - **Preview:** `cd output && python3 -m http.server 8084`
 - **Pattern:** All data inline in `build.py` (Provyx single-file pattern)
 - **Stack:** Static HTML/CSS/JS. No frameworks. GitHub Pages hosting.
-- **Current state:** 850 pages (100 schools, 35 comparisons, 22 guides, 25 blog posts, 25 rankings, 15 metros, tools, FAQ pages)
+- **Current state:** 930 pages (100 schools, 75 comparisons, 22 guides, 50 blog posts, 25 rankings, 30 metros, tools, FAQ pages)
 
 ## Reference Documents — READ BEFORE CREATING/EDITING ANY PAGE
 
