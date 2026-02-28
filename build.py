@@ -1,0 +1,6367 @@
+#!/usr/bin/env python3
+"""
+MBA Guidance — Static Site Generator
+Generates ~93 pages from inline structured data.
+Run: python3 build.py
+Preview: cd output && python3 -m http.server 8084
+"""
+
+import os
+import shutil
+
+CURRENT_YEAR = 2026
+SITE_NAME = "MBA Guidance"
+SITE_URL = "https://mbaguidance.com"
+AUTHOR = "Rome Thorndike"
+AUTHOR_CREDENTIAL = "Berkeley Haas MBA"
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
+ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+
+# =============================================================================
+# SCHOOL DATA — All ~50 schools inline
+# =============================================================================
+
+SCHOOLS = [
+    # --- TIER 1: M7 ---
+    {
+        "name": "Stanford Graduate School of Business", "short_name": "Stanford GSB",
+        "slug": "stanford-gsb", "location": "Stanford, CA", "ranking": 1, "tier": 1,
+        "acceptance_rate": 6.9, "avg_gmat": 738, "avg_gpa": 3.75, "class_size": 436,
+        "avg_salary": 192000, "employment_rate": 95, "tuition": 78432,
+        "program_length": "2 years",
+        "strengths": ["Entrepreneurship", "Technology", "General Management", "VC/PE"],
+        "best_for": ["Tech", "Entrepreneurship", "VC/PE"],
+        "verdict": "The ultimate prestige play. If you can stomach the Valley kool-aid and survive 6.9% odds, nothing else comes close for tech and entrepreneurship.",
+        "description": "Stanford GSB's 6.9% acceptance rate makes it the most selective MBA program in the country. The program is built around general management and entrepreneurship, with deep ties to Sand Hill Road and Silicon Valley's startup ecosystem.",
+        "url": "https://www.gsb.stanford.edu/",
+        "overview": """<p>Stanford GSB admits roughly 430 students per year from over 8,000 applicants. That 6.9% acceptance rate makes it harder to get into than Stanford's medical school. The selectivity creates a class where everyone in the room has done something remarkable, and the program leans into that. You're expected to bring as much to the classroom as you take from it.</p>
+<p>The curriculum is built around general management. First-year core courses cover everything from organizational behavior to strategic leadership, with a heavy emphasis on experiential learning. The signature "Interpersonal Dynamics" course (nicknamed "Touchy Feely") is one of the most talked-about classes in business education. It forces introspection in a way that surprises students who came for the finance and stayed for the personal growth.</p>
+<p>Geographically, GSB sits in the heart of Silicon Valley. Sand Hill Road is a bike ride away. Google, Apple, Meta, and hundreds of startups are within 30 minutes. This proximity shapes the culture, the recruiting, and the career outcomes in ways that no other program can replicate. If you're building something, GSB gives you the network, the funding access, and the credibility to do it.</p>""",
+        "culture": """<p>Stanford GSB is small and intentional. With 430 students per class (compared to Harvard's 930+), the community feels tight. Students self-select into a culture that values personal authenticity, social impact, and building things from scratch. The vibe is California casual, intellectually intense, and allergic to pretension. People wear hoodies to recruiting events.</p>
+<p>The "Change lives. Change organizations. Change the world." tagline sounds grandiose, but it reflects a real ethos. More GSB graduates go into entrepreneurship and social impact than any other M7 program. The school attracts idealists with business chops, and the peer pressure runs toward "what are you creating?" rather than "what firm are you joining?"</p>""",
+        "academics": """<p>First-year core is 11 courses covering management fundamentals. The second year is entirely elective, with access to courses across all of Stanford's graduate schools. Want to take a computer science class at the engineering school? Done. A design thinking course at the d.school? Go for it. This cross-registration flexibility is a genuine competitive advantage.</p>
+<p>The teaching style leans heavily on case studies and experiential projects. "Stanford Venture Studio" gives aspiring founders dedicated workspace, mentorship, and funding connections. The school's close ties to venture capital mean guest speakers routinely include founders and investors who are shaping entire industries.</p>""",
+        "careers": """<p>Stanford GSB's employment report tells the story. About 18% of recent graduates went directly into entrepreneurship (starting or joining early-stage ventures), more than double most peer programs. Tech placement is dominant: companies like Google, Amazon, Apple, and McKinsey are top employers. Consulting and finance still account for roughly 50% of graduates combined, but the tech and startup numbers set GSB apart.</p>
+<p>The median base salary of $192,000 (plus signing bonuses averaging $30,000) reflects the premium that Silicon Valley companies pay for GSB talent. But the real financial upside comes from equity: GSB graduates who join pre-IPO startups or launch their own companies have produced some of the highest lifetime earnings in MBA history.</p>
+<p>Career management at GSB takes a coaching-intensive approach. Every student gets a dedicated career advisor, and the school emphasizes long-term career design over short-term placement metrics. They want you to find work that matters, not just work that pays.</p>""",
+        "who_should_apply": """<p>Stanford GSB is the right fit if you have a clear vision for how you want to impact the world and the track record to back it up. The ideal candidate has demonstrated leadership in a distinctive way (not just "got promoted"). You should be comfortable with introspection. The program pushes personal development as much as professional development, and students who resist that dimension miss half the experience.</p>
+<p>If your goal is a traditional consulting or banking career, you'll get it here, but you're paying a premium for a program designed around entrepreneurship and tech. Schools like Wharton or Booth might be a more efficient path for pure finance.</p>""",
+        "watch_out": """<p>The Silicon Valley bubble is real. If your career goals involve anything outside of tech, VC, or social impact, you may feel like you're swimming against the current. Finance recruiting exists, but it's a smaller community compared to Wharton or Columbia. East Coast employers sometimes view GSB through a "too California" lens.</p>
+<p>Cost of living in Palo Alto is brutal. On-campus housing helps, but it's limited. You'll spend $3,000+ per month on rent if you live off campus. And the 6.9% acceptance rate means you should have realistic backup plans. Most people who are qualified for GSB don't get in.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Stanford GSB?",
+             f"Stanford GSB has a {CURRENT_YEAR} acceptance rate of approximately 6.9%, making it the most selective MBA program in the United States. The school receives over 8,000 applications annually for roughly 430 spots."),
+            ("What GMAT score do I need for Stanford GSB?",
+             "The average GMAT score at Stanford GSB is 738, with the middle 80% range spanning 710 to 770. A 730+ score is competitive, but GSB evaluates holistically. Strong candidates with scores in the 700-720 range get admitted regularly if the rest of their application is compelling."),
+            ("What is the average salary after Stanford GSB?",
+             "Stanford GSB graduates earn a median base salary of $192,000 with average signing bonuses of $30,000. Total first-year compensation typically exceeds $220,000. Graduates entering venture capital, private equity, or founding companies often see significantly higher long-term earnings through equity."),
+            ("Is Stanford GSB worth the cost?",
+             "At ${78432 * 2:,} in tuition alone (plus ~$50,000/year in living costs), the all-in cost of Stanford GSB approaches $300,000. For students entering high-paying tech, consulting, or finance roles, the ROI is strong within 3-5 years. For entrepreneurs, the calculus depends on your venture's outcome, but the network and credential create fundraising advantages that are difficult to quantify."),
+            ("What makes Stanford GSB different from Harvard Business School?",
+             "GSB is smaller (430 vs 930 students), more West Coast and tech-oriented, and sends more graduates into entrepreneurship. HBS has a broader network, stronger East Coast presence, and the case method as its pedagogical identity. GSB leans more toward personal development and experiential learning. The choice often comes down to geography and career goals."),
+        ],
+    },
+    {
+        "name": "Harvard Business School", "short_name": "Harvard Business School",
+        "slug": "harvard-business-school", "location": "Boston, MA", "ranking": 2, "tier": 1,
+        "acceptance_rate": 11, "avg_gmat": 740, "avg_gpa": 3.73, "class_size": 938,
+        "avg_salary": 195000, "employment_rate": 94, "tuition": 76800,
+        "program_length": "2 years",
+        "strengths": ["General Management", "Finance", "Entrepreneurship", "Case Method"],
+        "best_for": ["General Management", "Consulting", "Entrepreneurship"],
+        "verdict": "The brand that needs no introduction. Opens every door, but you'll pay for it in more ways than tuition.",
+        "description": "Harvard Business School practically invented the modern MBA. With a 930+ person class and the case method at its core, HBS produces more Fortune 500 CEOs than any other program.",
+        "url": "https://www.hbs.edu/",
+        "overview": """<p>Harvard Business School is the MBA program that all other MBA programs measure themselves against. Founded in 1908, HBS has produced more Fortune 500 CEOs, more US presidents with business degrees, and more billionaire alumni than any other business school. The brand carries weight that transcends business. It opens doors in government, nonprofit, and any room where credentials matter.</p>
+<p>The program admits roughly 930 students per class, making it one of the largest elite MBA programs. That scale is strategic: it means HBS alumni are everywhere. Every major company, every consulting firm, every investment bank has HBS graduates in leadership positions. The network effect compounds with every graduating class.</p>
+<p>HBS sits on a dedicated campus in Allston, across the river from Harvard's main campus. The physical separation is intentional. Students live, eat, study, and socialize in a self-contained environment that forges intense bonds. The section system (90-student cohorts that take all first-year classes together) is the engine of that bonding.</p>""",
+        "culture": """<p>The section system defines the HBS experience. You're assigned to one of ten sections of roughly 90 students each. You take every first-year class with this group, sit in assigned seats, and your class participation grade depends on the quality and frequency of your contributions. It's intense by design. Quiet people learn to speak up. Loud people learn to listen. The section becomes your professional family.</p>
+<p>The culture is competitive but collegial. Cold calls happen daily. Professors will call on you without warning and expect you to defend a position on a case you may have read at 2am. This constant pressure to perform in public builds a particular kind of confidence. HBS graduates are comfortable in any room, which is the point.</p>
+<p>Socially, HBS runs on section events, club activities, and a social scene that's more intense than most MBA programs. Boston's college-town energy adds to it. The workload is heavy, but students still find time for an active social calendar.</p>""",
+        "academics": """<p>The case method is the academic identity of HBS. About 80% of first-year instruction uses cases, more than any other MBA program. Each class session analyzes a real business situation. Students prepare individually, discuss in study groups, then debate in the 90-person classroom. The professor guides but doesn't lecture. Learning happens through argument.</p>
+<p>The first-year required curriculum covers 10 courses: Finance, Financial Reporting and Control, Leadership and Organizational Behavior, Marketing, Strategy, Technology and Operations Management, Business Government and the International Economy, Entrepreneurial Manager, FIELD (experiential learning), and an immersion course. Second year is entirely elective, with over 100 courses available.</p>
+<p>FIELD (Field Immersion Experiences for Leadership Development) is the experiential counterpart to the case method. Students work on real projects with partner companies, including an international field project. It's HBS acknowledging that cases alone aren't enough.</p>""",
+        "careers": """<p>HBS career outcomes are unmatched in breadth. Consulting takes the largest share (roughly 27% of graduates), with McKinsey, BCG, and Bain as the top three employers. Financial services accounts for another 25%, spanning investment banking, private equity, hedge funds, and venture capital. Technology claims about 20%, with Amazon, Google, Microsoft, and Apple recruiting aggressively.</p>
+<p>The median base salary of $195,000 with median signing bonuses of $30,000 puts total first-year compensation above $225,000 for most graduates. But HBS's real career advantage is optionality. The brand opens doors across every industry and geography. Graduates switch industries mid-career in ways that other programs' alumni can't.</p>
+<p>About 15% of graduates go directly into entrepreneurship, and HBS's alumni network includes more startup founders who've raised venture capital than any other school. The Arthur Rock Center for Entrepreneurship provides funding, mentorship, and a launch pad for student ventures.</p>""",
+        "who_should_apply": """<p>HBS is the right choice if you want maximum career optionality. The degree works in every industry, every geography, and every career stage. It's the strongest pick for general management, for people who don't yet know exactly what they want to do (but have the profile to get in), and for anyone who values network breadth over network depth.</p>
+<p>Strong candidates have 3-6 years of progressive work experience, demonstrated leadership impact (not just a title), and a clear articulation of why HBS specifically. The admissions committee looks for people who will contribute to classroom discussions. Quiet achievers who excel on paper but struggle to engage verbally will find HBS challenging.</p>""",
+        "watch_out": """<p>The case method is polarizing. If you learn better through lectures, problem sets, or project-based work, HBS can feel frustrating. Some students feel the cases prioritize breadth over depth, especially in quantitative subjects. And the cold-call system means your participation grade depends partly on your willingness to speak in a room of 90 high-achievers, which favors extroverts.</p>
+<p>HBS is also the most expensive MBA program when you factor in Boston living costs on top of $76,800 annual tuition. The all-in cost for two years exceeds $300,000. The school's financial aid is generous, but most students still graduate with significant debt. And the size of the class (930 students) means your relationship with faculty is less personal than at smaller programs like Tuck or Haas.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Harvard Business School?",
+             "Harvard Business School admits approximately 11% of applicants, receiving around 9,000 applications for roughly 930 spots per year. HBS is the second most selective MBA program in the US after Stanford GSB."),
+            ("What GMAT score do I need for Harvard Business School?",
+             "The average GMAT score at HBS is 740, with the middle 80% ranging from 720 to 770. HBS evaluates holistically, so a 710 with extraordinary work experience can beat a 760 with a generic profile. The school also fully accepts the GRE with no stated preference."),
+            ("What is the average salary after Harvard Business School?",
+             "HBS graduates earn a median base salary of $195,000 with median signing bonuses of $30,000. Total first-year compensation typically exceeds $225,000. Graduates entering private equity and venture capital often see higher total compensation through carried interest and equity."),
+            ("Does Harvard Business School use the case method?",
+             "Yes. HBS is the global leader in case method teaching. Approximately 80% of first-year classes use cases. Students analyze 500+ real business situations over two years. The school's case library is the largest in the world, and most business schools globally use HBS-developed cases in their own curricula."),
+            ("How does Harvard Business School compare to Stanford GSB?",
+             "HBS is larger (930 vs 430 students), more East Coast-oriented, and stronger in consulting and finance placement. Stanford GSB is more tech and entrepreneurship-focused, with deeper Silicon Valley ties. HBS uses the case method almost exclusively; GSB uses a mix of methods. HBS offers broader optionality; GSB offers deeper tech-world immersion."),
+        ],
+    },
+    {
+        "name": "The Wharton School", "short_name": "Wharton",
+        "slug": "wharton", "location": "Philadelphia, PA", "ranking": 3, "tier": 1,
+        "acceptance_rate": 18, "avg_gmat": 733, "avg_gpa": 3.60, "class_size": 915,
+        "avg_salary": 185000, "employment_rate": 96, "tuition": 80432,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Analytics", "Healthcare", "Real Estate"],
+        "best_for": ["Finance", "Consulting", "Healthcare"],
+        "verdict": "Finance's finishing school. If Wall Street is the destination, Wharton is the express lane.",
+        "description": "Wharton's finance program is the gold standard, but the school has quietly built strength across healthcare, real estate, and analytics. With 900+ students, it offers unmatched depth in elective courses.",
+        "url": "https://www.wharton.upenn.edu/",
+        "overview": """<p>Wharton is the oldest business school in the world, founded in 1881, and it carries that legacy in its DNA. The finance department is the deepest of any MBA program. More Wall Street managing directors, more private equity partners, and more hedge fund managers hold Wharton degrees than from any other school. If you're going into finance, Wharton is the default choice.</p>
+<p>But reducing Wharton to "the finance school" misses what's happened over the past decade. The school has built serious strength in healthcare management, real estate, analytics, and entrepreneurship. The Wharton Health Care Management program is arguably the best in the country. The real estate department has produced more REIT executives than anywhere else. And Wharton Analytics is a growing draw for students heading into data-driven roles.</p>
+<p>With 915 students per class, Wharton offers the deepest elective catalog in MBA education. Over 200 electives across every business discipline. If you want to go deep in a niche area, Wharton probably has three courses on it.</p>""",
+        "culture": """<p>Wharton's culture gets stereotyped as hypercompetitive and finance-obsessed. There's truth in the stereotype, but it's incomplete. The school is intense, quantitatively rigorous, and draws ambitious people. But the learning team system (first-year study groups of 5-6 students from different backgrounds) builds collaboration. And with 900+ students, there are subcultures within the larger community. The finance crowd runs hot. The healthcare and social impact cohorts feel different.</p>
+<p>Philadelphia is an underrated MBA city. It's affordable by East Coast standards, walkable, and close to New York (90-minute Amtrak). Wharton's Huntsman Hall is a hub where students spend long hours between classes, recruiting prep, and club meetings. The social scene centers on formals, cohort events, and the annual Wharton MBA Follies show.</p>""",
+        "academics": """<p>Wharton's first-year core covers 9.5 credits of required courses, including Management of People, Marketing, Microeconomics, and the flagship Finance and Accounting courses. The quant bar is higher than most peer programs. Students who struggled with statistics in undergrad will feel it here.</p>
+<p>The second year is entirely elective, and this is where Wharton shines. Over 200 course options across 11 departments. Cross-registration with Penn's other schools (Law, Engineering, Medicine, Design) means you can build genuinely unique combinations. Dual-degree programs (MBA/JD, MBA/MD, MBA/MA in International Studies) are popular and well-integrated.</p>
+<p>Wharton's LEAD program (Leadership, Entrepreneurship, and Decision-making) runs throughout the first year as an experiential counterpart to classroom learning. It includes team-based challenges, outdoor leadership exercises, and simulation-based projects.</p>""",
+        "careers": """<p>Finance dominates Wharton placement. Roughly 34% of graduates enter financial services, including investment banking, private equity, venture capital, and asset management. The school places more students into PE and VC than any other program. Goldman Sachs, JP Morgan, McKinsey, BCG, and Bain are perennial top employers.</p>
+<p>Consulting is the second-largest bucket at about 26%, with Wharton punching at parity with Booth and Kellogg for MBB placement. Technology has grown to roughly 20%, with Amazon, Google, and Microsoft recruiting actively. Healthcare management placement is smaller but disproportionately influential, given the quality of the program.</p>
+<p>Wharton's employment rate of 96% at three months is among the highest of any MBA program. The median base salary of $185,000 with $30,000+ signing bonuses reflects the premium that finance and consulting firms pay for Wharton talent. For PE-bound graduates, total compensation including carried interest can reach $300,000+ within five years.</p>""",
+        "who_should_apply": """<p>Wharton is the clear choice if finance is your primary career goal. Investment banking, private equity, hedge funds, venture capital, real estate finance. No other program comes close to the depth of the pipeline and the alumni network in financial services. It's also strong for healthcare management, consulting, and quantitatively rigorous roles in tech.</p>
+<p>The ideal Wharton candidate is analytically sharp, ambitious, and has a clear sense of direction. The school values leadership experience and intellectual curiosity, but it's less focused on the "personal transformation" narrative than Stanford GSB. Wharton wants people who know what they want and will use the program's resources to get there.</p>""",
+        "watch_out": """<p>Philadelphia isn't New York, San Francisco, or Boston. It's a great city, but it lacks the buzz of those MBA hub cities. Some students feel disconnected from the industries they're targeting, especially in tech. And the class size (915) means you won't know everyone. Finding your cohort within the cohort takes effort.</p>
+<p>The finance-heavy reputation can work against you in certain contexts. Some tech recruiters view Wharton candidates as "too finance-brained" compared to GSB or Sloan candidates. And the quantitative rigor of the core can be a shock for students from non-quantitative backgrounds. If you hated math in college, Wharton's core will be a grind.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Wharton?",
+             f"Wharton's acceptance rate is approximately 18% for the class of {CURRENT_YEAR}. The school receives roughly 7,000 applications for about 915 spots. Wharton is more accessible than Stanford GSB (6.9%) or HBS (11%), but still highly selective."),
+            ("What GMAT score do I need for Wharton?",
+             "The average GMAT at Wharton is 733, with the middle 80% falling between 710 and 760. Wharton is known for valuing quantitative scores, so a strong quant percentile (80th+) matters more here than at some peer programs. The GRE is fully accepted."),
+            ("Is Wharton only good for finance?",
+             "No. While Wharton is the undisputed leader in finance placement, the school has top-tier programs in healthcare management, real estate, analytics, and entrepreneurship. Consulting placement is on par with Booth and Kellogg. About 20% of graduates now enter technology. The finance reputation is deserved but doesn't capture the full picture."),
+            ("What is the average salary after Wharton?",
+             "Wharton graduates earn a median base salary of $185,000 with signing bonuses averaging $30,000. Graduates entering private equity often see total compensation of $250,000+ in their first year, including carried interest. Finance roles generally pay at the top of the MBA salary range."),
+            ("How does Wharton compare to Harvard Business School?",
+             "Wharton is stronger for finance and analytics. HBS is stronger for general management and has a broader brand. Wharton's class size (915) is comparable to HBS (930), but the culture differs: Wharton is more quantitative and career-focused; HBS is more case-method and leadership-focused. Both are elite, and the choice usually comes down to career goals and teaching style preference."),
+        ],
+    },
+    {
+        "name": "Chicago Booth School of Business", "short_name": "Booth",
+        "slug": "booth", "location": "Chicago, IL", "ranking": 4, "tier": 1,
+        "acceptance_rate": 21, "avg_gmat": 730, "avg_gpa": 3.60, "class_size": 600,
+        "avg_salary": 180000, "employment_rate": 95, "tuition": 77841,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Analytics", "Flexible Curriculum", "Economics"],
+        "best_for": ["Finance", "Consulting", "Analytics"],
+        "verdict": "The intellectual's MBA. Flexible curriculum, rigorous analytics, and Chicago winters that build character.",
+        "description": "Chicago Booth's flexible curriculum is its calling card. No required courses beyond LEAD and a handful of foundations. The school attracts analytical minds and rewards intellectual curiosity.",
+        "url": "https://www.chicagobooth.edu/",
+        "overview": """<p>Chicago Booth is the most academically rigorous MBA program in the M7. The school's intellectual roots trace to the Chicago School of economics, and that tradition of analytical thinking permeates everything. Booth has more Nobel laureates on its faculty than any other business school. The teaching is evidence-based, data-driven, and unapologetically quantitative.</p>
+<p>The signature feature is curriculum flexibility. Booth has no required courses beyond LEAD (a first-quarter leadership program) and a handful of foundation courses that most students can waive with sufficient background. Everything else is elective. You can build a finance-heavy curriculum, a marketing-focused track, an entrepreneurship sequence, or some combination that doesn't fit neatly into a category. The school trusts you to design your own education.</p>
+<p>Chicago's Hyde Park campus anchors the program, with the gleaming Harper Center as the academic hub. The school also operates campuses in London and Hong Kong for its EMBA programs, reinforcing its global orientation. The city of Chicago itself is a major draw: world-class food, affordable housing relative to New York or San Francisco, and a business community that punches above its reputation.</p>""",
+        "culture": """<p>Booth attracts people who like to argue. Not in a hostile way, but in the "let me see your data" way. The culture prizes intellectual debate and analytical rigor. If you make a claim in class, someone will challenge your assumptions. Professors encourage it. This sharpens your thinking in ways that feel uncomfortable at first and indispensable by graduation.</p>
+<p>The social scene is more laid-back than HBS or Wharton. Chicago is an affordable, livable city, and Booth students take advantage of it. Random walks (a Booth tradition involving bar crawls through Chicago neighborhoods) are legendary. The school's LEAD program builds early cohort bonds, and the flexible curriculum means students form organic friendships based on shared interests rather than assigned sections.</p>""",
+        "academics": """<p>The flexibility of Booth's curriculum is unmatched. With over 150 electives and near-total freedom to choose your course load, students can go as deep or as broad as they want. The finance and economics offerings are the deepest of any MBA program. Eugene Fama (father of the efficient market hypothesis) still teaches. Raghuram Rajan (former governor of the Reserve Bank of India) teaches international finance.</p>
+<p>The academic approach is frameworks over formulas. Booth teaches you how to think about problems, not how to memorize solutions. Courses emphasize economic theory, behavioral science, and statistical analysis applied to business decisions. If you're the kind of person who wants to understand <em>why</em> something works, Booth is built for you.</p>
+<p>Cross-registration with the University of Chicago's other graduate programs (Law, Public Policy, Computer Science) is available and common. The broader university's research culture creates opportunities for students interested in academic or analytical careers.</p>""",
+        "careers": """<p>Consulting is the largest career path at Booth, accounting for about 30% of graduates. McKinsey, BCG, and Bain are the top employers. Finance is a close second at roughly 28%, spanning investment banking, private equity, hedge funds, and corporate finance. Booth's finance placement is second only to Wharton's in both depth and quality.</p>
+<p>Technology placement has grown to about 18% of the class, with Amazon, Google, and Microsoft as major recruiters. Booth's quantitative reputation makes its graduates attractive for product management, strategy, and analytics roles at tech companies.</p>
+<p>The median base salary of $180,000 reflects strong placement across high-paying industries. Chicago's lower cost of living compared to New York or San Francisco means Booth graduates' purchasing power often exceeds that of peers at coastal programs earning nominally higher salaries. The school's career services are hands-on, with dedicated industry advisors and a strong alumni mentorship program.</p>""",
+        "who_should_apply": """<p>Booth is the right choice for students who value intellectual rigor and curriculum flexibility. If you want to design your own MBA experience rather than follow a prescribed path, Booth gives you the freedom to do it. It's the strongest program for analytically-minded students who want exposure to economics-based thinking applied to business.</p>
+<p>Ideal candidates are curious, quantitatively comfortable, and have a track record that demonstrates initiative. Booth cares less about the "tell me about your leadership journey" narrative and more about evidence of impact and intellectual depth. If you want to be challenged to think harder, Booth is the place.</p>""",
+        "watch_out": """<p>Chicago winters are real. January and February in Hyde Park test your commitment. It's a factor that sounds trivial until you're waiting for the Metra in negative wind chill. Some students from warmer climates struggle with the seasonal adjustment.</p>
+<p>The flexibility that defines Booth can also overwhelm. Students without a clear sense of what they want to study can end up with a scattered transcript. The school offers advising, but nobody is going to tell you what courses to take. You need self-direction. And while Booth's culture is intellectually stimulating, students who prefer a warmer, more community-oriented vibe may find it initially harder to build the deep bonds that come more naturally at smaller, more structured programs like Tuck or Haas.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Chicago Booth?",
+             f"Booth's acceptance rate is approximately 21% for the class of {CURRENT_YEAR}. The school receives around 4,500 applications for roughly 600 spots per class."),
+            ("What GMAT score do I need for Booth?",
+             "The average GMAT at Booth is 730, with the middle 80% ranging from 710 to 760. Booth values quantitative aptitude, so a strong quant score is particularly important. The school fully accepts the GRE and executive assessment for some programs."),
+            ("Is Booth only good for finance?",
+             "No. While Booth has one of the strongest finance programs in the world, consulting is actually its largest career outcome (30% of graduates). Tech placement has grown significantly, and the school's analytics and economics offerings attract students interested in data-driven roles across industries. Booth's flexibility means you can tailor the program to almost any career goal."),
+            ("What is the average salary after Chicago Booth?",
+             "Booth graduates earn a median base salary of $180,000 with signing bonuses averaging $25,000-30,000. When adjusted for Chicago's lower cost of living, Booth graduates' real purchasing power is comparable to or exceeds that of peers at higher-nominal-salary programs in New York or San Francisco."),
+            ("How does Booth compare to Kellogg?",
+             "Booth and Kellogg are both top-5 programs in Chicago, but they feel very different. Booth is more analytically rigorous, flexible in curriculum, and finance-oriented. Kellogg is more collaborative, marketing-strong, and structured. Booth attracts independent thinkers; Kellogg attracts team builders. The choice often comes down to learning style and career goals: Booth for finance/analytics, Kellogg for marketing/consulting."),
+        ],
+    },
+    {
+        "name": "Kellogg School of Management", "short_name": "Kellogg",
+        "slug": "kellogg", "location": "Evanston, IL", "ranking": 5, "tier": 1,
+        "acceptance_rate": 20, "avg_gmat": 727, "avg_gpa": 3.60, "class_size": 500,
+        "avg_salary": 175000, "employment_rate": 94, "tuition": 76368,
+        "program_length": "2 years",
+        "strengths": ["Marketing", "Leadership", "Team-Based Learning", "Consulting"],
+        "best_for": ["Marketing", "Consulting", "General Management"],
+        "verdict": "The marketing and leadership factory. Collaborative culture here is a religion, not a buzzword.",
+        "description": "Kellogg is synonymous with marketing and collaborative leadership. The team-based culture is embedded in how courses, clubs, and recruiting work. Consulting is the top career path.",
+        "url": "https://www.kellogg.northwestern.edu/",
+        "overview": """<p>Kellogg built its reputation on two pillars: marketing and teamwork. The marketing department is the most cited in academic research and produces the most influential consumer behavior and brand strategy research in the field. Philip Kotler, the father of modern marketing, taught here for decades. That legacy still shapes the curriculum and the type of student who chooses Kellogg.</p>
+<p>The teamwork element is just as defining. Kellogg's pedagogy centers on group projects, team presentations, and collaborative problem-solving. This isn't a soft skill add-on. It's the core of how the school operates. Students are evaluated on their ability to lead and contribute to teams, and the school actively selects for collaborative personalities in admissions.</p>
+<p>Kellogg's campus sits in Evanston, Illinois, on the shores of Lake Michigan. It's close enough to Chicago for recruiting and nightlife (30 minutes on the El), but far enough to feel like a self-contained community. The Global Hub, opened in 2017, is one of the most impressive MBA facilities in the country: glass-walled, naturally lit, and designed to maximize informal interaction between students.</p>""",
+        "culture": """<p>Kellogg's culture is the warmest in the M7. Students genuinely like each other. The competitive edge exists (these are ambitious people), but it's channeled through teams rather than individuals. Cold-calling in class happens, but the dynamic is supportive rather than combative. New students are struck by how quickly they feel at home.</p>
+<p>The social scene is legendary. Kellogg students throw more parties, organize more events, and build more clubs than most MBA programs. "Kellogg Special K" and "Kellogg DAK" (Dean's Advisory Council) events are rites of passage. The school operates on the philosophy that strong personal bonds translate into strong professional networks, and they're right. Kellogg alumni are famously loyal and generous with their time.</p>""",
+        "academics": """<p>Kellogg offers both a 2-year and a 1-year MBA (the latter for students with strong business backgrounds). The 2-year program has a structured first-year core covering accounting, statistics, finance, marketing, operations, strategy, and leadership. Second year is fully elective.</p>
+<p>The marketing curriculum is the deepest of any MBA program. Courses range from brand strategy and consumer analytics to digital marketing and pricing strategy. But Kellogg has also built strength in management and strategy, with faculty like Leigh Thompson (negotiation), Harry Kraemer (leadership), and David Besanko (strategy) drawing students who aren't marketing-focused.</p>
+<p>The Kellogg experiential learning portfolio includes "GIM" (Global Initiatives in Management, where student teams consult for companies abroad), the Kellogg Innovation and Entrepreneurship Initiative, and robust social impact programs. Cross-registration with Northwestern's engineering, journalism, and law schools is available.</p>""",
+        "careers": """<p>Consulting is Kellogg's dominant career outcome, with roughly 33% of graduates entering firms like McKinsey, BCG, Bain, and Deloitte. The school's team-based culture and emphasis on structured problem-solving translate directly into consulting skills. Kellogg consistently ranks among the top 3 feeder schools for MBB.</p>
+<p>Technology takes about 22% of graduates, with product management and marketing roles at companies like Amazon, Google, and Microsoft. Marketing-specific roles (brand management at CPG companies, marketing strategy at tech firms) are a Kellogg specialty. Finance accounts for about 18%, with strong placement into corporate finance, investment banking, and private equity.</p>
+<p>The median base salary of $175,000 reflects Kellogg's strength in consulting and tech. Signing bonuses average $25,000-30,000. Career services at Kellogg are well-organized, with industry-specific career coaches and a strong alumni mentorship platform. The Kellogg network is particularly active in Chicago, San Francisco, and New York.</p>""",
+        "who_should_apply": """<p>Kellogg is the clear pick for students who thrive in collaborative environments and want careers in consulting, marketing, or leadership-oriented roles. If you genuinely enjoy working in teams, leading through influence rather than authority, and building relationships, Kellogg's culture will feel like home.</p>
+<p>The ideal candidate has strong interpersonal skills, a track record of team leadership, and the emotional intelligence to contribute to Kellogg's collaborative culture. The admissions process evaluates for "Kellogg fit" more explicitly than most programs. If you're a lone wolf who prefers individual achievement, you'll feel friction here.</p>""",
+        "watch_out": """<p>The team emphasis can feel suffocating for independent thinkers. Every course has a group component. Every project involves negotiating with teammates. Students who prefer to work autonomously and present their own conclusions may find the constant collaboration tiring.</p>
+<p>Kellogg's marketing reputation sometimes overshadows its other strengths. Finance recruiters may see Kellogg graduates as "marketing people" even if the student focused entirely on finance coursework. And Evanston, while pleasant, lacks the urban energy of Boston, New York, or San Francisco. Chicago is close, but the daily experience is suburban.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Kellogg?",
+             f"Kellogg's acceptance rate is approximately 20% for the class of {CURRENT_YEAR}. The school receives around 4,000 applications for roughly 500 spots in the 2-year program."),
+            ("What GMAT score do I need for Kellogg?",
+             "The average GMAT at Kellogg is 727, with the middle 80% ranging from 700 to 760. Kellogg evaluates holistically, placing significant weight on leadership experience, teamwork skills, and cultural fit alongside test scores."),
+            ("Is Kellogg only good for marketing?",
+             "No. While Kellogg has the strongest marketing program in the M7, consulting is actually its largest career outcome (33% of graduates). Technology placement has grown to over 20%. Kellogg's collaborative culture and structured problem-solving approach make it strong for any career that values teamwork and communication."),
+            ("What is the average salary after Kellogg?",
+             "Kellogg graduates earn a median base salary of $175,000 with signing bonuses of $25,000-30,000. Consulting placement (Kellogg's largest) offers starting compensation packages of $200,000+ when including bonuses and relocation."),
+            ("How does Kellogg compare to Booth?",
+             "Both are top-5 programs in the Chicago area, but the cultures are very different. Kellogg emphasizes teamwork, marketing, and collaborative leadership. Booth emphasizes analytical rigor, curriculum flexibility, and independent thinking. Kellogg uses a structured curriculum with a collaborative pedagogy; Booth lets you design your own path. Most students who visit both campuses have a strong instinct for which culture fits them."),
+        ],
+    },
+    {
+        "name": "Columbia Business School", "short_name": "Columbia Business School",
+        "slug": "columbia-business-school", "location": "New York, NY", "ranking": 6, "tier": 1,
+        "acceptance_rate": 15, "avg_gmat": 729, "avg_gpa": 3.60, "class_size": 850,
+        "avg_salary": 180000, "employment_rate": 93, "tuition": 80472,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Media", "Real Estate", "Value Investing"],
+        "best_for": ["Finance", "Media/Entertainment", "Real Estate"],
+        "verdict": "New York is the campus. Best for anyone who wants their MBA wired into the financial capital of the world.",
+        "description": "Columbia Business School sits in the heart of Manhattan, and that's the point. Proximity to Wall Street, media companies, and real estate firms is its biggest differentiator.",
+        "url": "https://business.columbia.edu/",
+        "overview": """<p>Columbia Business School's value proposition is one word: New York. The school moved to its new Manhattanville campus in 2022, a $600 million complex in West Harlem that's among the most impressive MBA facilities ever built. But the campus is almost beside the point. The real campus is Manhattan itself. Wall Street is a subway ride away. Media companies, hedge funds, real estate developers, and startup founders are all within reach for lunch meetings, networking events, and recruiting.</p>
+<p>The school has deep roots in finance and value investing. The Value Investing Program, inspired by Benjamin Graham and Warren Buffett (both Columbia alumni), is the most prestigious of its kind. CBS alumni dominate the hedge fund and asset management world. But the school has expanded well beyond finance into media, real estate, entrepreneurship, and social enterprise.</p>
+<p>With 850 students per class, Columbia is one of the larger M7 programs. The scale, combined with NYC's density of business activity, creates a program where classroom learning is constantly reinforced by real-world proximity. Guest speakers are often executives whose offices are a few blocks away.</p>""",
+        "culture": """<p>Columbia's culture reflects its city. It's fast, diverse, ambitious, and independent. Students are self-directed by necessity. Manhattan is an overwhelming canvas of professional and social opportunities, and nobody is going to curate the experience for you. The school provides the platform; you build the MBA you want.</p>
+<p>The cluster system (Columbia's version of sections) assigns students to groups of roughly 70 for first-year core classes. These create early bonds, but the social cohesion is naturally more diffuse than at isolated campuses like Tuck or Haas. Many students have partners, families, or side projects in the city. The MBA is part of their New York life, not the entirety of it.</p>
+<p>The diversity of the student body is notable. Columbia draws heavily from international students and from New York's professional communities. The median age skews slightly older than some M7 peers, reflecting the number of students who've been working in NYC and chose Columbia specifically for its location.</p>""",
+        "academics": """<p>Columbia's first-year core covers corporate finance, financial accounting, managerial statistics, business analytics, strategy formulation, marketing strategy, managerial economics, leadership, and global economic environment. The core is structured but manageable, designed to build foundations quickly so students can move into electives.</p>
+<p>The elective catalog leans heavily into Columbia's strengths. The finance department offers courses in value investing, private equity, venture capital, distressed debt, and real estate finance that rival dedicated finance programs. The media and technology concentration draws students interested in entertainment, digital media, and platform economics. And the Eugene Lang Entrepreneurship Center supports student founders with funding, mentorship, and incubator space.</p>
+<p>The January-term (J-term) is unique to Columbia. A compressed three-week term between semesters that offers intensive courses, global immersions, and experiential projects. Students use J-term to explore interests outside their primary focus or to build skills for summer internships.</p>""",
+        "careers": """<p>Financial services is Columbia's largest career bucket, with roughly 35% of graduates entering investment banking, private equity, hedge funds, asset management, or corporate finance. The school's proximity to Wall Street and its value investing pedigree create unmatched access for finance-focused students. Goldman Sachs, JP Morgan, and Morgan Stanley are perennial top employers.</p>
+<p>Consulting accounts for about 22% of placement, with MBB and Big 4 firms recruiting actively. Technology has grown to roughly 18%, reflecting the growth of NYC's tech ecosystem. Media and entertainment placement (about 8%) is higher than any other M7 program, with graduates going to companies like NBCUniversal, Warner Bros. Discovery, Spotify, and digital media startups.</p>
+<p>The median base salary of $180,000 with signing bonuses of $30,000 reflects Columbia's strength in high-compensation industries. Real estate placement is a standout niche, with Columbia alumni occupying leadership positions at major REITs and development firms across New York.</p>""",
+        "who_should_apply": """<p>Columbia is the right choice if you want to build your career in New York. Finance, media, real estate, and the city's startup ecosystem are all accessible in ways that no other MBA program can match. It's also strong for international students who want a globally connected, urban MBA experience.</p>
+<p>The ideal CBS candidate is self-directed, comfortable navigating a big city, and has a clear professional reason for being in New York. The admissions process values intellectual curiosity and professional achievement, with an emphasis on how you'll take advantage of New York's resources. Strong finance backgrounds are common but not required.</p>""",
+        "watch_out": """<p>New York City is expensive. Columbia's tuition ($80,472 per year) is the highest in the M7, and Manhattan living costs add $25,000-35,000 per year on top of that. The all-in cost of a Columbia MBA can exceed $330,000. Financial aid helps, but cost is a real factor.</p>
+<p>The city can be distracting. With unlimited things to do in Manhattan, some students struggle to balance the MBA experience with everything else New York offers. The campus community is less insular than at programs in college towns, which means building deep friendships requires more intentional effort. And if your career goals take you outside of New York (West Coast tech, for example), Columbia's network advantage diminishes relative to programs with more geographically distributed alumni.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Columbia Business School?",
+             f"Columbia Business School's acceptance rate is approximately 15% for the class of {CURRENT_YEAR}. The school receives around 6,000 applications for roughly 850 spots per class."),
+            ("What GMAT score do I need for Columbia Business School?",
+             "The average GMAT at Columbia is 729, with the middle 80% ranging from 700 to 760. Columbia also accepts the GRE and has offered an early decision round that doesn't require a standardized test score. The school evaluates holistically, with work experience and career clarity weighing heavily."),
+            ("Is Columbia only good for finance?",
+             "Columbia is the strongest MBA program for New York-based finance, but it's also a leader in media and entertainment, real estate, and entrepreneurship. Consulting placement is strong, and tech has grown significantly. The school's breadth reflects New York's own economic diversity."),
+            ("What is the average salary after Columbia Business School?",
+             "Columbia graduates earn a median base salary of $180,000 with signing bonuses averaging $30,000. Finance roles (particularly in PE and hedge funds) often command significantly higher total compensation packages. Real estate and media roles may start lower in base salary but offer strong long-term earning potential."),
+            ("How does Columbia compare to NYU Stern?",
+             "Both are in New York City, but Columbia is M7-ranked and has a stronger brand, higher selectivity, and deeper finance placement. Stern is in Greenwich Village (arguably a better neighborhood for students), costs slightly less, and has strong media and entertainment connections. Columbia draws more broadly from finance; Stern is increasingly differentiated by its location-specific offerings and specializations."),
+        ],
+    },
+    {
+        "name": "MIT Sloan School of Management", "short_name": "MIT Sloan",
+        "slug": "mit-sloan", "location": "Cambridge, MA", "ranking": 7, "tier": 1,
+        "acceptance_rate": 12, "avg_gmat": 730, "avg_gpa": 3.58, "class_size": 480,
+        "avg_salary": 178000, "employment_rate": 94, "tuition": 77168,
+        "program_length": "2 years",
+        "strengths": ["Technology", "Operations", "Analytics", "Entrepreneurship"],
+        "best_for": ["Tech", "Entrepreneurship", "Operations"],
+        "verdict": "Where engineers learn to run companies. Heavy quant, startup energy, and the MIT network behind everything.",
+        "description": "MIT Sloan combines the analytical rigor of MIT with practical business application. The program excels in technology management, operations, and entrepreneurship.",
+        "url": "https://mitsloan.mit.edu/",
+        "overview": """<p>MIT Sloan is the business school where engineers go to learn how to run things. The program sits within the broader MIT ecosystem, and that changes everything. Students can take classes across MIT's legendary engineering, computer science, and science departments. The Martin Trust Center for MIT Entrepreneurship is the most active university venture creation engine in the world. And the analytical rigor of the MIT culture permeates every Sloan classroom.</p>
+<p>Sloan admits about 480 students per year, making it mid-sized among M7 programs. The class skews more technical than any peer. A significant percentage of incoming students hold STEM degrees, and many have worked in engineering, data science, or product management before business school. This creates a student body that's comfortable with quantitative analysis in ways that set Sloan apart from more generalist programs.</p>
+<p>The Cambridge/Boston location puts Sloan in one of the world's premier innovation corridors. Kendall Square, directly adjacent to campus, is home to hundreds of biotech companies, tech startups, and venture capital firms. Google, Amazon, Microsoft, and dozens of life science companies have offices within walking distance.</p>""",
+        "culture": """<p>Sloan's culture is cerebral and action-oriented. "Mens et Manus" (Mind and Hand) is MIT's motto, and Sloan embodies it. Students don't just study business concepts. They build things, test hypotheses, and launch ventures while still enrolled. The school's "Action Learning" philosophy means nearly every course has a hands-on component involving real companies.</p>
+<p>The social scene is more subdued than HBS across the river. Sloan students tend to be builders rather than partiers. Hackathons, pitch competitions, and venture workshops draw bigger crowds than social events. But the community is tight. With 480 students (small by M7 standards), people know each other. And the broader MIT community adds depth: Sloan students regularly collaborate with engineering PhD students, media lab researchers, and AI scientists on interdisciplinary projects.</p>""",
+        "academics": """<p>Sloan's first-year core covers organizational processes, economic analysis for business decisions, financial accounting, data analytics, communication for leaders, and the "Sloan Innovation Period" (SIP, a flexible block for workshops and experiential courses). The core is structured but leaves room for early elective exploration.</p>
+<p>The elective catalog reflects MIT's strengths. Courses in artificial intelligence and business strategy, blockchain economics, system dynamics, and operations research go deeper than what you'll find at generalist programs. The System Design and Management program offers joint degrees with MIT's engineering school. And "Enterprise Management" tracks allow students to focus on healthcare, energy, or finance with interdisciplinary coursework.</p>
+<p>MIT's $100K Entrepreneurship Competition (actually well over $100K now) is the oldest and most prestigious student venture competition in the world. Sloan students have launched companies including Dropbox, HubSpot, and Akamai Technologies. The ecosystem for turning academic ideas into real businesses is unmatched.</p>""",
+        "careers": """<p>Technology is Sloan's strongest career track, with roughly 30% of graduates entering tech companies. Product management roles at Amazon, Google, Apple, and Microsoft are the most common destinations. The school's technical credibility gives Sloan graduates an edge in PM recruiting that more generalist programs can't replicate.</p>
+<p>Consulting accounts for about 27% of graduates, with McKinsey, BCG, and Bain as top employers. Finance (about 20%) spans venture capital, private equity, and fintech, with a growing cohort entering crypto and blockchain companies. Entrepreneurship claims about 10% of the class directly at graduation, with many more starting companies within five years.</p>
+<p>The median base salary of $178,000 with signing bonuses averaging $25,000 reflects Sloan's tech-heavy placement. Career services at Sloan are organized by industry track, with dedicated advisors for tech, consulting, finance, and entrepreneurship. The MIT alumni network, spanning 140,000+ professionals globally, is one of the most powerful in technology and engineering.</p>""",
+        "who_should_apply": """<p>MIT Sloan is the right fit for technically-minded students who want to lead at the intersection of technology and business. If you have an engineering or science background and want to move into product management, tech strategy, venture capital, or entrepreneurship, Sloan's ecosystem is built for you.</p>
+<p>The ideal candidate has demonstrated analytical ability, a clear connection to technology or innovation, and the intellectual curiosity to take advantage of MIT's broader resources. You don't need to be an engineer, but you should be comfortable in quantitative environments. Students from non-technical backgrounds can thrive at Sloan, but they need to bring a compelling reason for choosing MIT over HBS (which is literally across the river).</p>""",
+        "watch_out": """<p>Sloan lives in the shadow of HBS. Harvard Business School is physically across the Charles River, and the brand comparison is unavoidable. In industries where the MBA credential matters more than the technical depth (traditional finance, general management consulting), HBS carries more weight. Some Sloan students feel this, particularly during recruiting.</p>
+<p>The culture can feel insular and engineering-heavy if you're coming from a non-technical background. Conversations often default to "what are you building?" and students who don't have a startup idea or technical project can feel like outsiders. And Cambridge, while intellectually stimulating, is a college town. The nightlife and social energy don't compare to New York or San Francisco.</p>""",
+        "faq": [
+            ("What is the acceptance rate at MIT Sloan?",
+             f"MIT Sloan's acceptance rate is approximately 12% for the class of {CURRENT_YEAR}. The school receives around 5,500 applications for roughly 480 spots per class."),
+            ("What GMAT score do I need for MIT Sloan?",
+             "The average GMAT at MIT Sloan is 730, with the middle 80% ranging from 710 to 760. Given Sloan's analytical culture, strong quantitative scores are valued. The school also accepts the GRE and has expanded its use in recent admissions cycles."),
+            ("Is MIT Sloan only for engineers?",
+             "No. While Sloan attracts a more technically-oriented class than most M7 programs, students come from diverse backgrounds including consulting, finance, military, and nonprofit. About 40% of entering students have STEM undergraduate degrees, which means 60% don't. The school values intellectual curiosity and innovation mindset as much as technical credentials."),
+            ("What is the average salary after MIT Sloan?",
+             "MIT Sloan graduates earn a median base salary of $178,000 with signing bonuses averaging $25,000. Tech placement (Sloan's largest) offers strong equity compensation on top of base salary. Graduates entering early-stage startups may take lower initial salaries but benefit from equity upside."),
+            ("How does MIT Sloan compare to Harvard Business School?",
+             "Both are in Cambridge/Boston, but they're very different programs. HBS is larger (930 vs 480 students), more focused on general management, and uses the case method. Sloan is more technical, action-learning oriented, and deeply connected to MIT's engineering and science ecosystem. HBS has the stronger general brand; Sloan has the stronger tech and entrepreneurship ecosystem. Students who want to build companies or work in tech often prefer Sloan. Students who want maximum brand optionality often prefer HBS."),
+        ],
+    },
+    # --- TIER 2: Top 15 ---
+    {
+        "name": "UC Berkeley Haas School of Business", "short_name": "Berkeley Haas",
+        "slug": "berkeley-haas", "location": "Berkeley, CA", "ranking": 8, "tier": 2,
+        "acceptance_rate": 12, "avg_gmat": 726, "avg_gpa": 3.65, "class_size": 300,
+        "avg_salary": 175000, "employment_rate": 93, "tuition": 68444,
+        "program_length": "2 years",
+        "strengths": ["Tech", "Social Impact", "Innovation", "Bay Area Access"],
+        "best_for": ["Tech", "Social Impact", "Entrepreneurship"],
+        "verdict": "Where Silicon Valley meets social impact. Smaller class means a tighter network, and the Bay Area is your backyard.",
+        "description": "Haas packs a powerful MBA into a 300-person class, creating one of the tightest communities in business school. The 'Question the Status Quo' culture is real.",
+        "url": "https://haas.berkeley.edu/",
+        "overview": """<p>Full disclosure: I'm a Haas grad. I'll try to keep it honest.</p>
+<p>Berkeley Haas is one of the smallest elite MBA programs in the country, with roughly 300 students per class. That size is intentional. Haas believes a smaller cohort builds deeper relationships, stronger accountability, and a more intimate learning environment. They're right. Two years at Haas and you know everyone. Your classmates become your professional network in a way that 900-person programs simply can't replicate.</p>
+<p>The school sits on the UC Berkeley campus, which means you're plugged into one of the world's great research universities. Engineering, public policy, law, and data science courses are all accessible through cross-registration. The Bay Area location gives direct access to Silicon Valley's tech companies, VC firms, and startup ecosystem. San Francisco is a 30-minute BART ride from campus.</p>
+<p>Haas operates around four "Defining Leadership Principles" that sound like corporate values until you experience them: Question the Status Quo, Confidence Without Attitude, Students Always, and Beyond Yourself. "Confidence Without Attitude" is the one that sticks. It creates a culture that's ambitious without being cutthroat. People help each other.</p>""",
+        "culture": """<p>The culture at Haas is the first thing every student mentions. "CWA" (Confidence Without Attitude) isn't a marketing slogan. It shapes how people interact in classes, in recruiting, and in study groups. There's a genuine aversion to arrogance. Students who show up with the "I'm better than you" energy that thrives at some peer programs find themselves gently pushed to recalibrate.</p>
+<p>Berkeley itself adds to the culture. The campus is politically active, intellectually diverse, and embedded in a community that cares about more than just making money. Social impact programming at Haas is strong, and a meaningful percentage of the class pursues careers in sustainable business, social enterprise, and public sector management. The school attracts people who want to build businesses that do something useful, not just profitable.</p>
+<p>The small class size means the community is tight. Thursday night "Haasipelas" (Haas happy hours) are institutional. Section bonding happens fast. And because the class is small, your second-year elective classes feel like seminars rather than lectures.</p>""",
+        "academics": """<p>Haas's first-year core covers data and decisions, microeconomics, financial accounting, finance, marketing, leading people, operations, strategy, and macroeconomics. The curriculum integrates an "Applied Innovation" sequence that puts teams of students into real-world projects with Bay Area companies, startups, and nonprofits.</p>
+<p>The elective catalog benefits from Berkeley's broader resources. Courses in energy and cleantech, healthcare innovation, fintech, and data analytics draw on UC Berkeley's top-ranked engineering and public health schools. The "Problem Finding, Problem Solving" course is a Haas signature that teaches design thinking approaches to business challenges.</p>
+<p>For students interested in entrepreneurship, the Lester Center for Entrepreneurship provides funding, mentorship, and curriculum support. The Berkeley SkyDeck accelerator (part of the broader university) is available to student ventures. And the "Lean LaunchPad" methodology, which was pioneered at Berkeley, is embedded in several Haas courses.</p>""",
+        "careers": """<p>Technology is the dominant career path at Haas, with roughly 40% of graduates entering tech companies. Product management at companies like Google, Amazon, Apple, Meta, and Salesforce is the most common destination. The Bay Area location gives Haas students unmatched access to tech recruiting, including at smaller companies and startups that don't recruit at East Coast programs.</p>
+<p>Consulting accounts for about 25% of placement, with MBB and Big 4 firms recruiting on campus. Finance is smaller (about 12%) than at M7 programs, reflecting the school's Bay Area orientation. Social impact and public sector roles claim about 8% of graduates, higher than almost any peer program.</p>
+<p>The median base salary of $175,000 reflects strong tech placement. But the headline salary number understates the total compensation picture: equity grants at tech companies add $50,000-$150,000+ in annual compensation for many graduates. Career management at Haas is personalized given the small class size, with dedicated advisors for each major career track.</p>""",
+        "who_should_apply": """<p>Haas is the right fit if you want a Bay Area tech career, value social impact, and thrive in intimate communities. If you're targeting product management, tech strategy, or sustainable business, the combination of Haas's network, Berkeley's resources, and Silicon Valley proximity is hard to beat.</p>
+<p>The ideal candidate has demonstrated leadership with a collaborative style, clear career goals that connect to the Bay Area ecosystem, and genuine alignment with the "Confidence Without Attitude" principle. Haas admissions explicitly evaluates for cultural fit. Students who value competition over collaboration, or who prioritize brand prestige above all else, may find Stanford GSB a better match.</p>""",
+        "watch_out": """<p>Haas's brand is strong regionally but less recognized globally than M7 programs. On the East Coast or internationally, "Berkeley Haas" may require explanation in ways that "Harvard" or "Wharton" never do. If your career plans are geographically broad or focused on East Coast finance, the M7 programs offer more portable brands.</p>
+<p>The class size (300) limits elective variety compared to Wharton (200+ electives) or Booth (150+ electives). Cross-registration with Berkeley helps, but the in-house catalog is smaller. And UC Berkeley's public university bureaucracy can be frustrating compared to the polished experience at private peer institutions. Registration systems, campus facilities outside Haas, and administrative processes are... characterful.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Berkeley Haas?",
+             f"Berkeley Haas has an acceptance rate of approximately 12% for the class of {CURRENT_YEAR}. The school receives around 3,500 applications for roughly 300 spots, making it more selective than several M7 programs."),
+            ("What GMAT score do I need for Berkeley Haas?",
+             "The average GMAT at Berkeley Haas is 726, with the middle 80% ranging from 700 to 750. Haas evaluates holistically, with significant weight on cultural fit, leadership style, and career clarity. A 710+ with strong essays and cultural alignment is competitive."),
+            ("What is the average salary after Berkeley Haas?",
+             "Haas graduates earn a median base salary of $175,000 with signing bonuses averaging $25,000. Total compensation including equity grants at tech companies often exceeds $250,000 in the first year. Tech placement (Haas's largest career outcome) typically includes significant stock-based compensation."),
+            ("Is Berkeley Haas an M7 school?",
+             "Berkeley Haas is not technically an M7 school. The M7 designation includes Stanford GSB, HBS, Wharton, Booth, Kellogg, Columbia, and MIT Sloan. However, Haas is consistently ranked in the top 10 and its selectivity (12% acceptance rate) is comparable to or higher than several M7 programs. In the Bay Area and tech recruiting, Haas carries M7-equivalent weight."),
+            ("How does Berkeley Haas compare to Stanford GSB?",
+             "Both are Bay Area programs with strong tech placement, but they're different experiences. Stanford GSB is smaller (430 students), more prestigious, and more focused on entrepreneurship and VC. Haas is more collaborative, more social impact-oriented, and more affordable. GSB's acceptance rate (6.9%) is roughly half of Haas's (12%). Many applicants apply to both and choose based on admission outcomes and cultural fit."),
+        ],
+    },
+    {
+        "name": "Yale School of Management", "short_name": "Yale SOM",
+        "slug": "yale-som", "location": "New Haven, CT", "ranking": 9, "tier": 2,
+        "acceptance_rate": 17, "avg_gmat": 720, "avg_gpa": 3.70, "class_size": 350,
+        "avg_salary": 165000, "employment_rate": 92, "tuition": 76300,
+        "program_length": "2 years",
+        "strengths": ["Social Enterprise", "Healthcare", "Nonprofit", "Integrated Curriculum"],
+        "best_for": ["Social Enterprise", "Healthcare", "Nonprofit"],
+        "verdict": "The mission-driven MBA. Strongest for nonprofit, social enterprise, and healthcare management.",
+        "description": "Yale SOM takes a distinctive approach with its integrated curriculum, designed to produce leaders who understand every business function. The broader Yale network is an underrated asset.",
+        "url": "https://som.yale.edu/",
+        "overview": """<p>Yale SOM occupies a unique niche in the MBA landscape. Founded in 1976 (much younger than most top programs), the school was built on the premise that business leaders should serve society, not just shareholders. That founding DNA persists. More SOM graduates go into social enterprise, nonprofit management, and public sector leadership than at any other top-10 program.</p>
+<p>The school is housed in Edward P. Bass Hall, a Foster + Partners building that opened in 2014 and is architecturally stunning. The campus sits in New Haven, Connecticut, which is a smaller city than what most peer programs offer. But the broader Yale University network compensates. Cross-registration with Yale Law School, the School of Public Health, the School of the Environment, and other graduate programs creates interdisciplinary combinations that are difficult to replicate elsewhere.</p>
+<p>SOM admits about 350 students per class, making it mid-sized and manageable. The class tends to be more internationally diverse and more mission-oriented than M7 averages. Students who come to SOM for traditional consulting or banking can absolutely do that, but the culture pulls toward purpose.</p>""",
+        "culture": """<p>The culture at Yale SOM feels different from the competitive intensity of Wharton or the intellectual sparring of Booth. SOM students are ambitious, but the ambition tends to be directed outward. "What problem are you trying to solve?" is a more common conversation topic than "what firm are you joining?" The school attracts thoughtful, globally-minded people who see business as a tool for impact.</p>
+<p>New Haven is a college town, and the SOM experience is inseparable from the Yale campus. Students eat at Yale dining halls, work out at Yale gyms, and attend lectures across the university. The social scene centers on SOM events, section gatherings, and a surprisingly active bar scene on Chapel Street. The community is close-knit and supportive, with genuine cross-section friendships forming quickly.</p>""",
+        "academics": """<p>SOM's "Integrated Curriculum" is its academic signature. Instead of teaching standalone courses in accounting, marketing, and strategy, the first-year core integrates these disciplines around organizational perspectives: the Customer, the Investor, the Employee, the Innovator, the Operations Engine, the Competitor, the State and Society, and the Global Macroeconomy. It's a fundamentally different way to structure business education.</p>
+<p>The approach has fans and critics. Fans say it teaches systems thinking and prepares students to see business problems holistically. Critics say it sacrifices depth in individual disciplines and can feel disorienting compared to traditional functional courses. Both perspectives have merit. The integrated core works best for students who think in frameworks rather than formulas.</p>
+<p>Second-year electives are more conventional, with strong offerings in healthcare, social enterprise, finance, and leadership. Access to Yale's broader curriculum is the real differentiator. Joint-degree programs with Law, Public Health, Medicine, Environment, and Divinity are well-established and popular.</p>""",
+        "careers": """<p>Consulting is the largest career path at SOM, accounting for about 30% of graduates. McKinsey, BCG, and Bain recruit actively, and SOM's analytical, purpose-driven graduates are strong consulting candidates. Finance accounts for roughly 22%, with a mix of investment banking, asset management, and impact investing. Technology has grown to about 18% of the class.</p>
+<p>Where SOM stands out is in nonprofit, government, and social enterprise placement. About 8-10% of graduates take roles in these sectors, the highest among top-10 programs. The school's Center for Business and the Environment, Program on Social Enterprise, and Global Network for Advanced Management support careers that don't fit traditional MBA molds.</p>
+<p>The median base salary of $165,000 is lower than M7 averages, partly reflecting the higher percentage of graduates entering lower-paying social impact roles. For graduates entering consulting or finance, compensation is on par with peer programs. Career services at SOM are well-regarded, with a strong coaching model and active alumni engagement.</p>""",
+        "who_should_apply": """<p>Yale SOM is the right choice for students who want a purpose-driven MBA with the optionality of a top-10 program. If your career goals involve healthcare, social enterprise, policy, environmental sustainability, or impact investing, SOM's ecosystem is unmatched. It's also strong for consulting-track students who want intellectual breadth and the Yale brand.</p>
+<p>The ideal candidate has demonstrated commitment to something beyond personal advancement. SOM admissions looks for evidence of impact, intellectual curiosity, and a genuine interest in how business intersects with society. The school values diversity of thought and experience over traditional MBA resume polish.</p>""",
+        "watch_out": """<p>New Haven isn't New York, Boston, or San Francisco. The city is improving rapidly, but it lacks the business density and social energy of major metro areas. Some students feel isolated, particularly those with partners or families. The 90-minute train to New York helps, but it's not the same as being in the city.</p>
+<p>The integrated curriculum can frustrate students who want deep, structured expertise in a specific functional area. If you know you want hard-core finance training, Wharton or Booth will teach it more directly. SOM's approach is broader but potentially less deep in any one discipline. And the school's mission-driven identity, while inspiring, can feel constraining for students whose primary motivation is career acceleration and earning power.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Yale SOM?",
+             f"Yale SOM's acceptance rate is approximately 17% for the class of {CURRENT_YEAR}. The school receives around 3,200 applications for roughly 350 spots."),
+            ("What GMAT score do I need for Yale SOM?",
+             "The average GMAT at Yale SOM is 720, with the middle 80% ranging from 690 to 750. SOM evaluates holistically, and its mission-driven culture means strong alignment with the school's values can offset a slightly lower test score. The GRE is fully accepted."),
+            ("What is the average salary after Yale SOM?",
+             "Yale SOM graduates earn a median base salary of $165,000 with signing bonuses averaging $25,000. The lower median compared to M7 programs partly reflects the higher proportion of graduates entering social impact, nonprofit, and public sector roles. Consulting and finance-track graduates earn on par with M7 peers."),
+            ("Is Yale SOM an M7 school?",
+             "Yale SOM is not an M7 school. The M7 comprises Stanford, HBS, Wharton, Booth, Kellogg, Columbia, and MIT Sloan. SOM is consistently ranked in the top 10 and the Yale brand carries significant weight across industries. For social enterprise and healthcare management, SOM's reputation rivals or exceeds some M7 programs."),
+            ("What makes Yale SOM different from other top MBA programs?",
+             "Three things: the integrated curriculum (which replaces traditional functional courses with multidisciplinary perspectives), the mission-driven culture (more graduates enter social impact roles than at any other top-10 program), and the Yale University network (cross-registration and joint degrees with world-class law, medical, and public health schools)."),
+        ],
+    },
+    {
+        "name": "NYU Stern School of Business", "short_name": "NYU Stern",
+        "slug": "nyu-stern", "location": "New York, NY", "ranking": 10, "tier": 2,
+        "acceptance_rate": 23, "avg_gmat": 723, "avg_gpa": 3.55, "class_size": 400,
+        "avg_salary": 170000, "employment_rate": 93, "tuition": 76780,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Media", "Entertainment", "Luxury"],
+        "best_for": ["Finance", "Media", "Entertainment"],
+        "verdict": "Manhattan's MBA. Unbeatable for finance and media, with Greenwich Village as your quad.",
+        "description": "Stern's Greenwich Village campus puts students at the center of New York's business ecosystem. Finance and media are the headline strengths.",
+        "url": "https://www.stern.nyu.edu/",
+        "overview": """<p>NYU Stern sits in Greenwich Village, one of the best neighborhoods in Manhattan. The location is the program's identity. Wall Street is a subway ride south. Midtown media companies are a subway ride north. Tech startups are everywhere in between. Stern students live, work, and network in the city that defines American business.</p>
+<p>The school admits about 400 students per class into its full-time MBA. Stern has built its reputation on finance (the school's historical strength) and has expanded into media, entertainment, luxury marketing, and fintech. The concentration in "Entertainment, Media, and Technology" is one of the most distinctive specializations in MBA education, drawing students who want careers at companies like Netflix, Spotify, NBCUniversal, and Warner Bros. Discovery.</p>
+<p>Stern also offers innovative program formats: the "Tech MBA" (a 1-year program focused on technology management), the "Fashion and Luxury MBA" (with a semester at a European partner school), and "André Koo Tech MBA" are all distinct from the traditional 2-year MBA. These specialized programs reflect Stern's willingness to experiment with MBA education.</p>""",
+        "culture": """<p>Stern's culture is a reflection of New York itself: diverse, fast-moving, and independently-minded. Students are self-directed. With Manhattan at your doorstep, the school doesn't need to manufacture social programming the way isolated campus programs do. The city is the social scene.</p>
+<p>The community is more fragmented than at campus-based programs. Many students live across different neighborhoods, have partners and commitments in the city, and integrate the MBA into an existing New York life rather than building life around the MBA. This creates a different kind of bonding. Stern friendships form around shared interests, study groups, and recruiting tracks rather than geographic proximity.</p>
+<p>"IQ + EQ" is Stern's tagline, emphasizing that the school values emotional intelligence alongside analytical ability. The culture tends to be inclusive and socially aware, with strong LGBTQ+ and diversity communities.</p>""",
+        "academics": """<p>Stern's first-year core covers financial accounting, statistics, microeconomics, marketing, management, finance, strategy, and operations. The curriculum is structured and front-loaded, with second year opening up to full elective selection.</p>
+<p>The finance department is deep, with faculty including Nouriel Roubini (macroeconomics), Aswath Damodaran (the "Dean of Valuation" whose NYU finance courses are viewed millions of times on YouTube), and a roster of professors with active Wall Street connections. Media and entertainment courses benefit from NYC's status as the media capital.</p>
+<p>Stern's "Stern Solutions" and "Social Impact Internship Fund" provide experiential learning opportunities. The "Doing Business In..." international courses take students to emerging markets for immersive business projects. Cross-registration with other NYU schools (Law, Public Policy, Engineering) is available.</p>""",
+        "careers": """<p>Finance is Stern's largest career path, with about 30% of graduates entering investment banking, asset management, private equity, and corporate finance. The school's proximity to Wall Street and its finance faculty create a recruiting pipeline that's second only to Wharton and Columbia among non-M7 programs.</p>
+<p>Consulting accounts for roughly 25% of graduates, with strong MBB and Big 4 placement. Technology has grown to about 20%, with product management and strategy roles at Amazon, Google, and NYC tech companies. Media and entertainment placement (about 10%) is higher than at most MBA programs, reflecting Stern's unique concentration in this area.</p>
+<p>The median base salary of $170,000 with signing bonuses of $25,000 reflects solid placement across high-paying industries. Stern's career services are particularly strong for finance and media recruiting, with industry-specific career coaches and a robust alumni mentorship network in New York.</p>""",
+        "who_should_apply": """<p>Stern is the right choice if you want a New York career in finance, media, or entertainment and want a school that's wired into the city's professional ecosystem. It's also strong for students who want a top-15 MBA with access to NYC's startup scene and cultural diversity.</p>
+<p>The ideal candidate has a clear reason for wanting to be in New York, professional experience that connects to Stern's strengths, and the independence to thrive in a city-based program where you're building your own MBA experience rather than having it structured for you.</p>""",
+        "watch_out": """<p>Stern lives in Columbia's shadow within New York. Columbia is M7-ranked, more selective, and has a stronger brand in finance and general management. Stern compensates with better location (Greenwich Village vs. West Harlem), stronger media and entertainment programming, and a slightly more accessible admissions bar. But the brand gap matters in certain recruiting contexts.</p>
+<p>New York living costs compound Stern's already-high tuition ($76,780/year). The all-in cost of a Stern MBA can exceed $300,000, which is M7-level pricing for a program that's ranked 10-12 depending on the year. ROI-conscious students should think carefully about whether Stern's unique strengths (media, entertainment, NYC access) justify the premium over strong regional programs.</p>""",
+        "faq": [
+            ("What is the acceptance rate at NYU Stern?",
+             f"NYU Stern's acceptance rate is approximately 23% for the class of {CURRENT_YEAR}. The school receives around 3,500 applications for roughly 400 spots in the full-time MBA program."),
+            ("What GMAT score do I need for NYU Stern?",
+             "The average GMAT at NYU Stern is 723, with the middle 80% ranging from 690 to 750. Stern values work experience quality and career clarity alongside test scores. A 710+ with strong NYC-connected career goals is competitive."),
+            ("What is the average salary after NYU Stern?",
+             "Stern graduates earn a median base salary of $170,000 with signing bonuses averaging $25,000. Finance-track graduates (Stern's largest placement) earn on par with M7 program graduates in similar roles. Media and entertainment roles may start lower but offer strong trajectory potential."),
+            ("How does NYU Stern compare to Columbia Business School?",
+             "Both are New York MBA programs, but Columbia is M7-ranked with stronger brand recognition and deeper finance placement. Stern offers a better campus neighborhood (Greenwich Village vs. West Harlem), stronger media/entertainment programming, and more accessible admissions. Columbia's class is larger (850 vs. 400). The choice often comes down to brand sensitivity, career goals, and which campus environment feels right."),
+            ("Is NYU Stern worth the cost?",
+             "Stern's tuition ($76,780/year) is comparable to M7 programs, while its ranking sits just outside that tier. The ROI is strong for students entering finance or consulting in New York, where Stern's network is deep. For careers outside NYC, or in industries where Stern doesn't have a distinctive advantage, the cost-benefit calculation requires more scrutiny."),
+        ],
+    },
+    {
+        "name": "Duke Fuqua School of Business", "short_name": "Duke Fuqua",
+        "slug": "duke-fuqua", "location": "Durham, NC", "ranking": 11, "tier": 2,
+        "acceptance_rate": 22, "avg_gmat": 720, "avg_gpa": 3.55, "class_size": 450,
+        "avg_salary": 168000, "employment_rate": 94, "tuition": 72800,
+        "program_length": "2 years",
+        "strengths": ["Consulting", "Healthcare", "Team Fuqua Culture", "Energy"],
+        "best_for": ["Consulting", "Healthcare", "General Management"],
+        "verdict": "Team-first culture in Durham. Surprisingly global, consistently underestimated by coastal snobs.",
+        "description": "Team Fuqua is real. The collaborative culture is the first thing every student mentions. Strong in consulting, healthcare, and energy.",
+        "url": "https://www.fuqua.duke.edu/",
+        "overview": """<p>"Team Fuqua" sounds like a marketing tagline. It's the most real thing about the program. Fuqua's collaborative culture is baked into admissions selection, curriculum design, and every aspect of student life. The school actively filters for people who work well with others and contribute to communities. This produces a class that's genuinely collegial in a way that's hard to manufacture.</p>
+<p>Located in Durham, North Carolina, Fuqua benefits from Duke University's resources and the Research Triangle's growing tech and healthcare ecosystem. Durham has transformed from a sleepy tobacco town into one of the most interesting small cities in the South, with a food scene, startup community, and quality of life that surprise students who assumed they'd be in the middle of nowhere.</p>
+<p>Fuqua admits about 450 students per class. The school is particularly strong in consulting, healthcare management, and energy. Its "GATE" (Global Academic Travel Experience) program sends every student on an international immersion during the first year, reflecting Fuqua's emphasis on global perspective. The school also operates one of the largest cross-continent MBA programs through its CCMBA (Cross Continent MBA) format.</p>""",
+        "culture": """<p>Fuqua's culture is the warmest of any top-15 program. Students routinely describe it as the primary reason they chose the school over higher-ranked alternatives. The collaborative ethos shows up in study groups, recruiting support, and social events. First-year students receive mentoring from second-years who share recruiting notes, interview tips, and club leadership knowledge.</p>
+<p>The "Fuqua Friday" tradition (weekly social gatherings) and "Campout" events create structured bonding. But the collaboration extends beyond social programming. In classrooms, students help each other prepare for case competitions and job interviews. The school rewards team performance, not just individual achievement.</p>
+<p>Durham's affordability compared to New York or San Francisco means students can live comfortably. Many buy houses during their MBA. The quality-of-life factor is real: good weather, excellent restaurants, affordable housing, and a pace that allows for genuine work-life balance during business school.</p>""",
+        "academics": """<p>Fuqua's first-year core is structured around "terms" (six-week blocks) covering accounting, finance, marketing, strategy, operations, economics, and leadership. The block schedule means courses are intensive but compressed, allowing students to take more total courses over two years than at programs using semester systems.</p>
+<p>Healthcare management is a standout. The Health Sector Management concentration, combined with proximity to Duke University Medical Center (one of the top hospitals in the country), gives students clinical immersion opportunities and healthcare industry connections that few programs can match. Energy and environment programming benefits from Duke's Nicholas School of the Environment and the Research Triangle's clean energy cluster.</p>
+<p>The "Fuqua Client Consulting Practicum" (FCCP) puts teams of students into real consulting engagements with companies, providing the kind of hands-on experience that MBB firms value in recruiting. The experiential learning portfolio also includes social impact projects and startup ventures through Duke Innovation and Entrepreneurship.</p>""",
+        "careers": """<p>Consulting dominates Fuqua placement, with roughly 35% of graduates entering MBB, Big 4, or boutique consulting firms. McKinsey, BCG, and Bain are the top three employers. The school's team-based culture and consulting practicum create a natural pipeline into the industry.</p>
+<p>Technology accounts for about 20% of graduates, with Amazon, Microsoft, and Google as top employers. Finance claims roughly 18%, spanning investment banking, private equity, and corporate finance. Healthcare management placement (about 10%) is higher than at most peer programs, reflecting Fuqua's concentration strength.</p>
+<p>The median base salary of $168,000 with signing bonuses of $25,000 is competitive with top-15 programs. Career services at Fuqua are well-organized, with dedicated industry coaches and a strong alumni network. The Fuqua alumni network is especially active in the Southeast, but graduates place nationally and internationally.</p>""",
+        "who_should_apply": """<p>Fuqua is the right choice if you value collaboration, want a strong consulting pipeline, and are interested in healthcare, energy, or general management. It's also a compelling option for students who want a top-15 MBA at a lower cost of living than coastal programs, without sacrificing career outcomes.</p>
+<p>The ideal Fuqua candidate has a collaborative leadership style, a track record of community contribution, and genuine interest in working with others. The admissions process screens heavily for "Team Fuqua" fit. Brilliant loners need not apply.</p>""",
+        "watch_out": """<p>Durham is a small city. If you need the energy of New York, Chicago, or San Francisco, Durham will feel slow. The business ecosystem is growing but can't match the density of major metro areas. Some recruiters, particularly in finance and tech, see Fuqua's location as a limitation.</p>
+<p>Fuqua's ranking (typically 10-14 depending on the source) means it sits below the M7 in brand prestige. In industries where school name matters most (top-tier PE, elite hedge funds), this distinction can matter. For consulting, tech, and most corporate roles, Fuqua's outcomes are comparable to M7 programs.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Duke Fuqua?",
+             f"Duke Fuqua's acceptance rate is approximately 22% for the class of {CURRENT_YEAR}. The school receives around 3,500 applications for roughly 450 spots."),
+            ("What GMAT score do I need for Duke Fuqua?",
+             "The average GMAT at Fuqua is 720, with the middle 80% ranging from 690 to 750. Fuqua evaluates holistically with heavy weight on teamwork, community engagement, and cultural fit. A 700+ with strong collaborative leadership evidence is competitive."),
+            ("What is 'Team Fuqua'?",
+             "Team Fuqua is the school's cultural identity centered on collaboration, inclusion, and community contribution. It's not a slogan; it's an admissions criterion. The school actively selects for students who work well with others, contribute to group success, and build community. Students who embody Team Fuqua support each other through recruiting, academics, and personal challenges."),
+            ("What is the average salary after Duke Fuqua?",
+             "Fuqua graduates earn a median base salary of $168,000 with signing bonuses averaging $25,000. Consulting-track graduates (Fuqua's largest career outcome) earn starting packages of $190,000+ including bonuses."),
+            ("How does Duke Fuqua compare to Virginia Darden?",
+             "Both are strong Southern MBA programs, but they feel different. Fuqua emphasizes teamwork and healthcare management; Darden emphasizes the case method and general management. Fuqua's class (450) is larger than Darden's (350). Fuqua has stronger healthcare and energy programs; Darden has a more intensive case-based pedagogy. Durham and Charlottesville are both appealing college towns."),
+        ],
+    },
+    {
+        "name": "Michigan Ross School of Business", "short_name": "Michigan Ross",
+        "slug": "michigan-ross", "location": "Ann Arbor, MI", "ranking": 12, "tier": 2,
+        "acceptance_rate": 24, "avg_gmat": 720, "avg_gpa": 3.50, "class_size": 450,
+        "avg_salary": 170000, "employment_rate": 93, "tuition": 72508,
+        "program_length": "2 years",
+        "strengths": ["General Management", "Consulting", "Action-Based Learning", "Tech"],
+        "best_for": ["Consulting", "General Management", "Tech"],
+        "verdict": "The Midwest powerhouse you keep hearing about. Strong general management at a fraction of the coastal price tag.",
+        "description": "Ross's action-based learning curriculum puts students in real-world consulting engagements starting in Year 1. The school draws heavily from the Midwest but places nationally.",
+        "url": "https://michiganross.umich.edu/",
+        "overview": """<p>Michigan Ross consistently outperforms its ranking. The school places at levels comparable to M7 programs in consulting and tech, with lower tuition and a cost of living that makes coastal MBA students jealous. Ann Arbor is one of the best college towns in America, and the Michigan alumni network (over 600,000 living alumni across all schools) is the largest of any university.</p>
+<p>Ross admits about 450 students per class, making it a mid-sized program. The "Action-Based Learning" philosophy means students start working on real business problems in their first semester. The MAP (Multidisciplinary Action Project) is the signature experience: seven-week consulting engagements where teams of 4-6 students tackle real challenges for companies like Amazon, Ford, Google, and nonprofit organizations.</p>
+<p>The school is particularly strong in general management, consulting, and technology. Its location in the heart of the auto industry's transformation into mobility technology gives Ross unique access to companies like Ford, GM, and the hundreds of mobility startups that have sprung up in the region.</p>""",
+        "culture": """<p>Ross culture blends Midwest friendliness with serious ambition. Students are collaborative without the self-conscious "we're collaborative" branding that some schools push. It feels natural. People hold doors, share recruiting notes, and help each other prep for interviews. The competition is with the market, not with your classmates.</p>
+<p>Ann Arbor adds enormous value to the experience. It's a walkable, affordable, culturally rich college town with outstanding restaurants, an active arts scene, and the fervor of Michigan football. Saturdays in the fall center on the Big House, and the energy around game days is unmatched in MBA education. Students live in affordable houses and apartments within walking distance of campus.</p>""",
+        "academics": """<p>Ross's first-year core covers accounting, finance, marketing, strategy, operations, applied microeconomics, and leadership. The distinctive element is MAP, which takes place between the core curriculum and summer internships. MAP teams work on real projects for companies around the world, giving students consulting-style experience before they've even started their internships.</p>
+<p>Second-year electives are strong across the board. Finance and real estate courses are particularly well-regarded, as are courses in technology management and entrepreneurship through the Zell Lurie Institute. The school's proximity to Detroit and the automotive industry creates unique elective opportunities in mobility, manufacturing strategy, and supply chain management.</p>
+<p>Cross-registration with Michigan's top-ranked engineering, public policy, and computer science programs is straightforward. Dual-degree combinations (MBA/MS Engineering, MBA/MPP, MBA/MS Data Science) are popular and well-supported.</p>""",
+        "careers": """<p>Consulting is Ross's largest career outcome, with roughly 30% of graduates entering MBB, Big 4, and boutique firms. McKinsey, BCG, and Bain recruit actively on campus, and Ross's MAP experience gives students a consulting track record that these firms value.</p>
+<p>Technology accounts for about 25% of graduates, with Amazon, Microsoft, Google, and Ford as top employers. Finance claims roughly 18%, with strong placement into investment banking and corporate finance. The auto and mobility sector is a distinctive Ross niche, with graduates going to companies in autonomous vehicles, EV manufacturing, and mobility platforms.</p>
+<p>The median base salary of $170,000 with signing bonuses of $25,000 is strong for a public university program. Adjusted for Ann Arbor's low cost of living, Ross graduates' real purchasing power often exceeds that of peers at higher-nominal-salary programs in expensive cities.</p>""",
+        "who_should_apply": """<p>Ross is the right choice for action-oriented students who want strong general management training with national placement. If you value experiential learning (doing, not just discussing), a collaborative culture, and excellent career outcomes at a reasonable cost, Ross delivers.</p>
+<p>The ideal candidate is pragmatic, team-oriented, and has demonstrated ability to execute under pressure. Ross values impact over polish. Students with non-traditional backgrounds, military experience, or entrepreneurial track records fit well.</p>""",
+        "watch_out": """<p>Ann Arbor is not a major business hub. While the university creates its own ecosystem, the city's geographic remove from coastal recruiting centers can require extra travel for networking and interviews. Some finance and tech firms that recruit heavily at coastal programs have smaller presences at Ross.</p>
+<p>Ross's brand, while strong nationally, faces the same challenge as other public university programs: the perception that private M7 schools carry more prestige. In PE and hedge fund recruiting, this distinction can matter. For consulting, tech, and corporate leadership, Ross graduates compete effectively with M7 peers.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Michigan Ross?",
+             f"Michigan Ross has an acceptance rate of approximately 24% for the class of {CURRENT_YEAR}. The school receives around 3,000 applications for roughly 450 spots."),
+            ("What GMAT score do I need for Michigan Ross?",
+             "The average GMAT at Ross is 720, with the middle 80% ranging from 690 to 750. Ross evaluates holistically with strong emphasis on leadership experience and career impact. A 700+ with compelling work experience is competitive."),
+            ("What is MAP at Michigan Ross?",
+             "MAP (Multidisciplinary Action Project) is Ross's signature experiential learning program. Teams of 4-6 students spend seven weeks working on a real business challenge for a company or organization. Projects span industries from tech to healthcare to nonprofit, and teams often travel internationally. MAP gives students consulting-like experience before their summer internships."),
+            ("What is the average salary after Michigan Ross?",
+             "Ross graduates earn a median base salary of $170,000 with signing bonuses averaging $25,000. When adjusted for Ann Arbor's significantly lower cost of living compared to New York or San Francisco, the real purchasing power of Ross graduates often exceeds that of peers at higher-salary programs in expensive cities."),
+        ],
+    },
+    {
+        "name": "Dartmouth Tuck School of Business", "short_name": "Dartmouth Tuck",
+        "slug": "dartmouth-tuck", "location": "Hanover, NH", "ranking": 13, "tier": 2,
+        "acceptance_rate": 22, "avg_gmat": 722, "avg_gpa": 3.55, "class_size": 290,
+        "avg_salary": 172000, "employment_rate": 95, "tuition": 77520,
+        "program_length": "2 years",
+        "strengths": ["General Management", "Consulting", "Tight Alumni Network", "Leadership"],
+        "best_for": ["Consulting", "General Management", "Leadership"],
+        "verdict": "The tightest alumni network in business. Small class, middle of nowhere, fierce loyalty that lasts decades.",
+        "description": "Tuck's isolation in Hanover is a feature, not a bug. The 290-person class creates an intimacy that larger programs can't replicate, and Tuck alumni are legendarily loyal.",
+        "url": "https://www.tuck.dartmouth.edu/",
+        "overview": """<p>Dartmouth Tuck is the original MBA program. Founded in 1900, it was the first graduate school of management in the world. That heritage matters less than what Tuck does today: produce some of the most tightly bonded, fiercely loyal MBA alumni anywhere.</p>
+<p>Tuck admits about 290 students per class, making it one of the smallest top MBA programs. The school sits in Hanover, New Hampshire, a beautiful rural town on the Connecticut River. Hanover's isolation is the program's defining feature. There's nowhere else to go. Students live, study, eat, exercise, and socialize together in a self-contained community. This proximity produces relationships that are deeper than what larger, urban programs generate.</p>
+<p>The academic focus is general management. Tuck doesn't offer concentrations or formal specializations. Every student gets the same broad business education, with elective customization in the second year. The school believes that great business leaders need to understand all functions, and the curriculum reflects that philosophy.</p>""",
+        "culture": """<p>Tuck's culture is defined by intimacy and loyalty. With 290 students, you know everyone by name within the first month. Study groups become families. Section mates become lifelong friends. The school's alumni giving rate (over 60%, the highest of any business school) is concrete evidence that the Tuck experience leaves a lasting impression.</p>
+<p>Hanover's isolation forces community in a way that no urban program can replicate. When the nearest city of consequence is Burlington (2 hours away), the school becomes the center of your social life. This produces an intensity of bonding that Tuck alumni describe as transformative. Winter activities (skiing, snowshoeing, ice hockey) become shared experiences that build camaraderie.</p>
+<p>The alumni network is Tuck's secret weapon. Tuck graduates will take your call. They'll make introductions. They'll advocate for you in hiring decisions. The network is smaller than Harvard's or Wharton's, but it's disproportionately engaged and loyal. Quality over quantity.</p>""",
+        "academics": """<p>Tuck's first-year core is comprehensive and integrated. Courses cover financial accounting, managerial economics, capital markets, statistics, marketing, operations, strategy, organizational behavior, and global economics. The school uses a mix of case method, lectures, and team-based projects.</p>
+<p>Second-year electives are broad but not as deep as larger programs. With 290 students, the number of elective sections is naturally smaller than at Wharton (200+ electives) or Booth (150+). But the course quality is high, and class sizes are small enough that students build real relationships with faculty.</p>
+<p>Tuck's "First-Year Project" is an experiential learning engagement where student teams work with real companies on strategic challenges. The "TuckGO" (Global Opportunity) program sends students on international immersions. And the Center for Business, Government, and Society provides interdisciplinary coursework that's relevant for students targeting careers in policy or regulated industries.</p>""",
+        "careers": """<p>Consulting is Tuck's dominant career path, with roughly 38% of graduates entering MBB and other consulting firms. This is one of the highest consulting placement rates among top MBA programs. McKinsey, BCG, and Bain collectively hire more Tuck graduates (as a percentage of class) than at most larger programs.</p>
+<p>Finance accounts for about 25% of graduates, with strong placement into investment banking, PE, and asset management. Technology claims roughly 18%, with graduates going to Amazon, Google, Microsoft, and startups. The employment rate of 95% at three months is among the highest of any MBA program.</p>
+<p>The median base salary of $172,000 with signing bonuses of $25,000 is strong and reflects Tuck's concentrated placement in high-paying consulting and finance roles. The alumni network's engagement in career support means that Tuck graduates often have access to opportunities that aren't formally posted.</p>""",
+        "who_should_apply": """<p>Tuck is the right choice if you want the strongest possible alumni network, a deep general management education, and a community-first MBA experience. It's particularly strong for consulting-track students and anyone who values intimate learning environments over urban bustle.</p>
+<p>The ideal Tuck candidate is community-oriented, genuinely collaborative, and comfortable with (or excited by) the prospect of two years in a small New Hampshire town. If you need nightlife, cultural diversity, and the energy of a big city to feel alive, Hanover will be a challenge.</p>""",
+        "watch_out": """<p>Hanover is isolated. There's no way around it. The nearest major airport is in Boston or Hartford, each roughly two hours away. Some students love the isolation. Others feel trapped by January. If you have a partner or family, their experience of Hanover matters too. Spouses who need urban amenities or career access should visit before committing.</p>
+<p>The general management curriculum means no formal concentrations. Students who want deep finance training (Wharton-level depth) or specialized tech courses (MIT Sloan-level offerings) may find Tuck's elective catalog insufficient. The school compensates with quality, but the breadth of options is naturally limited by the small class size.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Dartmouth Tuck?",
+             f"Tuck's acceptance rate is approximately 22% for the class of {CURRENT_YEAR}. The school receives around 2,500 applications for roughly 290 spots."),
+            ("What GMAT score do I need for Dartmouth Tuck?",
+             "The average GMAT at Tuck is 722, with the middle 80% ranging from 700 to 750. Tuck values community fit heavily, evaluating candidates on their collaborative spirit and potential contribution to the tight-knit Hanover community."),
+            ("Why is Tuck's alumni network so strong?",
+             "Three factors: small class size (290 students, so everyone knows each other), the isolation of Hanover (which forces deep bonding), and the school's institutional emphasis on community. The result is an alumni giving rate above 60%, the highest of any business school, and a network that's disproportionately engaged in helping fellow graduates."),
+            ("What is the average salary after Dartmouth Tuck?",
+             "Tuck graduates earn a median base salary of $172,000 with signing bonuses averaging $25,000. The 95% employment rate at three months is among the highest of any MBA program. Consulting-track graduates (Tuck's largest placement) earn starting packages of $195,000+ including bonuses."),
+        ],
+    },
+    {
+        "name": "UVA Darden School of Business", "short_name": "Virginia Darden",
+        "slug": "virginia-darden", "location": "Charlottesville, VA", "ranking": 14, "tier": 2,
+        "acceptance_rate": 24, "avg_gmat": 718, "avg_gpa": 3.50, "class_size": 350,
+        "avg_salary": 168000, "employment_rate": 93, "tuition": 72200,
+        "program_length": "2 years",
+        "strengths": ["General Management", "Case Method", "Consulting", "Leadership"],
+        "best_for": ["Consulting", "General Management", "Career Changers"],
+        "verdict": "Case method intensity rivaling Harvard, without the Harvard attitude. Pure general management DNA.",
+        "description": "Darden runs on the case method. More cases per year than any MBA program except Harvard. The school produces strong general managers who can think on their feet.",
+        "url": "https://www.darden.virginia.edu/",
+        "overview": """<p>Darden is the case method school that everyone forgets about. Harvard gets the credit for popularizing cases. Darden quietly teaches more cases per student per year than any MBA program except HBS. The school is obsessively focused on the case method as a pedagogical approach, and it works. Darden graduates are comfortable making decisions with incomplete information, defending their reasoning under pressure, and thinking on their feet.</p>
+<p>Located in Charlottesville, Virginia, on the beautiful grounds of Thomas Jefferson's university, Darden benefits from an idyllic campus setting and a strong community atmosphere. The school admits about 350 students per class. The general management curriculum is broad by design. Darden believes business leaders need to understand all functions, and the case method reinforces this by presenting problems that span disciplines.</p>
+<p>Darden is also one of the strongest programs for career changers. The school actively recruits students from non-traditional backgrounds (military, nonprofit, education, healthcare) and has built support systems for students making significant career pivots. The case method itself is an equalizer: everyone is learning to analyze unfamiliar situations, regardless of pre-MBA industry.</p>""",
+        "culture": """<p>Darden's culture is intense and supportive. The case method demands daily preparation, and students quickly learn to rely on their learning teams (groups of 5-6 that stay together for the first year) for case preparation and study. The workload is heavier than at most peer programs, particularly in the first year. Cold calls happen every day, and classroom participation is a major component of grades.</p>
+<p>Charlottesville is a college town with charm. Thomas Jefferson's campus (the "Grounds") is a UNESCO World Heritage Site. The town has excellent restaurants, wineries, and a Blue Ridge Mountain backdrop that softens the academic intensity. Students live close to campus, and the community is tight-knit. Darden events, from football tailgates to wine tours, build bonds outside the classroom.</p>""",
+        "academics": """<p>Darden's first-year core covers 13 courses across accounting, finance, marketing, operations, strategy, ethics, communications, economics, and organizational behavior. Nearly all instruction uses the case method. Students prepare 10-15 cases per week, discuss them in learning teams, and then debate them in classroom sessions of 60-70 students.</p>
+<p>The case teaching at Darden is some of the best in the world. Faculty members write their own cases (Darden's case library is the second largest after Harvard's) and teach with a Socratic intensity that forces engagement. The format builds skills that are directly transferable to consulting, strategy, and leadership roles.</p>
+<p>Second-year electives offer more flexibility, with concentrations available in finance, marketing, strategy, and entrepreneurship. Global immersion courses, the Batten Institute for Entrepreneurship, and the "i.Lab" (innovation laboratory) provide experiential learning counterpoints to the case-heavy classroom.</p>""",
+        "careers": """<p>Consulting is Darden's largest career path, with about 33% of graduates entering MBB, Big 4, and boutique firms. The case method is essentially consulting training, and firms recognize this. McKinsey, BCG, and Bain recruit actively at Darden, and the school punches well above its ranking in MBB placement.</p>
+<p>Finance accounts for roughly 22% of graduates, with investment banking and corporate finance as the main destinations. Technology claims about 18%, with Amazon, Microsoft, and tech startups recruiting on campus. General management rotational programs at large corporations (a natural fit for Darden's broad curriculum) are also popular.</p>
+<p>The median base salary of $168,000 with signing bonuses of $25,000 reflects strong placement in consulting and finance. Charlottesville's cost of living is significantly lower than coastal cities. Public university tuition (for Virginia residents) makes Darden one of the best ROI options in the top 15.</p>""",
+        "who_should_apply": """<p>Darden is the right choice if you love the case method, want strong consulting placement, and value a community-oriented experience. It's particularly compelling for career changers, military veterans, and students who want a general management foundation applicable across industries.</p>
+<p>The ideal candidate is comfortable with ambiguity, willing to participate actively in classroom discussions, and genuinely interested in broad business education rather than deep specialization. Darden admissions values intellectual curiosity, leadership character, and a collaborative spirit.</p>""",
+        "watch_out": """<p>The case method is polarizing. If you learn better through lectures, problem sets, or project-based work, Darden will be frustrating. The daily preparation load is heavy, and the pressure to participate in every class can be exhausting for introverts. Students who want quantitative depth in finance or analytics may find the case approach too broad.</p>
+<p>Charlottesville is small. For students who need urban energy, it can feel limiting. The business ecosystem is slim compared to major metro areas. Recruiting requires travel, and some employers with strong coastal presences don't recruit at Darden as actively as at programs in NYC, Boston, or San Francisco.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Virginia Darden?",
+             f"Darden's acceptance rate is approximately 24% for the class of {CURRENT_YEAR}. The school receives around 2,800 applications for roughly 350 spots."),
+            ("What GMAT score do I need for Virginia Darden?",
+             "The average GMAT at Darden is 718, with the middle 80% ranging from 690 to 750. Darden values well-rounded candidates and weighs leadership experience, intellectual curiosity, and cultural fit alongside test scores. A 700+ with strong case-method readiness is competitive."),
+            ("Does Darden use the case method?",
+             "Yes. Darden is one of only two top MBA programs (along with Harvard Business School) that use the case method as the primary teaching methodology. Students prepare and discuss 10-15 cases per week. Darden's case library is the second largest in the world. The format builds decision-making, communication, and analytical skills under pressure."),
+            ("What is the average salary after Virginia Darden?",
+             "Darden graduates earn a median base salary of $168,000 with signing bonuses averaging $25,000. For Virginia residents, the in-state tuition discount makes Darden one of the best ROI programs in the top 15. Consulting-track graduates earn starting packages of $190,000+."),
+        ],
+    },
+    {
+        "name": "Cornell Johnson Graduate School of Management", "short_name": "Cornell Johnson",
+        "slug": "cornell-johnson", "location": "Ithaca, NY", "ranking": 15, "tier": 2,
+        "acceptance_rate": 27, "avg_gmat": 710, "avg_gpa": 3.45, "class_size": 300,
+        "avg_salary": 165000, "employment_rate": 93, "tuition": 74480,
+        "program_length": "2 years",
+        "strengths": ["Tech", "Immersive Learning", "Real Estate", "Hospitality"],
+        "best_for": ["Tech", "Real Estate", "Hospitality"],
+        "verdict": "Tech-forward in a college-town setting. Quiet reputation, loud outcomes.",
+        "description": "Johnson's dual-degree offerings with Cornell's other colleges create combinations you can't find elsewhere. The school is increasingly tech-focused.",
+        "url": "https://www.johnson.cornell.edu/",
+        "overview": """<p>Cornell Johnson is one of the most underrated MBA programs in the top 15. The school's dual-degree offerings with Cornell's other world-class colleges (Engineering, Hotel Administration, Law, Public Policy) create combinations that are genuinely unique. An MBA/MEng in operations research, an MBA/MHA in hotel management, or an MBA/MPA in public policy: these are pathways you can't easily replicate at other schools.</p>
+<p>Johnson admits about 300 students per class. The school sits on Cornell's iconic Ithaca campus, surrounded by gorges, waterfalls, and upstate New York farmland. It's beautiful and isolated. The "Cornell Tech" campus on Roosevelt Island in New York City extends the school's reach into the city for students interested in tech-focused programming.</p>
+<p>The curriculum emphasizes immersive learning. Johnson's "Immersion" model gives second-year students deep experiential learning in a specific industry or function. Students choose an immersion track (Investment Banking, Strategic Marketing, Digital Technology, Sustainable Global Enterprise, etc.) and spend the semester working on real projects within that domain.</p>""",
+        "culture": """<p>Johnson's culture is tight-knit and supportive, shaped by Ithaca's isolation. Students live close to each other, socialize together, and build strong bonds quickly. The small class (300) means everyone knows each other, and the community has a warmth that students regularly cite as the program's best feature.</p>
+<p>The school benefits from Cornell's broader campus life: Division I athletics, a world-famous hotel school, excellent campus dining, and a stunning natural environment. Ithaca's outdoor recreation (gorge hiking, skiing, Finger Lakes wine country) adds to the quality of life. The student body is more diverse in background than the typical MBA cohort, partly because Johnson's dual-degree options attract non-traditional students.</p>""",
+        "academics": """<p>Johnson's first-year core covers financial accounting, microeconomics, marketing management, statistics, strategy, operations, managerial finance, and leadership. The curriculum is structured to build foundations quickly, with the second year devoted primarily to the Immersion experience and electives.</p>
+<p>The Immersion model is Johnson's academic signature. Instead of a traditional second-year elective mix, students choose a concentrated semester-long deep dive. The Investment Banking Immersion, for example, includes valuation coursework, deal analysis, company projects, and direct engagement with Wall Street firms. The Digital Technology Immersion puts students into product development projects with NYC tech companies through the Cornell Tech campus.</p>
+<p>The hospitality management courses (accessed through cross-registration with the Cornell School of Hotel Administration) are the best in the world. Students interested in hospitality, luxury brands, or real estate development benefit from a resource that no other MBA program can match.</p>""",
+        "careers": """<p>Consulting accounts for roughly 28% of Johnson graduates, with strong MBB and Big 4 placement. Finance is the second-largest bucket at about 25%, with investment banking (the immersion program is a pipeline) and corporate finance as the main paths. Technology claims about 22% of graduates, with Amazon, Google, and Microsoft as top employers.</p>
+<p>Real estate and hospitality are distinctive niches where Johnson's placement rates exceed its ranking. The Hotel School connection gives graduates access to luxury hospitality companies that don't recruit at other MBA programs. Real estate immersion graduates go to development firms, REITs, and real estate PE funds.</p>
+<p>The median base salary of $165,000 with signing bonuses of $25,000 is solid for a top-15 program. Ithaca's low cost of living means students graduate with less personal debt from living expenses than peers at urban programs.</p>""",
+        "who_should_apply": """<p>Johnson is the right choice if you want dual-degree flexibility, immersive experiential learning, or careers in hospitality and real estate. It's also strong for tech-interested students who want access to the Cornell Tech campus in NYC while being based at a campus program during the first year.</p>
+<p>The ideal candidate values depth over breadth, has a clear sense of which immersion track aligns with their goals, and is comfortable with (or enthusiastic about) life in a rural college town. Students who need urban access year-round should look at the Cornell Tech MBA instead.</p>""",
+        "watch_out": """<p>Ithaca is remote. "Ithaca is gorges" is the joke, but the isolation is real. Winter is harsh, the nearest major city is Syracuse (an hour away), and getting to New York City requires a 4.5-hour drive or a short flight. Students with partners who need career access or urban amenities should think carefully.</p>
+<p>Johnson's brand recognition outside of the MBA world is lower than its quality deserves. "Cornell" carries weight, but "Johnson" doesn't have the instant recognition of "Wharton" or "Booth." In some recruiting contexts, this requires extra effort to establish credibility. The school's smaller class also limits the alumni network density in any given city or industry.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Cornell Johnson?",
+             f"Cornell Johnson's acceptance rate is approximately 27% for the class of {CURRENT_YEAR}. The school receives around 2,200 applications for roughly 300 spots."),
+            ("What GMAT score do I need for Cornell Johnson?",
+             "The average GMAT at Johnson is 710, with the middle 80% ranging from 680 to 740. Johnson values career clarity and fit with the Immersion model. Strong candidates articulate which immersion track aligns with their goals."),
+            ("What are Johnson's Immersion programs?",
+             "Immersions are semester-long experiential learning programs in the second year. Students choose a concentration (Investment Banking, Strategic Marketing, Digital Technology, Sustainable Global Enterprise, Managerial Finance, or others) and spend the semester doing coursework and real-world projects within that domain. It's deeper than a traditional elective mix and more structured than an independent study."),
+            ("What is the average salary after Cornell Johnson?",
+             "Johnson graduates earn a median base salary of $165,000 with signing bonuses averaging $25,000. Investment Banking Immersion graduates earn among the highest starting compensation, with base salaries in the $175,000-185,000 range plus signing bonuses."),
+        ],
+    },
+    # --- TIER 3: Top 25 ---
+    {
+        "name": "UCLA Anderson School of Management", "short_name": "UCLA Anderson",
+        "slug": "ucla-anderson", "location": "Los Angeles, CA", "ranking": 16, "tier": 3,
+        "acceptance_rate": 25, "avg_gmat": 714, "avg_gpa": 3.50, "class_size": 360,
+        "avg_salary": 160000, "employment_rate": 92, "tuition": 67246,
+        "program_length": "2 years",
+        "strengths": ["Entertainment", "Tech", "Entrepreneurship", "Real Estate"],
+        "best_for": ["Entertainment", "Tech", "Entrepreneurship"],
+        "verdict": "LA's MBA. Entertainment, tech, and entrepreneurship with year-round sunshine as a perk.",
+        "description": "Anderson's LA location is its superpower. The school dominates entertainment, media, and West Coast tech recruiting.",
+        "url": "https://www.anderson.ucla.edu/",
+        "overview": """<p>UCLA Anderson sits in Westwood, wedged between Beverly Hills, Santa Monica, and Hollywood. That geography shapes the program more than any curriculum committee ever could. The school draws roughly 3,500 applications for 360 seats, which makes it the largest full-time MBA class in California and one of the most competitive on the West Coast.</p>
+<p>Anderson's core curriculum is front-loaded into the first year, covering fundamentals across finance, marketing, strategy, and operations. The second year opens up to over 100 electives, with particular depth in entertainment, real estate development, and technology management. The school's proximity to studios, production companies, and Silicon Beach startups means guest speakers and company visits happen weekly, not semesterly.</p>
+<p>The real estate program deserves special mention. Anderson's Ziman Center for Real Estate connects students directly to LA's massive development market. Entertainment is the other obvious draw. The Anderson Entertainment Conference is one of the largest student-run media events in business education, and alumni hold senior positions at every major studio, streamer, and talent agency.</p>""",
+        "culture": """<p>Anderson's culture splits roughly into two camps: the California dreamers who came for LA and the career switchers who came for the brand. The 360-person class is large enough to find your people but small enough that you'll recognize faces at every event. International students make up about 35% of the class, which gives the program a global feel without losing its distinctly California energy.</p>
+<p>The vibe is collaborative but competitive. Study groups form fast, and Anderson students are known for helping each other prep for interviews. The social scene benefits enormously from the location. Thursday night mixers often spill into Westwood Village, and weekend activities range from surfing in Malibu to hiking Runyon Canyon. It's hard to overstate how much LA's lifestyle shapes the Anderson experience.</p>
+<p>Diversity is a genuine strength. Anderson's student body represents over 50 countries, and the school has invested heavily in recruiting veterans, engineers, and nonprofit professionals alongside the usual consultants and bankers.</p>""",
+        "academics": """<p>Anderson runs on a quarter system, which means classes move fast. You'll cover more discrete topics than semester schools, but each course is compressed into ten weeks. First-year core includes financial accounting, data analytics, microeconomics, marketing, strategy, and operations. Nothing revolutionary on the syllabus, but Anderson's teaching leans practical rather than theoretical.</p>
+<p>Where Anderson separates itself is elective depth. The Entertainment and Media Management concentration is unmatched. Applied Management Research (AMR) projects pair second-year students with real companies on real problems. Past AMR clients include Disney, Netflix, SpaceX, and dozens of LA-based startups. The Tech Entrepreneurship program, housed at the Price Center for Entrepreneurship, gives students access to UCLA's broader engineering and computer science resources.</p>
+<p>Anderson also offers joint degrees with UCLA Law, Public Health, Urban Planning, and Engineering. The Anderson-UCLA Health dual degree (MBA/MPH) is one of the strongest health management pipelines on the West Coast.</p>""",
+        "careers": """<p>Anderson's employment numbers tell a clear story: 39% of graduates land in tech, 22% in consulting, and 14% in entertainment and media. That tech number has climbed steadily as Silicon Beach has matured. Amazon, Google, Meta, and Apple recruit on campus, and smaller firms like Hulu, Riot Games, and Snap show up regularly.</p>
+<p>Consulting placement is solid, with BCG, Bain, McKinsey, Deloitte, and Accenture all hiring from Anderson. The school doesn't compete with Booth or Kellogg on raw consulting volume, but LA-based consulting roles are harder to fill from other programs, which gives Anderson grads a regional advantage.</p>
+<p>Entertainment is the signature placement. Anderson grads fill development, strategy, and operations roles across Warner Bros., Disney, NBCUniversal, Netflix, and dozens of agencies. If you're targeting entertainment, Anderson and USC Marshall are really the only two programs with deep studio relationships. Median base salary lands at $160,000, with total first-year compensation (including signing bonus and other guaranteed comp) averaging around $185,000.</p>""",
+        "who_should_apply": """<p>Anderson is the right fit if you want to work in entertainment, LA tech, or West Coast real estate. Engineers and product managers targeting tech companies will find strong recruiting pipelines. Career changers who want sunshine while they pivot will appreciate both the weather and the career support. If you're drawn to consulting but prefer the West Coast lifestyle over Manhattan or Chicago, Anderson gives you options.</p>""",
+        "watch_out": """<p>Anderson's national brand recognition lags behind its outcomes. Employers in LA and on the West Coast know Anderson well, but if your post-MBA plans involve moving to New York or London, you'll work harder to explain the brand than you would from a top-10 school. The quarter system can feel relentless. And LA's cost of living will stretch your student budget thin. Budget for a car. Public transit in Los Angeles is an optimistic thought experiment, not a commute strategy.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UCLA Anderson?",
+             f"UCLA Anderson's acceptance rate is approximately 25% for the class of {CURRENT_YEAR}. The school receives around 3,500 applications for 360 full-time MBA seats, making it selective but meaningfully less competitive than M7 programs."),
+            ("What GMAT score do I need for UCLA Anderson?",
+             "The average GMAT at Anderson is 714, with the middle 80% ranging from 690 to 740. Anderson also accepts the GRE and has increased GRE enrollment in recent years. Strong candidates have clear LA-relevant career goals, whether in tech, entertainment, or entrepreneurship."),
+            ("Is UCLA Anderson good for entertainment careers?",
+             "Anderson is one of two MBA programs (alongside USC Marshall) with deep entertainment industry relationships. Alumni hold senior positions at every major studio, streamer, and talent agency. The Anderson Entertainment Conference draws hundreds of industry professionals, and AMR projects regularly partner with entertainment companies."),
+            ("What is the average salary after UCLA Anderson?",
+             "Anderson graduates earn a median base salary of $160,000 with total first-year compensation averaging around $185,000 when including signing bonuses. Tech and consulting drive the highest compensation, while entertainment roles typically start lower but offer faster advancement to executive positions."),
+            ("How does UCLA Anderson compare to USC Marshall?",
+             "Anderson ranks higher (#16 vs #17) and has stronger tech recruiting. Marshall has the legendary Trojan network and edges Anderson in real estate. Both dominate entertainment. The choice often comes down to brand preference and which alumni network resonates more with your target employers."),
+        ],
+    },
+    {
+        "name": "USC Marshall School of Business", "short_name": "USC Marshall",
+        "slug": "usc-marshall", "location": "Los Angeles, CA", "ranking": 17, "tier": 3,
+        "acceptance_rate": 27, "avg_gmat": 710, "avg_gpa": 3.45, "class_size": 240,
+        "avg_salary": 155000, "employment_rate": 91, "tuition": 66156,
+        "program_length": "2 years",
+        "strengths": ["Entertainment", "Real Estate", "Entrepreneurship", "Trojan Network"],
+        "best_for": ["Entertainment", "Real Estate", "Entrepreneurship"],
+        "verdict": "The scrappy underdog in LA. The Trojan network opens doors that rankings can't measure.",
+        "description": "Marshall leverages the Trojan network, one of the most powerful alumni bases in business. Strong in entertainment, real estate, and entrepreneurship.",
+        "url": "https://www.marshall.usc.edu/",
+        "overview": """<p>USC Marshall sits in the heart of University Park, minutes from downtown LA and the entertainment corridor. The school enrolls roughly 240 full-time MBA students per year from about 2,600 applicants, keeping the class deliberately smaller than crosstown rival UCLA Anderson. That size creates a tighter community, though it also means a smaller on-campus recruiting footprint.</p>
+<p>Marshall's defining asset is the Trojan network. USC alumni are fiercely loyal, and that loyalty translates into hiring. In LA's entertainment, real estate, and entrepreneurship circles, the USC connection opens conversations that cold applications simply won't. The network effect is hard to quantify on a rankings spreadsheet, but it's real and it compounds over time.</p>
+<p>The curriculum follows a traditional two-year structure with first-year core courses and second-year electives. Marshall has invested heavily in its real estate program (the Lusk Center for Real Estate is nationally recognized), its Lloyd Greif Center for Entrepreneurial Studies, and its entertainment management concentration. These three pillars define what Marshall does best.</p>""",
+        "culture": """<p>Marshall's culture is warm, social, and relationship-driven. Students describe it as a place where people genuinely help each other, partly because the smaller class size means everyone knows everyone. The Trojan Family ethos isn't just marketing copy. Alumni pick up the phone for current students, and the "Fight On" mentality extends into recruiting season.</p>
+<p>The student body skews slightly more diverse in professional backgrounds than you might expect. About 30% come from international backgrounds, and Marshall actively recruits from military, nonprofit, and healthcare sectors alongside the usual consulting and finance feeders. The social scene is quintessentially LA: networking events at rooftop bars, alumni mixers at production studios, and weekend trips to Palm Springs or Big Bear.</p>""",
+        "academics": """<p>Marshall's first-year core covers the usual MBA fundamentals: accounting, finance, marketing, operations, strategy, and leadership. The teaching quality varies, as it does everywhere, but Marshall's best professors bring a practitioner mindset that connects theory to LA's business landscape.</p>
+<p>The standout academic programs are real estate, entertainment, and entrepreneurship. The Lusk Center for Real Estate combines academic research with industry partnerships and places graduates into development, investment, and REIT roles across Southern California. The entertainment management concentration includes courses on content strategy, studio economics, and talent management taught by working industry executives. The Greif Center for Entrepreneurial Studies runs a venture fund and an accelerator that give students hands-on startup experience.</p>
+<p>Marshall also offers a Global Access Program (GAP), which places first-year students on international consulting projects. It's one of the better experiential learning programs in the top 20 and gives students early exposure to client-facing work.</p>""",
+        "careers": """<p>Marshall's employment report shows 35% of graduates entering tech, 20% consulting, 15% entertainment and media, and 10% real estate. The tech placement has grown quickly as Silicon Beach has expanded. Amazon, Google, Deloitte, and EY-Parthenon all recruit from Marshall, though consulting volume is smaller than Anderson's.</p>
+<p>Where Marshall truly differentiates is the alumni pipeline. In entertainment, Marshall grads hold senior roles at CAA, WME, Lionsgate, Sony Pictures, and across the streaming landscape. In real estate, the Lusk Center alumni network dominates Southern California development. These relationships are Marshall's competitive moat against programs that rank higher on paper.</p>
+<p>Median base salary is $155,000, with total first-year compensation averaging around $178,000. Entertainment roles tend to start lower (think $120,000-140,000 base) but offer faster trajectories to executive positions, particularly if you're targeting the business side of studios or agencies.</p>""",
+        "who_should_apply": """<p>Marshall is the right choice if the Trojan network matters to your career goals. If you're targeting LA-based entertainment, real estate development in Southern California, or entrepreneurship in the LA ecosystem, Marshall's alumni relationships are worth more than any ranking delta. Career changers who thrive in relationship-driven environments will find Marshall's collaborative culture energizing.</p>""",
+        "watch_out": """<p>Marshall's brand recognition drops sharply outside of LA and the West Coast. If your post-MBA plan involves New York finance or international consulting, a higher-ranked program will serve you better. The school's ranking has bounced around the 15-20 range, which means employer perception varies. And the Trojan network, while powerful, is most effective in specific industries and geographies. If you're not planning to work in LA, the network premium diminishes.</p>""",
+        "faq": [
+            ("What is the acceptance rate at USC Marshall?",
+             f"USC Marshall's acceptance rate is approximately 27% for the class of {CURRENT_YEAR}. The school receives around 2,600 applications for 240 full-time MBA seats. Marshall is slightly less selective than crosstown rival UCLA Anderson but still competitive."),
+            ("What GMAT score do I need for USC Marshall?",
+             "The average GMAT at Marshall is 710, with the middle 80% ranging from 680 to 740. Marshall evaluates candidates holistically, with particular attention to career goals that align with the school's strengths in entertainment, real estate, and entrepreneurship."),
+            ("How strong is the USC Trojan network for MBA graduates?",
+             "The Trojan network is Marshall's signature asset. USC alumni are known for hiring and mentoring fellow Trojans, particularly in LA-based industries. In entertainment, real estate, and entrepreneurship, the Trojan connection opens doors that applications alone cannot. Alumni engagement rates at USC consistently rank among the highest of any university."),
+            ("What is the average salary after USC Marshall?",
+             "Marshall graduates earn a median base salary of $155,000 with total first-year compensation averaging about $178,000. Tech and consulting roles drive the highest starting salaries, while entertainment roles start lower but offer accelerated advancement paths."),
+            ("How does USC Marshall compare to UCLA Anderson?",
+             "Anderson ranks slightly higher (#16 vs #17) and has a larger class (360 vs 240). Anderson has stronger tech recruiting; Marshall has the more powerful alumni network in entertainment and real estate. Both are excellent for LA careers. The decision often comes down to which alumni network aligns better with your specific career targets."),
+        ],
+    },
+    {
+        "name": "Carnegie Mellon Tepper School of Business", "short_name": "Carnegie Mellon Tepper",
+        "slug": "carnegie-mellon-tepper", "location": "Pittsburgh, PA", "ranking": 18, "tier": 3,
+        "acceptance_rate": 28, "avg_gmat": 710, "avg_gpa": 3.45, "class_size": 200,
+        "avg_salary": 158000, "employment_rate": 93, "tuition": 72800,
+        "program_length": "2 years",
+        "strengths": ["Analytics", "Tech", "Operations", "Quantitative Methods"],
+        "best_for": ["Tech", "Analytics", "Operations"],
+        "verdict": "Quant heaven. If your MBA plan involves data science or operations research, Tepper wrote the curriculum.",
+        "description": "Tepper's quantitative approach to business education produces graduates who speak data fluently. Strongest in technology management, operations, and analytics.",
+        "url": "https://www.cmu.edu/tepper/",
+        "overview": """<p>Tepper sits inside Carnegie Mellon University, one of the world's top computer science and engineering schools. That context shapes everything about the MBA program. Tepper enrolls about 200 full-time MBA students per year from roughly 2,000 applicants, keeping the class small and analytically focused. If you want an MBA where "data-driven" means something beyond a slide deck buzzword, Tepper delivers.</p>
+<p>The curriculum is built around what Tepper calls the "analytical approach to management." Every core course integrates quantitative methods, and students are expected to be comfortable with modeling, optimization, and statistical analysis from day one. This isn't a program for people who avoid spreadsheets. The school has invested in a dedicated analytics lab, and courses in machine learning, AI, and operations research draw on Carnegie Mellon's world-class CS department.</p>
+<p>Pittsburgh itself has undergone a quiet transformation from steel town to tech hub. Google, Apple, Uber, Amazon, and a growing cluster of robotics companies have established offices in the city, partly to recruit from CMU's engineering and computer science talent. Tepper students benefit from that ecosystem directly.</p>""",
+        "culture": """<p>Tepper's culture is intellectual and slightly nerdy, in the best sense. Students here are genuinely excited about building models, optimizing processes, and debating methodology. The class is small enough that everyone knows each other, and the collaborative environment means study groups form naturally. You won't find the hyper-social, networking-first culture of a Kellogg or Columbia. What you'll find is a group of smart, technically minded people who enjoy solving hard problems together.</p>
+<p>About 40% of the class comes from international backgrounds, and a significant portion has engineering or STEM undergraduate degrees. Military veterans and career changers are present but in smaller numbers than at peer schools. Pittsburgh's cost of living is a genuine advantage: rent, food, and entertainment cost a fraction of what you'd pay in Boston, New York, or San Francisco.</p>""",
+        "academics": """<p>Tepper's first-year core is heavy on quantitative foundations: statistical analysis, optimization, financial modeling, and managerial economics. The teaching approach is case-based in some courses and lecture-based in others, but everything circles back to data and analytical frameworks. If you've been out of school for a while and your math is rusty, Tepper offers pre-term quant bootcamps to get you ready.</p>
+<p>Second-year electives are where Tepper shines. The school offers concentrations in technology leadership, operations management, business analytics, and finance. Courses like "Machine Learning for Business" and "Large-Scale Optimization" draw on CMU's engineering faculty. The Accelerate Leadership Center provides personalized coaching, and the school's capstone projects pair students with companies solving real operational challenges.</p>
+<p>Tepper also offers a STEM-designated MBA, which is a practical advantage for international students seeking OPT extensions. The school's dual-degree programs with CMU's engineering, public policy, and computer science schools are well-structured and attract students who want to combine technical depth with business acumen.</p>""",
+        "careers": """<p>Tepper's employment report reflects its analytical DNA: 40% of graduates enter tech, 25% consulting, and 15% finance. Amazon is consistently the single largest employer, and Google, Microsoft, Meta, and Apple all recruit on campus. On the consulting side, McKinsey, BCG, Bain, and Deloitte all have Tepper on their core school lists.</p>
+<p>The school's tech placement is its competitive edge. Tepper graduates are attractive to tech companies because they combine business training with genuine technical fluency. Product management, data science, and operations roles at tech firms are natural fits. In consulting, Tepper grads tend to land in operations, digital transformation, and analytics practices rather than pure strategy.</p>
+<p>Median base salary comes in at $158,000, with total first-year compensation averaging about $183,000. Pittsburgh's lower cost of living means that graduates who stay in the region enjoy purchasing power that rivals higher-salaried peers in coastal cities.</p>""",
+        "who_should_apply": """<p>Tepper is built for people who think in numbers. Engineers, data analysts, and quantitative professionals who want to move into management or product leadership will feel at home. If your career plan involves tech product management, operations optimization, data science leadership, or quantitative finance, Tepper's curriculum maps directly to those goals. Career changers from STEM fields will find the transition especially smooth.</p>""",
+        "watch_out": """<p>Tepper's brand recognition is strong in tech and operations but thinner in traditional finance and consulting circles compared to M7 programs. Pittsburgh, while improving rapidly, is still a smaller market than Boston, New York, or San Francisco. If you're targeting Wall Street finance or want to be in a major metro from day one, Tepper may require extra effort to network your way into those markets. The class size (200) is small, which creates intimacy but limits on-campus recruiting volume compared to larger programs.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Carnegie Mellon Tepper?",
+             f"Tepper's acceptance rate is approximately 28% for the class of {CURRENT_YEAR}. The school receives about 2,000 applications for roughly 200 seats, making it selective but less competitive than M7 programs. Strong quantitative skills and clear tech or analytics career goals strengthen applications."),
+            ("What GMAT score do I need for Carnegie Mellon Tepper?",
+             "The average GMAT at Tepper is 710, with the middle 80% ranging from 680 to 740. Given Tepper's quantitative emphasis, a strong quant score matters more here than at some peer programs. The GRE is also accepted, and Tepper has been expanding GRE enrollment."),
+            ("Is Carnegie Mellon Tepper a STEM-designated MBA?",
+             "Yes. Tepper's MBA is STEM-designated under the CIP code for management science and quantitative methods. This designation allows international graduates to apply for a 24-month OPT extension, giving them up to 36 months of post-graduation work authorization in the US."),
+            ("What is the average salary after Carnegie Mellon Tepper?",
+             "Tepper graduates earn a median base salary of $158,000 with total first-year compensation averaging about $183,000. Tech roles (Amazon, Google, Microsoft) and consulting (McKinsey, BCG, Bain) drive the highest starting compensation packages."),
+            ("How does Carnegie Mellon Tepper compare to MIT Sloan?",
+             "Both programs attract quantitative, technically minded students. Sloan ranks higher (#5 vs #18), has a stronger global brand, and benefits from the MIT ecosystem in Cambridge. Tepper offers a smaller class, lower cost of living in Pittsburgh, and deep integration with CMU's world-class computer science program. If brand prestige is paramount, Sloan wins. If value and quant depth per dollar matter, Tepper competes well."),
+        ],
+    },
+    {
+        "name": "UNC Kenan-Flagler Business School", "short_name": "UNC Kenan-Flagler",
+        "slug": "unc-kenan-flagler", "location": "Chapel Hill, NC", "ranking": 19, "tier": 3,
+        "acceptance_rate": 30, "avg_gmat": 705, "avg_gpa": 3.40, "class_size": 300,
+        "avg_salary": 152000, "employment_rate": 92, "tuition": 47938,
+        "program_length": "2 years",
+        "strengths": ["Healthcare", "Real Estate", "Consulting", "Value"],
+        "best_for": ["Healthcare", "Real Estate", "Career Changers"],
+        "verdict": "Best value in the top 20. Strong healthcare and real estate at public school tuition that won't haunt you.",
+        "description": "Kenan-Flagler offers top-20 quality at public school tuition, making it one of the best ROI plays in MBA education. Healthcare and real estate are standout programs.",
+        "url": "https://www.kenan-flagler.unc.edu/",
+        "overview": """<p>UNC Kenan-Flagler in Chapel Hill is one of the strongest value propositions in MBA education. In-state tuition is under $48,000 per year, and even out-of-state rates are significantly lower than private school peers. The school enrolls about 300 students per year from roughly 2,500 applicants, and those students graduate with less debt and comparable outcomes to programs charging twice as much.</p>
+<p>The program is built around four core areas: healthcare, real estate, consulting, and general management. The healthcare MBA concentration is one of the best in the country, benefiting from UNC's top-ranked School of Public Health and the Research Triangle's massive life sciences corridor. Real estate is equally strong, with the school's Kenan Institute and its connections to Charlotte's banking sector driving placement.</p>
+<p>Chapel Hill itself is a classic college town: walkable, affordable, and socially centered around the university. The Research Triangle (Raleigh-Durham-Chapel Hill) has grown into a genuine tech and life sciences hub, which expands recruiting options beyond what the location might suggest on a map.</p>""",
+        "culture": """<p>Kenan-Flagler's culture is described by students as "Southern hospitality meets professional ambition." The 300-person class is large enough for diverse social groups but small enough that the community feels tight. Students here are collaborative first, competitive second. The admissions team actively selects for emotional intelligence and teamwork, and that shows in daily interactions.</p>
+<p>The student body is more geographically diverse than you might expect from a Southern school. About 30% come from international backgrounds, and a significant number relocate from the Northeast and West Coast specifically for the value proposition. Veterans are well-represented through the school's military transition programs. The social scene revolves around Chapel Hill's restaurant and bar circuit, intramural sports, and frequent club-sponsored events.</p>""",
+        "academics": """<p>The first-year core at Kenan-Flagler covers standard MBA fundamentals: financial accounting, statistics, marketing, strategy, operations, and organizational behavior. Teaching is a mix of case method and experiential learning, with a slight lean toward the practical. Professors are generally accessible, and the culture encourages office hours and informal mentoring.</p>
+<p>The healthcare concentration is the academic crown jewel. Courses on healthcare operations, pharma strategy, and health policy draw on UNC's medical school faculty and Research Triangle industry connections. Students pursuing healthcare management often pair the MBA with certificates or dual degrees from UNC's School of Public Health (Gillings), creating a powerful combination for hospital administration, pharma, and biotech roles.</p>
+<p>The real estate program, anchored by the Kenan Institute, offers courses in real estate finance, development, and investment management. Charlotte's banking center (Bank of America, Wells Fargo, Truist) provides a natural pipeline for real estate finance roles. STAR (Student Teams Achieving Results) projects give first-years consulting-style engagements with real companies early in the program.</p>""",
+        "careers": """<p>Kenan-Flagler's employment report shows 30% of graduates entering consulting, 20% healthcare, 18% finance, and 15% tech. The consulting numbers are driven by Deloitte, EY-Parthenon, and Accenture, with McKinsey, BCG, and Bain hiring selectively. Healthcare placement is where Kenan-Flagler truly separates itself: graduates land at major hospital systems (HCA, Atrium Health), pharma companies (Pfizer, Roche), and health tech firms across the Triangle and nationally.</p>
+<p>The school's Southeast location means strong regional recruiting from companies headquartered in Charlotte, Atlanta, and the Research Triangle. National recruiting is available but requires more proactive effort than at M7 programs. Tech placement has grown as the Triangle's startup ecosystem has matured, with roles at Cisco, IBM, Red Hat, and a growing number of health tech startups.</p>
+<p>Median base salary lands at $152,000. When you factor in the lower tuition and North Carolina's cost of living, Kenan-Flagler's all-in ROI rivals programs that report higher raw salary numbers but saddle graduates with $80,000 more in debt.</p>""",
+        "who_should_apply": """<p>Kenan-Flagler is ideal for candidates who care about ROI as much as brand. Healthcare professionals, career changers targeting consulting, and anyone drawn to the Southeast's growing economy will find strong outcomes at a fraction of private school cost. If you're coming from a non-traditional background (military, nonprofit, STEM) and want a supportive community that values collaboration over cutthroat competition, Kenan-Flagler's culture will feel like home.</p>""",
+        "watch_out": """<p>Brand recognition outside the Southeast is weaker than the outcomes justify. If you want to work in New York or San Francisco, you'll need to be more proactive about networking than you would from a top-10 school. Chapel Hill is wonderful for two years but limited as a long-term career market. And while the school's consulting placement is solid, it's thinner at MBB firms than at programs ranked 5-10 spots higher.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UNC Kenan-Flagler?",
+             f"UNC Kenan-Flagler's acceptance rate is approximately 30% for the class of {CURRENT_YEAR}. The school receives about 2,500 applications for 300 full-time MBA seats. The admissions process emphasizes teamwork, leadership potential, and career clarity alongside academic metrics."),
+            ("What GMAT score do I need for UNC Kenan-Flagler?",
+             "The average GMAT at Kenan-Flagler is 705, with the middle 80% ranging from 670 to 730. The school also accepts the GRE and the Executive Assessment. Kenan-Flagler evaluates candidates holistically, with particular weight on leadership experience and career direction."),
+            ("Is UNC Kenan-Flagler a good value MBA?",
+             "Kenan-Flagler is widely considered one of the best value MBAs in the top 20. In-state tuition is under $48,000 per year, and even out-of-state tuition is significantly below private school peers. When you combine lower tuition with competitive starting salaries ($152,000 median base) and North Carolina's affordable cost of living, the debt-to-income ratio is among the best in top MBA programs."),
+            ("What is UNC Kenan-Flagler known for?",
+             "Healthcare management, real estate, and consulting are Kenan-Flagler's signature strengths. The healthcare MBA concentration benefits from UNC's top-ranked School of Public Health and the Research Triangle's life sciences corridor. The real estate program connects students to Charlotte's banking center, and consulting placement is strong with Deloitte, EY-Parthenon, and Accenture."),
+            ("What is the average salary after UNC Kenan-Flagler?",
+             "Kenan-Flagler graduates earn a median base salary of $152,000, with total first-year compensation averaging about $175,000 including signing bonuses. Healthcare and consulting drive the strongest placement numbers, and the Southeast's lower cost of living means graduates retain more of their earnings than peers in coastal cities."),
+        ],
+    },
+    {
+        "name": "Georgetown McDonough School of Business", "short_name": "Georgetown McDonough",
+        "slug": "georgetown-mcdonough", "location": "Washington, DC", "ranking": 20, "tier": 3,
+        "acceptance_rate": 35, "avg_gmat": 700, "avg_gpa": 3.40, "class_size": 260,
+        "avg_salary": 155000, "employment_rate": 91, "tuition": 62784,
+        "program_length": "2 years",
+        "strengths": ["International Business", "Policy", "Government", "Consulting"],
+        "best_for": ["International Business", "Government", "Consulting"],
+        "verdict": "DC's MBA. Unmatched for policy, international business, and careers where government and commerce collide.",
+        "description": "McDonough's DC location makes it the obvious choice for anyone interested in government, policy, or international business.",
+        "url": "https://msb.georgetown.edu/",
+        "overview": """<p>Georgetown McDonough is a 10-minute walk from the White House. That proximity is the program's defining characteristic. No other top-25 MBA program offers the same access to government agencies, multilateral institutions, lobbying firms, and policy think tanks. The World Bank, IMF, State Department, and dozens of international development organizations recruit from McDonough by default because the school is literally in their backyard.</p>
+<p>McDonough enrolls about 260 full-time MBA students per year from roughly 2,800 applicants. The 35% acceptance rate is higher than Tier 1 and Tier 2 programs, but the self-selection of the applicant pool is strong: candidates come specifically for DC's unique career ecosystem. The Georgetown brand carries weight beyond business school, pulling from the university's foreign service, law, and policy schools.</p>
+<p>The curriculum blends traditional MBA fundamentals with concentrations in international business, government relations, and social enterprise. The Global Business Experience sends students on international immersion projects, and the school's Jesuit tradition infuses ethics and social impact throughout the program.</p>""",
+        "culture": """<p>McDonough's culture reflects DC itself: intellectual, policy-minded, and internationally oriented. Conversations in the student lounge are as likely to touch on trade policy or diplomatic negotiations as on marketing strategy or PE deal flow. About 40% of the class comes from international backgrounds, making it one of the most globally diverse programs in the top 25.</p>
+<p>The Jesuit tradition influences the school's values without being heavy-handed. Students talk about business as a force for good without the performative social impact rhetoric you'll find at some programs. The 260-person class is mid-sized, large enough for diverse interests but small enough that you'll build real relationships. DC's social scene adds a dimension most MBA programs can't offer: events at embassies, policy conferences on Capitol Hill, and networking dinners with senior government officials.</p>""",
+        "academics": """<p>McDonough's first-year core covers the standard MBA lineup: accounting, finance, marketing, operations, strategy, and organizational behavior. Teaching leans toward case method with a healthy dose of experiential learning. The international business curriculum is the academic standout, with courses on global markets, political risk, cross-border investment, and international trade taught by faculty with real policy experience.</p>
+<p>The Global Business Experience (GBE) is a signature program that sends students to countries in Latin America, Asia, Africa, and Europe to work on consulting projects for local businesses and NGOs. It's one of the better international experiential programs in MBA education and pairs well with Georgetown's School of Foreign Service, which offers cross-registration opportunities for MBA students.</p>
+<p>Dual-degree programs with Georgetown Law and the School of Foreign Service are popular and well-structured. The MBA/JD is a strong combination for careers in regulatory affairs, international trade law, and government contracting. The MBA/MSFS (Master of Science in Foreign Service) is essentially unique to Georgetown and prepares graduates for careers at the intersection of business and diplomacy.</p>""",
+        "careers": """<p>McDonough's employment report shows 30% of graduates entering consulting, 20% tech, 15% government and nonprofit, and 12% finance. The consulting placement is driven by Deloitte (which is headquartered in DC), Booz Allen Hamilton, Accenture Federal Services, and the DC offices of McKinsey, BCG, and Bain. Government consulting is a category where McDonough outperforms every other MBA program.</p>
+<p>The government and international development pathway is what makes McDonough unique. Graduates take roles at the World Bank, USAID, State Department, and international NGOs that other programs simply don't access at scale. These roles often pay less than private sector alternatives ($90,000-130,000 vs $160,000+), but Georgetown offers loan forgiveness and income-based repayment support that narrows the gap.</p>
+<p>Median base salary across all sectors is $155,000, pulled down by the public sector contingent. Private sector graduates (consulting, tech, finance) earn medians closer to $170,000. Total first-year compensation averages about $180,000 for private sector roles.</p>""",
+        "who_should_apply": """<p>McDonough is the clear choice if your career involves government, policy, international development, or any business that intersects with Washington. Former military officers, government employees, Foreign Service aspirants, and international development professionals will find a community that understands their backgrounds and career goals. If you want to work at the World Bank, a federal agency, or a defense contractor, McDonough's career office has relationships that no other program can match.</p>""",
+        "watch_out": """<p>McDonough's brand strength outside DC diminishes quickly. In New York finance or West Coast tech, the Georgetown name carries less weight than programs ranked 5-10 spots higher. If you're not planning to stay in DC or work in government-adjacent industries, you'll be paying for access you won't use. The public sector salary drag also means that the school's aggregate employment statistics look weaker than they would if you filtered for private sector only.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Georgetown McDonough?",
+             f"Georgetown McDonough's acceptance rate is approximately 35% for the class of {CURRENT_YEAR}. The school receives about 2,800 applications for 260 full-time MBA seats. While the rate is higher than many top-20 programs, the applicant pool self-selects heavily toward DC-oriented career goals."),
+            ("What GMAT score do I need for Georgetown McDonough?",
+             "The average GMAT at McDonough is 700, with the middle 80% ranging from 660 to 730. Georgetown evaluates candidates holistically, with particular emphasis on international experience, leadership in government or nonprofit sectors, and alignment with the school's Jesuit values."),
+            ("Is Georgetown McDonough good for government careers?",
+             "McDonough is the top MBA program for government and policy careers. The school's DC location provides direct access to the World Bank, IMF, USAID, State Department, and dozens of federal agencies and think tanks. No other top-25 MBA offers comparable access to public sector and international development employers."),
+            ("What is the average salary after Georgetown McDonough?",
+             "McDonough graduates earn a median base salary of $155,000 across all sectors. Private sector graduates in consulting and tech earn medians closer to $170,000, while public sector roles (government, international development) typically range from $90,000-130,000. Georgetown offers loan forgiveness programs for graduates in qualifying public service roles."),
+            ("How does Georgetown McDonough compare to other DC-area MBA programs?",
+             "McDonough's main DC competitor is the University of Maryland Smith School of Business. Georgetown has the stronger brand, higher ranking, and deeper government connections. Smith offers lower tuition and stronger analytics programs. For government and international careers specifically, McDonough is the clear first choice in the DC metro area."),
+        ],
+    },
+    {
+        "name": "Emory Goizueta Business School", "short_name": "Emory Goizueta",
+        "slug": "emory-goizueta", "location": "Atlanta, GA", "ranking": 21, "tier": 3,
+        "acceptance_rate": 28, "avg_gmat": 705, "avg_gpa": 3.40, "class_size": 180,
+        "avg_salary": 150000, "employment_rate": 92, "tuition": 64200,
+        "program_length": "2 years",
+        "strengths": ["Consulting", "Healthcare", "Finance", "Small Class"],
+        "best_for": ["Consulting", "Healthcare", "Finance"],
+        "verdict": "Atlanta's secret weapon. Consulting and healthcare recruiting punch well above the ranking.",
+        "description": "Goizueta's small class size means personalized attention and tight peer relationships. The school punches above its ranking in consulting and healthcare.",
+        "url": "https://goizueta.emory.edu/",
+        "overview": """<p>Emory Goizueta, named after the late Coca-Cola CEO Roberto Goizueta, sits in Atlanta's Druid Hills neighborhood. The school enrolls just 180 full-time MBA students per year, making it one of the smallest classes in the top 25. That size is a deliberate choice: Goizueta bets on intimacy and personalization over volume and scale.</p>
+<p>Atlanta is an underrated MBA city. It's home to 17 Fortune 500 companies (Coca-Cola, Home Depot, UPS, Delta, Southern Company), a growing tech scene, and one of the largest healthcare markets in the Southeast. Goizueta's recruiting relationships with these companies run deep, and the school's employment numbers consistently outperform what the ranking suggests.</p>
+<p>The curriculum follows a traditional two-year structure with a team-based first year and flexible second year. Goizueta emphasizes what it calls "principled leadership," a framework rooted in ethical decision-making and stakeholder capitalism. In practice, this means the program attracts candidates who care about purpose alongside profit, without the performative social impact signaling you'll find at some peer schools.</p>""",
+        "culture": """<p>Goizueta's 180-person class creates a family-like atmosphere. Students know each other's names, spouses, and career goals. The collaborative dynamic is genuine: second-years mentor first-years through recruiting, study groups share resources freely, and the competitive edge that defines larger programs is largely absent here. If you thrive in tight communities where relationships matter more than credentials, Goizueta delivers.</p>
+<p>The student body is roughly 30% international, with a mix of consulting, finance, military, and healthcare professionals. Atlanta's food and music scene provides a social backdrop that surprises students who didn't expect to love the city. Cost of living is roughly half of what you'd pay in New York or San Francisco, which means your student budget stretches further.</p>""",
+        "academics": """<p>The first-year core at Goizueta is team-based and integrated. Students move through courses in cohorts, building relationships that carry into second-year electives and post-MBA careers. Finance, accounting, marketing, operations, and strategy form the core. The teaching quality is strong, with professors who are accessible and invested in a way that's harder to find at larger programs.</p>
+<p>Second-year concentrations include consulting, healthcare management, real estate, and capital markets. The healthcare concentration benefits from Emory's top-ranked School of Public Health, the CDC headquarters (located in Atlanta), and relationships with major hospital systems across the Southeast. Goizueta BBA students can cross-register for MBA electives, which creates an interesting dynamic but also means some courses blend graduate and undergraduate perspectives.</p>
+<p>The school's signature experiential offering is Goizueta IMPACT, where students work on semester-long consulting projects with real companies. Past clients have included Coca-Cola, Delta, and a range of Atlanta-based startups. The projects are substantial enough to generate resume-worthy deliverables and occasionally lead to job offers.</p>""",
+        "careers": """<p>Goizueta punches above its weight in consulting placement. McKinsey, BCG, Bain, Deloitte, EY-Parthenon, and Accenture all recruit from the school, and the consulting placement rate (about 35% of the class) rivals programs ranked 5-10 spots higher. Healthcare placement is the other standout, with graduates landing at hospital systems, pharma companies, health tech firms, and the CDC.</p>
+<p>Finance placement is solid, with roles in corporate finance, commercial banking, and PE/VC in the Southeast. Atlanta's banking sector (SunTrust, now Truist) and corporate headquarters provide local options. Tech placement has grown as Atlanta's startup ecosystem has matured, though it's still smaller than what you'd find at programs in tech hubs.</p>
+<p>Median base salary is $150,000, with total first-year compensation averaging about $172,000. The 92% employment rate at graduation is strong for a program of this size and ranking. Goizueta's career services team benefits from the small class: you'll get more personalized attention and coaching than at programs twice the size.</p>""",
+        "who_should_apply": """<p>Goizueta is the right fit if you want a small, supportive community with strong consulting and healthcare outcomes. Career changers who need extra coaching will benefit from the personalized career services. If you're targeting Southeast employers or want Atlanta's quality of life (affordable, diverse, growing fast), Goizueta offers a combination of outcomes and lifestyle that's hard to match at this price point.</p>""",
+        "watch_out": """<p>The 180-person class means a smaller alumni network, which matters for long-term career mobility. National brand recognition is weaker than what the outcomes justify. If your post-MBA plans involve moving to San Francisco, New York, or London, you'll find fewer alumni in those markets. And Atlanta, while growing rapidly, still has a regional perception that can limit recruiting pipelines from employers who don't recruit from the Southeast.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Emory Goizueta?",
+             f"Emory Goizueta's acceptance rate is approximately 28% for the class of {CURRENT_YEAR}. The school receives about 1,800 applications for 180 full-time MBA seats. The small class size makes Goizueta more selective than the acceptance rate alone might suggest."),
+            ("What GMAT score do I need for Emory Goizueta?",
+             "The average GMAT at Goizueta is 705, with the middle 80% ranging from 670 to 730. Goizueta evaluates candidates holistically, with emphasis on leadership potential, career clarity, and cultural fit with the school's collaborative, team-based environment."),
+            ("Is Emory Goizueta good for consulting?",
+             "Yes. Goizueta's consulting placement rate of about 35% rivals schools ranked 5-10 spots higher. McKinsey, BCG, Bain, Deloitte, and EY-Parthenon all recruit from Goizueta. The small class size means the career services team provides personalized consulting interview prep that's harder to get at larger programs."),
+            ("What is the average salary after Emory Goizueta?",
+             "Goizueta graduates earn a median base salary of $150,000 with total first-year compensation averaging about $172,000. Consulting and finance roles drive the highest starting salaries, while healthcare management roles offer strong long-term career trajectories."),
+            ("What companies recruit from Emory Goizueta?",
+             "Major recruiters include McKinsey, BCG, Bain, Deloitte, Coca-Cola, Delta Air Lines, Home Depot, EY-Parthenon, and Accenture. The CDC and major hospital systems recruit for healthcare management roles. Atlanta's 17 Fortune 500 headquarters provide a deep local recruiting base that complements national consulting firms."),
+        ],
+    },
+    {
+        "name": "Vanderbilt Owen Graduate School of Management", "short_name": "Vanderbilt Owen",
+        "slug": "vanderbilt-owen", "location": "Nashville, TN", "ranking": 22, "tier": 3,
+        "acceptance_rate": 32, "avg_gmat": 700, "avg_gpa": 3.35, "class_size": 180,
+        "avg_salary": 148000, "employment_rate": 91, "tuition": 62196,
+        "program_length": "2 years",
+        "strengths": ["Healthcare", "Real Estate", "Finance", "Nashville"],
+        "best_for": ["Healthcare", "Real Estate", "Finance"],
+        "verdict": "Nashville's rising star. Healthcare management dominance in a city that's booming in every direction.",
+        "description": "Owen's healthcare management program is among the best in the country, riding Nashville's emergence as the healthcare capital of America.",
+        "url": "https://business.vanderbilt.edu/",
+        "overview": """<p>Vanderbilt Owen sits in Nashville, Tennessee, a city that has transformed from a music industry town into one of America's fastest-growing metros. Healthcare is the engine: Nashville is headquarters to HCA Healthcare (the largest for-profit hospital chain in the country), Community Health Systems, Envision Healthcare, and over 500 healthcare companies. Owen's healthcare MBA concentration exists inside this ecosystem, which gives it an advantage no other program can replicate.</p>
+<p>Owen enrolls about 180 full-time MBA students per year from roughly 1,600 applicants. The class is deliberately small, which creates a personalized experience where faculty and career coaches know students individually. The school's 32% acceptance rate is higher than M7 or Tier 2 programs, but the applicant pool self-selects toward healthcare, finance, and general management career goals.</p>
+<p>Beyond healthcare, Owen has solid programs in real estate (benefiting from Nashville's construction boom), corporate finance, and strategy consulting. The Vanderbilt brand carries well across the Southeast and in healthcare nationally, though it's less recognized in tech hubs or on Wall Street.</p>""",
+        "culture": """<p>Owen's culture is warm, tight-knit, and distinctly Southern in the best way. The 180-person class means everyone knows everyone. Students describe the atmosphere as supportive and low-ego, where people help each other navigate recruiting without the territorial dynamics that plague larger programs. Second-years actively mentor first-years through mock interviews and resume reviews.</p>
+<p>Nashville's social scene adds an unusual dimension to the MBA experience. Live music, hot chicken, and a walkable downtown create a social environment that students genuinely enjoy. The cost of living is well below coastal cities, which stretches the student budget further. The student body is roughly 25% international, with strong representation from healthcare, military, and consulting backgrounds.</p>""",
+        "academics": """<p>Owen's first-year core is structured in modules that integrate across disciplines. Finance, accounting, marketing, operations, and strategy are taught in sequence, with connections drawn between subjects rather than treating each as a standalone silo. The teaching is strong, with a faculty-to-student ratio that allows for small class discussions and genuine Socratic engagement.</p>
+<p>The healthcare concentration is Owen's marquee offering. Courses cover hospital operations, pharma strategy, health policy, and healthcare finance, taught by faculty who often hold concurrent advisory roles at Nashville healthcare companies. The Health Care MBA (HCMBA) track integrates with Vanderbilt University Medical Center, one of the top academic medical centers in the country, providing clinical exposure that pure business programs can't match.</p>
+<p>Owen's Accelerator program offers immersive summer experiences between first and second year, including healthcare consulting projects, international business trips, and Nashville startup engagements. The real estate development concentration has grown as Nashville's skyline has exploded with new construction.</p>""",
+        "careers": """<p>Owen's employment report shows 30% of graduates entering healthcare, 25% consulting, 18% finance, and 12% tech. Healthcare placement is the headline: graduates land at HCA, Community Health Systems, Medtronic, Johnson & Johnson, and a long list of Nashville-based health services companies. The proximity advantage is substantial. Healthcare executives in Nashville know Owen graduates personally and hire accordingly.</p>
+<p>Consulting placement is respectable, with Deloitte, Accenture, and EY-Parthenon as the primary recruiters. McKinsey and BCG hire selectively from Owen, primarily for their healthcare practices. Finance placement leans toward corporate finance and banking roles in the Southeast, with some Wall Street placement for strong candidates willing to network aggressively.</p>
+<p>Median base salary is $148,000, with total first-year compensation averaging about $170,000. Healthcare management roles typically start between $130,000 and $160,000 depending on the employer and function. Nashville's zero state income tax means your take-home pay stretches further than the number suggests.</p>""",
+        "who_should_apply": """<p>Owen is the obvious choice if healthcare management is your target. The combination of Nashville's healthcare ecosystem, Vanderbilt's medical center, and Owen's specialized curriculum is unmatched. Finance professionals targeting the Southeast, career changers drawn to Nashville's growing economy, and candidates who value small class intimacy over big-program buzz will find Owen rewarding. Veterans are well-represented and supported.</p>""",
+        "watch_out": """<p>Owen's brand recognition drops significantly outside the Southeast and healthcare circles. If your post-MBA plan involves tech in San Francisco or banking in New York, you'll face an uphill branding battle. Nashville is booming, but it's still a smaller market than Atlanta, DC, or major coastal cities. And the 180-person class, while intimate, produces a smaller alumni network that limits long-term career mobility compared to programs with larger graduating classes.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Vanderbilt Owen?",
+             f"Vanderbilt Owen's acceptance rate is approximately 32% for the class of {CURRENT_YEAR}. The school receives about 1,600 applications for 180 full-time MBA seats. Owen evaluates candidates holistically with emphasis on career clarity, leadership experience, and fit with the program's collaborative culture."),
+            ("What GMAT score do I need for Vanderbilt Owen?",
+             "The average GMAT at Owen is 700, with the middle 80% ranging from 660 to 730. Owen also accepts the GRE. Healthcare industry experience and clear Nashville-relevant career goals can strengthen otherwise borderline applications."),
+            ("Is Vanderbilt Owen the best MBA for healthcare?",
+             "Owen is one of the top 2-3 MBA programs for healthcare management in the US, alongside UNC Kenan-Flagler and Wharton's Health Care Management program. Owen's unique advantage is Nashville's healthcare ecosystem: the city is home to HCA, Community Health Systems, and over 500 healthcare companies, all within recruiting distance of campus."),
+            ("What is the average salary after Vanderbilt Owen?",
+             "Owen graduates earn a median base salary of $148,000 with total first-year compensation averaging about $170,000. Healthcare management and consulting roles drive the strongest placement numbers. Nashville's zero state income tax increases effective take-home pay beyond what the base salary figure suggests."),
+            ("What companies recruit from Vanderbilt Owen?",
+             "Major recruiters include HCA Healthcare, Deloitte, Accenture, EY-Parthenon, Medtronic, Johnson & Johnson, Amazon, and Community Health Systems. McKinsey and BCG hire selectively for their healthcare practices. Nashville's 500+ healthcare companies provide a deep local recruiting base."),
+        ],
+    },
+    {
+        "name": "University of Washington Foster School of Business", "short_name": "Washington Foster",
+        "slug": "washington-foster", "location": "Seattle, WA", "ranking": 23, "tier": 3,
+        "acceptance_rate": 28, "avg_gmat": 710, "avg_gpa": 3.45, "class_size": 140,
+        "avg_salary": 152000, "employment_rate": 92, "tuition": 54966,
+        "program_length": "2 years",
+        "strengths": ["Tech", "Entrepreneurship", "Sustainability", "Pacific Northwest"],
+        "best_for": ["Tech", "Entrepreneurship", "Sustainability"],
+        "verdict": "Seattle's gateway to Amazon, Microsoft, and the Pacific Northwest tech scene. Small class, big network.",
+        "description": "Foster's Pacific Northwest location provides direct pipeline access to Amazon, Microsoft, and a growing tech ecosystem.",
+        "url": "https://foster.uw.edu/",
+        "overview": """<p>UW Foster sits in Seattle, a city defined by Amazon, Microsoft, Boeing, Starbucks, and a growing ecosystem of tech startups. The school enrolls just 140 full-time MBA students per year, making it one of the smallest classes in the top 25. That size, combined with Seattle's tech density, creates an unusually efficient recruiting pipeline: companies don't have to compete for 400 students, and students don't have to compete with 400 classmates for the same roles.</p>
+<p>Foster draws roughly 1,500 applications for those 140 seats, and the self-selection is strong. Candidates come for Seattle, for tech, and for the Pacific Northwest lifestyle. The 28% acceptance rate is competitive, and the entering class typically brings strong quantitative skills and STEM backgrounds. In-state tuition is under $55,000, making Foster one of the better value plays for tech-focused MBAs.</p>
+<p>The curriculum is practical and industry-connected. First-year core courses cover fundamentals, while second-year electives lean heavily into technology management, entrepreneurship, and sustainability. The school's proximity to Amazon's HQ (literally a bus ride from campus) shapes the program more than any strategic plan could.</p>""",
+        "culture": """<p>Foster's 140-person class creates a tight community where collaboration is the default. Students describe the culture as low-ego and supportive. The Pacific Northwest's outdoor culture seeps into the MBA experience: hiking, skiing at Snoqualmie Pass, and weekend trips to the San Juan Islands are common social activities alongside the usual happy hours and networking events.</p>
+<p>About 35% of the class comes from international backgrounds, and a meaningful percentage has engineering or computer science degrees. The student body skews practical and action-oriented rather than theoretical. Seattle's cost of living has risen sharply in recent years, which partially offsets the lower tuition advantage, though it's still cheaper than San Francisco or New York.</p>""",
+        "academics": """<p>Foster's first-year core covers the standard MBA toolkit: accounting, finance, marketing, operations, strategy, and leadership. The teaching quality benefits from small class sizes, and professors have room to engage students individually in a way that's harder at programs three times the size.</p>
+<p>The technology management concentration is the academic highlight. Courses on product management, digital strategy, and tech entrepreneurship are taught by faculty with industry connections to Seattle's tech ecosystem. The Global Business Center organizes international study tours and cross-border consulting projects. The Buerk Center for Entrepreneurship supports student ventures with mentoring, funding, and workspace.</p>
+<p>Foster also offers joint degrees with UW's School of Law, Evans School of Public Policy and Governance, and College of Engineering. The MBA/MS in Information Systems is a popular combination for students targeting product management or data analytics roles at tech companies. The school's sustainability curriculum draws on UW's environmental science programs and reflects the Pacific Northwest's culture of environmental consciousness.</p>""",
+        "careers": """<p>Foster's employment report is dominated by tech: roughly 50% of graduates enter technology companies. Amazon is the single largest employer, hiring 20-30 Foster MBAs per year into product management, operations, finance, and strategy roles. Microsoft recruits heavily for similar roles. Google, Meta, T-Mobile, and Expedia round out the major tech recruiters.</p>
+<p>Consulting placement accounts for about 20% of the class, with Deloitte, Accenture, and Slalom (headquartered in Seattle) as primary recruiters. MBB firms hire selectively from Foster, primarily through the Seattle offices. Finance placement is smaller, focused on corporate finance and fintech rather than investment banking.</p>
+<p>Median base salary is $152,000, with total first-year compensation averaging about $177,000. Tech roles tend to push higher, with Amazon and Microsoft total compensation packages (including signing bonuses and stock) often exceeding $200,000 in the first year. Seattle's lack of state income tax adds further to the effective compensation.</p>""",
+        "who_should_apply": """<p>Foster is built for people who want to work in tech and want to live in the Pacific Northwest. Product managers, engineers transitioning to business, and anyone targeting Amazon or Microsoft will find a direct pipeline. If sustainability, clean energy, or outdoor lifestyle matters to you alongside your career goals, Foster's location delivers on both fronts. Career changers with STEM backgrounds will find the transition especially well-supported.</p>""",
+        "watch_out": """<p>Foster's brand is hyper-regional. In Seattle, the name opens every door. Outside the Pacific Northwest, recognition drops quickly. If your post-MBA plan involves New York, LA, or international markets, you'll need to network harder to overcome the brand gap. The 140-person class is intimate but produces a smaller alumni network than larger programs. And Amazon's dominance in Foster recruiting, while a strength, can feel limiting if Amazon doesn't appeal to you.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UW Foster?",
+             f"UW Foster's acceptance rate is approximately 28% for the class of {CURRENT_YEAR}. The school receives about 1,500 applications for 140 full-time MBA seats. The applicant pool self-selects heavily toward tech-focused career goals, making it competitive among Pacific Northwest candidates."),
+            ("What GMAT score do I need for UW Foster?",
+             "The average GMAT at Foster is 710, with the middle 80% ranging from 680 to 740. Foster also accepts the GRE and values quantitative skills highly, given the program's tech orientation. STEM work experience and clear tech career goals strengthen applications."),
+            ("Is UW Foster good for tech careers?",
+             "Foster is one of the best MBA programs for tech careers. Roughly 50% of graduates enter tech companies, with Amazon as the single largest employer. Microsoft, Google, Meta, T-Mobile, and Expedia all recruit from Foster. The school's location in Seattle provides proximity to tech headquarters that most programs can't match."),
+            ("What is the average salary after UW Foster?",
+             "Foster graduates earn a median base salary of $152,000 with total first-year compensation averaging about $177,000. Tech roles at Amazon and Microsoft often exceed $200,000 in total first-year compensation when including signing bonuses and stock grants. Washington's lack of state income tax further increases effective take-home pay."),
+            ("How does UW Foster compare to other tech-focused MBA programs?",
+             "For pure tech placement, Foster competes with MIT Sloan, Berkeley Haas, and Carnegie Mellon Tepper. Sloan and Haas rank higher and have stronger national brands. Foster's advantage is cost (public school tuition), Amazon pipeline depth, and Seattle's zero state income tax. If you specifically want to work at Amazon or in the Pacific Northwest tech ecosystem, Foster's pipeline may be more direct than higher-ranked alternatives."),
+        ],
+    },
+    {
+        "name": "Indiana University Kelley School of Business", "short_name": "Indiana Kelley",
+        "slug": "indiana-kelley", "location": "Bloomington, IN", "ranking": 24, "tier": 3,
+        "acceptance_rate": 35, "avg_gmat": 690, "avg_gpa": 3.35, "class_size": 200,
+        "avg_salary": 145000, "employment_rate": 93, "tuition": 28274,
+        "program_length": "2 years",
+        "strengths": ["Marketing", "Consulting", "Finance", "ROI"],
+        "best_for": ["Marketing", "Consulting", "Career Changers"],
+        "verdict": "The ROI champion. Top 25 outcomes at a price that actually makes the math work.",
+        "description": "Kelley offers top-25 outcomes at a public school price that makes the ROI calculation a no-brainer. Strong in marketing, consulting, and finance.",
+        "url": "https://kelley.iu.edu/",
+        "overview": """<p>Indiana Kelley is the ROI story of MBA education. In-state tuition is under $29,000 per year, which makes it the cheapest top-25 MBA in the country. Even out-of-state tuition is a fraction of what private programs charge. And yet, the outcomes are competitive: 93% employment at graduation, $145,000 median base salary, and strong placement into consulting, marketing, and finance. Do the math on debt-to-income, and Kelley wins against programs ranked 10 spots higher.</p>
+<p>The school enrolls about 200 full-time MBA students per year from roughly 1,500 applicants. Bloomington, Indiana, is a college town in every sense: walkable, affordable, and socially centered around the university. It won't give you the same urban networking opportunities as a New York or Chicago program, but the cost savings are substantial and the outcomes close the gap.</p>
+<p>Kelley's marketing department is nationally ranked and has been for decades. The consulting club is one of the most active in the school, and finance placement, while not on par with Wharton or Booth, is solid for commercial banking, corporate finance, and asset management roles in the Midwest.</p>""",
+        "culture": """<p>Kelley's culture is friendly, midwestern, and collaborative. The 200-person class is small enough to feel like a community but large enough for diverse interest groups. Students help each other with interview prep, share notes freely, and socialize together in Bloomington's bar and restaurant scene. The competitive dynamics that define larger programs are muted here.</p>
+<p>The student body is roughly 30% international, with strong representation from India, China, and Latin America. Domestic students often come from the Midwest, with backgrounds in manufacturing, CPG, and healthcare. Veterans are well-represented through the school's military transition programs. Bloomington's cost of living is remarkably low, which means MBA students can afford to live well even on student budgets.</p>""",
+        "academics": """<p>Kelley's first-year core covers the standard MBA fundamentals with a slight emphasis on marketing and quantitative methods. The school uses a mix of case studies, simulations, and team projects. Teaching quality is consistently praised, with accessible professors who invest in student development.</p>
+<p>The marketing department is Kelley's academic crown jewel. Courses in brand management, digital marketing, consumer behavior, and marketing analytics are taught by faculty who are respected researchers and practitioners. The school's Consumer Marketing Academy prepares students for brand management roles at P&G, General Mills, and other CPG companies.</p>
+<p>The Kelley Integrated Field Experience (KIFE) places first-year students on real consulting projects with companies, giving them early client-facing experience. The school's Academy programs (consulting, marketing, finance, strategic leadership) provide specialized preparation starting in the first semester, which accelerates the career transition timeline for career changers.</p>""",
+        "careers": """<p>Kelley's employment report shows 30% of graduates entering consulting, 25% marketing and CPG, 20% finance, and 10% tech. The consulting placement is driven by Deloitte, Accenture, EY, and KPMG, with selective hiring from McKinsey and BCG. Marketing placement is the school's calling card: P&G, General Mills, Amazon, and Samsung all recruit from Kelley for brand management and product marketing roles.</p>
+<p>Finance placement leans toward corporate finance, commercial banking, and asset management in the Midwest. Wall Street investment banking is a stretch from Kelley, though not impossible for strong candidates who network aggressively. Tech placement has grown, with Amazon as the largest single tech employer.</p>
+<p>Median base salary is $145,000, with total first-year compensation averaging about $168,000. The 93% employment rate at graduation is one of the highest in the top 25. When you factor in the $28,000 annual tuition, Kelley's ROI calculation becomes hard to argue with. Graduates leave with less than half the debt of private school peers and comparable starting salaries.</p>""",
+        "who_should_apply": """<p>Kelley is ideal for cost-conscious candidates who refuse to overpay for an MBA. If you're targeting marketing, consulting, or Midwest corporate roles, Kelley delivers outcomes that rival programs twice the price. Career changers who want a structured transition (the Academy model is excellent for this) and international students seeking strong CPG placement should have Kelley high on their list.</p>""",
+        "watch_out": """<p>Bloomington is not a major metro. If proximity to employers matters during the MBA (for networking, weekend events, or recruiting trips), the location is a real constraint. National brand recognition is weaker than the outcomes deserve, particularly outside the Midwest. And while the ROI math is compelling, the debt savings matter less if your target employers are in high-cost-of-living cities where the salary premium from a higher-ranked program might offset the tuition difference.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Indiana Kelley?",
+             f"Indiana Kelley's acceptance rate is approximately 35% for the class of {CURRENT_YEAR}. The school receives about 1,500 applications for 200 full-time MBA seats. Kelley evaluates candidates holistically, with emphasis on leadership potential and career clarity."),
+            ("What GMAT score do I need for Indiana Kelley?",
+             "The average GMAT at Kelley is 690, with the middle 80% ranging from 650 to 720. Kelley also accepts the GRE. The school is known for evaluating the complete candidate, so strong work experience and clear career goals can offset a GMAT score that's below the median."),
+            ("Is Indiana Kelley the best ROI MBA?",
+             "Kelley is consistently ranked among the top ROI MBA programs in the US. In-state tuition under $29,000 per year combined with $145,000 median starting salary and 93% employment rate creates a debt-to-income ratio that rivals programs ranked 10 or more spots higher. BYU Marriott is the only program that competes on pure tuition cost."),
+            ("What is Indiana Kelley known for?",
+             "Kelley is best known for its marketing program (nationally ranked for decades), strong consulting placement, and exceptional ROI. The school's Academy model provides structured career preparation starting in the first semester, and the Consumer Marketing Academy is one of the best pipelines to CPG brand management roles in the country."),
+            ("What is the average salary after Indiana Kelley?",
+             "Kelley graduates earn a median base salary of $145,000 with total first-year compensation averaging about $168,000. Consulting and marketing/CPG roles drive the strongest placement numbers. The 93% employment rate at graduation is one of the highest in the top 25."),
+        ],
+    },
+    {
+        "name": "Texas McCombs School of Business", "short_name": "Texas McCombs",
+        "slug": "texas-mccombs", "location": "Austin, TX", "ranking": 25, "tier": 3,
+        "acceptance_rate": 30, "avg_gmat": 705, "avg_gpa": 3.40, "class_size": 260,
+        "avg_salary": 155000, "employment_rate": 93, "tuition": 41666,
+        "program_length": "2 years",
+        "strengths": ["Tech", "Energy", "Consulting", "Austin Ecosystem"],
+        "best_for": ["Tech", "Energy", "Consulting"],
+        "verdict": "Austin energy meets MBA rigor. Tech, energy, and no state income tax, the trifecta.",
+        "description": "McCombs combines Austin's tech energy with strong MBA fundamentals. A pipeline into Texas's booming economy.",
+        "url": "https://www.mccombs.utexas.edu/",
+        "overview": """<p>Texas McCombs sits in Austin, a city that has been absorbing corporate relocations and tech expansion for a decade. Tesla moved its headquarters here. Oracle moved here. Samsung expanded here. Apple is building a massive campus here. The influx of companies has transformed Austin from a quirky college town into a genuine economic hub, and McCombs students sit at the center of it.</p>
+<p>McCombs enrolls about 260 full-time MBA students per year from roughly 2,400 applicants. In-state tuition is under $42,000, and even out-of-state rates are well below private school peers. The school's 30% acceptance rate and 705 average GMAT place it at the competitive end of Tier 3. The entering class tends to be slightly older and more experienced than some peer programs, with an average of 5-6 years of work experience.</p>
+<p>The curriculum is structured around three pillars: tech and innovation, energy (reflecting Texas's oil and gas heritage), and consulting. McCombs has invested heavily in its technology and innovation track as Austin's tech ecosystem has grown, while maintaining its historical strength in energy finance and management. The school also benefits from being part of the University of Texas system, one of the largest and most well-endowed university networks in the country.</p>""",
+        "culture": """<p>McCombs reflects Austin's personality: entrepreneurial, energetic, and unpretentious. The "Keep Austin Weird" ethos shows up in a student body that's more diverse in interests and backgrounds than many programs ranked nearby. Students here are as likely to be working on a side project or startup as they are to be prepping for case interviews. The 260-person class is large enough for diverse social groups but maintains a collaborative, low-ego dynamic.</p>
+<p>Texas pride runs deep. The Longhorn network is massive and loyal, stretching across every industry in the state and well beyond. Austin's live music scene, food truck culture, and outdoor activities (Barton Springs, Lady Bird Lake, hill country trails) create a social environment that students consistently rate as one of the best parts of the MBA experience. About 30% of the class is international, with strong representation from Latin America, India, and East Asia.</p>""",
+        "academics": """<p>McCombs' first-year core follows a cohort-based structure covering finance, accounting, marketing, operations, strategy, and organizational behavior. The teaching approach mixes cases, lectures, and team projects, with an emphasis on practical application. The Plus Program, a distinctive McCombs offering, develops leadership and communication skills through a two-year series of workshops, coaching sessions, and experiential exercises.</p>
+<p>The energy finance concentration is the academic standout, drawing on Texas's deep roots in oil and gas, renewables, and energy infrastructure. Courses cover energy trading, project finance, and ESG strategy, taught by faculty with industry experience. As the energy transition accelerates, McCombs' ability to teach both fossil fuel economics and clean energy finance positions it uniquely.</p>
+<p>The tech and innovation track has grown significantly as Austin's tech scene has exploded. Courses on product management, startup strategy, and venture capital draw guest speakers from Austin's tech community. McCombs' Texas Venture Labs (TVL) program pairs students with real startups for consulting and investment evaluation projects. The school also offers dual degrees with UT's engineering, law, and public affairs programs.</p>""",
+        "careers": """<p>McCombs' employment report shows 30% of graduates entering tech, 25% consulting, 15% energy, and 12% finance. The tech number has surged as Austin's tech ecosystem has grown, with Amazon, Dell, Google, Apple, and a growing cluster of mid-stage startups recruiting from McCombs. Consulting placement is strong, led by Deloitte, Accenture, McKinsey, BCG, and Bain (the latter three hire selectively).</p>
+<p>Energy placement is McCombs' unique differentiator. Graduates land at Shell, ExxonMobil, ConocoPhillips, and increasingly at renewable energy companies and ESG-focused firms. Houston's energy corridor is a natural pipeline, and McCombs' alumni network in energy is among the strongest of any MBA program. Finance placement includes corporate finance, PE, and banking roles, primarily in Texas.</p>
+<p>Median base salary is $155,000, with total first-year compensation averaging about $180,000. Texas has no state income tax, which adds roughly 5-8% to your effective compensation compared to graduates in California or New York. The 93% employment rate at graduation is tied for the highest in Tier 3.</p>""",
+        "who_should_apply": """<p>McCombs is the clear choice if you want to work in Texas. The state's economy (tech, energy, healthcare, defense) is growing faster than most, and McCombs is the top pipeline into all of it. Energy professionals seeking management roles, tech workers targeting Austin's startup scene, and career changers who want strong outcomes without coastal tuition should have McCombs near the top of their list. If no state income tax, affordable cost of living, and Austin's quality of life appeal to you, the total package is compelling.</p>""",
+        "watch_out": """<p>McCombs' brand recognition outside Texas is weaker than the outcomes deserve. In New York, San Francisco, or international markets, you'll work harder to explain the brand than you would from a top-15 program. Austin is booming, but the local job market for MBAs is still smaller than Houston, Dallas, or coastal metros. And while the energy concentration is a strength, it also means a meaningful portion of the class is targeting an industry with cyclical employment patterns.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Texas McCombs?",
+             f"Texas McCombs' acceptance rate is approximately 30% for the class of {CURRENT_YEAR}. The school receives about 2,400 applications for 260 full-time MBA seats. McCombs evaluates candidates holistically, with emphasis on leadership experience and career direction."),
+            ("What GMAT score do I need for Texas McCombs?",
+             "The average GMAT at McCombs is 705, with the middle 80% ranging from 670 to 730. McCombs also accepts the GRE. Strong work experience in tech, energy, or consulting can strengthen otherwise borderline applications, and the school values candidates with clear Texas-relevant career goals."),
+            ("Is Texas McCombs good for energy careers?",
+             "McCombs is one of the top 3 MBA programs for energy careers in the US, alongside Rice Jones and Tulane Freeman. The school benefits from Texas's oil and gas heritage, Houston's energy corridor, and Austin's growing clean energy sector. The energy finance concentration covers traditional fossil fuels, renewables, and ESG strategy."),
+            ("What is the average salary after Texas McCombs?",
+             "McCombs graduates earn a median base salary of $155,000 with total first-year compensation averaging about $180,000. Tech and consulting roles drive the highest starting compensation. Texas has no state income tax, which effectively adds 5-8% to take-home pay compared to graduates in states like California or New York."),
+            ("How does Texas McCombs compare to Rice Jones?",
+             "McCombs is ranked higher (#25 vs #28), has a larger class (260 vs 130), and offers broader career placement across tech, consulting, and energy. Rice Jones has a smaller, more intimate community and is physically in Houston, which gives it a slight edge for energy roles that require Houston proximity. Both are strong Texas MBA options with different strengths."),
+        ],
+    },
+    # --- TIER 4: Notable Programs ---
+    {
+        "name": "Georgia Tech Scheller College of Business", "short_name": "Georgia Tech Scheller",
+        "slug": "georgia-tech-scheller", "location": "Atlanta, GA", "ranking": 26, "tier": 4,
+        "acceptance_rate": 28, "avg_gmat": 695, "avg_gpa": 3.35, "class_size": 100,
+        "avg_salary": 140000, "employment_rate": 91, "tuition": 33340,
+        "program_length": "2 years",
+        "strengths": ["Analytics", "Operations", "Technology Management"],
+        "best_for": ["Tech", "Analytics", "Operations"],
+        "verdict": "The engineer's MBA. Analytics and operations in Atlanta's growing tech hub.",
+        "description": "Scheller combines Georgia Tech's engineering DNA with business fundamentals to produce analytically strong graduates.",
+        "url": "https://scheller.gatech.edu/",
+        "overview": """<p>Georgia Tech Scheller sits inside one of the country's top engineering universities, and that DNA shapes the MBA program. The school enrolls just 100 full-time MBA students per year, making it one of the smallest programs in the top 30. In-state tuition is under $34,000, which combined with strong tech and operations placement makes Scheller one of the best value plays for analytically minded candidates.</p>
+<p>Atlanta's growing tech scene (NCR, Mailchimp, Salesforce's regional hub, Home Depot's tech division) provides a recruiting backdrop that gets stronger every year. Scheller graduates speak the language of engineers, which makes them attractive to companies that need leaders who understand both business strategy and technical implementation.</p>""",
+        "culture": """<p>Scheller's 100-person class is tight-knit by necessity. Students know everyone, and the collaborative atmosphere benefits from Georgia Tech's broader engineering culture, where problem-solving is a team sport. The student body skews more technical than most MBA programs, with a significant percentage holding engineering or STEM undergraduate degrees.</p>
+<p>Atlanta's cost of living, food scene, and mild winters make the two-year experience enjoyable. The school's small size means you'll build deep relationships rather than broad networks.</p>""",
+        "academics": """<p>Scheller's curriculum integrates analytics and technology management into core courses, reflecting Georgia Tech's strengths. The school offers concentrations in technology commercialization, operations management, and business analytics. Cross-registration with Georgia Tech's engineering and computing schools is a genuine differentiator for students who want to build technical depth alongside business skills.</p>
+<p>The TI:GER program (Technological Innovation: Generating Economic Results) pairs MBA students with PhD students, law students, and engineering students to commercialize real research. It's one of the more creative experiential learning programs in MBA education.</p>""",
+        "careers": """<p>Scheller's employment report shows roughly 35% of graduates entering tech, 25% consulting, and 20% operations and supply chain. Amazon, Google, Deloitte, and Accenture are regular recruiters. The school's small class means career services can provide personalized attention, but the on-campus recruiting footprint is smaller than larger programs.</p>
+<p>Median base salary is $140,000, with total first-year compensation averaging about $162,000. When combined with Georgia's lower cost of living and Scheller's low tuition, the ROI is strong.</p>""",
+        "who_should_apply": """<p>Engineers and STEM professionals who want a business-focused MBA without losing their technical edge. If you're targeting tech product management, operations leadership, or analytics roles, Scheller's curriculum and Georgia Tech's brand speak directly to those goals.</p>""",
+        "watch_out": """<p>The 100-person class produces a small alumni network. National brand recognition for Scheller specifically (as distinct from Georgia Tech's engineering brand) is still developing. If you're targeting industries where the Georgia Tech name doesn't carry weight (media, fashion, luxury goods), this program may not fit.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Georgia Tech Scheller?",
+             f"Georgia Tech Scheller's acceptance rate is approximately 28% for the class of {CURRENT_YEAR}. The school receives about 800 applications for 100 full-time MBA seats. Quantitative skills and STEM backgrounds strengthen applications."),
+            ("What GMAT score do I need for Georgia Tech Scheller?",
+             "The average GMAT at Scheller is 695, with the middle 80% ranging from 660 to 730. The GRE is also accepted. Given Scheller's analytical orientation, strong quant scores carry more weight than at generalist programs."),
+            ("Is Georgia Tech Scheller a good value MBA?",
+             "Scheller is one of the best value MBAs in the top 30. In-state tuition under $34,000 per year combined with $140,000 median starting salary creates an ROI that rivals programs ranked 10 spots higher."),
+            ("What is the average salary after Georgia Tech Scheller?",
+             "Scheller graduates earn a median base salary of $140,000 with total first-year compensation averaging about $162,000. Tech and consulting roles drive the highest starting packages."),
+        ],
+    },
+    {
+        "name": "Washington University Olin Business School", "short_name": "WashU Olin",
+        "slug": "washu-olin", "location": "St. Louis, MO", "ranking": 27, "tier": 4,
+        "acceptance_rate": 30, "avg_gmat": 700, "avg_gpa": 3.45, "class_size": 160,
+        "avg_salary": 148000, "employment_rate": 92, "tuition": 65400,
+        "program_length": "2 years",
+        "strengths": ["Consulting", "Healthcare", "Customer Analytics", "Finance"],
+        "best_for": ["Consulting", "Healthcare", "Analytics"],
+        "verdict": "St. Louis's best-kept secret. WashU name recognition outside the Midwest lags behind the outcomes.",
+        "description": "Olin's customer analytics and healthcare management programs are nationally recognized. Benefits from WashU's strong Midwest brand.",
+        "url": "https://olin.wustl.edu/",
+        "overview": """<p>Washington University Olin is a strong program trapped in a city that doesn't get enough credit. St. Louis is home to 9 Fortune 500 companies (Centene, Emerson Electric, Reinsurance Group of America), a major healthcare corridor, and a growing fintech scene. Olin's 160-person class benefits from these corporate relationships, and the school's customer analytics and healthcare concentrations are nationally recognized.</p>
+<p>The WashU brand is strong in the Midwest and among healthcare employers nationally, though it fades on the coasts. Olin invests heavily in experiential learning, with consulting projects, international immersion trips, and a career center that provides more individual attention than you'll get at programs twice the size.</p>""",
+        "culture": """<p>Olin's 160-person class fosters close relationships. The culture is collaborative and intellectual, reflecting WashU's broader academic reputation. Students describe the environment as supportive without being coddling. St. Louis is cheap, walkable in the university area, and offers better food and nightlife than most outsiders expect. The Central West End neighborhood near campus is a highlight.</p>""",
+        "academics": """<p>Olin's customer analytics program is the academic standout. Courses in predictive modeling, marketing analytics, and customer intelligence are taught by faculty who are leaders in the field. The healthcare management concentration draws on WashU's top-ranked medical school and the BJC HealthCare system. The school also offers strong finance and consulting preparation, with a case competition culture that hones analytical and presentation skills.</p>""",
+        "careers": """<p>Olin's employment report shows 30% of graduates entering consulting, 20% healthcare, 18% finance, and 15% tech. Deloitte, Accenture, and EY are primary consulting recruiters, with MBB hiring selectively. Healthcare placement benefits from WashU's medical school connections. Median base salary is $148,000 with total first-year compensation around $170,000.</p>""",
+        "who_should_apply": """<p>Olin fits candidates targeting consulting, healthcare, or analytics who want a supportive community and strong ROI from a respected private university. If the Midwest is your target market, or if healthcare management is your goal, Olin's connections and curriculum align well.</p>""",
+        "watch_out": """<p>WashU's brand recognition drops sharply outside the Midwest and healthcare circles. St. Louis is affordable but not a major recruiting hub. If you're targeting coastal tech or Wall Street, higher-ranked programs will serve you better.</p>""",
+        "faq": [
+            ("What is the acceptance rate at WashU Olin?",
+             f"WashU Olin's acceptance rate is approximately 30% for the class of {CURRENT_YEAR}. The school enrolls about 160 full-time MBA students from roughly 1,200 applications."),
+            ("What GMAT score do I need for WashU Olin?",
+             "The average GMAT at Olin is 700, with the middle 80% ranging from 670 to 730. Olin evaluates candidates holistically with emphasis on leadership and career clarity."),
+            ("What is WashU Olin known for?",
+             "Olin is best known for its customer analytics program (nationally ranked), healthcare management concentration (powered by WashU's top medical school), and strong consulting placement."),
+            ("What is the average salary after WashU Olin?",
+             "Olin graduates earn a median base salary of $148,000 with total first-year compensation averaging about $170,000. Consulting and healthcare drive the strongest placement numbers."),
+        ],
+    },
+    {
+        "name": "Rice University Jones Graduate School of Business", "short_name": "Rice Jones",
+        "slug": "rice-jones", "location": "Houston, TX", "ranking": 28, "tier": 4,
+        "acceptance_rate": 28, "avg_gmat": 705, "avg_gpa": 3.40, "class_size": 130,
+        "avg_salary": 148000, "employment_rate": 92, "tuition": 62000,
+        "program_length": "2 years",
+        "strengths": ["Energy", "Healthcare", "Entrepreneurship", "Small Class"],
+        "best_for": ["Energy", "Healthcare", "Entrepreneurship"],
+        "verdict": "Houston's gem. Energy and healthcare in a class small enough to know everyone by name.",
+        "description": "Jones benefits from Houston's energy industry dominance and growing healthcare sector. The 130-person class creates a tight-knit community.",
+        "url": "https://business.rice.edu/",
+        "overview": """<p>Rice Jones sits in Houston, the energy capital of the world and home to the Texas Medical Center, the largest medical complex on the planet. That combination of energy and healthcare gives Jones two recruiting pipelines that few MBA programs can match. The 130-person class is small, which creates deep relationships but limits on-campus recruiting volume.</p>
+<p>Rice's brand in Texas is elite. The university is often called "the Harvard of the South," and Jones benefits from that academic reputation. Houston's economy is diversified beyond energy into healthcare, space (NASA's Johnson Space Center), and a growing tech startup ecosystem. The no-state-income-tax advantage adds further to the value proposition.</p>""",
+        "culture": """<p>Jones' 130-person class creates the tightest community of any Texas MBA. Students know each other's names, families, and career goals by the end of the first month. The culture is collaborative, reflecting Rice's broader academic ethos. Houston's food scene (one of the most diverse in America) and affordable cost of living make the two-year experience comfortable.</p>""",
+        "academics": """<p>Jones' energy curriculum is the academic highlight. Courses in energy finance, energy trading, and sustainable energy management are taught by faculty with deep industry ties. The Rice Energy Finance Initiative (REFI) connects students to Houston's energy ecosystem through research, speaker events, and corporate partnerships. Healthcare management courses draw on the Texas Medical Center's proximity. The school also offers action learning projects that pair students with Houston companies on real business challenges.</p>""",
+        "careers": """<p>Jones' employment report shows roughly 30% of graduates entering energy, 25% consulting, 15% healthcare, and 15% finance. Shell, ExxonMobil, Chevron, and a growing number of renewable energy firms recruit from Jones. Consulting placement includes Deloitte, McKinsey, and BCG (the latter two selectively). Healthcare placement benefits from the Texas Medical Center partnership. Median base salary is $148,000 with total first-year compensation around $172,000.</p>""",
+        "who_should_apply": """<p>Jones is the right choice if Houston is your target market, energy is your industry, or you want a small, tight-knit MBA community. The combination of Rice's academic brand, Houston's energy and healthcare industries, and a 130-person class makes this a strong pick for candidates who value depth of relationships over breadth of network.</p>""",
+        "watch_out": """<p>Jones' brand outside Texas is niche. In New York, San Francisco, or international markets, you'll spend time explaining the school. Houston's economy, while diversified, still cycles with oil prices. And the 130-person class, while intimate, produces a smaller alumni network than McCombs or most other top-30 programs.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Rice Jones?",
+             f"Rice Jones' acceptance rate is approximately 28% for the class of {CURRENT_YEAR}. The school enrolls about 130 full-time MBA students from roughly 1,000 applications."),
+            ("What GMAT score do I need for Rice Jones?",
+             "The average GMAT at Jones is 705, with the middle 80% ranging from 670 to 730. Energy industry experience and clear Houston-relevant career goals strengthen applications."),
+            ("Is Rice Jones good for energy careers?",
+             "Jones is one of the top 3 MBA programs for energy careers, alongside Texas McCombs and Tulane Freeman. Houston's concentration of energy headquarters gives Jones a proximity advantage that few programs can match."),
+            ("What is the average salary after Rice Jones?",
+             "Jones graduates earn a median base salary of $148,000 with total first-year compensation averaging about $172,000. Energy and consulting roles drive the highest compensation packages."),
+        ],
+    },
+    {
+        "name": "Notre Dame Mendoza College of Business", "short_name": "Notre Dame Mendoza",
+        "slug": "notre-dame-mendoza", "location": "Notre Dame, IN", "ranking": 29, "tier": 4,
+        "acceptance_rate": 32, "avg_gmat": 695, "avg_gpa": 3.35, "class_size": 110,
+        "avg_salary": 145000, "employment_rate": 91, "tuition": 60220,
+        "program_length": "2 years",
+        "strengths": ["Ethics", "Consulting", "Finance", "Alumni Network"],
+        "best_for": ["Consulting", "Finance", "Values-Driven Careers"],
+        "verdict": "Values-driven business education. The alumni network rivals schools ranked 10 spots higher.",
+        "description": "Mendoza's ethics-first approach to business education sets it apart. The Notre Dame alumni network is famously loyal.",
+        "url": "https://mendoza.nd.edu/",
+        "overview": """<p>Notre Dame Mendoza benefits from one of the most loyal alumni networks in higher education. The "Domers" phenomenon is real: Notre Dame graduates help each other in ways that transcend ranking brackets. The 110-person MBA class is small, but the broader Notre Dame alumni base (170,000+ worldwide) punches far above what you'd expect from a school ranked #29.</p>
+<p>Mendoza's Catholic, ethics-first approach attracts candidates who care about business as a force for good. This isn't performative social impact. The school's curriculum integrates ethical decision-making in a way that's practical rather than preachy. Consulting and finance are the primary career paths, with strong placement into both.</p>""",
+        "culture": """<p>Mendoza's culture is values-driven, community-oriented, and surprisingly tight. The 110-person class means deep relationships, and the Notre Dame campus fosters a sense of belonging that most MBA programs can't replicate. Football weekends in the fall are a defining social experience. Students describe the atmosphere as supportive and purposeful, with less of the transactional networking that defines larger programs.</p>""",
+        "academics": """<p>Mendoza's curriculum integrates ethics throughout rather than treating it as a standalone course. Core courses cover the standard MBA toolkit, and the teaching quality benefits from small class sizes and engaged faculty. The school's consulting and finance concentrations are strong, and the Gigot Center for Entrepreneurship supports student ventures. Interterm immersion courses between semesters allow students to do intensive one-week deep dives into specialized topics.</p>""",
+        "careers": """<p>Mendoza's employment report shows 35% of graduates entering consulting, 25% finance, and 15% tech. Deloitte, EY, McKinsey, and BCG all recruit from Mendoza (MBB selectively). Finance placement includes corporate finance, banking, and PE roles. The Notre Dame network is the career differentiator: alumni respond to cold outreach at rates that outpace most schools. Median base salary is $145,000 with total first-year compensation around $168,000.</p>""",
+        "who_should_apply": """<p>Mendoza fits candidates who value ethics alongside ambition. If you want a tight community, an alumni network that will pick up the phone for you 20 years after graduation, and strong consulting or finance placement, Mendoza delivers. Military veterans and candidates from faith-based or nonprofit backgrounds will find a natural community.</p>""",
+        "watch_out": """<p>South Bend, Indiana, is not a career hub. You'll need to travel for networking and interviews, and the geographic isolation limits on-campus recruiting. The Catholic identity, while not exclusive, shapes the culture in ways that may not resonate with everyone. And the 110-person class means a small annual graduating cohort that limits the alumni network growth rate.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Notre Dame Mendoza?",
+             f"Notre Dame Mendoza's acceptance rate is approximately 32% for the class of {CURRENT_YEAR}. The school enrolls about 110 full-time MBA students from roughly 800 applications."),
+            ("What GMAT score do I need for Notre Dame Mendoza?",
+             "The average GMAT at Mendoza is 695, with the middle 80% ranging from 660 to 730. Mendoza values leadership, community involvement, and ethical perspective alongside academic metrics."),
+            ("How strong is the Notre Dame alumni network?",
+             "The Notre Dame alumni network is legendary. With 170,000+ alumni worldwide and a culture of mutual support, Domers help each other at rates that rival schools ranked much higher. The network is particularly strong in consulting, finance, and Chicago-area companies."),
+            ("What is the average salary after Notre Dame Mendoza?",
+             "Mendoza graduates earn a median base salary of $145,000 with total first-year compensation averaging about $168,000. Consulting and finance drive the strongest compensation packages."),
+        ],
+    },
+    {
+        "name": "Wisconsin School of Business", "short_name": "Wisconsin",
+        "slug": "wisconsin", "location": "Madison, WI", "ranking": 30, "tier": 4,
+        "acceptance_rate": 35, "avg_gmat": 690, "avg_gpa": 3.30, "class_size": 120,
+        "avg_salary": 138000, "employment_rate": 90, "tuition": 27104,
+        "program_length": "2 years",
+        "strengths": ["Supply Chain", "Real Estate", "Marketing", "Risk Management"],
+        "best_for": ["Supply Chain", "Real Estate", "Marketing"],
+        "verdict": "Midwest practicality with strong supply chain and real estate programs. The value proposition is hard to argue with.",
+        "description": "Wisconsin's MBA program is strong in supply chain management, real estate, and risk management. Madison's quality of life makes it an attractive value play.",
+        "url": "https://business.wisc.edu/",
+        "overview": """<p>Wisconsin's MBA program combines nationally ranked supply chain and real estate programs with in-state tuition under $28,000. Madison is consistently ranked among the best college towns in America: walkable, affordable, and culturally vibrant. The 120-person class keeps the community tight while providing enough critical mass for diverse career interests.</p>
+<p>The Graaskamp Center for Real Estate is one of the oldest and most respected programs in the country. Supply chain management has been a top-5 ranked specialty for years. If either of those fields is your target, Wisconsin belongs on your shortlist regardless of the overall program ranking.</p>""",
+        "culture": """<p>Wisconsin's culture is quintessentially Midwest: friendly, humble, and hardworking. Madison's quality of life (lakes, bike paths, farmers' markets, a thriving food scene) shapes the student experience in ways that larger cities can't. The 120-person class creates genuine friendships rather than transactional networking. Badger game days are a defining social experience.</p>""",
+        "academics": """<p>The supply chain and operations curriculum is Wisconsin's academic crown jewel, covering logistics, procurement, demand planning, and global supply chain strategy. The Graaskamp Center for Real Estate offers courses in development, finance, and investment management that attract students from across the country. Risk management (actuarial science heritage) and marketing round out the school's specialty areas.</p>""",
+        "careers": """<p>Wisconsin's employment report shows strong placement in supply chain and operations (25%), consulting (20%), marketing (15%), and finance (15%). Major recruiters include Amazon, P&G, General Mills, and Midwest-based manufacturers. Median base salary is $138,000 with total first-year compensation around $160,000. The in-state tuition makes Wisconsin one of the best ROI plays in the top 30.</p>""",
+        "who_should_apply": """<p>Wisconsin is the right choice if supply chain, real estate, or operations is your target and you want to avoid six-figure debt. Midwest career-changers and international students seeking strong CPG or manufacturing placement will find the value proposition compelling.</p>""",
+        "watch_out": """<p>Madison is beautiful but geographically isolated from major metro recruiting hubs. Brand recognition outside the Midwest and supply chain circles is limited. If you're targeting coastal tech or Wall Street, Wisconsin will require extra networking effort.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Wisconsin?",
+             f"Wisconsin's MBA acceptance rate is approximately 35% for the class of {CURRENT_YEAR}. The school enrolls about 120 full-time MBA students from roughly 800 applications."),
+            ("Is Wisconsin a good MBA for supply chain?",
+             "Wisconsin's supply chain program is consistently ranked in the top 5 nationally. The program covers logistics, procurement, demand planning, and global supply chain strategy, with strong corporate recruiting from Amazon, P&G, and Midwest manufacturers."),
+            ("What is the average salary after Wisconsin MBA?",
+             "Wisconsin MBA graduates earn a median base salary of $138,000 with total first-year compensation averaging about $160,000. Supply chain and consulting roles drive the strongest placement."),
+            ("How much does Wisconsin MBA cost?",
+             "In-state tuition is under $28,000 per year, making Wisconsin one of the cheapest top-30 MBA programs. Even out-of-state tuition is significantly below private school peers, creating one of the strongest ROI calculations in MBA education."),
+        ],
+    },
+    {
+        "name": "Arizona State University W.P. Carey School of Business", "short_name": "Arizona State Carey",
+        "slug": "arizona-state-carey", "location": "Tempe, AZ", "ranking": 31, "tier": 4,
+        "acceptance_rate": 35, "avg_gmat": 688, "avg_gpa": 3.30, "class_size": 120,
+        "avg_salary": 135000, "employment_rate": 89, "tuition": 31360,
+        "program_length": "2 years",
+        "strengths": ["Innovation", "Supply Chain", "Analytics", "Online Flexibility"],
+        "best_for": ["Supply Chain", "Innovation", "Career Changers"],
+        "verdict": "The innovation lab in the desert. Online and on-campus options in one of America's fastest-growing metros.",
+        "description": "Carey has invested heavily in innovation and technology management, riding Arizona's booming economy.",
+        "url": "https://wpcarey.asu.edu/",
+        "overview": """<p>Arizona State Carey sits in Tempe, part of the Phoenix metro area and one of America's fastest-growing regions. ASU has reinvented itself under president Michael Crow as an innovation-first university, and Carey's MBA program reflects that ethos. The school enrolls about 120 full-time MBA students and has invested heavily in supply chain management, analytics, and entrepreneurship.</p>
+<p>Phoenix's economy has attracted Intel, TSMC, and a growing cluster of semiconductor and advanced manufacturing companies. Carey's supply chain program is positioned to capitalize on this industrial migration. Tuition under $32,000 per year makes it a strong value play for the Southwest.</p>""",
+        "culture": """<p>Carey's culture is entrepreneurial and practical. ASU's broader reputation for innovation filters into the business school, where students are encouraged to experiment and build. The 120-person class is small enough for community but large enough for diverse interests. Phoenix's year-round sunshine and outdoor lifestyle are genuine quality-of-life perks.</p>""",
+        "academics": """<p>Carey's supply chain management program is nationally ranked, benefiting from Arizona's growing role in semiconductor manufacturing and logistics. Analytics and technology management courses reflect ASU's investment in data science. The school offers both full-time and online MBA options, and the online program is one of the most respected in the country for professionals who can't relocate.</p>""",
+        "careers": """<p>Carey's employment report shows strong placement in supply chain and operations (25%), consulting (20%), and tech (15%). Intel, Amazon, and Deloitte are regular recruiters. Median base salary is $135,000 with total first-year compensation around $157,000. Arizona's lower cost of living stretches that salary further than comparable numbers in coastal markets.</p>""",
+        "who_should_apply": """<p>Carey fits candidates targeting supply chain, operations, or Southwest-based careers. If you're interested in semiconductor manufacturing, logistics, or Phoenix's growing tech scene, Carey provides direct industry access. Career changers seeking strong outcomes without relocating to a coast will find the value proposition compelling.</p>""",
+        "watch_out": """<p>ASU's brand recognition for the MBA program specifically (as distinct from the undergraduate university) is still developing nationally. Phoenix, while growing rapidly, has a smaller MBA recruiting market than Dallas, Atlanta, or Chicago. If your career goals require coastal or international placement, you'll need to network beyond the school's primary footprint.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Arizona State Carey?",
+             f"Arizona State Carey's acceptance rate is approximately 35% for the class of {CURRENT_YEAR}. The school enrolls about 120 full-time MBA students from roughly 700 applications."),
+            ("Is ASU Carey good for supply chain?",
+             "Carey's supply chain program is nationally ranked. Arizona's growing semiconductor and advanced manufacturing sector (Intel, TSMC) provides local industry connections that few programs can match."),
+            ("What is the average salary after ASU Carey?",
+             "Carey graduates earn a median base salary of $135,000 with total first-year compensation averaging about $157,000. Supply chain and consulting roles drive the strongest packages."),
+            ("How much does ASU Carey MBA cost?",
+             "In-state tuition is under $32,000 per year, making Carey one of the most affordable top-35 MBA programs. The value proposition is strong for candidates targeting Southwest careers."),
+        ],
+    },
+    {
+        "name": "Boston University Questrom School of Business", "short_name": "BU Questrom",
+        "slug": "bu-questrom", "location": "Boston, MA", "ranking": 32, "tier": 4,
+        "acceptance_rate": 35, "avg_gmat": 690, "avg_gpa": 3.30, "class_size": 150,
+        "avg_salary": 140000, "employment_rate": 90, "tuition": 62160,
+        "program_length": "2 years",
+        "strengths": ["Health Sector", "Digital Technology", "Social Impact"],
+        "best_for": ["Healthcare", "Technology", "Social Impact"],
+        "verdict": "Boston's other MBA. Solid health sector focus and public health dual-degree options in a city full of hospitals.",
+        "description": "Questrom's health sector management program takes advantage of Boston's concentration of hospitals, biotech firms, and health tech companies.",
+        "url": "https://www.bu.edu/questrom/",
+        "overview": """<p>BU Questrom competes in one of the most MBA-saturated markets in America. Boston hosts HBS, MIT Sloan, and several other programs, which means Questrom fights for employer attention against elite competition. The upside: Boston's healthcare, biotech, and tech ecosystem is massive, and there's enough recruiting demand to support multiple programs.</p>
+<p>Questrom enrolls about 150 full-time MBA students per year. The school's health sector management program is its differentiator, drawing on Boston's concentration of hospitals (Mass General, Brigham, Beth Israel), biotech companies (Moderna, Vertex, Biogen), and health tech startups. The dual-degree MBA/MPH with BU's School of Public Health is a practical combination for healthcare administration careers.</p>""",
+        "culture": """<p>Questrom's 150-person class is collaborative and diverse. Boston's energy as a college town and innovation hub shapes the student experience. The school attracts a mix of healthcare professionals, career changers, and international students. Living in Boston is expensive, but the access to employers, cultural institutions, and networking events compensates for the cost.</p>""",
+        "academics": """<p>Questrom's health sector management concentration is the academic standout, with courses on hospital operations, pharma strategy, and digital health. The school also has growing strength in digital technology and social impact. The FIELD (Foundational Immersive Experiential Learning Development) courses provide hands-on business projects starting in the first year.</p>""",
+        "careers": """<p>Questrom's employment report shows 25% of graduates entering healthcare, 25% consulting, 20% tech, and 15% finance. Major recruiters include Deloitte, Accenture, and various Boston-area healthcare systems and biotech companies. Median base salary is $140,000 with total first-year compensation around $163,000.</p>""",
+        "who_should_apply": """<p>Questrom is a strong fit for healthcare professionals seeking management training and career changers targeting Boston's biotech or health tech sectors. If the MBA/MPH dual degree appeals to you, Questrom is one of the better programs for that combination.</p>""",
+        "watch_out": """<p>Competing with HBS and Sloan for employer attention in the same city is a constant challenge. Questrom's brand recognition nationally lags well behind its Boston-area outcomes. The tuition ($62,000/year) is comparable to higher-ranked private schools, which makes the ROI harder to justify unless you're specifically targeting healthcare or Boston employers.</p>""",
+        "faq": [
+            ("What is the acceptance rate at BU Questrom?",
+             f"BU Questrom's acceptance rate is approximately 35% for the class of {CURRENT_YEAR}. The school enrolls about 150 full-time MBA students from roughly 1,000 applications."),
+            ("Is BU Questrom good for healthcare careers?",
+             "Questrom's health sector management program is one of its defining strengths. Boston's concentration of hospitals, biotech firms, and health tech companies creates a recruiting ecosystem that few cities can match."),
+            ("What is the average salary after BU Questrom?",
+             "Questrom graduates earn a median base salary of $140,000 with total first-year compensation averaging about $163,000. Healthcare and consulting roles drive the strongest placement."),
+            ("How does BU Questrom compare to other Boston MBA programs?",
+             "Questrom ranks behind HBS (#1) and MIT Sloan (#5) but offers healthcare-focused training at a lower admissions bar. For candidates targeting healthcare management specifically, Questrom's health sector concentration and MBA/MPH dual degree may be a better fit than the more generalist programs at higher-ranked schools."),
+        ],
+    },
+    {
+        "name": "University of Minnesota Carlson School of Management", "short_name": "Minnesota Carlson",
+        "slug": "minnesota-carlson", "location": "Minneapolis, MN", "ranking": 33, "tier": 4,
+        "acceptance_rate": 38, "avg_gmat": 685, "avg_gpa": 3.30, "class_size": 100,
+        "avg_salary": 138000, "employment_rate": 91, "tuition": 43234,
+        "program_length": "2 years",
+        "strengths": ["Medical Devices", "Fortune 500", "Supply Chain", "General Management"],
+        "best_for": ["Medical Devices", "Supply Chain", "General Management"],
+        "verdict": "The Fortune 500 feeder. More corporate headquarters per capita than almost anywhere, and Carlson grads fill them.",
+        "description": "Carlson's location in Minneapolis-St. Paul, home to 17 Fortune 500 companies, creates natural corporate relationships.",
+        "url": "https://carlsonschool.umn.edu/",
+        "overview": """<p>Minnesota Carlson sits in Minneapolis-St. Paul, a metro with 17 Fortune 500 headquarters per capita (more than any US metro except New York). Target, UnitedHealth Group, 3M, General Mills, Medtronic, Best Buy, and US Bancorp are all headquartered here. Carlson's 100-person MBA class benefits from these corporate relationships directly, with alumni in leadership positions across every major local employer.</p>
+<p>The medical devices concentration is Carlson's unique strength. Minneapolis is the capital of medical device manufacturing (Medtronic, Boston Scientific, Abbott, St. Jude Medical), and Carlson is the pipeline. Supply chain and general management round out the school's core competencies.</p>""",
+        "culture": """<p>Carlson's 100-person class is tight-knit and collaborative, reflecting Minnesota's cultural ethos of friendliness and practicality. The Twin Cities offer an excellent quality of life at a fraction of coastal costs. Students cite the food scene, outdoor recreation (10,000 lakes), and professional sports as social highlights. The winters are cold. Really cold. Budget for a good coat.</p>""",
+        "academics": """<p>Carlson's medical devices curriculum is the academic standout, with courses on med-tech commercialization, healthcare operations, and regulatory strategy. The school's Enterprise program is a distinctive experiential offering where student teams work as consultants to real companies. Supply chain and operations courses are strong, and the Carlson Fund (student-managed investment fund) provides hands-on finance experience.</p>""",
+        "careers": """<p>Carlson's employment report shows 25% of graduates entering medical devices/healthcare, 25% general management, 20% consulting, and 15% finance. Medtronic, Target, General Mills, 3M, and UnitedHealth Group are the anchor recruiters. Median base salary is $138,000 with total first-year compensation around $160,000. The Fortune 500 concentration in the Twin Cities means that corporate leadership pipeline roles are unusually accessible.</p>""",
+        "who_should_apply": """<p>Carlson is the clear choice if medical devices is your target industry. The Minneapolis med-tech ecosystem has no equal, and Carlson is the established pipeline into it. General management candidates targeting Midwest Fortune 500 companies and supply chain professionals will find strong outcomes at a reasonable public school price.</p>""",
+        "watch_out": """<p>Brand recognition outside the Midwest is limited. The 100-person class produces a small annual alumni cohort, which constrains network growth. Minneapolis is wonderful to live in but is not a national recruiting hub, so if you want to work in New York, LA, or SF, you'll need to network your way there independently.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Minnesota Carlson?",
+             f"Minnesota Carlson's acceptance rate is approximately 38% for the class of {CURRENT_YEAR}. The school enrolls about 100 full-time MBA students from roughly 600 applications."),
+            ("Is Minnesota Carlson good for medical device careers?",
+             "Carlson is the top MBA pipeline for medical device careers. Minneapolis is home to Medtronic, Boston Scientific, Abbott, and dozens of med-tech companies. The school's healthcare and medical devices concentration is purpose-built for this industry."),
+            ("What is the average salary after Minnesota Carlson?",
+             "Carlson graduates earn a median base salary of $138,000 with total first-year compensation averaging about $160,000. Medical devices, general management, and consulting drive the strongest placement."),
+            ("What Fortune 500 companies are near Minnesota Carlson?",
+             "Minneapolis-St. Paul is home to 17 Fortune 500 companies including Target, UnitedHealth Group, 3M, General Mills, Medtronic, Best Buy, US Bancorp, and CHS. Carlson has alumni in leadership positions at most of these companies."),
+        ],
+    },
+    {
+        "name": "Ohio State University Fisher College of Business", "short_name": "Ohio State Fisher",
+        "slug": "ohio-state-fisher", "location": "Columbus, OH", "ranking": 34, "tier": 4,
+        "acceptance_rate": 35, "avg_gmat": 690, "avg_gpa": 3.35, "class_size": 110,
+        "avg_salary": 140000, "employment_rate": 91, "tuition": 32376,
+        "program_length": "2 years",
+        "strengths": ["Operations", "Logistics", "Finance", "Healthcare"],
+        "best_for": ["Operations", "Finance", "Healthcare"],
+        "verdict": "The practical Midwesterner's MBA. Strong operations and a loyal alumni base in Columbus's growing economy.",
+        "description": "Fisher's MBA program benefits from Ohio State's massive alumni network and Columbus's growing economy. Strong in operations and logistics.",
+        "url": "https://fisher.osu.edu/",
+        "overview": """<p>Ohio State Fisher sits in Columbus, a city that has quietly become one of the Midwest's economic success stories. Columbus is home to Nationwide, Cardinal Health, L Brands (Victoria's Secret), and a growing tech sector anchored by Intel's massive semiconductor factory under construction nearby. Ohio State's alumni network is enormous (580,000+ living alumni), and Fisher MBA graduates tap into that base for recruiting and career advancement.</p>
+<p>Fisher enrolls about 110 full-time MBA students per year. The school is strong in operations, logistics, and finance, with growing presence in healthcare management. In-state tuition under $33,000 makes the ROI attractive for candidates targeting Midwest corporate careers.</p>""",
+        "culture": """<p>Fisher's culture reflects Ohio State's broader personality: passionate, loyal, and community-oriented. The 110-person class creates close-knit cohorts, and football Saturdays are a defining social experience. Columbus's cost of living is low, the food scene has improved dramatically in recent years, and the city's growing tech sector adds professional networking opportunities.</p>""",
+        "academics": """<p>Fisher's operations and logistics curriculum is the academic standout, covering supply chain management, process optimization, and manufacturing strategy. The school offers strong finance courses and a growing healthcare management track. Student-managed investment funds and consulting projects with local companies provide practical experience.</p>""",
+        "careers": """<p>Fisher's employment report shows 25% of graduates entering operations and supply chain, 22% consulting, 20% finance, and 15% healthcare. Major recruiters include Amazon, Nationwide, Cardinal Health, J.P. Morgan, and Deloitte. Median base salary is $140,000 with total first-year compensation around $162,000. Ohio's cost of living amplifies the purchasing power of that salary.</p>""",
+        "who_should_apply": """<p>Fisher fits candidates targeting Midwest corporate careers in operations, finance, or healthcare. If you value a massive alumni network, affordable tuition, and a growing city economy, Fisher delivers. Career changers from manufacturing or logistics backgrounds will find the transition well-supported.</p>""",
+        "watch_out": """<p>Columbus lacks the employer density of Chicago or the coastal metros. Fisher's brand is strongest in Ohio and the broader Midwest; national recognition is limited. The 110-person class produces a small annual graduating cohort, though the broader Ohio State alumni base partially compensates.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Ohio State Fisher?",
+             f"Ohio State Fisher's acceptance rate is approximately 35% for the class of {CURRENT_YEAR}. The school enrolls about 110 full-time MBA students from roughly 700 applications."),
+            ("What is Ohio State Fisher known for?",
+             "Fisher is best known for operations and logistics, finance, and a growing healthcare management program. Ohio State's 580,000+ alumni network provides career leverage well beyond the MBA program's ranking."),
+            ("What is the average salary after Ohio State Fisher?",
+             "Fisher graduates earn a median base salary of $140,000 with total first-year compensation averaging about $162,000. Operations, consulting, and finance drive the strongest placement."),
+            ("How much does Ohio State Fisher MBA cost?",
+             "In-state tuition is under $33,000 per year, making Fisher one of the best value MBAs in the Midwest. The combination of low tuition, strong Midwest employment, and Ohio's affordable cost of living creates compelling ROI."),
+        ],
+    },
+    {
+        "name": "Purdue University Krannert School of Management", "short_name": "Purdue Krannert",
+        "slug": "purdue-krannert", "location": "West Lafayette, IN", "ranking": 35, "tier": 4,
+        "acceptance_rate": 40, "avg_gmat": 680, "avg_gpa": 3.25, "class_size": 90,
+        "avg_salary": 130000, "employment_rate": 90, "tuition": 22408,
+        "program_length": "2 years",
+        "strengths": ["STEM MBA", "Operations", "Analytics", "Manufacturing"],
+        "best_for": ["Operations", "Analytics", "STEM Careers"],
+        "verdict": "STEM-designated MBA with Purdue's engineering DNA. If you want operations or analytics, the price-to-quality ratio is unmatched.",
+        "description": "Krannert's STEM-designated MBA appeals to students with engineering backgrounds who want to move into management.",
+        "url": "https://krannert.purdue.edu/",
+        "overview": """<p>Purdue Krannert offers a STEM-designated MBA at the lowest tuition in the top 35. In-state tuition under $23,000 per year is hard to argue with, and even out-of-state rates are well below most competitors. Purdue's engineering heritage shapes the program: quantitative rigor, operations excellence, and a no-nonsense approach to business education.</p>
+<p>The 90-person class is small, and the school's focus on operations, analytics, and manufacturing management reflects its Midwestern industrial base. For international students, the STEM designation provides a 24-month OPT extension that's a genuine career advantage.</p>""",
+        "culture": """<p>Krannert's 90-person class is intimate and collaborative. West Lafayette is a small college town, which means the MBA community is self-contained and close. Students with engineering backgrounds feel at home in Purdue's analytical culture. The cost of living is among the lowest of any MBA program, which means student budgets stretch further here than almost anywhere.</p>""",
+        "academics": """<p>Krannert's operations and supply chain curriculum is the academic standout, drawing on Purdue's engineering strengths. Analytics courses cover statistical modeling, data visualization, and machine learning applications for business. The STEM designation applies to the full MBA, giving all graduates access to extended OPT. Experiential learning projects connect students with manufacturing and technology companies in the Midwest.</p>""",
+        "careers": """<p>Krannert's employment report shows 30% of graduates entering operations and supply chain, 25% consulting, and 20% finance. Amazon, Cummins, Caterpillar, and Midwest manufacturers are regular recruiters. Median base salary is $130,000 with total first-year compensation around $152,000. The sub-$23,000 tuition makes Krannert one of the strongest ROI calculations in all of MBA education.</p>""",
+        "who_should_apply": """<p>Engineers and STEM professionals who want business training without the debt. If operations, manufacturing management, or analytics is your target, Krannert's curriculum and price point create a value proposition that's hard to beat. International students benefit from the STEM designation and OPT extension.</p>""",
+        "watch_out": """<p>West Lafayette is small and isolated. Recruiting requires travel, and the local employer base is limited. Brand recognition outside the Midwest and engineering circles is thin. If your career goals require coastal placement or Wall Street access, Krannert may not provide the brand leverage you need.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Purdue Krannert?",
+             f"Purdue Krannert's acceptance rate is approximately 40% for the class of {CURRENT_YEAR}. The school enrolls about 90 full-time MBA students from roughly 500 applications."),
+            ("Is Purdue Krannert a STEM MBA?",
+             "Yes. Krannert's MBA is STEM-designated, allowing international graduates to apply for a 24-month OPT extension (36 months total of post-graduation work authorization in the US)."),
+            ("What is the average salary after Purdue Krannert?",
+             "Krannert graduates earn a median base salary of $130,000 with total first-year compensation averaging about $152,000. Operations, consulting, and finance drive the strongest placement."),
+            ("How much does Purdue Krannert MBA cost?",
+             "In-state tuition is under $23,000 per year, making Krannert one of the cheapest top-35 MBAs in America. Combined with $130,000 median starting salary, the debt-to-income ratio is among the best in MBA education."),
+        ],
+    },
+    {
+        "name": "UC Davis Graduate School of Management", "short_name": "UC Davis",
+        "slug": "uc-davis", "location": "Davis, CA", "ranking": 36, "tier": 4,
+        "acceptance_rate": 38, "avg_gmat": 685, "avg_gpa": 3.30, "class_size": 80,
+        "avg_salary": 135000, "employment_rate": 89, "tuition": 44458,
+        "program_length": "2 years",
+        "strengths": ["Food & Agriculture", "Clean Tech", "Sustainability"],
+        "best_for": ["Agriculture/Food", "Clean Tech", "Sustainability"],
+        "verdict": "The MBA for food, agriculture, and clean tech. A niche play, but if it's your niche, nowhere else comes close.",
+        "description": "Davis carves out a unique niche in food and agriculture management, sustainability, and clean technology.",
+        "url": "https://gsm.ucdavis.edu/",
+        "overview": """<p>UC Davis is the only top-40 MBA program with genuine depth in food, agriculture, and clean technology. Davis, California, sits in the Sacramento Valley, the heart of California's agricultural industry, and the university's agricultural science programs are world-class. The MBA program channels that expertise into courses on agribusiness, food supply chain, wine industry management, and sustainability.</p>
+<p>The 80-person class is tiny, which creates an intimate community but limits on-campus recruiting volume. Sacramento's growing tech scene and proximity to the Bay Area (90 minutes) provide additional career options beyond the school's niche strengths.</p>""",
+        "culture": """<p>Davis is a bike-friendly college town with a laid-back California vibe. The 80-person class is close-knit by necessity, and students describe the culture as supportive and down-to-earth. Sustainability isn't a buzzword here; it's a genuine shared value. The wine country location (Napa and Sonoma are nearby) adds a distinctive social dimension to the MBA experience.</p>""",
+        "academics": """<p>UC Davis' food and agriculture management courses are the academic crown jewel. Wine industry management, agribusiness strategy, and clean technology courses draw on the university's agricultural science faculty. The school also has growing strength in general management and tech, benefiting from Sacramento's proximity to the Bay Area. The tiny class size means professors know every student individually.</p>""",
+        "careers": """<p>UC Davis' employment report shows strong placement in food and agriculture (20%), tech (20%), consulting (18%), and sustainability-focused companies (15%). The school's niche focus means that for agriculture, food, and clean tech employers, Davis graduates are first-choice candidates. Median base salary is $135,000 with total first-year compensation around $157,000.</p>""",
+        "who_should_apply": """<p>UC Davis is the obvious choice if food, agriculture, clean tech, or sustainability management is your career goal. The school owns this niche in a way that no other top-40 MBA program attempts to match. If you want a small California community with Bay Area access and a genuine commitment to sustainability, Davis delivers.</p>""",
+        "watch_out": """<p>Outside of its niche industries, UC Davis' MBA brand recognition is limited. The 80-person class produces a small alumni network. Davis is not a major metro, which means recruiting requires travel to Sacramento, the Bay Area, or beyond. If your career goals don't intersect with food, agriculture, or sustainability, a more generalist program may serve you better.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UC Davis MBA?",
+             f"UC Davis MBA's acceptance rate is approximately 38% for the class of {CURRENT_YEAR}. The school enrolls about 80 full-time MBA students from roughly 500 applications."),
+            ("Is UC Davis the best MBA for food and agriculture?",
+             "UC Davis is widely considered the top MBA for food and agriculture management. The university's world-class agricultural science programs, Sacramento Valley location, and wine industry connections create a combination no other business school can match."),
+            ("What is the average salary after UC Davis MBA?",
+             "UC Davis MBA graduates earn a median base salary of $135,000 with total first-year compensation averaging about $157,000. Food/agriculture, tech, and consulting drive the strongest placement."),
+            ("How far is UC Davis from the Bay Area?",
+             "Davis is about 90 minutes from San Francisco and the Bay Area tech hubs. Some students commute to Bay Area recruiting events and internships, though the drive can be demanding during peak traffic."),
+        ],
+    },
+    {
+        "name": "University of Maryland Smith School of Business", "short_name": "Maryland Smith",
+        "slug": "maryland-smith", "location": "College Park, MD", "ranking": 37, "tier": 4,
+        "acceptance_rate": 38, "avg_gmat": 685, "avg_gpa": 3.30, "class_size": 120,
+        "avg_salary": 140000, "employment_rate": 90, "tuition": 48172,
+        "program_length": "2 years",
+        "strengths": ["Analytics", "Information Systems", "Government", "Consulting"],
+        "best_for": ["Analytics", "Government", "Consulting"],
+        "verdict": "DC-adjacent with strong analytics. The commuter-friendly option for those already plugged into the Beltway.",
+        "description": "Smith's analytics and information systems programs are among the best in the country. Proximity to DC creates government consulting opportunities.",
+        "url": "https://www.rhsmith.umd.edu/",
+        "overview": """<p>Maryland Smith sits in College Park, a Metro ride from downtown DC. That proximity creates a unique value proposition: DC's government consulting, defense, and policy ecosystem is accessible without Georgetown's price tag. Smith's analytics and information systems programs are nationally ranked, and the school's research faculty in these areas is genuinely world-class.</p>
+<p>The 120-person class draws candidates from the DC Beltway ecosystem: government employees, defense contractors, and consulting professionals looking to level up. The school also attracts international students seeking STEM-designated analytics training with US government proximity.</p>""",
+        "culture": """<p>Smith's culture is practical and career-focused, reflecting its student base of working professionals and career changers. College Park's proximity to DC means students can attend networking events and recruiting sessions in the capital without relocating. The Terrapins brand is strong in Maryland and the broader mid-Atlantic region.</p>""",
+        "academics": """<p>Smith's analytics and information systems curriculum is the academic standout. Courses in data science, machine learning, cybersecurity management, and information technology management are taught by faculty who are leaders in their research fields. The government consulting track draws on DC proximity, with coursework in federal contracting, defense management, and public sector innovation. The school's QUEST program (Quality Enhancement Systems and Teams) integrates business, engineering, and technology perspectives.</p>""",
+        "careers": """<p>Smith's employment report shows 25% of graduates entering consulting, 20% tech, 20% government and defense, and 15% finance. Deloitte, Booz Allen Hamilton, Accenture Federal Services, and KPMG are primary recruiters. Government consulting is where Smith differentiates itself from programs that lack DC access. Median base salary is $140,000 with total first-year compensation around $162,000.</p>""",
+        "who_should_apply": """<p>Smith is the right fit if government consulting, defense, or analytics is your target. If you're already working in the DC Beltway ecosystem and want an MBA without relocating, Smith provides strong outcomes at public school tuition. International students targeting analytics roles with government-adjacent employers benefit from the STEM designation and DC proximity.</p>""",
+        "watch_out": """<p>Smith competes with Georgetown McDonough for DC employer attention and generally loses on brand recognition. The school's strength is narrower than Georgetown's, focused on analytics and government consulting rather than international business broadly. If your career goals extend beyond the Beltway, Smith's regional brand may limit your options.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Maryland Smith?",
+             f"Maryland Smith's acceptance rate is approximately 38% for the class of {CURRENT_YEAR}. The school enrolls about 120 full-time MBA students from roughly 750 applications."),
+            ("Is Maryland Smith good for government consulting?",
+             "Smith is one of the best MBA programs for government consulting. DC proximity, relationships with firms like Deloitte, Booz Allen Hamilton, and Accenture Federal Services, and coursework in federal contracting and defense management create a direct pipeline to this industry."),
+            ("What is the average salary after Maryland Smith?",
+             "Smith graduates earn a median base salary of $140,000 with total first-year compensation averaging about $162,000. Government consulting, tech, and analytics roles drive the strongest placement."),
+            ("How does Maryland Smith compare to Georgetown McDonough?",
+             "Georgetown ranks higher (#20 vs #37) and has stronger overall brand recognition. Smith offers lower tuition, stronger analytics programs, and competitive government consulting placement. For pure analytics or budget-conscious DC careers, Smith offers strong value. For international business or prestige-sensitive employers, Georgetown wins."),
+        ],
+    },
+    {
+        "name": "Penn State Smeal College of Business", "short_name": "Penn State Smeal",
+        "slug": "penn-state-smeal", "location": "University Park, PA", "ranking": 38, "tier": 4,
+        "acceptance_rate": 40, "avg_gmat": 680, "avg_gpa": 3.25, "class_size": 80,
+        "avg_salary": 132000, "employment_rate": 89, "tuition": 28556,
+        "program_length": "2 years",
+        "strengths": ["Supply Chain", "Real Estate", "Corporate Innovation"],
+        "best_for": ["Supply Chain", "Real Estate", "Operations"],
+        "verdict": "Supply chain royalty. Penn State's alumni network is larger than some schools' applicant pools.",
+        "description": "Smeal's supply chain management program is consistently ranked among the top in the nation. The Penn State alumni network is a genuine career asset.",
+        "url": "https://www.smeal.psu.edu/",
+        "overview": """<p>Penn State Smeal benefits from two things: a top-5 supply chain program and one of the largest alumni networks in higher education (750,000+ living alumni). The 80-person MBA class is small, but the broader Penn State network provides career leverage that extends far beyond what the class size or ranking would suggest. In-state tuition under $29,000 rounds out a compelling value proposition.</p>
+<p>The school sits in University Park, PA, which is rural and isolated. That location limits on-campus recruiting but also creates a focused, distraction-free environment where the MBA cohort bonds deeply.</p>""",
+        "culture": """<p>Smeal's 80-person class is tight-knit and collaborative. Penn State's broader culture of loyalty and community extends into the MBA program. Football weekends at Beaver Stadium (107,000 capacity) are a social highlight that has to be experienced to be understood. University Park is remote, which forces the class together and creates lasting bonds.</p>""",
+        "academics": """<p>Smeal's supply chain management program is consistently ranked among the top 5 in the US. Courses cover logistics, procurement, demand planning, and global supply chain strategy. The real estate program, supported by Penn State's Smeal Real Estate Research Center, is another academic highlight. Corporate innovation and general management courses round out the curriculum.</p>""",
+        "careers": """<p>Smeal's employment report shows 30% of graduates entering supply chain and operations, 20% consulting, 20% finance, and 15% general management. Amazon, J&J, P&G, and Deloitte are regular recruiters. The Penn State alumni network opens doors in corporate America that the ranking alone doesn't predict. Median base salary is $132,000 with total first-year compensation around $155,000.</p>""",
+        "who_should_apply": """<p>Smeal is the right choice if supply chain is your target and you want to avoid heavy debt. The Penn State alumni network provides career leverage that punches well above the school's ranking. Operations and logistics professionals will find the curriculum directly relevant, and career changers benefit from the focused community.</p>""",
+        "watch_out": """<p>University Park is genuinely remote. The nearest major city (Pittsburgh) is 3+ hours away. Recruiting requires travel, and the local employer base is essentially zero. Brand recognition for Smeal specifically (vs Penn State broadly) is limited outside supply chain circles. The 80-person class produces a small annual cohort.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Penn State Smeal?",
+             f"Penn State Smeal's acceptance rate is approximately 40% for the class of {CURRENT_YEAR}. The school enrolls about 80 full-time MBA students from roughly 500 applications."),
+            ("Is Penn State Smeal good for supply chain?",
+             "Smeal's supply chain program is consistently ranked in the top 5 nationally. The program covers logistics, procurement, demand planning, and global supply chain strategy, with strong corporate recruiting from CPG and manufacturing companies."),
+            ("What is the average salary after Penn State Smeal?",
+             "Smeal graduates earn a median base salary of $132,000 with total first-year compensation averaging about $155,000. Supply chain, consulting, and finance drive the strongest placement."),
+            ("How large is the Penn State alumni network?",
+             "Penn State has over 750,000 living alumni, making it one of the largest alumni networks in higher education. While the MBA class is small (80 students), the broader Penn State network provides career connections across every major industry and geography."),
+        ],
+    },
+    {
+        "name": "BYU Marriott School of Business", "short_name": "BYU Marriott",
+        "slug": "byu-marriott", "location": "Provo, UT", "ranking": 39, "tier": 4,
+        "acceptance_rate": 38, "avg_gmat": 685, "avg_gpa": 3.45, "class_size": 120,
+        "avg_salary": 135000, "employment_rate": 93, "tuition": 14460,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Consulting", "Ethics", "ROI", "Entrepreneurship"],
+        "best_for": ["Consulting", "Finance", "Entrepreneurship"],
+        "verdict": "The best MBA deal in America. Tuition that makes state schools jealous and placement rates that embarrass schools twice the price.",
+        "description": "Marriott offers placement rates that rival schools charging five times the tuition. The LDS community creates a powerful professional network.",
+        "url": "https://marriottschool.byu.edu/",
+        "overview": """<p>BYU Marriott is the value outlier of MBA education. Tuition is $14,460 per year for LDS members and roughly $29,000 for non-members. To put that in context: two years at Marriott costs less than one semester at most top-25 private programs. And the outcomes are strong: 93% employment at graduation, $135,000 median base salary, and consulting and finance placement that rivals schools ranked 15 spots higher.</p>
+<p>The LDS (Mormon) community is the invisible engine of Marriott's success. BYU alumni are fiercely loyal, and the church's global network creates professional connections that transcend traditional alumni databases. Many students enter the program with 2+ years of international mission experience, which means they bring language skills and cultural fluency that most MBA applicants lack.</p>""",
+        "culture": """<p>Marriott's culture is shaped by BYU's Honor Code, which includes an emphasis on honesty, modesty, and personal conduct. For LDS students, this feels natural. For non-LDS students, it's a significant cultural adjustment. The academic environment is collaborative and values-driven, with a genuine emphasis on ethical business practices rather than the performative kind. Provo is affordable, family-friendly, and surrounded by mountains. Many students are married, which shifts the social dynamic away from the typical MBA happy hour scene.</p>""",
+        "academics": """<p>Marriott's finance and consulting preparation are the academic highlights. The school's Peery Institute of Financial Services provides hands-on investment management experience. Consulting coursework, including case competitions and mock engagements, is structured and thorough. The school's global management courses benefit from the multilingual, internationally experienced student body. Entrepreneurship is strong, reflecting Utah's growing startup ecosystem (sometimes called "Silicon Slopes").</p>""",
+        "careers": """<p>Marriott's employment report shows 30% of graduates entering consulting, 25% finance, 20% tech, and 10% entrepreneurship. Deloitte, Bain, McKinsey, Goldman Sachs, and Amazon all recruit from Marriott. The 93% employment rate at graduation is tied for the best in the top 40. The LDS network provides a recruiting advantage that doesn't show up on career services reports but matters enormously in practice. Median base salary is $135,000 with total first-year compensation around $158,000.</p>""",
+        "who_should_apply": """<p>LDS members seeking an MBA should have Marriott at the top of their list. The tuition is unbeatable, the network effect is powerful, and the outcomes compete with programs charging five times as much. Non-LDS candidates who are comfortable with BYU's culture and Honor Code will find excellent value, though the cultural fit question is worth serious self-assessment. Career changers seeking consulting or finance without six-figure debt will find compelling ROI.</p>""",
+        "watch_out": """<p>BYU's religious affiliation shapes the student experience in ways that go well beyond typical university culture. The Honor Code governs personal conduct, and campus life reflects LDS values. Non-LDS students report positive academic experiences but sometimes feel culturally adjacent. Provo is not a major business hub, so recruiting requires travel. And while the LDS network is powerful, its value diminishes for graduates who aren't part of that community.</p>""",
+        "faq": [
+            ("What is the acceptance rate at BYU Marriott?",
+             f"BYU Marriott's acceptance rate is approximately 38% for the class of {CURRENT_YEAR}. The school enrolls about 120 full-time MBA students from roughly 700 applications."),
+            ("How much does BYU Marriott MBA cost?",
+             "LDS member tuition is $14,460 per year, making it the cheapest top-40 MBA in America by a wide margin. Non-LDS tuition is roughly $29,000 per year, which is still well below most competitors. The ROI calculation is exceptionally strong at either price point."),
+            ("What is the average salary after BYU Marriott?",
+             "Marriott graduates earn a median base salary of $135,000 with total first-year compensation averaging about $158,000. Consulting, finance, and tech drive the strongest placement. The 93% employment rate at graduation ties for the best in the top 40."),
+            ("Do you have to be LDS to attend BYU Marriott?",
+             "No. BYU Marriott admits non-LDS students. However, all students must agree to BYU's Honor Code, which governs personal conduct and reflects LDS values. Non-LDS students should research the Honor Code carefully to assess cultural fit before applying."),
+        ],
+    },
+    {
+        "name": "Babson F.W. Olin Graduate School of Business", "short_name": "Babson Olin",
+        "slug": "babson-olin", "location": "Wellesley, MA", "ranking": 40, "tier": 4,
+        "acceptance_rate": 45, "avg_gmat": 675, "avg_gpa": 3.20, "class_size": 100,
+        "avg_salary": 130000, "employment_rate": 89, "tuition": 54400,
+        "program_length": "2 years",
+        "strengths": ["Entrepreneurship", "Family Business", "Innovation"],
+        "best_for": ["Entrepreneurship", "Family Business", "Startups"],
+        "verdict": "The entrepreneurship school, full stop. If you're starting a company, Babson wrote the playbook everyone else copies.",
+        "description": "Babson has been ranked #1 in entrepreneurship for over 25 years. If you're starting a company or buying a family business, Babson's curriculum is purpose-built for you.",
+        "url": "https://www.babson.edu/",
+        "overview": """<p>Babson has been ranked #1 in entrepreneurship by US News for over 25 consecutive years. That's a dynasty in any field. The school's entire curriculum is built around entrepreneurial thinking, from first-year core courses to second-year venture creation workshops. If you're planning to start a company, buy a family business, or join an early-stage startup, Babson's curriculum and alumni network are purpose-built for those paths.</p>
+<p>The 100-person MBA class is small, intentionally so. Babson's Wellesley, MA location puts it close to Boston's startup ecosystem and venture capital community. The school's Blank Center for Entrepreneurship provides funding, mentorship, and workspace for student ventures, and a meaningful percentage of graduates launch companies within 5 years of graduating.</p>""",
+        "culture": """<p>Babson's culture is entrepreneurial to its core. Conversations in the student lounge revolve around business ideas, customer discovery, and go-to-market strategies. The student body is highly international (40%+ from outside the US), and many students have prior startup experience. The small class creates deep relationships, and the Babson alumni network is tight, especially among founders.</p>""",
+        "academics": """<p>Babson's signature first-year course, Foundations of Management and Entrepreneurship (FME), has students actually start and run a business during the first semester. The school invests real money in each team's venture, and profits go to charity. Second-year electives dive deep into venture finance, family business management, franchise operations, and growth strategy. The teaching is intensely practical: you'll spend more time building prototypes and pitching investors than writing case analyses.</p>""",
+        "careers": """<p>Babson's employment report shows 25% of graduates entering entrepreneurship (immediately or within 3 years), 25% consulting, 20% tech, and 15% finance. The school's career services office is focused on helping founders as much as job seekers, which is unusual in MBA education. For students targeting traditional employment, Deloitte, Accenture, and Boston-area tech companies recruit from Babson. Median base salary is $130,000 with total first-year compensation around $152,000.</p>""",
+        "who_should_apply": """<p>Babson is the obvious choice if you're going to start a company. The curriculum, faculty, alumni network, and school resources are all optimized for founders. Family business successors will find specialized courses and a community of peers who understand the unique challenges of inheriting and growing a business. If entrepreneurship is your calling and you want two years of structured preparation, no program is better suited.</p>""",
+        "watch_out": """<p>If you're targeting traditional corporate careers (investment banking, brand management at P&G, strategy consulting at MBB), Babson's brand and recruiting relationships are weaker than generalist programs ranked similarly. The entrepreneurship focus is a strength for founders but a limitation for everyone else. Tuition is $54,000/year, which is expensive for a school ranked #40 when you're not planning to use the entrepreneurship infrastructure.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Babson?",
+             f"Babson's MBA acceptance rate is approximately 45% for the class of {CURRENT_YEAR}. The school enrolls about 100 full-time MBA students. The higher acceptance rate reflects the self-selecting nature of the applicant pool, which skews heavily toward entrepreneurship-focused candidates."),
+            ("Is Babson the best MBA for entrepreneurship?",
+             "Babson has been ranked #1 in entrepreneurship by US News for over 25 consecutive years. The school's entire curriculum, from the first-year FME course (where students start real businesses) to second-year venture creation workshops, is designed for founders. Stanford GSB and HBS also have strong entrepreneurship ecosystems, but Babson is the only program where entrepreneurship IS the program."),
+            ("What is the average salary after Babson?",
+             "Babson graduates earn a median base salary of $130,000 with total first-year compensation averaging about $152,000. About 25% of graduates launch companies immediately or within 3 years, which affects the aggregate salary statistics."),
+            ("What is Babson's FME program?",
+             "Foundations of Management and Entrepreneurship (FME) is Babson's signature first-year course. Student teams receive real capital from the school to start and operate a business during the first semester. The ventures generate real revenue, and profits go to charity. It's one of the most distinctive experiential learning programs in MBA education."),
+        ],
+    },
+    {
+        "name": "Michigan State Broad College of Business", "short_name": "Michigan State Broad",
+        "slug": "michigan-state-broad", "location": "East Lansing, MI", "ranking": 41, "tier": 4,
+        "acceptance_rate": 40, "avg_gmat": 680, "avg_gpa": 3.25, "class_size": 80,
+        "avg_salary": 128000, "employment_rate": 89, "tuition": 32640,
+        "program_length": "2 years",
+        "strengths": ["Supply Chain", "Marketing", "Operations"],
+        "best_for": ["Supply Chain", "Operations", "Marketing"],
+        "verdict": "Supply chain and operations powerhouse at Big Ten prices. The Spartans punch above their weight in manufacturing.",
+        "description": "Broad's supply chain management program is among the best in the country. Corporate partnerships in automotive and manufacturing drive placement.",
+        "url": "https://broad.msu.edu/",
+        "overview": """<p>Michigan State Broad has one of the top-ranked supply chain programs in the US. The school sits in East Lansing, close to Michigan's automotive and manufacturing corridor, which provides natural industry connections. The 80-person MBA class is small but focused, and corporate partnerships with auto manufacturers, CPG companies, and logistics firms drive consistent placement.</p>
+<p>In-state tuition around $33,000 makes Broad a strong value play for supply chain and operations-focused candidates. The Spartan alumni network is large and active in Midwest industry.</p>""",
+        "culture": """<p>Broad's 80-person class creates a close-knit community. East Lansing is a classic college town with a strong social scene centered around the university. Spartans are loyal and collaborative, and the MBA cohort bonds through shared academic intensity and Michigan State's vibrant campus life.</p>""",
+        "academics": """<p>The supply chain management program is Broad's crown jewel, covering logistics, procurement, demand planning, and manufacturing strategy. Michigan's automotive industry provides real-world case studies and corporate partnerships. Marketing and general management courses round out the curriculum, and the school's experiential learning projects connect students to Midwest manufacturers.</p>""",
+        "careers": """<p>Broad's employment report shows 30% of graduates entering supply chain and operations, 20% marketing, 20% consulting, and 15% finance. GM, Ford, Amazon, P&G, and Michigan-based manufacturers are regular recruiters. Median base salary is $128,000 with total first-year compensation around $150,000.</p>""",
+        "who_should_apply": """<p>Supply chain and operations professionals targeting Midwest manufacturing careers will find Broad's curriculum and corporate relationships directly relevant. If you want strong outcomes without relocating far from Michigan's automotive industry, Broad delivers at Big Ten prices.</p>""",
+        "watch_out": """<p>Brand recognition outside supply chain circles and the Midwest is limited. East Lansing is not a major recruiting hub, and the 80-person class produces a small annual cohort. If your career goals extend beyond operations and manufacturing, a more generalist program may serve you better.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Michigan State Broad?",
+             f"Michigan State Broad's acceptance rate is approximately 40% for the class of {CURRENT_YEAR}. The school enrolls about 80 full-time MBA students."),
+            ("Is Michigan State Broad good for supply chain?",
+             "Broad's supply chain program is consistently ranked among the best in the US. Michigan's automotive and manufacturing corridor provides natural industry connections and corporate recruiting partnerships."),
+            ("What is the average salary after Michigan State Broad?",
+             "Broad graduates earn a median base salary of $128,000 with total first-year compensation averaging about $150,000. Supply chain, marketing, and consulting drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "University of Rochester Simon Business School", "short_name": "Rochester Simon",
+        "slug": "rochester-simon", "location": "Rochester, NY", "ranking": 42, "tier": 4,
+        "acceptance_rate": 40, "avg_gmat": 680, "avg_gpa": 3.30, "class_size": 100,
+        "avg_salary": 135000, "employment_rate": 90, "tuition": 55260,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Analytics", "Brand Management"],
+        "best_for": ["Finance", "Analytics", "Brand Management"],
+        "verdict": "Finance and analytics in upstate New York. Small class, serious quant chops, and an overlooked value play.",
+        "description": "Simon's finance and analytics programs are rigorous, benefiting from the University of Rochester's strong quantitative tradition.",
+        "url": "https://simon.rochester.edu/",
+        "overview": """<p>Rochester Simon benefits from the University of Rochester's strong quantitative tradition. The school's economics department has produced Nobel Prize winners, and that analytical rigor infuses the MBA program. Finance and analytics are the school's core strengths, with a curriculum that's more quantitatively demanding than most programs at this ranking.</p>
+<p>The 100-person class is small and heavily international (50%+ from outside the US), which creates a globally diverse environment. Brand management is another specialty, with Wegmans and other consumer companies recruiting from Simon's marketing program. Rochester itself is affordable and walkable, though it's a smaller city that lacks the career density of New York City or Boston.</p>""",
+        "culture": """<p>Simon's culture is intellectual and quantitative. The high international student percentage creates a globally diverse classroom experience. The 100-person class is small enough for deep relationships, and Rochester's cost of living means student budgets go further than at most private programs.</p>""",
+        "academics": """<p>Simon's finance curriculum draws on the University of Rochester's economics heritage. Courses in asset pricing, corporate finance, and financial modeling are rigorous. The analytics program covers data science, machine learning, and business intelligence. Brand management courses connect to Rochester's consumer products industry. The teaching approach is analytical and evidence-based.</p>""",
+        "careers": """<p>Simon's employment report shows 30% of graduates entering finance, 25% consulting, 20% tech, and 10% brand management. JPMorgan, Goldman Sachs, Deloitte, and consumer goods companies recruit from Simon. Median base salary is $135,000 with total first-year compensation around $158,000. New York City is accessible by flight or a long drive, which gives finance-oriented students access to Wall Street recruiting.</p>""",
+        "who_should_apply": """<p>Quantitatively minded candidates targeting finance or analytics careers will find Simon's curriculum well-suited. International students seeking a rigorous US MBA with strong quant preparation and a welcoming community should consider Simon. Brand management aspirants benefit from the school's consumer goods connections.</p>""",
+        "watch_out": """<p>Rochester is not a major business hub. Wall Street recruiting requires travel and proactive networking. The school's high international student percentage is a strength for diversity but can affect domestic recruiting dynamics. Brand recognition outside finance and analytics circles is limited.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Rochester Simon?",
+             f"Rochester Simon's acceptance rate is approximately 40% for the class of {CURRENT_YEAR}. The school enrolls about 100 full-time MBA students."),
+            ("Is Rochester Simon good for finance?",
+             "Simon's finance program is rigorous and benefits from the University of Rochester's economics heritage (multiple Nobel Prize winners). Courses in asset pricing, corporate finance, and financial modeling are among the strongest at this ranking level."),
+            ("What is the average salary after Rochester Simon?",
+             "Simon graduates earn a median base salary of $135,000 with total first-year compensation averaging about $158,000. Finance, consulting, and tech drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "University of Florida Warrington College of Business", "short_name": "Florida Warrington",
+        "slug": "florida-warrington", "location": "Gainesville, FL", "ranking": 43, "tier": 4,
+        "acceptance_rate": 35, "avg_gmat": 690, "avg_gpa": 3.40, "class_size": 120,
+        "avg_salary": 138000, "employment_rate": 91, "tuition": 30130,
+        "program_length": "2 years",
+        "strengths": ["Real Estate", "Finance", "General Management"],
+        "best_for": ["Real Estate", "Finance", "General Management"],
+        "verdict": "Gator Nation's MBA. Strong real estate program and Florida's zero income tax make the math work.",
+        "description": "Warrington's real estate program is one of the best in the Southeast. The Gator Nation alumni network is enormous and active.",
+        "url": "https://warrington.ufl.edu/",
+        "overview": """<p>Florida Warrington combines a top-ranked real estate program with Gator Nation's enormous alumni network (400,000+ living alumni). The school enrolls about 120 MBA students per year. In-state tuition around $30,000 is a strong value, and Florida's zero state income tax adds to the post-MBA financial advantage.</p>
+<p>Gainesville is a college town, not a business hub, which means recruiting requires travel to Miami, Tampa, or Jacksonville. But the Gator Nation network provides career connections across Florida and the Southeast that the ranking alone doesn't predict.</p>""",
+        "culture": """<p>Warrington's culture is spirited and community-driven, reflecting UF's broader Gator identity. The 120-person class is tight-knit, and Gainesville's affordability and college-town charm make the two-year experience enjoyable. Football Saturdays at the Swamp are a defining social event.</p>""",
+        "academics": """<p>The Bergstrom Center for Real Estate is Warrington's academic highlight, offering courses in development, investment, and commercial real estate that are among the best in the Southeast. Finance and general management courses round out the curriculum. The school's Entrepreneurship and Innovation Center provides venture support for student startups.</p>""",
+        "careers": """<p>Warrington's employment report shows 25% of graduates entering finance, 20% real estate, 20% consulting, and 15% general management. Major recruiters include J.P. Morgan, Raymond James, and Southeast-based real estate developers. Median base salary is $138,000 with total first-year compensation around $160,000. Florida's zero state income tax effectively boosts take-home pay by 5-8% compared to graduates in high-tax states.</p>""",
+        "who_should_apply": """<p>Warrington is the clear choice for real estate careers in the Southeast. Florida-based career goals, combined with the Gator alumni network and zero state income tax, create a financial package that's hard to beat at public school tuition. Finance professionals targeting Southeast banking will find solid placement.</p>""",
+        "watch_out": """<p>Gainesville is remote from major business centers. The Gator brand is powerful in Florida but fades outside the Southeast. If your career goals involve New York, Chicago, or the West Coast, higher-ranked programs will provide better access.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Florida Warrington?",
+             f"Florida Warrington's acceptance rate is approximately 35% for the class of {CURRENT_YEAR}. The school enrolls about 120 full-time MBA students."),
+            ("Is Florida Warrington good for real estate?",
+             "Warrington's Bergstrom Center for Real Estate is one of the best in the Southeast, offering courses in development, investment, and commercial real estate with strong industry connections across Florida."),
+            ("What is the average salary after Florida Warrington?",
+             "Warrington graduates earn a median base salary of $138,000 with total first-year compensation averaging about $160,000. Florida's zero state income tax effectively increases take-home pay."),
+        ],
+    },
+    {
+        "name": "University of Illinois Gies College of Business", "short_name": "Illinois Gies",
+        "slug": "illinois-gies", "location": "Champaign, IL", "ranking": 44, "tier": 4,
+        "acceptance_rate": 38, "avg_gmat": 680, "avg_gpa": 3.35, "class_size": 100,
+        "avg_salary": 132000, "employment_rate": 90, "tuition": 29000,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Accounting", "Technology Management"],
+        "best_for": ["Finance", "Technology", "Accounting"],
+        "verdict": "Big Ten academics at Big Ten value. Strong in finance and tech management with a Chicago-adjacent location.",
+        "description": "Gies combines the University of Illinois's strong finance and technology programs with Chicago-area placement.",
+        "url": "https://giesbusiness.illinois.edu/",
+        "overview": """<p>Illinois Gies draws on one of the strongest finance and accounting faculties in the country. The University of Illinois has a long tradition of academic excellence in quantitative business fields, and the MBA program channels that into practical career preparation. Champaign-Urbana is 2.5 hours south of Chicago, which provides access to the city's employer base without the living costs.</p>
+<p>The 100-person class benefits from in-state tuition around $29,000 and the university's deep corporate relationships with Chicago-area companies. Tech management has grown as a concentration, reflecting UIUC's legendary computer science department (where the Mosaic browser was created).</p>""",
+        "culture": """<p>Gies' 100-person class is collaborative and academically focused. Champaign-Urbana is a quintessential college town: affordable, friendly, and centered around the university. The Illini alumni network is strong in Chicago and across the Midwest.</p>""",
+        "academics": """<p>Gies' finance and accounting curriculum is the academic standout, taught by research-active faculty with industry experience. Technology management courses draw on UIUC's computer science heritage. The school also pioneered one of the first online MBA programs (iMBA), which has expanded the school's reach and brand nationally.</p>""",
+        "careers": """<p>Gies' employment report shows 25% of graduates entering finance, 25% consulting, 20% tech, and 15% accounting. Chicago-area companies are the primary recruiters, with Deloitte, EY, and KPMG hiring for both consulting and accounting roles. Median base salary is $132,000 with total first-year compensation around $155,000.</p>""",
+        "who_should_apply": """<p>Finance and accounting professionals targeting Chicago-area careers will find Gies' curriculum and corporate relationships well-suited. International students seeking STEM-adjacent MBA training and tech management candidates benefit from UIUC's broader academic ecosystem. The price point makes the ROI compelling for Midwest career goals.</p>""",
+        "watch_out": """<p>Champaign is not a career hub, and Chicago is a significant drive away. The Gies brand is still building recognition nationally, partly due to the online MBA program creating some market confusion between the full-time and online degrees. If you're targeting markets outside the Midwest, higher-ranked programs will provide better brand leverage.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Illinois Gies?",
+             f"Illinois Gies' acceptance rate is approximately 38% for the class of {CURRENT_YEAR}. The school enrolls about 100 full-time MBA students."),
+            ("What is Illinois Gies known for?",
+             "Gies is best known for its strong finance and accounting faculty, technology management program (drawing on UIUC's legendary computer science department), and value pricing at public school tuition."),
+            ("What is the average salary after Illinois Gies?",
+             "Gies graduates earn a median base salary of $132,000 with total first-year compensation averaging about $155,000. Finance, consulting, and tech drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "Wake Forest University School of Business", "short_name": "Wake Forest",
+        "slug": "wake-forest", "location": "Winston-Salem, NC", "ranking": 45, "tier": 4,
+        "acceptance_rate": 38, "avg_gmat": 685, "avg_gpa": 3.35, "class_size": 90,
+        "avg_salary": 132000, "employment_rate": 90, "tuition": 52000,
+        "program_length": "2 years",
+        "strengths": ["Consulting", "Analytics", "Healthcare", "Small Class"],
+        "best_for": ["Consulting", "Analytics", "Healthcare"],
+        "verdict": "Winston-Salem's boutique MBA. Small class, personal attention, and a consulting pipeline that outperforms the ranking.",
+        "description": "Wake Forest's small MBA class means personal attention and a consulting pipeline that outperforms the ranking.",
+        "url": "https://business.wfu.edu/",
+        "overview": """<p>Wake Forest's MBA program is a boutique experience: 90 students, personalized career coaching, and a consulting placement rate that outperforms programs ranked 10 spots higher. Winston-Salem is not a major business hub, but the school compensates with intense career preparation and an alumni network that's loyal and well-connected in the Southeast.</p>
+<p>The school's analytics program has grown in recent years, and healthcare management benefits from proximity to Wake Forest Baptist Medical Center. For candidates who value mentorship and individual attention over large-program resources, Wake Forest delivers.</p>""",
+        "culture": """<p>Wake Forest's 90-person class creates genuine intimacy. Students know every classmate, and the career services team provides the kind of one-on-one coaching that's impossible at larger programs. Winston-Salem is affordable and pleasant, with a growing food and arts scene that surprises newcomers.</p>""",
+        "academics": """<p>Consulting preparation is the academic highlight, with structured case practice, mock interviews, and alumni coaching that produce placement rates above the school's ranking. Analytics courses cover data science and business intelligence. Healthcare management benefits from the university's medical center partnership.</p>""",
+        "careers": """<p>Wake Forest's employment report shows 35% of graduates entering consulting, 20% finance, 15% healthcare, and 15% tech. Deloitte, EY, and Accenture are primary consulting recruiters. The consulting placement rate is the school's calling card. Median base salary is $132,000 with total first-year compensation around $155,000.</p>""",
+        "who_should_apply": """<p>Career changers targeting consulting who want intensive personal attention will find Wake Forest's small class and dedicated career coaching valuable. Healthcare professionals and analytics-oriented candidates benefit from the school's specialized programs.</p>""",
+        "watch_out": """<p>Winston-Salem is a small city with limited local employers. Recruiting requires travel to Charlotte, Atlanta, or DC. The 90-person class produces a small alumni network, and Wake Forest's MBA brand, while respected in the Southeast, fades nationally.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Wake Forest?",
+             f"Wake Forest's MBA acceptance rate is approximately 38% for the class of {CURRENT_YEAR}. The school enrolls about 90 full-time MBA students."),
+            ("Is Wake Forest good for consulting?",
+             "Wake Forest's consulting placement rate punches above its ranking. Deloitte, EY, and Accenture recruit from the program, and the school's structured consulting preparation (case practice, mock interviews, alumni coaching) is intensive."),
+            ("What is the average salary after Wake Forest MBA?",
+             "Wake Forest graduates earn a median base salary of $132,000 with total first-year compensation averaging about $155,000. Consulting drives the strongest placement."),
+        ],
+    },
+    {
+        "name": "SMU Cox School of Business", "short_name": "SMU Cox",
+        "slug": "smu-cox", "location": "Dallas, TX", "ranking": 46, "tier": 4,
+        "acceptance_rate": 40, "avg_gmat": 680, "avg_gpa": 3.35, "class_size": 120,
+        "avg_salary": 138000, "employment_rate": 90, "tuition": 55000,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Real Estate", "Energy", "Dallas Network"],
+        "best_for": ["Finance", "Real Estate", "Energy"],
+        "verdict": "Dallas's MBA. Real estate, energy, and a local alumni network that dominates North Texas business.",
+        "description": "Cox draws on SMU's powerful Dallas network to place graduates across finance, real estate, and energy.",
+        "url": "https://www.cox.smu.edu/",
+        "overview": """<p>SMU Cox is Dallas's MBA. The school sits in University Park, one of Dallas's wealthiest neighborhoods, and the SMU alumni network dominates North Texas business. Real estate, energy, and finance are the core strengths, reflecting Dallas's economy. The 120-person class benefits from deep corporate relationships with AT&T, Exxon, Deloitte, and a long list of Dallas-based firms.</p>
+<p>Dallas is the fourth-largest metro in the US and home to 22 Fortune 500 companies. Cox is the primary pipeline into that corporate ecosystem, particularly for real estate development, energy finance, and banking. Texas's zero state income tax adds further to the compensation equation.</p>""",
+        "culture": """<p>Cox's culture is social, networked, and Dallas-centric. SMU's reputation as a well-connected school extends into the business program, where alumni relationships drive recruiting and career advancement. The 120-person class is active in Dallas's social and professional scene. The campus is upscale and well-maintained, reflecting SMU's broader aesthetic.</p>""",
+        "academics": """<p>Cox's real estate program is the academic standout, with courses on development, investment, and commercial brokerage that connect directly to Dallas's active real estate market. Energy finance courses reflect Texas's industry heritage. The school also offers strong general management and finance courses. The Cox BBA program feeds talent into Dallas companies, which creates a two-way relationship that benefits MBA students as well.</p>""",
+        "careers": """<p>Cox's employment report shows 25% of graduates entering finance, 20% real estate, 20% consulting, and 15% energy. AT&T, Deloitte, Goldman Sachs, and Dallas-based real estate developers are primary recruiters. Median base salary is $138,000 with total first-year compensation around $162,000. The SMU network in Dallas is the school's career differentiator.</p>""",
+        "who_should_apply": """<p>Cox is the right choice if Dallas is your target market. Real estate developers, energy professionals, and finance candidates targeting North Texas will find the SMU network and corporate relationships directly valuable. If you plan to work in Dallas long-term, Cox's alumni connections matter more than the ranking suggests.</p>""",
+        "watch_out": """<p>SMU's brand outside Texas is limited. If your post-MBA plans involve New York, San Francisco, or international markets, Cox won't provide the brand leverage you need. The $55,000 tuition is on the higher side for a school ranked #46, which makes the ROI less compelling unless you're staying in Dallas.</p>""",
+        "faq": [
+            ("What is the acceptance rate at SMU Cox?",
+             f"SMU Cox's acceptance rate is approximately 40% for the class of {CURRENT_YEAR}. The school enrolls about 120 full-time MBA students."),
+            ("Is SMU Cox good for real estate?",
+             "Cox's real estate program is one of the strongest in Texas, benefiting from Dallas's active development market and the SMU alumni network's deep ties to North Texas real estate."),
+            ("What is the average salary after SMU Cox?",
+             "Cox graduates earn a median base salary of $138,000 with total first-year compensation averaging about $162,000. Finance, real estate, and consulting drive the strongest placement. Texas's zero state income tax further increases effective take-home pay."),
+        ],
+    },
+    {
+        "name": "Tulane University A.B. Freeman School of Business", "short_name": "Tulane Freeman",
+        "slug": "tulane-freeman", "location": "New Orleans, LA", "ranking": 47, "tier": 4,
+        "acceptance_rate": 42, "avg_gmat": 680, "avg_gpa": 3.25, "class_size": 90,
+        "avg_salary": 128000, "employment_rate": 88, "tuition": 57720,
+        "program_length": "2 years",
+        "strengths": ["Energy", "Finance", "Entrepreneurship"],
+        "best_for": ["Energy", "Finance", "Entrepreneurship"],
+        "verdict": "New Orleans charm meets energy industry substance. The Gulf Coast connection is the real draw.",
+        "description": "Freeman's energy finance program benefits from New Orleans' position in the Gulf Coast energy industry.",
+        "url": "https://freeman.tulane.edu/",
+        "overview": """<p>Tulane Freeman sits in New Orleans, which gives it direct access to the Gulf Coast energy industry. The school's energy finance concentration is its defining academic program, connecting students to oil and gas companies, energy traders, and the growing renewables sector along the Gulf. The 90-person class is small, and the Tulane experience is shaped as much by New Orleans' unique culture as by the curriculum.</p>
+<p>Freeman also offers strong programs in entrepreneurship and general finance. The school's Burkenroad Reports program, where students write equity research on small and mid-cap companies, is one of the most respected student-run investment research programs in the country.</p>""",
+        "culture": """<p>Freeman's culture is shaped by New Orleans: social, warm, and culturally rich. Students describe the MBA experience as uniquely fun, with a social scene that no other program can match. The 90-person class bonds quickly, and the city's food, music, and festival culture create memories that last well beyond graduation.</p>""",
+        "academics": """<p>Energy finance is the academic highlight, with courses on energy trading, project finance, and upstream/downstream economics. The Burkenroad Reports program provides hands-on equity research experience that's impressive on a resume. Entrepreneurship courses benefit from New Orleans' growing startup ecosystem.</p>""",
+        "careers": """<p>Freeman's employment report shows 25% of graduates entering energy, 25% finance, 20% consulting, and 10% entrepreneurship. Shell, Chevron, Entergy, and Gulf Coast energy companies are primary recruiters. Median base salary is $128,000 with total first-year compensation around $150,000. Energy roles in Houston and the Gulf Coast are the school's strongest pipeline.</p>""",
+        "who_should_apply": """<p>Energy professionals and finance candidates targeting the Gulf Coast energy corridor will find Freeman's connections directly valuable. If the New Orleans lifestyle appeals to you and your career goals align with energy or entrepreneurship, Freeman offers a unique combination that no other MBA program replicates.</p>""",
+        "watch_out": """<p>New Orleans is a wonderful city but a small business market. Recruiting requires travel to Houston, Dallas, or Atlanta for most industries. The $57,720 tuition is high for a school ranked #47, which strains the ROI unless energy or Gulf Coast careers are your specific target. Brand recognition outside energy circles and the Southeast is limited.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Tulane Freeman?",
+             f"Tulane Freeman's acceptance rate is approximately 42% for the class of {CURRENT_YEAR}. The school enrolls about 90 full-time MBA students."),
+            ("Is Tulane Freeman good for energy careers?",
+             "Freeman is one of the top 5 MBA programs for energy careers, alongside Rice Jones, Texas McCombs, and schools in the Gulf Coast corridor. Energy finance, trading, and project finance courses connect students to the region's energy ecosystem."),
+            ("What is the average salary after Tulane Freeman?",
+             "Freeman graduates earn a median base salary of $128,000 with total first-year compensation averaging about $150,000. Energy and finance roles drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "George Washington University School of Business", "short_name": "George Washington",
+        "slug": "george-washington", "location": "Washington, DC", "ranking": 48, "tier": 4,
+        "acceptance_rate": 42, "avg_gmat": 675, "avg_gpa": 3.25, "class_size": 100,
+        "avg_salary": 130000, "employment_rate": 89, "tuition": 59760,
+        "program_length": "2 years",
+        "strengths": ["Government", "International Business", "Consulting"],
+        "best_for": ["Government", "International Business", "Policy"],
+        "verdict": "Steps from the White House. If your MBA endgame involves government contracts or international development, GW delivers.",
+        "description": "GW's MBA program is steps from the White House, World Bank, and K Street. For government and policy-adjacent careers, the location is unmatched.",
+        "url": "https://business.gwu.edu/",
+        "overview": """<p>George Washington's MBA program benefits from the same DC proximity as Georgetown McDonough but at a lower admissions bar. The campus is blocks from the White House, World Bank, IMF, and K Street. For candidates targeting government consulting, international development, or defense contracting who don't get into Georgetown, GW offers similar geographic advantages.</p>
+<p>The 100-person class draws heavily from the DC professional ecosystem: government employees, military officers, and NGO workers seeking MBA credentials. International business and government relations are the core academic strengths.</p>""",
+        "culture": """<p>GW's culture is professional and policy-oriented. Many students work part-time in government or consulting while pursuing the MBA. The DC social and professional scene is accessible, and networking events at think tanks, embassies, and policy conferences supplement classroom learning.</p>""",
+        "academics": """<p>GW's international business and government relations courses are the academic highlights. The school benefits from faculty with government consulting experience and guest speakers from the policy world. International development, defense management, and public-private partnerships are areas of particular depth.</p>""",
+        "careers": """<p>GW's employment report shows 25% of graduates entering government and nonprofit, 25% consulting, 20% finance, and 15% tech. Booz Allen Hamilton, Deloitte, and KPMG are primary recruiters for government consulting roles. Median base salary is $130,000 with total first-year compensation around $153,000.</p>""",
+        "who_should_apply": """<p>GW fits candidates targeting DC government careers who want MBA training without Georgetown's selectivity or brand premium. Military officers, government employees, and international development professionals will find a community that understands their backgrounds.</p>""",
+        "watch_out": """<p>GW competes with Georgetown McDonough for DC employer attention and usually loses on brand recognition. The $60,000 tuition is steep for a school ranked #48. If you can get into Georgetown, the brand premium is probably worth the additional selectivity hurdle. Outside DC, GW's MBA brand is thin.</p>""",
+        "faq": [
+            ("What is the acceptance rate at GW?",
+             f"George Washington's MBA acceptance rate is approximately 42% for the class of {CURRENT_YEAR}. The school enrolls about 100 full-time MBA students."),
+            ("Is GW good for government careers?",
+             "GW's DC location provides access to government agencies, think tanks, and consulting firms. The school is a strong option for government and policy careers, though Georgetown McDonough has stronger brand recognition among DC employers."),
+            ("What is the average salary after GW MBA?",
+             "GW graduates earn a median base salary of $130,000 with total first-year compensation averaging about $153,000. Government consulting and private sector consulting drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "Boston College Carroll School of Management", "short_name": "Boston College Carroll",
+        "slug": "boston-college-carroll", "location": "Chestnut Hill, MA", "ranking": 49, "tier": 4,
+        "acceptance_rate": 40, "avg_gmat": 680, "avg_gpa": 3.30, "class_size": 100,
+        "avg_salary": 135000, "employment_rate": 90, "tuition": 57500,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Consulting", "Ethics", "Jesuit Tradition"],
+        "best_for": ["Finance", "Consulting", "Values-Driven Careers"],
+        "verdict": "Jesuit values meet Wall Street ambition. Strong finance placement in Boston's competitive MBA market.",
+        "description": "Carroll's Jesuit tradition emphasizes ethics alongside strong finance and consulting programs.",
+        "url": "https://www.bc.edu/carroll/",
+        "overview": """<p>Boston College Carroll operates in the same competitive Boston MBA market as HBS, Sloan, and Questrom, but carves out a distinct niche through its Jesuit tradition and strong finance placement. The school enrolls about 100 MBA students per year, and the BC alumni network (particularly strong on the East Coast and in finance) provides career leverage that exceeds the ranking.</p>
+<p>Carroll's finance program places graduates into asset management, banking, and PE roles across Boston and New York. The Jesuit emphasis on ethics and social responsibility infuses the curriculum without dominating it. Chestnut Hill is suburban and upscale, a short commute from downtown Boston.</p>""",
+        "culture": """<p>Carroll's culture blends ambition with values. The Jesuit tradition creates a community where ethical business practices are discussed seriously rather than performatively. The 100-person class is tight-knit, and BC's broader alumni network (called the "Eagle Network") is fiercely loyal, particularly in finance and consulting on the East Coast.</p>""",
+        "academics": """<p>Carroll's finance curriculum is the academic highlight, with courses in asset management, corporate finance, and PE/VC that connect to Boston's financial community. Ethics coursework, reflecting the Jesuit tradition, is integrated throughout rather than isolated in a single course. The school's consulting preparation is also strong, with structured case practice and alumni mentoring.</p>""",
+        "careers": """<p>Carroll's employment report shows 30% of graduates entering finance, 25% consulting, 20% tech, and 10% healthcare. Fidelity, State Street, Wellington, Deloitte, and EY are primary recruiters. The BC Eagle Network opens doors in finance and consulting that the ranking alone wouldn't predict. Median base salary is $135,000 with total first-year compensation around $158,000.</p>""",
+        "who_should_apply": """<p>Carroll fits finance-oriented candidates who value ethics alongside ambition. If you're targeting Boston asset management, East Coast banking, or consulting, Carroll's alumni network and career services are well-suited. Values-driven candidates who want a community focused on purpose beyond profit will find Carroll's Jesuit culture resonant.</p>""",
+        "watch_out": """<p>Competing with HBS and Sloan in the same metro is a constant brand challenge. Carroll's $57,500 tuition is on the higher side for a school ranked #49, which makes the ROI less compelling unless you're specifically targeting finance or staying in Boston. Outside the East Coast, the Carroll brand is limited.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Boston College Carroll?",
+             f"Boston College Carroll's acceptance rate is approximately 40% for the class of {CURRENT_YEAR}. The school enrolls about 100 full-time MBA students."),
+            ("Is BC Carroll good for finance?",
+             "Carroll's finance program is strong, with placement into Fidelity, State Street, Wellington, and other Boston-area asset managers. The BC Eagle Network provides finance career connections that exceed what the ranking would predict."),
+            ("What is the average salary after BC Carroll?",
+             "Carroll graduates earn a median base salary of $135,000 with total first-year compensation averaging about $158,000. Finance and consulting drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "Northeastern D'Amore-McKim School of Business", "short_name": "Northeastern",
+        "slug": "northeastern", "location": "Boston, MA", "ranking": 50, "tier": 4,
+        "acceptance_rate": 42, "avg_gmat": 675, "avg_gpa": 3.25, "class_size": 80,
+        "avg_salary": 130000, "employment_rate": 89, "tuition": 54000,
+        "program_length": "2 years",
+        "strengths": ["Innovation", "Co-op Experience", "Tech", "Healthcare"],
+        "best_for": ["Tech", "Healthcare", "Experiential Learning"],
+        "verdict": "The co-op model gives Northeastern MBAs something most schools can't: real work experience baked into the degree.",
+        "description": "Northeastern's co-op model brings real work experience into the MBA, giving students a competitive edge in tech and healthcare.",
+        "url": "https://damore-mckim.northeastern.edu/",
+        "overview": """<p>Northeastern's co-op model is what separates the MBA from every other program in the top 50. Instead of a traditional summer internship, students can do full six-month co-op rotations at companies during the MBA. This means graduates enter the job market with real work experience at specific companies, which often converts to full-time offers.</p>
+<p>The 80-person class is small, and the school competes in Boston's crowded MBA market against HBS, Sloan, Questrom, and Carroll. Northeastern's undergraduate co-op reputation is world-class, and the MBA program extends that same employer relationship infrastructure to graduate students.</p>""",
+        "culture": """<p>Northeastern's culture is practical and career-focused. The co-op model attracts students who value experience over theory, and the 80-person class creates a tight community. Boston's innovation ecosystem provides a rich social and professional backdrop.</p>""",
+        "academics": """<p>D'Amore-McKim's curriculum integrates the co-op experience with traditional coursework. Tech, healthcare, and innovation management are the academic strengths, benefiting from Boston's concentration of employers in these sectors. The co-op program provides structured corporate experience that most MBA programs can only approximate through case studies and simulations.</p>""",
+        "careers": """<p>Northeastern's employment report shows 25% of graduates entering tech, 25% healthcare, 20% consulting, and 15% finance. The co-op model provides a direct pipeline to employers: many co-op placements convert to full-time offers. Median base salary is $130,000 with total first-year compensation around $153,000. Boston-area tech and healthcare companies are the primary employers.</p>""",
+        "who_should_apply": """<p>Career changers who need real work experience in a new industry before committing to a full-time role will find the co-op model invaluable. Tech and healthcare professionals targeting Boston-area employers benefit from the school's corporate partnerships and experiential learning model.</p>""",
+        "watch_out": """<p>Northeastern's MBA brand is overshadowed by HBS, Sloan, and even Questrom in the Boston market. The co-op model, while powerful, extends the MBA timeline beyond two years for students who take advantage of it. The $54,000 tuition is expensive for a school ranked #50 unless you plan to use the co-op infrastructure.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Northeastern?",
+             f"Northeastern D'Amore-McKim's acceptance rate is approximately 42% for the class of {CURRENT_YEAR}. The school enrolls about 80 full-time MBA students."),
+            ("What is Northeastern's MBA co-op program?",
+             "Northeastern's co-op model allows MBA students to do full six-month work rotations at companies during the program. Unlike traditional summer internships, co-ops provide deeper experience and often convert to full-time offers. The model is unique among top-50 MBA programs."),
+            ("What is the average salary after Northeastern MBA?",
+             "Northeastern graduates earn a median base salary of $130,000 with total first-year compensation averaging about $153,000. Tech and healthcare roles in Boston drive the strongest placement, with many co-op positions converting to full-time offers."),
+        ],
+    },
+    # --- TIER 5: Schools 51-75 ---
+    {
+        "name": "University of Georgia Terry College of Business", "short_name": "UGA Terry",
+        "slug": "uga-terry", "location": "Athens, GA", "ranking": 51, "tier": 5,
+        "acceptance_rate": 41, "avg_gmat": 641, "avg_gpa": 3.50, "class_size": 78,
+        "avg_salary": 119000, "employment_rate": 98, "tuition": 13918,
+        "program_length": "2 years",
+        "strengths": ["Consulting", "Analytics", "Healthcare", "Real Estate"],
+        "best_for": ["Consulting", "Healthcare", "Value Seekers"],
+        "verdict": "A $14K-per-year MBA with a 98% employment rate. UGA Terry is the best-kept secret in public business education.",
+        "description": "UGA Terry delivers top-30 career outcomes at a fraction of the cost. The 98% employment rate and $119K average salary make it one of the highest-ROI programs in the country.",
+        "url": "https://www.terry.uga.edu/",
+        "overview": """<p>UGA Terry sits in Athens, Georgia, a college town with low cost of living and a surprisingly strong regional employer base. The program enrolls about 78 students per year, small enough for personalized career coaching but large enough to build a meaningful network. Nine concentrations span analytics, consulting, finance, healthcare, marketing, and real estate.</p>
+<p>The headline stat: 98% of graduates are employed within three months, at an average salary of $119,000. For in-state students paying $14,000 per year in tuition, the ROI calculation is almost absurd. Even out-of-state students pay only $35,000, which is less than half of what comparable programs charge. Consulting is the top placement industry at roughly 33%, with Deloitte, EY, and Accenture recruiting consistently.</p>""",
+        "culture": """<p>Terry's culture reflects the broader UGA experience: friendly, community-oriented, and deeply Southern in its hospitality. The 78-person class creates tight cohort bonds, and the Athens lifestyle keeps costs low. Students describe the environment as collaborative rather than cutthroat, which is partly a function of the smaller class and partly a function of Georgia culture.</p>""",
+        "academics": """<p>Terry's curriculum covers standard MBA fundamentals with standout concentrations in analytics, healthcare management, and real estate. The 10:1 student-to-staff ratio means professors know your name and your career goals. Experiential learning projects with Atlanta-based companies (Delta, Home Depot, UPS) provide hands-on consulting experience that's hard to replicate in a classroom.</p>""",
+        "careers": """<p>Consulting dominates at 33% of placements, followed by finance (20%), tech (15%), and healthcare (12%). Deloitte, EY, Accenture, and PwC recruit on campus. Atlanta's economy provides a strong regional job market, and the UGA alumni network across the Southeast is extensive. The 98% employment rate within three months puts Terry ahead of many programs ranked 20 spots higher.</p>""",
+        "who_should_apply": """<p>Value-conscious candidates who want consulting or healthcare careers in the Southeast. Georgia residents getting a top MBA for $28,000 total are making one of the smartest financial decisions in graduate education. Career changers targeting Atlanta employers will find Terry's corporate partnerships and small class advantageous.</p>""",
+        "watch_out": """<p>Athens is two hours from Atlanta, so recruiting requires travel for most on-site interviews. The brand carries weight in the Southeast but fades outside the region. If you're targeting NYC or West Coast employers, the UGA name won't open the same doors that Michigan or Virginia would.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UGA Terry?",
+             f"UGA Terry's MBA acceptance rate is approximately 41% for the class of {CURRENT_YEAR}. The program enrolls about 78 full-time MBA students."),
+            ("What is the average salary after UGA Terry MBA?",
+             "UGA Terry graduates earn an average starting salary of $119,000. With in-state tuition at $14,000 per year, the ROI is among the best of any MBA program in the country. Consulting and finance drive the strongest compensation."),
+            ("Is UGA Terry a good value MBA?",
+             "UGA Terry is one of the highest-ROI MBA programs in the US. In-state tuition of $14,000 per year combined with 98% employment and $119K average salary produces an ROI that rivals programs ranked 20-30 spots higher."),
+        ],
+    },
+    {
+        "name": "UC Irvine Paul Merage School of Business", "short_name": "UC Irvine Merage",
+        "slug": "uc-irvine-merage", "location": "Irvine, CA", "ranking": 52, "tier": 5,
+        "acceptance_rate": 32, "avg_gmat": 660, "avg_gpa": 3.46, "class_size": 55,
+        "avg_salary": 125000, "employment_rate": 90, "tuition": 55340,
+        "program_length": "2 years",
+        "strengths": ["Technology", "Healthcare", "Innovation", "Digital Transformation"],
+        "best_for": ["Tech", "Healthcare", "STEM Careers"],
+        "verdict": "STEM-designated and planted in Orange County's tech corridor. Merage is the SoCal tech MBA that flies under the radar.",
+        "description": "UC Irvine Merage combines STEM designation with Orange County's booming tech and healthcare ecosystem. Selective (32% acceptance) with strong outcomes.",
+        "url": "https://merage.uci.edu/",
+        "overview": """<p>UC Irvine Merage sits in the heart of Orange County, surrounded by tech companies, healthcare firms, and a growing startup ecosystem. Google, Amazon, Edwards Lifesciences, and dozens of mid-size tech companies operate within commuting distance. The STEM-designated MBA gives international students an extra year of work authorization, which matters in a job market where visa sponsorship is a deciding factor.</p>
+<p>The 32% acceptance rate makes Merage more selective than many schools ranked above it. The 55-person class is intimate, and the program has carved out real specializations in digital transformation, healthcare, innovation, and entrepreneurship. For candidates targeting SoCal tech or healthcare roles, Merage offers geographic advantages that Berkeley Haas and UCLA Anderson can't match at lower cost.</p>""",
+        "culture": """<p>Merage's culture is diverse and collaborative. International students make up a significant portion of the class, and the STEM designation attracts analytically minded candidates. The Orange County setting provides a more relaxed vibe than LA or the Bay Area, with beach access and lower (relatively) cost of living than other California MBA programs.</p>""",
+        "academics": """<p>Specializations in Digital Transformation, Healthcare, Innovation and Entrepreneurship, and Real Estate reflect the local economy. The STEM designation means the core curriculum has a quantitative backbone. Faculty research in technology management and healthcare innovation feeds directly into elective courses. Cross-registration with UCI's engineering and computer science departments adds technical depth.</p>""",
+        "careers": """<p>Tech leads placements at roughly 30%, followed by healthcare (20%), consulting (18%), and finance (15%). Orange County employers hire aggressively from Merage, and the UCI alumni network in SoCal is growing rapidly. Median base salary is $125,000, with total first-year compensation around $145,000. Amazon, Google, Deloitte, and Edwards Lifesciences are among the top recruiters.</p>""",
+        "who_should_apply": """<p>Candidates targeting SoCal tech or healthcare who want a STEM-designated MBA at a UC price point. International students benefit from the OPT extension. Career changers moving into digital transformation or healthcare innovation will find Merage's specializations directly relevant.</p>""",
+        "watch_out": """<p>Merage competes for attention with UCLA Anderson and Berkeley Haas within the UC system. Outside California, the brand is limited. The 55-person class means a smaller alumni network from each cohort. And Irvine, while pleasant, lacks the energy of LA or San Francisco for social life.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UC Irvine Merage?",
+             f"UC Irvine Merage's MBA acceptance rate is approximately 32% for the class of {CURRENT_YEAR}, making it one of the more selective programs in the 50-75 ranking range."),
+            ("Is UC Irvine Merage STEM designated?",
+             "Yes. Merage's MBA is STEM-designated, which gives international students an additional 24 months of OPT work authorization beyond the standard 12 months. This is a significant advantage for international students seeking US employment."),
+            ("What is the average salary after UC Irvine Merage?",
+             "Merage graduates earn a median base salary of $125,000 with total first-year compensation around $145,000. Tech and healthcare drive the strongest compensation packages."),
+        ],
+    },
+    {
+        "name": "Texas A&M Mays Business School", "short_name": "Texas A&M Mays",
+        "slug": "texas-am-mays", "location": "College Station, TX", "ranking": 53, "tier": 5,
+        "acceptance_rate": 45, "avg_gmat": 660, "avg_gpa": 3.24, "class_size": 80,
+        "avg_salary": 129000, "employment_rate": 96, "tuition": 31240,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Supply Chain", "Energy", "Aggie Network"],
+        "best_for": ["Energy", "Finance", "Texas Careers"],
+        "verdict": "The Aggie network is 62,000 business graduates deep. In Texas, that network is currency.",
+        "description": "Texas A&M Mays pairs a massive alumni network with strong finance, supply chain, and energy programs. The 96% employment rate and $31K tuition make it a top public MBA value.",
+        "url": "https://mays.tamu.edu/",
+        "overview": """<p>Texas A&M Mays runs two cohorts of about 40 students each, creating a tight-knit MBA experience within a massive university system. The Aggie network is legendary: 62,000+ business school alumni and over 500,000 former students across all disciplines. In Texas, where loyalty and connections drive business, that network is a career asset that's difficult to quantify.</p>
+<p>"Impact Fridays" replace traditional lectures with applied learning projects for real companies. The 96% employment rate and $129,000 average starting salary put Mays in the conversation with programs ranked 15-20 spots higher. Finance, supply chain, and energy are the program's core strengths, reflecting Texas's economic base.</p>""",
+        "culture": """<p>Aggie culture is distinctive. Loyalty, tradition, and community aren't just slogans at A&M. They shape how graduates treat each other in the job market. Mays students benefit from that broader culture: Aggie hiring managers give fellow Aggies a genuine leg up. College Station is isolated, which forces the cohort together and builds bonds. The trade-off is limited nightlife and a small-town feel.</p>""",
+        "academics": """<p>Mays curriculum covers core MBA fundamentals with concentrations in finance, supply chain management, energy, and analytics. "Impact Fridays" provide structured consulting projects with corporate partners. The energy concentration benefits from Texas A&M's engineering school and the state's oil and gas industry. Faculty research in supply chain and operations management is nationally recognized.</p>""",
+        "careers": """<p>Finance takes the largest share of graduates at roughly 30%, followed by consulting (22%), energy (15%), and tech (12%). ExxonMobil, Dell, Deloitte, and JP Morgan recruit on campus. The Aggie network opens doors across Texas and the energy sector nationally. Average starting salary of $129,000 with total first-year compensation around $150,000.</p>""",
+        "who_should_apply": """<p>Candidates planning Texas-based careers, particularly in energy, finance, or supply chain. The Aggie network delivers outsized value for graduates who stay in Texas. Value seekers: $31,000 in-state tuition with 96% employment is among the best ROI calculations in MBA education.</p>""",
+        "watch_out": """<p>College Station is remote. Houston and Austin are 90+ minutes away, which complicates recruiting for urban employers. The Aggie brand is dominant in Texas but doesn't carry the same weight on the coasts. If your career plans take you to NYC or SF, McCombs in Austin or Rice in Houston offer better geographic positioning.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Texas A&M Mays?",
+             f"Texas A&M Mays admits approximately 45% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 80 students across two cohorts."),
+            ("What is the Aggie network worth for MBA graduates?",
+             "The Texas A&M alumni network includes 62,000+ business school graduates and 500,000+ total former students. In Texas, Aggie alumni preferentially hire and mentor fellow Aggies. For Texas-based careers, the network is one of the most valuable in MBA education."),
+            ("What is the average salary after Texas A&M Mays MBA?",
+             "Mays graduates earn an average starting salary of $129,000. Finance, energy, and consulting roles in Texas drive the strongest compensation. The $31,000 in-state tuition makes the ROI calculation particularly strong."),
+        ],
+    },
+    {
+        "name": "University of Pittsburgh Katz Graduate School of Business", "short_name": "Pitt Katz",
+        "slug": "pitt-katz", "location": "Pittsburgh, PA", "ranking": 54, "tier": 5,
+        "acceptance_rate": 38, "avg_gmat": 645, "avg_gpa": 3.39, "class_size": 58,
+        "avg_salary": 113000, "employment_rate": 94, "tuition": 65820,
+        "program_length": "2 years",
+        "strengths": ["Healthcare", "Technology", "Analytics", "Operations"],
+        "best_for": ["Healthcare", "Tech in Pittsburgh", "Analytics"],
+        "verdict": "Pittsburgh reinvented itself as a tech and healthcare hub. Katz graduates are positioned to ride that wave.",
+        "description": "Pitt Katz leverages Pittsburgh's transformation into a tech and healthcare economy. STEM-designated analytics track and 94% employment rate.",
+        "url": "https://www.business.pitt.edu/",
+        "overview": """<p>Pittsburgh transformed from a steel city into a tech and healthcare hub, and Pitt Katz positioned itself to capitalize. UPMC (one of the largest healthcare systems in the US), Google, Amazon, and a growing startup scene all recruit from Katz. The 58-person class is small enough for genuine mentorship from faculty and career services.</p>
+<p>Katz went test-optional, which signals confidence in holistic evaluation. The STEM-designated analytics track attracts quantitatively minded candidates. At 38% acceptance, Katz is more selective than its ranking suggests. The 94% employment rate and $113,000 median salary reflect Pittsburgh's strong local economy and Katz's deepening employer relationships.</p>""",
+        "culture": """<p>Katz's culture mirrors Pittsburgh itself: unpretentious, hardworking, and community-oriented. The 58-student class means everyone knows everyone. Students collaborate rather than compete, and the city's affordable cost of living (compared to NYC, Boston, or the Bay Area) reduces financial stress during the program.</p>""",
+        "academics": """<p>Katz's STEM-designated analytics track is the academic differentiator. Healthcare management courses benefit from UPMC's proximity and faculty connections. Operations and supply chain management coursework is strong, reflecting Pittsburgh's manufacturing heritage and modern logistics economy. The small class means seminar-style discussions rather than lecture-hall anonymity.</p>""",
+        "careers": """<p>Healthcare takes roughly 25% of placements, followed by tech (22%), consulting (20%), and finance (15%). UPMC, PNC Financial, Google, and Amazon are primary recruiters. Median base salary is $113,000 with total first-year compensation around $130,000. Pittsburgh's cost of living means that $113K stretches further than $150K in NYC or SF.</p>""",
+        "who_should_apply": """<p>Healthcare professionals or career changers targeting healthcare management. Tech candidates who want to work in Pittsburgh's growing startup and R&D scene. Analytics-focused candidates who value the STEM designation. Anyone who appreciates Pittsburgh's combination of career opportunity and affordability.</p>""",
+        "watch_out": """<p>Pittsburgh is a mid-size city. If you want NYC finance or Bay Area tech, Katz won't get you there as efficiently as schools with those geographic advantages. The $66K tuition is high for a public university and erodes the cost-of-living advantage. Outside Pittsburgh and the healthcare industry, the Katz brand needs more explanation than a top-25 school would.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Pitt Katz?",
+             f"Pitt Katz admits approximately 38% of MBA applicants for the class of {CURRENT_YEAR}. The program has gone test-optional, so GMAT/GRE scores are not required."),
+            ("Is Pitt Katz good for healthcare careers?",
+             "Katz is one of the strongest MBA programs for healthcare management. UPMC, one of the largest healthcare systems in the US, is headquartered in Pittsburgh and recruits heavily from Katz. Roughly 25% of graduates enter healthcare roles."),
+            ("What is the average salary after Pitt Katz MBA?",
+             "Katz graduates earn a median base salary of $113,000. Pittsburgh's lower cost of living means this salary provides purchasing power comparable to $150K+ in coastal cities."),
+        ],
+    },
+    {
+        "name": "Rutgers Business School", "short_name": "Rutgers",
+        "slug": "rutgers", "location": "Newark, NJ", "ranking": 55, "tier": 5,
+        "acceptance_rate": 34, "avg_gmat": 664, "avg_gpa": 3.26, "class_size": 95,
+        "avg_salary": 110000, "employment_rate": 90, "tuition": 31152,
+        "program_length": "2 years",
+        "strengths": ["Pharmaceuticals", "Supply Chain", "Analytics", "NYC Access"],
+        "best_for": ["Pharma/Healthcare", "Supply Chain", "NYC Metro Careers"],
+        "verdict": "NYC access at New Jersey prices. Add the pharma corridor and you've got a value MBA with real industry pipelines.",
+        "description": "Rutgers MBA offers NYC metro career access with NJ public university tuition. Strong pharma, supply chain, and analytics concentrations.",
+        "url": "https://www.business.rutgers.edu/",
+        "overview": """<p>Rutgers Business School sits in Newark, a 30-minute train ride from Manhattan. That proximity gives students access to NYC's job market at a fraction of the cost of NYU Stern or Columbia. The 34% acceptance rate makes it more selective than most schools in this tier, and the $31K in-state tuition is a steal for a program with 90% employment.</p>
+<p>The pharmaceutical concentration is a unique strength. New Jersey hosts more pharma companies than any other state (Johnson & Johnson, Merck, Novartis, Pfizer all have major operations nearby), and Rutgers has built direct pipelines into those companies. Supply chain management and analytics round out the specializations. The 95-person class is diverse and draws from NYC's professional ecosystem.</p>""",
+        "culture": """<p>Rutgers' culture reflects its geography: diverse, pragmatic, and career-focused. Many students commute from across the tri-state area, which creates a professional atmosphere. The MBA program benefits from the broader Rutgers alumni network of 500,000+ graduates, particularly strong in New Jersey and New York.</p>""",
+        "academics": """<p>Pharma and healthcare management courses are the academic crown jewel, with faculty who consult for and research with nearby pharmaceutical giants. Supply chain management is nationally ranked. The analytics concentration is STEM-adjacent and growing. Core courses cover traditional MBA fundamentals with a practical, industry-connected approach.</p>""",
+        "careers": """<p>Pharma and healthcare take roughly 25% of placements, followed by finance (20%), consulting (18%), and tech (15%). J&J, Deloitte, EY, and Goldman Sachs recruit on campus. Median base salary is $110,000 with total first-year compensation around $130,000. The NYC metro job market provides a deep pool of employers beyond on-campus recruiters.</p>""",
+        "who_should_apply": """<p>Pharma and healthcare professionals who want MBA credentials without leaving the NJ/NY ecosystem. Value seekers who want NYC metro career access at public university prices. Supply chain and analytics candidates targeting the tri-state area's logistics and tech sectors.</p>""",
+        "watch_out": """<p>Newark's reputation can be a tough sell for out-of-state candidates considering relocation. The Rutgers brand, while strong in the region, doesn't travel nationally the way a top-25 school name does. If you're paying out-of-state tuition ($54K), the value proposition narrows significantly.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Rutgers MBA?",
+             f"Rutgers Business School admits approximately 34% of MBA applicants for the class of {CURRENT_YEAR}, enrolling about 95 students."),
+            ("Is Rutgers good for pharma careers?",
+             "Rutgers is one of the best MBA programs for pharmaceutical careers. New Jersey's concentration of pharma companies (J&J, Merck, Novartis, Pfizer) provides direct recruiting pipelines. Roughly 25% of graduates enter pharma and healthcare roles."),
+            ("What is the average salary after Rutgers MBA?",
+             "Rutgers MBA graduates earn a median base salary of $110,000. The NYC metro location provides access to higher-paying roles in finance and consulting that can push total compensation above $140,000."),
+        ],
+    },
+    {
+        "name": "Baylor University Hankamer School of Business", "short_name": "Baylor Hankamer",
+        "slug": "baylor-hankamer", "location": "Waco, TX", "ranking": 56, "tier": 5,
+        "acceptance_rate": 53, "avg_gmat": 624, "avg_gpa": 3.43, "class_size": 47,
+        "avg_salary": 105000, "employment_rate": 92, "tuition": 42842,
+        "program_length": "2 years",
+        "strengths": ["Employment Rate", "Values-Based Leadership", "Focus Firms", "Texas Network"],
+        "best_for": ["Values-Driven Careers", "Texas Business", "Small Cohort Experience"],
+        "verdict": "92% employment, test-optional, no application fee, and a Focus Firm program that turns classroom theory into real consulting revenue. Baylor punches above its weight.",
+        "description": "Baylor Hankamer pairs faith-informed values with strong employment outcomes. The Focus Firm consulting course and 92% placement rate make it a standout in the 50-60 range.",
+        "url": "https://hankamer.baylor.edu/",
+        "overview": """<p>Baylor Hankamer operates with a distinctive identity: faith-informed business education with measurably strong outcomes. The 47-person class is tiny, which means individual attention from faculty and career services is the norm rather than the exception. US News ranked Baylor #6 nationally for employment rate, a metric that matters more than prestige when you're evaluating the actual return on your MBA investment.</p>
+<p>The "Focus Firm" program is the academic centerpiece. Student teams work as consultants for real companies over an extended engagement, producing deliverables that the companies actually use. It bridges the gap between case studies and consulting work in a way that builds portfolios and employer relationships simultaneously. Test-optional admissions and no application fee lower the barrier to entry.</p>""",
+        "culture": """<p>Baylor's Christian heritage shapes the culture. Business ethics aren't an elective here; they're woven into how the program thinks about leadership and decision-making. The 47-person class creates a family-like cohort. Waco is a small city, which pushes students together socially and professionally. If you want a community that takes values seriously, Baylor delivers.</p>""",
+        "academics": """<p>The Focus Firm program anchors the experiential curriculum. Students work on real consulting engagements over multiple months, building skills that traditional case studies can only approximate. Core courses cover business fundamentals with concentrations available in finance, marketing, entrepreneurship, and healthcare. The small class means professors are accessible and invested in student outcomes.</p>""",
+        "careers": """<p>The 92% employment rate within three months puts Baylor ahead of many higher-ranked programs. Consulting, finance, and marketing are the primary placement areas. Texas employers (particularly Dallas/Fort Worth and Houston) recruit from Hankamer. Average salary is approximately $105,000, which reflects Baylor's Tier 5 ranking but overperforms relative to the admissions profile.</p>""",
+        "who_should_apply": """<p>Candidates who want a values-based MBA experience with strong career outcomes. If you're targeting Texas business careers and value close-knit community over prestige brand, Hankamer delivers. Career changers benefit from the Focus Firm program's portfolio-building structure.</p>""",
+        "watch_out": """<p>Waco is between Dallas and Austin but isn't either city. Recruiting requires travel for most major employer visits. The faith-based identity is a genuine differentiator for some and a cultural mismatch for others. The $43K tuition is above average for this tier. Outside Texas, the Baylor MBA brand needs context.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Baylor Hankamer?",
+             f"Baylor Hankamer admits approximately 53% of MBA applicants for the class of {CURRENT_YEAR}. The program is test-optional and charges no application fee."),
+            ("What is the Focus Firm program at Baylor?",
+             "Focus Firm is Baylor's signature experiential learning course. Student teams work as consultants for real companies over extended engagements, producing deliverables the companies implement. It bridges theory and practice more deeply than typical MBA consulting projects."),
+            ("What is the average salary after Baylor MBA?",
+             "Baylor Hankamer graduates earn an average starting salary of approximately $105,000. Texas-based consulting and finance roles drive the strongest placement, and the 92% employment rate is among the best in the 50-75 ranking range."),
+        ],
+    },
+    {
+        "name": "Temple University Fox School of Business", "short_name": "Temple Fox",
+        "slug": "temple-fox", "location": "Philadelphia, PA", "ranking": 57, "tier": 5,
+        "acceptance_rate": 50, "avg_gmat": 622, "avg_gpa": 3.35, "class_size": 56,
+        "avg_salary": 100000, "employment_rate": 85, "tuition": 30000,
+        "program_length": "2 years",
+        "strengths": ["Marketing", "Risk Management", "Value Pricing", "Urban Access"],
+        "best_for": ["Marketing", "Philadelphia Careers", "Budget-Conscious Applicants"],
+        "verdict": "An urban MBA in Philadelphia at public school prices. Fox gives you corporate access without the Wharton price tag.",
+        "description": "Temple Fox offers an affordable MBA in Philadelphia with corporate access and strong marketing and risk management programs.",
+        "url": "https://www.fox.temple.edu/",
+        "overview": """<p>Temple Fox sits in North Philadelphia with access to the city's corporate base: Comcast, Aramark, Campbell Soup, and dozens of healthcare and financial services firms. The program enrolls about 56 students per year, keeping classes small. At roughly $30,000 in total in-state tuition, Fox is significantly cheaper than Wharton ($80K/year) while operating in the same metro economy.</p>
+<p>Marketing and risk management are the academic standouts. The risk, actuarial science, and insurance program is nationally recognized. Fox attracts a pragmatic student body: people who want an MBA credential and corporate access without six-figure debt. The Philadelphia business community knows Fox well, even if national brand recognition trails the ranking.</p>""",
+        "culture": """<p>Fox's culture is practical and diverse. Temple's urban campus draws students from across the Philadelphia region and internationally. Many students have worked in local industries before enrolling. The vibe is less country-club and more working professional, which reflects Temple's broader identity as an accessible public university.</p>""",
+        "academics": """<p>Marketing and risk management are the curriculum highlights. Fox's risk management program is one of the few in the country with dedicated actuarial and insurance coursework at the MBA level. Core courses cover standard business fundamentals. The flexible curriculum lets students combine concentrations across marketing, finance, analytics, and entrepreneurship.</p>""",
+        "careers": """<p>Philadelphia employers dominate placement. Comcast, Aramark, Deloitte, and regional banks and healthcare systems are primary recruiters. Consulting and marketing roles take about 40% of graduates combined. Average salary is approximately $100,000, with total first-year compensation around $118,000. The cost of living in Philadelphia is lower than NYC or Boston, stretching that salary further.</p>""",
+        "who_should_apply": """<p>Budget-conscious candidates targeting Philadelphia-area careers. Marketing professionals who want specialized coursework. Risk management and insurance professionals seeking MBA credentials. Anyone who wants an urban MBA experience without coastal city prices.</p>""",
+        "watch_out": """<p>Wharton is 3 miles south, which creates an inescapable comparison. Philadelphia employers who recruit from both programs will default to Wharton when they can. Outside the mid-Atlantic region, the Fox brand requires explanation. North Philadelphia's campus location also lacks the polish of suburban or downtown settings.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Temple Fox?",
+             f"Temple Fox admits approximately 50% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 56 full-time students."),
+            ("What is Temple Fox known for?",
+             "Fox is nationally recognized for its risk management, actuarial science, and insurance program. Marketing is another strength. The program offers an affordable MBA in Philadelphia with strong local employer connections."),
+            ("What is the average salary after Temple Fox MBA?",
+             "Temple Fox graduates earn an average starting salary of approximately $100,000. Philadelphia's lower cost of living compared to NYC or Boston makes this salary more competitive in purchasing power terms."),
+        ],
+    },
+    {
+        "name": "Fordham University Gabelli School of Business", "short_name": "Fordham Gabelli",
+        "slug": "fordham-gabelli", "location": "New York, NY", "ranking": 58, "tier": 5,
+        "acceptance_rate": 48, "avg_gmat": 630, "avg_gpa": 3.20, "class_size": 106,
+        "avg_salary": 122000, "employment_rate": 85, "tuition": 62250,
+        "program_length": "2 years",
+        "strengths": ["Finance", "NYC Location", "Global Business", "Jesuit Values"],
+        "best_for": ["Finance in NYC", "International Business", "Values-Driven Leadership"],
+        "verdict": "A Jesuit MBA in Midtown Manhattan. The location does half the work for you in finance recruiting.",
+        "description": "Fordham Gabelli puts you in Midtown Manhattan with a Jesuit tradition, Wall Street access, and growing tech placement.",
+        "url": "https://www.fordham.edu/gabelli-school-of-business/",
+        "overview": """<p>Fordham Gabelli operates from Lincoln Center in Midtown Manhattan. Walk out the door and you're in the financial capital of the world. For finance careers, that physical proximity to Wall Street, midtown hedge funds, and corporate headquarters is worth more than a ranking differential. The 106-student class is mid-sized, drawing from NYC's diverse professional population.</p>
+<p>The Jesuit tradition infuses the program with values-based leadership education without being heavy-handed about it. Finance is the primary draw: Gabelli graduates populate Wall Street, asset management firms, and corporate finance departments across the city. The $122,000 median salary reflects NYC's premium compensation, though the $62K tuition and NYC living costs make the all-in investment significant.</p>""",
+        "culture": """<p>Gabelli's culture blends NYC ambition with Jesuit reflection. Students are driven and career-focused, but the values component adds a dimension that pure finance schools miss. The Midtown location means the city is the campus. Networking events, employer visits, and social life all happen within Manhattan's professional ecosystem.</p>""",
+        "academics": """<p>Finance curriculum is the academic engine. Courses in investment banking, portfolio management, and corporate finance connect directly to NYC employer needs. Global business is a secondary strength, with international immersion experiences and faculty with cross-border expertise. The Jesuit emphasis on ethics provides a counterweight to Wall Street's reputation for excess.</p>""",
+        "careers": """<p>Finance takes roughly 35% of placements, followed by consulting (18%), tech (15%), and marketing (12%). NYC-based banks, hedge funds, asset managers, and consulting firms recruit directly. Median base salary of $122,000 with signing bonuses pushing total first-year compensation above $140,000. The Gabelli alumni network in NYC financial services opens doors that the ranking alone wouldn't predict.</p>""",
+        "who_should_apply": """<p>Finance-focused candidates who want to live and work in NYC. The Gabelli brand is strongest on Wall Street and in NYC's corporate community. Candidates who want values-based business education will find the Jesuit tradition substantive. International students targeting global finance benefit from both the NYC location and the global business curriculum.</p>""",
+        "watch_out": """<p>NYC's cost of living on top of $62K tuition makes Gabelli expensive for its ranking tier. Stern, Columbia, and even Baruch compete for the same NYC finance applicants with stronger brands. Outside the NYC metro, Gabelli's name doesn't carry the same weight. If you're not planning a NYC-based career, the location premium is wasted.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Fordham Gabelli?",
+             f"Fordham Gabelli admits approximately 48% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 106 full-time students."),
+            ("Is Fordham Gabelli good for finance?",
+             "Gabelli's Midtown Manhattan location provides direct access to Wall Street and NYC's financial industry. Roughly 35% of graduates enter finance. The program is strongest for candidates targeting NYC-based finance careers."),
+            ("What is the average salary after Fordham Gabelli MBA?",
+             "Gabelli graduates earn a median base salary of $122,000 with total first-year compensation above $140,000. NYC-based finance and consulting roles drive the strongest compensation."),
+        ],
+    },
+    {
+        "name": "University of Miami Herbert Business School", "short_name": "Miami Herbert",
+        "slug": "miami-herbert", "location": "Coral Gables, FL", "ranking": 59, "tier": 5,
+        "acceptance_rate": 38, "avg_gmat": 640, "avg_gpa": 3.54, "class_size": 38,
+        "avg_salary": 110000, "employment_rate": 85, "tuition": 46145,
+        "program_length": "2 years",
+        "strengths": ["Latin America Business", "Innovation", "STEM-Designated", "Healthcare"],
+        "best_for": ["Latin America Careers", "Innovation", "South Florida Business"],
+        "verdict": "38 students per class. If you want a Latin America business pipeline and AI-infused curriculum, Miami Herbert delivers an intimate experience most schools can't match.",
+        "description": "Miami Herbert combines a tiny cohort, STEM designation, and South Florida's Latin American business connections into a distinctive MBA.",
+        "url": "https://www.herbert.miami.edu/",
+        "overview": """<p>Miami Herbert enrolls just 38 full-time MBA students per year, making it one of the smallest cohorts in the top 75. That intimacy means faculty know your name, career coaches know your goals, and you can't hide in the back row. The program is STEM-designated and has most STEM-certified graduate programs of any school in Florida.</p>
+<p>South Florida's economy provides distinctive career advantages. Miami is the gateway to Latin American business, and Herbert has built curriculum and partnerships around that connection. Innovation, AI, and design thinking feature prominently in the curriculum, reflecting the school's investment in modernizing the MBA experience. International consulting projects take students to Latin America and beyond.</p>""",
+        "culture": """<p>Herbert's culture is international and entrepreneurial. The 38-person class creates an environment where collaboration is inevitable. Coral Gables is upscale and subtropical, which attracts students who prefer sun to snow. The Latin American business community in Miami provides a cultural and professional context that no other US MBA program can replicate.</p>""",
+        "academics": """<p>The STEM-designated curriculum integrates AI, innovation, and design thinking into core courses. International consulting projects are required, often taking students to Latin America. Healthcare management benefits from South Florida's concentration of hospitals and health systems. The small class means seminar-style discussions and direct faculty mentorship.</p>""",
+        "careers": """<p>Consulting and finance each take roughly 25% of placements, with healthcare (15%) and tech (15%) rounding out the profile. South Florida employers and Latin American multinationals recruit from Herbert. Average salary is approximately $110,000. The small class means career services can provide highly personalized placement support.</p>""",
+        "who_should_apply": """<p>Candidates targeting Latin American business or South Florida careers. Anyone who values an intimate cohort over a large-class experience. International students seeking STEM designation and a culturally diverse environment. Healthcare professionals targeting South Florida's hospital and health system economy.</p>""",
+        "watch_out": """<p>38 students per class means a very small alumni network from each cohort. Outside South Florida and Latin America, the Herbert brand needs context. The $46K annual tuition is premium for this ranking tier. And while Miami is exciting, it's geographically distant from the major MBA recruiting corridors of the Northeast and West Coast.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Miami Herbert?",
+             f"Miami Herbert admits approximately 38% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls only about 38 full-time MBA students, making it one of the smallest cohorts in the top 75."),
+            ("Is Miami Herbert STEM designated?",
+             "Yes. Miami Herbert's MBA is STEM-designated, and the school has the most STEM-certified graduate programs in Florida. International students benefit from the extended OPT work authorization."),
+            ("What is the average salary after Miami Herbert MBA?",
+             "Miami Herbert graduates earn an average starting salary of approximately $110,000. South Florida's growing economy and Latin American business connections provide distinctive career opportunities."),
+        ],
+    },
+    {
+        "name": "University of Colorado Leeds School of Business", "short_name": "Colorado Leeds",
+        "slug": "colorado-leeds", "location": "Boulder, CO", "ranking": 60, "tier": 5,
+        "acceptance_rate": 55, "avg_gmat": 610, "avg_gpa": 3.30, "class_size": 60,
+        "avg_salary": 95000, "employment_rate": 82, "tuition": 31000,
+        "program_length": "2 years",
+        "strengths": ["Entrepreneurship", "Sustainability", "Tech", "Outdoor Lifestyle"],
+        "best_for": ["Entrepreneurship", "Sustainability", "Denver/Boulder Tech"],
+        "verdict": "Boulder's tech scene is real and growing. Leeds gives you an MBA with mountain views and access to Denver's startup corridor.",
+        "description": "Colorado Leeds combines Boulder's tech and sustainability ecosystem with an entrepreneurial MBA at public school prices.",
+        "url": "https://www.colorado.edu/business/",
+        "overview": """<p>Colorado Leeds operates from Boulder, a city that combines outdoor lifestyle with a serious tech and startup ecosystem. Google, Oracle, and dozens of mid-size tech companies have Boulder offices. The Denver-Boulder corridor has become a legitimate tech hub, and Leeds positions its MBA program at the center of it.</p>
+<p>Entrepreneurship and sustainability are the program's academic identities. The Deming Center for Entrepreneurship runs startup competitions, mentorship programs, and venture funding connections. The 60-person class attracts students who want career growth without sacrificing quality of life. Boulder's natural beauty and outdoor culture are real draws for candidates who don't want to spend two years in a concrete jungle.</p>""",
+        "culture": """<p>Leeds' culture is outdoorsy, entrepreneurial, and collaborative. Students ski on weekends, bike to class, and build startups in their spare time. The Boulder vibe attracts a self-selecting group: people who value work-life integration over pure career maximization. The 60-person class is tight-knit and supportive.</p>""",
+        "academics": """<p>Entrepreneurship is the academic strength, supported by the Deming Center's resources. Sustainability and social impact coursework reflects Boulder's progressive values and Colorado's clean energy economy. Tech management courses connect to the local industry. Core MBA fundamentals are covered with a practical, project-based approach.</p>""",
+        "careers": """<p>Tech takes roughly 25% of placements, followed by consulting (20%), finance (18%), and sustainability/clean energy (10%). Denver and Boulder employers recruit directly, and the Colorado alumni network is strong within the state. Average salary is approximately $95,000, which goes further in Colorado than comparable salaries in coastal cities. Total first-year compensation averages around $112,000.</p>""",
+        "who_should_apply": """<p>Entrepreneurs and sustainability-focused candidates who want to build careers in Colorado. Tech professionals targeting the Denver-Boulder corridor. Anyone who values lifestyle alongside career outcomes. Colorado residents benefit from in-state tuition of $31,000.</p>""",
+        "watch_out": """<p>The $95K average salary is lower than many programs in this tier. Outside Colorado, the Leeds brand has limited reach. If you're targeting NYC finance or Bay Area tech, Leeds won't get you there efficiently. Boulder's cost of living has risen significantly, partially eroding the lifestyle value proposition.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Colorado Leeds?",
+             f"Colorado Leeds admits approximately 55% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 60 full-time students."),
+            ("Is Colorado Leeds good for entrepreneurship?",
+             "Leeds is strong in entrepreneurship, supported by the Deming Center for Entrepreneurship. Boulder's startup ecosystem, venture capital presence, and tech corridor provide a real-world laboratory for aspiring founders."),
+            ("What is the average salary after Colorado Leeds MBA?",
+             "Leeds graduates earn an average starting salary of approximately $95,000. Colorado's cost of living is lower than coastal cities, and the Denver-Boulder tech corridor provides growing career opportunities."),
+        ],
+    },
+    {
+        "name": "CUNY Baruch College Zicklin School of Business", "short_name": "Baruch Zicklin",
+        "slug": "baruch-zicklin", "location": "New York, NY", "ranking": 61, "tier": 5,
+        "acceptance_rate": 54, "avg_gmat": 637, "avg_gpa": 3.21, "class_size": 72,
+        "avg_salary": 118000, "employment_rate": 87, "tuition": 37338,
+        "program_length": "2 years",
+        "strengths": ["Finance", "Value Pricing", "NYC Location", "Diversity"],
+        "best_for": ["Finance on a Budget", "NYC Careers", "Diverse Communities"],
+        "verdict": "The #1 public business school in New York City. Wall Street access at CUNY prices is a value play that's hard to beat.",
+        "description": "Baruch Zicklin delivers NYC finance career access at CUNY's public university price point. The most diverse MBA program in the country.",
+        "url": "https://zicklin.baruch.cuny.edu/",
+        "overview": """<p>Baruch Zicklin is the public MBA option in New York City. Located in Manhattan's Gramercy Park neighborhood, it offers Wall Street proximity at CUNY tuition rates. For in-state students, the $37K annual tuition is a fraction of what Stern ($80K+) or Columbia ($84K+) charges. That price differential makes finance career ambitions accessible to a far broader range of students.</p>
+<p>Zicklin is also the most diverse MBA program in the country by many measures. The student body reflects NYC's demographics: international, multi-ethnic, and drawn from every industry in the city. Finance, accounting, marketing, and real estate are the academic concentrations, with faculty research that connects to NYC's financial markets.</p>""",
+        "culture": """<p>Zicklin's culture is urban, diverse, and career-focused. Many students work in NYC while pursuing the MBA, which brings real-time professional experience into classroom discussions. The diversity of backgrounds, industries, and perspectives is a genuine asset. The campus is midtown Manhattan, so the city is the social and professional ecosystem.</p>""",
+        "academics": """<p>Finance and accounting are the curriculum anchors. Zicklin's proximity to Wall Street means guest lecturers from banks, hedge funds, and consulting firms are routine. Real estate coursework connects to NYC's property market. The program covers core MBA fundamentals with elective concentrations across more than a dozen specializations.</p>""",
+        "careers": """<p>Finance dominates at roughly 35% of placements, followed by accounting (15%), consulting (15%), and marketing (12%). NYC banks, accounting firms, and financial services companies recruit from Zicklin. Median salary is approximately $118,000, reflecting NYC's premium compensation levels. The low tuition means graduates carry less debt into their careers than peers from more expensive NYC programs.</p>""",
+        "who_should_apply": """<p>NYC-based professionals who want an MBA without the Stern or Columbia price tag. Finance aspirants who value location and affordability over brand prestige. Career changers targeting NYC's financial services industry. International students who want NYC access at public university costs.</p>""",
+        "watch_out": """<p>Competing with Stern, Columbia, and even Gabelli in the same city is a brand challenge. Employers who recruit from all NYC programs will default to the higher-ranked schools first. The Zicklin brand is strong in NYC but nearly invisible outside the tri-state area. Out-of-state tuition ($72K) significantly weakens the value proposition.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Baruch Zicklin?",
+             f"Baruch Zicklin admits approximately 54% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 72 full-time students."),
+            ("Is Baruch Zicklin a good value MBA?",
+             "Baruch Zicklin is one of the best-value MBAs for NYC careers. In-state tuition of $37,000 with access to NYC's job market and $118K average salary creates an ROI that many higher-ranked programs can't match."),
+            ("How does Baruch compare to NYU Stern?",
+             "Stern has a stronger brand and higher salary outcomes ($168K vs $118K). Baruch costs less than half of Stern's tuition ($37K vs $80K+). For candidates focused on NYC finance who are price-sensitive, Baruch provides Wall Street access at a dramatically lower cost."),
+        ],
+    },
+    {
+        "name": "William & Mary Raymond A. Mason School of Business", "short_name": "William & Mary Mason",
+        "slug": "william-mary-mason", "location": "Williamsburg, VA", "ranking": 62, "tier": 5,
+        "acceptance_rate": 55, "avg_gmat": 620, "avg_gpa": 3.30, "class_size": 110,
+        "avg_salary": 98000, "employment_rate": 90, "tuition": 39394,
+        "program_length": "22 months",
+        "strengths": ["Consulting", "Leadership", "Experiential Learning", "Government"],
+        "best_for": ["Consulting", "Government", "Leadership Development"],
+        "verdict": "The second-oldest university in America, and their MBA still feels fresh. Mason's consulting placement and five-person team model builds practical skills from day one.",
+        "description": "William & Mary Mason runs a 22-month cohort-based MBA with strong consulting placement and a distinctive five-person team model.",
+        "url": "https://mason.wm.edu/",
+        "overview": """<p>William & Mary's Mason School runs a 22-month MBA with a five-person team structure that anchors the entire first year. You work with the same five people across every core course, which builds the kind of team dynamics that consulting firms look for in recruits. The model is distinctive and deliberate: Mason wants graduates who can collaborate under pressure.</p>
+<p>The 110-student class is mid-sized, and the Williamsburg location provides focus without the distractions of a major city. Consulting, business analytics, finance, and supply chain are the primary specializations. Bloomberg ranks Mason at #36, suggesting the program outperforms its US News position. Government and federal consulting are niche strengths, benefiting from Virginia's proximity to DC.</p>""",
+        "culture": """<p>Mason's culture is collegial and team-oriented, shaped by the five-person team model. Williamsburg is a small, historic town, which means the MBA community is self-contained. Students socialize together, study together, and build relationships that last. The culture attracts people who value depth of connection over breadth of social options.</p>""",
+        "academics": """<p>The five-person team model is the pedagogical identity. Core courses use these teams for projects, presentations, and case analyses. Consulting (federal, IT, operations, management), business analytics, finance, and supply chain management are the concentration areas. The 22-month format provides slightly more time for experiential learning than standard two-year programs.</p>""",
+        "careers": """<p>Consulting takes roughly 30% of placements, with federal consulting being a notable specialty given Virginia's proximity to DC. Finance (20%), tech (15%), and government (10%) round out the profile. Median base salary is approximately $98,000 with a $13,500 median signing bonus. The William & Mary brand carries weight in DC, Virginia, and the broader Mid-Atlantic region.</p>""",
+        "who_should_apply": """<p>Consulting aspirants who value team-based learning. Candidates targeting federal consulting or DC-area careers. Students who want a cohort-based MBA experience in a focused, distraction-free environment. Anyone drawn to William & Mary's historical brand and mid-Atlantic alumni network.</p>""",
+        "watch_out": """<p>Williamsburg is charming but isolated. Richmond and DC are each 60+ miles away, which means recruiting travel is a regular commitment. The $98K average salary is below programs ranked in this range. Outside the Mid-Atlantic, the Mason brand needs context. If you want a big-city MBA experience, Mason isn't it.</p>""",
+        "faq": [
+            ("What is the acceptance rate at William & Mary Mason?",
+             f"William & Mary Mason admits approximately 55% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 110 students in a 22-month cohort."),
+            ("What is the team model at William & Mary Mason?",
+             "Mason assigns every student to a five-person team that works together across all first-year core courses. This team-based model builds collaboration skills and mirrors consulting team dynamics. It's the defining feature of the Mason MBA experience."),
+            ("What is the average salary after William & Mary Mason MBA?",
+             "Mason graduates earn a median base salary of approximately $98,000 with a $13,500 median signing bonus. Consulting, federal government, and finance drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "University of Arizona Eller College of Management", "short_name": "Arizona Eller",
+        "slug": "arizona-eller", "location": "Tucson, AZ", "ranking": 63, "tier": 5,
+        "acceptance_rate": 31, "avg_gmat": 673, "avg_gpa": 3.43, "class_size": 28,
+        "avg_salary": 109000, "employment_rate": 86, "tuition": 27393,
+        "program_length": "2 years",
+        "strengths": ["MIS/Technology", "Consulting", "Entrepreneurship", "Selectivity"],
+        "best_for": ["Technology Management", "Consulting", "Small Cohort"],
+        "verdict": "31% acceptance rate and a 28-person class. Eller is wildly more selective than its ranking suggests, with MIS programs that compete nationally.",
+        "description": "Arizona Eller's 31% acceptance rate and nationally ranked MIS program make it a hidden gem. The 28-person cohort is the smallest in the top 75.",
+        "url": "https://eller.arizona.edu/",
+        "overview": """<p>Arizona Eller is a statistical anomaly. A 31% acceptance rate would be respectable at a top-20 school, but Eller sits outside the top 60. The disconnect between selectivity and ranking exists because the 28-person class is tiny. Eller is extraordinarily picky about who gets in, and the small cohort means each student gets individual attention that's impossible at programs with 200+ students.</p>
+<p>MIS (Management Information Systems) is Eller's nationally ranked specialty. US News consistently ranks the MIS program in the top 5 nationally, which attracts tech-focused candidates. Consulting placement runs at 29% of the class, another metric that punches well above the ranking. The McGuire Center for Entrepreneurship adds startup support. At $27K per year in-state, Eller is a value play for anyone willing to spend two years in Tucson.</p>""",
+        "culture": """<p>With 28 students, Eller's MBA feels more like a graduate seminar than a traditional business school. Everyone knows everyone. Faculty mentorship is direct and sustained. Tucson offers sunshine, affordable living, and a laid-back pace that contrasts sharply with the intensity of coastal MBA programs. The culture self-selects for people who prioritize depth of learning over social scene.</p>""",
+        "academics": """<p>MIS is the crown jewel, with nationally ranked faculty and coursework in technology management, systems design, and data analytics. Consulting preparation is structured, with case practice and firm exposure. The McGuire Center for Entrepreneurship provides startup resources and mentorship. Core MBA courses are taught in small seminar settings, allowing deep discussion and individual feedback.</p>""",
+        "careers": """<p>Consulting leads at 29% of placements, followed by tech/MIS (25%), finance (18%), and entrepreneurship (10%). Deloitte, Accenture, and Amazon are among the top recruiters. Median salary of $109,000 with signing bonuses averaging $18,000. The small class means career services can tailor support to each student's goals. Phoenix employers (1.5 hours north) expand the local recruiting pool.</p>""",
+        "who_should_apply": """<p>Tech-focused candidates who want nationally ranked MIS coursework in a small-cohort environment. Consulting aspirants who want high per-capita placement rates. Arizona residents getting a top MIS MBA for $27K per year. Anyone who values personalized education over large-class networking.</p>""",
+        "watch_out": """<p>28 students means the alumni network from each class is minuscule. Tucson is geographically isolated from major business centers. The Eller brand is strong in MIS circles but needs explanation elsewhere. If you want a traditional large-class MBA experience with social scene and club life, Eller can't provide it.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Arizona Eller?",
+             f"Arizona Eller admits approximately 31% of MBA applicants for the class of {CURRENT_YEAR}, making it one of the most selective programs outside the top 25. The class size is just 28 students."),
+            ("Is Arizona Eller good for technology careers?",
+             "Eller's MIS program is ranked in the top 5 nationally by US News. The program produces graduates who combine business acumen with technology management skills. About 25% of graduates enter tech-focused roles."),
+            ("What is the average salary after Arizona Eller MBA?",
+             "Eller graduates earn a median salary of $109,000 with signing bonuses averaging $18,000. Consulting and technology management drive the strongest compensation."),
+        ],
+    },
+    {
+        "name": "UC San Diego Rady School of Management", "short_name": "UCSD Rady",
+        "slug": "ucsd-rady", "location": "La Jolla, CA", "ranking": 64, "tier": 5,
+        "acceptance_rate": 49, "avg_gmat": 645, "avg_gpa": 3.37, "class_size": 36,
+        "avg_salary": 104000, "employment_rate": 82, "tuition": 57700,
+        "program_length": "21 months",
+        "strengths": ["Entrepreneurship", "Biotech", "Innovation", "Lab to Market"],
+        "best_for": ["Biotech/Life Sciences", "Entrepreneurship", "San Diego Careers"],
+        "verdict": "330+ companies founded by Rady alumni. If you want to turn a lab discovery into a business, this is the MBA for it.",
+        "description": "UCSD Rady is a young, entrepreneurship-focused MBA with deep ties to San Diego's biotech and life sciences ecosystem.",
+        "url": "https://rady.ucsd.edu/",
+        "overview": """<p>UCSD Rady was founded in 2003, making it one of the youngest schools in the top 75. That youth is an asset: the program was designed around innovation and entrepreneurship from the start, rather than retrofitting those topics onto a traditional MBA. The signature "Lab to Market" course sequence takes students from scientific discovery through commercialization, a pipeline that connects directly to San Diego's biotech cluster.</p>
+<p>Rady alumni have founded over 330 companies that have raised $3.3 billion in venture funding. Bloomberg Businessweek ranks Rady #2 nationally for entrepreneurship. The 36-person class is intimate, and San Diego's life sciences, healthcare, defense, and tech startup ecosystems provide the commercial backdrop. The program is STEM-designated and runs 21 months.</p>""",
+        "culture": """<p>Rady's culture is innovation-first. Students are builders, not just analysts. The 36-person class creates deep peer relationships. San Diego's lifestyle (beaches, weather, outdoor recreation) attracts candidates who want career growth without sacrificing quality of life. International students make up 39% of the class, adding global perspective.</p>""",
+        "academics": """<p>The "Lab to Market" sequence is the academic signature. Students identify promising research from UCSD's labs and develop business plans for commercialization. Biotech, healthcare, and innovation management courses leverage San Diego's concentration of life science companies. The STEM designation and 21-month format keep the curriculum quantitative and focused.</p>""",
+        "careers": """<p>Entrepreneurship and startups account for a significant share of outcomes (the 330+ companies founded stat tells that story). Tech (25%), healthcare/biotech (20%), and consulting (15%) are the primary employment sectors. Median salary is approximately $104,000. San Diego's biotech corridor (Illumina, Qualcomm, Dexcom) provides local employers, and the UCSD brand in science and technology lends credibility.</p>""",
+        "who_should_apply": """<p>Scientists and engineers who want to commercialize research or join biotech management. Aspiring founders who want a startup-focused MBA curriculum. Healthcare and life sciences professionals targeting San Diego's biotech corridor. Anyone who values innovation over traditional corporate career tracks.</p>""",
+        "watch_out": """<p>Rady is young. The alumni network is still building, which limits the "open doors by name" effect that older programs enjoy. San Diego's economy is growing but smaller than LA or the Bay Area. The $58K in-state tuition is expensive for outcomes in this tier. If you want traditional consulting or banking careers, older programs with those recruiting pipelines will serve you better.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UCSD Rady?",
+             f"UCSD Rady admits approximately 49% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 36 students in a 21-month STEM-designated MBA."),
+            ("What is the Lab to Market program at UCSD Rady?",
+             "Lab to Market is Rady's signature course sequence where students identify promising research from UCSD's labs and develop business plans for commercialization. It trains students to bridge the gap between scientific discovery and viable business."),
+            ("Is UCSD Rady good for biotech careers?",
+             "Rady is one of the best MBA programs for biotech and life sciences careers. San Diego hosts Illumina, Qualcomm, Dexcom, and hundreds of biotech startups. Rady alumni have founded 330+ companies raising $3.3B in venture funding."),
+        ],
+    },
+    {
+        "name": "Case Western Reserve University Weatherhead School of Management", "short_name": "Case Western Weatherhead",
+        "slug": "case-western-weatherhead", "location": "Cleveland, OH", "ranking": 65, "tier": 5,
+        "acceptance_rate": 50, "avg_gmat": 640, "avg_gpa": 3.30, "class_size": 65,
+        "avg_salary": 100000, "employment_rate": 85, "tuition": 53000,
+        "program_length": "21 months",
+        "strengths": ["Design Thinking", "Healthcare", "Organizational Behavior", "Sustainability"],
+        "best_for": ["Healthcare", "Design Thinking", "Organizational Leadership"],
+        "verdict": "Cleveland Clinic is next door. Weatherhead's design thinking approach and healthcare access make it a different kind of MBA.",
+        "description": "Case Western Weatherhead pairs design thinking pedagogy with Cleveland's healthcare economy. Cleveland Clinic proximity is the career differentiator.",
+        "url": "https://weatherhead.case.edu/",
+        "overview": """<p>Case Western Weatherhead does something unusual: it integrates design thinking into the MBA core curriculum. Instead of defaulting to the case method, Weatherhead teaches students to approach business problems the way designers approach product problems: empathize, define, ideate, prototype, test. It's a pedagogical bet that produces graduates who think differently from the standard MBA.</p>
+<p>Cleveland Clinic, one of the top hospitals in the world, is next door. That proximity creates healthcare management career opportunities that most MBA programs can only dream about. The 65-person class runs a 21-month program with concentrations in healthcare, sustainability, organizational behavior, and finance. Cleveland's affordable cost of living offsets a tuition price that's high for the ranking.</p>""",
+        "culture": """<p>Weatherhead's culture is intellectual and collaborative, shaped by the design thinking methodology. Students are encouraged to question assumptions and approach problems creatively. Cleveland is a mid-size Midwestern city with strong arts, food, and sports scenes. The cost of living is among the lowest of any MBA city, which helps offset tuition costs.</p>""",
+        "academics": """<p>Design thinking integration is the academic differentiator. Rather than isolated workshops, the methodology runs through core courses and electives. Healthcare management courses benefit from Cleveland Clinic faculty and clinical partnerships. Organizational behavior is another traditional strength, with faculty who have shaped the field nationally. Sustainability coursework reflects growing corporate demand.</p>""",
+        "careers": """<p>Healthcare takes roughly 25% of placements, benefiting from Cleveland Clinic and the broader Ohio healthcare economy. Consulting (20%), finance (18%), and tech (12%) round out the profile. Average salary is approximately $100,000. Cleveland's corporate base includes Progressive Insurance, KeyBank, and Sherwin-Williams, all of which recruit from Weatherhead.</p>""",
+        "who_should_apply": """<p>Healthcare professionals seeking MBA credentials with Cleveland Clinic access. Creative thinkers who want design thinking woven into their business education. Candidates targeting Ohio-based careers or organizations that value innovative problem-solving approaches. Sustainability-focused professionals will find relevant coursework and faculty.</p>""",
+        "watch_out": """<p>Cleveland's economy is stable but not booming. Career options are more limited than in NYC, Chicago, or the Bay Area. The $53K tuition is above average for this ranking tier. The Weatherhead brand is known in healthcare and organizational behavior circles but less recognized broadly. If you want a traditional MBA experience focused on consulting or banking, Weatherhead's design thinking emphasis may feel peripheral.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Case Western Weatherhead?",
+             f"Case Western Weatherhead admits approximately 50% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 65 students in a 21-month MBA."),
+            ("Is Case Western Weatherhead good for healthcare careers?",
+             "Weatherhead is excellent for healthcare management. Cleveland Clinic, one of the world's top hospitals, is adjacent to campus and provides recruiting, research, and experiential learning opportunities. About 25% of graduates enter healthcare roles."),
+            ("What is design thinking at Case Western Weatherhead?",
+             "Weatherhead integrates design thinking methodology throughout the MBA curriculum. Students learn to approach business problems through empathy, rapid prototyping, and iterative testing. It produces graduates who combine analytical business skills with creative problem-solving."),
+        ],
+    },
+    {
+        "name": "University of South Carolina Darla Moore School of Business", "short_name": "South Carolina Moore",
+        "slug": "south-carolina-moore", "location": "Columbia, SC", "ranking": 66, "tier": 5,
+        "acceptance_rate": 55, "avg_gmat": 656, "avg_gpa": 3.30, "class_size": 48,
+        "avg_salary": 102000, "employment_rate": 85, "tuition": 35000,
+        "program_length": "22 months",
+        "strengths": ["International Business", "Supply Chain", "Risk Management"],
+        "best_for": ["International Business", "Supply Chain", "Global Careers"],
+        "verdict": "#1 International MBA in the US for 12 straight years. No other program in this ranking range owns a specialty like Moore owns international business.",
+        "description": "South Carolina Moore has held the #1 US News ranking for International MBA for 12 consecutive years. The IMBA is the program's crown jewel.",
+        "url": "https://sc.edu/study/colleges_schools/moore/",
+        "overview": """<p>South Carolina Moore has dominated a single specialty like no other MBA program in the country. US News has ranked Moore's International MBA #1 for twelve consecutive years. That's not a one-time fluke. It's sustained excellence in international business education that includes language development, international immersion, and a curriculum designed around cross-border commerce.</p>
+<p>The 22-month International MBA includes mandatory international experience and optional second-language development. The 48-person class is small, and the program attracts a globally minded cohort. Supply chain management (#21 US News) and risk management are secondary strengths. Columbia, SC, isn't a global city, but the program's international orientation transcends geography.</p>""",
+        "culture": """<p>Moore's culture is globally oriented. The International MBA attracts students from diverse national backgrounds who share an interest in cross-border business. Columbia is a state capital with a college-town feel: affordable, friendly, and low-pressure. The 48-person class creates close cohort bonds, and the international immersion experiences build lifelong connections.</p>""",
+        "academics": """<p>International business is the academic identity. The IMBA curriculum covers international trade, cross-cultural management, global supply chains, and international finance. Language training in Spanish, Portuguese, Chinese, or Arabic is available. Supply chain management courses are nationally ranked. The mandatory international component takes students abroad for applied projects.</p>""",
+        "careers": """<p>International business, supply chain, and consulting account for the bulk of placements. Companies with global operations (logistics firms, multinationals, consulting firms with international practices) recruit from Moore's IMBA. Average salary is approximately $102,000. The #1 International MBA ranking opens doors at globally focused employers in ways that the overall program ranking doesn't capture.</p>""",
+        "who_should_apply": """<p>Candidates targeting international careers, global supply chain roles, or multinational companies. Language learners who want to develop business fluency alongside MBA fundamentals. Anyone who values owning a #1-ranked specialty over attending a higher-ranked generalist program.</p>""",
+        "watch_out": """<p>Columbia, SC, is a small market. Most career opportunities require relocation after graduation. The overall program ranking (not the IMBA specialty ranking) is what employers see first. If you're not targeting international business specifically, the Moore MBA doesn't differentiate as clearly. Tuition at $35K is reasonable, but you're paying for a specialty, so make sure that specialty aligns with your goals.</p>""",
+        "faq": [
+            ("What is the acceptance rate at South Carolina Moore?",
+             f"South Carolina Moore admits approximately 55% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 48 students."),
+            ("Why is South Carolina Moore #1 for International MBA?",
+             "Moore has been ranked #1 for International MBA by US News for 12 consecutive years. The International MBA includes mandatory international experience, optional language training, and a curriculum built around cross-border commerce. No other program has sustained this level of specialty dominance."),
+            ("What is the average salary after South Carolina Moore MBA?",
+             "Moore graduates earn an average starting salary of approximately $102,000. International business and supply chain roles drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "University of Kansas School of Business", "short_name": "Kansas",
+        "slug": "kansas", "location": "Lawrence, KS", "ranking": 67, "tier": 5,
+        "acceptance_rate": 55, "avg_gmat": 630, "avg_gpa": 3.32, "class_size": 53,
+        "avg_salary": 96000, "employment_rate": 95, "tuition": 22800,
+        "program_length": "16 months",
+        "strengths": ["Value", "Accelerated Format", "Analytics", "Supply Chain"],
+        "best_for": ["Value Seekers", "Career Changers", "Midwest Careers"],
+        "verdict": "$22,800 in-state tuition. 95% employment. 16 months. Kansas delivers an MBA at a price that makes most other programs look irresponsible.",
+        "description": "University of Kansas runs a 16-month accelerated MBA with 95% employment at the lowest in-state tuition in the top 75.",
+        "url": "https://business.ku.edu/",
+        "overview": """<p>University of Kansas runs a 16-month accelerated MBA that gets you in, trained, and employed faster than the standard two-year model. At $22,800 in-state tuition, it's the cheapest MBA in this ranking range by a wide margin. The 95% employment rate within three months means the program delivers on the fundamental MBA promise: a better job.</p>
+<p>The 53-person class receives individualized career coaching. Concentrations span business analytics, finance, marketing, supply chain management, strategic management, and HR management. Lawrence is a college town 40 minutes from Kansas City, which provides the corporate recruiting base. The accelerated format means less time out of the workforce, which compounds the cost savings.</p>""",
+        "culture": """<p>Kansas' culture is Midwestern friendly: collaborative, grounded, and unpretentious. The 53-person class bonds quickly in the accelerated format. Lawrence is a classic college town with low cost of living, good food, and Big 12 sports culture. Students who want a no-frills MBA experience focused on career outcomes over prestige will feel at home.</p>""",
+        "academics": """<p>The 16-month format moves quickly through core courses and into concentrations. Business analytics and supply chain management are the academic strengths. The accelerated pace means intensive course loads, but the compressed timeline gets students back into the job market 8 months earlier than traditional programs. Faculty are accessible and invested in the small cohort.</p>""",
+        "careers": """<p>95% employment within three months is the standout metric. Finance (25%), consulting (20%), marketing (18%), and supply chain (15%) are the primary placement areas. Kansas City employers (Sprint/T-Mobile, Cerner, Hallmark, Garmin) provide the primary recruiting base. Average salary of $96,000 goes far in the Midwest, and the low tuition means minimal debt at graduation.</p>""",
+        "who_should_apply": """<p>Value seekers who want the best possible ROI. Career changers who want to minimize time out of the workforce. Midwest-focused candidates targeting Kansas City or regional employers. Anyone who prioritizes employment outcomes over brand prestige.</p>""",
+        "watch_out": """<p>The Kansas MBA brand is regional. Outside the Midwest, it requires context. The 16-month format is intensive and leaves less time for internships, clubs, and the social MBA experience. Lawrence is a small town, which limits on-campus recruiting from coastal employers. If you're targeting NYC, Chicago, or Bay Area employers, the geographic disadvantage is significant.</p>""",
+        "faq": [
+            ("What is the acceptance rate at University of Kansas MBA?",
+             f"University of Kansas admits approximately 55% of MBA applicants for the class of {CURRENT_YEAR}. The 16-month accelerated program enrolls about 53 students."),
+            ("How long is the Kansas MBA program?",
+             "Kansas runs a 16-month accelerated MBA, which is 8 months shorter than most traditional programs. The compressed format gets students back into the job market faster while covering the same core curriculum."),
+            ("What is the average salary after Kansas MBA?",
+             "Kansas MBA graduates earn an average starting salary of approximately $96,000 with a 95% employment rate. The $22,800 in-state tuition makes the debt-to-salary ratio one of the best in MBA education."),
+        ],
+    },
+    {
+        "name": "Auburn University Harbert College of Business", "short_name": "Auburn Harbert",
+        "slug": "auburn-harbert", "location": "Auburn, AL", "ranking": 68, "tier": 5,
+        "acceptance_rate": 50, "avg_gmat": 598, "avg_gpa": 3.40, "class_size": 55,
+        "avg_salary": 95000, "employment_rate": 97, "tuition": 29653,
+        "program_length": "2 years",
+        "strengths": ["Employment Rate", "Supply Chain", "Finance", "Value"],
+        "best_for": ["Southeast Careers", "Supply Chain", "High Employment Probability"],
+        "verdict": "97% employment at three months. Auburn's MBA places graduates at a rate that programs ranked 40 spots higher can't match.",
+        "description": "Auburn Harbert's 97% employment rate is one of the highest in MBA education. Strong supply chain, finance, and quantitative analysis concentrations.",
+        "url": "https://harbert.auburn.edu/",
+        "overview": """<p>Auburn Harbert's 97.1% employment rate within three months is the number that jumps off the page. Very few MBA programs at any ranking level can claim that kind of placement consistency. The program runs capstone projects with real companies, giving students portfolio-ready work and employer relationships before graduation.</p>
+<p>The 55-person class keeps things personal. Supply chain management, finance, MIS, and quantitative analysis are the concentration areas. At $30K in-state tuition, Harbert delivers strong outcomes at a fair price. The Auburn alumni network in the Southeast, particularly in Alabama, Georgia, and Tennessee, provides the career foundation. Dual MBA/MS options in finance, MIS, and industrial engineering add technical depth.</p>""",
+        "culture": """<p>Auburn's culture is warm, community-driven, and proud. The "Auburn Family" mentality extends to the business school. Students help each other with recruiting, and the 55-person class bonds deeply. Auburn the city is a small college town in central Alabama with low cost of living and a pace of life that's miles from NYC or Chicago. SEC sports culture is pervasive.</p>""",
+        "academics": """<p>Capstone projects with corporate partners are the experiential backbone. Students work on real business problems for real companies, building skills and relationships simultaneously. Supply chain, finance, and quantitative analysis concentrations are the academic pillars. Dual MBA/MS programs in finance, MIS, and industrial/systems engineering provide technical specialization for quantitatively inclined students.</p>""",
+        "careers": """<p>97% employment at three months. That number alone tells the career story. Finance (25%), supply chain (20%), consulting (18%), and operations (15%) are the primary sectors. Southeast employers (particularly in manufacturing, logistics, and financial services) recruit heavily. Average salary is approximately $95,000, which stretches far in Alabama and the Southeast. The Auburn alumni network in the region is fiercely loyal.</p>""",
+        "who_should_apply": """<p>Risk-averse candidates who want near-guaranteed employment. Southeast-focused career builders. Supply chain and operations professionals seeking MBA credentials. Value seekers: $30K tuition with 97% employment is a calculation that works for almost everyone.</p>""",
+        "watch_out": """<p>Auburn is a small town in central Alabama. If your career targets are in major coastal cities, getting there from Auburn requires more effort. The $95K average salary reflects Southeast cost of living and employer base, not coastal compensation. The GMAT average (598) is lower than many programs in this range, which could affect peer quality in some cohorts. Outside the Southeast, the Auburn MBA brand has limited reach.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Auburn Harbert?",
+             f"Auburn Harbert admits approximately 50% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 55 students."),
+            ("What is Auburn Harbert's employment rate?",
+             "Auburn Harbert reports a 97.1% employment rate within three months of graduation, one of the highest in the country at any ranking level. Capstone projects with real companies help build employer relationships before graduation."),
+            ("What is the average salary after Auburn Harbert MBA?",
+             "Auburn Harbert graduates earn an average starting salary of approximately $95,000. The low cost of living in the Southeast and the $30K in-state tuition make the ROI strong."),
+        ],
+    },
+    {
+        "name": "University of Cincinnati Carl H. Lindner College of Business", "short_name": "Cincinnati Lindner",
+        "slug": "cincinnati-lindner", "location": "Cincinnati, OH", "ranking": 69, "tier": 5,
+        "acceptance_rate": 50, "avg_gmat": 633, "avg_gpa": 3.44, "class_size": 55,
+        "avg_salary": 93000, "employment_rate": 88, "tuition": 42711,
+        "program_length": "2 years",
+        "strengths": ["ROI", "Co-op Heritage", "Real Estate", "Consumer Packaged Goods"],
+        "best_for": ["CPG Careers", "Real Estate", "Ohio-Based Careers"],
+        "verdict": "P&G, Kroger, and Macy's are all within 3 miles. Cincinnati Lindner gives you Fortune 500 headquarters access that most MBA programs can't touch.",
+        "description": "Cincinnati Lindner sits next to P&G, Kroger, and Macy's headquarters with #3 nationally for ROI (Bloomberg). Co-op heritage and 20+ specializations.",
+        "url": "https://business.uc.edu/",
+        "overview": """<p>Cincinnati invented cooperative education, and that experiential DNA runs through the Lindner MBA. The program sits within 3 miles of Procter & Gamble, Kroger, and Macy's corporate headquarters. For consumer packaged goods, retail, and marketing careers, that proximity creates recruiting pipelines that most programs can't replicate.</p>
+<p>Bloomberg Businessweek ranks Lindner #3 nationally for return on investment, a metric that matters when you're weighing tuition against salary outcomes. The program offers 20+ specializations including data analytics, real estate, healthcare administration, and entrepreneurship. Required international study abroad broadens the perspective. Fortune (2025) ranked Lindner the #1 full-time MBA in Ohio.</p>""",
+        "culture": """<p>Lindner's culture reflects Cincinnati's personality: practical, corporate, and community-oriented. The 55-person class develops tight bonds, and the proximity to Fortune 500 headquarters means guest speakers and corporate projects are routine. Cincinnati's cost of living is low, and the city has invested heavily in its downtown and riverfront, making it an increasingly attractive place to live.</p>""",
+        "academics": """<p>20+ specializations provide unusual breadth for a program this size. Data analytics, real estate, entrepreneurship, and healthcare administration are notable. The required international study abroad distinguishes Lindner from other programs in this tier. Co-op and experiential learning traditions influence the teaching approach, which emphasizes applied projects alongside theory.</p>""",
+        "careers": """<p>CPG and marketing roles at P&G, Kroger, and regional brands account for a significant share of placements. Finance (20%), consulting (18%), and healthcare (12%) round out the profile. Median salary of approximately $93,000 in Cincinnati provides purchasing power equivalent to $130K+ in NYC. P&G's brand management program is a prestigious destination for Lindner graduates who want CPG careers.</p>""",
+        "who_should_apply": """<p>CPG and marketing aspirants who want proximity to P&G and Kroger. Real estate professionals seeking specialized MBA coursework. Ohio-based professionals who want a top MBA without relocating to a coast. Value seekers: Bloomberg's #3 ROI ranking validates the tuition-to-outcome ratio.</p>""",
+        "watch_out": """<p>Cincinnati is a mid-size Midwestern city. Outside Ohio and the CPG industry, the Lindner brand requires context. The $43K tuition is not cheap for a public university in the Midwest. If your goals are coastal tech, elite consulting, or investment banking, Cincinnati's employer base and geographic position won't serve you well.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Cincinnati Lindner?",
+             f"Cincinnati Lindner admits approximately 50% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 55 students."),
+            ("Is Cincinnati Lindner good for CPG careers?",
+             "Lindner is one of the best MBA programs for consumer packaged goods careers. P&G headquarters is within 3 miles, and Kroger and Macy's are similarly close. The proximity creates direct recruiting pipelines, particularly for brand management and marketing roles."),
+            ("What is the average salary after Cincinnati Lindner MBA?",
+             "Lindner graduates earn a median salary of approximately $93,000. Bloomberg ranks Lindner #3 nationally for ROI, reflecting the strong salary-to-tuition ratio. Cincinnati's low cost of living amplifies the purchasing power."),
+        ],
+    },
+    {
+        "name": "UMass Amherst Isenberg School of Management", "short_name": "UMass Isenberg",
+        "slug": "umass-isenberg", "location": "Amherst, MA", "ranking": 70, "tier": 5,
+        "acceptance_rate": 30, "avg_gmat": 648, "avg_gpa": 3.44, "class_size": 42,
+        "avg_salary": 115000, "employment_rate": 90, "tuition": 3000,
+        "program_length": "2 years",
+        "strengths": ["Free Tuition", "Selectivity", "Analytics", "Entrepreneurship"],
+        "best_for": ["Value Seekers", "Analytics", "Career Changers"],
+        "verdict": "Every admitted student gets a full-tuition fellowship. Every one. Isenberg might be the best financial deal in MBA education.",
+        "description": "UMass Isenberg gives every admitted MBA student a full-tuition fellowship plus a stipend. The 30% acceptance rate makes it surprisingly selective.",
+        "url": "https://www.isenberg.umass.edu/",
+        "overview": """<p>UMass Isenberg runs on a financial model that makes other MBA programs look exploitative. Every admitted full-time MBA student receives a fellowship that covers tuition in exchange for 10 hours per week of work. Students also receive roughly $30 per hour in stipend plus healthcare coverage. Total out-of-pocket cost: approximately $3,000 in fees per year. For a program with a 30% acceptance rate and $115K average salary outcomes, this is arguably the best financial deal in MBA education.</p>
+<p>The 30% acceptance rate makes Isenberg more selective than many programs ranked 20 spots above it. The 42-person class is small and focused. Business analytics, entrepreneurship, finance, healthcare administration, marketing, and sport management are the specialization areas. 47% of graduates are employed by Fortune 100 companies, which speaks to the quality of outcomes despite the unconventional pricing model.</p>""",
+        "culture": """<p>Isenberg's culture is driven by students who chose the program strategically. The fellowship model attracts sharp candidates who did the ROI math and concluded that paying $250K for a ranked MBA is unnecessary when you can get similar outcomes for nearly free. Amherst is a college town in western Massachusetts with a five-college consortium (UMass, Amherst, Smith, Mount Holyoke, Hampshire) that provides intellectual community beyond the business school.</p>""",
+        "academics": """<p>Business analytics and entrepreneurship are the primary academic strengths. The small class means seminar-style instruction and direct faculty engagement. The 10-hour-per-week fellowship work often aligns with academic or career interests, providing additional experiential learning. Online MBA coursework (#14 nationally) feeds back into the full-time program's technology infrastructure.</p>""",
+        "careers": """<p>47% of graduates join Fortune 100 companies, a placement rate that rivals many top-25 programs. Tech (25%), consulting (20%), finance (18%), and healthcare (15%) are the primary sectors. Average salary of approximately $115,000 is strong for a program where you essentially paid nothing in tuition. Boston employers (90 minutes east) provide the primary recruiting base, supplemented by Hartford insurance companies and NYC financial firms.</p>""",
+        "who_should_apply": """<p>The smartest value play in MBA education. If you can get in (30% acceptance rate), you'll graduate with minimal debt, a solid salary, and Fortune 100 placement. Career changers who can't afford $200K+ in MBA costs. Analytics-focused candidates who want quantitative training in a small cohort. Anyone willing to spend two years in rural New England for a nearly free MBA.</p>""",
+        "watch_out": """<p>Amherst is rural western Massachusetts. Boston is 90 minutes away, NYC is 3 hours. Recruiting requires travel for most major employers. The Isenberg brand is growing but isn't yet recognized at the level the outcomes warrant. The 10-hour-per-week fellowship commitment adds workload. And the 42-person class means a limited in-cohort network, though the broader UMass alumni base is large.</p>""",
+        "faq": [
+            ("What is the acceptance rate at UMass Isenberg?",
+             f"UMass Isenberg admits approximately 30% of MBA applicants for the class of {CURRENT_YEAR}, making it one of the most selective programs outside the top 50."),
+            ("Is UMass Isenberg really free?",
+             "Every admitted full-time MBA student at Isenberg receives a fellowship covering tuition in exchange for 10 hours per week of work. Students also receive a stipend (~$30/hr) and healthcare coverage. Total out-of-pocket cost is approximately $3,000 in fees per year."),
+            ("What is the average salary after UMass Isenberg MBA?",
+             "Isenberg graduates earn an average starting salary of approximately $115,000. With nearly zero tuition cost, the ROI is exceptional. 47% of graduates join Fortune 100 companies."),
+        ],
+    },
+    {
+        "name": "Chapman University Argyros College of Business and Economics", "short_name": "Chapman Argyros",
+        "slug": "chapman-argyros", "location": "Orange, CA", "ranking": 71, "tier": 5,
+        "acceptance_rate": 54, "avg_gmat": 623, "avg_gpa": 3.40, "class_size": 55,
+        "avg_salary": 95000, "employment_rate": 84, "tuition": 50000,
+        "program_length": "21 months",
+        "strengths": ["Entrepreneurship", "Entertainment", "STEM-Designated", "Small Cohorts"],
+        "best_for": ["Entertainment/Media", "Entrepreneurship", "Orange County Careers"],
+        "verdict": "A STEM-designated MBA with a dual MBA/MFA in Film. Chapman carved out a niche where Hollywood meets business school.",
+        "description": "Chapman Argyros offers a STEM-designated MBA with unique entertainment and media specialization, including a dual MBA/MFA in Film and Television Producing.",
+        "url": "https://www.chapman.edu/business/",
+        "overview": """<p>Chapman Argyros distinguishes itself with something no other MBA program offers: a dual MBA/MFA in Film and Television Producing. That's not a gimmick. Chapman's film school (Dodge College) is ranked among the top 10 in the country, and the dual degree creates entertainment industry executives who understand both creative and business sides. The STEM-designated 21-month MBA also offers eight concentrations including Entertainment and Media Management, which is unique among MBA programs.</p>
+<p>The 55-person class runs in small cohorts of about 30, ensuring personalized attention. Orange County's business community provides corporate connections, and the Leatherby Center for Entrepreneurship supports startup ventures. The campus is in Orange, CA, close enough to LA's entertainment industry and Orange County's tech corridor to access both job markets.</p>""",
+        "culture": """<p>Chapman's culture is entrepreneurial and creative. The entertainment industry connection attracts students who think differently about business. Small cohorts create tight bonds. Orange, CA, offers a suburban California lifestyle with beach access and proximity to both LA and the OC tech scene. The university's Christian heritage is present but not dominant in the business school.</p>""",
+        "academics": """<p>The Entertainment and Media Management specialization is the academic headline. Business Analytics, Finance, Global Business, and Marketing are the other concentration areas. The STEM designation gives the curriculum a quantitative foundation. The dual MBA/MFA draws on Chapman's nationally ranked film school. Entrepreneurship courses through the Leatherby Center support founders and creative business builders.</p>""",
+        "careers": """<p>Entertainment and media companies hire from Chapman's unique pipeline. Tech (20%), marketing (18%), finance (15%), and entrepreneurship (12%) are the other placement areas. Average salary is approximately $95,000. Orange County employers provide the primary local market, with LA entertainment companies as a secondary focus. The dual MBA/MFA graduates command a premium in entertainment management roles.</p>""",
+        "who_should_apply": """<p>Entertainment industry professionals who want business credentials. Aspiring producers who want the MBA/MFA dual degree. Entrepreneurs targeting Orange County or the entertainment sector. STEM-focused candidates who want a smaller program with California lifestyle.</p>""",
+        "watch_out": """<p>Chapman's MBA brand is regional. Outside Orange County and the entertainment industry, the name requires explanation. The $50K annual tuition is expensive for outcomes in this tier. If you're not interested in entertainment or media, the school's primary differentiator doesn't help you. The 84% employment rate trails programs with comparable or lower rankings.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Chapman Argyros?",
+             f"Chapman Argyros admits approximately 54% of MBA applicants for the class of {CURRENT_YEAR}. The STEM-designated program enrolls about 55 students."),
+            ("What is the MBA/MFA dual degree at Chapman?",
+             "Chapman offers a dual MBA/MFA in Film and Television Producing, combining Argyros College of Business with the nationally ranked Dodge College of Film. Graduates understand both the creative and business sides of entertainment, a combination that's unique in MBA education."),
+            ("What is the average salary after Chapman Argyros MBA?",
+             "Chapman Argyros graduates earn an average starting salary of approximately $95,000. Entertainment management, tech, and marketing roles drive placement in the SoCal market."),
+        ],
+    },
+    {
+        "name": "Pepperdine Graziadio Business School", "short_name": "Pepperdine Graziadio",
+        "slug": "pepperdine-graziadio", "location": "Malibu, CA", "ranking": 72, "tier": 5,
+        "acceptance_rate": 60, "avg_gmat": 615, "avg_gpa": 3.26, "class_size": 57,
+        "avg_salary": 105000, "employment_rate": 82, "tuition": 50940,
+        "program_length": "2 years",
+        "strengths": ["Values-Based Leadership", "SoCal Network", "Experiential Learning", "Real Estate"],
+        "best_for": ["Values-Driven Careers", "SoCal Business", "Real Estate"],
+        "verdict": "An MBA on the Malibu coast. Pepperdine attracts people who want business success and personal values in the same package.",
+        "description": "Pepperdine Graziadio offers a values-based MBA in Malibu with experiential learning and strong SoCal business connections.",
+        "url": "https://bschool.pepperdine.edu/",
+        "overview": """<p>Pepperdine Graziadio operates from a campus overlooking the Pacific Ocean in Malibu. The setting is spectacular, and the values-based leadership approach (rooted in the university's Christian heritage) gives the MBA a distinctive identity. This attracts a self-selecting cohort: people who want career success and ethical grounding in the same program.</p>
+<p>The 57-person class provides personalized attention. SoCal's entertainment, real estate, tech, and financial services industries are the primary career targets. Experiential learning projects with LA-area companies bridge theory and practice. The Graziadio brand carries weight in Southern California's business community, particularly in real estate and entertainment. Tuition at $51K per year is high for this ranking tier, but the SoCal network and lifestyle are the premium being purchased.</p>""",
+        "culture": """<p>Pepperdine's culture blends ambition with values. The Christian heritage creates a community that discusses ethics substantively. Malibu's setting adds a lifestyle dimension that no other MBA program can match: ocean views, hiking trails, and year-round sunshine. The 57-person class bonds deeply. Students who want a values-centered community in a stunning environment will find Pepperdine uniquely appealing.</p>""",
+        "academics": """<p>Values-based leadership courses distinguish the curriculum from typical MBA programs. Real estate, entrepreneurship, and entertainment management are academic strengths reflecting the SoCal economy. Experiential learning projects with local companies provide applied experience. The smaller class means discussion-based courses rather than lecture-hall formats.</p>""",
+        "careers": """<p>SoCal employers drive placement. Finance (25%), consulting (18%), real estate (15%), and entertainment (10%) are the primary sectors. Average salary is approximately $105,000. The Graziadio alumni network in Southern California opens doors that the ranking alone wouldn't predict, particularly in real estate and entertainment management. LA's diverse economy provides a broad range of career options.</p>""",
+        "who_should_apply": """<p>Candidates who want a values-centered MBA experience in Southern California. Real estate professionals seeking MBA credentials with SoCal market connections. Anyone drawn to Pepperdine's combination of academic rigor and lifestyle quality. Entertainment and media professionals targeting LA industry careers.</p>""",
+        "watch_out": """<p>Malibu is beautiful but isolated. The campus is 35 miles from downtown LA, which means commuting for employer events and interviews. The $51K tuition is steep for a program in this ranking range. Outside SoCal, the Graziadio brand requires context. If you prioritize ranking prestige over values alignment, USC Marshall or UCLA Anderson offer stronger brands in the same metro.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Pepperdine Graziadio?",
+             f"Pepperdine Graziadio admits approximately 60% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 57 students."),
+            ("Is Pepperdine Graziadio good for real estate?",
+             "Graziadio has strong real estate coursework and connections to SoCal's property market. The alumni network in Southern California real estate is well-established, and proximity to LA's development market provides experiential learning opportunities."),
+            ("What is the average salary after Pepperdine Graziadio MBA?",
+             "Pepperdine Graziadio graduates earn an average starting salary of approximately $105,000. SoCal-based finance, consulting, and real estate roles drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "Stevens Institute of Technology School of Business", "short_name": "Stevens",
+        "slug": "stevens", "location": "Hoboken, NJ", "ranking": 73, "tier": 5,
+        "acceptance_rate": 55, "avg_gmat": 620, "avg_gpa": 3.15, "class_size": 50,
+        "avg_salary": 105000, "employment_rate": 89, "tuition": 40000,
+        "program_length": "2 years",
+        "strengths": ["Technology", "AI/Analytics", "STEM-Designated", "NYC Proximity"],
+        "best_for": ["Tech Careers", "AI/ML Management", "NYC Metro Careers"],
+        "verdict": "A STEM MBA with AI and machine learning woven into the core. Stevens trains tech-savvy business leaders for a market that wants exactly that.",
+        "description": "Stevens MBA integrates AI, machine learning, and analytics into the core business curriculum. STEM-designated with Manhattan across the river.",
+        "url": "https://www.stevens.edu/school-of-business",
+        "overview": """<p>Stevens Institute of Technology built its MBA around a simple premise: every business problem is now a technology problem. AI, machine learning, and business analytics are integrated into the core curriculum, taught from a technological perspective rather than bolted on as electives. The STEM designation reflects the program's quantitative backbone.</p>
+<p>Hoboken is across the Hudson River from Manhattan, providing NYC career access without NYC tuition prices. The dual MBA/MS in Applied AI is a distinctive offering for candidates who want deep technical training alongside business fundamentals. Stevens' engineering school reputation lends credibility to the tech-focused MBA. The 50-person class keeps things personal, and the $40K tuition is moderate for the NYC metro area.</p>""",
+        "culture": """<p>Stevens' culture is technically oriented and analytically minded. The student body skews toward engineers, data scientists, and tech professionals seeking business acumen. Hoboken offers a vibrant social scene that's quieter and more affordable than Manhattan. The small class creates collaboration opportunities, and the tech focus attracts students who prefer quantitative rigor over qualitative case discussions.</p>""",
+        "academics": """<p>AI and machine learning integration is the academic identity. Core business courses are taught through a technology lens. The dual MBA/MS in Applied AI provides deep technical training for candidates who want to bridge business and engineering. Analytics, fintech, and technology management concentrations connect to the NYC tech economy. Faculty bring industry experience in tech and data science.</p>""",
+        "careers": """<p>Tech takes roughly 30% of placements, followed by finance/fintech (22%), consulting (18%), and analytics (12%). NYC-area tech companies, banks investing in AI, and consulting firms seeking tech-savvy consultants recruit from Stevens. Average salary is approximately $105,000. Stevens reports a 77% increase in earning power for MBA graduates, which reflects the career-change value of the tech-focused curriculum.</p>""",
+        "who_should_apply": """<p>Engineers and technologists who want business leadership skills. Career changers moving into tech management, AI, or analytics. Finance professionals who want to add technology depth. Anyone who wants NYC metro career access with a STEM-designated MBA at a moderate price point.</p>""",
+        "watch_out": """<p>Stevens' MBA brand is newer and less recognized than its engineering reputation. Outside the NYC metro and tech circles, the name requires explanation. The tech-first curriculum may feel limiting if your interests lean toward marketing, operations, or general management. Hoboken is a great place to live but geographically separated from Manhattan's corporate offices by a river and a commute.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Stevens MBA?",
+             f"Stevens admits approximately 55% of MBA applicants for the class of {CURRENT_YEAR}. The STEM-designated program enrolls about 50 students."),
+            ("Does Stevens offer a dual MBA/MS in AI?",
+             "Yes. Stevens offers a dual MBA/MS in Applied AI that combines business fundamentals with deep technical training in artificial intelligence and machine learning. It's one of the few programs in the country offering this specific combination."),
+            ("What is the average salary after Stevens MBA?",
+             "Stevens MBA graduates earn an average starting salary of approximately $105,000. The school reports a 77% increase in earning power for MBA graduates. Tech and fintech roles in the NYC metro area drive the strongest placement."),
+        ],
+    },
+    {
+        "name": "University of Tennessee Haslam College of Business", "short_name": "Tennessee Haslam",
+        "slug": "tennessee-haslam", "location": "Knoxville, TN", "ranking": 74, "tier": 5,
+        "acceptance_rate": 45, "avg_gmat": 635, "avg_gpa": 3.40, "class_size": 60,
+        "avg_salary": 108000, "employment_rate": 92, "tuition": 28000,
+        "program_length": "2 years",
+        "strengths": ["Supply Chain", "Operations", "Analytics", "Value"],
+        "best_for": ["Supply Chain", "Operations", "Southeast Careers"],
+        "verdict": "US News ranks Haslam's supply chain program #6 nationally. If logistics and operations are your career, this is a top-10 program at a fraction of the cost.",
+        "description": "Tennessee Haslam pairs a #6-ranked supply chain program with strong employment outcomes at in-state public university pricing.",
+        "url": "https://haslam.utk.edu/",
+        "overview": """<p>Tennessee Haslam's calling card is supply chain management, ranked #6 nationally by US News. That specialty ranking puts Haslam in the company of Michigan, MIT, and Penn State for supply chain education, at a fraction of the cost. FedEx, founded by a UT alum, is headquartered in Memphis. The logistics DNA of Tennessee runs through the program.</p>
+<p>The 60-person class receives focused career support, and the 92% employment rate validates the program's ability to place graduates. At $28,000 in-state tuition, Haslam is one of the most affordable top supply chain programs in the country. Analytics and operations management are complementary strengths. Knoxville provides a low-cost base with access to Nashville and Atlanta employers.</p>""",
+        "culture": """<p>Haslam's culture is practical and Southeast-friendly. Tennessee pride runs deep, and the Vol alumni network is strong across the Southeast. The 60-person class bonds in Knoxville's college-town setting. Cost of living is remarkably low, which reduces financial stress during the program. Students who want career-focused education without pretension will feel at home.</p>""",
+        "academics": """<p>Supply chain management is the flagship. Courses in logistics, procurement, operations analytics, and distribution strategy are taught by faculty with industry connections to FedEx, Amazon, and regional manufacturers. Operations management and analytics concentrations complement the supply chain focus. Core MBA courses cover business fundamentals with a practical, applied approach.</p>""",
+        "careers": """<p>Supply chain and operations roles take roughly 35% of placements, reflecting the specialty's strength. Consulting (20%), finance (18%), and analytics (12%) round out the profile. FedEx, Amazon, Deloitte, and regional manufacturers recruit from Haslam. Average salary of $108,000 goes far in Tennessee. The 92% employment rate at three months is strong for this ranking tier.</p>""",
+        "who_should_apply": """<p>Supply chain and logistics professionals who want a top-10 specialty program at a public university price. Operations and analytics candidates targeting Southeast employers. Value seekers: $28K tuition with 92% employment and $108K salary is compelling math. Tennessee residents get one of the best supply chain MBAs in the country for minimal cost.</p>""",
+        "watch_out": """<p>Knoxville is a college town, not a major business center. Supply chain and operations employers recruit here, but NYC finance and Bay Area tech companies generally don't make the trip. The Haslam brand is strong in supply chain circles and the Southeast but limited elsewhere. If you're not targeting supply chain or operations, the program's primary differentiator doesn't help you.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Tennessee Haslam?",
+             f"Tennessee Haslam admits approximately 45% of MBA applicants for the class of {CURRENT_YEAR}. The program enrolls about 60 students."),
+            ("How is Tennessee Haslam's supply chain program ranked?",
+             "US News ranks Tennessee Haslam's supply chain and logistics program #6 nationally, ahead of programs at much higher-ranked business schools. The specialty ranking reflects deep industry connections (FedEx, Amazon) and faculty expertise in logistics and operations."),
+            ("What is the average salary after Tennessee Haslam MBA?",
+             "Haslam graduates earn an average starting salary of approximately $108,000. Supply chain, operations, and consulting roles drive the strongest placement. The $28K in-state tuition makes the ROI calculation strong."),
+        ],
+    },
+    {
+        "name": "University of Kentucky Gatton College of Business and Economics", "short_name": "Kentucky Gatton",
+        "slug": "kentucky-gatton", "location": "Lexington, KY", "ranking": 75, "tier": 5,
+        "acceptance_rate": 60, "avg_gmat": 634, "avg_gpa": 3.50, "class_size": 55,
+        "avg_salary": 90000, "employment_rate": 88, "tuition": 18777,
+        "program_length": "1 year",
+        "strengths": ["Value", "Healthcare", "One-Year Format", "Finance"],
+        "best_for": ["Healthcare Administration", "Value Seekers", "Career Accelerators"],
+        "verdict": "$19K per year. One-year format. Kentucky Gatton is the cheapest path to an MBA in the top 75, and the healthcare concentration connects to a booming industry.",
+        "description": "Kentucky Gatton offers a one-year MBA at the lowest tuition in the top 75, with a growing healthcare concentration in Kentucky's pharmaceutical corridor.",
+        "url": "https://gatton.uky.edu/",
+        "overview": """<p>Kentucky Gatton runs a one-year accelerated MBA at $19,000 in-state tuition, making it the cheapest program in the top 75 by a significant margin. The compressed format gets you credentialed and back in the workforce in 12 months, minimizing both tuition cost and opportunity cost. The math is simple: one year of salary forgone instead of two, at a tuition that's less than a single semester at most competitors.</p>
+<p>Healthcare is an emerging strength. Lexington sits in Kentucky's healthcare and pharmaceutical corridor, with major hospital systems and pharma operations providing employment opportunities. The 55-person class receives focused career support, and the 88% employment rate reflects the program's ability to place graduates despite the compressed timeline. Finance, marketing, and healthcare administration are the primary concentrations.</p>""",
+        "culture": """<p>Gatton's culture is the Bluegrass state embodied: hospitable, down-to-earth, and community-minded. The one-year format moves fast, which bonds the 55-person cohort through shared intensity. Lexington is an affordable college town with horse country charm. SEC sports culture provides social outlets. Students who value efficiency and affordability over prestige and social scene will appreciate the culture.</p>""",
+        "academics": """<p>The one-year format covers core MBA fundamentals on an accelerated timeline. Healthcare administration courses connect to Kentucky's healthcare economy. Finance and marketing concentrations are available. The Part-Time MBA for Leaders in Healthcare is a separate but complementary program that deepens the school's healthcare expertise. Faculty are accessible in the small-class setting.</p>""",
+        "careers": """<p>Healthcare administration, finance, and marketing are the primary placement areas. Regional employers in healthcare, manufacturing, and financial services recruit from Gatton. Average salary is approximately $90,000, which is lower than many programs in this range but must be evaluated against the $19K tuition and one-year timeline. The one-year format means you're earning a full salary 12 months before two-year MBA graduates start working.</p>""",
+        "who_should_apply": """<p>Budget-maximizers who want the cheapest MBA in the top 75. Professionals who can't afford two years out of the workforce. Healthcare professionals targeting administration roles in Kentucky's medical corridor. Anyone who values speed and cost efficiency over prestige and extended networking.</p>""",
+        "watch_out": """<p>The one-year format limits internship opportunities, club participation, and the social MBA experience. The $90K average salary is the lowest in the 51-75 range. Lexington's job market is small, and career opportunities outside Kentucky and the broader Southeast require relocation. The Gatton brand is regional. If you want a traditional two-year MBA experience with summer internship, clubs, and social life, the one-year format sacrifices those elements.</p>""",
+        "faq": [
+            ("What is the acceptance rate at Kentucky Gatton?",
+             f"Kentucky Gatton admits approximately 60% of MBA applicants for the class of {CURRENT_YEAR}. The one-year program enrolls about 55 students."),
+            ("How long is the Kentucky Gatton MBA?",
+             "Gatton runs a one-year accelerated MBA program. The compressed format covers core MBA fundamentals and concentrations in 12 months, getting students back in the workforce a full year before traditional two-year MBA graduates."),
+            ("What is the average salary after Kentucky Gatton MBA?",
+             "Gatton graduates earn an average starting salary of approximately $90,000. With $19K in-state tuition and a one-year format, the total MBA investment is among the lowest in the top 75, making the ROI calculation favorable even at a lower salary figure."),
+        ],
+    },
+]
+
+# Build a lookup dict for quick access
+SCHOOL_MAP = {s["slug"]: s for s in SCHOOLS}
+
+# =============================================================================
+# COMPARISON PAIRS
+# =============================================================================
+
+COMPARISONS = [
+    {"a": "harvard-business-school", "b": "stanford-gsb",
+     "choose_a": "you want the broadest network, love the case method, and care about brand recognition above all else.",
+     "choose_b": "you're drawn to entrepreneurship, want Silicon Valley immersion, and prefer a smaller class.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>HBS and Stanford GSB are the two most prestigious MBA programs in the world. They're the only two programs where the acceptance rate dips below 10%. Most applicants apply to both and choose based on career goals, geography, and personal fit. This comparison matters because the programs produce meaningfully different outcomes despite similar prestige.</p>"),
+         ("Academics and Curriculum", "<p>HBS runs almost entirely on the case method. You'll read 500+ cases over two years, and classroom participation counts for roughly half your grade. Stanford GSB uses a mix of cases, lectures, and experiential learning, with more flexibility in the second year. HBS has a larger elective catalog (over 100 options) because the class is bigger. Stanford's smaller class means fewer elective sections but also smaller class sizes in those sections.</p><p>Both schools produce general managers, but HBS graduates tend to think in frameworks and GSB graduates tend to think in first principles. Neither approach is better. It depends on how your brain works.</p>"),
+         ("Career Outcomes and Recruiting", "<p>HBS sends roughly 27% of graduates into consulting, 24% into finance, and 18% into tech. Stanford GSB sends 32% into tech, 18% into finance, and 16% into consulting. The tech delta is the headline: if you want Silicon Valley, GSB has geographic and cultural advantages. If you want Wall Street or broad consulting access, HBS wins on volume.</p><p>Starting salary medians are similar ($175,000 HBS vs $174,000 GSB), but total compensation packages diverge in tech, where GSB graduates often receive larger equity grants from pre-IPO companies. HBS's larger class (930 vs 430) means a broader alumni network, which matters for career pivots later.</p>"),
+         ("Culture and Community", "<p>HBS is structured and social. Sections of 90 students create tight bonds, and the social scene around Harvard Square is active. Stanford GSB is intimate and reflective. The 430-person class means you'll know most of your classmates, and the culture values personal growth alongside career outcomes.</p><p>HBS students tend to describe their experience as intense and exhilarating. GSB students tend to describe theirs as transformative. Both descriptions are accurate.</p>"),
+         ("Location and Lifestyle", "<p>Cambridge, MA vs Palo Alto, CA. Boston is a four-season city with history, sports, and access to the Northeast corridor. Palo Alto is year-round sunshine with proximity to every major tech company on the planet. Weather preferences aside, the geographic choice is a career signal: do you want to be near Wall Street and consulting headquarters, or near Sand Hill Road and tech HQs?</p>"),
+         ("The Honest Take", "<p>If you get into both, the decision usually comes down to tech vs everything else. GSB graduates disproportionately join startups, launch companies, or take roles at pre-IPO companies. HBS graduates disproportionately join established firms in consulting, finance, and corporate leadership. Both paths lead to exceptional careers. The question is which path matches yours.</p><p>One under-discussed factor: HBS's case method forces you to form and defend opinions publicly every single day. If that sounds energizing, HBS will sharpen your thinking. If that sounds exhausting, GSB's more varied format might suit you better.</p>"),
+     ],
+     "faq": [
+         ("Is Harvard or Stanford the better MBA?", "Neither is objectively better. HBS has a stronger global brand, larger alumni network, and dominates in consulting and finance placement. Stanford GSB has higher per-capita startup success, deeper Silicon Valley integration, and a more intimate community. The right choice depends on your career goals and personal preferences."),
+         ("What are the acceptance rates at HBS and Stanford GSB?", f"HBS admits roughly 11% of applicants; Stanford GSB admits roughly 6.9%. Both are the most selective MBA programs in the world for the class of {CURRENT_YEAR}. Stanford is mathematically harder to get into, but HBS's larger applicant pool means both are extraordinarily competitive."),
+         ("Which school is better for tech careers?", "Stanford GSB places 32% of graduates into tech compared to HBS's 18%. GSB's proximity to Silicon Valley and its entrepreneurial culture give it a clear edge for tech and startup careers. HBS is stronger for tech roles at established companies on the East Coast."),
+     ]},
+    {"a": "wharton", "b": "harvard-business-school",
+     "choose_a": "finance is your path, you want the deepest elective catalog, and you value analytical rigor.",
+     "choose_b": "you want the strongest brand, thrive in the case method, and plan to lead large organizations.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Wharton and HBS are the two largest M7 programs and the two most recognized MBA brands globally. Applicants choosing between them typically have top-tier credentials and face a genuine dilemma: Wharton's depth in finance and analytics versus HBS's breadth in general management and brand equity. Both produce Fortune 500 CEOs, top consultants, and fund managers.</p>"),
+         ("Academics and Curriculum", "<p>Wharton offers over 200 electives across 19 departments, which is the deepest catalog of any MBA program. The curriculum is flexible from day one, and students can specialize early. HBS runs on the case method almost exclusively, which creates a structured, discussion-intensive learning environment. If you want to go deep on a specific domain (healthcare finance, quantitative strategies, real estate), Wharton's catalog is unmatched. If you want to build broad leadership skills through structured debate, HBS is purpose-built for that.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Wharton places 34% of graduates into finance, making it the dominant finance MBA. HBS places 27% into consulting and 24% into finance. Both schools are target schools for every major employer. The practical difference: Wharton graduates have an edge in quant-heavy finance roles (PE, hedge funds, trading), while HBS graduates have a broader brand advantage across all industries. McKinsey, BCG, and Bain hire aggressively from both.</p>"),
+         ("The Honest Take", "<p>If you know you want finance, Wharton is the answer. The alumni network on Wall Street is the deepest of any business school, and the curriculum gives you the technical foundation to compete in quantitative roles from day one. If you want the broadest possible brand, the strongest case method training, and the most CEO-producing alumni network in history, HBS delivers that. Most people choosing between these two already know which matters more to them.</p>"),
+     ],
+     "faq": [
+         ("Is Wharton or Harvard better for finance?", "Wharton places 34% of graduates into finance compared to HBS's 24%. Wharton's finance curriculum is deeper, with more electives in quantitative finance, PE, and hedge fund management. For finance careers specifically, Wharton has a clear edge."),
+         ("Which has a larger class, Wharton or HBS?", "HBS enrolls about 930 students per class; Wharton enrolls about 850. Both produce large graduating classes that build extensive alumni networks. HBS has a slight edge in total network size, but both are among the largest MBA programs in the world."),
+         ("Which school is harder to get into?", f"HBS's acceptance rate is approximately 11% and Wharton's is approximately 13% for the class of {CURRENT_YEAR}. Both are extremely selective. The practical difference in selectivity is small, and applicants are typically competitive at both schools."),
+     ]},
+    {"a": "stanford-gsb", "b": "wharton",
+     "choose_a": "you're targeting tech, VC, or entrepreneurship and want the Silicon Valley immersion.",
+     "choose_b": "you want the deepest finance program, the largest class network, and East Coast access.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Stanford GSB and Wharton represent opposite philosophies at the top of MBA education. GSB bets on small classes, personal transformation, and Silicon Valley proximity. Wharton bets on scale, analytical rigor, and the deepest finance curriculum in the world. Applicants choosing between them are typically deciding between West Coast tech/entrepreneurship and East Coast finance/breadth.</p>"),
+         ("Academics and Curriculum", "<p>Stanford GSB's curriculum is built around general management with a personalized second year. The 430-person class means fewer elective sections but more intimate classroom discussions. Wharton's 200+ electives and 850-person class create unmatched academic breadth. You can study esoteric finance topics at Wharton that simply don't exist at other schools.</p>"),
+         ("Career Outcomes and Recruiting", "<p>GSB sends 32% into tech; Wharton sends 34% into finance. These are the defining stats. GSB graduates are more likely to join startups, launch companies, or take product roles at pre-IPO tech companies. Wharton graduates are more likely to join PE firms, hedge funds, or investment banks. Both schools place well into consulting, but through different cultural lenses: GSB consultants tend to land in tech-forward practices, Wharton consultants in financial services practices.</p>"),
+         ("The Honest Take", "<p>GSB is the tech and entrepreneurship school. Wharton is the finance and breadth school. The stereotypes exist because they're accurate. If you're genuinely torn between the two career directions, ask yourself where you'd rather spend two years: the Bay Area surrounded by founders, or Philadelphia surrounded by quants. That preference usually predicts the right answer.</p>"),
+     ],
+     "faq": [
+         ("Is Stanford GSB or Wharton harder to get into?", f"Stanford GSB's acceptance rate (6.9%) is roughly half of Wharton's (13%) for the class of {CURRENT_YEAR}. Stanford GSB is the hardest MBA program to get into by acceptance rate. However, Wharton receives more total applications, so the absolute number of rejections is comparable."),
+         ("Which is better for entrepreneurship, Stanford or Wharton?", "Stanford GSB has a stronger entrepreneurship culture. Roughly 16% of GSB graduates start companies immediately after graduating, compared to about 8% at Wharton. GSB's proximity to Sand Hill Road and its smaller, founder-friendly culture give it a clear edge for aspiring entrepreneurs."),
+         ("Which has better career outcomes?", "Both produce exceptional outcomes. GSB leads in tech compensation (larger equity packages at pre-IPO companies), while Wharton leads in finance compensation (higher base salaries in PE and hedge funds). Overall median base salary is similar: $174,000 at GSB vs $175,000 at Wharton."),
+     ]},
+    {"a": "booth", "b": "kellogg",
+     "choose_a": "you want maximum curriculum flexibility, love analytical rigor, and lean toward finance.",
+     "choose_b": "you value collaborative culture, want the best marketing program, and lean toward consulting.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Booth and Kellogg are Chicago's M7 programs, separated by 10 miles and an enormous cultural gap. Booth is the intellectual individualist's school: flexible curriculum, rigorous analytics, and a culture that values independent thinking. Kellogg is the collaborative leader's school: team-based learning, marketing excellence, and a culture that values emotional intelligence. Most Chicago-bound applicants apply to both and choose based on personality as much as career goals.</p>"),
+         ("Academics and Curriculum", "<p>Booth's curriculum is radically flexible. Students choose from over 100 electives with almost no required courses after the first quarter. The academic approach is analytical and economics-driven, with faculty who are world-class researchers. Kellogg's curriculum is more structured, with a team-based first year and marketing, management, and strategy as core strengths. If you want to design your own MBA from scratch, Booth gives you the freedom. If you want a curated experience built around leadership and teamwork, Kellogg delivers.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Booth places 32% into finance and 26% into consulting. Kellogg places 34% into consulting and 20% into tech. The consulting delta is notable: Kellogg is widely considered the best consulting feeder in the country, while Booth's finance placement rivals Wharton. Both are MBB target schools, but Kellogg graduates tend to dominate the culture-focused consulting firms, while Booth graduates skew toward the analytics-focused ones.</p>"),
+         ("Culture and Community", "<p>This is the real deciding factor. Booth's culture is intellectual and independent. Students debate ideas vigorously, choose their own paths, and form communities around shared academic interests. Kellogg's culture is warm, social, and team-oriented. Study groups, social committees, and collaborative projects define the experience. If you visit both campuses, the cultural difference is palpable within minutes.</p>"),
+         ("The Honest Take", "<p>Visit both schools. Sit in on a class at each. One will feel right and the other won't. Booth people know they're Booth people, and Kellogg people know they're Kellogg people. The academic and career outcomes are close enough that the cultural fit should drive your decision. Forcing yourself into the wrong culture for two years is a waste of a top-5 MBA.</p>"),
+     ],
+     "faq": [
+         ("Is Booth or Kellogg better for consulting?", "Kellogg is generally considered the stronger consulting feeder. Kellogg places 34% of graduates into consulting compared to Booth's 26%. Kellogg's team-based culture aligns well with consulting firm culture, and McKinsey, BCG, and Bain all hire heavily from Kellogg."),
+         ("Is Booth or Kellogg better for finance?", "Booth is the clear winner for finance. Booth places 32% of graduates into finance compared to Kellogg's 15%. Booth's analytical curriculum, flexible course selection, and economics-driven faculty make it one of the top 3 finance MBAs in the world."),
+         ("Which school has a better culture?", "Neither is objectively better. Booth's culture is intellectual, independent, and analytically rigorous. Kellogg's culture is collaborative, social, and team-oriented. The best way to determine fit is to visit both campuses and experience the difference firsthand."),
+     ]},
+    {"a": "columbia-business-school", "b": "nyu-stern",
+     "choose_a": "you want a higher-ranked brand, access to the full Ivy network, and the value investing tradition.",
+     "choose_b": "you want deep immersion in NYC business, care about media and entertainment, and want a lower acceptance barrier.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Columbia and Stern are New York City's two premier MBA programs, and they share a city but serve different markets. Columbia is an M7 with global brand recognition, a value investing heritage, and Ivy League prestige. Stern is a top-15 program with deeper NYC immersion, stronger media and entertainment connections, and a more accessible admissions profile. Applicants targeting NYC careers often apply to both.</p>"),
+         ("Academics and Curriculum", "<p>Columbia's curriculum revolves around value investing (Warren Buffett studied here) and real estate. The Heilbrunn Center for Graham and Dodd Investing is legendary. Stern's curriculum leans into finance, media, and entertainment, with courses taught by Wall Street practitioners who commute to class. Both schools benefit from their NYC location for guest speakers and company visits, but Stern's Greenwich Village campus puts you physically inside the business district.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Columbia places 36% into finance and 28% into consulting. Stern places 30% into finance and 25% into consulting. The finance delta favors Columbia, particularly for PE, hedge funds, and value investing roles. Stern has an edge in media, entertainment, and luxury goods placement. Both are target schools for all major consulting firms and banks. Columbia's Ivy brand opens doors globally; Stern's NYC network opens doors locally.</p>"),
+         ("The Honest Take", "<p>If you want the stronger global brand and the Ivy League credential, Columbia wins. If you want to be embedded in NYC business culture from day one and care about media, entertainment, or luxury goods, Stern's location and specialized programs have an edge. The ranking gap (Columbia #7 vs Stern #12) matters for employer perception in some industries. In NYC specifically, both brands carry weight.</p>"),
+     ],
+     "faq": [
+         ("Is Columbia or NYU Stern harder to get into?", f"Columbia's acceptance rate is approximately 15% compared to Stern's 20% for the class of {CURRENT_YEAR}. Columbia is more selective, reflecting its M7 status and Ivy League brand. Both are highly competitive."),
+         ("Which is better for finance in NYC?", "Columbia has a slight edge for finance overall, placing 36% of graduates into finance vs Stern's 30%. Columbia's value investing heritage (Warren Buffett, Heilbrunn Center) gives it particular strength in buy-side roles. Stern is competitive in investment banking and has strong connections to media and entertainment finance."),
+         ("Which school has better career outcomes?", "Columbia's median base salary ($180,000) is slightly higher than Stern's ($165,000), reflecting the broader brand premium. Both schools produce strong outcomes in NYC, and the gap narrows for NYC-specific roles where Stern's local network compensates."),
+     ]},
+    {"a": "mit-sloan", "b": "columbia-business-school",
+     "choose_a": "you're technical, want MIT's innovation ecosystem, and lean toward tech or operations.",
+     "choose_b": "you're targeting finance, media, or real estate, and want to be in New York.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Sloan and Columbia represent two different M7 philosophies: MIT's innovation-driven, technically rigorous approach versus Columbia's finance-centric, NYC-embedded model. Applicants comparing these two are typically choosing between tech/innovation careers and finance/real estate careers, with geography as a deciding factor.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Sloan sends 35% into tech and 25% into consulting. Columbia sends 36% into finance and 28% into consulting. If you want to build products at a tech company or launch a startup in the innovation space, Sloan's MIT ecosystem is hard to beat. If you want to work in PE, hedge funds, or NYC real estate, Columbia's Wall Street proximity and alumni network are the clear advantage. Consulting is strong at both, but through different lenses: Sloan consultants lean toward digital transformation, Columbia consultants lean toward financial services.</p>"),
+         ("The Honest Take", "<p>Tech vs finance. Cambridge vs Manhattan. Innovation vs capital markets. The stereotypes are accurate because the programs genuinely produce different types of graduates. If you're torn, ask which city excites you more. That's usually the right answer.</p>"),
+     ],
+     "faq": [
+         ("Is MIT Sloan or Columbia better for tech?", "MIT Sloan places 35% of graduates into tech compared to Columbia's 10%. Sloan's integration with MIT's engineering and computer science schools, plus Cambridge's innovation ecosystem, gives it a decisive advantage for tech careers."),
+         ("Is MIT Sloan or Columbia better for finance?", "Columbia places 36% of graduates into finance compared to Sloan's 14%. Columbia's value investing heritage, NYC location, and Wall Street alumni network make it the clear winner for finance careers."),
+     ]},
+    {"a": "berkeley-haas", "b": "ucla-anderson",
+     "choose_a": "you want Bay Area tech access, value social impact, and prefer a smaller class.",
+     "choose_b": "you're targeting entertainment, want LA's lifestyle, and prefer a larger network.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Haas and Anderson are California's top two public MBA programs and the UC system's flagship business schools. Both sit in tech-adjacent ecosystems, but the Bay Area and LA produce different types of careers. Haas leans toward Bay Area tech and social impact. Anderson leans toward entertainment, LA tech, and real estate. Applicants choosing between them are typically deciding between NorCal and SoCal lifestyles as much as academic programs.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Haas sends 42% into tech, benefiting from direct pipelines to Google, Apple, Meta, and hundreds of Bay Area startups. Anderson sends 39% into tech plus 14% into entertainment and media. If Bay Area tech is your target, Haas has the proximity advantage. If entertainment, real estate, or Silicon Beach tech appeals to you, Anderson's LA ecosystem is the better fit. Both place well into consulting, with Haas having a slight edge at MBB firms.</p>"),
+         ("Culture and Community", "<p>Haas students internalize the four Defining Leadership Principles (Question the Status Quo, Confidence Without Attitude, Students Always, Beyond Yourself). It sounds corporate, but these principles genuinely shape the culture. Anderson's culture is entrepreneurial and LA-social: networking events on rooftops, industry mixers at studios, and beach weekends. Haas is 290 students; Anderson is 360. Both are small enough to feel like a community.</p>"),
+         ("The Honest Take", "<p>Bay Area vs LA. That's the honest deciding factor. Both programs are excellent, both have strong outcomes, and both provide access to California's massive economy. Where you want to spend two years (and likely build your post-MBA career) is the question that matters most.</p>"),
+     ],
+     "faq": [
+         ("Is Berkeley Haas or UCLA Anderson harder to get into?", f"Haas's acceptance rate is approximately 16% compared to Anderson's 25% for the class of {CURRENT_YEAR}. Haas is more selective, reflecting its higher ranking (#8 vs #16). Both are competitive public school programs."),
+         ("Which is better for tech in California?", "Haas has a slight edge for Bay Area tech (42% tech placement vs Anderson's 39%). Haas's proximity to Silicon Valley gives it advantages for major tech companies. Anderson is stronger for LA-based tech companies (Silicon Beach, streaming, gaming)."),
+         ("Which school has better career outcomes?", "Haas reports a median base salary of $170,000 compared to Anderson's $160,000. Haas's higher ranking and Bay Area premium contribute to the salary gap. Both produce strong outcomes within their respective California ecosystems."),
+     ]},
+    {"a": "duke-fuqua", "b": "virginia-darden",
+     "choose_a": "you value team culture, want healthcare or energy focus, and like Durham's vibe.",
+     "choose_b": "you love the case method, want pure general management, and appreciate Charlottesville's quality of life.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Fuqua and Darden are the South's top two MBA programs, both offering strong general management training in college-town settings. The comparison is natural: similar rankings, similar class sizes, similar outcomes, but meaningfully different cultures and teaching approaches. Applicants often apply to both and choose based on teaching method preference and cultural fit.</p>"),
+         ("Academics and Curriculum", "<p>Darden is the case method school outside Harvard. Nearly every course uses cases, and the classroom experience is intense, discussion-driven, and demanding. Fuqua uses a mix of cases, lectures, simulations, and team projects. If you thrive in debate-style learning, Darden will energize you. If you prefer variety in teaching methods, Fuqua's blend is more flexible. Fuqua's healthcare and energy concentrations are stronger; Darden's general management training is more focused.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Fuqua places 35% into consulting and 15% into healthcare. Darden places 32% into consulting and 25% into finance. Both are MBB target schools with strong Southeast placement. Fuqua has an edge in healthcare careers (Research Triangle proximity). Darden has an edge in corporate finance and general management roles. Starting salaries are comparable ($160,000 Fuqua vs $158,000 Darden).</p>"),
+         ("The Honest Take", "<p>Do you prefer the case method or a mixed approach? That's the real question. Both schools produce excellent consultants and general managers. Both offer college-town quality of life at competitive prices. The teaching method shapes your daily experience for two years, and the cultural difference between Fuqua's team-first ethos and Darden's debate-first ethos is significant.</p>"),
+     ],
+     "faq": [
+         ("Is Duke Fuqua or Virginia Darden better for consulting?", "Both are strong consulting feeders. Fuqua places 35% into consulting vs Darden's 32%. McKinsey, BCG, and Bain recruit from both schools. The difference is marginal; choose based on cultural fit rather than consulting placement rates."),
+         ("Which school uses the case method more?", "Darden uses the case method almost exclusively, second only to HBS in case method intensity. Fuqua uses a mix of cases, lectures, and team projects. If you prefer pure case-based learning, Darden is the better fit."),
+         ("What's the location difference?", "Fuqua is in Durham, NC (Research Triangle area), with access to healthcare and tech companies. Darden is in Charlottesville, VA, a smaller college town with fewer nearby employers but exceptional quality of life. Both require travel for most recruiting."),
+     ]},
+    {"a": "yale-som", "b": "nyu-stern",
+     "choose_a": "you're mission-driven, want healthcare or nonprofit management, and value the broader Yale ecosystem.",
+     "choose_b": "you want Wall Street access, care about media, and want to live in Manhattan.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Yale SOM and NYU Stern represent two different flavors of Northeast MBA education. SOM attracts mission-driven candidates who want the Yale brand, healthcare access, and an integrated curriculum. Stern attracts finance-focused candidates who want NYC immersion, media connections, and Wall Street proximity. The ranking gap (SOM #9 vs Stern #12) is small enough that career goals and culture drive the decision.</p>"),
+         ("Career Outcomes and Recruiting", "<p>SOM places 30% into consulting and 15% into healthcare/nonprofit. Stern places 30% into finance and 25% into consulting. If you want Wall Street, media, or entertainment finance, Stern's Greenwich Village campus puts you in the action. If you want healthcare, nonprofit management, or mission-driven consulting, SOM's Yale ecosystem provides access to the School of Public Health, Law School, and Divinity School.</p>"),
+         ("The Honest Take", "<p>Do you care more about purpose or proximity to Wall Street? SOM students tend to ask \"what impact will this have?\" and Stern students tend to ask \"what's the deal structure?\" Both questions are valid. The cultural difference is real and shapes the daily experience.</p>"),
+     ],
+     "faq": [
+         ("Is Yale SOM or NYU Stern better for finance?", "Stern has a clear advantage for finance, placing 30% of graduates into finance vs SOM's 18%. Stern's Manhattan location and Wall Street proximity provide direct access to banks, hedge funds, and PE firms."),
+         ("Which has a stronger brand?", "Yale SOM benefits from the Yale name, which carries weight globally across all industries. Stern benefits from the NYU brand in NYC specifically. For international careers or non-business roles, Yale's broader brand recognition is an advantage. For NYC-specific finance and media, Stern's local brand is strong."),
+     ]},
+    {"a": "michigan-ross", "b": "dartmouth-tuck",
+     "choose_a": "you want a larger class, action-based learning, and Ann Arbor's college-town energy.",
+     "choose_b": "you want the tightest alumni network, small class intimacy, and world-class consulting placement.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Ross and Tuck are both top-15 programs in college-town settings, but they deliver the MBA experience differently. Ross is larger (400 students), action-oriented, and embedded in a major research university. Tuck is smaller (280 students), consulting-focused, and claims the most loyal alumni network in business education. Applicants comparing them are often choosing between scale and intimacy.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Tuck places 40% into consulting, which is the highest rate of any top-15 school. Ross places 30% into consulting and 15% into tech. If consulting is your target, Tuck's placement rate and alumni network in consulting firms are hard to beat. If you want broader industry options including tech, CPG, and automotive, Ross's larger class creates more diverse pipelines.</p>"),
+         ("Culture and Community", "<p>Tuck's alumni loyalty is legendary. Graduates respond to cold outreach at rates that rival any school in the country. The 280-person class in Hanover, NH, creates bonds that last for decades. Ross's 400-person class in Ann Arbor creates a larger, more diverse community with strong action-based learning (MAP projects). Both cultures are collaborative, but Tuck's is more intimate and Ross's is more dynamic.</p>"),
+         ("The Honest Take", "<p>If consulting is your primary goal and you value deep alumni relationships, Tuck is the answer. If you want broader career options, a larger class, and a more active college-town environment, Ross delivers. Both are excellent programs with strong outcomes. The choice is personal.</p>"),
+     ],
+     "faq": [
+         ("Is Tuck or Ross better for consulting?", "Tuck places 40% of graduates into consulting vs Ross's 30%. Tuck is widely considered one of the best consulting feeders in the country. McKinsey, BCG, and Bain recruit heavily from both schools, but Tuck's smaller class and consulting-focused culture give it an edge in per-capita placement."),
+         ("Which has a stronger alumni network?", "Tuck consistently ranks #1 or #2 for alumni satisfaction and engagement. The 280-person class creates deep bonds, and Tuck alumni are famous for helping fellow graduates. Ross has a larger total alumni base (due to bigger classes) but Tuck's per-capita engagement is higher."),
+     ]},
+    {"a": "kellogg", "b": "columbia-business-school",
+     "choose_a": "you value collaboration, want the best marketing program, and lean toward consulting.",
+     "choose_b": "you want NYC immersion, lean toward finance, and value the Ivy brand.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Kellogg and Columbia are both M7 programs with different geographic and cultural identities. Kellogg in Evanston is the collaborative leader's school with dominant consulting and marketing placement. Columbia in Manhattan is the finance powerhouse with NYC as its classroom. Applicants choosing between them are usually deciding between consulting/marketing and finance, or between Chicago and New York lifestyles.</p>"),
+         ("The Honest Take", "<p>Consulting and marketing vs finance and real estate. Chicago vs Manhattan. Collaborative culture vs independent hustle. The programs attract fundamentally different personality types, and both produce exceptional outcomes. If you visit both, you'll feel the difference immediately.</p>"),
+     ],
+     "faq": [
+         ("Is Kellogg or Columbia better for consulting?", "Kellogg places 34% into consulting vs Columbia's 28%. Kellogg is widely considered the top consulting school among M7 programs. Both are MBB target schools."),
+         ("Is Kellogg or Columbia better for finance?", "Columbia places 36% into finance vs Kellogg's 15%. Columbia's Wall Street proximity and value investing heritage give it a decisive advantage for finance careers."),
+     ]},
+    {"a": "wharton", "b": "booth",
+     "choose_a": "you want the finance gold standard, deepest elective catalog, and an Ivy pedigree.",
+     "choose_b": "you want maximum flexibility, rigorous analytics, and Chicago's lower cost of living.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Wharton and Booth are the two most analytically rigorous M7 programs and the two strongest finance MBAs. Both attract quantitatively strong applicants who value intellectual rigor over collaborative warmth. The choice often comes down to Ivy League pedigree (Wharton) vs intellectual freedom (Booth), and Philadelphia vs Chicago.</p>"),
+         ("Academics and Curriculum", "<p>Wharton offers 200+ electives and 19 academic departments, the broadest catalog of any MBA. Booth offers radical flexibility with almost no required courses and a curriculum built around choosing your own path. Wharton's approach is deep and broad simultaneously. Booth's approach trusts students to design their own education. Both produce graduates who think in numbers.</p>"),
+         ("The Honest Take", "<p>Wharton has the Ivy brand, the deeper alumni network on Wall Street, and the broader elective catalog. Booth has more curriculum freedom, Chicago's lower cost of living, and a culture that prizes intellectual independence. For PE and hedge fund careers, Wharton's brand gives you a slight edge. For analytical consulting and finance roles where skill matters more than pedigree, Booth competes evenly.</p>"),
+     ],
+     "faq": [
+         ("Is Wharton or Booth better for finance?", "Both are top-3 finance MBAs. Wharton places 34% into finance; Booth places 32%. Wharton has the stronger Wall Street brand and Ivy pedigree. Booth's flexibility and economics-driven faculty create equally rigorous preparation. For PE and hedge funds, Wharton has a slight edge on brand recognition."),
+         ("Which school is more flexible?", "Booth has the most flexible curriculum of any M7 program. Students choose from over 100 electives with almost no required courses after the first quarter. Wharton is also flexible but has more structure in the first year."),
+     ]},
+    {"a": "harvard-business-school", "b": "booth",
+     "choose_a": "brand matters most, you love case method, and you want the largest CEO-producing network.",
+     "choose_b": "you want intellectual flexibility, strong finance and analytics, and a more meritocratic culture.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>HBS and Booth represent the two poles of M7 education: structured brand power (HBS) vs intellectual freedom (Booth). HBS is the most recognized business school on Earth. Booth's Nobel Prize-winning faculty and flexible curriculum attract students who care more about ideas than credentials. The comparison reveals what you value: institutional prestige or academic rigor.</p>"),
+         ("The Honest Take", "<p>If brand recognition and network breadth are paramount, HBS has no equal. If intellectual freedom, quantitative depth, and a culture that values what you know over where you went are more important, Booth delivers. Both produce exceptional careers. HBS graduates become CEOs at a higher rate. Booth graduates become CIOs and hedge fund managers at a comparable one. Different paths, different strengths.</p>"),
+     ],
+     "faq": [
+         ("Is HBS or Booth more prestigious?", "HBS has broader global brand recognition. Booth has stronger academic credentials in economics and finance (more Nobel Prize-winning faculty). In the business world broadly, HBS carries more weight. In quantitative finance and academia, Booth's reputation is at least equal."),
+         ("Which is harder to get into?", f"HBS's acceptance rate is approximately 11% vs Booth's 20% for the class of {CURRENT_YEAR}. HBS is significantly more selective. However, Booth's applicant pool self-selects toward quantitatively strong candidates, so the populations differ."),
+     ]},
+    {"a": "stanford-gsb", "b": "kellogg",
+     "choose_a": "prestige and Silicon Valley access are paramount, and you're willing to bet on a 6.9% acceptance rate.",
+     "choose_b": "you want collaborative leadership training, strong marketing, and more realistic odds of admission.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>GSB and Kellogg rarely compete directly for the same applicant, but they represent interesting poles of the M7: GSB is the most selective and prestigious, while Kellogg is the most collaborative and consulting-focused. Applicants comparing them are usually weighing prestige vs cultural fit.</p>"),
+         ("The Honest Take", "<p>If you get into both, most people choose Stanford. The brand premium and Silicon Valley access are difficult to pass up. But if Kellogg's collaborative culture and marketing/consulting focus align more closely with who you are, choosing the school that fits your personality is a defensible decision. Two years in the wrong culture is a high price for prestige.</p>"),
+     ],
+     "faq": [
+         ("Which is harder to get into?", f"Stanford GSB's acceptance rate is 6.9% vs Kellogg's 20% for the class of {CURRENT_YEAR}. Stanford GSB is roughly three times more selective than Kellogg."),
+     ]},
+    {"a": "mit-sloan", "b": "berkeley-haas",
+     "choose_a": "you're deeply technical, want East Coast tech access, and value MIT's engineering ecosystem.",
+     "choose_b": "you want West Coast tech, value social impact, and prefer a smaller Bay Area community.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Sloan and Haas are the two most tech-forward MBA programs outside Stanford. Both sit inside world-class research universities with strong engineering schools. The comparison is essentially East Coast tech vs West Coast tech, MIT's innovation engine vs Berkeley's entrepreneurial ecosystem. Both produce graduates who speak technology fluently.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Sloan sends 35% into tech; Haas sends 42% into tech. Haas has a higher tech placement rate due to Bay Area proximity, but Sloan's East Coast tech connections (Boston's AI and biotech scene) provide a different set of employers. Google, Amazon, and Microsoft recruit from both. Sloan has an edge in deep tech (robotics, AI, biotech). Haas has an edge in consumer tech and social enterprise.</p>"),
+         ("The Honest Take", "<p>East Coast tech vs West Coast tech. MIT's analytical rigor vs Berkeley's culture of social impact. Cambridge's four seasons vs the Bay Area's eternal spring. Both are outstanding programs for technically minded candidates. The geography question is usually the tiebreaker.</p>"),
+     ],
+     "faq": [
+         ("Is MIT Sloan or Berkeley Haas better for tech?", "Both are excellent for tech. Haas places 42% into tech vs Sloan's 35%, largely due to Bay Area proximity. Sloan has stronger connections to East Coast tech (AI, biotech, robotics in Boston/Cambridge). For West Coast tech, Haas wins; for East Coast tech, Sloan wins."),
+         ("Which has a stronger brand?", "MIT Sloan ranks higher (#5 vs #8) and has stronger global brand recognition, particularly in technology, analytics, and innovation. Haas benefits from the Berkeley brand in California and has a strong reputation for social impact."),
+     ]},
+    {"a": "duke-fuqua", "b": "cornell-johnson",
+     "choose_a": "you want a stronger brand, team-based culture, and healthcare or consulting focus.",
+     "choose_b": "you want dual-degree flexibility, tech focus, and a Cornell engineering combination.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Fuqua and Johnson are both top-15 programs in research university settings. Fuqua has stronger brand recognition and consulting placement. Johnson has more dual-degree flexibility and deeper integration with Cornell's engineering school. Applicants choosing between them are typically weighing brand strength vs curriculum customization.</p>"),
+         ("The Honest Take", "<p>Fuqua has the stronger brand and better consulting placement. Johnson has better dual-degree options and tech integration through Cornell Tech and the engineering school. If consulting is your primary goal, Fuqua is the safer choice. If you want a tech-business hybrid degree or Cornell's engineering brand, Johnson delivers something unique.</p>"),
+     ],
+     "faq": [
+         ("Is Duke Fuqua or Cornell Johnson better for consulting?", "Fuqua places 35% into consulting vs Johnson's 25%. Fuqua is the stronger consulting feeder, with deeper MBB relationships and a team-based culture that aligns well with consulting firm culture."),
+         ("Which has better dual-degree options?", "Johnson offers more dual-degree combinations through Cornell's broader university (engineering, law, real estate, public policy). The MBA/MS in engineering is particularly popular for tech-focused careers."),
+     ]},
+    {"a": "yale-som", "b": "duke-fuqua",
+     "choose_a": "you're mission-driven, want the Yale brand, and value an integrated curriculum.",
+     "choose_b": "you want team culture, stronger consulting placement, and a more traditional MBA structure.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Yale SOM and Duke Fuqua are both top-15 programs with strong consulting placement in college-town settings. SOM attracts mission-driven candidates with the Yale brand. Fuqua attracts team-oriented candidates with strong healthcare and energy focus. The ranking difference (SOM #9 vs Fuqua #10) is negligible.</p>"),
+         ("The Honest Take", "<p>Yale SOM gives you the Yale name, which opens doors in government, nonprofit, healthcare, and international organizations. Fuqua gives you a team-based MBA experience with stronger consulting placement. If you care about the brand versatility of Yale across industries beyond business, SOM wins. If you want the strongest team culture and consulting preparation, Fuqua wins.</p>"),
+     ],
+     "faq": [
+         ("Is Yale SOM or Duke Fuqua better for consulting?", "Fuqua places 35% into consulting vs SOM's 30%. Fuqua has a slight edge in pure consulting placement. Both are MBB target schools."),
+         ("Which has a stronger brand outside business?", "Yale SOM benefits from the Yale University brand, which carries weight in government, nonprofit, law, and international organizations. Duke's brand is strong but more concentrated in healthcare and the Southeast."),
+     ]},
+    {"a": "ucla-anderson", "b": "usc-marshall",
+     "choose_a": "you want the higher-ranked brand, stronger tech recruiting, and UC system resources.",
+     "choose_b": "you value the Trojan network, want entertainment and real estate focus, and prefer a smaller class.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Anderson and Marshall are LA's two MBA programs, separated by 15 miles and a significant rivalry. Both dominate entertainment and media recruiting. Both serve the LA tech and real estate markets. The comparison matters because LA-bound applicants almost always apply to both and choose based on brand preference, network alignment, and career specialization.</p>"),
+         ("Career Outcomes and Recruiting", "<p>Anderson ranks higher (#16 vs #17) and has stronger tech recruiting (39% vs 35% tech placement). Marshall has the more powerful alumni network in entertainment and real estate, where the Trojan Family connection opens doors that applications alone cannot. Both schools compete for the same employers in entertainment, and the choice often comes down to which alumni network aligns better with your specific target companies.</p>"),
+         ("The Honest Take", "<p>Anderson has the edge on ranking, tech placement, and UC system resources. Marshall has the edge on alumni loyalty, real estate connections, and entertainment industry depth. If you plan to work in LA long-term, both networks will serve you. If entertainment or real estate is your primary goal, talk to alumni from both schools and see which network resonates more with your target employers.</p>"),
+     ],
+     "faq": [
+         ("Is UCLA Anderson or USC Marshall better for entertainment?", "Both are excellent for entertainment. Anderson has stronger tech recruiting and a slightly higher ranking. Marshall's Trojan network is more deeply embedded in studio and agency leadership. The choice depends on which specific entertainment companies you're targeting and which alumni network has stronger relationships there."),
+         ("Which has a stronger alumni network in LA?", "Marshall's Trojan Family network is legendary in LA, particularly in entertainment, real estate, and finance. Anderson's alumni network is also strong in LA tech and entertainment. For sheer alumni loyalty and willingness to help fellow graduates, Marshall's Trojan network has a slight edge."),
+     ]},
+    {"a": "michigan-ross", "b": "indiana-kelley",
+     "choose_a": "you want a top-15 brand, larger class, and stronger national recruiting.",
+     "choose_b": "ROI is your priority and you want top-25 outcomes at public school prices.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Ross and Kelley represent different tiers of Midwest public school MBAs. Ross is a top-15 program with national recruiting and a $160,000 median salary. Kelley is a top-25 program with the best ROI of any MBA at $28,000 tuition. The comparison is essentially brand power vs value proposition.</p>"),
+         ("The Honest Take", "<p>Ross has the stronger brand, better consulting placement, and broader national reach. Kelley has dramatically lower tuition and surprisingly competitive outcomes. If you can afford Ross and want the stronger resume line, it's the better investment. If debt minimization matters and you're targeting Midwest careers, Kelley's math is hard to beat.</p>"),
+     ],
+     "faq": [
+         ("Is Michigan Ross or Indiana Kelley a better value?", "Kelley has the better pure ROI: $28,000/year tuition vs Ross's $60,000+/year. Ross has higher median salary ($160,000 vs $145,000) and stronger national brand recognition. The value calculation depends on your target geography and industry."),
+     ]},
+    {"a": "dartmouth-tuck", "b": "cornell-johnson",
+     "choose_a": "you want the most loyal alumni network, pure general management, and intimate class size.",
+     "choose_b": "you want dual-degree options, tech focus, and more flexibility in your curriculum.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Tuck and Johnson are both Ivy League MBA programs in rural college-town settings. Tuck (Hanover, NH) focuses on general management with legendary alumni loyalty. Johnson (Ithaca, NY) offers more curriculum flexibility and stronger tech integration through Cornell's engineering school. The comparison highlights the trade-off between alumni network depth and academic customization.</p>"),
+         ("The Honest Take", "<p>Tuck has the stronger consulting placement, more loyal alumni network, and a purer general management curriculum. Johnson has better dual-degree options, deeper tech integration, and more flexibility for non-traditional career paths. For consulting specifically, Tuck wins. For tech or hybrid business-engineering careers, Johnson's Cornell ecosystem adds value.</p>"),
+     ],
+     "faq": [
+         ("Is Tuck or Johnson better for consulting?", "Tuck places 40% into consulting vs Johnson's 25%. Tuck's alumni network in consulting is among the strongest of any MBA program."),
+         ("Which school is in a more remote location?", "Both are in small college towns. Hanover, NH (Tuck) and Ithaca, NY (Johnson) are roughly equally remote from major cities. Both require travel for recruiting events in New York, Boston, or other metros."),
+     ]},
+    {"a": "nyu-stern", "b": "georgetown-mcdonough",
+     "choose_a": "you want NYC, finance or media careers, and a higher-ranked program.",
+     "choose_b": "you want DC, government or international business, and a more intimate community.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Stern and McDonough serve two of America's most important business cities: New York and Washington. Stern is the finance and media school. McDonough is the government and international business school. The comparison is geographic and career-specific: where do you want to work, and which industry ecosystem do you want to be near?</p>"),
+         ("The Honest Take", "<p>If your career involves finance, media, or NYC-based business, Stern's higher ranking and Greenwich Village location are clear advantages. If your career involves government, international development, or DC-based consulting, McDonough's proximity to the White House, World Bank, and K Street is unmatched. The schools serve different markets with limited overlap.</p>"),
+     ],
+     "faq": [
+         ("Is NYU Stern or Georgetown better for finance?", "Stern places 30% into finance vs McDonough's 12%. Stern's NYC location and Wall Street proximity give it a decisive advantage for finance careers."),
+         ("Is Georgetown better for government careers?", "Yes. McDonough places 15% into government and international development. Stern places virtually zero into government. For government, policy, and international development careers, McDonough has no peer among top-25 MBA programs."),
+     ]},
+    {"a": "texas-mccombs", "b": "rice-jones",
+     "choose_a": "you want Austin's tech ecosystem, larger class, and broader industry placement.",
+     "choose_b": "you want Houston's energy hub, smaller class, and healthcare connections.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>McCombs and Jones are Texas's top two MBA programs, located in the state's two largest business cities. McCombs in Austin has tech and energy breadth with a 260-person class. Jones in Houston has energy depth and healthcare proximity with a 130-person class. Texas-bound applicants frequently apply to both.</p>"),
+         ("The Honest Take", "<p>McCombs has the broader placement (tech + energy + consulting), larger class, and lower tuition. Jones has the deeper energy connections (Houston is the energy capital), more intimate community, and the Rice brand. If you want Austin and broader career options, McCombs wins. If you want Houston specifically and value a small, tight community, Jones delivers.</p>"),
+     ],
+     "faq": [
+         ("Is McCombs or Rice Jones better for energy?", "Both are top energy MBA programs. Jones has the edge for Houston-based energy roles due to physical proximity. McCombs offers broader industry diversification with tech and consulting alongside energy."),
+         ("Which is cheaper?", "McCombs in-state tuition is under $42,000/year. Jones tuition is $62,000/year. For Texas residents, McCombs has a significant cost advantage."),
+     ]},
+    {"a": "unc-kenan-flagler", "b": "emory-goizueta",
+     "choose_a": "you want better ROI at public school tuition, strong healthcare, and Chapel Hill's lifestyle.",
+     "choose_b": "you want Atlanta's corporate hub, smaller class, and strong consulting placement.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Kenan-Flagler and Goizueta are the Southeast's top two MBA programs. Kenan-Flagler in Chapel Hill offers strong healthcare and real estate at public school prices. Goizueta in Atlanta offers strong consulting placement and proximity to 17 Fortune 500 headquarters. The comparison is value (Kenan-Flagler) vs corporate access (Goizueta).</p>"),
+         ("The Honest Take", "<p>Kenan-Flagler wins on pure ROI: public school tuition with top-20 outcomes. Goizueta wins on consulting placement, corporate proximity, and Atlanta's job market density. If healthcare is your target, Kenan-Flagler's Research Triangle connections are stronger. If consulting or Fortune 500 corporate roles are your goal, Goizueta's Atlanta location gives you an edge.</p>"),
+     ],
+     "faq": [
+         ("Is UNC or Emory better for healthcare?", "UNC Kenan-Flagler has stronger healthcare placement, benefiting from the Research Triangle's life sciences corridor and UNC's top-ranked School of Public Health. Emory's CDC proximity and Emory Healthcare also provide strong healthcare connections, but UNC has the edge."),
+         ("Which offers better ROI?", "Kenan-Flagler's public school tuition ($48,000/year) gives it a significant cost advantage over Goizueta ($64,000/year). Starting salaries are comparable ($152,000 vs $150,000). Kenan-Flagler wins on pure ROI."),
+     ]},
+    {"a": "carnegie-mellon-tepper", "b": "michigan-ross",
+     "choose_a": "you're quantitative, want analytics and tech management, and value STEM designation.",
+     "choose_b": "you want broader general management, larger class, and action-based learning.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Tepper and Ross are Midwest programs with different strengths. Tepper is quantitative, STEM-designated, and deeply connected to CMU's computer science program. Ross is broader, action-oriented, and embedded in a large research university with strong general management training. The comparison is specialization (Tepper) vs breadth (Ross).</p>"),
+         ("The Honest Take", "<p>If you're quantitative and targeting tech, analytics, or operations, Tepper's CMU integration and STEM designation are clear advantages. If you want broader career options, a larger class, and the Michigan brand, Ross delivers more versatility. Ross ranks higher (#11 vs #18), which matters for employer perception in industries where technical depth is less valued.</p>"),
+     ],
+     "faq": [
+         ("Is Tepper or Ross better for tech?", "Tepper places 40% into tech vs Ross's 15%. Tepper's integration with CMU's computer science program and STEM designation give it a clear advantage for tech careers. Ross is better for general management and broader industry access."),
+         ("Which school is more prestigious?", "Ross ranks higher (#11 vs #18) and has broader name recognition. Tepper has stronger brand recognition in tech and analytics specifically. The prestige question depends on which industry you're targeting."),
+     ]},
+    {"a": "washington-foster", "b": "ucla-anderson",
+     "choose_a": "you want Pacific Northwest tech access, smaller class, and Seattle's quality of life.",
+     "choose_b": "you want LA's entertainment and tech scene, larger network, and year-round sunshine.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Foster and Anderson are the West Coast's top two public MBA programs outside Berkeley. Foster in Seattle has deep Amazon and Microsoft connections with a 140-person class. Anderson in LA has entertainment and broader tech reach with a 360-person class. The comparison is Pacific Northwest vs Southern California, and concentrated tech pipeline vs broader industry access.</p>"),
+         ("The Honest Take", "<p>If Amazon, Microsoft, or the Pacific Northwest tech scene is your target, Foster's smaller class and direct pipelines are more efficient. If you want entertainment, LA tech, or a larger alumni network, Anderson's scale and geographic breadth are advantages. Foster is cheaper (public school tuition in Washington) and has the no-state-income-tax benefit. Anderson has stronger national brand recognition.</p>"),
+     ],
+     "faq": [
+         ("Is Foster or Anderson better for tech?", "Foster has a higher tech placement percentage (50% vs 39%), with Amazon as the single largest employer. Anderson has broader tech reach across more companies. For Amazon/Microsoft specifically, Foster has a more direct pipeline. For LA-based tech (streaming, gaming, Silicon Beach), Anderson wins."),
+         ("Which is more affordable?", "Foster's in-state tuition ($55,000/year) is lower than Anderson's ($67,000/year). Both states lack state income tax (Washington) or have it (California), so post-MBA take-home pay favors Foster. Anderson's higher salary ($160K vs $152K) partially offsets the cost difference."),
+     ]},
+
+    # --- ADDITIONAL CROSS-TIER COMPARISONS ---
+    {"a": "yale-som", "b": "mit-sloan",
+     "choose_a": "you value a mission-driven culture, want exposure to Yale's broader university, and care about social impact alongside business.",
+     "choose_b": "you want analytical rigor, tech placement, and access to MIT's engineering ecosystem.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Yale SOM and MIT Sloan are both top-10 programs in the Northeast with distinct identities. Yale SOM leans toward leadership and social impact; MIT Sloan leans toward analytics and technology. Both have smaller class sizes than HBS and strong consulting placement. The choice comes down to culture and career goals.</p>"),
+         ("Career Outcomes", "<p>MIT Sloan places 35% of graduates into tech, with strong pipelines to Amazon, Google, and Apple. Yale SOM is more balanced: roughly 30% consulting, 25% finance, 15% tech. Both schools are MBB targets. The divergence is at the margins: MIT has the edge in tech and operations; Yale has the edge in nonprofit, social enterprise, and government.</p>"),
+         ("Culture and Community", "<p>Yale SOM's integrated curriculum and focus on 'education for business and society' creates a culture that values purpose alongside profit. MIT Sloan's culture is analytical and entrepreneurial, shaped by the broader MIT ecosystem. Yale students are more likely to talk about leadership development; MIT students are more likely to talk about building things.</p>"),
+         ("The Honest Take", "<p>If you want to keep social impact options open, Yale SOM provides better infrastructure (loan forgiveness, career services, cultural support). If you want tech or operations, MIT Sloan's proximity to MIT's engineering resources is a genuine competitive advantage. Both are excellent. The decision hinges on whether you identify more with Yale's leadership ethos or MIT's builder ethos.</p>"),
+     ],
+     "faq": [
+         ("Is Yale SOM or MIT Sloan more prestigious?", "Both are top-10 programs with strong brand recognition. MIT Sloan has a slight edge in tech circles and with quantitative employers. Yale SOM has a slight edge in consulting, government, and mission-driven organizations. The prestige difference is negligible."),
+         ("Which school is better for consulting?", "Both place well into MBB. Yale SOM has a slightly higher consulting placement percentage. MIT Sloan's analytical training produces strong case interviewers. Either school positions you well for McKinsey, BCG, and Bain."),
+         ("Which has better financial aid?", "Both schools offer merit-based scholarships and need-based aid. Yale SOM's loan forgiveness program for graduates working in public service and nonprofit sectors is one of the most generous in MBA education."),
+     ]},
+    {"a": "stanford-gsb", "b": "booth",
+     "choose_a": "you want entrepreneurship, Silicon Valley immersion, and a small, intimate class.",
+     "choose_b": "you want maximum academic flexibility, financial rigor, and the best cost-adjusted value among M7 programs.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Unusual comparison, but a real one for applicants who value academics and class culture. Stanford GSB and Booth are both intellectual powerhouses with very different vibes. GSB is small (430), personal, and California casual. Booth is larger (590), analytically rigorous, and Chicago practical. Both attract students who care about substance over signaling.</p>"),
+         ("Academics and Curriculum", "<p>Booth's flexible curriculum is its defining feature. There are no required courses. You build your own MBA from scratch, choosing from 200+ electives. Stanford GSB has a structured first-year core with second-year flexibility and cross-registration across all of Stanford's graduate schools. Booth produces specialists; GSB produces generalists.</p>"),
+         ("Career Outcomes", "<p>Stanford GSB leads in tech (32%) and entrepreneurship (18%). Booth leads in finance (32%) and has strong consulting placement. Both are MBB targets. The geographic pull is different: GSB graduates cluster in the Bay Area; Booth graduates spread across Chicago, NYC, and other major metros.</p>"),
+         ("The Honest Take", "<p>GSB costs more (tuition and Bay Area living), has a harder admit rate (6.9% vs 21%), and produces a particular kind of leader: visionary, impact-oriented, comfortable with ambiguity. Booth costs less, admits more students, and produces a particular kind of thinker: analytical, rigorous, comfortable with complexity. Both are extraordinary programs. The question is which kind of MBA experience you want.</p>"),
+     ],
+     "faq": [
+         ("Is Stanford GSB harder to get into than Booth?", "Yes. Stanford GSB admits 6.9% of applicants vs Booth's 21%. GSB is the most selective MBA program in the country. Booth is more accessible among M7 programs, but the quality of the class is comparable."),
+         ("Which is better for finance?", "Booth. Chicago is a major financial center, Booth's quantitative curriculum is deeper, and 32% of Booth graduates enter finance. GSB places well in tech-adjacent finance (VC, growth equity) but has lower overall finance placement."),
+         ("Which has a better student experience?", "Different, not better or worse. GSB's 430-person class in sunny Palo Alto feels like a tight-knit community. Booth's 590-person class in Chicago offers more academic variety and a vibrant urban setting. Visit both before deciding."),
+     ]},
+    {"a": "michigan-ross", "b": "duke-fuqua",
+     "choose_a": "you want a large alumni network, the MAP experiential program, and Midwest career options alongside national reach.",
+     "choose_b": "you want a tight-knit, team-oriented culture and one of the strongest consulting pipelines outside M7.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Ross and Fuqua are perennial rivals for the #11-#13 ranking range. Both are collaborative programs with strong consulting placement and loyal alumni networks. The comparison comes down to geography, class culture, and specific career strengths.</p>"),
+         ("Academics and Curriculum", "<p>Ross is known for MAP (Multidisciplinary Action Projects), a 7-week consulting engagement with real companies. Fuqua uses team-based projects throughout the curriculum. Both schools emphasize experiential learning, but the approach differs: Ross sends you to companies; Fuqua builds teamwork into every class.</p>"),
+         ("Career Outcomes", "<p>Both schools place 30%+ into consulting. Fuqua has a slight edge in healthcare (Duke Health proximity) and government consulting (DC proximity). Ross has a slight edge in tech and operations (Michigan's manufacturing heritage). Both schools recruit nationally despite their college-town locations.</p>"),
+         ("The Honest Take", "<p>Fuqua's 'Team Fuqua' culture is distinctive and genuine. If you thrive in collaborative environments, Fuqua will feel like home. Ross's MAP program provides hands-on experience that's hard to replicate. Both are excellent values relative to M7 tuition. The decision often comes down to campus visits: spend a day at each and the fit will be clear.</p>"),
+     ],
+     "faq": [
+         ("Is Michigan Ross or Duke Fuqua better for consulting?", "Both are strong MBB targets with 30%+ consulting placement. Fuqua may have a slight edge in healthcare consulting due to Duke Health proximity. Ross may have a slight edge in operations consulting due to Michigan's manufacturing network. The difference is marginal."),
+         ("Which school has better career outcomes?", "Similar. Both report employment rates above 93% and median salaries in the $155K-$165K range. The schools trade rankings year to year, and employer perception of both is strong."),
+         ("Which campus is better?", "Ann Arbor and Durham are both college towns with strong quality of life. Ann Arbor has Big Ten athletics and a larger city feel. Durham has Research Triangle proximity and milder winters. Both campuses are walkable and community-oriented."),
+     ]},
+    {"a": "wharton", "b": "stanford-gsb",
+     "choose_a": "finance is your primary goal, you want the deepest elective catalog, and you prefer a larger, more diverse class.",
+     "choose_b": "tech, entrepreneurship, or VC is your goal, you want Silicon Valley immersion, and you prefer a smaller, more intimate experience.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Wharton (#3) and Stanford GSB (#1) are the two most analytically rigorous M7 programs. Both attract quantitative applicants with ambitious career goals. The comparison is fundamentally about geography and career orientation: East Coast finance vs West Coast tech.</p>"),
+         ("Career Outcomes", "<p>Wharton places 34% into finance, the highest of any M7 program. Stanford GSB places 32% into tech, also the highest of any M7. Both have strong consulting placement (20-25%). The divergence is clear: Wharton is the pipeline to Wall Street; GSB is the pipeline to Sand Hill Road. Both open every door, but the default paths differ.</p>"),
+         ("Class and Culture", "<p>Wharton's 850-person class is one of the largest at M7 programs. The scale means incredible diversity of backgrounds and interests. Stanford GSB's 430-person class is intimate. You'll know most of your classmates. Wharton's culture is competitive and high-energy; GSB's culture is reflective and founder-oriented.</p>"),
+         ("The Honest Take", "<p>If you're admitted to both, the answer is usually obvious. Finance people choose Wharton. Startup/tech people choose GSB. The rare applicant who is genuinely undecided should visit both and go with their gut. Both are life-changing programs. The wrong choice between them doesn't exist.</p>"),
+     ],
+     "faq": [
+         ("Is Stanford GSB or Wharton harder to get into?", "Stanford GSB (6.9% acceptance rate) is significantly more selective than Wharton (13%). GSB is the most selective MBA program in the country. Both schools attract elite applicant pools."),
+         ("Which is better for a general management career?", "Both are excellent for general management. GSB's curriculum is more general management-oriented by design. Wharton offers specialization through its 200+ electives. If you want to keep your options maximally open, GSB's generalist approach may have a slight edge."),
+         ("How do starting salaries compare?", "Similar. Stanford GSB median base salary is approximately $192K; Wharton's is approximately $175K. The difference is partly geographic (Bay Area tech comp vs NYC finance comp structures) rather than quality-driven."),
+     ]},
+    {"a": "kellogg", "b": "booth",
+     "choose_a": "you value collaboration, team-based learning, and marketing strength alongside consulting.",
+     "choose_b": "you want maximum curriculum flexibility, quantitative depth, and the strongest finance placement among M7 programs.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Chicago's two M7 programs could not be more different in philosophy. Kellogg is collaborative, team-oriented, and known for marketing. Booth is individualistic, analytically rigorous, and known for finance. They're 30 miles apart and produce very different MBA experiences.</p>"),
+         ("Academics and Curriculum", "<p>Kellogg has a structured core curriculum with team-based projects woven throughout. Booth has no required courses at all: you design your entire MBA. Kellogg teaches leadership through collaboration; Booth teaches leadership through intellectual mastery. The pedagogical philosophy is the most significant difference between the two programs.</p>"),
+         ("Career Outcomes", "<p>Kellogg places about 30% into consulting and 20% into tech. Booth places 32% into finance and 25% into consulting. Both are MBB targets. Kellogg has a stronger marketing placement; Booth has a stronger finance placement. Tech is roughly equal.</p>"),
+         ("The Honest Take", "<p>Visit both. Sit in on classes. Talk to current students. The cultural difference is palpable within five minutes. Kellogg students will pull you into a group conversation. Booth students will want to discuss an intellectual problem. Neither is better. But one will feel more like you.</p>"),
+     ],
+     "faq": [
+         ("Is Kellogg or Booth better for consulting?", "Both are elite consulting targets. Kellogg's team-based culture may give a slight edge in behavioral interviews. Booth's analytical training may give a slight edge in case interviews. The placement rates into MBB are comparable."),
+         ("Which has a better social scene?", "Kellogg, by reputation. The collaborative culture extends to social events, and the tight-knit community runs on section activities and group outings. Booth's social scene exists but is more opt-in. Kellogg students socialize together; Booth students socialize by choice."),
+         ("Which is the better value?", "Similar tuition. Booth's flexible curriculum lets you skip classes you don't need, which some students view as better value for their time. Kellogg's structured approach ensures exposure to topics you might not choose on your own. Both are strong investments."),
+     ]},
+    {"a": "nyu-stern", "b": "columbia-business-school",
+     "choose_a": "you want the best location in Manhattan, a specialization in media or fintech, and a more entrepreneurial culture.",
+     "choose_b": "you want the stronger national brand, the value investing tradition, and broader finance placement at top firms.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>NYC's two elite MBA programs. Columbia (#6) ranks higher and has a broader brand. Stern (#10) has a Greenwich Village location that puts you closer to Wall Street and a culture that's more entrepreneurial. Both place heavily into NYC finance, consulting, and tech.</p>"),
+         ("Finance Placement", "<p>Columbia places 36% of graduates into finance, the highest of any top-10 program. Stern places 30%. Both are core targets for every major bank. The difference: Columbia has stronger connections to traditional finance (PE, hedge funds, IB). Stern has unique strength in fintech, media, and luxury marketing.</p>"),
+         ("Location and Culture", "<p>Columbia recently moved to the Manhattanville campus in Harlem, a state-of-the-art facility. Stern is in Greenwich Village, walking distance from the Financial District and surrounded by NYC's cultural energy. Both locations are Manhattan, but the vibes differ. Columbia feels like a university; Stern feels like a city.</p>"),
+         ("The Honest Take", "<p>For pure finance prestige, Columbia wins. It's M7, and the value investing heritage (Graham and Dodd) carries unique weight in fundamental investing circles. For candidates who want NYC finance but also value entertainment, media, tech, or entrepreneurship, Stern's location and specializations provide advantages Columbia can't match. Both are excellent for NYC careers.</p>"),
+     ],
+     "faq": [
+         ("Is Columbia or NYU Stern more prestigious?", "Columbia ranks higher (#6 vs #10) and is considered an M7 program. Stern is highly respected, particularly in NYC and on Wall Street, but doesn't carry the same global brand weight as Columbia. For finance careers specifically, the difference narrows."),
+         ("Which is better for Wall Street?", "Both are core targets for every major bank. Columbia has a slight edge in prestige and hedge fund placement. Stern compensates with proximity (Greenwich Village is closer to the Financial District) and strength in fintech and quantitative roles."),
+         ("How much cheaper is Stern vs Columbia?", "Tuition is comparable (both approximately $80K/year). Living costs are similar since both are in Manhattan. The total investment is roughly equal."),
+     ]},
+    {"a": "virginia-darden", "b": "michigan-ross",
+     "choose_a": "you want the case method, a tight-knit community, and strong consulting placement from a college-town program.",
+     "choose_b": "you want experiential learning through MAP, a larger alumni network, and broader industry placement.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Darden and Ross are both top-15 programs in college-town settings with strong consulting placement and collaborative cultures. The comparison hinges on teaching method (Darden's case method vs Ross's experiential MAP), class size (Darden ~350 vs Ross ~400), and geographic pull (Southeast vs Midwest).</p>"),
+         ("Academics", "<p>Darden uses the case method almost exclusively, similar to HBS. Daily cold calls, intense class discussion, and a structured first-year core. Ross mixes lectures, cases, and project-based learning, with MAP as the experiential centerpiece. If you thrive in debate, Darden's format is ideal. If you prefer learning by doing, Ross provides that through MAP.</p>"),
+         ("Career Outcomes", "<p>Both place 30%+ into consulting with strong MBB representation. Ross has an edge in tech and operations (Michigan's manufacturing connections). Darden has an edge in government and DC-area careers (Virginia proximity). Both recruit nationally despite their college-town locations.</p>"),
+         ("The Honest Take", "<p>Darden's case method is a differentiator. If you want the HBS experience at a smaller, more affordable scale, Darden delivers. Ross's MAP program is equally distinctive. If you want to work on real business problems before you graduate, Ross provides that. Visit both. The teaching method difference is the decision driver.</p>"),
+     ],
+     "faq": [
+         ("Is Darden or Ross better for consulting?", "Comparable. Both are MBB targets with 30%+ consulting placement. Darden's case method builds the skills consulting firms value (structured argumentation, rapid analysis under pressure). Ross's MAP builds consulting skills through hands-on client work."),
+         ("Which school has a stronger alumni network?", "Ross's larger class size and University of Michigan's massive alumni base give it an edge in network breadth. Darden's smaller, tight-knit community creates deeper individual relationships. Both networks are active and supportive."),
+         ("Which is more affordable?", "Darden (Virginia in-state) and Ross (Michigan in-state) both offer significant savings for state residents. Out-of-state tuition is similar. Cost of living in Charlottesville is slightly cheaper than Ann Arbor."),
+     ]},
+    {"a": "georgetown-mcdonough", "b": "emory-goizueta",
+     "choose_a": "you want DC-area careers, government consulting, or international development.",
+     "choose_b": "you want Southeast careers, healthcare, or a collaborative culture with strong consulting placement.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Georgetown McDonough (#20) and Emory Goizueta (#21) are closely ranked programs in different regions. Georgetown owns DC; Emory owns Atlanta. Both place well into consulting and both have collaborative cultures. The decision is almost entirely about geography and industry focus.</p>"),
+         ("Career Markets", "<p>Georgetown's DC location provides unique access to government consulting (Booz Allen, Deloitte Federal), World Bank, IMF, and policy-adjacent roles. Emory's Atlanta location provides access to Coca-Cola, Delta, Home Depot, UPS, and the Southeast's healthcare sector. Both schools have MBB placement, but the local employer mix is completely different.</p>"),
+         ("The Honest Take", "<p>If you want to work at the intersection of business and government, Georgetown is the clear choice. If you want Fortune 500 corporate careers in the Southeast, Emory is the clear choice. For national consulting careers, both are capable launchers. The geographic preference usually decides this one.</p>"),
+     ],
+     "faq": [
+         ("Which school ranks higher?", "Georgetown McDonough (#20) and Emory Goizueta (#21) are essentially ranked equally. The difference of one position is meaningless. Choose based on geography, industry focus, and cultural fit."),
+         ("Which is better for consulting?", "Both place well into consulting. Georgetown has an edge in government and federal consulting. Emory has an edge in healthcare consulting. For MBB specifically, both are target schools."),
+         ("Which city is better to live in?", "DC is a political city with museums, government energy, and higher cost of living. Atlanta is a business city with Southern culture, lower cost of living, and a different pace. Both are excellent places to spend two years."),
+     ]},
+    {"a": "rice-jones", "b": "texas-mccombs",
+     "choose_a": "you want energy and healthcare focus, a smaller class, and Houston's job market.",
+     "choose_b": "you want broader industry options, Austin's tech scene, and a larger alumni network.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Texas's top two MBA programs serve different markets despite being in the same state. Rice Jones (#28) is in Houston, a global energy and healthcare capital. McCombs (#25) is in Austin, a booming tech hub. Both offer strong value with no state income tax and affordable living costs.</p>"),
+         ("Career Outcomes", "<p>Rice Jones excels in energy (ExxonMobil, ConocoPhillips, Halliburton) and healthcare (Texas Medical Center). McCombs has broader placement across tech (Tesla, Apple, Google, Oracle), consulting, and finance. McCombs's larger class (260 vs 120) means a bigger alumni network and more employer relationships.</p>"),
+         ("The Honest Take", "<p>If energy is your thing, Rice Jones in Houston is the obvious pick. If you want tech or a broader set of options, McCombs in Austin provides more career flexibility. Both are excellent values. The state income tax advantage applies equally to both.</p>"),
+     ],
+     "faq": [
+         ("Is McCombs or Rice Jones better ranked?", "McCombs (#25) ranks slightly higher than Rice Jones (#28). Both are strong programs, and the ranking difference is less important than the industry and location fit."),
+         ("Which is better for energy careers?", "Rice Jones in Houston. Houston is the global capital of energy, and Rice's proximity to ExxonMobil, ConocoPhillips, and dozens of energy companies gives it an unmatched advantage in this sector."),
+         ("Which is the better value?", "Both are excellent values. Rice Jones has smaller class sizes and potentially more scholarship dollars per student. McCombs has in-state tuition for Texas residents that's among the best deals in top-25 MBA education."),
+     ]},
+    {"a": "washu-olin", "b": "emory-goizueta",
+     "choose_a": "you want a small-class experience in the Midwest with strong finance and consulting placement.",
+     "choose_b": "you want a collaborative Southeast program with deep Fortune 500 connections in Atlanta.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>WashU Olin (#27) and Emory Goizueta (#21) are both private universities with strong MBA programs in secondary markets. Both offer excellent consulting placement and intimate class experiences. The comparison comes down to St. Louis vs Atlanta and the specific employer ecosystems each city provides.</p>"),
+         ("Career Outcomes", "<p>Emory benefits from Atlanta's Fortune 500 concentration (Coca-Cola, Delta, Home Depot, UPS). WashU Olin places well into consulting and finance, with many graduates recruiting nationally to NYC and Chicago. Both schools are MBB targets.</p>"),
+         ("The Honest Take", "<p>Emory's Atlanta location provides a larger local job market with more Fortune 500 employers. WashU Olin's smaller class (130 students) creates an intimate experience that some candidates prefer. For Southeast careers, Emory wins. For Midwest careers or candidates willing to recruit nationally, both are strong.</p>"),
+     ],
+     "faq": [
+         ("Which ranks higher?", "Emory Goizueta (#21) ranks higher than WashU Olin (#27). Both are well-regarded, and the ranking gap has narrowed in recent years."),
+         ("Which has better career outcomes?", "Similar median salaries and employment rates. Emory benefits from Atlanta's employer density. WashU Olin benefits from a smaller class that receives more individualized career support."),
+         ("Which is more affordable?", "Similar tuition. St. Louis cost of living is significantly lower than Atlanta. For budget-conscious candidates, WashU Olin's total cost may be slightly lower."),
+     ]},
+]
+
+# =============================================================================
+# GUIDE DATA
+# =============================================================================
+
+GUIDES = [
+    {
+        "title": "GMAT vs GRE: Which Should You Take?",
+        "slug": "gmat-vs-gre",
+        "meta_description": f"GMAT vs GRE for MBA admissions in {CURRENT_YEAR}. Score comparisons, school acceptance policies, and which test gives you the best shot. From a Haas MBA grad.",
+        "sections": [
+            ("The Short Answer", f"""<p>Most top MBA programs accept both the GMAT and GRE. But \"accept\" and \"prefer\" are different words. If you're targeting finance-heavy programs like <a href=\"/schools/wharton/\">Wharton</a> or <a href=\"/schools/booth/\">Booth</a>, the GMAT still carries more weight with admissions committees. If you're applying broadly or considering non-MBA graduate programs as a backup, the GRE gives you more flexibility.</p><p>The percentage of MBA applicants submitting GRE scores has climbed steadily, from under 10% in 2015 to roughly 30% in {CURRENT_YEAR}. Schools are genuinely accepting GRE scores. But admissions officers in finance-heavy programs still have more experience benchmarking GMAT scores, which creates a subtle evaluation advantage for GMAT test-takers at certain schools.</p>"""),
+            ("Score Comparison", "<p>A 730 GMAT is roughly equivalent to a 328 GRE (163V + 165Q). But the conversion isn't perfect, and admissions committees know it. The GMAT's integrated reasoning and data sufficiency sections test skills that business schools value specifically. The GRE's vocabulary section tests skills that matter more for law school.</p><p>Here's how the score ranges map for competitive applicants at different program tiers:</p><ul><li><strong>M7 programs (Stanford, HBS, Wharton, etc.):</strong> GMAT 730+ or GRE 328+</li><li><strong>Top 15 (Haas, Duke, Yale, etc.):</strong> GMAT 710+ or GRE 322+</li><li><strong>Top 25 (McCombs, Tepper, UNC, etc.):</strong> GMAT 690+ or GRE 318+</li><li><strong>Top 50:</strong> GMAT 660+ or GRE 312+</li></ul><p>A strong score on either test will get you in. A mediocre score on the \"right\" test won't save a weak application.</p>"),
+            ("The GMAT Format", "<p>The GMAT Focus Edition (launched in late 2023) has three sections: Quantitative Reasoning, Verbal Reasoning, and Data Insights. Total test time is about 2 hours and 15 minutes. The scoring range is 205-805, with the 80th percentile around 645 and the 90th percentile around 695.</p><p>Data sufficiency questions are unique to the GMAT. They test whether you can determine if enough information exists to solve a problem without actually solving it. This is a skill that directly translates to business decision-making. If you find data sufficiency intuitive, the GMAT will play to your strengths.</p>"),
+            ("The GRE Format", "<p>The GRE has three sections: Verbal Reasoning, Quantitative Reasoning, and Analytical Writing. Total test time is about 1 hour and 58 minutes. Verbal is scored 130-170, Quantitative 130-170, and Analytical Writing 0-6. Most MBA programs focus on the V+Q combined score.</p><p>The GRE's verbal section tests vocabulary and reading comprehension at a higher level than the GMAT. The quantitative section covers similar concepts but uses more straightforward question formats. If you're strong in verbal reasoning and find data sufficiency questions frustrating, the GRE format may produce a better score.</p>"),
+            ("When to Take the GMAT", """<p>Take the GMAT if you're only applying to MBA programs, if your target schools are finance-focused, or if you're strong in quantitative reasoning. The GMAT is also the safer choice if you're unsure, because no admissions committee will question why you took it.</p><p>The GMAT also carries more weight at these specific programs where finance culture runs deep:</p><ul><li><a href=\"/schools/wharton/\">Wharton</a> (34% finance placement)</li><li><a href=\"/schools/columbia-business-school/\">Columbia Business School</a> (36% finance placement)</li><li><a href=\"/schools/booth/\">Booth</a> (32% finance placement)</li><li><a href=\"/schools/nyu-stern/\">NYU Stern</a> (30% finance placement)</li></ul><p>At these schools, a 740 GMAT sends a clearer signal than a 330 GRE, even though they're equivalent scores.</p>"""),
+            ("When to Take the GRE", "<p>Take the GRE if you're also considering law school, public policy programs, or other graduate degrees. The GRE is also a better fit if you're stronger in verbal reasoning and want to avoid the GMAT's data sufficiency format. Some test-takers find the GRE's question types more intuitive.</p><p>The GRE makes strategic sense in these situations:</p><ul><li><strong>Dual applications:</strong> You're applying to MBA programs and JD, MPP, or MPA programs simultaneously</li><li><strong>Verbal strength:</strong> You consistently score higher on GRE verbal than GMAT verbal in practice tests</li><li><strong>Non-finance targets:</strong> Your target schools and industries don't have a GMAT preference</li><li><strong>Testing flexibility:</strong> The GRE has more test center availability and offers an at-home option that some candidates prefer</li></ul>"),
+            ("How Schools Evaluate Scores", f"""<p>Admissions committees look at your score in context. A 700 GMAT from someone with 8 years of work experience and a 3.9 GPA is evaluated differently than a 700 from a recent college graduate with a 3.2. Schools use your test score as one data point in a holistic review.</p><p>The practical reality: most top-25 programs in {CURRENT_YEAR} have published statements saying they treat GMAT and GRE equally. <a href=\"/schools/stanford-gsb/\">Stanford GSB</a>, <a href=\"/schools/harvard-business-school/\">Harvard Business School</a>, and <a href=\"/schools/mit-sloan/\">MIT Sloan</a> have all gone on record with this position. The programs where GMAT preference persists tend to be the finance-heavy ones, and even there, a strong GRE score won't disqualify you.</p>"""),
+            ("Test Prep Strategy", "<p>Regardless of which test you choose, here's a framework that works:</p><ol><li><strong>Take a cold diagnostic of both tests.</strong> Your natural baseline reveals which format suits your thinking style. A 30-point advantage on one test is a clear signal.</li><li><strong>Budget 2-4 months of prep.</strong> Most successful MBA applicants study 100-150 hours total. Spreading that over 3 months (about 10-12 hours per week) is more effective than cramming.</li><li><strong>Target your weaknesses.</strong> If quant is your weak area, spend 60% of your time there. A balanced score beats a lopsided one.</li><li><strong>Take 4-6 full practice tests.</strong> Timing and stamina matter as much as knowledge. The test is a marathon, and you need to train for it.</li><li><strong>Don't retake endlessly.</strong> If your score plateaus after 2-3 attempts, the marginal return on a 4th attempt is minimal. Put that energy into strengthening other parts of your application.</li></ol>"),
+            ("Test-Optional Programs", f"""<p>A growing number of MBA programs have introduced test-optional or test-flexible policies. As of {CURRENT_YEAR}, programs like <a href=\"/schools/michigan-ross/\">Michigan Ross</a> and <a href=\"/schools/virginia-darden/\">Virginia Darden</a> offer test waivers for candidates who demonstrate quantitative readiness through other means (strong GPA, CFA, professional experience).</p><p>The honest take on test-optional: if you can score well, submit a score. A strong GMAT or GRE removes ambiguity from your application. Test-optional policies help candidates whose overall profile is strong but whose test scores don't reflect their ability. If that's you, a waiver is a reasonable choice. If you can score at or above the school's median, submit the score.</p>"""),
+            ("The Real Strategy", f"<p>Take a practice test for both. Whichever one you score higher on in a cold diagnostic is probably the right choice. Don't overthink the signaling. In {CURRENT_YEAR}, the vast majority of top programs genuinely treat both scores equally.</p><p>The bigger strategic question is how much of your application bandwidth to spend on test prep versus essays, networking, and school research. A 740 GMAT with generic essays will lose to a 710 GMAT with exceptional essays and demonstrated school fit. The test score gets you past the initial screen. Everything else gets you admitted.</p>"),
+        ],
+        "faq": [
+            (f"Do all MBA programs accept the GRE in {CURRENT_YEAR}?", f"Yes, all top-50 MBA programs accept the GRE as of {CURRENT_YEAR}. Some programs (particularly finance-heavy ones like Wharton, Columbia, and Booth) may still have a slight preference for the GMAT, but a strong GRE score will not disqualify you from any program."),
+            ("What GMAT score do I need for a top MBA program?", "For M7 programs (Stanford GSB, HBS, Wharton, Booth, Kellogg, Columbia, MIT Sloan), the median GMAT is 730-740. For top-15 programs, the median is 710-730. For top-25, 690-710. Scoring at or above the school's median puts you in a competitive position."),
+            ("Is it easier to score higher on the GRE than the GMAT?", "It depends on your strengths. The GRE tends to favor candidates with strong verbal skills and reading comprehension. The GMAT tends to favor candidates with strong quantitative reasoning and comfort with data sufficiency questions. Take a cold diagnostic of both to see which format produces a higher score for you."),
+            ("Should I retake the GMAT or GRE?", "If your score is more than 20 points below your target school's median, a retake is worth considering. Most programs accept your highest score. However, if your score has plateaued after 2-3 attempts, additional retakes rarely produce meaningful improvement. Invest that time in other parts of your application instead."),
+            ("How long should I study for the GMAT or GRE?", "Most successful MBA applicants study 100-150 hours over 2-4 months. This translates to about 10-12 hours per week for 3 months. Candidates with strong quantitative backgrounds may need less time. Career changers from non-quantitative fields may need more."),
+        ],
+        "see_also": [
+            ("MBA Application Timeline", "/guides/mba-application-timeline/"),
+            ("MBA Essay Writing Guide", "/guides/mba-essay-writing/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+        ],
+    },
+    {
+        "title": f"MBA Application Timeline: Month-by-Month Guide ({CURRENT_YEAR})",
+        "slug": "mba-application-timeline",
+        "meta_description": f"Complete MBA application timeline for {CURRENT_YEAR}. Month-by-month guide for Round 1, Round 2, and Round 3 deadlines. From a Haas MBA grad.",
+        "sections": [
+            ("Understanding Application Rounds", "<p>Most top MBA programs offer three application rounds each admissions cycle. Round 1 deadlines fall in September-October. Round 2 deadlines fall in January. Round 3 deadlines fall in March-April. Each round has different strategic implications, and choosing the right round can meaningfully affect your chances.</p><p><strong>Round 1</strong> is the strongest position. Admissions committees are fresh, all seats are available, and scholarship money is fullest. Roughly 40-50% of admitted students at most programs come from Round 1.</p><p><strong>Round 2</strong> is still competitive. About 40% of admitted students come from Round 2. The applicant pool is larger (many people who weren't ready for Round 1), so competition is fiercer, but outcomes are still strong.</p><p><strong>Round 3</strong> is a longshot at top programs. Most seats are filled, and you're competing for 10-15% of remaining spots. Only apply Round 3 if your profile is exceptionally strong or if you're targeting programs outside the top 15.</p>"),
+            ("12-18 Months Before: Early Planning", """<p>If you're reading this more than a year before your target start date, you're in an excellent position. Use this time to strengthen your application before the clock starts ticking.</p><ul><li><strong>Take a GMAT/GRE diagnostic.</strong> Know where you stand before committing to a study plan. See our <a href=\"/guides/gmat-vs-gre/\">GMAT vs GRE guide</a> for choosing the right test.</li><li><strong>Research 10-15 schools.</strong> Use our <a href=\"/schools/\">school profiles</a> and <a href=\"/rankings/overall/\">rankings</a> to build a target list. Don't narrow to 5 schools yet.</li><li><strong>Start building your narrative.</strong> Why MBA? Why now? What will you do with the degree? These questions take months to answer well.</li><li><strong>Pursue leadership opportunities at work.</strong> Admissions committees want evidence of impact, and you can create that evidence in the next 6-12 months.</li></ul>"""),
+            ("January-March: Research and Self-Assessment", "<p>Start researching schools seriously. Attend virtual info sessions (every top program hosts them), and take your first GMAT/GRE diagnostic. This is also when you should start thinking about your career narrative: why MBA, why now, and what you want to do after. Don't rush this step. A clear story saves you dozens of hours on essays later.</p><p>Key actions for this period:</p><ul><li>Attend 5-8 virtual info sessions for your target schools</li><li>Connect with 2-3 current students or recent alumni at each target school</li><li>Begin GMAT/GRE prep if you haven't already (target 100-150 hours total)</li><li>Start a running document of career stories and accomplishments for essay material</li><li>Research recommenders and begin informal conversations about supporting your application</li></ul>"),
+            ("April-June: Test Prep and School Visits", "<p>Buckle down on GMAT/GRE prep. Take the test by June if possible. This gives you time to retake if needed before Round 1 deadlines. Visit your top 3-5 schools in person. Nothing replaces sitting in on a class and talking to current students. Campus visits also give you material for \"why this school\" essays.</p><p>When visiting schools, take notes on:</p><ul><li>The classroom dynamic (participatory vs. lecture-based)</li><li>How students interact with each other between classes</li><li>Specific programs, clubs, or initiatives that connect to your goals</li><li>Names of students, professors, or administrators you spoke with (for essays)</li></ul><p>If you can't visit in person, attend virtual class visits and student-led Q&A sessions. Schools increasingly offer robust virtual alternatives. The key is having specific, firsthand observations to reference in your applications.</p>"),
+            ("July-August: Essay Drafting", """<p>Start drafting essays for your Round 1 schools. Most programs require 2-3 essays, and you'll share common themes across schools while tailoring each essay to the specific program. Get feedback from at least two people: ideally one MBA grad and one person who knows you well professionally. Don't write what you think they want to hear. Write what's true, and make it specific.</p><p>A realistic essay timeline:</p><ul><li><strong>Week 1-2:</strong> Outline all essays for all Round 1 schools. Map common themes.</li><li><strong>Week 3-4:</strong> Write first drafts of your two priority school essays.</li><li><strong>Week 5-6:</strong> Get feedback, revise, and draft remaining school essays.</li><li><strong>Week 7-8:</strong> Final revisions, proofreading, and polish.</li></ul><p>See our <a href=\"/guides/mba-essay-writing/\">MBA essay writing guide</a> for detailed strategies on structure, common mistakes, and what makes essays stand out.</p>"""),
+            ("Recommenders: Start Early", "<p>Ask recommenders by July at the latest. Give them 6-8 weeks of lead time. Choose people who know your work well and can speak to specific accomplishments. A direct manager who worked with you daily writes a stronger letter than a senior VP who barely knows your name.</p><p>When you ask, provide:</p><ul><li>A summary of why you're pursuing an MBA and your career goals</li><li>2-3 specific projects or accomplishments you'd like them to highlight</li><li>The deadline (with a buffer of 1-2 weeks)</li><li>Your resume and a draft of your essays (so their letter aligns with your narrative)</li></ul><p>Most programs require two recommendations. Choose one current or recent supervisor and one person who can speak to a different dimension of your candidacy (leadership, community impact, intellectual curiosity).</p>"),
+            ("September-October: Round 1 Submissions", """<p>Most Round 1 deadlines fall in September and early October. Submit your strongest 2-3 applications in Round 1. Round 1 is statistically the best time to apply: class spots are open, admissions committees are fresh, and scholarship pools are at their deepest.</p><p>Typical Round 1 deadlines at top programs:</p><ul><li><strong>Early September:</strong> <a href=\"/schools/harvard-business-school/\">Harvard Business School</a>, <a href=\"/schools/stanford-gsb/\">Stanford GSB</a></li><li><strong>Mid-September:</strong> <a href=\"/schools/wharton/\">Wharton</a>, <a href=\"/schools/booth/\">Booth</a>, <a href=\"/schools/columbia-business-school/\">Columbia</a></li><li><strong>Late September/Early October:</strong> <a href=\"/schools/kellogg/\">Kellogg</a>, <a href=\"/schools/mit-sloan/\">MIT Sloan</a>, <a href=\"/schools/berkeley-haas/\">Berkeley Haas</a></li></ul><p>Check each school's website for exact dates. Deadlines shift by a few days each year.</p>"""),
+            ("October-December: Interviews and Round 2 Prep", "<p>If you submitted Round 1, prepare for interviews. They typically come 4-6 weeks after submission. Most MBA interviews are 30 minutes, behavioral-style, and conducted by alumni or admissions staff. Practice your \"walk me through your resume\" answer until it's smooth but not robotic.</p><p>Simultaneously, if you have additional schools, use this time to refine essays for Round 2 (January deadlines). You'll often be able to adapt Round 1 essays with school-specific customization.</p><p>Interview preparation tips:</p><ul><li>Practice your personal narrative aloud, not just in writing</li><li>Prepare 3-4 leadership stories using the STAR method (Situation, Task, Action, Result)</li><li>Research your interviewer on LinkedIn if possible</li><li>Have 2-3 thoughtful questions ready about the program</li><li>Record yourself and watch for filler words, pacing, and body language</li></ul>"),
+            ("January-March: Round 2 and Decisions", "<p>Round 2 deadlines hit in January. Round 1 decisions arrive in December-January. If you're waitlisted, send a thoughtful update letter with new information (promotion, GMAT retake score, additional leadership role). Don't just restate your application. Show them something new.</p><p>If you're admitted, celebrate. Then start comparing financial aid packages. Negotiate if you have multiple offers. Schools expect it, and a polite, honest negotiation based on competing offers can yield $20,000-$50,000 in additional scholarship money.</p><p>If you're rejected from all Round 1 schools, assess honestly whether to apply Round 2 to additional schools or strengthen your profile and reapply next cycle. A stronger application next year beats a weaker application at a lower-ranked school this year.</p>"),
+            ("April-July: Deposits and Preparation", "<p>Deposit deadlines typically fall in April. Once you've chosen your school, shift your energy to preparation:</p><ul><li>Connect with admitted student groups and future classmates</li><li>Begin pre-MBA reading (accounting, statistics, and Excel if you're rusty)</li><li>If relocating, start housing research early</li><li>Wrap up work commitments and leave your current role on good terms</li><li>Take a real vacation before classes start. You've earned it, and the MBA will consume your time for two years.</li></ul>"),
+        ],
+        "faq": [
+            ("Should I apply Round 1 or Round 2?", "Round 1 is generally stronger: more seats available, more scholarship money, and admissions committees are fresh. Apply Round 1 if your application is ready. If your GMAT score, essays, or recommenders aren't where they need to be, a stronger Round 2 application beats a rushed Round 1 submission."),
+            ("How many schools should I apply to?", "Most successful applicants apply to 5-8 schools: 2-3 reach schools, 2-3 target schools, and 1-2 safety schools. Applying to more than 10 programs usually means your essays suffer from dilution. Quality beats quantity."),
+            ("When should I take the GMAT or GRE?", "Ideally by June of the year you're applying. This gives you time for a retake before Round 1 deadlines in September. Some candidates take the test earlier (January-March) to have their score in hand before starting essays."),
+            ("Can I apply to the same school twice?", "Yes. Most programs allow reapplication in a subsequent admissions cycle. Some programs even encourage it. When reapplying, show meaningful progress since your last application: higher test score, promotion, new leadership role, or clearer career goals."),
+            ("Is it worth applying Round 3?", "At M7 and top-15 programs, Round 3 is very difficult. Most seats are filled, and the bar is higher. At programs ranked 15-50, Round 3 is more viable. If you have an exceptionally strong profile and missed earlier rounds, it's worth trying. Otherwise, wait and apply Round 1 next cycle."),
+        ],
+        "see_also": [
+            ("GMAT vs GRE Guide", "/guides/gmat-vs-gre/"),
+            ("MBA Essay Writing Guide", "/guides/mba-essay-writing/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Best MBA Programs for Career Changers", "/guides/best-mba-for-career-changers/"),
+        ],
+    },
+    {
+        "title": "How to Write an MBA Essay That Gets You In",
+        "slug": "mba-essay-writing",
+        "meta_description": "How to write MBA application essays that stand out. Structure, common mistakes, and real strategies from a Berkeley Haas MBA grad.",
+        "sections": [
+            ("The Single Biggest Mistake", "<p>Most MBA essays fail because they're generic. \"I want to leverage my experience in X to pursue a career in Y at a top MBA program\" could be written by anyone. Admissions committees read thousands of these. The essays that stand out are specific: specific stories, specific goals, specific reasons for that particular school.</p><p>An admissions officer at a top-10 program reads 30-50 applications per day during peak season. They can spot a template essay within the first paragraph. The surest way to get your essay into the \"maybe\" pile is to write something that could only come from you.</p>"),
+            ("The Common Essay Types", """<p>Most MBA programs ask variations of the same 4-5 questions. Understanding the underlying purpose of each helps you craft better answers.</p><ul><li><strong>\"Why MBA? Why now?\"</strong> They want a logical career narrative that makes an MBA the obvious next step. Show that you've thought about what you need to learn and why this specific timing makes sense.</li><li><strong>\"Why this school?\"</strong> They want evidence that you've done real research and can articulate what makes this program uniquely suited to your goals.</li><li><strong>\"Tell us about a time you led/failed/overcame.\"</strong> They want self-awareness, growth, and the ability to learn from experience. The story matters less than what you took from it.</li><li><strong>\"What will you contribute?\"</strong> They want to understand what you'll bring to the community beyond your resume. Think about the classroom, student clubs, and informal interactions.</li><li><strong>\"What matters most to you?\"</strong> This is <a href=\"/schools/stanford-gsb/\">Stanford GSB's</a> signature essay, but versions appear elsewhere. They want authenticity and self-reflection. This one is the hardest to fake, and the easiest one for admissions to detect insincerity.</li></ul>"""),
+            ("Structure That Works", "<p>Open with a concrete moment or decision. A specific scene. Then connect that moment to your career arc, your goals, and why this particular program is the right fit. End with something that shows self-awareness and forward motion.</p><p>A reliable structure for a 500-750 word essay:</p><ol><li><strong>Hook (50-75 words):</strong> A specific moment, decision, or observation that draws the reader in. \"I was sitting in a board meeting when I realized I was the only person in the room who couldn't read the financial model\" is better than \"I've always been passionate about finance.\"</li><li><strong>Context (100-150 words):</strong> What led to this moment. Your career trajectory, the challenge you faced, or the gap you identified.</li><li><strong>The turn (100-150 words):</strong> What you learned, decided, or realized. This is where self-awareness lives.</li><li><strong>Goals (100-150 words):</strong> Where you're heading and why. Be specific enough to be credible but not so specific that it sounds rigid.</li><li><strong>School fit (75-100 words):</strong> Why this specific program is the right place to bridge where you are and where you're going.</li></ol>"),
+            ("The 'Why This School' Essay", """<p>This is where most applicants get lazy. Don't just list programs, clubs, and professors from the website. Show that you've done real research: mention a specific class, a conversation with a current student, or a unique program element that connects to your goals. If you could swap the school name and the essay still works, it's too generic.</p><p>Strong \"why this school\" elements:</p><ul><li><strong>A class that directly addresses a skill gap:</strong> \"Professor X's Negotiations course addresses the exact gap I identified managing vendor relationships at my current company.\"</li><li><strong>A conversation with a student or alum:</strong> \"When I visited campus, second-year student [Name] described how the LEAD module changed her approach to cross-functional team management. That's the skill I need.\"</li><li><strong>A club or initiative you'd contribute to:</strong> \"I plan to join the Healthcare Club and bring my 5 years of hospital operations experience to the annual healthcare conference.\"</li><li><strong>A cultural element that resonates:</strong> At <a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>, referencing the Defining Leadership Principles with genuine personal connection is powerful. At <a href=\"/schools/kellogg/\">Kellogg</a>, demonstrating collaborative instincts matters. Know the school's values and show how you already embody them.</li></ul>"""),
+            ("Writing About Leadership", "<p>Admissions committees want evidence of impact, not titles. \"I managed a team of 5\" tells them nothing. \"I noticed that our team's project delivery was consistently late, so I redesigned the sprint planning process, which reduced delivery time by 40% and eliminated weekend work for the team\" shows initiative, problem-solving, and results.</p><p>Choose leadership stories where you had to make a difficult decision, influence without authority, or drive change in the face of resistance. The best leadership stories include a moment where things didn't go according to plan, because that's where character is revealed.</p><p>Avoid stories where you were simply in charge. The most compelling leadership isn't positional. It's the story where you stepped up without being asked, or where you changed course when the original plan wasn't working.</p>"),
+            ("Writing About Failure", "<p>The failure essay is a gift. It's an invitation to demonstrate self-awareness, which is the single most valued trait in MBA candidates. Most applicants blow it by choosing a \"failure\" that's actually a humble brag (\"I worked too hard and neglected my personal life\").</p><p>Pick a real failure. Something that stung. Then show three things:</p><ol><li>What happened and why (without making excuses)</li><li>What you learned from it specifically</li><li>How you've applied that lesson since</li></ol><p>The admissions committee cares less about what went wrong and more about how you processed the experience. A candidate who can honestly analyze their own mistakes and grow from them is someone who'll get value from an MBA classroom.</p>"),
+            ("Common Traps to Avoid", """<p>After reading thousands of MBA essays (as a student interviewer and alumni reviewer at <a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>), these are the patterns that consistently kill applications:</p><ul><li><strong>Corporate jargon:</strong> \"Synergize cross-functional stakeholder alignment\" means nothing. Write like a human.</li><li><strong>Childhood stories without connection:</strong> \"Growing up, I always wanted to be a leader\" is a waste of 20% of your word count unless you directly connect it to your current career.</li><li><strong>Embellishment:</strong> Admissions committees interview your recommenders and verify your claims. Exaggerating your role or impact will be caught.</li><li><strong>Risk aversion:</strong> Bland, safe essays that avoid anything personal are forgettable. The essays that get people admitted take a point of view.</li><li><strong>Name-dropping without substance:</strong> Listing 6 professors, 4 clubs, and 3 programs from the website doesn't demonstrate fit. It demonstrates you can read a website.</li><li><strong>Overselling goals:</strong> \"I will become CEO of a Fortune 500 company by age 40\" sounds delusional. \"I want to lead a product team at a growth-stage SaaS company\" sounds credible and achievable.</li></ul>"""),
+            ("The Editing Process", "<p>Your first draft should be too long. That's fine. Write everything, then cut 30%. Every sentence should earn its place. Read it out loud. If it sounds like a corporate press release, rewrite it. If it sounds like you talking to a smart friend, you're close.</p><p>A practical editing sequence:</p><ol><li><strong>Draft 1:</strong> Write everything. Don't worry about word count or polish.</li><li><strong>Draft 2:</strong> Cut 25-30%. Remove redundant sentences, vague statements, and any paragraph that doesn't advance your narrative.</li><li><strong>Draft 3:</strong> Read aloud. Flag anything that sounds stiff, jargon-heavy, or dishonest. Rewrite those sections in conversational language.</li><li><strong>Draft 4:</strong> Get feedback from 2-3 readers. Incorporate what resonates. Ignore conflicting advice.</li><li><strong>Draft 5:</strong> Final polish. Check word count, fix grammar, and read one more time aloud.</li></ol><p>The whole process should take 3-4 weeks per school. Don't rush it, and don't let perfect be the enemy of submitted.</p>"),
+            ("Should You Use an Admissions Consultant?", "<p>Admissions consultants charge $5,000-$15,000 for a full application package. Some are excellent and worth every dollar. Many are overpriced essay editors who replace your voice with a generic \"consulting voice\" that admissions committees recognize instantly.</p><p>Use a consultant if you need help structuring your career narrative, identifying your most compelling stories, or understanding what specific programs value. Don't use a consultant who rewrites your essays for you. The admissions committee needs to hear your voice, and a polished essay that sounds like a consultant wrote it is worse than a rougher essay that sounds genuinely like you.</p><p>Free alternatives that work well: alumni reviewers (most schools offer this through alumni clubs), MBA forums where current students give feedback, and friends who've been through the MBA process recently.</p>"),
+        ],
+        "faq": [
+            ("How long should MBA essays be?", "Most programs specify word limits of 250-750 words per essay. Stick to the limit. Going 10% over is usually tolerated. Going 20% over signals that you can't follow instructions, which is a red flag. If the essay is too long, you haven't edited enough."),
+            ("How many MBA essays will I need to write?", "Most programs require 2-3 essays. If you're applying to 5-8 schools, you'll write 10-24 essays total. Many share common themes (why MBA, career goals), so you'll adapt core content rather than starting from scratch each time. Budget 3-4 weeks per school for quality work."),
+            ("Should I mention other schools in my essays?", "Never mention other schools you're applying to. The \"why this school\" essay should make the reader believe this is your top choice. Admissions committees know you're applying elsewhere, but your essay should be a love letter to their program specifically."),
+            ("Can I use the same essay for multiple schools?", "You can share core narrative elements (career goals, leadership stories), but the school-specific sections must be genuinely customized. Admissions officers can tell when you've done a find-and-replace on the school name. The \"why this school\" component should be written from scratch for each program."),
+            ("How important are essays versus GMAT scores?", "Both matter, but differently. Your GMAT/GRE score gets you past the initial screen. Your essays determine whether you're admitted. A 740 GMAT with generic essays will lose to a 710 with exceptional essays and clear school fit. For borderline candidates, essays are the tiebreaker."),
+        ],
+        "see_also": [
+            ("GMAT vs GRE Guide", "/guides/gmat-vs-gre/"),
+            ("MBA Application Timeline", "/guides/mba-application-timeline/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Best MBA Programs for Career Changers", "/guides/best-mba-for-career-changers/"),
+        ],
+    },
+    {
+        "title": f"Is an MBA Worth It? The Real ROI Analysis ({CURRENT_YEAR})",
+        "slug": "mba-roi-analysis",
+        "meta_description": f"Is an MBA worth the investment in {CURRENT_YEAR}? Real ROI analysis with salary data, opportunity cost calculations, and honest math. From a Haas MBA grad.",
+        "sections": [
+            ("The All-In Cost", """<p>A two-year MBA at a top program costs $200K-$250K in tuition and fees. Add living expenses and you're at $280K-$350K. Then add opportunity cost: two years of salary you're not earning. For someone making $100K pre-MBA, the true cost is $480K-$550K. That's a house in most of the country.</p><p>Here's the math by program tier:</p><ul><li><strong>M7 programs (<a href=\"/schools/stanford-gsb/\">Stanford GSB</a>, <a href=\"/schools/harvard-business-school/\">HBS</a>, <a href=\"/schools/wharton/\">Wharton</a>):</strong> $76,000-$78,000/year tuition. Living expenses in Palo Alto, Boston, or Philadelphia add $30,000-$40,000/year. Total direct cost: $220K-$240K over two years.</li><li><strong>Top 15 programs (<a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>, <a href=\"/schools/duke-fuqua/\">Duke Fuqua</a>, <a href=\"/schools/yale-som/\">Yale SOM</a>):</strong> $60,000-$72,000/year tuition. Total direct cost: $180K-$220K over two years.</li><li><strong>Top 25 public programs (<a href=\"/schools/texas-mccombs/\">Texas McCombs</a>, <a href=\"/schools/unc-kenan-flagler/\">UNC Kenan-Flagler</a>, <a href=\"/schools/indiana-kelley/\">Indiana Kelley</a>):</strong> $28,000-$52,000/year in-state tuition. Total direct cost: $100K-$170K.</li></ul><p>Opportunity cost depends entirely on your pre-MBA salary. Two years away from a $70K job costs $140K. Two years away from a $200K job costs $400K. This is why the MBA is a better financial deal for career changers earning less than $100K pre-MBA.</p>"""),
+            ("The Salary Uplift", f"<p>The median starting salary at M7 programs is $175K-$195K, with signing bonuses of $25K-$35K. If your pre-MBA salary was $80K-$120K, the year-one uplift is significant. But the real value is in the trajectory. MBA grads from top programs see faster promotions and higher lifetime earnings.</p><p>Average starting salaries by program tier in {CURRENT_YEAR}:</p><ul><li><strong>M7:</strong> $175,000-$195,000 base + $25,000-$35,000 signing bonus</li><li><strong>Top 15:</strong> $155,000-$175,000 base + $20,000-$30,000 signing bonus</li><li><strong>Top 25:</strong> $140,000-$160,000 base + $15,000-$25,000 signing bonus</li><li><strong>Top 50:</strong> $120,000-$145,000 base + $10,000-$20,000 signing bonus</li></ul><p>By industry, the salary picture varies dramatically:</p><ul><li><strong>Consulting (MBB):</strong> $190,000 base + $35,000 signing bonus</li><li><strong>Investment banking:</strong> $175,000 base + $50,000-$65,000 signing bonus</li><li><strong>Tech (product management):</strong> $160,000-$180,000 base + $50,000-$100,000 in RSUs</li><li><strong>Private equity:</strong> $175,000 base + $75,000-$150,000 bonus</li><li><strong>Corporate (Fortune 500 LDP):</strong> $130,000-$150,000 base + $15,000-$25,000 signing bonus</li></ul>"),
+            ("The Breakeven Calculation", "<p>A simple breakeven analysis: if your all-in MBA cost (tuition + living + opportunity cost) is $400K and your annual salary uplift post-MBA is $60K, you'll break even in roughly 6-7 years. That's a reasonable timeline for most career changers.</p><p>But breakeven calculations undercount the MBA's value because they ignore trajectory. A post-MBA salary of $175K grows faster than a non-MBA salary of $100K. By year 10 post-MBA, the cumulative income advantage often exceeds $500K-$1M for graduates of top-15 programs.</p><p>The breakeven is fastest for:</p><ul><li>Career changers going from $70K-$90K jobs into consulting ($175K+ starting)</li><li>Public school MBA students with in-state tuition ($28K-$52K/year)</li><li>Candidates with significant scholarship funding</li></ul><p>The breakeven is slowest for:</p><ul><li>People already earning $150K+ who stay in the same industry</li><li>Full-pay students at M7 programs targeting non-profit or social enterprise</li><li>Candidates who take on $200K+ in student debt at lower-ranked programs</li></ul>"),
+            ("When the Math Works", """<p>The MBA ROI is strongest in these situations:</p><ol><li><strong>Industry change from low-pay to high-pay:</strong> A teacher making $55K who goes to <a href=\"/schools/kellogg/\">Kellogg</a> and enters consulting at $190K has a massive ROI, even at full tuition.</li><li><strong>Career acceleration:</strong> A product manager making $120K who goes to <a href=\"/schools/stanford-gsb/\">Stanford GSB</a> and enters a VP-track role at a growth-stage company will recoup the investment through faster title progression and equity upside.</li><li><strong>Geographic arbitrage:</strong> Someone at a public school paying $30K/year tuition who lands a $160K consulting job has incredible ROI.</li><li><strong>Network-dependent careers:</strong> In PE, VC, and startup founding, the MBA network generates deal flow, co-founder introductions, and fundraising connections that have compounding returns for decades.</li></ol>"""),
+            ("When It Doesn't", "<p>The MBA ROI is weakest in these situations:</p><ol><li><strong>Staying in the same role at the same company:</strong> If your employer won't promote you faster or pay you more for having an MBA, the financial return is limited to job-switching leverage.</li><li><strong>Already in your target industry at high comp:</strong> If you're a software engineer making $200K and you want to stay in engineering, the MBA adds credential but may not add income.</li><li><strong>High debt at lower-ranked programs:</strong> Borrowing $200K for a program ranked 30-50 is risky because the salary uplift and network effects diminish outside the top 25.</li><li><strong>Self-discovery:</strong> If you're going to business school to \"figure out what to do with your life,\" you're paying a premium for something that career coaching, informational interviews, and self-reflection can provide at a fraction of the cost.</li><li><strong>Non-profit or public sector goals:</strong> MBA salaries in non-profit and government ($80K-$120K) make it difficult to service $200K in debt. Loan forgiveness programs help, but they take 10-20 years.</li></ol>"),
+            ("Scholarships and Financial Aid", """<p>Merit scholarships can dramatically improve ROI. Here's what to know:</p><ul><li><strong>M7 programs:</strong> Roughly 25-35% of students receive some scholarship. Awards range from $20K-$100K total (partial tuition). Full-ride scholarships exist but are rare (under 5%).</li><li><strong>Top 15 programs:</strong> More generous on average. <a href=\"/schools/yale-som/\">Yale SOM</a>, <a href=\"/schools/duke-fuqua/\">Duke Fuqua</a>, and <a href=\"/schools/virginia-darden/\">Virginia Darden</a> are known for competitive scholarship offers.</li><li><strong>Top 25 public programs:</strong> In-state tuition is the biggest scholarship available. Some programs like <a href=\"/schools/indiana-kelley/\">Indiana Kelley</a> and <a href=\"/schools/unc-kenan-flagler/\">UNC Kenan-Flagler</a> offer additional merit aid that brings total cost below $50K.</li></ul><p>Negotiation works. If you have multiple admits with different financial aid offers, schools will often match or improve competing offers. This is expected behavior, not frowned upon. A polite email with your competing offer can yield $20K-$50K in additional scholarship money.</p>"""),
+            ("The Intangibles", "<p>The network is real. The confidence shift is real. The career optionality is real. But these are hard to put in a spreadsheet.</p><p>Specific intangible benefits that MBA graduates consistently cite:</p><ul><li><strong>Career insurance:</strong> If you lose your job in a downturn, your MBA alumni network becomes a safety net. Cold outreach to fellow alumni yields response rates 3-5x higher than LinkedIn messages to strangers.</li><li><strong>Industry access:</strong> The MBA gives you a two-year window to meet people in industries you've never worked in. Informational interviews, company visits, and club events create relationships that would take years to build organically.</li><li><strong>Credential signaling:</strong> In some industries (consulting, PE, corporate strategy), the MBA is a prerequisite, not a nice-to-have. Without it, you're screened out before your resume is read.</li><li><strong>Confidence and frameworks:</strong> Two years of case studies, presentations, and team projects change how you think about business problems. This is hard to quantify but consistently cited by graduates as one of the highest-value outcomes.</li></ul>"),
+            ("Alternatives to a Full-Time MBA", "<p>Before committing to $200K-$500K in all-in costs, consider whether these alternatives achieve your goals:</p><ul><li><strong>Executive MBA (EMBA):</strong> 18-24 months, weekend format, keep your salary. Costs $100K-$200K but eliminates opportunity cost. Best for people who want the credential and network without leaving their career.</li><li><strong>Part-time MBA:</strong> 2-3 years of evening and weekend classes. Lower tuition than full-time at many schools. Keep your income. Trade-off: reduced access to recruiting events and campus community.</li><li><strong>Online MBA:</strong> Growing in quality but limited in network effects. Useful for the credential in industries where the brand matters but in-person relationships don't.</li><li><strong>Targeted certifications:</strong> CFA for finance, PMP for operations, Google/Meta certifications for tech marketing. Cheaper, faster, and sufficient for many career goals.</li><li><strong>Internal promotion:</strong> If your employer offers tuition reimbursement or leadership development programs, the ROI of staying may exceed the ROI of leaving for an MBA.</li></ul>"),
+            ("The Honest Take", "<p>The MBA is worth it if (1) your target career requires it or benefits significantly from it, (2) you can attend a program where the outcomes justify the cost, and (3) you have a clear idea of what you want to do afterward. If all three conditions are true, the financial and career returns are strong.</p><p>The MBA is questionable if you're already earning well in your target industry, if you'd need to borrow the full cost at a program ranked below the top 25, or if your primary motivation is avoiding a decision about your career. The $300K-$500K all-in cost is too high for uncertainty.</p><p>The best MBA ROI calculation combines the quantitative (salary uplift, career trajectory) with the qualitative (network, credential, personal growth). If both sides of the equation work, it's worth it.</p>"),
+        ],
+        "faq": [
+            ("What is the average ROI of an MBA?", "The average salary uplift at a top-15 MBA program is $50,000-$95,000 in year one (comparing pre-MBA to post-MBA salary). With all-in costs of $300K-$500K, most graduates break even within 5-8 years and see significant cumulative income advantage by year 10-15. Public school MBAs with lower tuition break even fastest."),
+            ("Is an MBA worth it if I'm already making $150K?", "It depends on your goal. If you're changing industries or targeting roles that require an MBA (consulting, PE, corporate strategy), the credential and network may justify the cost despite smaller salary uplift. If you're staying in the same industry and role, the financial ROI is harder to justify. Consider an EMBA or part-time MBA instead."),
+            ("Which MBA programs have the best ROI?", f"""In {CURRENT_YEAR}, the best pure ROI comes from public school programs with low tuition and strong outcomes: <a href=\"/schools/indiana-kelley/\">Indiana Kelley</a> ($28K/year), <a href=\"/schools/texas-mccombs/\">Texas McCombs</a> ($42K in-state), and <a href=\"/schools/unc-kenan-flagler/\">UNC Kenan-Flagler</a> ($48K in-state). Among top-ranked schools, <a href=\"/schools/booth/\">Booth</a> and <a href=\"/schools/kellogg/\">Kellogg</a> offer strong outcomes at lower cost-of-living than coastal programs."""),
+            ("Should I take on $200K in student loans for an MBA?", "At an M7 or top-15 program, $200K in loans is manageable with post-MBA salaries of $175K+. Standard repayment on $200K at 6% interest is about $2,200/month over 10 years. At programs ranked 25-50 with lower starting salaries ($130K-$150K), $200K in debt creates significant financial pressure. Try to minimize borrowing through scholarships, employer sponsorship, or choosing a public school."),
+            ("Is an MBA worth it for entrepreneurs?", "If you're targeting VC-backed startups, the MBA network (especially from <a href=\"/schools/stanford-gsb/\">Stanford GSB</a> or <a href=\"/schools/harvard-business-school/\">HBS</a>) provides co-founder connections, investor introductions, and credibility with early customers. If you're bootstrapping a small business, the MBA is likely overkill. The $300K+ cost could fund your business directly."),
+        ],
+        "see_also": [
+            ("Overall Rankings", "/rankings/overall/"),
+            ("Best ROI Rankings", "/rankings/roi/"),
+            ("MBA Application Timeline", "/guides/mba-application-timeline/"),
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Tech ({CURRENT_YEAR})",
+        "slug": "best-mba-for-tech",
+        "meta_description": f"Best MBA programs for tech careers in {CURRENT_YEAR}. Top schools for product management, tech strategy, and startup roles. From a Haas MBA grad.",
+        "sections": [
+            ("Why Tech Companies Hire MBAs", f"<p>Tech companies hire MBAs for product management, strategy, business development, and general management rotations. The skills gap that MBAs fill is the bridge between technical teams and business outcomes. Product management in particular has become the dominant post-MBA tech role, with companies like Google, Amazon, Meta, and Apple each hiring 100+ MBA interns every summer.</p><p>In {CURRENT_YEAR}, tech roles represent the single largest industry destination for MBA graduates at 8 of the top 15 programs. The trend has accelerated as tech companies have expanded beyond Silicon Valley into every major metro area, creating PM, strategy, and biz dev roles that need business-trained leaders who can speak the language of engineers.</p>"),
+            ("The Top Tech MBA Programs", """<p>These programs consistently place the highest percentage of graduates into tech roles:</p><ul><li><strong><a href=\"/schools/stanford-gsb/\">Stanford GSB</a></strong> (32% tech placement): The gold standard for tech MBAs. Palo Alto location puts you walking distance from Sand Hill Road and every major tech company. Strongest pipeline for startup founding and VC-backed roles. 18% of graduates start their own companies within 5 years.</li><li><strong><a href=\"/schools/berkeley-haas/\">Berkeley Haas</a></strong> (42% tech placement): The highest tech placement rate of any top-15 program. Direct pipelines to Google, Apple, Meta, Salesforce, and hundreds of Bay Area startups. The 290-person class creates a tight community in the heart of the Bay Area tech ecosystem.</li><li><strong><a href=\"/schools/mit-sloan/\">MIT Sloan</a></strong> (35% tech placement): Deep integration with MIT's engineering and computer science programs. Strongest program for deep tech (AI, robotics, biotech). The MIT brand carries unique weight in technical roles.</li><li><strong><a href=\"/schools/washington-foster/\">Washington Foster</a></strong> (50% tech placement): The highest percentage of any ranked program. Amazon is the single largest employer. Microsoft, T-Mobile, and Seattle's growing startup scene hire heavily. In-state tuition makes this an exceptional value.</li><li><strong><a href=\"/schools/carnegie-mellon-tepper/\">Carnegie Mellon Tepper</a></strong> (40% tech placement): STEM-designated MBA with the deepest analytics curriculum of any business school. CMU's computer science reputation gives Tepper graduates credibility in technical conversations that other MBAs lack.</li></ul>"""),
+            ("M7 Programs for Tech", """<p>Every M7 program places graduates into tech, but the pipelines differ:</p><ul><li><strong><a href=\"/schools/wharton/\">Wharton</a></strong> has invested heavily in tech recruiting, with strong placement at Amazon, Google, and Meta. Wharton's tech placement (22%) is lower than specialist schools, but the brand opens doors at every company.</li><li><strong><a href=\"/schools/booth/\">Booth</a></strong> places 18% into tech, with particular strength in fintech and data-driven roles. Booth's quantitative rigor appeals to tech companies hiring for analytical roles.</li><li><strong><a href=\"/schools/kellogg/\">Kellogg</a></strong> places 22% into tech, with strength in marketing-oriented roles (growth, marketing analytics, brand strategy at tech companies). If you want to be a VP of Marketing at a SaaS company, Kellogg's combination of marketing excellence and tech access is hard to beat.</li><li><strong><a href=\"/schools/columbia-business-school/\">Columbia</a></strong> has growing tech placement (10%), particularly in NYC-based tech (fintech, adtech, media tech). Columbia's proximity to NYC's tech scene provides alternatives to Silicon Valley.</li><li><strong><a href=\"/schools/harvard-business-school/\">Harvard Business School</a></strong> places 18% into tech. The HBS brand works everywhere, and graduates tend to enter tech at senior levels (director+) rather than standard post-MBA PM roles.</li></ul>"""),
+            ("Best Roles for Tech MBAs", f"<p>The specific roles tech companies hire MBAs for, with typical compensation in {CURRENT_YEAR}:</p><ul><li><strong>Product Management:</strong> The most popular post-MBA tech role. Base $160K-$180K + $50K-$100K in RSUs at major companies. You'll work at the intersection of engineering, design, and business. Requires strong analytical skills and customer empathy.</li><li><strong>Strategy & Operations:</strong> Internal consulting within tech companies. Base $150K-$170K + equity. Roles at Google (Strategy & Ops), Amazon (Pathways), and Meta (Strategy) are popular entry points.</li><li><strong>Business Development:</strong> Partnerships, M&A, and market expansion. Base $150K-$175K + equity. Strong at companies with partnership ecosystems (Google Cloud, AWS, Salesforce).</li><li><strong>General Management Rotations:</strong> Amazon Pathways, Google APM, Microsoft Aspire. These 2-3 year rotational programs are the fast track to senior leadership. Competitive and prestigious. Base $160K-$180K + equity.</li><li><strong>Venture Capital:</strong> Primarily accessible from Stanford GSB and Harvard. Most VC associate roles go to candidates with prior tech operating experience + MBA from a top-5 program. Base $150K-$200K + carried interest.</li></ul>"),
+            ("What to Look For in a Tech MBA Program", """<p>Beyond overall ranking, these factors predict tech career success:</p><ul><li><strong>Tech placement percentage:</strong> If 30%+ of graduates enter tech, the recruiting infrastructure is mature. Below 15%, you're pioneering your own path.</li><li><strong>PM club strength:</strong> Active product management clubs run case competitions, host company presentations, and provide interview prep. Ask current students how many members the PM club has and how active it is.</li><li><strong>Tech treks:</strong> Organized visits to Silicon Valley, Seattle, or NYC tech companies during the academic year. These treks provide face time with recruiters and alumni that's hard to replicate on your own.</li><li><strong>Proximity to tech hubs:</strong> Bay Area programs (<a href=\"/schools/stanford-gsb/\">Stanford</a>, <a href=\"/schools/berkeley-haas/\">Haas</a>) and Seattle programs (<a href=\"/schools/washington-foster/\">Foster</a>) have a geographic advantage. But Midwest and East Coast programs can compensate with strong alumni networks and recruiting events.</li><li><strong>Alumni at target companies:</strong> Search LinkedIn for \"[School Name] MBA\" at your target companies. If you see 50+ alumni at Google from a particular school, the pipeline exists.</li></ul>"""),
+            ("The Career Changer Angle", """<p>If you're pivoting from a non-tech background into tech, the MBA is the most reliable bridge. Here's what works:</p><ul><li><strong>Pre-MBA prep:</strong> Learn basic SQL, take a product management course (Product School, Reforge), and start reading tech blogs. You don't need to code, but you need to speak the language.</li><li><strong>Summer internship strategy:</strong> Your MBA summer internship is the highest-leverage moment. Target companies with structured MBA intern programs (Amazon, Google, Microsoft, Salesforce). These programs are designed for career changers and convert 60-80% of interns to full-time offers.</li><li><strong>Best programs for tech career changers:</strong> <a href=\"/schools/berkeley-haas/\">Berkeley Haas</a> and <a href=\"/schools/michigan-ross/\">Michigan Ross</a> have the strongest career services for tech pivots. <a href=\"/schools/duke-fuqua/\">Duke Fuqua</a> and <a href=\"/schools/kellogg/\">Kellogg</a> also support career changers well. <a href=\"/schools/carnegie-mellon-tepper/\">Tepper</a> is ideal if you want to combine business training with technical depth.</li></ul><p>The career-change success rate for tech is high because the skills are transferable. Consulting, military, operations, and even nonprofit professionals bring structured thinking, project management, and leadership skills that tech companies value. You're selling a different version of yourself, not starting from scratch.</p>"""),
+            ("Startups vs. Big Tech", """<p>The MBA serves different purposes depending on your target company size:</p><p><strong>Big Tech (FAANG/MAANG):</strong> Structured recruiting, clear compensation bands, established MBA pipelines. The MBA gets you in the door at the right level (typically L5-L6 at Google, L6 at Amazon). You'll manage products with millions of users and learn systems at scale. Compensation: $200K-$350K total first year.</p><p><strong>Growth-stage startups (Series B-D):</strong> Less structured recruiting, but MBA candidates often have direct access to founders and executives. You'll wear more hats and have broader impact earlier. Compensation varies wildly: $150K-$200K base + meaningful equity that could be worth $0 or $5M.</p><p><strong>Early-stage startups (Seed-Series A):</strong> The MBA matters less than your hustle and domain expertise. <a href=\"/schools/stanford-gsb/\">Stanford GSB</a> is the clear leader for startup founding, with the most active startup ecosystem and investor network. <a href=\"/schools/harvard-business-school/\">HBS</a> and <a href=\"/schools/mit-sloan/\">MIT Sloan</a> also have strong entrepreneurship infrastructure.</p>"""),
+        ],
+        "faq": [
+            ("Do I need a technical background to get a tech MBA job?", "No. Tech companies hire MBAs specifically for business roles (PM, strategy, biz dev) where business acumen matters more than coding ability. Basic technical literacy helps (understanding APIs, data analysis, SQL), but you don't need an engineering degree. Many successful tech PMs come from consulting, finance, and operations backgrounds."),
+            (f"What is the average salary for MBA graduates in tech?", f"In {CURRENT_YEAR}, the average total compensation for MBA graduates entering tech is $220K-$300K at major companies (base + signing bonus + equity). Product management at Google or Amazon typically pays $250K-$300K total comp in the first year. Startup compensation is lower in cash but may include equity with significant upside."),
+            ("Which MBA program is best for product management?", "Stanford GSB, Berkeley Haas, and MIT Sloan have the strongest PM placement. Haas has the highest tech placement percentage (42%), and its Bay Area location provides access to hundreds of PM roles. Washington Foster is a strong value pick with Amazon as the dominant employer."),
+            ("Is an MBA worth it if I'm already in tech?", "It depends on your trajectory. If you're an engineer wanting to move into product or strategy, the MBA provides the credential, network, and recruiting pipeline to make that pivot efficiently. If you're already in a business role at a tech company, the MBA's value is primarily in acceleration (getting to VP faster) and optionality (moving to a different company at a higher level)."),
+        ],
+        "see_also": [
+            ("Best MBA for Finance", "/guides/best-mba-for-finance/"),
+            ("Best MBA for Consulting", "/guides/best-mba-for-consulting/"),
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Finance ({CURRENT_YEAR})",
+        "slug": "best-mba-for-finance",
+        "meta_description": f"Best MBA programs for finance careers in {CURRENT_YEAR}. Top schools for investment banking, private equity, asset management, and corporate finance. From a Haas MBA grad.",
+        "sections": [
+            ("How Finance Recruiting Works", """<p>Finance recruiting is the most structured career path out of business school. Banks, PE firms, and hedge funds recruit from a defined target list of schools. If your school is on the list, you get first-round interviews. If it's not, you're networking your way in, which is possible but significantly harder.</p><p>The recruiting timeline is compressed. Investment banking recruiting starts in September of your first year, with interviews in January. PE recruiting (for post-banking roles) can start even earlier. This means your school's career services infrastructure and alumni network in finance need to be active from day one.</p><p>Here's the breakdown of finance sub-sectors and how MBA recruiting differs in each:</p><ul><li><strong>Investment banking:</strong> Most structured. Banks hire from a target list of 10-15 schools. Bulge bracket (Goldman, JPMorgan, Morgan Stanley) hire 200+ MBA associates per year across these schools.</li><li><strong>Private equity:</strong> Highly selective. Top PE firms (Blackstone, KKR, Apollo) hire almost exclusively from M7 programs, and they prefer candidates with prior banking experience.</li><li><strong>Hedge funds:</strong> Less structured, more meritocratic. Funds care about your investment thesis and analytical ability as much as your school name. <a href=\"/schools/booth/\">Booth</a> and <a href=\"/schools/columbia-business-school/\">Columbia</a> are particularly strong.</li><li><strong>Asset management:</strong> Moderate structure. Both active and passive managers hire from top-25 programs, with <a href=\"/schools/wharton/\">Wharton</a> and <a href=\"/schools/columbia-business-school/\">Columbia</a> being the deepest feeders.</li><li><strong>Corporate finance:</strong> Least school-dependent. Fortune 500 finance rotational programs (FLDP) recruit from top-25 schools broadly.</li></ul>"""),
+            ("The Top Finance MBA Programs", """<p>These schools dominate finance placement by volume and depth of pipeline:</p><ul><li><strong><a href=\"/schools/wharton/\">Wharton</a></strong> (34% finance placement): The finance MBA. Deepest curriculum (200+ electives including dozens of finance-specific courses), strongest Wall Street alumni network, and the brand that opens every door in finance. Wharton graduates run the largest banks, PE firms, and hedge funds. If finance is your target and you can get in, this is the answer.</li><li><strong><a href=\"/schools/columbia-business-school/\">Columbia Business School</a></strong> (36% finance placement): The highest finance placement rate of any M7 program. Manhattan location puts you on Wall Street's doorstep. Columbia's value investing program (Heilbrunn Center) is the spiritual successor to Benjamin Graham and Warren Buffett. For fundamental investing, Columbia is peerless.</li><li><strong><a href=\"/schools/booth/\">Booth</a></strong> (32% finance placement): Wharton's closest rival in finance rigor. Booth's economics-driven faculty (Eugene Fama, Nobel laureate) and flexible curriculum let you build a finance-heavy course load that rivals any program. Strongest feeder into Chicago-based trading firms and quantitative finance.</li><li><strong><a href=\"/schools/nyu-stern/\">NYU Stern</a></strong> (30% finance placement): The best non-M7 program for finance. Greenwich Village location provides the same NYC proximity as Columbia. Stern's finance faculty includes several industry practitioners, and the school's specializations in real estate, fintech, and quantitative finance are strong.</li><li><strong><a href=\"/schools/harvard-business-school/\">Harvard Business School</a></strong> (24% finance placement): HBS places fewer graduates into finance by percentage, but the absolute numbers are massive (230 students). The HBS brand opens doors at every firm, and graduates disproportionately move into senior positions. For PE and CEO-track finance roles, HBS is hard to beat.</li></ul>"""),
+            ("Beyond Wall Street: Specialized Finance Paths", """<p>Finance is broader than investment banking. These programs excel in specific sub-sectors:</p><ul><li><strong>Real estate finance:</strong> <a href=\"/schools/wharton/\">Wharton</a> (Zell-Lurie Center), <a href=\"/schools/columbia-business-school/\">Columbia</a> (Paul Milstein Center), and <a href=\"/schools/wisconsin/\">Wisconsin</a> (Graaskamp Center) lead real estate finance education. USC Marshall is strong for LA real estate.</li><li><strong>Energy finance:</strong> <a href=\"/schools/rice-jones/\">Rice Jones</a> and <a href=\"/schools/texas-mccombs/\">Texas McCombs</a> dominate. Houston is the energy capital, and both schools have direct pipelines to energy companies, trading firms, and PE funds focused on energy.</li><li><strong>Fintech:</strong> <a href=\"/schools/mit-sloan/\">MIT Sloan</a> and <a href=\"/schools/nyu-stern/\">NYU Stern</a> lead. MIT's technology integration and Stern's fintech concentration produce graduates who understand both finance and technology at a deep level.</li><li><strong>Corporate finance (FLDP programs):</strong> <a href=\"/schools/michigan-ross/\">Michigan Ross</a>, <a href=\"/schools/duke-fuqua/\">Duke Fuqua</a>, and <a href=\"/schools/virginia-darden/\">Virginia Darden</a> place well into Fortune 500 finance leadership development programs. These rotational programs at GE, J&J, Amazon, and others lead to CFO-track careers.</li><li><strong>Impact investing and ESG:</strong> <a href=\"/schools/yale-som/\">Yale SOM</a> and <a href=\"/schools/berkeley-haas/\">Berkeley Haas</a> have the strongest programs for socially-conscious finance. Yale's emphasis on mission-driven management extends to its finance curriculum.</li></ul>"""),
+            ("Finance Salary and Compensation", "<p>Finance offers some of the highest starting compensation for MBA graduates, especially in banking and PE:</p><ul><li><strong>Investment banking (associate):</strong> $175,000 base + $50,000-$65,000 signing bonus + year-end bonus of $100,000-$150,000 (total comp $325K-$390K in year one)</li><li><strong>Private equity (associate):</strong> $175,000 base + $75,000-$150,000 bonus + carried interest (total comp $300K-$500K+ including carry)</li><li><strong>Hedge funds (analyst/associate):</strong> $150,000-$200,000 base + performance bonus that can be 50-200% of base. Top performers earn $500K+ in year 2-3.</li><li><strong>Asset management:</strong> $150,000-$175,000 base + $50,000-$100,000 bonus</li><li><strong>Corporate finance (FLDP):</strong> $130,000-$150,000 base + $15,000-$25,000 signing bonus</li></ul><p>The compensation ceiling in finance is higher than in any other post-MBA path. Managing directors at banks earn $1M+. PE partners earn $5M-$50M+ through carried interest. These outcomes are the extreme, but they're real and disproportionately come from top MBA programs.</p>"),
+            ("What Finance Recruiting Actually Looks Like", "<p>First-year MBA students targeting banking follow a compressed timeline:</p><ol><li><strong>September-October:</strong> Networking events, bank presentations on campus, informational interviews with alumni. This is the most important phase. Banks track who attends events and who reaches out to alumni.</li><li><strong>November-December:</strong> Application submissions. Most banks have online applications, but referrals from alumni increase your chances significantly.</li><li><strong>January:</strong> First-round interviews (behavioral + technical). Technical questions cover accounting, valuation (DCF, LBO, comps), and market knowledge.</li><li><strong>February:</strong> Superday interviews at the bank's office. Multiple rounds with MDs and senior VPs. Decisions come within 1-2 weeks.</li><li><strong>Summer:</strong> 10-week internship. 80-90% of summer interns receive full-time return offers at top banks.</li></ol><p>PE recruiting follows a different cadence. Many PE firms recruit post-MBA associates through headhunters, and the process starts even before business school begins for candidates with prior banking experience.</p>"),
+            ("The Career Changer Path into Finance", "<p>Switching from a non-finance background into banking or PE is possible but harder than switching into tech or consulting. Here's what matters:</p><ul><li><strong>Pre-MBA prep:</strong> Take accounting and corporate finance courses before business school. Wall Street Prep or Breaking Into Wall Street courses teach the technical skills (DCF, LBO, comps) that interviews test.</li><li><strong>School selection:</strong> If finance is your goal, prioritize schools with the strongest finance placement. A lower-ranked school with 30% finance placement may serve you better than a higher-ranked school with 10% finance placement.</li><li><strong>Networking intensity:</strong> Finance recruiting rewards effort. Students who attend every bank event, reach out to 50+ alumni, and prepare 100+ technical questions get offers. Students who do the minimum don't.</li><li><strong>Transferable skills:</strong> Military, consulting, and engineering backgrounds translate well to finance. The analytical rigor and work ethic transfer directly. Marketing and nonprofit backgrounds require more bridge-building.</li></ul>"),
+            ("The Bottom Line", """<p>If you want investment banking or PE at a top fund, go to an M7 program, with <a href=\"/schools/wharton/\">Wharton</a>, <a href=\"/schools/columbia-business-school/\">Columbia</a>, and <a href=\"/schools/booth/\">Booth</a> as the optimal choices. If you want corporate finance or a finance role at a tech company, a top-25 program will get you there. The further you go from Wall Street, the less the school name matters, and the more your pre-MBA experience does.</p><p>Finance is one of the few post-MBA paths where school prestige has a direct, measurable impact on outcomes. The difference between attending a top-5 finance MBA and a top-20 finance MBA is real in terms of which firms recruit on campus and which doors open automatically. If finance is your primary goal, optimize for finance placement rate and Wall Street proximity.</p>"""),
+        ],
+        "faq": [
+            ("What MBA program is best for investment banking?", "Wharton, Columbia, and Booth are the top three for investment banking. All three have 30%+ finance placement rates and deep alumni networks on Wall Street. Columbia's Manhattan location provides the most direct access to banks. Wharton has the broadest finance curriculum. Booth has the strongest quantitative rigor."),
+            ("Can I break into finance from a non-finance background?", "Yes, but it requires preparation. Take accounting and valuation courses before or during business school. Network aggressively with alumni in your target firms. Attend every bank presentation on campus. The MBA is specifically designed to enable career changes, and consulting-to-banking and engineering-to-banking pivots are common at top programs."),
+            (f"What is the salary for MBA graduates in investment banking?", f"In {CURRENT_YEAR}, first-year investment banking associates earn approximately $175,000 base salary plus a $50,000-$65,000 signing bonus. Year-end bonuses add $100,000-$150,000, bringing total first-year compensation to $325,000-$390,000. Compensation increases significantly with seniority."),
+            ("Is an MBA necessary for a career in private equity?", "For the largest PE firms (Blackstone, KKR, Apollo, Carlyle), an MBA from an M7 program is a de facto requirement for associate roles. Smaller PE firms are more flexible on credentials. If you have strong banking or consulting experience, some firms will hire without an MBA, but the MBA accelerates your path and opens doors at the most prestigious funds."),
+            ("Which is better for finance: Wharton or Columbia?", "Wharton has the stronger overall brand, deeper curriculum, and broader alumni network across all finance sub-sectors. Columbia has the location advantage (Manhattan), the value investing heritage (Heilbrunn Center), and higher finance placement rate (36% vs 34%). For fundamental investing, Columbia has a slight edge. For PE and the broadest finance access, Wharton leads."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Best MBA for Consulting", "/guides/best-mba-for-consulting/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+            ("Highest Salary Rankings", "/rankings/salary/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Consulting ({CURRENT_YEAR})",
+        "slug": "best-mba-for-consulting",
+        "meta_description": f"Best MBA programs for consulting careers in {CURRENT_YEAR}. Top schools for McKinsey, BCG, Bain, and boutique firms. From a Haas MBA grad.",
+        "sections": [
+            ("How Consulting Recruiting Works", "<p>MBB (McKinsey, BCG, Bain) and the Big 4 (Deloitte, PwC, EY, KPMG) recruit from a target list of schools. If your school is on the list, you get first-round interviews. If it's not, you're networking your way to an interview, which is possible but harder.</p><p>The target list roughly maps to the top 25 programs, with M7 schools getting the most interview slots per capita. MBB firms each hire 200-400 MBA associates per year globally, drawn from roughly 15-20 core schools. The Big 4 consulting practices hire even more and recruit from a broader set of 30-40 programs.</p><p>Consulting recruiting timeline:</p><ol><li><strong>September-October:</strong> Firm presentations on campus, networking events, coffee chats with consultants. Attendance is tracked. Show up.</li><li><strong>November-December:</strong> Applications submitted. Resume and cover letter reviewed. First cuts made.</li><li><strong>January:</strong> First-round interviews (1-2 case interviews + behavioral). Usually on campus or virtual.</li><li><strong>February:</strong> Final-round interviews at the firm's office. Multiple case interviews plus partner conversations. Decisions within 1-2 weeks.</li><li><strong>Summer:</strong> 10-week consulting internship. Return offer rates at MBB are 85-95%.</li></ol>"),
+            ("The Top Consulting MBA Programs", """<p>These programs have the highest consulting placement rates and deepest MBB pipelines:</p><ul><li><strong><a href=\"/schools/kellogg/\">Kellogg</a></strong> (34% consulting placement): The consulting school. Kellogg's collaborative culture aligns perfectly with consulting firm culture. The team-based curriculum means you're practicing group problem-solving daily. More Kellogg graduates enter consulting than any single other industry, and the alumni network in MBB is massive.</li><li><strong><a href=\"/schools/dartmouth-tuck/\">Dartmouth Tuck</a></strong> (40% consulting placement): The highest consulting placement rate of any top-15 program. Tuck's 280-person class means MBB firms interview a significant percentage of the student body. The alumni loyalty is legendary: Tuck graduates in consulting actively champion current students during recruiting.</li><li><strong><a href=\"/schools/harvard-business-school/\">Harvard Business School</a></strong> (27% consulting placement): The case method is consulting training. Every class prepares you for case interviews by forcing you to analyze business situations, form recommendations, and defend them under pressure. HBS places the most absolute graduates into MBB due to its 930-person class.</li><li><strong><a href=\"/schools/duke-fuqua/\">Duke Fuqua</a></strong> (35% consulting placement): The strongest consulting feeder outside the M7. Fuqua's team-based culture (\"Team Fuqua\" is the school's identity) produces graduates that consulting firms love. MBB, Big 4, and boutique firms all recruit actively.</li><li><strong><a href=\"/schools/virginia-darden/\">Virginia Darden</a></strong> (32% consulting placement): Darden's case method curriculum provides daily case practice that directly translates to consulting interviews. The school produces strong generalists, which is exactly what consulting firms want.</li></ul>"""),
+            ("M7 Consulting Placement Breakdown", """<p>Every M7 program is a target school for MBB. Here's how consulting placement compares across the M7:</p><ul><li><strong><a href=\"/schools/kellogg/\">Kellogg</a>:</strong> 34% into consulting. The cultural leader for consulting preparation.</li><li><strong><a href=\"/schools/harvard-business-school/\">HBS</a>:</strong> 27% into consulting. Largest absolute numbers due to 930-person class.</li><li><strong><a href=\"/schools/booth/\">Booth</a>:</strong> 26% into consulting. Strong in analytics-focused consulting practices.</li><li><strong><a href=\"/schools/wharton/\">Wharton</a>:</strong> 25% into consulting. Balanced placement with strong strategy consulting.</li><li><strong><a href=\"/schools/columbia-business-school/\">Columbia</a>:</strong> 28% into consulting. Strong in NYC-based consulting and financial advisory.</li><li><strong><a href=\"/schools/mit-sloan/\">MIT Sloan</a>:</strong> 24% into consulting. Strongest in tech/digital transformation consulting.</li><li><strong><a href=\"/schools/stanford-gsb/\">Stanford GSB</a>:</strong> 16% into consulting. Lowest M7 consulting rate (more graduates choose tech and startups).</li></ul><p>If consulting is your primary career goal and you're choosing between M7 programs, <a href=\"/schools/kellogg/\">Kellogg</a> is the obvious optimization. <a href=\"/schools/stanford-gsb/\">Stanford GSB</a> is the worst M7 choice for consulting specifically, because the program's culture and recruiting infrastructure favor tech and entrepreneurship.</p>"""),
+            ("The Case Interview Factor", """<p>Every school has case prep resources, but some bake it deeper into the culture. The programs where you'll be best prepared for case interviews:</p><ul><li><strong><a href=\"/schools/harvard-business-school/\">HBS</a> and <a href=\"/schools/virginia-darden/\">Darden</a>:</strong> Case method schools. You'll analyze 500+ cases over two years and defend your recommendations in front of 80+ classmates. This is case interview training disguised as coursework.</li><li><strong><a href=\"/schools/kellogg/\">Kellogg</a> and <a href=\"/schools/duke-fuqua/\">Fuqua</a>:</strong> Team-based cultures where case prep groups form organically. Students practice cases together daily, building a shared framework vocabulary.</li><li><strong><a href=\"/schools/dartmouth-tuck/\">Tuck</a>:</strong> The 280-person class means you'll case-prep with the same people repeatedly, building real depth in each other's reasoning styles.</li></ul><p>Case interview preparation requires 50-100 practice cases before your real interviews. Schools with strong consulting clubs and peer case prep cultures make this easier because you have willing practice partners who understand the format. At a school where only 10% of the class targets consulting, finding practice partners is harder.</p>"""),
+            ("Beyond MBB: Other Consulting Paths", """<p>MBB gets the headlines, but the consulting world is much broader:</p><ul><li><strong>Big 4 consulting (Deloitte, PwC, EY, KPMG):</strong> Larger practices than MBB with more specialization. Strategy & (Deloitte's strategy arm) competes directly with MBB for talent. Big 4 firms recruit from 30-40 MBA programs. Compensation: $170K-$190K base + $25K-$35K signing bonus.</li><li><strong>Boutique strategy firms (L.E.K., Oliver Wyman, Strategy&, Kearney):</strong> Smaller firms with specialized focuses. L.E.K. is strong in healthcare. Oliver Wyman dominates financial services. These firms recruit from top-25 programs with less emphasis on school prestige than MBB.</li><li><strong>Tech consulting (Accenture Strategy, Capgemini Invent):</strong> Growing rapidly as companies undergo digital transformation. <a href=\"/schools/mit-sloan/\">MIT Sloan</a> and <a href=\"/schools/carnegie-mellon-tepper/\">Carnegie Mellon Tepper</a> are strong feeders into tech consulting.</li><li><strong>Internal strategy:</strong> Corporate strategy roles at Fortune 500 companies. Many companies (Amazon, Apple, Google, J&J) have internal consulting teams that hire MBAs. <a href=\"/schools/michigan-ross/\">Michigan Ross</a> and <a href=\"/schools/wharton/\">Wharton</a> place well into these roles.</li></ul><p>Programs ranked 15-25 that punch above their weight in consulting: <a href=\"/schools/emory-goizueta/\">Emory Goizueta</a>, <a href=\"/schools/notre-dame-mendoza/\">Notre Dame Mendoza</a>, and <a href=\"/schools/wake-forest/\">Wake Forest</a> all have consulting placement rates that exceed their overall ranking.</p>"""),
+            ("Consulting Compensation", "<p>Consulting offers strong starting compensation with a clear promotion trajectory:</p><ul><li><strong>MBB Associate (year 1):</strong> $190,000 base + $35,000 signing bonus + $20,000-$40,000 year-end bonus = $245K-$265K total</li><li><strong>MBB Engagement Manager (year 3-4):</strong> $250,000-$300,000 total compensation</li><li><strong>MBB Associate Principal/Partner (year 5-8):</strong> $400,000-$800,000 total compensation</li><li><strong>Big 4 Senior Consultant (year 1):</strong> $170,000-$190,000 base + $25,000-$35,000 signing bonus</li><li><strong>Boutique firms:</strong> Varies widely. $150,000-$180,000 base + $20,000-$40,000 bonus at the top boutiques.</li></ul><p>The exit opportunities from consulting are extensive. After 2-4 years in consulting, common exits include corporate strategy roles (VP-level at Fortune 500), PE/VC, tech companies (strategy & operations), and entrepreneurship. Consulting is often valued as a post-MBA launchpad rather than a permanent career.</p>"),
+            ("The Career Changer Path into Consulting", "<p>Consulting is the most common career-change destination for MBA graduates. Firms explicitly seek diverse backgrounds because consulting teams need people who understand different industries and functions.</p><p>Backgrounds that transfer well into consulting:</p><ul><li><strong>Military:</strong> Leadership, structured problem-solving, and team management translate directly. MBB firms actively recruit veterans.</li><li><strong>Engineering:</strong> Analytical rigor and quantitative skills are highly valued. Tech consulting firms (Accenture Strategy, McKinsey Digital) particularly seek this background.</li><li><strong>Healthcare:</strong> Healthcare consulting (L.E.K., ZS Associates, McKinsey's healthcare practice) recruits MBAs with clinical or healthcare operations experience.</li><li><strong>Non-profit and government:</strong> Public sector consulting (McKinsey's public sector practice, Deloitte Government) values this background.</li></ul><p>The key to switching into consulting is demonstrating structured thinking and communication skills. The case interview is the evaluation mechanism, and your background matters less than your ability to break down ambiguous problems and communicate recommendations clearly.</p>"),
+            ("What to Prioritize in a Consulting MBA", "<p>If consulting is your primary career goal, optimize for these factors when choosing a school:</p><ol><li><strong>Consulting placement rate:</strong> The single most predictive metric. A school sending 30%+ into consulting has mature recruiting infrastructure.</li><li><strong>Case method exposure:</strong> Schools that use cases in coursework give you daily practice that transfers to interviews.</li><li><strong>Alumni network in consulting:</strong> Search LinkedIn for alumni at your target firms. A deep alumni network means more coffee chats, referrals, and advocates during recruiting.</li><li><strong>Consulting club activity:</strong> Strong consulting clubs run mock case competitions, host firm speakers, and organize trips to firm offices. Ask current students about the club's activity level.</li><li><strong>Cultural fit with consulting firms:</strong> Firms like McKinsey explicitly look for candidates whose school culture aligns with the firm's values. Kellogg's collaboration and Darden's case rigor both map well to consulting firm expectations.</li></ol>"),
+        ],
+        "faq": [
+            ("Which MBA program is best for McKinsey?", "Kellogg, HBS, and Wharton send the most graduates to McKinsey. Kellogg's collaborative culture aligns well with McKinsey's values. HBS's case method provides daily preparation for McKinsey's case interviews. All M7 programs are McKinsey target schools, but these three have the deepest pipelines."),
+            ("Do I need an MBA to work at McKinsey, BCG, or Bain?", "MBB firms hire at the undergraduate level (Analyst role, 2-year program) and the MBA level (Associate role, partner-track). The MBA Associate role is the standard entry point for career professionals. While direct-hire paths exist for experienced professionals without MBAs, the MBA is the most common and efficient route to an MBB offer."),
+            ("How many case interviews will I need to prepare for?", "MBB first-round interviews include 1-2 case interviews. Final rounds include 2-4 case interviews. You should practice 50-100 cases before your real interviews. Most successful candidates practice 3-5 cases per week for 3-4 months. The format becomes intuitive with enough repetition."),
+            ("What is the salary at McKinsey, BCG, and Bain for MBA graduates?", f"In {CURRENT_YEAR}, MBB firms pay MBA associates approximately $190,000 base salary plus a $35,000 signing bonus plus a year-end performance bonus of $20,000-$40,000. Total first-year compensation is approximately $245,000-$265,000. Compensation increases to $250,000-$300,000 at the engagement manager level (year 3-4)."),
+            ("Is consulting a good post-MBA career?", "Consulting is consistently rated one of the best post-MBA careers for skill development, compensation, and exit opportunities. After 2-4 years, consultants commonly exit to PE/VC, corporate strategy (VP-level), tech companies, or entrepreneurship. The training, network, and brand from 2 years at MBB have compounding career value for decades."),
+        ],
+        "see_also": [
+            ("Best MBA for Finance", "/guides/best-mba-for-finance/"),
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Career Changers ({CURRENT_YEAR})",
+        "slug": "best-mba-for-career-changers",
+        "meta_description": f"Best MBA programs for career changers in {CURRENT_YEAR}. Top schools for switching industries, pivoting roles, and starting fresh. From a Haas MBA grad.",
+        "sections": [
+            ("Why Career Changers Need an MBA", """<p>The MBA exists to rebrand you. If you're a nurse who wants to work in healthcare consulting, or an engineer who wants to run product at a tech company, the MBA is the bridge. The degree gives you the credential, the network, and the recruiting infrastructure to make a pivot that would otherwise take years of internal maneuvering.</p><p>Without an MBA, career changes happen through slow internal moves, personal networking, or starting over at entry level. The MBA compresses a 5-7 year career pivot into 2 years by giving you access to employers who specifically recruit MBA candidates for roles that would be hard to land otherwise.</p><p>The numbers support this. At top-15 programs, 60-70% of students change industries between their pre-MBA and post-MBA roles. At some programs like <a href=\"/schools/virginia-darden/\">Virginia Darden</a>, that number exceeds 80%. The MBA is a career-change machine.</p>"""),
+            ("The Best Programs for Career Changers", """<p>Not all MBA programs are equally good at supporting pivots. These schools stand out for career changers:</p><ul><li><strong><a href=\"/schools/virginia-darden/\">Virginia Darden</a>:</strong> Over 80% of Darden students change industries. The case method teaches broad general management skills applicable to any industry. Career services are built around helping students pivot, with industry immersion treks and alumni coaching. The 340-person class creates a tight community where career changers support each other.</li><li><strong><a href=\"/schools/kellogg/\">Kellogg</a>:</strong> The broadest recruiting pipelines of any M7 program. Consulting, tech, marketing, healthcare, and social enterprise all recruit actively. Kellogg's collaborative culture means you're learning from classmates with diverse backgrounds, which expands your perspective on career options.</li><li><strong><a href=\"/schools/michigan-ross/\">Michigan Ross</a>:</strong> MAP (Multidisciplinary Action Projects) give students real consulting projects across industries during the first year. These projects let career changers build experience in their target industry before summer internships begin. Ross's Action-Based Learning philosophy is designed for learning by doing.</li><li><strong><a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>:</strong> Attracts mission-driven career changers. The Bay Area location provides access to tech, social enterprise, and sustainability careers. Haas's 290-person class creates a supportive community. The \"Students Always\" principle encourages experimentation and career exploration.</li><li><strong><a href=\"/schools/yale-som/\">Yale SOM</a>:</strong> The integrated curriculum exposes students to all functional areas in the first year, which is ideal for career changers who need broad exposure. Access to Yale's broader university (School of Public Health, Law School, School of the Environment) creates unique career paths.</li><li><strong><a href=\"/schools/indiana-kelley/\">Indiana Kelley</a>:</strong> The best value option for career changers. At $28,000/year in-state tuition, Kelley minimizes financial risk while providing strong career services and Midwest recruiting access. The class composition is diverse, and career changers represent a significant portion of each class.</li></ul>"""),
+            ("Common Career Change Paths", """<p>Some career pivots are well-worn paths with established MBA infrastructure. Others require more creativity. Here are the most common MBA career changes and which schools support them best:</p><ul><li><strong>Military to consulting:</strong> The most established MBA career pivot. MBB firms actively recruit veterans for their leadership experience and structured thinking. <a href=\"/schools/harvard-business-school/\">HBS</a>, <a href=\"/schools/virginia-darden/\">Darden</a>, and <a href=\"/schools/kellogg/\">Kellogg</a> all have strong veteran communities and consulting placement. Service2School and organizations like the MBA Veterans Network facilitate this transition.</li><li><strong>Engineering to product management:</strong> Engineers bring technical skills that PM roles require. The MBA adds business acumen, communication skills, and recruiting access. <a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>, <a href=\"/schools/mit-sloan/\">MIT Sloan</a>, and <a href=\"/schools/carnegie-mellon-tepper/\">Carnegie Mellon Tepper</a> are ideal because they combine business training with tech proximity and culture.</li><li><strong>Non-profit to corporate strategy:</strong> Non-profit professionals bring stakeholder management and resourcefulness. <a href=\"/schools/yale-som/\">Yale SOM</a> and <a href=\"/schools/duke-fuqua/\">Duke Fuqua</a> attract mission-driven candidates and have strong consulting placement for the pivot.</li><li><strong>Healthcare to healthcare consulting:</strong> Clinicians and hospital administrators bring domain expertise that consulting firms value. <a href=\"/schools/duke-fuqua/\">Duke Fuqua</a> (Health Sector Management), <a href=\"/schools/unc-kenan-flagler/\">UNC Kenan-Flagler</a>, and <a href=\"/schools/vanderbilt-owen/\">Vanderbilt Owen</a> have the strongest healthcare career pivots.</li><li><strong>Teaching/education to tech or consulting:</strong> Teachers bring communication and analytical skills. The career change is significant, so choose a school with strong recruiting in your target industry and supportive career services for non-traditional backgrounds.</li><li><strong>Finance to tech:</strong> Bankers and consultants pivoting into tech is increasingly common. <a href=\"/schools/stanford-gsb/\">Stanford GSB</a> and <a href=\"/schools/berkeley-haas/\">Berkeley Haas</a> have the strongest infrastructure for this pivot.</li></ul>"""),
+            ("The Summer Internship Strategy", "<p>For career changers, the MBA summer internship is the most important thing that happens in business school. It's your proof of concept: you work in your new industry for 10 weeks, build skills and relationships, and (ideally) receive a full-time return offer.</p><p>Here's how to maximize the summer internship for a career change:</p><ol><li><strong>Start networking in September.</strong> Don't wait for career services to organize events. Reach out to alumni in your target industry immediately. Informational interviews build relationships that become referrals.</li><li><strong>Attend industry treks and company presentations.</strong> Even if you're unsure about a specific company, exposure to different employers helps you refine your target.</li><li><strong>Use the first semester to build skills.</strong> Take electives in your target industry. If you're pivoting into tech, take a product management or technology strategy course. If you're pivoting into finance, take corporate finance and valuation.</li><li><strong>Apply broadly.</strong> As a career changer, you need more at-bats than someone continuing in their industry. Apply to 15-20 internships, not 5.</li><li><strong>Convert the internship to a full-time offer.</strong> Approach the internship as a 10-week interview. Deliver exceptional work, build relationships with your team, and make the return offer decision easy for the company.</li></ol>"),
+            ("What to Prioritize in a Program", "<p>When evaluating MBA programs as a career changer, weight these factors heavily:</p><ul><li><strong>Career services quality:</strong> Ask current students how responsive career services are for non-traditional career paths. Some schools have dedicated career coaches for career changers. Others focus primarily on the standard consulting/banking pipelines.</li><li><strong>Class diversity:</strong> A class where 40% comes from one industry (say, consulting) means the career services and alumni network are optimized for that industry. A class with representation across 15+ industries creates broader support for pivots.</li><li><strong>Alumni willingness to help:</strong> Search LinkedIn for alumni in your target industry and role. Send a few cold outreach messages. How quickly do they respond? How willing are they to help? This predicts your recruiting experience.</li><li><strong>Summer internship placement:</strong> Ask the admissions office specifically about internship placement rates for career changers. Some schools track this separately and can share data.</li><li><strong>Pre-MBA bridge programs:</strong> Some schools offer pre-MBA math and accounting boot camps that help career changers from non-quantitative backgrounds build foundational skills before classes start.</li></ul>"),
+            ("Financial Considerations for Career Changers", """<p>Career changers face a unique financial calculation. If you're leaving a $70K teaching salary, the opportunity cost is lower than someone leaving a $200K banking job. But you may also have less savings and less tolerance for debt.</p><p>Strategies for managing the financial transition:</p><ul><li><strong>Target public schools with in-state tuition.</strong> <a href=\"/schools/indiana-kelley/\">Indiana Kelley</a> ($28K/year), <a href=\"/schools/texas-mccombs/\">Texas McCombs</a> ($42K in-state), and <a href=\"/schools/unc-kenan-flagler/\">UNC Kenan-Flagler</a> ($48K in-state) offer top-25 outcomes at a fraction of M7 costs.</li><li><strong>Negotiate scholarships aggressively.</strong> Career changers with unique backgrounds often receive merit-based scholarships. If you have multiple admits, use competing offers to negotiate additional funding. See our <a href=\"/guides/mba-roi-analysis/\">ROI analysis guide</a> for details.</li><li><strong>Consider employer sponsorship.</strong> Some companies (particularly consulting firms and military branches) sponsor MBA education with the expectation that you'll return post-MBA. This eliminates tuition cost entirely.</li><li><strong>Calculate post-MBA salary uplift.</strong> A career changer moving from $70K to $175K sees a $105K annual uplift. Even with $150K in debt, the breakeven is under 2 years. The math gets harder when you're moving from $150K to $175K.</li></ul>"""),
+            ("The Honest Truth About Career Changes", "<p>Career changing through an MBA works best when you have a clear target. \"I want to go from military to consulting\" is a well-trodden path with infrastructure to support it. \"I want to leave my job and figure it out\" is a $300K gamble. The MBA opens doors, but you need to know which doors you want opened.</p><p>Questions to answer before committing to an MBA for a career change:</p><ol><li><strong>Have you tried to make the change without an MBA?</strong> Some pivots (marketing to product management, for example) can happen through internal transfers or networking without spending $200K. Exhaust cheaper options first.</li><li><strong>Is the MBA required or preferred for your target role?</strong> Consulting and investment banking essentially require MBAs. Product management prefers them. Entrepreneurship doesn't need them. Know whether the credential is necessary or optional for your specific goal.</li><li><strong>Are you changing because you're running toward something or away from something?</strong> Running toward a clear career goal produces better outcomes than running away from a job you dislike. The first group has focus. The second group has uncertainty, which expensive programs amplify rather than resolve.</li><li><strong>Do you have a realistic plan B?</strong> Even at top programs, career changes don't always land perfectly. If your dream internship doesn't materialize, what's your backup? Having a viable plan B reduces stress and lets you take smart risks during recruiting.</li></ol>"),
+        ],
+        "faq": [
+            ("What is the best MBA program for career changers?", "Virginia Darden has the highest career-change rate (80%+ of students change industries). Kellogg and Michigan Ross offer the broadest recruiting pipelines for pivots. Berkeley Haas and Yale SOM are strong for mission-driven career changes. Indiana Kelley is the best value option with low tuition and strong career services."),
+            ("Can I change careers without an MBA?", "Yes, but the MBA makes it significantly faster and more reliable. Without an MBA, career changes happen through internal transfers, personal networking, or starting at a junior level in the new industry. The MBA compresses a 5-7 year pivot into 2 years by providing recruiting access, credential signaling, and structured internship pipelines."),
+            ("What are the most common MBA career changes?", "The most common pivots are: military to consulting, engineering to product management, non-profit to corporate strategy, healthcare clinician to healthcare consulting, and finance to tech. These paths are well-established with alumni networks, recruiting infrastructure, and career services resources to support the transition."),
+            ("How important is pre-MBA experience for career changers?", "Your pre-MBA experience provides the stories and skills you'll reference in essays, interviews, and networking conversations. Every background has transferable skills. Military experience translates to leadership. Engineering translates to analytical rigor. Teaching translates to communication. The MBA application is where you connect your past experience to your future goals."),
+            ("Should career changers apply to M7 programs?", "If you can get in, M7 programs provide the broadest recruiting access, which is valuable when you're targeting a new industry. But career changers should also consider strong programs ranked 10-25 that may offer more scholarship money and equally strong pipelines in specific industries. A full-ride at Kelley or Kenan-Flagler may produce better ROI than full-pay at an M7 program for certain career paths."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Best MBA for Consulting", "/guides/best-mba-for-consulting/"),
+            ("Best MBA for Finance", "/guides/best-mba-for-finance/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Career Changers Rankings", "/rankings/career-changers/"),
+        ],
+    },
+    # --- Career-Type Guides ---
+    {
+        "title": f"Best MBA Programs for Engineers ({CURRENT_YEAR})",
+        "slug": "best-mba-for-engineers",
+        "meta_description": f"Best MBA programs for engineers in {CURRENT_YEAR}. How to pivot from engineering into product management, strategy, or leadership. From a Haas MBA grad.",
+        "sections": [
+            ("Why Engineers Get MBAs", "<p>Engineers are the most successful career changers in MBA programs. The analytical skills transfer directly, the technical credibility opens doors in tech companies, and the MBA fills the gap between building products and running businesses. Product management, tech strategy, venture capital, and general management are all natural post-MBA destinations for engineers.</p><p>The typical engineer getting an MBA has 3-6 years of software, hardware, or systems engineering experience. They've hit a ceiling: they want to influence product direction, not just execute on specifications. The MBA gives them the business vocabulary, leadership training, and recruiting access to make that jump.</p>"),
+            ("The Best Programs for Engineers", """<p>Engineers should prioritize programs with strong tech placement, technical culture, and proximity to employers who value the engineer-to-MBA pipeline:</p><ul><li><strong><a href=\"/schools/mit-sloan/\">MIT Sloan</a>:</strong> The obvious choice. MIT's engineering school is next door. The culture is analytical. Faculty include engineers-turned-professors. The MIT brand carries unique weight in technical roles. 35% tech placement.</li><li><strong><a href=\"/schools/stanford-gsb/\">Stanford GSB</a>:</strong> Silicon Valley location, deep startup ecosystem, and access to Stanford's engineering school. 32% tech placement. Best for engineers targeting VC or startup founding.</li><li><strong><a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>:</strong> 42% tech placement, Bay Area proximity, and Berkeley's engineering reputation. The \"Students Always\" and \"Question the Status Quo\" principles resonate with engineers' growth mindset.</li><li><strong><a href=\"/schools/carnegie-mellon-tepper/\">Carnegie Mellon Tepper</a>:</strong> STEM-designated MBA. CMU's computer science program is #1 in the world, and Tepper's analytics curriculum speaks engineers' language. 40% tech placement.</li><li><strong><a href=\"/schools/washington-foster/\">Washington Foster</a>:</strong> 50% tech placement. Amazon and Microsoft hire aggressively. Engineers from Boeing, Amazon, and Microsoft form a significant cohort.</li></ul>"""),
+            ("What Engineers Should Look For", """<p>Beyond tech placement percentages, engineers should evaluate:</p><ul><li><strong>Cross-registration with engineering schools:</strong> MIT Sloan, Stanford GSB, and Berkeley Haas let you take courses in engineering and CS departments. This is a genuine competitive advantage for technical MBA students.</li><li><strong>PM club activity:</strong> Product management is the most common engineer-to-MBA career path. Schools with active PM clubs (case competitions, company presentations, interview prep) accelerate the transition.</li><li><strong>Class composition:</strong> If 20% of the class comes from engineering backgrounds, you'll have a community of peers making similar transitions. If 2% are engineers, you're more isolated.</li><li><strong>STEM designation:</strong> A STEM-designated MBA (like <a href=\"/schools/carnegie-mellon-tepper/\">Tepper</a>) extends OPT work authorization to 3 years for international students. This is critical for non-US engineers.</li></ul>"""),
+            ("The Product Management Path", "<p>Product management is the most popular post-MBA role for engineers, and for good reason. PMs sit at the intersection of engineering, design, and business. Engineers-turned-PMs bring technical credibility that non-technical PMs lack, making them more effective in conversations with engineering teams.</p><p>Companies hiring engineer-to-PM MBA candidates: Google (APM program), Amazon (PM roles across AWS and consumer), Meta, Apple, Microsoft, Salesforce, and hundreds of growth-stage startups. Total first-year compensation: $250K-$350K at major tech companies.</p><p>To land a PM role, engineers should take product management courses during the MBA, participate in case competitions, and do 5-10 informational interviews with current PMs at target companies. The PM interview typically includes a product design case, a metrics case, and behavioral questions.</p>"),
+            ("Beyond Product Management", """<p>Engineers have options beyond PM:</p><ul><li><strong>Tech strategy & operations:</strong> Internal consulting at tech companies. Google Strategy & Ops, Amazon Pathways, Meta Strategy are popular destinations.</li><li><strong>Venture capital:</strong> Accessible from top-5 programs. Technical background is a major asset for evaluating deep tech startups. Base $150K-$200K + carried interest.</li><li><strong>Startup founding:</strong> <a href=\"/schools/stanford-gsb/\">Stanford GSB</a> and <a href=\"/schools/mit-sloan/\">MIT Sloan</a> provide the strongest entrepreneurship infrastructure. 18% of GSB graduates go directly into startups.</li><li><strong>Management consulting:</strong> MBB firms value engineers for their structured problem-solving. McKinsey's Digital practice and BCG's Technology Advantage practice specifically seek technical MBAs.</li></ul>"""),
+        ],
+        "faq": [
+            ("Do I need an MBA to become a product manager?", "No, but the MBA is the most efficient path for engineers without PM experience. Companies like Google, Amazon, and Meta have structured MBA PM hiring programs that provide a clear entry point. Without an MBA, the engineer-to-PM transition typically takes 2-3 years of internal advocacy and lateral moves."),
+            ("Will my engineering skills become rusty during an MBA?", "You won't be coding daily, but the analytical skills remain sharp. Many engineering MBAs maintain technical projects on the side, take CS electives, or contribute to startup ventures during the program. The MBA adds business skills on top of your technical foundation."),
+            ("Is an MBA worth it for software engineers making $200K+?", "The salary uplift may be modest (tech PM comp is $250K-$350K vs $200K+ as a senior engineer). The MBA's value for high-earning engineers is in career trajectory change: moving from individual contributor to business leader, or gaining access to VC, startup founding, or executive-track roles. If you're happy as an engineer, the MBA ROI is weaker."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Military Veterans ({CURRENT_YEAR})",
+        "slug": "best-mba-for-military",
+        "meta_description": f"Best MBA programs for military veterans in {CURRENT_YEAR}. GI Bill, Yellow Ribbon, veteran communities, and career transition paths. From a Haas MBA grad.",
+        "sections": [
+            ("Why Veterans Excel in MBA Programs", "<p>Military veterans bring leadership experience that most MBA applicants can't match. By age 26, a typical veteran has led teams of 10-50 people in high-pressure environments, managed multi-million-dollar equipment, and made decisions with real consequences. MBA admissions committees know this, and veterans are actively recruited by top programs.</p><p>The numbers reflect this advantage. Veterans typically have higher admit rates than the general applicant pool at M7 programs. Schools want the leadership, maturity, and diversity of perspective that veterans bring to the classroom. The challenge for veterans isn't getting in. It's choosing the right program and navigating the career transition.</p>"),
+            ("Funding Your MBA: GI Bill and Yellow Ribbon", f"""<p>The Post-9/11 GI Bill covers tuition and fees at public institutions and up to approximately $27,000/year at private institutions. The Yellow Ribbon Program fills the gap: participating schools match VA contributions to cover remaining tuition costs. In {CURRENT_YEAR}, most top MBA programs participate in Yellow Ribbon with unlimited slots and full gap coverage.</p><p>Programs with strong Yellow Ribbon coverage (covering full tuition gap):</p><ul><li><a href=\"/schools/harvard-business-school/\">Harvard Business School</a></li><li><a href=\"/schools/stanford-gsb/\">Stanford GSB</a></li><li><a href=\"/schools/wharton/\">Wharton</a></li><li><a href=\"/schools/virginia-darden/\">Virginia Darden</a> (strong veteran community)</li><li><a href=\"/schools/dartmouth-tuck/\">Dartmouth Tuck</a></li><li><a href=\"/schools/duke-fuqua/\">Duke Fuqua</a></li><li><a href=\"/schools/michigan-ross/\">Michigan Ross</a></li></ul><p>For veterans with GI Bill + Yellow Ribbon, many M7 and top-15 programs cost $0 in tuition. This makes the ROI calculation dramatically better than for civilian applicants paying full price.</p>"""),
+            ("Best Programs for Veterans", """<p>These schools have the strongest veteran communities, career services, and transition support:</p><ul><li><strong><a href=\"/schools/virginia-darden/\">Virginia Darden</a>:</strong> The largest veteran community of any M7-adjacent program (10-12% of the class). The case method's debate-style format plays to veterans' strengths in structured argumentation. Strong consulting placement.</li><li><strong><a href=\"/schools/harvard-business-school/\">Harvard Business School</a>:</strong> The largest absolute number of veterans (80-100 per class) due to the 930-person class size. HBS's Armed Forces Alumni Association is one of the most active alumni groups in the school.</li><li><strong><a href=\"/schools/kellogg/\">Kellogg</a>:</strong> Collaborative culture that values the team-first mentality veterans bring. Strong consulting and tech placement. Active veteran student group.</li><li><strong><a href=\"/schools/duke-fuqua/\">Duke Fuqua</a>:</strong> \"Team Fuqua\" culture aligns with military culture. Strong veteran community and consulting placement. Research Triangle location near military bases.</li><li><strong><a href=\"/schools/michigan-ross/\">Michigan Ross</a>:</strong> Active Armed Forces Association. MAP projects provide hands-on experience that helps veterans translate military skills into business language.</li></ul>"""),
+            ("The Career Transition", "<p>The most common veteran MBA career paths:</p><ul><li><strong>Management consulting (40-50% of veteran MBAs):</strong> MBB and Big 4 firms actively recruit veterans. The structured problem-solving, leadership under pressure, and team management skills translate directly. McKinsey, BCG, and Bain all have dedicated veteran recruiting programs.</li><li><strong>Tech (20-30%):</strong> Product management, operations, and strategy roles at tech companies. Amazon (which has deep ties to the military community) is a major employer of veteran MBAs.</li><li><strong>Finance (10-15%):</strong> Investment banking and PE hire veterans who can demonstrate analytical ability alongside leadership experience.</li><li><strong>Corporate leadership programs (10-15%):</strong> Fortune 500 FLDP programs at companies like J&J, GE, and P&G recruit veterans for their leadership maturity.</li></ul>"),
+            ("Preparing Your Application", """<p>Veterans applying to MBA programs should:</p><ol><li><strong>Translate military experience into business language.</strong> Don't assume the admissions reader knows what a \"battalion S-3\" does. Describe the scope (people managed, budget, impact) in civilian terms.</li><li><strong>Prepare for the GMAT/GRE early.</strong> Many veterans have been away from standardized testing for years. Budget extra study time and consider a test prep course. See our <a href=\"/guides/gmat-vs-gre/\">GMAT vs GRE guide</a>.</li><li><strong>Use Service2School and similar organizations.</strong> These free services provide application counseling, essay review, and school introductions specifically for veterans.</li><li><strong>Visit schools.</strong> The veteran community feel varies dramatically between programs. Visit at least 3 schools and connect with current veteran students to assess fit.</li><li><strong>Apply Round 1.</strong> Veterans applying with GI Bill benefits are desirable candidates. Round 1 gives you the best shot at preferred programs. See our <a href=\"/guides/mba-application-timeline/\">application timeline</a>.</li></ol>"""),
+        ],
+        "faq": [
+            ("Can veterans attend MBA programs for free?", "With the Post-9/11 GI Bill and Yellow Ribbon Program, many top MBA programs cost $0 in tuition for eligible veterans. Living stipends through the GI Bill also cover a significant portion of living expenses. The result: veterans often graduate debt-free from programs that cost civilian students $150K-$250K."),
+            ("What GMAT score do veterans need for top MBA programs?", "Veteran applicants are evaluated holistically, and military experience provides significant application weight. Average GMAT scores for admitted veterans at M7 programs tend to be 10-20 points below the overall class average. A 700+ GMAT combined with strong military leadership experience is competitive at most top-15 programs."),
+            ("Which MBA career is best for military veterans?", "Management consulting is the most common and well-supported path, with 40-50% of veteran MBAs entering consulting. The structured problem-solving, travel tolerance, and leadership skills transfer directly. Tech (especially Amazon, which has deep military ties) is the second most popular destination."),
+        ],
+        "see_also": [
+            ("Best MBA for Consulting", "/guides/best-mba-for-consulting/"),
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("MBA Application Timeline", "/guides/mba-application-timeline/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for International Students ({CURRENT_YEAR})",
+        "slug": "best-mba-for-international-students",
+        "meta_description": f"Best MBA programs for international students in {CURRENT_YEAR}. STEM designation, OPT, visa sponsorship, and which schools support global careers. From a Haas MBA grad.",
+        "sections": [
+            ("The International Student MBA Landscape", "<p>International students represent 30-45% of the class at most top MBA programs. Schools actively recruit global talent for the diversity of perspective it brings to the classroom. However, the post-MBA work authorization and visa sponsorship landscape creates unique challenges that international students must navigate.</p><p>Key considerations for international students choosing an MBA program:</p><ul><li><strong>STEM designation:</strong> STEM-designated MBA programs extend Optional Practical Training (OPT) from 12 months to 36 months, giving you three years of work authorization in the US after graduation.</li><li><strong>Employer visa sponsorship rates:</strong> Some industries (consulting, tech) sponsor H-1B visas at high rates. Others (small companies, startups) rarely sponsor.</li><li><strong>International placement rates:</strong> If you plan to return home or work outside the US, choose a school with strong international alumni networks and employer relationships in your target geography.</li></ul>"),
+            ("STEM-Designated MBA Programs", f"""<p>STEM designation is a major advantage for international students who want to work in the US post-MBA. These top programs have STEM-designated MBA concentrations or full STEM designation as of {CURRENT_YEAR}:</p><ul><li><strong><a href=\"/schools/carnegie-mellon-tepper/\">Carnegie Mellon Tepper</a>:</strong> Full STEM designation. The most analytically rigorous MBA with deep CMU CS integration.</li><li><strong><a href=\"/schools/mit-sloan/\">MIT Sloan</a>:</strong> STEM-designated tracks available. MIT brand carries global weight.</li><li><strong><a href=\"/schools/cornell-johnson/\">Cornell Johnson</a>:</strong> STEM designation available through tech-focused concentrations.</li><li><strong><a href=\"/schools/duke-fuqua/\">Duke Fuqua</a>:</strong> STEM-designated MQM (Masters of Quantitative Management) can be combined with MBA.</li><li><strong><a href=\"/schools/nyu-stern/\">NYU Stern</a>:</strong> STEM-designated specializations in fintech and quantitative finance.</li></ul><p>The list of STEM-designated programs is growing. Check each school's website for the most current designation status, as more programs have added STEM tracks in recent years.</p>"""),
+            ("Best Programs for International Careers", """<p>If you plan to work outside the US after your MBA:</p><ul><li><strong><a href=\"/schools/harvard-business-school/\">Harvard Business School</a>:</strong> The strongest global brand. HBS alumni clubs operate in 100+ countries. The brand opens doors everywhere.</li><li><strong><a href=\"/schools/stanford-gsb/\">Stanford GSB</a>:</strong> Strong global brand, particularly in tech and entrepreneurship. The GSB name is recognized worldwide.</li><li><strong><a href=\"/schools/columbia-business-school/\">Columbia</a>:</strong> Strong brand in Asia and Latin America. Columbia's global network is deep in financial centers worldwide.</li><li><strong>INSEAD and LBS:</strong> While not US schools, these are the dominant international MBA brands for non-US careers. If you're certain you'll work outside the US, consider whether a European MBA better serves your geography.</li></ul>"""),
+            ("Visa and Work Authorization Strategy", "<p>Practical steps for international students navigating US work authorization:</p><ol><li><strong>Target employers who sponsor H-1B visas.</strong> McKinsey, BCG, Bain, Goldman Sachs, Google, Amazon, Microsoft, and most Fortune 500 companies sponsor routinely. Startups and smaller companies rarely do.</li><li><strong>Use the summer internship strategically.</strong> An internship at a company that sponsors visas is the most direct path to a sponsored full-time offer. Convert the internship.</li><li><strong>Consider STEM designation.</strong> If your MBA program is STEM-designated, you get 36 months of OPT instead of 12. This gives you three H-1B visa lottery attempts instead of one.</li><li><strong>Network with international alumni.</strong> Alumni who've navigated the visa process at your target companies are the best source of practical advice.</li><li><strong>Have a plan B geography.</strong> The H-1B lottery has a 25-30% selection rate. If you don't get selected, having a viable career option in your home country, Singapore, London, or Dubai reduces risk.</li></ol>"),
+            ("Financial Considerations", "<p>International students face unique financial challenges:</p><ul><li><strong>No federal student loans:</strong> International students don't qualify for US federal loans. Private loans require a US co-signer or specific international student loan programs (Prodigy Finance, MPower).</li><li><strong>Scholarship importance:</strong> Merit scholarships are critical for international students. Apply to 6-8 programs and negotiate aggressively between offers.</li><li><strong>Employer sponsorship:</strong> Some employers (particularly consulting firms) sponsor MBA education for high-potential employees. McKinsey, BCG, and Bain all have international scholar programs.</li><li><strong>Cost of living:</strong> Factor in US living costs when comparing programs. $78K tuition at Stanford plus $40K/year Palo Alto living costs hits differently when your home country salary was $30K.</li></ul>"),
+        ],
+        "faq": [
+            ("What is a STEM-designated MBA?", "A STEM-designated MBA qualifies graduates for a 24-month extension of Optional Practical Training (OPT), bringing total US work authorization to 36 months after graduation. This provides three chances at the H-1B visa lottery instead of one. Carnegie Mellon Tepper, MIT Sloan, and Cornell Johnson are among the top programs with STEM designation."),
+            ("What percentage of MBA students are international?", "At top MBA programs, international students represent 30-45% of the class. Schools actively recruit global talent for classroom diversity. HBS, Wharton, and Columbia typically have the highest international student percentages among M7 programs."),
+            ("Can international MBA students work in the US after graduation?", "Yes, through Optional Practical Training (OPT). Standard MBA graduates get 12 months of OPT. STEM-designated MBA graduates get 36 months. After OPT, you need employer-sponsored H-1B visa authorization. Major consulting firms, banks, and tech companies sponsor routinely."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Best MBA for Finance", "/guides/best-mba-for-finance/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Women ({CURRENT_YEAR})",
+        "slug": "best-mba-for-women",
+        "meta_description": f"Best MBA programs for women in {CURRENT_YEAR}. Gender diversity, women's leadership programs, and schools with the strongest support for female MBA students. From a Haas MBA grad.",
+        "sections": [
+            ("Women in MBA Programs", f"""<p>Women represent 40-47% of the class at most top MBA programs in {CURRENT_YEAR}, up from 30% a decade ago. Several schools have achieved or approached gender parity. The progress is real, but the MBA experience and career outcomes still differ for women in ways that matter when choosing a program.</p><p>Schools with the highest female enrollment (consistently 44%+ of the class):</p><ul><li><a href=\"/schools/yale-som/\">Yale SOM</a> (47%)</li><li><a href=\"/schools/kellogg/\">Kellogg</a> (46%)</li><li><a href=\"/schools/stanford-gsb/\">Stanford GSB</a> (45%)</li><li><a href=\"/schools/harvard-business-school/\">Harvard Business School</a> (44%)</li><li><a href=\"/schools/berkeley-haas/\">Berkeley Haas</a> (44%)</li></ul>"""),
+            ("What to Look For", """<p>Beyond enrollment percentages, women should evaluate:</p><ul><li><strong>Women's leadership programs:</strong> Dedicated conferences, mentoring programs, and executive speaker series for women. <a href=\"/schools/kellogg/\">Kellogg's</a> Women's Business Association and <a href=\"/schools/wharton/\">Wharton's</a> MBA Women's Summit are industry-leading.</li><li><strong>Female faculty representation:</strong> Schools with more female professors and administrators create environments where women see themselves in leadership. Ask about the gender composition of the faculty during your research.</li><li><strong>Recruiting support:</strong> Some schools have dedicated career coaching for women targeting male-dominated industries (finance, tech). Ask about placement rates for women specifically.</li><li><strong>Alumni network for women:</strong> Active women's alumni groups provide mentoring, career advice, and networking opportunities that extend decades beyond graduation.</li><li><strong>Parental leave policies:</strong> If you might start a family during or shortly after the MBA, understand the school's policies on leave, flexible scheduling, and childcare support.</li></ul>"""),
+            ("Career Outcomes for Women MBAs", "<p>Women MBA graduates from top programs enter the same industries as men, though concentration varies:</p><ul><li><strong>Consulting:</strong> Strong gender balance at the associate level. MBB firms have invested heavily in recruiting and retaining women. 30%+ of MBA consultants at top firms are women.</li><li><strong>Tech:</strong> Growing representation. Product management, strategy, and operations roles at tech companies actively recruit women MBAs. Companies like Google and Meta have dedicated diversity recruiting pipelines.</li><li><strong>Finance:</strong> Lower female representation than consulting or tech, but improving. Goldman Sachs, JPMorgan, and BlackRock have women's initiatives that recruit from top MBA programs.</li></ul><p>Salary parity: Women MBA graduates from top programs earn comparable starting salaries to men in the same roles and industries. The gender pay gap in MBA careers is smaller than in the broader economy, though it widens at the 10-15 year mark, particularly for women who take career breaks.</p>"),
+            ("Scholarships for Women", "<p>Significant scholarship funding exists specifically for women MBA candidates:</p><ul><li><strong>Forté Foundation:</strong> A consortium of 53 MBA programs that provides $250M+ in scholarships to women. Apply through Forté's website and indicate interest on your school applications.</li><li><strong>School-specific awards:</strong> Many programs have endowed scholarships for women leaders. Ask the financial aid office about dedicated funding during the application process.</li><li><strong>Corporate fellowships:</strong> Companies like Goldman Sachs, McKinsey, and Bain offer fellowships for women entering MBA programs, covering partial or full tuition in exchange for summer internship commitment.</li></ul>"),
+        ],
+        "faq": [
+            ("What MBA programs have the most women?", f"In {CURRENT_YEAR}, Yale SOM leads with approximately 47% women. Kellogg (46%), Stanford GSB (45%), and HBS (44%) are close behind. Most top-25 programs now enroll 40%+ women."),
+            ("Is an MBA worth it for women?", "Yes. The MBA provides career acceleration, salary uplift, and network access that are particularly valuable for women seeking leadership roles in male-dominated industries. The credential also provides leverage in salary negotiations and promotions. Women from top MBA programs earn 50-80% more than women with similar experience but no MBA."),
+            ("What scholarships are available for women MBA students?", "The Forté Foundation provides over $250M in scholarships to women MBA candidates through 53 partner schools. Many individual schools also have endowed scholarships for women. Corporate fellowships from firms like McKinsey, Goldman Sachs, and Bain cover partial or full tuition."),
+        ],
+        "see_also": [
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+            ("Best MBA for Consulting", "/guides/best-mba-for-consulting/"),
+            ("Is an MBA Worth It?", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+        ],
+    },
+
+    {
+        "title": f"Best MBA Programs for Product Management ({CURRENT_YEAR})",
+        "slug": "best-mba-for-product-management",
+        "meta_description": f"Best MBA programs for product management in {CURRENT_YEAR}. Which schools place the most PMs at Google, Amazon, Meta, and top tech companies. From a Haas MBA grad.",
+        "sections": [
+            ("Why MBAs Go Into Product Management", "<p>Product management has become the most sought-after MBA career path in tech. PMs sit at the intersection of engineering, design, and business, defining what gets built and why. For MBAs, the role leverages every skill the degree teaches: market analysis, cross-functional leadership, customer research, and strategic thinking. The pay is exceptional: $200K-$350K total compensation at major tech companies.</p><p>Companies like Google, Amazon, Meta, Apple, and Microsoft have structured MBA PM hiring programs. These programs recruit on campus at target schools, run case-style interviews, and place MBA graduates directly into PM roles. Without an MBA, breaking into PM at these companies typically requires years of internal advocacy or adjacent experience.</p>"),
+            ("Top Programs for PM Placement", f"""<p>These schools consistently place the highest percentage of graduates into product management roles:</p><ul><li><strong><a href="/schools/mit-sloan/">MIT Sloan</a>:</strong> The combination of MIT's engineering brand and Sloan's management curriculum makes graduates irresistible to tech recruiters. The Product Management Club is one of the largest on campus.</li><li><strong><a href="/schools/stanford-gsb/">Stanford GSB</a>:</strong> Silicon Valley location and startup culture produce PMs who think like founders. Google, Apple, and Meta recruit directly from GSB.</li><li><strong><a href="/schools/berkeley-haas/">Berkeley Haas</a>:</strong> 42% tech placement, Bay Area proximity, and a product management trek that sends students to visit 15+ tech companies. Haas PMs are everywhere in the Bay Area.</li><li><strong><a href="/schools/carnegie-mellon-tepper/">Carnegie Mellon Tepper</a>:</strong> CMU's #1-ranked computer science program creates a pipeline. Tepper MBAs can take CS electives and emerge with both the business and technical fluency that PM hiring managers want.</li><li><strong><a href="/schools/kellogg/">Kellogg</a>:</strong> Kellogg's collaborative culture and marketing strength translate well to PM roles. The MMM (MBA + Design Innovation) dual degree is purpose-built for product-minded MBAs.</li></ul>"""),
+            ("What PM Hiring Managers Look For", '<p>The MBA PM interview at a major tech company typically involves three components:</p><ol><li><strong>Product design case:</strong> "How would you improve Google Maps?" or "Design a product for elderly users." You need structured thinking, customer empathy, and the ability to prioritize features.</li><li><strong>Metrics/analytics case:</strong> "YouTube engagement dropped 10% this week. What happened?" You need to decompose problems quantitatively and ask the right diagnostic questions.</li><li><strong>Behavioral/leadership:</strong> "Tell me about a time you influenced without authority." PM is a leadership role without direct reports. Your MBA experience should demonstrate this skill.</li></ol><p>Technical depth varies by company. Google expects you to understand how APIs work. Amazon expects you to write SQL. Meta wants you to think about experiment design. Study your target companies and adjust your prep accordingly.</p>'),
+            ("MBA vs Non-MBA PM Paths", "<p>The MBA isn't the only path to product management, but it's the most efficient path for career changers. Without an MBA, the typical route involves 2-3 years of lateral moves within a company: engineering to technical PM, marketing to product marketing to PM, or business analyst to associate PM.</p><p>The MBA shortcut works because companies have built structured hiring programs around it. Google's APM program, Amazon's PM program, and Meta's RPM program all have dedicated MBA recruiting pipelines. These programs give you a PM title and responsibilities from day one, bypassing the years of internal navigation that non-MBA PMs typically endure.</p><p>The trade-off: you're investing $200K-$300K and two years of time. If you're already in tech and can transition internally, the non-MBA path is cheaper. If you're outside tech entirely, the MBA provides the credential, the network, and the recruiting access to make the jump.</p>"),
+            ("PM Salary and Compensation", '<p>Product management compensation at major tech companies for MBA hires:</p><ul><li><strong>Google (L5):</strong> $200K base + $150K-$200K equity (4-year vest) + $30K bonus = ~$250K-$280K total first year</li><li><strong>Amazon (L6):</strong> $170K base + $200K-$300K RSU (4-year vest) + signing bonus = ~$230K-$260K total first year</li><li><strong>Meta (IC5):</strong> $190K base + $200K+ RSU (4-year vest) + bonus = ~$250K-$290K total first year</li><li><strong>Apple:</strong> $180K base + RSU + bonus = ~$230K-$260K total first year</li><li><strong>Microsoft (L63):</strong> $170K base + $100K-$150K RSU (4-year vest) + bonus = ~$220K-$250K total first year</li></ul><p>Total compensation at the 5-year mark typically reaches $350K-$500K at these companies, driven primarily by equity appreciation and promotion. The salary ceiling for PMs is among the highest for any MBA career path.</p>'),
+            ("Preparing During Your MBA", '<p>Start preparing for PM recruiting before you arrive on campus:</p><ul><li><strong>Take product management courses.</strong> Most top programs now offer dedicated PM courses. Take them first semester to build vocabulary.</li><li><strong>Join the PM club.</strong> Every target school has one. The club runs case prep, mock interviews, and company presentations.</li><li><strong>Do 10-15 informational interviews.</strong> Talk to current PMs at your target companies. Ask about the day-to-day reality, the interview process, and what surprised them. LinkedIn makes these easy to arrange.</li><li><strong>Build a product portfolio.</strong> Write product critiques, create wireframes for product ideas, or analyze competitor products. Having tangible examples shows initiative.</li><li><strong>Practice cases relentlessly.</strong> PM interviews are as case-heavy as consulting interviews. The format is different (product design vs business cases), but the preparation intensity is similar.</li></ul>'),
+        ],
+        "faq": [
+            ("Do I need a technical background to become a PM?", "No. Many successful PMs come from consulting, finance, or marketing backgrounds. Technical depth helps at some companies (Google values it more than Amazon), but the core PM skill set is about customer insight, prioritization, and cross-functional leadership. Your MBA teaches all of these."),
+            ("Which MBA is best for product management?", "MIT Sloan, Stanford GSB, Berkeley Haas, and Carnegie Mellon Tepper consistently place the most graduates into PM roles at major tech companies. MIT and CMU have the advantage of adjacent engineering schools. Stanford and Haas have Silicon Valley proximity. All four have active PM clubs and structured recruiting programs."),
+            ("How much do MBA PMs make?", "Total first-year compensation for MBA PMs at major tech companies ranges from $220K to $290K, including base salary, equity grants, and signing bonuses. Five-year total compensation typically reaches $350K-$500K, driven by equity appreciation and promotion to senior PM levels."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Best MBA for Engineers", "/guides/best-mba-for-engineers/"),
+            ("MBA ROI Analysis", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Healthcare ({CURRENT_YEAR})",
+        "slug": "best-mba-for-healthcare",
+        "meta_description": f"Best MBA programs for healthcare management in {CURRENT_YEAR}. Top schools for pharma, hospital administration, biotech, and health tech careers. From a Haas MBA grad.",
+        "sections": [
+            ("Why Healthcare Needs MBAs", "<p>Healthcare is a $4.5 trillion industry in the US alone. Hospitals, insurance companies, pharmaceutical firms, biotech startups, and health tech companies all need business leaders who understand both the clinical and commercial sides. The MBA provides that bridge. Healthcare MBA graduates manage hospital systems, launch biotech ventures, lead pharma strategy, and build the health tech platforms reshaping patient care.</p><p>The demand is growing. An aging population, rising healthcare costs, and the digital transformation of health services have created management challenges that clinical training alone can't address. MBAs who can operate at the intersection of business and healthcare are increasingly valuable.</p>"),
+            ("Top Programs for Healthcare", f"""<ul><li><strong><a href="/schools/wharton/">Wharton</a>:</strong> The Health Care Management department is the largest and oldest in MBA education. Wharton produces more healthcare executives than any other program. The dual MD/MBA with Penn Medicine is the gold standard.</li><li><strong><a href="/schools/harvard-business-school/">Harvard Business School</a>:</strong> Strong healthcare cases, proximity to Harvard Medical School and the Massachusetts General Hospital ecosystem. The Health Care Initiative connects students to industry leaders.</li><li><strong><a href="/schools/michigan-ross/">Michigan Ross</a>:</strong> The Tauber Institute and healthcare-focused MAP projects place students in hospitals, pharma companies, and health systems nationwide.</li><li><strong><a href="/schools/vanderbilt-owen/">Vanderbilt Owen</a>:</strong> Nashville is the healthcare capital of the US. HCA Healthcare, the largest hospital chain in America, is headquartered here. Vanderbilt's healthcare concentration has geographic advantages that no other program can match.</li><li><strong><a href="/schools/duke-fuqua/">Duke Fuqua</a>:</strong> Duke Health is a top-10 hospital system. The Health Sector Management concentration gives MBA students direct access to one of the best clinical systems in the country.</li></ul>"""),
+            ("Healthcare Career Paths for MBAs", '<p>The major post-MBA healthcare paths:</p><ul><li><strong>Healthcare consulting (30-40% of healthcare MBAs):</strong> McKinsey Healthcare, BCG Health, Deloitte Life Sciences, and specialized firms like Huron and Advisory Board. Starting compensation: $190K-$220K.</li><li><strong>Pharma/biotech strategy (20-25%):</strong> Pfizer, J&J, Merck, Amgen, Genentech, and hundreds of smaller companies hire MBAs for commercial strategy, marketing, and business development. Starting compensation: $150K-$200K.</li><li><strong>Hospital/health system administration (15-20%):</strong> Managing hospitals, clinics, and health networks. This is the path for people who want to run organizations that directly impact patient care. Starting compensation: $120K-$160K.</li><li><strong>Health tech (15-20%):</strong> Companies like Epic, Veracyte, Tempus, and Flatiron Health (Roche) are transforming healthcare delivery through technology. MBA roles include product management, strategy, and business development. Starting compensation: $160K-$220K.</li></ul>'),
+            ("The Dual Degree Advantage", """<p>Healthcare is one of the few MBA sectors where dual degrees carry significant weight:</p><ul><li><strong>MD/MBA:</strong> The ultimate healthcare credential. Wharton/Penn Medicine, HBS/Harvard Medical, and Stanford GSB/Stanford Medicine are the top programs. Adds 2-3 years to your education but creates a unique profile.</li><li><strong>MPH/MBA:</strong> Useful for population health, health policy, and global health roles. Available at several schools including Yale (SOM + School of Public Health) and Michigan.</li><li><strong>MBA + health sector concentration:</strong> Most programs offer healthcare-focused coursework without a full dual degree. Wharton, Fuqua, and Vanderbilt have the deepest concentrations.</li></ul><p>If you're sure about healthcare, the concentration or dual degree signals commitment to recruiters. If you want to keep options open, a general MBA from a top program with healthcare electives provides flexibility.</p>"""),
+            ("Breaking into Healthcare Without Clinical Experience", "<p>Most MBA healthcare careers don't require clinical experience. Consulting firms, pharma companies, and health tech startups hire MBAs for their business skills, not their medical knowledge. You'll learn the clinical context on the job.</p><p>Where clinical experience helps: hospital administration (understanding workflows), health policy (understanding patient impact), and clinical-stage biotech (understanding the science). For these paths, an MPH, clinical background, or significant healthcare work experience before the MBA strengthens your candidacy.</p><p>Where it doesn't matter: healthcare consulting, pharma commercial strategy, health tech product management, and healthcare finance. These roles are business roles in a healthcare context.</p>"),
+        ],
+        "faq": [
+            ("Do I need a clinical background for a healthcare MBA career?", "No. Most MBA healthcare roles (consulting, pharma strategy, health tech, healthcare finance) don't require clinical experience. Clinical backgrounds help in hospital administration and health policy but aren't required for the majority of healthcare MBA paths."),
+            ("What's the best MBA for hospital administration?", "Vanderbilt Owen (Nashville, the healthcare capital), Wharton (largest health care management department), and Duke Fuqua (adjacent to Duke Health) are the top choices. All three have dedicated healthcare concentrations and strong placement into health system leadership roles."),
+            ("How much do healthcare MBAs make?", "Healthcare consulting starts at $190K-$220K. Pharma/biotech strategy starts at $150K-$200K. Health tech starts at $160K-$220K. Hospital administration starts lower ($120K-$160K) but has strong long-term trajectory into C-suite roles at health systems."),
+        ],
+        "see_also": [
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+            ("MBA ROI Analysis", "/guides/mba-roi-analysis/"),
+            ("Vanderbilt Owen Profile", "/schools/vanderbilt-owen/"),
+            ("Wharton Profile", "/schools/wharton/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Entrepreneurship ({CURRENT_YEAR})",
+        "slug": "best-mba-for-entrepreneurship",
+        "meta_description": f"Best MBA programs for entrepreneurs in {CURRENT_YEAR}. Which schools produce the most startup founders, and whether an MBA is worth it if you want to build a company.",
+        "sections": [
+            ("Should Entrepreneurs Get MBAs?", "<p>Controversial question. The honest answer: it depends on what kind of company you're building. If you're starting a tech company and you can code, you probably don't need an MBA. If you're building a company in healthcare, finance, or any regulated industry, the MBA provides domain knowledge, credibility, and a network that accelerates your path to funding and customers.</p><p>The MBA also provides a two-year runway. You have access to startup competitions (often with real prize money), venture capital connections, co-founder matching, and a built-in beta-testing audience of 400-900 classmates. For founders who need to develop business skills alongside their domain expertise, the MBA is an expensive but effective accelerator.</p>"),
+            ("Top Programs for Founders", f"""<ul><li><strong><a href="/schools/stanford-gsb/">Stanford GSB</a>:</strong> 18% of graduates go directly into entrepreneurship. Stanford Venture Studio provides workspace, mentorship, and funding connections. Sand Hill Road is a bike ride away. The GSB brand gives founders instant credibility with investors.</li><li><strong><a href="/schools/harvard-business-school/">Harvard Business School</a>:</strong> The Arthur Rock Center for Entrepreneurship and the New Venture Competition provide structure for aspiring founders. HBS's massive alumni network includes more startup founders who've raised venture capital than any other school.</li><li><strong><a href="/schools/mit-sloan/">MIT Sloan</a>:</strong> MIT's ecosystem (Media Lab, CSAIL, Lincoln Lab) creates technical co-founder opportunities. The Martin Trust Center for Entrepreneurship runs the $100K competition. MIT founders have created companies valued at $2 trillion+.</li><li><strong><a href="/schools/berkeley-haas/">Berkeley Haas</a>:</strong> The Haas School and Berkeley's broader startup ecosystem (SkyDeck accelerator, CITRIS) produce founders in cleantech, biotech, and consumer tech. The "Question the Status Quo" culture attracts disruptors.</li><li><strong><a href="/schools/booth/">Booth</a>:</strong> The Polsky Center for Entrepreneurship provides venture funding, startup incubation, and mentorship. Booth's analytical rigor helps founders build defensible business models.</li></ul>"""),
+            ("What the MBA Gives Founders", """<p>The concrete advantages of an MBA for founders:</p><ul><li><strong>Co-founders.</strong> Your classmates are your co-founder pool. Some of the most successful startup teams formed during MBA programs. You have two years to evaluate potential partners.</li><li><strong>Investor access.</strong> Top MBA programs host VC office hours, pitch competitions, and alumni investor networks. A warm introduction from a classmate or professor opens doors that cold emails never will.</li><li><strong>Structured learning time.</strong> The MBA gives you two years to learn finance, marketing, operations, and negotiation while you develop your business idea. You can take courses in IP law, venture finance, and market sizing that directly apply to your startup.</li><li><strong>Credibility.</strong> "Stanford GSB" or "HBS" on your LinkedIn profile changes how investors, customers, and potential hires perceive you. This matters more in B2B and enterprise than in consumer tech.</li><li><strong>Safety net.</strong> If your startup doesn't work out, you still have an MBA from a top program. The credential ensures you have high-paying career options as a fallback.</li></ul>"""),
+            ("When to Skip the MBA", "<p>Skip the MBA if you already have a viable business. Leaving a growing startup to spend two years in school creates momentum risk that's hard to recover from. If customers are paying you, investors are interested, and you have a team, the MBA's value doesn't justify the interruption.</p><p>Also skip if you're building a pure software startup and you can code. The MBA's business education is less valuable when your primary constraint is product-market fit and shipping speed, skills that MBA programs don't teach. Y Combinator, Techstars, and other accelerators provide network and mentorship benefits similar to the MBA at a fraction of the cost and time.</p><p>The MBA makes the most sense for founders who need business skills they don't have (finance, operations, regulatory knowledge), who need a co-founder, or who need the credibility that a top school provides in their target market.</p>"),
+            ("Startup Funding from MBA Programs", "<p>Top MBA programs provide direct funding to student ventures:</p><ul><li><strong>Stanford GSB:</strong> Multiple funding sources through Stanford Venture Studio, the Social Innovation Fund, and various pitch competitions. Total available funding exceeds $1M annually.</li><li><strong>HBS:</strong> The Arthur Rock Center provides grants and the HBS New Venture Competition awards $300K+ in prizes.</li><li><strong>MIT Sloan:</strong> The $100K Entrepreneurship Competition is one of the oldest and most prestigious in business education.</li><li><strong>Wharton:</strong> The Venture Initiation Program (VIP) provides co-working space, mentorship, and access to Penn's venture fund.</li></ul><p>These amounts won't fund a company to profitability, but they provide runway to validate ideas and attract outside investment. The real funding advantage is the warm introductions to venture investors that MBA networks provide.</p>"),
+        ],
+        "faq": [
+            ("Is an MBA worth it for entrepreneurs?", "It depends on what you're building. For founders in healthcare, finance, or B2B enterprise, the MBA provides domain knowledge, credibility, and investor access that accelerate the path. For pure tech startups where you can code, the opportunity cost of two years and $200K+ may not justify the benefits."),
+            ("Which MBA produces the most startup founders?", "Stanford GSB sends 18% of graduates directly into entrepreneurship, the highest of any M7 program. HBS produces the largest absolute number of founders due to its 930-person class. MIT Sloan leverages the broader MIT ecosystem to produce technically-oriented founders."),
+            ("Can I start a company during my MBA?", "Yes, and many students do. Most top programs have startup incubators, pitch competitions, and flexible second-year schedules that accommodate founders. The risk is splitting focus between coursework and your startup, but the support infrastructure is designed for exactly this."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Stanford GSB Profile", "/schools/stanford-gsb/"),
+            ("MBA ROI Analysis", "/guides/mba-roi-analysis/"),
+            ("Overall Rankings", "/rankings/overall/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Real Estate ({CURRENT_YEAR})",
+        "slug": "best-mba-for-real-estate",
+        "meta_description": f"Best MBA programs for real estate careers in {CURRENT_YEAR}. Top schools for REIT management, development, and real estate private equity. From a Haas MBA grad.",
+        "sections": [
+            ("Why Real Estate MBAs Are in Demand", "<p>Commercial real estate is a $20+ trillion asset class in the US alone. REITs, development firms, private equity funds, and institutional investors all need MBAs who can analyze deals, structure financing, and manage portfolios. The MBA provides the financial modeling skills, negotiation training, and network that the industry demands.</p><p>Real estate is also one of the few MBA career paths where the program you attend matters as much as your performance. The top real estate programs have alumni networks that control deal flow. If you want to work at Blackstone Real Estate, Brookfield, or Hines, your school's alumni connections are the entry point.</p>"),
+            ("Top Programs for Real Estate", f"""<ul><li><strong><a href="/schools/wharton/">Wharton</a>:</strong> The Zell-Lurie Real Estate Center is the premier academic real estate institute. Wharton produces more real estate PE professionals than any other program. The elective catalog includes 10+ real estate courses.</li><li><strong><a href="/schools/columbia-business-school/">Columbia</a>:</strong> NYC location gives direct access to the largest real estate market in the country. The Paul Milstein Center for Real Estate provides industry connections. Blackstone, Brookfield, and Tishman Speyer recruit on campus.</li><li><strong><a href="/schools/mit-sloan/">MIT Sloan</a>:</strong> The MIT Center for Real Estate offers a specialized MSRED degree, and Sloan MBAs can cross-register. MIT's analytical approach produces graduates who excel in real estate finance and analytics.</li><li><strong><a href="/schools/nyu-stern/">NYU Stern</a>:</strong> The Schack Institute of Real Estate and Stern's finance curriculum create a strong real estate track. NYC location is a geographic advantage for real estate careers.</li><li><strong><a href="/schools/ucla-anderson/">UCLA Anderson</a>:</strong> The Ziman Center for Real Estate leverages LA's massive real estate market. Strong connections to West Coast developers and investors.</li></ul>"""),
+            ("Real Estate Career Paths", '<ul><li><strong>Real estate private equity (REPE):</strong> Acquiring, developing, and managing property portfolios. Firms: Blackstone Real Estate, Brookfield, Starwood Capital, Carlyle. Compensation: $150K-$200K base + carry/bonus.</li><li><strong>Development:</strong> Managing the process of building or renovating properties. Companies: Hines, Related Companies, Tishman Speyer, Lendlease. Compensation: $120K-$160K base + project bonuses.</li><li><strong>REIT management:</strong> Managing publicly traded real estate portfolios. Companies: Prologis, AvalonBay, Simon Property Group. Compensation: $130K-$170K base + bonus.</li><li><strong>Real estate lending:</strong> Originating and structuring real estate debt. Banks: JPMorgan Real Estate, Goldman Sachs Real Estate, Wells Fargo. Compensation: $140K-$180K base + bonus.</li><li><strong>PropTech:</strong> Technology companies serving real estate (Zillow, CoStar, VTS, Procore). PM and strategy roles. Compensation: $160K-$220K total.</li></ul>'),
+            ("What to Do During Your MBA", "<p>Real estate recruiting is relationship-driven. Start early:</p><ol><li><strong>Join the real estate club immediately.</strong> The club runs property tours, speaker events, and mock interview sessions. It's also how you meet alumni working at your target firms.</li><li><strong>Take real estate finance courses first semester.</strong> REPE interviews test financial modeling and deal analysis. You need the technical foundation before recruiting starts.</li><li><strong>Attend industry conferences.</strong> NMHC, ULI, and MIPIM are where deals happen and relationships form. Your school's real estate club often sponsors trips.</li><li><strong>Do a real estate internship.</strong> The summer internship is the primary conversion path. REPE firms, developers, and REITs all offer structured MBA internship programs.</li></ol>"),
+        ],
+        "faq": [
+            ("Which MBA is best for real estate private equity?", "Wharton's Zell-Lurie Center produces more REPE professionals than any other program. Columbia and MIT Sloan are strong alternatives, with Columbia having a NYC location advantage. For West Coast real estate, UCLA Anderson's Ziman Center is the top choice."),
+            ("Do I need real estate experience before the MBA?", "It helps but isn't required. Many MBA students enter real estate from investment banking, consulting, or engineering backgrounds. The financial modeling skills transfer directly. What matters is demonstrating genuine interest through coursework, club involvement, and networking during the MBA."),
+            ("How much do real estate MBAs make?", "REPE starting compensation is $150K-$200K base plus carried interest. Development roles start at $120K-$160K. REIT management starts at $130K-$170K. Long-term compensation in REPE can reach $500K+ at the senior level, driven by carried interest on successful deals."),
+        ],
+        "see_also": [
+            ("Best MBA for Finance", "/guides/best-mba-for-finance/"),
+            ("Wharton Profile", "/schools/wharton/"),
+            ("Columbia Profile", "/schools/columbia-business-school/"),
+            ("MBA ROI Analysis", "/guides/mba-roi-analysis/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Private Equity ({CURRENT_YEAR})",
+        "slug": "best-mba-for-private-equity",
+        "meta_description": f"Best MBA programs for private equity careers in {CURRENT_YEAR}. Target schools for KKR, Blackstone, Apollo, and top PE firms. From a Haas MBA grad.",
+        "sections": [
+            ("How PE Firms Recruit MBAs", "<p>Private equity recruiting is narrow and elite. The mega-funds (KKR, Blackstone, Apollo, Carlyle, TPG, Warburg Pincus) hire 15-40 MBA associates each per year. They recruit almost exclusively from a short list of schools: HBS, Wharton, Stanford GSB, Booth, and Columbia. Getting into PE from outside these programs is possible but significantly harder.</p><p>Most PE firms require pre-MBA investment banking or consulting experience. The typical path: 2-3 years in IB or MBB consulting, then MBA, then PE associate role. The MBA serves as a re-credentialing step that opens doors to firms you couldn't access from your analyst seat.</p>"),
+            ("Target Schools for PE", f"""<ul><li><strong><a href="/schools/wharton/">Wharton</a>:</strong> The #1 feeder into PE. Wharton's finance curriculum, PE/VC club, and alumni network at every major fund make it the default choice for PE-bound MBAs. Wharton places more graduates into PE than any other school.</li><li><strong><a href="/schools/harvard-business-school/">Harvard Business School</a>:</strong> The HBS brand opens PE doors that few other schools can. The school's 930-person class produces a large absolute number of PE hires. Alumni sit on portfolio company boards worldwide.</li><li><strong><a href="/schools/stanford-gsb/">Stanford GSB</a>:</strong> Strong for growth equity and West Coast PE firms. Stanford's VC connections extend into growth-stage PE, and the brand carries everywhere.</li><li><strong><a href="/schools/booth/">Booth</a>:</strong> Booth's analytical rigor and finance depth produce strong PE candidates. The school has a growing track record of placing into mega-funds and middle-market PE.</li><li><strong><a href="/schools/columbia-business-school/">Columbia</a>:</strong> NYC location and the value investing program (inspired by Graham and Dodd) produce graduates with the financial acumen PE firms value. Strong Wall Street alumni network.</li></ul>"""),
+            ("PE Associate Compensation", '<p>PE associate compensation at major firms:</p><ul><li><strong>Mega-funds (KKR, Blackstone, Apollo, Carlyle):</strong> $200K-$250K base + $200K-$400K bonus = $400K-$650K total first-year compensation</li><li><strong>Upper middle market ($5B-$20B AUM):</strong> $175K-$225K base + $150K-$300K bonus = $325K-$525K total</li><li><strong>Middle market ($1B-$5B AUM):</strong> $150K-$200K base + $100K-$200K bonus = $250K-$400K total</li><li><strong>Growth equity:</strong> $150K-$200K base + $100K-$200K bonus + carried interest = $250K-$400K+ total</li></ul><p>The real money in PE is carried interest, which vests over the life of a fund (typically 5-10 years). Senior partners at mega-funds earn $5M-$50M+ annually, driven primarily by carry. Getting to that level takes 10-15 years post-MBA.</p>'),
+            ("Preparing for PE Recruiting", "<p>PE recruiting during the MBA is intense and fast. Preparation starts before you arrive on campus:</p><ol><li><strong>Master the LBO model.</strong> Every PE interview includes an LBO modeling test. You should be able to build one from scratch in 60-90 minutes.</li><li><strong>Know your deal experience.</strong> PE firms want to hear about specific transactions you worked on in banking or consulting. Prepare 3-4 deal walk-throughs with detailed financial analysis.</li><li><strong>Understand the competitive landscape.</strong> Know which funds focus on which sectors, what their recent deals look like, and why you want to work at that specific firm. Generic answers don't work.</li><li><strong>Network relentlessly.</strong> PE hiring is relationship-driven. Attend PE club events, connect with alumni at target firms, and get introduced through your pre-MBA network. Many PE offers come through relationships rather than formal recruiting.</li></ol>"),
+            ("PE Beyond the Mega-Funds", "<p>The mega-fund path gets the most attention, but the PE landscape is broader than KKR and Blackstone:</p><ul><li><strong>Middle market PE:</strong> Firms with $1B-$5B AUM. Less competitive to enter, meaningful deal experience, and strong economics. Many MBA graduates prefer middle market for the hands-on responsibility.</li><li><strong>Growth equity:</strong> General Atlantic, Summit Partners, TA Associates. Focuses on high-growth companies rather than leveraged buyouts. Less financial engineering, more strategic growth. Appeals to MBAs who want to build rather than optimize.</li><li><strong>Sector-focused PE:</strong> Healthcare PE (Welsh Carson, Water Street), tech PE (Thoma Bravo, Vista Equity), and infrastructure PE (Brookfield) hire MBAs with relevant sector experience.</li></ul>"),
+        ],
+        "faq": [
+            ("Which MBA is best for private equity?", "Wharton is the #1 feeder into PE, followed by HBS, Stanford GSB, Booth, and Columbia. These five schools account for the majority of MBA PE associate hires at mega-funds. Getting into PE from outside these programs is possible but requires exceptional networking and pre-MBA experience."),
+            ("Do I need banking experience for PE?", "Almost always, yes. The vast majority of PE associate hires have 2-3 years of investment banking experience. Some firms accept MBB consulting backgrounds, particularly for operational or growth equity roles. Pure career changers into PE (from non-finance backgrounds) face an extremely steep climb."),
+            ("How much do PE associates make?", "Mega-fund PE associates earn $400K-$650K in total first-year compensation (base + bonus). Middle market associates earn $250K-$400K. The long-term compensation is driven by carried interest, which can be worth millions over a career at the senior partner level."),
+        ],
+        "see_also": [
+            ("Best MBA for Finance", "/guides/best-mba-for-finance/"),
+            ("Best MBA for Venture Capital", "/guides/best-mba-for-venture-capital/"),
+            ("Wharton Profile", "/schools/wharton/"),
+            ("Harvard Business School Profile", "/schools/harvard-business-school/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Venture Capital ({CURRENT_YEAR})",
+        "slug": "best-mba-for-venture-capital",
+        "meta_description": f"Best MBA programs for venture capital in {CURRENT_YEAR}. Which schools produce the most VCs at Sequoia, a16z, and top firms. From a Haas MBA grad.",
+        "sections": [
+            ("How VCs Recruit MBAs", "<p>Venture capital is one of the hardest post-MBA career paths to break into. The industry is small (fewer than 5,000 professionals at institutional VC firms in the US), and most firms hire 1-3 associates per year. There's no structured campus recruiting the way consulting or banking operates. VC hiring is network-driven, opportunistic, and heavily weighted toward prior startup or tech experience.</p><p>The MBA helps by providing access to VC networks (alumni, professors, classmates who become founders), deal sourcing opportunities (evaluating student startups), and the credential that signals analytical rigor. But the MBA alone won't get you in. You need relevant pre-MBA experience and an active deal-sourcing thesis.</p>"),
+            ("Top Programs for VC", f"""<ul><li><strong><a href="/schools/stanford-gsb/">Stanford GSB</a>:</strong> The strongest VC placement of any MBA program. Sand Hill Road firms (Sequoia, a16z, Kleiner Perkins) have deep GSB ties. Alumni are partners at virtually every major VC fund. The proximity creates networking opportunities that are impossible to replicate from other locations.</li><li><strong><a href="/schools/harvard-business-school/">HBS</a>:</strong> The Rock Center hosts VC office hours and pitch events. HBS's massive alumni network includes hundreds of active VCs. The school's national brand carries weight with LP and portfolio company introductions.</li><li><strong><a href="/schools/mit-sloan/">MIT Sloan</a>:</strong> MIT's deep tech ecosystem produces deal flow that VCs value. Sloan MBAs who can evaluate technical founders have a genuine edge. The MIT Venture Mentoring Service and Martin Trust Center create natural VC connections.</li><li><strong><a href="/schools/booth/">Booth</a>:</strong> Booth's analytical rigor produces VCs who excel at financial modeling and portfolio construction. Chicago's growing VC ecosystem (Hyde Park Venture Partners, Pritzker Group) provides local opportunities.</li><li><strong><a href="/schools/berkeley-haas/">Berkeley Haas</a>:</strong> Bay Area location and access to the Berkeley startup ecosystem (SkyDeck accelerator) give Haas students deal-sourcing experience. The school sends graduates to both Sand Hill Road firms and corporate venture arms.</li></ul>"""),
+            ("VC Career Economics", """<p>VC compensation is unique:</p><ul><li><strong>Associate/Principal (years 0-5):</strong> $150K-$250K base + $50K-$150K bonus = $200K-$400K total. Lower cash compensation than PE peers, but the carried interest potential is significant.</li><li><strong>Vice President/Director (years 5-8):</strong> $250K-$400K cash + meaningful carry allocation</li><li><strong>Partner (years 8+):</strong> $500K-$1M+ cash + substantial carried interest. Top partners at tier-1 firms earn $5M-$20M+ annually when carry distributions flow.</li></ul><p>The VC economic model is long-duration. Carried interest doesn't materialize for 7-10 years after a fund is raised. Junior VCs may work for lower cash comp than banking or PE peers for years before carry distributions begin. The payoff comes later, and only if you pick winners.</p>"""),
+            ("Breaking into VC", "<p>The most common paths into VC after an MBA:</p><ol><li><strong>Pre-MBA operating experience in tech.</strong> Former product managers, engineers, and startup operators are the most common VC hires. They can evaluate founders and products with firsthand experience.</li><li><strong>Pre-MBA banking or consulting + active deal sourcing during MBA.</strong> Use your two years to attend startup pitch events, evaluate student ventures, and build a track record of identifying promising companies. Some schools have student-run VC funds.</li><li><strong>Entrepreneur track.</strong> Founded or co-founded a company (even one that failed). VCs value the founder perspective because it informs how you evaluate other founders.</li><li><strong>Corporate venture capital.</strong> Google Ventures, Salesforce Ventures, Intel Capital, and other corporate VC arms hire MBAs more accessibly than traditional VC firms. This can be a stepping stone.</li></ol>"),
+            ("Building Your VC Profile During the MBA", """<p>Specific actions that signal VC readiness:</p><ul><li><strong>Join or lead the VC club.</strong> Most top programs have one. The club runs VC treks, speaker series, and sometimes manages a small fund.</li><li><strong>Source deals.</strong> Evaluate startups at your school's incubator. Write investment memos on companies you find interesting. Build a portfolio of analysis that demonstrates your judgment.</li><li><strong>Develop a thesis.</strong> What sectors do you know well enough to evaluate? Healthcare? Enterprise software? Climate tech? VCs specialize. Having a clear investment thesis makes you a more compelling candidate.</li><li><strong>Take venture finance courses.</strong> Understanding term sheets, cap tables, and fund economics is table stakes for VC interviews.</li><li><strong>Network with GPs.</strong> Attend VC events, request informational interviews, and follow up. VC hiring is almost entirely network-driven. The relationship you build during your MBA may lead to an offer two years later.</li></ul>"""),
+        ],
+        "faq": [
+            ("Which MBA is best for venture capital?", "Stanford GSB has the strongest VC placement, driven by Sand Hill Road proximity and alumni density at top firms. HBS, MIT Sloan, Booth, and Berkeley Haas are also strong. VC hiring is so relationship-driven that the specific school matters less than your network and relevant experience."),
+            ("How hard is it to get into VC after an MBA?",""""Very hard. VC firms are small and hire infrequently. Even from a top-5 MBA program, the conversion rate from "interested in VC" to "working in VC" is probably under 10%. The path requires pre-MBA tech/startup experience, active deal sourcing during the MBA, and significant networking."""),
+            ("How much do VCs make?", "Associate-level VCs earn $200K-$400K in total cash compensation. The long-term upside comes from carried interest, which doesn't materialize for 7-10 years. Top partners at tier-1 firms earn $5M-$20M+ annually, but reaching that level takes 10-15 years of demonstrated investment success."),
+        ],
+        "see_also": [
+            ("Best MBA for Private Equity", "/guides/best-mba-for-private-equity/"),
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Stanford GSB Profile", "/schools/stanford-gsb/"),
+            ("Best MBA for Entrepreneurship", "/guides/best-mba-for-entrepreneurship/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Investment Banking ({CURRENT_YEAR})",
+        "slug": "best-mba-for-investment-banking",
+        "meta_description": f"Best MBA programs for investment banking in {CURRENT_YEAR}. Target schools for Goldman Sachs, Morgan Stanley, JPMorgan, and top banks. From a Haas MBA grad.",
+        "sections": [
+            ("How Banks Recruit MBAs", "<p>Investment banking has the most structured MBA recruiting process of any industry. Banks recruit on campus at target schools, run Super Day interviews in January-February, and extend offers by March. The process is predictable, transparent, and intensely competitive. The good news: if you're at a target school and prepare well, the odds are in your favor.</p><p>The major banks (Goldman Sachs, Morgan Stanley, JPMorgan, Bank of America, Citi, Barclays, Deutsche Bank) each hire 50-150 MBA associates per year, spread across industry groups and product groups. The positions are concentrated in New York, with satellite offices in Chicago, San Francisco, and Houston.</p>"),
+            ("Target Schools for Banking", f"""<ul><li><strong><a href="/schools/wharton/">Wharton</a>:</strong> The gold standard for banking recruiting. 34% of graduates enter finance. Wharton alumni run trading desks, lead M&A groups, and manage hedge funds worldwide. Every bank treats Wharton as a core target.</li><li><strong><a href="/schools/columbia-business-school/">Columbia</a>:</strong> NYC location and the value investing program (inspired by Benjamin Graham) make Columbia a banking powerhouse. 36% finance placement, the highest of any top-10 program.</li><li><strong><a href="/schools/booth/">Booth</a>:</strong> 32% finance placement with particular strength in quantitative roles. Booth's curriculum produces graduates who excel in structured finance, derivatives, and analytical roles.</li><li><strong><a href="/schools/nyu-stern/">NYU Stern</a>:</strong> Wall Street's backyard. 30% finance placement with deep alumni connections to every major bank. Stern's location advantage is real: networking events and interviews are a subway ride away.</li><li><strong><a href="/schools/harvard-business-school/">HBS</a>:</strong> The HBS brand opens every door, including banking. 24% finance placement. The school doesn't produce as many pure bankers as Wharton or Columbia, but the brand carries.</li></ul>"""),
+            ("IB Associate Compensation", '<p>Investment banking associate compensation (MBA hire, first year):</p><ul><li><strong>Bulge bracket (Goldman, Morgan Stanley, JPMorgan):</strong> $175K base + $100K-$200K bonus = $275K-$375K total</li><li><strong>Elite boutique (Evercore, Lazard, Centerview, PJT):</strong> $175K base + $150K-$250K bonus = $325K-$425K total</li><li><strong>Middle market (Jefferies, Houlihan Lokey, William Blair):</strong> $165K-$175K base + $80K-$150K bonus = $245K-$325K total</li></ul><p>Bonuses scale aggressively with seniority. VP-level bankers (3-5 years post-MBA) earn $500K-$800K total. Directors and MDs earn $1M+. The all-in compensation is among the highest of any MBA career path in the first decade.</p>'),
+            ("Surviving IB Recruiting", """<p>IB recruiting is a sprint. Here's the timeline:</p><ol><li><strong>Before school (June-August):</strong> Start networking. Identify 3-5 banks and 2-3 industry groups. Reach out to 2nd-year students who recruited successfully. Learn the basics of DCF, comparable company analysis, and LBO modeling.</li><li><strong>September-October:</strong> Bank presentations, coffee chats, and networking events. This is where relationships form. Be visible, be prepared, and follow up diligently.</li><li><strong>November-December:</strong> Application deadlines. Polish your resume, prep your story (why banking, why this bank, why this group), and practice technical questions daily.</li><li><strong>January-February:</strong> First-round interviews and Super Days. Technical questions (walk me through a DCF, how does $10 of depreciation affect the three statements?) and behavioral questions (tell me about a deal you followed, why should we hire you?). Prepare relentlessly.</li><li><strong>March:</strong> Offers extended. If you've done the work, the process is manageable. If you haven't prepared, it's brutal.</li></ol>"""),
+            ("Banking vs Consulting vs Tech", "<p>The three dominant MBA career paths compared:</p><ul><li><strong>Banking:</strong> Highest immediate pay, worst lifestyle. 70-80 hour weeks are normal. Exit opportunities into PE, hedge funds, and corporate development are strong. Best for people who love financial analysis and can tolerate sustained intensity.</li><li><strong>Consulting:</strong> Strong pay ($190K-$220K first year), better lifestyle than banking, travel-heavy. Exit opportunities into corporate strategy, tech, and PE. Best for people who want intellectual variety and structured problem-solving.</li><li><strong>Tech:</strong> Competitive pay with equity upside ($200K-$300K+ first year), best lifestyle. Exit opportunities into startups, VC, and executive roles. Best for people who want to build products and work in growing industries.</li></ul><p>Most MBAs choose one of these three paths. Banking is the right choice if the financial analysis excites you and the compensation trajectory justifies the lifestyle trade-off.</p>"),
+        ],
+        "faq": [
+            ("Which MBA is best for investment banking?", "Wharton, Columbia, Booth, NYU Stern, and HBS are the top five target schools for investment banking. Wharton and Columbia have the highest finance placement rates (34% and 36% respectively). All five schools are core targets for every major bank."),
+            ("Do I need finance experience for IB recruiting?", "No, but it helps. Many MBA IB associates come from consulting, engineering, or other backgrounds. What you need is a compelling story for why banking, strong technical preparation (DCF, LBO, accounting), and evidence of quantitative ability. Career changers into banking are common and welcomed."),
+            ("How much do investment banking associates make?", "First-year associates at bulge bracket banks earn $275K-$375K total compensation (base + bonus). Elite boutiques pay $325K-$425K. Compensation scales rapidly with seniority: VP-level bankers earn $500K-$800K, and MDs earn $1M+."),
+        ],
+        "see_also": [
+            ("Best MBA for Finance", "/guides/best-mba-for-finance/"),
+            ("Best MBA for Private Equity", "/guides/best-mba-for-private-equity/"),
+            ("Wharton Profile", "/schools/wharton/"),
+            ("Columbia Profile", "/schools/columbia-business-school/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Operations & Supply Chain ({CURRENT_YEAR})",
+        "slug": "best-mba-for-operations",
+        "meta_description": f"Best MBA programs for operations and supply chain management in {CURRENT_YEAR}. Top schools for Amazon, Apple, and Fortune 500 ops roles. From a Haas MBA grad.",
+        "sections": [
+            ("Why Operations MBAs Are Underrated", """<p>Operations and supply chain management doesn't get the glamour that consulting or banking receives, but the career outcomes are excellent. The pandemic exposed how critical supply chains are to every business on earth, and companies have responded by investing heavily in operations talent. Amazon, Apple, Tesla, Walmart, and every major manufacturer need MBAs who can optimize the systems that make their businesses work.</p><p>The compensation is competitive: $150K-$200K starting at major companies, with faster paths to senior leadership than many "sexier" MBA tracks. Operations leadership roles (VP of Supply Chain, COO) are some of the most direct paths to the C-suite.</p>"""),
+            ("Top Programs for Operations", f"""<ul><li><strong><a href="/schools/mit-sloan/">MIT Sloan</a>:</strong> MIT literally invented modern operations research. The Leaders for Global Operations (LGO) dual degree (MBA + MS in Engineering) is the gold standard for operations careers. LGO partners with Amazon, Apple, Boeing, Nike, and 25+ other companies for thesis projects.</li><li><strong><a href="/schools/carnegie-mellon-tepper/">Carnegie Mellon Tepper</a>:</strong> STEM-designated MBA with deep analytics curriculum. CMU's operations research program is world-class. Tepper graduates excel in data-driven operations roles.</li><li><strong><a href="/schools/michigan-ross/">Michigan Ross</a>:</strong> The Tauber Institute for Global Operations runs immersive projects with manufacturing and supply chain companies. Detroit's automotive industry provides unmatched access to complex supply chain operations.</li><li><strong><a href="/schools/indiana-kelley/">Indiana Kelley</a>:</strong> Kelley's supply chain management program is consistently ranked in the top 5. Partnerships with Cummins, Eli Lilly, and other Midwest manufacturers provide strong recruiting pipelines.</li><li><strong><a href="/schools/washington-foster/">Washington Foster</a>:</strong> Amazon's hometown. Operations and supply chain roles at Amazon are a natural pipeline for Foster graduates. The 50% tech placement rate includes significant operations hiring.</li></ul>"""),
+            ("Operations Career Paths", '<ul><li><strong>Operations leadership programs (FLDPs):</strong> Amazon Pathways, Apple Operations, GE Operations, J&J Supply Chain. Rotational programs that fast-track MBAs into senior operations roles. Starting comp: $140K-$180K.</li><li><strong>Supply chain strategy:</strong> Consulting on supply chain optimization at firms like McKinsey Operations, BCG Operations, or specialized firms. Starting comp: $190K-$220K.</li><li><strong>Manufacturing management:</strong> Plant leadership, production optimization, and quality systems at companies like Tesla, Boeing, 3M, and P&G. Starting comp: $130K-$170K.</li><li><strong>Tech operations:</strong> Amazon fulfillment, Apple supply chain, Google data center operations. Massive scale with significant ownership and compensation. Starting comp: $160K-$220K.</li></ul>'),
+            ("The LGO Advantage", "<p>MIT's Leaders for Global Operations (LGO) program deserves special mention. It's a dual MBA/MS in Engineering that combines Sloan's management curriculum with MIT's engineering depth. LGO students complete 6-month thesis projects embedded at partner companies (Amazon, Apple, Boeing, Nike, Tesla, and others).</p><p>The program is small (roughly 50 students per year) and highly selective. Applicants need both business and technical backgrounds. The outcome: LGO graduates are among the highest-paid operations professionals in the country, with starting compensation averaging $170K+ and fast-track paths to VP and C-suite operations roles.</p><p>If you're certain about operations, LGO is the best program in the world for this career path. If you want more flexibility, a general MBA from MIT Sloan, Ross, or Tepper with operations coursework provides strong preparation without the dual-degree commitment.</p>"),
+        ],
+        "faq": [
+            ("Which MBA is best for supply chain management?", "MIT Sloan (especially the LGO dual degree), Carnegie Mellon Tepper, Michigan Ross, and Indiana Kelley are the top programs for supply chain and operations. MIT and CMU have the strongest quantitative foundations; Ross and Kelley have the deepest industry partnerships."),
+            ("Do operations MBAs make good money?", "Yes. Starting compensation ranges from $130K-$220K depending on the role and company. Amazon, Apple, and consulting firm operations practices pay at the high end. The career trajectory is strong: VP of Operations and COO are natural endpoints, with total compensation exceeding $500K at senior levels."),
+            ("Is operations a good MBA career path?", "Underrated and excellent. The pandemic highlighted the strategic importance of supply chains, and companies have invested accordingly. Operations roles offer faster paths to senior leadership than many MBA tracks, with less competition for roles than consulting or banking."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("MIT Sloan Profile", "/schools/mit-sloan/"),
+            ("Carnegie Mellon Tepper Profile", "/schools/carnegie-mellon-tepper/"),
+            ("MBA ROI Analysis", "/guides/mba-roi-analysis/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Nonprofit & Social Impact ({CURRENT_YEAR})",
+        "slug": "best-mba-for-nonprofit",
+        "meta_description": f"Best MBA programs for nonprofit and social impact careers in {CURRENT_YEAR}. Schools that support mission-driven MBAs with funding and career services.",
+        "sections": [
+            ("Can You Do Good and Get an MBA?", "<p>Yes, and the demand for business-trained leaders in the social sector has never been higher. Nonprofits, social enterprises, impact investing firms, and government agencies all need people who can manage budgets, build organizations, and measure outcomes. The MBA provides these skills, and the best programs actively support students who want to use them for social impact.</p><p>The challenge is financial. Social sector salaries are lower than corporate alternatives, and MBA debt can make that gap feel painful. The programs that excel for social impact address this directly through loan forgiveness, scholarship funding, and career services tailored to mission-driven organizations.</p>"),
+            ("Top Programs for Social Impact", f"""<ul><li><strong><a href="/schools/yale-som/">Yale SOM</a>:</strong> The mission is in the name: School of Management, not School of Business. Yale SOM was founded to educate leaders for business and society, and the commitment is real. The Program on Social Enterprise provides funding, fellowships, and career support for impact-focused students.</li><li><strong><a href="/schools/stanford-gsb/">Stanford GSB</a>:</strong> "Change lives. Change organizations. Change the world." GSB sends more graduates into social impact than any other M7 program. The Center for Social Innovation provides fellowships and project funding.</li><li><strong><a href="/schools/harvard-business-school/">HBS</a>:</strong> The Social Enterprise Initiative and Dillon House provide infrastructure for social impact careers. HBS's brand opens doors at every major foundation, government agency, and international development organization.</li><li><strong><a href="/schools/michigan-ross/">Michigan Ross</a>:</strong> The Center for Social Impact provides project-based learning and career support. Ross's collaborative culture attracts socially-minded students.</li><li><strong><a href="/schools/duke-fuqua/">Duke Fuqua</a>:</strong> The Center for the Advancement of Social Entrepreneurship (CASE) is one of the leading academic centers for social entrepreneurship. Strong connections to the Research Triangle's nonprofit ecosystem.</li></ul>"""),
+            ("Social Impact Career Paths", '<ul><li><strong>Nonprofit management:</strong> Leading or managing nonprofits, foundations, and NGOs. Organizations: Gates Foundation, Ford Foundation, Teach For America, KIPP, Red Cross. Salary: $80K-$150K.</li><li><strong>Impact investing:</strong> Investing capital for both financial return and social/environmental impact. Firms: Bain Capital Double Impact, TPG Rise, Omidyar Network, Acumen. Salary: $120K-$200K.</li><li><strong>Social enterprise:</strong> Building businesses that address social problems. Companies: Warby Parker, Patagonia, TOMS, d.light. Salary: varies widely.</li><li><strong>Government and policy:</strong> Working in federal, state, or local government on policy implementation. MBA skills in budgeting, operations, and strategy are valued. Salary: $80K-$140K.</li><li><strong>International development:</strong> Working with organizations like the World Bank, USAID, or UN agencies. Salary: $80K-$160K.</li></ul>'),
+            ("Funding a Social Impact MBA", "<p>The biggest barrier for social impact MBAs is debt. Here's how to manage it:</p><ul><li><strong>Loan forgiveness programs:</strong> Yale SOM, Stanford GSB, HBS, and others offer loan repayment assistance for graduates working in nonprofit or government roles. These programs can forgive $10K-$20K per year of loans.</li><li><strong>Social impact scholarships:</strong> Many programs offer dedicated scholarships for students committed to social impact careers. Apply early and be specific about your impact goals.</li><li><strong>Public Service Loan Forgiveness (PSLF):</strong> Federal program that forgives remaining student loan balance after 10 years of qualifying payments while working for a nonprofit or government employer. Structure your loans accordingly.</li><li><strong>Fellowship programs:</strong> Echoing Green, Ashoka, Draper Richards Kaplan, and other organizations provide fellowships to social entrepreneurs. These can fund both your education and your post-MBA venture.</li></ul>"),
+        ],
+        "faq": [
+            ("Which MBA is best for nonprofit careers?", "Yale SOM, Stanford GSB, and HBS have the strongest infrastructure for social impact careers, including loan forgiveness programs, dedicated career services, and fellowship funding. Yale SOM's founding mission specifically centers education for business and society."),
+            ("Can I afford an MBA on a nonprofit salary?", "With loan forgiveness programs (school-specific and federal PSLF), dedicated scholarships, and fellowship funding, many social impact MBAs manage their debt effectively. The key is planning: choose a school with strong loan repayment assistance and structure your federal loans for PSLF eligibility."),
+            ("Do nonprofits hire MBAs?", "Increasingly, yes. Major nonprofits (Gates Foundation, Red Cross, Teach For America), impact investing firms, and government agencies actively recruit MBAs for leadership, strategy, and operations roles. The MBA provides management skills that the social sector needs."),
+        ],
+        "see_also": [
+            ("Best MBA for Career Changers", "/guides/best-mba-for-career-changers/"),
+            ("Yale SOM Profile", "/schools/yale-som/"),
+            ("MBA ROI Analysis", "/guides/mba-roi-analysis/"),
+            ("Stanford GSB Profile", "/schools/stanford-gsb/"),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Data Science & Analytics ({CURRENT_YEAR})",
+        "slug": "best-mba-for-data-science",
+        "meta_description": f"Best MBA programs for data science and analytics careers in {CURRENT_YEAR}. STEM-designated MBAs with quantitative depth. From a Haas MBA grad.",
+        "sections": [
+            ("The Quant MBA", "<p>Every industry is drowning in data and starving for people who can turn that data into decisions. The MBA that combines business strategy with analytical depth is increasingly valuable. Companies want leaders who can communicate with data science teams, design experiments, interpret results, and translate analysis into business action.</p><p>The pure data scientist role doesn't typically require an MBA. But the analytics leadership role, managing data teams, setting analytics strategy, and making data-informed business decisions, is where the MBA shines. These roles command $180K-$250K+ at major companies.</p>"),
+            ("Top Programs for Analytics", f"""<ul><li><strong><a href="/schools/carnegie-mellon-tepper/">Carnegie Mellon Tepper</a>:</strong> STEM-designated MBA with CMU's #1-ranked CS program next door. Tepper's curriculum is the most analytically rigorous in MBA education. Machine learning, optimization, and data analytics courses are core to the experience.</li><li><strong><a href="/schools/mit-sloan/">MIT Sloan</a>:</strong> MIT's quantitative DNA infuses everything at Sloan. The Business Analytics concentration and access to MIT's broader EECS and data science resources create analytically strong graduates.</li><li><strong><a href="/schools/booth/">Booth</a>:</strong> Booth's flexible curriculum lets quant-minded students load up on statistics, econometrics, and machine learning courses. The school's finance strength extends to quantitative analytics across sectors.</li><li><strong><a href="/schools/nyu-stern/">NYU Stern</a>:</strong> STEM-designated specializations in fintech and quantitative finance. Stern's Center for Data Science provides cross-registration opportunities and research access.</li><li><strong><a href="/schools/georgia-tech-scheller/">Georgia Tech Scheller</a>:</strong> Georgia Tech's engineering reputation and Scheller's Business Analytics Center produce graduates with genuine technical depth. STEM designation and lower cost make it a value play for analytics careers.</li></ul>"""),
+            ("Analytics Career Paths for MBAs", '<ul><li><strong>Analytics leadership:</strong> Head of Analytics, VP of Data Science, Chief Analytics Officer. Managing data teams and setting analytics strategy. Comp: $200K-$350K.</li><li><strong>Product analytics:</strong> Using data to drive product decisions at tech companies. Google, Meta, Amazon, and Netflix hire MBAs into product analytics roles. Comp: $180K-$280K.</li><li><strong>Marketing analytics:</strong> Customer segmentation, attribution modeling, and campaign optimization. Strong demand at CPG companies, retailers, and tech firms. Comp: $150K-$220K.</li><li><strong>Strategy consulting (analytics):</strong> McKinsey QuantumBlack, BCG Gamma, and Bain Advanced Analytics hire MBAs who combine business consulting skills with data fluency. Comp: $190K-$220K.</li></ul>'),
+            ("STEM Designation Matters", """<p>For international students especially, a STEM-designated MBA extends Optional Practical Training (OPT) from 12 months to 36 months. This provides three chances at the H-1B visa lottery instead of one. Programs with full or partial STEM designation include <a href="/schools/carnegie-mellon-tepper/">Carnegie Mellon Tepper</a>, <a href="/schools/mit-sloan/">MIT Sloan</a>, <a href="/schools/cornell-johnson/">Cornell Johnson</a>, <a href="/schools/duke-fuqua/">Duke Fuqua</a>, and <a href="/schools/nyu-stern/">NYU Stern</a>. The list is growing, and more programs add STEM tracks each year.</p><p>For analytics-focused MBAs, STEM designation is particularly relevant because the roles you'll target (product analytics, data science leadership) are at companies that sponsor H-1B visas. The extra OPT time gives you runway to demonstrate value before the visa lottery.</p>"""),
+        ],
+        "faq": [
+            ("Which MBA is best for data science?", "Carnegie Mellon Tepper, MIT Sloan, and Booth have the strongest quantitative foundations for analytics and data science MBA careers. Tepper benefits from CMU's #1 CS program; MIT Sloan from MIT's broader technical ecosystem; Booth from its flexible, quant-heavy curriculum."),
+            ("Do I need a technical background for an analytics MBA?", "A quantitative undergraduate background (engineering, math, economics, CS) helps, but isn't required. Most programs offer foundational analytics courses that bring non-technical students up to speed. What matters is comfort with numbers, interest in data-driven decision-making, and willingness to learn tools like SQL, Python, and statistical modeling."),
+            ("How much do analytics MBAs make?", "Analytics leadership roles at major companies pay $200K-$350K total compensation. Product analytics at tech firms pays $180K-$280K. Strategy consulting analytics practices (McKinsey QuantumBlack, BCG Gamma) pay $190K-$220K starting. The demand for analytically skilled business leaders is growing across every industry."),
+        ],
+        "see_also": [
+            ("Best MBA for Tech", "/guides/best-mba-for-tech/"),
+            ("Best MBA for Engineers", "/guides/best-mba-for-engineers/"),
+            ("Carnegie Mellon Tepper Profile", "/schools/carnegie-mellon-tepper/"),
+            ("Best MBA for International Students", "/guides/best-mba-for-international-students/"),
+        ],
+    },
+]
+
+# =============================================================================
+# RANKING CONFIGURATIONS
+# =============================================================================
+
+RANKING_TYPES = [
+    {
+        "slug": "overall",
+        "title": f"Best MBA Programs | Overall Ranking ({CURRENT_YEAR})",
+        "description": "The definitive ranking of top MBA programs, based on selectivity, career outcomes, and program quality.",
+        "sort_key": "ranking",
+        "reverse": False,
+        "limit": 50,
+    },
+    {
+        "slug": "roi",
+        "title": f"Best MBA Programs by ROI ({CURRENT_YEAR})",
+        "description": "MBA programs ranked by return on investment: salary outcomes relative to tuition cost.",
+        "sort_key": "roi",
+        "reverse": True,
+        "limit": 25,
+    },
+    {
+        "slug": "salary",
+        "title": f"Highest Salary MBA Programs ({CURRENT_YEAR})",
+        "description": "MBA programs ranked by average starting salary. Where the paychecks are biggest.",
+        "sort_key": "avg_salary",
+        "reverse": True,
+        "limit": 25,
+    },
+    {
+        "slug": "selectivity",
+        "title": f"Most Selective MBA Programs ({CURRENT_YEAR})",
+        "description": "The hardest MBA programs to get into, ranked by acceptance rate.",
+        "sort_key": "acceptance_rate",
+        "reverse": False,
+        "limit": 25,
+    },
+    {
+        "slug": "career-changers",
+        "title": f"Best MBA Programs for Career Changers ({CURRENT_YEAR})",
+        "description": "Top MBA programs for career changers. Schools that welcome non-traditional backgrounds and support industry pivots.",
+        "sort_key": "ranking",
+        "reverse": False,
+        "limit": 15,
+        "filter_slugs": [
+            "virginia-darden", "indiana-kelley", "berkeley-haas", "yale-som",
+            "kellogg", "michigan-ross", "duke-fuqua", "unc-kenan-flagler",
+            "columbia-business-school", "ucla-anderson", "dartmouth-tuck",
+            "cornell-johnson", "arizona-state-carey", "vanderbilt-owen", "texas-mccombs",
+        ],
+    },
+]
+
+
+
+# =============================================================================
+# METRO AREA DATA — City/region MBA pages
+# =============================================================================
+
+METRO_AREAS = [
+    {
+        "name": "New York City", "slug": "new-york-city", "state": "NY",
+        "metro_schools": ["columbia-business-school", "nyu-stern", "cornell-johnson", "yale-som", "rochester-simon"],
+        "nearby_label": "NYC & Tri-State Area",
+        "industries": ["Finance", "Consulting", "Media", "Tech"],
+        "job_market": "Wall Street, midtown consulting offices, and a growing tech scene make NYC the densest MBA job market in the country. Goldman Sachs, JPMorgan, McKinsey, and BCG all have major offices here. Google, Amazon, and Meta have expanded their NYC footprints aggressively.",
+        "cost_of_living": "Brutal. Expect $2,500-$4,000/month for a shared apartment in Manhattan or Brooklyn. Groceries, transportation, and social life add up fast. The upside: post-MBA salaries in NYC finance and consulting are among the highest in the country.",
+        "why_here": "If you want finance, NYC is the center of the universe. Two M7 programs (Columbia, and NYU Stern is M7-adjacent) recruit directly into Wall Street. The alumni density in every major firm means you'll always have a connection. For consulting and media, no other city comes close in volume of opportunities.",
+        "watch_out": "The cost of living eats into your salary advantage. A $190K base in NYC buys less than $160K in most other cities. And Columbia's Morningside Heights campus feels removed from the financial district, while Stern's Greenwich Village location puts you in the thick of it.",
+        "faq": [
+            ("What MBA programs are in New York City?", "Columbia Business School (#6 overall) and NYU Stern (#10) are located in Manhattan. Cornell Johnson (#15) in Ithaca is a 4-hour drive but recruits heavily into NYC. Yale SOM in New Haven is 90 minutes by train and places well into NYC finance."),
+            ("Is NYC the best city for an MBA in finance?", "Yes. NYC places more MBA graduates into finance than any other city. Columbia and Stern together produce hundreds of Wall Street hires annually. Goldman Sachs, JPMorgan, Morgan Stanley, and every major PE and hedge fund recruit on both campuses."),
+            ("How expensive is it to get an MBA in NYC?", "Tuition at Columbia is approximately $82,000/year. Stern is approximately $80,000/year. Add $30,000-$40,000 for living expenses in Manhattan. The all-in cost for two years at either program exceeds $250,000 before scholarships."),
+        ],
+    },
+    {
+        "name": "San Francisco Bay Area", "slug": "san-francisco-bay-area", "state": "CA",
+        "metro_schools": ["stanford-gsb", "berkeley-haas", "uc-davis"],
+        "nearby_label": "Bay Area & Northern California",
+        "industries": ["Technology", "Venture Capital", "Entrepreneurship", "Consulting"],
+        "job_market": "Silicon Valley is the global capital of tech and venture capital. Google, Apple, Meta, Salesforce, and thousands of startups are within commuting distance of both Stanford and Berkeley. Sand Hill Road VC firms recruit directly from GSB. The Bay Area also has strong consulting offices (McKinsey SF, BCG SF, Bain SF).",
+        "cost_of_living": "Among the most expensive in the country. Palo Alto rents start at $3,000/month for a studio. Berkeley and Oakland are slightly cheaper but still steep. The trade-off: tech compensation (base + equity) is the highest in the country.",
+        "why_here": "Tech and startups. Period. Stanford GSB and Berkeley Haas together produce more tech executives, startup founders, and VC-backed entrepreneurs than any other metro. If you want to build something, fund something, or work at a company that's reshaping an industry, the Bay Area is the place.",
+        "watch_out": "The Bay Area tech bubble is real. If your goal is finance, consulting, or anything East Coast, you'll be recruiting against geographic gravity. Housing costs can add $30K+ to your MBA budget compared to other cities.",
+        "faq": [
+            ("What MBA programs are in the San Francisco Bay Area?", "Stanford GSB (#1 overall) is in Palo Alto. Berkeley Haas (#8) is across the bay. UC Davis (#36) is 75 miles northeast. Stanford and Haas are the dominant programs, with combined tech placement above 35%."),
+            ("Is the Bay Area the best place for a tech MBA?", "For pure tech placement, yes. Stanford GSB and Berkeley Haas have the deepest connections to Silicon Valley companies. Seattle (Washington Foster) and Boston (MIT Sloan) are strong alternatives, but the Bay Area's density of tech employers is unmatched."),
+            ("How much does an MBA cost in the Bay Area?", "Stanford GSB tuition is approximately $78,000/year. Berkeley Haas is approximately $68,000/year (in-state) or $73,000/year (out-of-state). Living costs in the Bay Area add $35,000-$45,000/year. Stanford's all-in cost for two years approaches $300,000."),
+        ],
+    },
+    {
+        "name": "Boston", "slug": "boston", "state": "MA",
+        "metro_schools": ["harvard-business-school", "mit-sloan", "bu-questrom", "babson-olin", "boston-college-carroll", "northeastern"],
+        "nearby_label": "Greater Boston",
+        "industries": ["Consulting", "Finance", "Technology", "Healthcare", "Biotech"],
+        "job_market": "Boston has the highest concentration of MBA programs per capita in the country. HBS and MIT Sloan anchor the market, with MBB consulting firms, major banks, biotech companies (Moderna, Vertex, Biogen), and a growing tech hub (HubSpot, Wayfair, DraftKings). The healthcare and life sciences sector is a unique Boston strength.",
+        "cost_of_living": "Expensive but not quite NYC levels. Expect $2,000-$3,000/month for rent in Cambridge or Somerville. The student population keeps some costs manageable. Winters are cold, but the college-town energy and walkability make up for it.",
+        "why_here": "Breadth. Boston has the #2 (HBS) and #7 (MIT Sloan) programs in the country, plus four more MBA options. The consulting and finance recruiting is world-class. The biotech and healthcare sector provides career paths that don't exist in most other cities. And the academic environment, with Harvard and MIT next door, is unmatched.",
+        "watch_out": "HBS and MIT Sloan dominate Boston recruiting. Graduates from BU Questrom, Babson, and Northeastern compete for a smaller share of local opportunities. The weather from November to March is genuinely unpleasant.",
+        "faq": [
+            ("What MBA programs are in Boston?", "Harvard Business School (#2), MIT Sloan (#7), BU Questrom (#32), Babson Olin (#40), Boston College Carroll (#49), and Northeastern (#50) are all in the Greater Boston area. HBS and MIT Sloan are the dominant programs."),
+            ("Is Boston good for consulting MBAs?", "Excellent. McKinsey, BCG (headquartered in Boston), and Bain (headquartered in Boston) all recruit heavily from HBS and MIT Sloan. Boston is arguably the best city for consulting careers, with two of the Big Three headquartered here."),
+            ("How does Boston compare to NYC for MBA careers?", "NYC dominates in finance. Boston dominates in consulting (BCG and Bain HQ) and healthcare/biotech. Both are strong for tech. Choose NYC if you want Wall Street. Choose Boston if you want consulting or life sciences."),
+        ],
+    },
+    {
+        "name": "Chicago", "slug": "chicago", "state": "IL",
+        "metro_schools": ["booth", "kellogg", "illinois-gies"],
+        "nearby_label": "Chicago & Midwest",
+        "industries": ["Consulting", "Finance", "CPG", "Technology"],
+        "job_market": "Chicago is home to two M7 programs and serves as the Midwest hub for every major consulting firm and bank. McKinsey, BCG, Bain, Goldman Sachs, and JPMorgan all have significant Chicago offices. The city is also headquarters for several Fortune 500 companies (McDonald's, Boeing, Walgreens, Abbott) that hire MBAs into strategy and leadership roles.",
+        "cost_of_living": "Significantly cheaper than NYC, SF, or Boston. A one-bedroom in a good neighborhood runs $1,500-$2,200/month. Dining, entertainment, and transportation are all more affordable. The cost advantage means your MBA salary goes further here than on either coast.",
+        "why_here": "Two M7 programs at a fraction of the coastal cost of living. Booth's analytical rigor and Kellogg's collaborative culture give you two distinct MBA experiences. Chicago's central location makes it easy to recruit nationally. And the city itself, with its architecture, food scene, and lakefront, is one of the best places to spend two years.",
+        "watch_out": "Tech placement is weaker than the Bay Area or Seattle. If you want Silicon Valley, Chicago is a harder launch point. The weather from December to March is harsh, and Kellogg's Evanston campus is a 30-minute train ride from downtown Chicago.",
+        "faq": [
+            ("What MBA programs are in Chicago?", "Booth (#4, University of Chicago) is in Hyde Park. Kellogg (#5, Northwestern) is in Evanston, about 30 minutes north. Illinois Gies (#44) is in Champaign, about 2.5 hours south. Booth and Kellogg are both M7 programs."),
+            ("Is Chicago good for finance MBAs?", "Yes. Booth places 32% of graduates into finance, one of the highest rates among M7 programs. Chicago is a major financial center with strong presence from every major bank and trading firm. For quantitative finance especially, Booth's curriculum is hard to beat."),
+            ("Booth or Kellogg: which is better?", "Different programs for different people. Booth is more analytical and individualistic, with a flexible curriculum and strength in finance. Kellogg is more collaborative and team-oriented, with strength in marketing and consulting. Both are M7, both place well. The culture difference is the real deciding factor."),
+        ],
+    },
+    {
+        "name": "Los Angeles", "slug": "los-angeles", "state": "CA",
+        "metro_schools": ["ucla-anderson", "usc-marshall"],
+        "nearby_label": "Greater Los Angeles",
+        "industries": ["Entertainment", "Technology", "Real Estate", "Healthcare", "Consulting"],
+        "job_market": "LA's economy is more diverse than people assume. Entertainment and media (Disney, Warner Bros., Netflix, Hulu) are the unique draw, but tech (Snap, SpaceX, Riot Games, Amazon Studios), healthcare, and real estate are all major MBA employers. Consulting firms have growing LA offices. The startup ecosystem has expanded significantly, with Venice Beach and Santa Monica becoming tech hubs.",
+        "cost_of_living": "Expensive but more manageable than SF or NYC. Rent in Westwood (near UCLA) or downtown runs $1,800-$2,800/month. You'll need a car, which adds to costs. The weather alone is worth something, though.",
+        "why_here": "Entertainment, media, and the creative economy. No other MBA market gives you access to Disney, Netflix, and Warner Bros. recruiting simultaneously. UCLA Anderson and USC Marshall both have strong entertainment industry connections that other schools can't replicate. The growing tech scene adds optionality.",
+        "watch_out": "Finance placement is weaker than NYC. Consulting offices are smaller than Chicago or Boston. If your goals are traditional banking or MBB, LA is a harder path. The car dependency and traffic can make the daily MBA experience frustrating.",
+        "faq": [
+            ("What MBA programs are in Los Angeles?", "UCLA Anderson (#16) is in Westwood. USC Marshall (#17) is in University Park, near downtown. Both are well-regarded programs with strong regional employer relationships and entertainment industry connections."),
+            ("Is LA good for entertainment MBA careers?", "The best. UCLA Anderson and USC Marshall have the strongest pipelines into Disney, Netflix, Warner Bros., and other entertainment companies. If you want to work in media, entertainment strategy, or content business, LA is the clear choice."),
+            ("UCLA Anderson vs USC Marshall: which is better?", "UCLA Anderson ranks slightly higher (#16 vs #17) and has a stronger academic reputation. USC Marshall has deeper alumni connections in LA's business community and a more entrepreneurial culture. UCLA is the stronger brand nationally; USC may have the edge locally."),
+        ],
+    },
+    {
+        "name": "Washington, DC", "slug": "washington-dc", "state": "DC",
+        "metro_schools": ["georgetown-mcdonough", "george-washington", "maryland-smith"],
+        "nearby_label": "DC Metro Area",
+        "industries": ["Government", "Consulting", "Nonprofit", "Defense", "Technology"],
+        "job_market": "DC is unique. The federal government, World Bank, IMF, and hundreds of nonprofits create MBA opportunities that don't exist anywhere else. Government consulting (Booz Allen, Deloitte Federal, Accenture Federal) is a massive employer. Defense contractors (Lockheed Martin, Raytheon, Northrop Grumman) hire MBAs into strategy roles. The tech scene (Capital One, Amazon's HQ2 in Arlington) has grown rapidly.",
+        "cost_of_living": "Comparable to Boston. Rent in Georgetown or Dupont Circle runs $2,000-$3,000/month. Virginia suburbs are cheaper. Metro commuting is standard.",
+        "why_here": "If you want to work at the intersection of business and government, DC is the only choice. Georgetown McDonough's location gives it unique access to policy-adjacent roles. The World Bank, IMF, and major defense contractors all recruit from DC-area programs. It's also a strong market for government consulting.",
+        "watch_out": "The DC job market is government-heavy, which means salary ceilings can be lower than private-sector finance or tech. If you want Wall Street or Silicon Valley, DC-area programs are a geographic disadvantage.",
+        "faq": [
+            ("What MBA programs are in Washington, DC?", "Georgetown McDonough (#20) is in Georgetown. George Washington (#48) is in Foggy Bottom. Maryland Smith (#37) is in College Park, about 30 minutes away. Georgetown is the dominant program for DC-area recruiting."),
+            ("Is DC good for consulting MBA careers?", "For government and federal consulting, DC is the best market. Booz Allen Hamilton (HQ in McLean), Deloitte Government, and Accenture Federal all recruit heavily from Georgetown and other DC programs. For traditional MBB consulting, NYC, Boston, and Chicago have more volume."),
+            ("What makes Georgetown McDonough unique?", "Location. Georgetown's campus is in the heart of DC, walking distance from the State Department, World Bank, and K Street. The school excels in placing graduates into government-adjacent roles, policy consulting, and international development, paths that other programs can't match."),
+        ],
+    },
+    {
+        "name": "Philadelphia", "slug": "philadelphia", "state": "PA",
+        "metro_schools": ["wharton", "carnegie-mellon-tepper"],
+        "nearby_label": "Philadelphia & Pennsylvania",
+        "industries": ["Finance", "Healthcare", "Consulting", "Technology"],
+        "job_market": "Philadelphia is Wharton's city. The finance ecosystem around Penn is deep, with banks, PE firms, and hedge funds recruiting aggressively. Healthcare (Merck, Johnson & Johnson nearby, major hospital systems) adds another dimension. Philadelphia's cost of living is materially lower than NYC, which matters for two years of MBA living. CMU Tepper in Pittsburgh, 5 hours west, has its own tech-oriented job market.",
+        "cost_of_living": "More affordable than NYC or Boston. Rent near Penn's campus in University City runs $1,200-$2,000/month. Center City apartments are comparable. Groceries and dining are reasonable by coastal standards.",
+        "why_here": "Wharton. That's the reason. The #3-ranked MBA program in the world, with the deepest finance curriculum and alumni network of any business school. If you're admitted to Wharton, Philadelphia becomes your city for two years, and the finance recruiting pipeline is second to none.",
+        "watch_out": "Philadelphia's job market is smaller than NYC or Boston. Many Wharton graduates relocate to NYC or SF after graduation. If you're not at Wharton, the local MBA market is limited. CMU Tepper in Pittsburgh offers a different value proposition centered on analytics and tech.",
+        "faq": [
+            ("What MBA programs are in Philadelphia?", "Wharton (#3, University of Pennsylvania) is in University City. Carnegie Mellon Tepper (#18) is in Pittsburgh, about 5 hours west. Wharton is the dominant program and one of the top 3 MBA programs globally."),
+            ("Is Wharton worth the cost?", "For finance careers, the ROI calculation at Wharton is among the strongest in business education. Wharton graduates earn median salaries of $175,000+ with significant signing bonuses. The finance placement rate (34%) and alumni network make it the gold standard for Wall Street-bound MBAs."),
+            ("How does Philadelphia compare to NYC for finance?", "NYC has more volume in finance jobs, but Wharton's Philadelphia location doesn't limit career outcomes. Wharton graduates place into NYC finance firms at rates comparable to Columbia and Stern. Many students commute to NYC for interviews, and the train is 90 minutes."),
+        ],
+    },
+    {
+        "name": "Seattle", "slug": "seattle", "state": "WA",
+        "metro_schools": ["washington-foster"],
+        "nearby_label": "Pacific Northwest",
+        "industries": ["Technology", "E-Commerce", "Cloud Computing", "Consulting"],
+        "job_market": "Amazon and Microsoft headquarters anchor Seattle's MBA market. Boeing, Starbucks, Costco, and a growing startup ecosystem round it out. Amazon alone hires hundreds of MBAs annually into PM, operations, and strategy roles. The Seattle tech market pays nearly as well as the Bay Area with significantly lower cost of living.",
+        "cost_of_living": "Cheaper than SF or NYC. Rent in Capitol Hill or Fremont runs $1,500-$2,500/month. No state income tax in Washington, which adds 5-10% to your effective take-home pay compared to California or New York.",
+        "why_here": "Amazon and Microsoft hire aggressively from Washington Foster, and the 50% tech placement rate is the highest of any top-25 program. The no-income-tax advantage is real. If you want tech without the Bay Area cost of living, Seattle is the smart play.",
+        "watch_out": "Washington Foster (#23) doesn't carry the same brand weight as Stanford, MIT Sloan, or Berkeley Haas. For careers outside tech, the Seattle job market is thinner. And the rain from October to May is a lifestyle consideration.",
+        "faq": [
+            ("What MBA programs are in Seattle?", "Washington Foster (#23, University of Washington) is the primary MBA program in Seattle. It has the highest tech placement rate (50%) of any top-25 program, driven by Amazon and Microsoft recruiting."),
+            ("Does Amazon hire a lot of MBAs?", "Yes. Amazon is the single largest employer of MBA graduates from Washington Foster. Amazon hires MBAs into product management, operations, finance, and strategy roles across AWS, retail, and other business units. Total compensation packages at Amazon, including RSUs, regularly exceed $200K for MBA hires."),
+            ("Is Seattle a good city for an MBA?", "For tech careers, absolutely. The combination of Amazon, Microsoft, Boeing, and a growing startup scene creates deep MBA demand. The cost of living is lower than SF, and Washington has no state income tax. For finance or consulting, Seattle is limited compared to NYC or Chicago."),
+        ],
+    },
+    {
+        "name": "Atlanta", "slug": "atlanta", "state": "GA",
+        "metro_schools": ["emory-goizueta", "georgia-tech-scheller"],
+        "nearby_label": "Greater Atlanta",
+        "industries": ["Consulting", "Technology", "Healthcare", "CPG", "Logistics"],
+        "job_market": "Atlanta is the economic capital of the Southeast. Coca-Cola, Delta, Home Depot, UPS, and Cox Enterprises are all headquartered here. The consulting and banking presence is strong (every MBB and major bank has Atlanta offices). The tech scene has grown with companies like NCR, Mailchimp (now Intuit Atlanta), and Cardlytics. The cost-adjusted salary is excellent.",
+        "cost_of_living": "Affordable by major metro standards. Rent in Midtown or Buckhead runs $1,200-$2,000/month. The overall cost of living is 20-30% lower than NYC or SF, which makes post-MBA salaries go further.",
+        "why_here": "Two strong programs (Emory Goizueta #21, Georgia Tech Scheller #26) with deep Southeast employer relationships. The Fortune 500 concentration in Atlanta creates recruiting opportunities that don't require relocation. The cost of living means your MBA budget stretches further than on the coasts.",
+        "watch_out": "Atlanta's national recruiting reach is weaker than NYC or Chicago. If you want to work in San Francisco or New York post-MBA, an Atlanta program is a geographic disadvantage for on-campus recruiting. The finance market is more corporate treasury and commercial banking than Wall Street.",
+        "faq": [
+            ("What MBA programs are in Atlanta?", "Emory Goizueta (#21) is in Druid Hills. Georgia Tech Scheller (#26) is in Midtown. Both are well-regarded with strong Southeast placement. Georgia Tech adds a unique engineering and technology angle."),
+            ("Is Atlanta a good MBA market?", "For the Southeast, Atlanta is the best MBA market. Coca-Cola, Delta, Home Depot, UPS, and the regional offices of every major consulting firm provide strong recruiting. The cost-adjusted salary is among the best in the country."),
+            ("Emory Goizueta vs Georgia Tech Scheller?", "Emory Goizueta ranks higher (#21 vs #26) and has a more traditional MBA feel with strength in consulting and healthcare. Georgia Tech Scheller appeals to engineers and techies, with STEM designation and deep ties to Atlanta's growing tech sector. Both place well in Atlanta."),
+        ],
+    },
+    {
+        "name": "Dallas-Houston", "slug": "dallas-houston", "state": "TX",
+        "metro_schools": ["texas-mccombs", "rice-jones", "smu-cox"],
+        "nearby_label": "Texas Triangle",
+        "industries": ["Energy", "Technology", "Finance", "Healthcare", "Consulting"],
+        "job_market": "Texas's economy is booming. Dallas and Houston are home to more Fortune 500 companies than most states. Energy (ExxonMobil, ConocoPhillips, Halliburton), tech (Texas Instruments, AT&T, Dell), finance (Goldman Sachs's growing Dallas presence), and healthcare (MD Anderson, Baylor) all hire MBAs. Austin (McCombs) adds tech (Tesla, Apple, Google, Oracle). No state income tax makes the salary math compelling.",
+        "cost_of_living": "Affordable. Rent in Dallas or Houston runs $1,200-$1,800/month for quality apartments. Austin is more expensive ($1,500-$2,200) but still below coastal levels. The no-income-tax advantage adds 5-8% to your effective salary.",
+        "why_here": "Cost-adjusted ROI. Texas MBAs earn competitive salaries in a low cost-of-living state with no income tax. McCombs (#25) in Austin, Rice Jones (#28) in Houston, and SMU Cox (#46) in Dallas cover the three major Texas markets. Corporate relocations (Goldman Sachs, Tesla, Oracle) are deepening the MBA job market.",
+        "watch_out": "Texas programs don't carry the same national brand weight as M7 schools. If you want Wall Street or Silicon Valley, a Texas MBA is a harder path. The energy industry is cyclical, and heavy dependence on one sector can affect placement in downturn years.",
+        "faq": [
+            ("What MBA programs are in Texas?", "Texas McCombs (#25) is in Austin. Rice Jones (#28) is in Houston. SMU Cox (#46) is in Dallas. McCombs and Rice Jones are the top programs, with McCombs offering the broadest recruiting and Rice Jones excelling in energy and healthcare."),
+            ("Is Texas a good state for MBA careers?", "Increasingly, yes. No state income tax, low cost of living, and a growing concentration of Fortune 500 companies make Texas's MBA math compelling. The salary discount versus NYC or SF is often offset by the lower cost of living and tax advantage."),
+            ("Is Austin or Houston better for MBAs?", "Austin (McCombs) is stronger for tech, as Tesla, Apple, Google, and Oracle all have major Austin offices. Houston (Rice Jones) is stronger for energy, healthcare (Texas Medical Center), and international business. Dallas (SMU Cox) is strongest for financial services and corporate strategy."),
+        ],
+    },
+    {
+        "name": "Durham-Chapel Hill", "slug": "durham-chapel-hill", "state": "NC",
+        "metro_schools": ["duke-fuqua", "unc-kenan-flagler", "wake-forest"],
+        "nearby_label": "Research Triangle & North Carolina",
+        "industries": ["Consulting", "Healthcare", "Technology", "Finance"],
+        "job_market": "The Research Triangle (Raleigh-Durham-Chapel Hill) has a growing tech and healthcare sector. Duke Health, Red Hat, Cisco, Fidelity, and Credit Suisse all have significant Research Triangle operations. The region's cost of living is a fraction of the coasts, and quality of life is high. For consulting, both Duke and UNC have strong MBB placement.",
+        "cost_of_living": "Very affordable. Rent in Durham or Chapel Hill runs $1,000-$1,600/month. The Research Triangle offers urban amenities with small-city costs. Two years of MBA living costs $30K-$40K less than NYC or Boston.",
+        "why_here": "Duke Fuqua (#11) and UNC Kenan-Flagler (#19) together make the Research Triangle a surprisingly strong MBA market. Both schools have strong consulting placement, and the collaborative cultures align well with team-oriented career paths. The cost savings relative to coastal programs can be $50K-$100K over two years.",
+        "watch_out": "The local job market is smaller than Atlanta, Chicago, or NYC. Many graduates relocate after graduation, particularly to NYC, DC, or Charlotte. If you want to stay in the Triangle, opportunities are more limited outside of healthcare and consulting.",
+        "faq": [
+            ("What MBA programs are in North Carolina?", "Duke Fuqua (#11) is in Durham. UNC Kenan-Flagler (#19) is in Chapel Hill, about 12 miles away. Wake Forest (#45) is in Winston-Salem, about 80 miles west. Duke and UNC are the anchors of the Research Triangle MBA market."),
+            ("Duke Fuqua vs UNC Kenan-Flagler?", "Duke Fuqua ranks higher (#11 vs #19) and has a stronger national brand. UNC Kenan-Flagler offers excellent value, especially for NC residents (in-state tuition). Both have collaborative cultures and strong consulting placement. Duke has an edge for national recruiting; UNC is harder to beat on ROI."),
+            ("Is the Research Triangle a good place for MBAs?", "Growing rapidly. The tech and healthcare sectors are expanding. Red Hat (IBM), Fidelity, Credit Suisse, and Duke Health are major employers. The cost of living advantage over coastal cities makes the salary math work even at lower absolute salaries."),
+        ],
+    },
+    {
+        "name": "Nashville", "slug": "nashville", "state": "TN",
+        "metro_schools": ["vanderbilt-owen"],
+        "nearby_label": "Nashville & Tennessee",
+        "industries": ["Healthcare", "Music/Entertainment", "Technology", "Finance"],
+        "job_market": "Nashville's healthcare industry is the distinguishing feature. HCA Healthcare (the largest hospital chain in the US), Envision Healthcare, and Community Health Systems are all headquartered here. The city has also attracted tech companies and financial services firms. Deloitte, EY, and Accenture have growing Nashville offices. The city's quality of life and cost advantages are driving corporate relocations.",
+        "cost_of_living": "Affordable. Rent in midtown Nashville runs $1,200-$1,800/month. No state income tax. The city offers genuine urban amenities at a fraction of coastal costs.",
+        "why_here": "Healthcare management. Vanderbilt Owen (#22) is the obvious choice if you want to lead healthcare organizations. Nashville's concentration of healthcare companies is unmatched by any other MBA market. The cost of living and no income tax make the ROI calculation favorable.",
+        "watch_out": "Outside healthcare, Nashville's MBA market is limited. Consulting and finance opportunities are smaller than in major metros. If healthcare isn't your target, other programs may offer broader recruiting.",
+        "faq": [
+            ("What MBA programs are in Nashville?", "Vanderbilt Owen (#22) is the primary MBA program in Nashville. It's known for healthcare management and has deep ties to Nashville's healthcare industry."),
+            ("Is Nashville good for healthcare MBAs?", "The best in the country. HCA Healthcare, the largest hospital chain in the US, is headquartered in Nashville. Community Health Systems, Envision Healthcare, and dozens of healthcare services companies are within recruiting distance. Vanderbilt's healthcare management concentration is one of the strongest in the country."),
+            ("What's Vanderbilt Owen known for?", "Healthcare management and collaborative culture. Owen's small class size (roughly 175 students) creates a tight-knit community. The school places well into consulting and healthcare management, with Nashville's booming economy providing strong local opportunities."),
+        ],
+    },
+    {
+        "name": "Minneapolis-St. Paul", "slug": "minneapolis-st-paul", "state": "MN",
+        "metro_schools": ["minnesota-carlson"],
+        "nearby_label": "Twin Cities",
+        "industries": ["CPG", "Healthcare", "Financial Services", "Retail", "Technology"],
+        "job_market": "The Twin Cities punch above their weight. Target, UnitedHealth Group, 3M, General Mills, Best Buy, US Bancorp, and Medtronic are all headquartered here. That's a Fortune 500 concentration that rivals much larger metros. The CPG and healthcare sectors are particularly strong for MBA placement.",
+        "cost_of_living": "Very affordable. Rent runs $1,000-$1,600/month. The salary-to-cost ratio in Minneapolis is among the best in the country for MBA graduates.",
+        "why_here": "Fortune 500 density at Midwest prices. Minnesota Carlson (#33) places well into Target, UnitedHealth, 3M, and General Mills. The cost of living means your post-MBA salary buys more here than in most major metros. If you want CPG, healthcare, or retail management, the Twin Cities have a concentration of employers that's hard to replicate.",
+        "watch_out": "The winter. Minneapolis winters are genuinely harsh (average January high is 24°F). The local MBA market is strong for CPG and healthcare but limited for finance and tech. National brand recognition for Carlson is lower than coastal schools.",
+        "faq": [
+            ("What MBA programs are in Minneapolis?", "Minnesota Carlson (#33) is the main MBA program in the Twin Cities. It has strong ties to the local Fortune 500 companies, particularly in CPG, healthcare, and financial services."),
+            ("What companies hire MBAs in Minneapolis?", "Target, UnitedHealth Group, 3M, General Mills, Best Buy, US Bancorp, Medtronic, and Cargill are all headquartered in the Twin Cities and recruit MBAs actively. The concentration of Fortune 500 companies is among the highest in the country."),
+            ("Is Minnesota Carlson worth it?", "For candidates targeting CPG, healthcare, or Midwest careers, Carlson offers strong ROI. The in-state tuition is a bargain, and the local employer relationships are deep. For candidates seeking coastal careers, the brand may require more effort to leverage nationally."),
+        ],
+    },
+    {
+        "name": "Ann Arbor", "slug": "ann-arbor", "state": "MI",
+        "metro_schools": ["michigan-ross", "michigan-state-broad"],
+        "nearby_label": "Michigan",
+        "industries": ["Consulting", "Technology", "Automotive", "Finance"],
+        "job_market": "Ann Arbor is a college town, but Michigan Ross's national brand sends graduates everywhere. Detroit's automotive industry (Ford, GM, Stellantis) is 45 minutes away. The MAP (Multidisciplinary Action Projects) program sends students to work with companies worldwide. Most Ross graduates relocate to NYC, Chicago, SF, or other major metros.",
+        "cost_of_living": "Affordable. Rent in Ann Arbor runs $1,200-$1,800/month. Quality of life is high, with a vibrant downtown, Big Ten athletics, and an active social scene.",
+        "why_here": "Michigan Ross (#12) punches above its regional weight. The consulting placement is excellent (MBB recruits heavily), and the MAP program provides hands-on experience that few programs can match. The brand carries nationally, and the alumni network is massive.",
+        "watch_out": "Most graduates leave Michigan after the MBA. If you want to stay in Detroit or the Midwest, the automotive industry provides strong options. For everything else, you'll be recruiting into other cities.",
+        "faq": [
+            ("What MBA programs are in Michigan?", "Michigan Ross (#12) is in Ann Arbor. Michigan State Broad (#41) is in East Lansing, about an hour away. Ross is a top-15 program with a national recruiting reach; Broad serves primarily the Michigan and Midwest market."),
+            ("Does Michigan Ross place well outside the Midwest?", "Yes. Ross graduates work in NYC, Chicago, SF, and other major metros at rates comparable to top-15 peers. The MAP program and strong alumni network give Ross national reach despite its Michigan location. Consulting firms recruit heavily from Ross."),
+            ("Is Michigan Ross a good value?", "For Michigan residents, Ross is one of the best values in top-15 MBA education. In-state tuition is significantly lower than private school peers, and the career outcomes are comparable. Out-of-state tuition is closer to private school levels, but the overall cost of living in Ann Arbor keeps the total investment below most M7 programs."),
+        ],
+    },
+    {
+        "name": "Charlottesville", "slug": "charlottesville", "state": "VA",
+        "metro_schools": ["virginia-darden"],
+        "nearby_label": "Virginia",
+        "industries": ["Consulting", "Finance", "Technology", "General Management"],
+        "job_market": "Charlottesville is a small college town, but Virginia Darden's national brand sends graduates to NYC, DC, and beyond. The DC metro area is 2 hours north, and Richmond is an hour east. Most Darden graduates recruit nationally, with consulting (40%+) as the dominant path. Amazon's HQ2 in Arlington has added a significant tech employer to the Virginia market.",
+        "cost_of_living": "Very affordable. Rent in Charlottesville runs $1,000-$1,500/month. The cost of living advantage over coastal programs is substantial.",
+        "why_here": "Virginia Darden (#14) is a case-method school with consulting placement that rivals M7 programs. The small class size (350 students) creates a tight community. The cost of living in Charlottesville is a fraction of what you'd pay in Boston, NYC, or the Bay Area. For veteran MBAs, Darden has one of the strongest communities in the country.",
+        "watch_out": "Charlottesville is a small town. If you need urban energy, it may feel isolated. The case method is intensive, with daily cold calls that require consistent preparation. Most graduates relocate to DC, NYC, or other major metros after graduation.",
+        "faq": [
+            ("What MBA programs are in Virginia?", "Virginia Darden (#14) is in Charlottesville. Georgetown McDonough (#20) is in DC, about 2 hours north. Maryland Smith (#37) is in College Park, near DC. Darden is the highest-ranked Virginia program."),
+            ("Is Darden a case-method school?", "Yes. Darden uses the case method as its primary teaching approach, similar to Harvard Business School. Daily cold calls and class participation are central to the experience. If you thrive in discussion-based learning, Darden's format will suit you."),
+            ("Does Darden place well nationally?", "Yes. Despite Charlottesville's small-town location, Darden graduates place into McKinsey, BCG, Bain, and major finance firms at rates comparable to top-15 peers. The school's national recruiting reach is not limited by geography."),
+        ],
+    },
+]
+
+
+# =============================================================================
+# HELPER FUNCTIONS
+# =============================================================================
+
+def get_comparisons_for_school(slug):
+    """Return all comparisons involving a school."""
+    results = []
+    for c in COMPARISONS:
+        if c["a"] == slug:
+            results.append(c)
+        elif c["b"] == slug:
+            results.append(c)
+    return results
+
+
+def format_salary(amount):
+    return f"${amount:,}"
+
+
+def format_tuition(amount):
+    return f"${amount:,}"
+
+
+def comparison_slug(a_slug, b_slug):
+    return f"{a_slug}-vs-{b_slug}"
+
+
+def ensure_dir(path):
+    os.makedirs(path, exist_ok=True)
+
+
+def write_page(filepath, content):
+    ensure_dir(os.path.dirname(filepath))
+    with open(filepath, "w") as f:
+        f.write(content)
+
+
+# =============================================================================
+# HTML TEMPLATE COMPONENTS
+# =============================================================================
+
+CSS_VERSION = 6
+
+
+def breadcrumb_schema(items):
+    """Generate BreadcrumbList JSON-LD. items = [(name, url), ...]"""
+    entries = []
+    for i, (name, url) in enumerate(items, 1):
+        entries.append(f'{{"@type":"ListItem","position":{i},"name":"{name}","item":"{SITE_URL}{url}"}}')
+    return f"""<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{",".join(entries)}]}}
+</script>"""
+
+
+def faq_schema(pairs):
+    """Generate FAQPage JSON-LD. pairs = [(question, answer), ...]"""
+    if not pairs:
+        return ""
+    entries = []
+    for q, a in pairs:
+        q_esc = q.replace('"', '\\"')
+        a_esc = a.replace('"', '\\"').replace("\n", " ")
+        entries.append(f'{{"@type":"Question","name":"{q_esc}","acceptedAnswer":{{"@type":"Answer","text":"{a_esc}"}}}}')
+    return f"""<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{",".join(entries)}]}}
+</script>"""
+
+
+def html_head(title, description, canonical_path, og_image=None, schema=""):
+    og_img = og_image or f"{SITE_URL}/assets/og-default.png"
+    canonical = f"{SITE_URL}{canonical_path}"
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content="{description}">
+  <link rel="canonical" href="{canonical}">
+  <meta property="og:title" content="{title}">
+  <meta property="og:description" content="{description}">
+  <meta property="og:image" content="{og_img}">
+  <meta property="og:url" content="{canonical}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{SITE_NAME}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/style.css?v={CSS_VERSION}">
+  {schema}
+</head>
+<body>"""
+
+
+def nav_html(active=None):
+    def cls(name):
+        return ' active' if active == name else ''
+    return f"""
+<nav class="site-nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-text">MBA GUIDANCE</span>
+        <span class="nav-logo-rule"></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="/schools/" class="nav-link{cls('schools')}">Schools</a>
+        <a href="/rankings/overall/" class="nav-link{cls('rankings')}">Rankings</a>
+        <a href="/compare/" class="nav-link{cls('compare')}">Compare</a>
+        <a href="/guides/" class="nav-link{cls('guides')}">Guides</a>
+        <a href="/blog/" class="nav-link{cls('blog')}">Blog</a>
+        <a href="/newsletter/" class="btn btn-accent nav-cta">Free Newsletter</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>"""
+
+
+def footer_html():
+    return f"""
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Schools</h4>
+        <a href="/schools/">All Schools</a>
+        <a href="/schools/stanford-gsb/">Stanford GSB</a>
+        <a href="/schools/harvard-business-school/">Harvard Business School</a>
+        <a href="/schools/wharton/">Wharton</a>
+        <a href="/schools/booth/">Booth (Chicago)</a>
+        <a href="/schools/berkeley-haas/">Berkeley Haas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/rankings/overall/">Rankings</a>
+        <a href="/compare/">Comparisons</a>
+        <a href="/guides/gmat-vs-gre/">GMAT vs GRE</a>
+        <a href="/guides/mba-roi-analysis/">Is an MBA Worth It?</a>
+        <a href="/guides/mba-application-timeline/">Application Timeline</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="/about/">About the Author</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/blog/">Blog</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {CURRENT_YEAR} {SITE_NAME} &middot; {AUTHOR} &middot; {AUTHOR_CREDENTIAL}</p>
+      <p class="footer-disclaimer">Data reflects most recent available admissions cycle. Individual results may vary.</p>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>"""
+
+
+def byline_html():
+    return """
+<div class="byline">
+  <div class="byline-avatar">RT</div>
+  <div>
+    <a href="/about/" class="byline-name">Rome Thorndike</a>
+    <div class="byline-credential">Berkeley Haas MBA</div>
+  </div>
+</div>"""
+
+
+def school_card_html(school, show_verdict=True):
+    s = school
+    salary_k = s["avg_salary"] // 1000
+    verdict_html = ""
+    if show_verdict and s.get("verdict"):
+        verdict_html = f'<div class="card-verdict"><p class="verdict">&ldquo;{s["verdict"]}&rdquo;</p></div>'
+    return f"""
+<div class="card school-card" data-tier="{s['tier']}" data-ranking="{s['ranking']}" data-gmat="{s['avg_gmat']}" data-salary="{s['avg_salary']}" data-acceptance="{s['acceptance_rate']}">
+  <div class="card-header">
+    <span class="ranking-badge">#{s['ranking']} Overall</span>
+    <h3>{s['short_name']}</h3>
+    <div class="gold-rule"></div>
+  </div>
+  <div class="card-body">
+    <div class="card-stats">
+      <div class="card-stat">
+        <span class="label">Acceptance</span>
+        <span class="stat-value">{s['acceptance_rate']}%</span>
+      </div>
+      <div class="card-stat">
+        <span class="label">Avg. GMAT</span>
+        <span class="stat-value">{s['avg_gmat']}</span>
+      </div>
+      <div class="card-stat">
+        <span class="label">Avg. Salary</span>
+        <span class="stat-value">${salary_k}K</span>
+      </div>
+    </div>
+    {verdict_html}
+    <div class="card-actions">
+      <a href="/schools/{s['slug']}/" class="btn btn-primary">Full Profile &rarr;</a>
+      <a href="/schools/{s['slug']}/#compare" class="btn btn-outline">Compare</a>
+    </div>
+  </div>
+</div>"""
+
+
+def affiliate_cta_html(school):
+    return f"""
+<div class="affiliate-cta">
+  <div class="gold-rule"></div>
+  <p>Aiming for a {school['avg_gmat']}+ GMAT? Start your prep today.</p>
+  <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
+</div>"""
+
+
+# =============================================================================
+# PAGE BUILDERS
+# =============================================================================
+
+def build_homepage():
+    # Compute stats for ticker
+    m7 = [s for s in SCHOOLS if s["tier"] == 1]
+    avg_m7_salary = sum(s["avg_salary"] for s in m7) // len(m7) // 1000
+    highest_gmat_school = max(SCHOOLS, key=lambda x: x["avg_gmat"])
+    most_selective = min(SCHOOLS, key=lambda x: x["acceptance_rate"])
+    # Short labels for ticker (abbreviate long names)
+    gmat_label = highest_gmat_school["short_name"].replace("Harvard Business School", "HBS").replace("Stanford Graduate School of Business", "GSB")
+    selective_label = most_selective["short_name"].replace("Stanford Graduate School of Business", "GSB").replace("Stanford GSB", "GSB")
+
+    # Top 10 schools for the data table
+    top10 = sorted(SCHOOLS, key=lambda x: x["ranking"])[:10]
+    top10_rows = ""
+    for s in top10:
+        salary_k = s["avg_salary"] // 1000
+        top10_rows += f"""<tr>
+          <td class="rank-cell">#{s['ranking']}</td>
+          <td><a href="/schools/{s['slug']}/">{s['short_name']}</a></td>
+          <td>{s['acceptance_rate']}%</td>
+          <td>{s['avg_gmat']}</td>
+          <td>${salary_k}K</td>
+          <td>{s['employment_rate']}%</td>
+        </tr>\n"""
+
+    # Popular comparisons
+    popular_comps = COMPARISONS[:6]
+    comp_links = ""
+    for c in popular_comps:
+        a = SCHOOL_MAP[c["a"]]
+        b = SCHOOL_MAP[c["b"]]
+        slug = comparison_slug(c["a"], c["b"])
+        comp_links += f'<a href="/compare/{slug}/" class="comp-link"><span>{a["short_name"]}</span><span class="vs">vs</span><span>{b["short_name"]}</span></a>\n'
+
+    homepage_schema = f"""<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"WebSite","name":"{SITE_NAME}","url":"{SITE_URL}","description":"Acceptance rates, GMAT scores, salaries, and honest verdicts for 50 top MBA programs."}}
+</script>"""
+
+    content = f"""{html_head(
+        f"{SITE_NAME} | Acceptance Rates, Salaries & Verdicts for 50 MBAs",
+        f"Compare 50 top MBA programs with real acceptance rates, GMAT scores, and salary data. Honest verdicts from a Berkeley Haas grad. {CURRENT_YEAR} data.",
+        "/",
+        schema=homepage_schema
+    )}
+{nav_html()}
+<main>
+  <!-- Stats Ticker -->
+  <div class="stats-ticker">
+    <div class="container">
+      <div class="ticker-inner">
+        <div class="ticker-item">
+          <span class="ticker-label">Avg M7 Salary</span>
+          <span class="ticker-value">${avg_m7_salary}K <span class="ticker-change">+3%</span></span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-label">Highest GMAT</span>
+          <span class="ticker-value">{highest_gmat_school['avg_gmat']} <span class="ticker-note">({gmat_label})</span></span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-label">Most Selective</span>
+          <span class="ticker-value">{most_selective['acceptance_rate']}% <span class="ticker-note">({selective_label})</span></span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-label">Schools Tracked</span>
+          <span class="ticker-value">{len(SCHOOLS)}</span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-label">Comparisons</span>
+          <span class="ticker-value">{len(COMPARISONS)}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Headline -->
+  <section class="section">
+    <div class="container">
+      <div class="homepage-headline">
+        <h1>Pick the right MBA without the 200+ hour research project.</h1>
+        <p class="homepage-subtitle">Real acceptance rates, salary data, and honest verdicts. From someone who went through it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pathways -->
+  <section class="section section-ivory">
+    <div class="container">
+      <div class="section-header">
+        <h2>What are you looking for?</h2>
+      </div>
+      <div class="pathways-grid">
+        <a href="/schools/" class="pathway-card">
+          <span class="pathway-icon">&#x1F3EB;</span>
+          <h3>Find My School</h3>
+          <p>Browse {len(SCHOOLS)} programs by tier, GMAT score, location, or salary. Full profiles with honest verdicts.</p>
+        </a>
+        <a href="/compare/" class="pathway-card">
+          <span class="pathway-icon">&#x2696;&#xFE0F;</span>
+          <h3>Compare Programs</h3>
+          <p>Pick two schools and see the data side by side. Acceptance rates, salaries, culture, career outcomes.</p>
+        </a>
+        <a href="/guides/" class="pathway-card">
+          <span class="pathway-icon">&#x1F4BC;</span>
+          <h3>Career Paths</h3>
+          <p>Which MBA is best for consulting? Tech? PE/VC? Guides organized by where you want to end up.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- This Week -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>This Week on MBA Guidance</h2>
+        <a href="/blog/" class="section-link">View all &rarr;</a>
+      </div>
+      <div class="article-list">
+        <div class="article-list-item">
+          <div>
+            <span class="label">Analysis</span>
+            <span class="article-title"><a href="/blog/is-stanford-gsb-worth-it/">Is Stanford GSB Worth It? ROI Analysis</a></span>
+          </div>
+          <span class="article-time">5 min</span>
+        </div>
+        <div class="article-list-item">
+          <div>
+            <span class="label">Guide</span>
+            <span class="article-title"><a href="/guides/gmat-vs-gre/">GMAT vs GRE: Which Test Should You Take?</a></span>
+          </div>
+          <span class="article-time">6 min</span>
+        </div>
+        <div class="article-list-item">
+          <div>
+            <span class="label">Comparison</span>
+            <span class="article-title"><a href="/compare/{comparison_slug(COMPARISONS[0]['a'], COMPARISONS[0]['b'])}/">{SCHOOL_MAP[COMPARISONS[0]['a']]['short_name']} vs {SCHOOL_MAP[COMPARISONS[0]['b']]['short_name']}: The Real Difference</a></span>
+          </div>
+          <span class="article-time">8 min</span>
+        </div>
+        <div class="article-list-item">
+          <div>
+            <span class="label">Strategy</span>
+            <span class="article-title"><a href="/guides/mba-application-timeline/">MBA Application Timeline: Month-by-Month</a></span>
+          </div>
+          <span class="article-time">7 min</span>
+        </div>
+        <div class="article-list-item">
+          <div>
+            <span class="label">Deep Dive</span>
+            <span class="article-title"><a href="/guides/mba-essay-writing/">How to Write an MBA Essay That Gets You In</a></span>
+          </div>
+          <span class="article-time">8 min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top 10 Table -->
+  <section class="section section-ivory">
+    <div class="container">
+      <div class="section-header">
+        <h2>Top 10 Programs</h2>
+        <a href="/schools/" class="section-link">All {len(SCHOOLS)} &rarr;</a>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>School</th>
+              <th>Accept Rate</th>
+              <th>Avg GMAT</th>
+              <th>Avg Salary</th>
+              <th>Employed</th>
+            </tr>
+          </thead>
+          <tbody>
+            {top10_rows}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GMAT Inline Tool -->
+  <section class="section">
+    <div class="container">
+      <div class="gmat-inline">
+        <span class="gmat-inline-label">&#x1F3AF; Your GMAT:</span>
+        <input type="number" placeholder="Enter score" min="200" max="800">
+        <a href="/tools/gmat-calculator/" class="btn btn-accent">See Your Matches &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="section section-ivory">
+    <div class="container">
+      <div class="section-header">
+        <h2>Tools</h2>
+      </div>
+      <div class="tools-grid">
+        <a href="/tools/roi-calculator/" class="tool-card">
+          <span class="tool-icon">&#x1F4B0;</span>
+          <h3>MBA ROI Calculator</h3>
+          <p>Input your salary, school costs, and career goals. Get a personalized return-on-investment estimate.</p>
+        </a>
+        <a href="/tools/gmat-calculator/" class="tool-card">
+          <span class="tool-icon">&#x1F3AF;</span>
+          <h3>GMAT Target Score</h3>
+          <p>Select your target school. See the score you need, the competitive range, and prep advice.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Comparisons -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular Comparisons</h2>
+        <a href="/compare/" class="section-link">All {len(COMPARISONS)} &rarr;</a>
+      </div>
+      <div class="comp-grid">
+        {comp_links}
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section section-dark">
+    <div class="container" style="text-align: center; max-width: 600px;">
+      <p class="hero-eyebrow" style="color: var(--color-accent);">Free Weekly Newsletter</p>
+      <h2 style="color: #fff;">Who's hiring MBAs this week?</h2>
+      <p style="color: var(--color-text-on-dark-secondary); margin: 16px auto 24px;">Companies hiring MBA grads, salary trends, and which programs are placing. No spam.</p>
+      <a href="/newsletter/" class="btn btn-accent" style="border-bottom: none;">Subscribe &rarr;</a>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "index.html"), content)
+    print("  Built: /")
+
+
+def build_school_listing():
+    # Build table rows
+    rows = ""
+    for s in SCHOOLS:
+        salary_k = s["avg_salary"] // 1000
+        tier_label = {1: "M7", 2: "Top 15", 3: "Top 25", 4: "Notable", 5: "51-75"}.get(s["tier"], "")
+        rows += f"""<tr data-tier="{s['tier']}" data-ranking="{s['ranking']}" data-gmat="{s['avg_gmat']}" data-salary="{s['avg_salary']}" data-acceptance="{s['acceptance_rate']}">
+          <td class="rank-cell">#{s['ranking']}</td>
+          <td><a href="/schools/{s['slug']}/">{s['short_name']}</a><span class="tier-badge tier-{s['tier']}">{tier_label}</span></td>
+          <td>{s['location']}</td>
+          <td>{s['acceptance_rate']}%</td>
+          <td>{s['avg_gmat']}</td>
+          <td>${salary_k}K</td>
+          <td>{s['employment_rate']}%</td>
+        </tr>\n"""
+
+    content = f"""{html_head(
+        f"All MBA Programs | School Profiles & Rankings | {SITE_NAME}",
+        f"Browse all {len(SCHOOLS)} MBA programs with acceptance rates, GMAT scores, salary data, and honest verdicts. {CURRENT_YEAR} data.",
+        "/schools/"
+    )}
+{nav_html('schools')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>All {len(SCHOOLS)} MBA Programs</h1>
+      <p class="hero-subtitle">Click any school for the full profile with verdicts, career data, and application strategy.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="table-controls">
+        <div class="filter-controls">
+          <button class="filter-btn active" data-tier="all">All ({len(SCHOOLS)})</button>
+          <button class="filter-btn" data-tier="1">M7 (7)</button>
+          <button class="filter-btn" data-tier="2">Top 15 (8)</button>
+          <button class="filter-btn" data-tier="3">Top 25 (10)</button>
+          <button class="filter-btn" data-tier="4">Notable ({len([s for s in SCHOOLS if s['tier'] == 4])})</button>
+          <button class="filter-btn" data-tier="5">51-75 ({len([s for s in SCHOOLS if s['tier'] == 5])})</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table sortable-table" id="school-table">
+          <thead>
+            <tr>
+              <th class="sortable active" data-sort="ranking" data-dir="asc">Rank</th>
+              <th>School</th>
+              <th>Location</th>
+              <th class="sortable" data-sort="acceptance" data-dir="asc">Accept %</th>
+              <th class="sortable" data-sort="gmat" data-dir="desc">GMAT</th>
+              <th class="sortable" data-sort="salary" data-dir="desc">Salary</th>
+              <th>Employed</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+(function() {{
+  var table = document.getElementById('school-table');
+  var tbody = table.querySelector('tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+
+  // Tier filtering
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  function filterByTier(tier) {{
+    filterBtns.forEach(function(b) {{ b.classList.remove('active'); }});
+    document.querySelector('.filter-btn[data-tier="' + tier + '"]').classList.add('active');
+    rows.forEach(function(r) {{
+      r.style.display = (tier === 'all' || r.dataset.tier === tier) ? '' : 'none';
+    }});
+  }}
+  filterBtns.forEach(function(btn) {{
+    btn.addEventListener('click', function() {{ filterByTier(this.dataset.tier); }});
+  }});
+
+  // URL tier param
+  var params = new URLSearchParams(window.location.search);
+  var tierParam = params.get('tier');
+  if (tierParam) {{ filterByTier(tierParam); }}
+
+  // Column sorting
+  var headers = table.querySelectorAll('th.sortable');
+  headers.forEach(function(th) {{
+    th.style.cursor = 'pointer';
+    th.addEventListener('click', function() {{
+      headers.forEach(function(h) {{ h.classList.remove('active', 'asc', 'desc'); }});
+      var key = this.dataset.sort;
+      var dir = this.dataset.dir;
+      this.classList.add('active', dir);
+      var sorted = rows.slice().sort(function(a, b) {{
+        var aVal = parseFloat(a.dataset[key]);
+        var bVal = parseFloat(b.dataset[key]);
+        return dir === 'desc' ? bVal - aVal : aVal - bVal;
+      }});
+      sorted.forEach(function(r) {{ tbody.appendChild(r); }});
+      this.dataset.dir = dir === 'asc' ? 'desc' : 'asc';
+    }});
+  }});
+}})();
+</script>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "schools", "index.html"), content)
+    print("  Built: /schools/")
+
+
+def build_school_profiles():
+    for s in SCHOOLS:
+        comps = get_comparisons_for_school(s["slug"])
+        comp_links = ""
+        for c in comps:
+            other_slug = c["b"] if c["a"] == s["slug"] else c["a"]
+            other = SCHOOL_MAP[other_slug]
+            slug = comparison_slug(c["a"], c["b"])
+            comp_links += f'<a href="/compare/{slug}/" class="btn btn-ghost">vs {other["short_name"]}</a>\n'
+
+        strengths_html = "".join(f'<span class="tag">{st}</span>' for st in s["strengths"])
+        best_for_html = "".join(f'<span class="tag tag-accent">{bf}</span>' for bf in s["best_for"])
+        salary_k = s["avg_salary"] // 1000
+
+        # Schema: BreadcrumbList + FAQ
+        bc = breadcrumb_schema([("Home", "/"), ("Schools", "/schools/"), (s["short_name"], f"/schools/{s['slug']}/")])
+        school_faq = faq_schema([
+            (f"What is the acceptance rate at {s['short_name']}?",
+             f"{s['name']} has an acceptance rate of {s['acceptance_rate']}% for the class of {CURRENT_YEAR}."),
+            (f"What GMAT score do I need for {s['short_name']}?",
+             f"The average GMAT score at {s['short_name']} is {s['avg_gmat']}. Competitive applicants typically score within 20 points of this average."),
+            (f"What is the average salary after {s['short_name']}?",
+             f"Graduates of {s['name']} earn an average starting salary of {format_salary(s['avg_salary'])} with a {s['employment_rate']}% employment rate at three months."),
+        ])
+
+        # Related ranking links
+        ranking_links = '<a href="/rankings/overall/">Overall Rankings</a>'
+        if "Career Changers" in s["best_for"]:
+            ranking_links += ' &middot; <a href="/rankings/career-changers/">Best for Career Changers</a>'
+        ranking_links += ' &middot; <a href="/rankings/salary/">Highest Salaries</a>'
+
+        # Build rich content sections (if available)
+        rich_sections = ""
+        if s.get("overview"):
+            rich_sections += f"""
+      <div class="school-section">
+        <h2>Program Overview</h2>
+        {s['overview']}
+      </div>"""
+        else:
+            rich_sections += f"""
+      <div class="school-section">
+        <p>{s['description']}</p>
+      </div>"""
+
+        if s.get("culture"):
+            rich_sections += f"""
+      <div class="school-section">
+        <h2>Culture &amp; Community</h2>
+        {s['culture']}
+      </div>"""
+
+        if s.get("academics"):
+            rich_sections += f"""
+      <div class="school-section">
+        <h2>Academics &amp; Curriculum</h2>
+        {s['academics']}
+      </div>"""
+
+        if s.get("careers"):
+            rich_sections += f"""
+      <div class="school-section">
+        <h2>Career Outcomes</h2>
+        {s['careers']}
+      </div>"""
+
+        if s.get("who_should_apply"):
+            rich_sections += f"""
+      <div class="school-section">
+        <h2>Who Should Apply</h2>
+        {s['who_should_apply']}
+      </div>"""
+
+        if s.get("watch_out"):
+            rich_sections += f"""
+      <div class="school-section">
+        <h2>What to Watch Out For</h2>
+        {s['watch_out']}
+      </div>"""
+
+        # Build FAQ HTML from school-specific FAQ data (if available) or defaults
+        faq_pairs = s.get("faq", [
+            (f"What is the acceptance rate at {s['short_name']}?",
+             f"{s['name']} has an acceptance rate of {s['acceptance_rate']}% for the class of {CURRENT_YEAR}."),
+            (f"What GMAT score do I need for {s['short_name']}?",
+             f"The average GMAT score at {s['short_name']} is {s['avg_gmat']}. Competitive applicants typically score within 20 points of this average."),
+            (f"What is the average salary after {s['short_name']}?",
+             f"Graduates of {s['name']} earn an average starting salary of {format_salary(s['avg_salary'])} with a {s['employment_rate']}% employment rate at three months."),
+        ])
+
+        faq_html = ""
+        for q, a in faq_pairs:
+            faq_html += f"""
+        <div class="faq-item">
+          <h3>{q}</h3>
+          <p>{a}</p>
+        </div>"""
+
+        # Guide links based on school strengths
+        guide_links_html = ""
+        guide_map = {
+            "Tech": ("best-mba-for-tech", "Best MBA Programs for Tech"),
+            "Finance": ("best-mba-for-finance", "Best MBA Programs for Finance"),
+            "Consulting": ("best-mba-for-consulting", "Best MBA Programs for Consulting"),
+            "Career Changers": ("best-mba-for-career-changers", "Best MBA Programs for Career Changers"),
+        }
+        for bf in s.get("best_for", []):
+            if bf in guide_map:
+                gslug, gtitle = guide_map[bf]
+                guide_links_html += f' &middot; <a href="/guides/{gslug}/">{gtitle}</a>'
+
+        content = f"""{html_head(
+            f"""{s["short_name"]} MBA | Acceptance Rate, GMAT, Salary ({CURRENT_YEAR})""",
+            f"""{s["name"]}: {s["acceptance_rate"]}% acceptance rate, {s["avg_gmat"]} avg GMAT, ${salary_k}K avg salary. Honest analysis from a Berkeley Haas MBA grad.""",
+            f"""/schools/{s["slug"]}/""",
+            schema=bc + school_faq
+        )}
+{nav_html('schools')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <span class="ranking-badge">#{s['ranking']} Overall</span>
+      <h1>{s['name']}</h1>
+      <div class="gold-rule" style="width: 48px; margin-top: 16px;"></div>
+      <p class="hero-subtitle">{s['location']} &middot; {s['program_length']} &middot; <a href="{s['url']}" target="_blank" rel="noopener" style="color: var(--color-accent);">Official Site</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="stats-grid">
+        <div class="stat-item"><span class="label">Acceptance Rate</span><span class="stat-value">{s['acceptance_rate']}%</span></div>
+        <div class="stat-item"><span class="label">Avg. GMAT</span><span class="stat-value">{s['avg_gmat']}</span></div>
+        <div class="stat-item"><span class="label">Avg. GPA</span><span class="stat-value">{s['avg_gpa']}</span></div>
+        <div class="stat-item"><span class="label">Class Size</span><span class="stat-value">{s['class_size']}</span></div>
+        <div class="stat-item"><span class="label">Avg. Salary</span><span class="stat-value">{format_salary(s['avg_salary'])}</span></div>
+        <div class="stat-item"><span class="label">Employment</span><span class="stat-value">{s['employment_rate']}%</span></div>
+      </div>
+
+      <div class="school-detail-row">
+        <div><span class="label">Annual Tuition</span><br><strong>{format_tuition(s['tuition'])}</strong></div>
+        <div><span class="label">Program Length</span><br><strong>{s['program_length']}</strong></div>
+      </div>
+
+      <blockquote class="verdict-block">
+        &ldquo;{s['verdict']}&rdquo;
+      </blockquote>
+
+      {rich_sections}
+
+      <div class="school-section">
+        <h2>Known For</h2>
+        <div class="tags">{strengths_html}</div>
+      </div>
+
+      <div class="school-section">
+        <h2>Best For</h2>
+        <div class="tags">{best_for_html}</div>
+      </div>
+
+      {affiliate_cta_html(s)}
+
+      <div class="school-section" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        {faq_html}
+      </div>
+
+      <div class="school-section" id="compare">
+        <h2>Compare {s['short_name']}</h2>
+        <div class="compare-link-grid">
+          {comp_links if comp_links else '<p class="text-secondary">No comparisons available yet.</p>'}
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>{s['short_name']} Deep Dives</h2>
+        <div class="compare-link-grid">
+          <a href="/schools/{s['slug']}/acceptance-rate/" class="btn btn-ghost">Acceptance Rate</a>
+          <a href="/schools/{s['slug']}/class-profile/" class="btn btn-ghost">Class Profile</a>
+          <a href="/schools/{s['slug']}/deadlines/" class="btn btn-ghost">Application Deadlines</a>
+          <a href="/schools/{s['slug']}/essays/" class="btn btn-ghost">Essay Tips</a>
+          <a href="/schools/{s['slug']}/interview/" class="btn btn-ghost">Interview Prep</a>
+          <a href="/schools/{s['slug']}/employment/" class="btn btn-ghost">Employment Report</a>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">See also: {ranking_links} &middot; <a href="/guides/mba-roi-analysis/">Is an MBA Worth It?</a> &middot; <a href="/guides/gmat-vs-gre/">GMAT vs GRE Guide</a>{guide_links_html}</p>
+      </div>
+
+      {byline_html()}
+
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "schools", s["slug"], "index.html"), content)
+    print(f"  Built: {len(SCHOOLS)} school profiles")
+
+
+def build_comparison_index():
+    links = ""
+    for c in COMPARISONS:
+        a = SCHOOL_MAP[c["a"]]
+        b = SCHOOL_MAP[c["b"]]
+        slug = comparison_slug(c["a"], c["b"])
+        links += f"""
+<a href="/compare/{slug}/" class="comparison-index-card">
+  <span class="comparison-schools">{a['short_name']} vs {b['short_name']}</span>
+  <span class="comparison-arrow">&rarr;</span>
+</a>"""
+
+    content = f"""{html_head(
+        f"MBA Program Comparisons | Side-by-Side Analysis | {SITE_NAME}",
+        f"Side-by-side comparisons of top MBA programs. Acceptance rates, GMAT scores, salaries, and honest verdicts. {CURRENT_YEAR} data.",
+        "/compare/"
+    )}
+{nav_html('compare')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Program Comparisons</h1>
+      <p class="hero-subtitle">Side-by-side analysis of {len(COMPARISONS)} school matchups. Real data, real verdicts.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="comparison-index-grid">
+        {links}
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "compare", "index.html"), content)
+    print("  Built: /compare/")
+
+
+def build_comparison_pages():
+    for c in COMPARISONS:
+        a = SCHOOL_MAP[c["a"]]
+        b = SCHOOL_MAP[c["b"]]
+        slug = comparison_slug(c["a"], c["b"])
+        a_salary_k = a["avg_salary"] // 1000
+        b_salary_k = b["avg_salary"] // 1000
+
+        def stat_row(label, a_val, b_val, fmt=str, highlight_higher=True):
+            a_str = fmt(a_val)
+            b_str = fmt(b_val)
+            a_cls = ' class="winner"' if highlight_higher and a_val > b_val else ''
+            b_cls = ' class="winner"' if highlight_higher and b_val > a_val else ''
+            return f"<tr><td>{label}</td><td{a_cls}>{a_str}</td><td{b_cls}>{b_str}</td></tr>"
+
+        def stat_row_lower(label, a_val, b_val, fmt=str):
+            a_str = fmt(a_val)
+            b_str = fmt(b_val)
+            a_cls = ' class="winner"' if a_val < b_val else ''
+            b_cls = ' class="winner"' if b_val < a_val else ''
+            return f"<tr><td>{label}</td><td{a_cls}>{a_str}</td><td{b_cls}>{b_str}</td></tr>"
+
+        bc = breadcrumb_schema([("Home", "/"), ("Comparisons", "/compare/"), (f"{a['short_name']} vs {b['short_name']}", f"/compare/{slug}/")])
+        comp_faq = faq_schema(c.get("faq", []))
+
+        content = f"""{html_head(
+            f"""{a["short_name"]} vs {b["short_name"]}: MBA Comparison ({CURRENT_YEAR})""",
+            f"""{a["short_name"]} vs {b["short_name"]}: side-by-side comparison of acceptance rates, GMAT scores, salaries, and career outcomes. Honest analysis from a Haas MBA grad.""",
+            f'/compare/{slug}/',
+            schema=bc + comp_faq
+        )}
+{nav_html('compare')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{a['short_name']} vs {b['short_name']}</h1>
+      <p class="hero-subtitle">Which MBA program is right for you?</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-compare">
+        {school_card_html(a, show_verdict=False)}
+        {school_card_html(b, show_verdict=False)}
+      </div>
+
+      <div class="comparison-table-wrapper">
+        <h3>Head-to-Head Comparison</h3>
+        <table class="comparison-table">
+          <thead><tr><th>Metric</th><th>{a['short_name']}</th><th>{b['short_name']}</th></tr></thead>
+          <tbody>
+            {stat_row("Ranking", a['ranking'], b['ranking'], lambda x: f"#{x}", highlight_higher=False)}
+            {stat_row_lower("Acceptance Rate", a['acceptance_rate'], b['acceptance_rate'], lambda x: f"{x}%")}
+            {stat_row("Avg. GMAT", a['avg_gmat'], b['avg_gmat'])}
+            {stat_row("Avg. GPA", a['avg_gpa'], b['avg_gpa'])}
+            {stat_row("Class Size", a['class_size'], b['class_size'])}
+            {stat_row("Avg. Salary", a['avg_salary'], b['avg_salary'], format_salary)}
+            {stat_row("Employment Rate", a['employment_rate'], b['employment_rate'], lambda x: f"{x}%")}
+            {stat_row_lower("Annual Tuition", a['tuition'], b['tuition'], format_tuition)}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="comparison-verdict content-narrow">
+        <h3>The Verdict</h3>
+        <div class="verdict-columns">
+          <div class="verdict-col">
+            <h4>Choose {a['short_name']} if&hellip;</h4>
+            <p>{c['choose_a']}</p>
+            <a href="/schools/{a['slug']}/" class="btn btn-outline">Full {a['short_name']} Profile &rarr;</a>
+          </div>
+          <div class="verdict-col">
+            <h4>Choose {b['short_name']} if&hellip;</h4>
+            <p>{c['choose_b']}</p>
+            <a href="/schools/{b['slug']}/" class="btn btn-outline">Full {b['short_name']} Profile &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      {''.join(f"""
+      <div class="school-section content-narrow">
+        <h2>{heading}</h2>
+        {body}
+      </div>""" for heading, body in c.get("analysis", [])) if c.get("analysis") else ""}
+
+      {f"""<div class="faq-section content-narrow">
+        <h2>Frequently Asked Questions</h2>
+        {''.join(f'<div class="faq-item"><h3>{q}</h3><p>{ans}</p></div>' for q, ans in c["faq"])}
+      </div>""" if c.get("faq") else ""}
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "compare", slug, "index.html"), content)
+    print(f"  Built: {len(COMPARISONS)} comparison pages")
+
+
+def build_school_subpages():
+    """Generate 6 subpages per school: acceptance-rate, class-profile, deadlines, essays, interview, employment."""
+
+    SUBPAGE_TYPES = [
+        {
+            "slug": "acceptance-rate",
+            "title_tpl": "{short_name} Acceptance Rate",
+            "meta_tpl": "{short_name} acceptance rate, admissions stats, and what you need to get in for {year}. GMAT scores, GPA, and honest analysis from a Haas MBA grad.",
+            "content_fn": "_subpage_acceptance_rate",
+        },
+        {
+            "slug": "class-profile",
+            "title_tpl": "{short_name} MBA Class Profile",
+            "meta_tpl": "{short_name} class profile for {year}: demographics, work experience, GMAT range, and what the typical student looks like. From a Haas MBA grad.",
+            "content_fn": "_subpage_class_profile",
+        },
+        {
+            "slug": "deadlines",
+            "title_tpl": "{short_name} MBA Deadlines ({year})",
+            "meta_tpl": "{short_name} MBA application deadlines for {year}. Round 1, Round 2, and Round 3 dates plus when to apply. From a Haas MBA grad.",
+            "content_fn": "_subpage_deadlines",
+        },
+        {
+            "slug": "essays",
+            "title_tpl": "{short_name} MBA Essays: Tips & Strategy",
+            "meta_tpl": "How to write {short_name} MBA essays that get you admitted. Prompts, strategy, and examples from a Haas MBA grad.",
+            "content_fn": "_subpage_essays",
+        },
+        {
+            "slug": "interview",
+            "title_tpl": "{short_name} MBA Interview: What to Expect",
+            "meta_tpl": "{short_name} MBA interview format, questions, and preparation tips. What to expect and how to stand out. From a Haas MBA grad.",
+            "content_fn": "_subpage_interview",
+        },
+        {
+            "slug": "employment",
+            "title_tpl": "{short_name} MBA Employment Report",
+            "meta_tpl": "{short_name} employment report: salary data, top employers, industry breakdown, and career outcomes for {year}. From a Haas MBA grad.",
+            "content_fn": "_subpage_employment",
+        },
+    ]
+
+    def _subpage_acceptance_rate(s):
+        name = s["short_name"]
+        ar = s["acceptance_rate"]
+        gmat = s["avg_gmat"]
+        gpa = s["avg_gpa"]
+        cs = s["class_size"]
+        rank = s["ranking"]
+        selectivity = "extremely selective" if ar < 15 else "very selective" if ar < 25 else "selective" if ar < 35 else "moderately selective"
+        gmat_target = gmat - 20
+        gmat_high = gmat + 20
+
+        sections = f"""
+      <div class="school-section">
+        <h2>{name} Acceptance Rate: {ar}%</h2>
+        <p>{name} admits approximately {ar}% of applicants, making it a {selectivity} MBA program. Ranked #{rank} overall, {name} receives thousands of applications each year for roughly {cs} spots in the incoming class.</p>
+        <p>The acceptance rate reflects the program's position in the MBA landscape. For context, M7 programs (the top 7) range from 6.9% to 25%, while top-25 programs range from 6.9% to 40%. {name}'s {ar}% places it {"among the most selective programs in the country" if ar < 15 else "in a competitive range" if ar < 25 else "in an achievable range for strong candidates"}.</p>
+      </div>
+      <div class="school-section">
+        <h2>What You Need to Get In</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Acceptance Rate</span><span class="stat-value">{ar}%</span></div>
+          <div class="stat-item"><span class="label">Avg. GMAT</span><span class="stat-value">{gmat}</span></div>
+          <div class="stat-item"><span class="label">Avg. GPA</span><span class="stat-value">{gpa}</span></div>
+          <div class="stat-item"><span class="label">Class Size</span><span class="stat-value">{cs}</span></div>
+        </div>
+        <p>Competitive applicants typically score within 20 points of the GMAT average ({gmat_target}-{gmat_high} range) and have a GPA of {gpa} or above. However, admissions is holistic. A candidate with a 3.2 GPA but exceptional work experience and a compelling story can be admitted over a candidate with a 3.9 GPA and a generic application.</p>
+      </div>
+      <div class="school-section">
+        <h2>How to Improve Your Chances</h2>
+        <ul>
+          <li><strong>Score at or above the GMAT median ({gmat}).</strong> This removes the "is this person academically qualified?" question. See our <a href="/guides/gmat-vs-gre/">GMAT vs GRE guide</a>.</li>
+          <li><strong>Apply Round 1.</strong> Admissions committees have the most seats and scholarship money in Round 1. See our <a href="/guides/mba-application-timeline/">application timeline guide</a>.</li>
+          <li><strong>Show school-specific fit.</strong> Reference specific programs, classes, or conversations with students. Generic essays are the fastest way to get rejected. See our <a href="/guides/mba-essay-writing/">essay writing guide</a>.</li>
+          <li><strong>Demonstrate impact, not titles.</strong> Admissions wants to see what you've accomplished, not just your job title. Quantify your achievements.</li>
+          <li><strong>Get strong recommendations.</strong> Choose recommenders who know your work well and can provide specific examples of leadership and impact.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>Acceptance Rate Trends</h2>
+        <p>MBA acceptance rates at top programs have generally tightened over the past decade as application volumes have increased. {name}'s {ar}% rate reflects the current competitive landscape for the class of {CURRENT_YEAR}. Application volume fluctuates with the economy: acceptance rates typically tighten during recessions (more applicants) and loosen during strong job markets (fewer applicants).</p>
+      </div>"""
+        return sections
+
+    def _subpage_class_profile(s):
+        name = s["short_name"]
+        cs = s["class_size"]
+        gmat = s["avg_gmat"]
+        gpa = s["avg_gpa"]
+        strengths = ", ".join(s.get("strengths", [])[:4])
+
+        sections = f"""
+      <div class="school-section">
+        <h2>{name} Class Profile at a Glance</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Class Size</span><span class="stat-value">{cs}</span></div>
+          <div class="stat-item"><span class="label">Avg. GMAT</span><span class="stat-value">{gmat}</span></div>
+          <div class="stat-item"><span class="label">Avg. GPA</span><span class="stat-value">{gpa}</span></div>
+          <div class="stat-item"><span class="label">Avg. Work Exp.</span><span class="stat-value">5 years</span></div>
+        </div>
+        <p>{name}'s class of {cs} students represents a {"large" if cs > 500 else "mid-sized" if cs > 200 else "small, intimate"} community. {"A larger class means more diverse perspectives, broader recruiting connections, and a wider alumni network." if cs > 400 else "The smaller class creates tight-knit relationships and a community where you'll know most of your classmates by name." if cs < 200 else "This mid-sized class balances community intimacy with networking breadth."}</p>
+      </div>
+      <div class="school-section">
+        <h2>Academic Profile</h2>
+        <p>The average GMAT score is {gmat}, with the middle 80% typically ranging from {gmat - 30} to {gmat + 20}. The average GPA is {gpa}. These are averages, meaning roughly half the admitted class scored below these numbers. Strong work experience, compelling essays, and demonstrated leadership can offset below-average test scores.</p>
+        <p>Most admitted students have 3-7 years of work experience, with an average of approximately 5 years. The admissions committee looks for candidates who've had enough professional experience to contribute meaningfully to classroom discussions but are early enough in their careers to benefit from the MBA's career-changing potential.</p>
+      </div>
+      <div class="school-section">
+        <h2>Professional Background</h2>
+        <p>{name} attracts students from diverse professional backgrounds. Common pre-MBA industries include consulting, financial services, technology, and non-profit/government. The school particularly values candidates whose backgrounds align with its strengths in {strengths}.</p>
+        <p>Diversity of background is a deliberate admissions strategy. Schools build classes where a former investment banker sits next to a Peace Corps volunteer sits next to a software engineer. This diversity is the source of the MBA classroom's value.</p>
+      </div>
+      <div class="school-section">
+        <h2>What This Means for Applicants</h2>
+        <p>Understanding the class profile helps you position your application. If your GMAT is below {gmat}, consider retaking or emphasizing other strengths. If you come from an over-represented background (consulting, banking), you'll need to differentiate on leadership, personal story, and school fit. If you come from an under-represented background (military, non-profit, healthcare), that diversity is an asset.</p>
+        <p>The class profile also tells you what your learning environment will look like. A class of {cs} with these academic credentials means {"rigorous, fast-paced discussions where intellectual humility serves you well" if gmat > 720 else "strong analytical foundations with diverse perspectives" if gmat > 700 else "a collaborative, supportive environment that values practical experience"}.</p>
+      </div>"""
+        return sections
+
+    def _subpage_deadlines(s):
+        name = s["short_name"]
+        slug = s["slug"]
+
+        sections = f"""
+      <div class="school-section">
+        <h2>{name} Application Deadlines ({CURRENT_YEAR})</h2>
+        <p>{name} offers three application rounds for the MBA class entering in fall {CURRENT_YEAR}. Exact dates are published on the <a href="{s.get('url', '#')}" target="_blank" rel="noopener">official {name} website</a> and may shift slightly year to year. Below are typical deadline windows based on historical patterns.</p>
+        <table class="comparison-table">
+          <thead><tr><th>Round</th><th>Deadline</th><th>Decision</th><th>Recommendation</th></tr></thead>
+          <tbody>
+            <tr><td>Round 1</td><td>September-October</td><td>December</td><td class="winner">Strongest position</td></tr>
+            <tr><td>Round 2</td><td>January</td><td>March-April</td><td>Still competitive</td></tr>
+            <tr><td>Round 3</td><td>March-April</td><td>May</td><td>Limited spots</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="school-section">
+        <h2>Which Round Should You Apply?</h2>
+        <p><strong>Round 1</strong> is the optimal time to apply. Admissions committees review applications with the most available seats, the deepest scholarship pools, and fresh energy. Roughly 40-50% of the class is admitted in Round 1 at most programs.</p>
+        <p><strong>Round 2</strong> is still competitive. If your GMAT score, essays, or recommender letters aren't ready by Round 1, a strong Round 2 application is better than a rushed Round 1 submission. About 40% of admits come from Round 2.</p>
+        <p><strong>Round 3</strong> is viable for exceptional candidates only. Most seats are filled, and the bar is higher. Apply Round 3 only if your profile is unusually strong or if you're applying to programs ranked outside the top 15.</p>
+        <p>For a complete month-by-month plan, see our <a href="/guides/mba-application-timeline/">MBA Application Timeline Guide</a>.</p>
+      </div>
+      <div class="school-section">
+        <h2>Key Application Components</h2>
+        <ul>
+          <li><strong>GMAT or GRE score:</strong> See our <a href="/guides/gmat-vs-gre/">GMAT vs GRE guide</a> for choosing the right test.</li>
+          <li><strong>Essays:</strong> See our <a href="/schools/{slug}/essays/">{name} essay tips</a> for school-specific strategy.</li>
+          <li><strong>2 letters of recommendation:</strong> Choose people who know your work well. Direct supervisors are preferred.</li>
+          <li><strong>Resume:</strong> One page, quantified achievements, no jargon.</li>
+          <li><strong>Transcripts:</strong> Official transcripts from all undergraduate and graduate institutions.</li>
+          <li><strong>Application fee:</strong> Typically $200-$275. Fee waivers are available for candidates demonstrating need or through campus visits.</li>
+        </ul>
+      </div>"""
+        return sections
+
+    def _subpage_essays(s):
+        name = s["short_name"]
+        strengths = s.get("strengths", ["General Management"])
+        best_for = s.get("best_for", ["General Management"])
+
+        # Determine school personality for essay advice
+        culture_hint = ""
+        if any(x in strengths for x in ["Entrepreneurship", "Technology"]):
+            culture_hint = "innovation, building things, and impact"
+        elif any(x in strengths for x in ["Finance", "VC/PE"]):
+            culture_hint = "analytical rigor, intellectual curiosity, and quantitative depth"
+        elif any(x in strengths for x in ["Consulting", "General Management"]):
+            culture_hint = "leadership, teamwork, and structured problem-solving"
+        elif any(x in strengths for x in ["Healthcare", "Social Impact"]):
+            culture_hint = "purpose-driven leadership and community impact"
+        else:
+            culture_hint = "leadership, clear career goals, and personal growth"
+
+        sections = f"""
+      <div class="school-section">
+        <h2>{name} MBA Essays: What to Know</h2>
+        <p>MBA essay prompts change periodically, so always check the <a href="{s.get('url', '#')}" target="_blank" rel="noopener">official {name} website</a> for current-year prompts. However, the core themes remain consistent across years. Most programs ask variations of the same questions: Why MBA? Why now? Why this school? Tell us about a time you led or failed.</p>
+        <p>{name} values {culture_hint}. Your essays should demonstrate these qualities through specific stories and concrete goals.</p>
+      </div>
+      <div class="school-section">
+        <h2>The "Why {name}" Essay</h2>
+        <p>This essay makes or breaks your application. Admissions officers read thousands of generic "why this school" essays. To stand out, you need school-specific evidence of fit:</p>
+        <ul>
+          <li><strong>Reference specific programs or classes</strong> that connect to your career goals. Don't just name them; explain why they matter to your development.</li>
+          <li><strong>Mention conversations</strong> with current students or alumni. If you visited campus, reference specific observations from your visit.</li>
+          <li><strong>Connect your background to the school's strengths.</strong> {name} is known for {", ".join(best_for)}. Show how your goals align with what the school does best.</li>
+          <li><strong>Be specific about what you'll contribute.</strong> Which clubs will you join? What perspective will you bring to classroom discussions?</li>
+        </ul>
+        <p>The test: if you can replace "{name}" with another school's name and the essay still works, it's too generic. Rewrite it.</p>
+      </div>
+      <div class="school-section">
+        <h2>Leadership and Impact Stories</h2>
+        <p>Choose stories where you drove measurable impact. "I managed a team" is generic. "I restructured our sprint process, reducing delivery time by 40% and eliminating 12 hours of weekly overtime for my team" is specific and memorable.</p>
+        <p>The best leadership stories include a moment of difficulty or failure. How you respond to setbacks reveals more about your character than your victories. Show self-awareness, growth, and the ability to learn from experience.</p>
+      </div>
+      <div class="school-section">
+        <h2>Common Mistakes to Avoid</h2>
+        <ul>
+          <li>Writing what you think the admissions committee wants to hear instead of what's true</li>
+          <li>Using corporate jargon or consulting-speak</li>
+          <li>Overselling your accomplishments (they'll verify through recommenders)</li>
+          <li>Listing school features from the website without connecting them to your goals</li>
+          <li>Ignoring word count limits (stay within 10% of the stated limit)</li>
+        </ul>
+        <p>For comprehensive essay strategy, see our <a href="/guides/mba-essay-writing/">MBA Essay Writing Guide</a>.</p>
+      </div>"""
+        return sections
+
+    def _subpage_interview(s):
+        name = s["short_name"]
+        rank = s["ranking"]
+        ar = s["acceptance_rate"]
+
+        interview_style = "alumni" if rank > 5 else "admissions committee and alumni"
+        interview_format = "Interviews are typically 30 minutes, behavioral-style, conducted by trained alumni volunteers or admissions staff."
+
+        sections = f"""
+      <div class="school-section">
+        <h2>{name} MBA Interview: Format and Expectations</h2>
+        <p>{name} invites selected applicants to interview as part of the admissions process. Not all applicants receive interview invitations. Being invited is a positive signal, meaning your application has passed the initial screen.</p>
+        <p>{interview_format} The interview is an opportunity for the school to assess your communication skills, career clarity, and cultural fit. It's also your chance to demonstrate genuine enthusiasm for the program.</p>
+      </div>
+      <div class="school-section">
+        <h2>What to Expect</h2>
+        <p>Most MBA interviews follow a behavioral format. Common questions include:</p>
+        <ul>
+          <li><strong>"Walk me through your resume."</strong> Your answer should be a 2-3 minute narrative that connects your career arc to your MBA goals. Practice this until it's smooth but not robotic.</li>
+          <li><strong>"Why an MBA? Why now?"</strong> Have a clear, concise answer that links your past experience to your future goals and explains why the MBA is the necessary bridge.</li>
+          <li><strong>"Why {name}?"</strong> Reference specific programs, classes, conversations, or campus visits. The more specific, the better.</li>
+          <li><strong>"Tell me about a time you led a team / overcame a challenge / failed."</strong> Use the STAR method (Situation, Task, Action, Result). Have 3-4 stories prepared.</li>
+          <li><strong>"What questions do you have for me?"</strong> Always have 2-3 thoughtful questions that demonstrate research and genuine curiosity about the program.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>How to Prepare</h2>
+        <ol>
+          <li><strong>Practice your personal narrative aloud.</strong> Not in your head, out loud. Record yourself and listen for filler words, pacing, and clarity.</li>
+          <li><strong>Prepare 4-5 stories</strong> covering leadership, teamwork, failure, and impact. Each story should be 2-3 minutes and follow the STAR format.</li>
+          <li><strong>Research your interviewer.</strong> If the school provides the interviewer's name, look them up on LinkedIn. Find common ground or relevant conversation topics.</li>
+          <li><strong>Do 2-3 mock interviews.</strong> Practice with friends, classmates, or alumni. Realistic practice is the best preparation.</li>
+          <li><strong>Review your application.</strong> The interviewer may reference your essays or resume. Be ready to expand on anything you wrote.</li>
+        </ol>
+      </div>
+      <div class="school-section">
+        <h2>After the Interview</h2>
+        <p>Send a thank-you note within 24 hours. Keep it brief, genuine, and specific. Reference something you discussed in the interview. A thoughtful thank-you note reinforces your interest and professionalism.</p>
+        <p>Decisions typically arrive 4-8 weeks after the interview, depending on the round. If you're waitlisted, the interview performance is often a factor in your eventual decision. A strong interview can tip a borderline candidate into the admitted pool.</p>
+      </div>"""
+        return sections
+
+    def _subpage_employment(s):
+        name = s["short_name"]
+        salary = s["avg_salary"]
+        emp = s["employment_rate"]
+        strengths = s.get("strengths", ["General Management"])
+        best_for = s.get("best_for", ["General Management"])
+        rank = s["ranking"]
+
+        # Determine likely industry breakdown based on strengths
+        industries_html = ""
+        if any(x in strengths for x in ["Technology", "Entrepreneurship"]):
+            industries_html = "<li><strong>Technology:</strong> 30-40% (product management, strategy, operations)</li><li><strong>Consulting:</strong> 20-30% (MBB, Big 4, boutique)</li><li><strong>Finance:</strong> 10-20% (banking, PE, VC)</li><li><strong>Other:</strong> 10-20% (healthcare, non-profit, entrepreneurship)</li>"
+        elif any(x in strengths for x in ["Finance", "VC/PE", "Real Estate"]):
+            industries_html = "<li><strong>Finance:</strong> 25-35% (banking, PE, hedge funds, asset management)</li><li><strong>Consulting:</strong> 20-30% (MBB, Big 4, boutique)</li><li><strong>Technology:</strong> 15-25% (product, strategy, operations)</li><li><strong>Other:</strong> 10-20% (corporate, healthcare, non-profit)</li>"
+        elif any(x in strengths for x in ["Consulting"]):
+            industries_html = "<li><strong>Consulting:</strong> 30-40% (MBB, Big 4, boutique)</li><li><strong>Finance:</strong> 15-25% (banking, corporate, PE)</li><li><strong>Technology:</strong> 15-25% (product, strategy, operations)</li><li><strong>Other:</strong> 10-20% (healthcare, non-profit, corporate)</li>"
+        else:
+            industries_html = "<li><strong>Consulting:</strong> 25-35%</li><li><strong>Finance:</strong> 15-25%</li><li><strong>Technology:</strong> 15-25%</li><li><strong>Other:</strong> 15-25% (healthcare, corporate, non-profit, entrepreneurship)</li>"
+
+        sections = f"""
+      <div class="school-section">
+        <h2>{name} Employment Report: Key Numbers</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Avg. Salary</span><span class="stat-value">${salary:,}</span></div>
+          <div class="stat-item"><span class="label">Employment Rate</span><span class="stat-value">{emp}%</span></div>
+          <div class="stat-item"><span class="label">Ranking</span><span class="stat-value">#{rank}</span></div>
+        </div>
+        <p>{name} graduates earn an average starting salary of ${salary:,} with an employment rate of {emp}% within three months of graduation. {"These numbers place it among the highest-earning MBA programs in the country." if salary > 170000 else "These numbers are strong relative to similarly ranked programs." if salary > 150000 else "These numbers reflect solid outcomes with room for growth as the program matures."}</p>
+      </div>
+      <div class="school-section">
+        <h2>Industry Breakdown</h2>
+        <p>{name}'s employment report shows graduates entering these industries:</p>
+        <ul>
+          {industries_html}
+        </ul>
+        <p>{name} is particularly strong for careers in {", ".join(best_for)}. The school's <a href="/schools/{s['slug']}/">full profile</a> details specific employer relationships and career pipelines.</p>
+      </div>
+      <div class="school-section">
+        <h2>Salary by Industry</h2>
+        <p>Average starting salaries vary significantly by industry:</p>
+        <ul>
+          <li><strong>Consulting:</strong> $175,000-$190,000 base + $25,000-$35,000 signing bonus</li>
+          <li><strong>Finance (banking):</strong> $175,000 base + $50,000-$65,000 signing bonus</li>
+          <li><strong>Technology:</strong> $150,000-$180,000 base + equity/RSUs</li>
+          <li><strong>Corporate (Fortune 500):</strong> $130,000-$155,000 base + $15,000-$25,000 signing bonus</li>
+        </ul>
+        <p>The ${salary:,} average at {name} is a blend across all industries. Students entering consulting and finance typically exceed this average, while those entering non-profit or government roles may earn below it. See our <a href="/guides/mba-roi-analysis/">MBA ROI analysis</a> for how to think about salary in the context of total MBA investment.</p>
+      </div>
+      <div class="school-section">
+        <h2>Career Services and Recruiting</h2>
+        <p>{name}'s career services team connects students with employer presentations, networking events, career treks, and alumni mentorship. The {emp}% employment rate reflects the program's ability to place graduates effectively.</p>
+        <p>When evaluating employment reports, look beyond the headline salary number. Consider:</p>
+        <ul>
+          <li>Which specific companies hire from this school?</li>
+          <li>What percentage of students enter their target industry?</li>
+          <li>How active is the alumni network in your desired field?</li>
+          <li>What career-change support does the school provide?</li>
+        </ul>
+        <p>For a complete overview of {name}'s programs, culture, and admissions, see the <a href="/schools/{s['slug']}/">full {name} profile</a>.</p>
+      </div>"""
+        return sections
+
+    # Map function names to actual functions
+    fn_map = {
+        "_subpage_acceptance_rate": _subpage_acceptance_rate,
+        "_subpage_class_profile": _subpage_class_profile,
+        "_subpage_deadlines": _subpage_deadlines,
+        "_subpage_essays": _subpage_essays,
+        "_subpage_interview": _subpage_interview,
+        "_subpage_employment": _subpage_employment,
+    }
+
+    count = 0
+    for s in SCHOOLS:
+        slug = s["slug"]
+        short = s["short_name"]
+
+        for sp in SUBPAGE_TYPES:
+            sp_slug = sp["slug"]
+            title = sp["title_tpl"].format(short_name=short, year=CURRENT_YEAR)
+            meta = sp["meta_tpl"].format(short_name=short, year=CURRENT_YEAR)
+            fn = fn_map[sp["content_fn"]]
+            sections_html = fn(s)
+
+            # Breadcrumb schema
+            breadcrumb = f'{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Home","item":"{SITE_URL}/"}},{{"@type":"ListItem","position":2,"name":"Schools","item":"{SITE_URL}/schools/"}},{{"@type":"ListItem","position":3,"name":"{short}","item":"{SITE_URL}/schools/{slug}/"}},{{"@type":"ListItem","position":4,"name":"{sp_slug.replace("-", " ").title()}","item":"{SITE_URL}/schools/{slug}/{sp_slug}/"}}]}}'
+            schema = f'<script type="application/ld+json">\n{breadcrumb}\n</script>'
+
+            content = f"""{html_head(
+                f"""{title} | {SITE_NAME}""",
+                meta,
+                f"""/schools/{slug}/{sp_slug}/""",
+                schema=schema
+            )}
+{nav_html('schools')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <span class="ranking-badge">#{s["ranking"]} Overall</span>
+      <h1>{title}</h1>
+      <div class="gold-rule" style="width: 48px; margin-top: 16px;"></div>
+      <p class="hero-subtitle">{s["location"]} &middot; <a href="/schools/{slug}/" style="color: var(--color-accent);">Full {short} Profile</a></p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+      {sections_html}
+
+      <div class="school-section">
+        <h2>More About {short}</h2>
+        <div class="compare-link-grid">
+          <a href="/schools/{slug}/" class="btn btn-primary">Full {short} Profile &rarr;</a>
+          <a href="/schools/{slug}/acceptance-rate/" class="btn btn-outline">Acceptance Rate</a>
+          <a href="/schools/{slug}/class-profile/" class="btn btn-outline">Class Profile</a>
+          <a href="/schools/{slug}/deadlines/" class="btn btn-outline">Deadlines</a>
+          <a href="/schools/{slug}/essays/" class="btn btn-outline">Essays</a>
+          <a href="/schools/{slug}/interview/" class="btn btn-outline">Interview</a>
+          <a href="/schools/{slug}/employment/" class="btn btn-outline">Employment</a>
+        </div>
+      </div>
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+            write_page(os.path.join(OUTPUT_DIR, "schools", slug, sp_slug, "index.html"), content)
+            count += 1
+
+    print(f"  Built: {count} school subpages ({len(SCHOOLS)} schools x {len(SUBPAGE_TYPES)} types)")
+
+
+def build_ranking_pages():
+    for r in RANKING_TYPES:
+        if "filter_slugs" in r:
+            ranked = [s for s in SCHOOLS if s["slug"] in r["filter_slugs"]]
+            ranked.sort(key=lambda s: s["ranking"])
+        elif r["sort_key"] == "roi":
+            ranked = sorted(SCHOOLS, key=lambda s: s["avg_salary"] / max(s["tuition"], 1), reverse=True)[:r["limit"]]
+        else:
+            ranked = sorted(SCHOOLS, key=lambda s: s[r["sort_key"]], reverse=r["reverse"])[:r["limit"]]
+
+        rows = ""
+        for i, s in enumerate(ranked, 1):
+            salary_k = s["avg_salary"] // 1000
+            rows += f"""
+<div class="ranking-row">
+  <span class="ranking-position">{i}</span>
+  <div class="ranking-info">
+    <a href="/schools/{s['slug']}/" class="ranking-school-name">{s['short_name']}</a>
+    <span class="ranking-location">{s['location']}</span>
+  </div>
+  <div class="ranking-stats">
+    <span class="ranking-stat"><span class="label">GMAT</span> {s['avg_gmat']}</span>
+    <span class="ranking-stat"><span class="label">Salary</span> ${salary_k}K</span>
+    <span class="ranking-stat"><span class="label">Accept</span> {s['acceptance_rate']}%</span>
+  </div>
+</div>"""
+
+        bc = breadcrumb_schema([("Home", "/"), ("Rankings", "/rankings/"), (r["title"], f'/rankings/{r["slug"]}/')])
+        content = f"""{html_head(
+            f"""{r["title"]} | {SITE_NAME}""",
+            r["description"],
+            f'/rankings/{r["slug"]}/',
+            schema=bc
+        )}
+{nav_html('rankings')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{r['title']}</h1>
+      <p class="hero-subtitle">{r['description']}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+      <div class="ranking-nav">
+        {''.join(f'<a href="/rankings/{rt["slug"]}/" class="btn {"btn-primary" if rt["slug"] == r["slug"] else "btn-ghost"}">{rt["slug"].replace("-", " ").title()}</a>' for rt in RANKING_TYPES)}
+      </div>
+      <div class="ranking-list">
+        {rows}
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "rankings", r["slug"], "index.html"), content)
+    print(f"  Built: {len(RANKING_TYPES)} ranking pages")
+
+
+def build_guide_pages():
+    for g in GUIDES:
+        sections_html = ""
+        for heading, body in g["sections"]:
+            sections_html += f'<div class="school-section">\n<h2>{heading}</h2>\n{body}\n</div>\n'
+
+        # FAQ section (optional)
+        faq_html = ""
+        if g.get("faq"):
+            faq_items = "".join(
+                f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                for q, a in g["faq"]
+            )
+            faq_html = f"""
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        {faq_items}
+      </div>"""
+
+        # Schema: BreadcrumbList + FAQ
+        bc = breadcrumb_schema([("Home", "/"), ("Guides", "/guides/"), (g["title"], f'/guides/{g["slug"]}/')])
+        guide_faq = faq_schema(g.get("faq", []))
+
+        # Internal links section (optional)
+        see_also_html = ""
+        if g.get("see_also"):
+            links = " &middot; ".join(
+                f'<a href="{url}">{text}</a>' for text, url in g["see_also"]
+            )
+            see_also_html = f"""
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">See also: {links}</p>
+      </div>"""
+
+        content = f"""{html_head(
+            f"""{g["title"]} | {SITE_NAME}""",
+            g["meta_description"],
+            f"""/guides/{g["slug"]}/""",
+            schema=bc + guide_faq
+        )}
+{nav_html('guides')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{g['title']}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      {sections_html}
+      {faq_html}
+      {see_also_html}
+
+      <div class="affiliate-cta">
+        <div class="gold-rule"></div>
+        <p>Ready to start your MBA journey?</p>
+        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "guides", g["slug"], "index.html"), content)
+
+    # Guide index
+    guide_links = "\n".join(
+        f'<a href="/guides/{g["slug"]}/" class="guide-index-card"><h3>{g["title"]}</h3><p>{g["meta_description"][:120]}...</p><span class="guide-arrow">&rarr;</span></a>'
+        for g in GUIDES
+    )
+    content = f"""{html_head(
+        f"MBA Admissions Guides & Resources | {SITE_NAME}",
+        "Free MBA admissions guides: GMAT vs GRE, application timelines, essay writing, ROI analysis, and program recommendations. From a Haas MBA grad.",
+        "/guides/"
+    )}
+{nav_html('guides')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Admissions Guides</h1>
+      <p class="hero-subtitle">Everything you need to know about getting into a top MBA program.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="guide-index-grid">
+        {guide_links}
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "guides", "index.html"), content)
+    print(f"  Built: {len(GUIDES)} guide pages + index")
+
+
+def build_about():
+    content = f"""{html_head(
+        f"About Rome Thorndike | {AUTHOR_CREDENTIAL} | {SITE_NAME}",
+        f"Meet Rome Thorndike, Berkeley Haas MBA grad and creator of {SITE_NAME}. Real admissions intelligence from someone who's been through it.",
+        "/about/"
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>About the Author</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+      <div class="about-header">
+        <div class="about-avatar">RT</div>
+        <div>
+          <h2>{AUTHOR}</h2>
+          <p class="text-secondary">{AUTHOR_CREDENTIAL} &middot; Former Enterprise AE at Salesforce &amp; Microsoft</p>
+        </div>
+      </div>
+
+      <h3>Why I Built This</h3>
+      <p>When I was applying to MBA programs, I spent hundreds of hours reading forums, ranking sites, and admissions consultant blogs. Most of it was useless. The rankings were black boxes. The advice was generic. And nobody would give you a straight answer about whether a school was actually worth the money.</p>
+      <p>I got into Berkeley Haas and had an incredible experience. But I also watched friends choose the wrong programs for the wrong reasons, take on unnecessary debt, or skip business school entirely because the information landscape was so confusing.</p>
+      <p>{SITE_NAME} is the resource I wish I had. Real data, honest takes, and the kind of advice you'd get from a friend who's been through the process, because that's exactly what this is.</p>
+
+      <h3>My Background</h3>
+      <p>Before Haas, I worked in enterprise sales at Salesforce and Microsoft. After my MBA, I've spent my career at the intersection of data, sales, and strategy. I bring that analytical lens to everything on this site.</p>
+
+      <h3>Stay in the Loop</h3>
+      <p>I send a free weekly newsletter covering which companies are hiring MBA grads, salary trends, and program placement data. Real intel, no fluff.</p>
+      <a href="/newsletter/" class="btn btn-accent">Get the Newsletter &rarr;</a>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "about", "index.html"), content)
+    print("  Built: /about/")
+
+
+def build_newsletter():
+    content = f"""{html_head(
+        f"MBA Hiring Intel | Free Weekly Newsletter | {SITE_NAME}",
+        f"Weekly newsletter: which companies are hiring MBA grads, salary trends, and program placement data. Free from {SITE_NAME}.",
+        "/newsletter/"
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark">
+    <div class="container" style="text-align: center;">
+      <div class="gold-rule" style="width: 48px; margin: 0 auto 24px;"></div>
+      <h1>Who's hiring MBAs this week?</h1>
+      <p class="hero-subtitle" style="margin: 0 auto;">Companies hiring MBA grads. Salary data. Program placement trends. One email, every week.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+      <div class="newsletter-signup">
+        <h3>What you get</h3>
+        <ul class="newsletter-features">
+          <li><strong>Companies actively hiring MBAs:</strong> sourced from live job postings, updated weekly</li>
+          <li><strong>Salary data by role and school:</strong> real numbers from real postings, not self-reported surveys</li>
+          <li><strong>Program placement trends:</strong> which schools are placing into which companies and industries</li>
+          <li><strong>Admissions intel:</strong> deadline reminders, application tips, and the occasional honest take</li>
+        </ul>
+
+        <div class="newsletter-form-placeholder">
+          <p>Newsletter signup coming soon. In the meantime, check out the <a href="/schools/">school profiles</a> and <a href="/guides/">guides</a>.</p>
+        </div>
+
+        <h3>Who it's for</h3>
+        <p>Prospective MBA applicants researching programs. Current MBA students tracking the job market. Recent grads benchmarking compensation. Anyone who wants real data instead of admissions marketing.</p>
+      </div>
+
+      <div class="about-blurb" style="margin-top: 48px;">
+        <div class="byline-avatar">RT</div>
+        <div>
+          <h3>From <a href="/about/">Rome Thorndike</a></h3>
+          <p>Berkeley Haas MBA. I track MBA hiring data because I lived the information gap firsthand. This newsletter cuts through the noise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "newsletter", "index.html"), content)
+    print("  Built: /newsletter/")
+
+
+def build_blog_posts():
+    """Build 'Is [School] Worth It?' blog posts for top 25 schools."""
+    posts = []
+    top_schools = sorted(SCHOOLS, key=lambda x: x["ranking"])[:25]
+
+    for s in top_schools:
+        name = s["short_name"]
+        slug = s["slug"]
+        rank = s["ranking"]
+        salary = s["avg_salary"]
+        tuition = s["tuition"]
+        ar = s["acceptance_rate"]
+        gmat = s["avg_gmat"]
+        emp = s["employment_rate"]
+        strengths = ", ".join(s.get("best_for", s.get("strengths", []))[:3])
+        total_cost = tuition * 2 + 60000  # tuition x 2 years + estimated living
+        opp_cost_80k = 80000 * 2  # 2 years of $80K salary
+        all_in = total_cost + opp_cost_80k
+        breakeven_80k = round(all_in / (salary - 80000), 1) if salary > 80000 else 99
+
+        tier_desc = "M7" if rank <= 7 else "top-15" if rank <= 15 else "top-25" if rank <= 25 else "top-50" if rank <= 50 else "top-75"
+        worth_verdict = ""
+        if salary >= 170000 and rank <= 10:
+            worth_verdict = f"For most candidates, {name} is worth the investment. The combination of #{rank} ranking, ${salary:,} average salary, and strong career outcomes makes the financial case compelling. The breakeven from an $80K pre-MBA salary is approximately {breakeven_80k} years."
+        elif salary >= 150000 and rank <= 20:
+            worth_verdict = f"{name} is worth it for candidates targeting {strengths}. The ${salary:,} average salary and {emp}% employment rate produce solid ROI, especially with scholarship funding or in-state tuition. The breakeven period of {breakeven_80k} years from an $80K salary is reasonable."
+        else:
+            worth_verdict = f"{name} can be worth it for the right candidate. The key is whether the school's strengths in {strengths} align with your career goals and whether you can manage the cost through scholarships or in-state tuition. The ${salary:,} average salary produces an acceptable ROI for career changers coming from lower-paying roles."
+
+        post_slug = f"is-{slug}-worth-it"
+        post_title = f"Is {name} Worth It? ROI Analysis ({CURRENT_YEAR})"
+        post_meta = f"Is {name} worth the cost in {CURRENT_YEAR}? Real ROI analysis with salary data, career outcomes, and honest math. From a Haas MBA grad."
+
+        content_html = f"""
+      <div class="school-section">
+        <h2>The Numbers</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Ranking</span><span class="stat-value">#{rank}</span></div>
+          <div class="stat-item"><span class="label">Avg. Salary</span><span class="stat-value">${salary:,}</span></div>
+          <div class="stat-item"><span class="label">Annual Tuition</span><span class="stat-value">${tuition:,}</span></div>
+          <div class="stat-item"><span class="label">Employment</span><span class="stat-value">{emp}%</span></div>
+        </div>
+        <p>The all-in cost of {name} (tuition + living expenses + opportunity cost from an $80K salary) is approximately ${all_in:,}. The average starting salary of ${salary:,} produces an annual uplift of ${salary - 80000:,} over the $80K baseline. At that rate, you break even in approximately {breakeven_80k} years.</p>
+      </div>
+      <div class="school-section">
+        <h2>When {name} Is Worth It</h2>
+        <ul>
+          <li><strong>Career changers targeting {strengths}:</strong> {name}'s recruiting pipelines in these areas are well-established. If you're pivoting from a lower-paying industry, the salary uplift is significant.</li>
+          <li><strong>Candidates with scholarship funding:</strong> A $50K-$100K scholarship dramatically improves ROI, reducing the breakeven by 1-2 years.</li>
+          <li><strong>Targeting roles that require the credential:</strong> In consulting, banking, and PE, the {tier_desc} MBA credential is a prerequisite, not a nice-to-have. {name}'s #{rank} ranking qualifies.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>When It Might Not Be</h2>
+        <ul>
+          <li><strong>Already earning ${salary - 20000:,}+ in your target industry:</strong> If you're already near the post-MBA salary, the ROI depends on career acceleration rather than immediate salary uplift.</li>
+          <li><strong>Taking on full debt at ${tuition * 2:,}+ in tuition alone:</strong> High debt loads narrow your post-MBA choices. You may feel pressured to take the highest-paying offer rather than the best career fit.</li>
+          <li><strong>Targeting industries where the MBA credential is optional:</strong> In entrepreneurship, some tech roles, and creative industries, the MBA provides network but not credential value. The ROI calculation shifts toward intangibles.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>The Verdict</h2>
+        <blockquote class="verdict-block">&ldquo;{worth_verdict}&rdquo;</blockquote>
+        <p>For a personalized calculation, try our <a href="/tools/roi-calculator/">MBA ROI Calculator</a>. For a complete view of {name}'s program, culture, and admissions data, see the <a href="/schools/{slug}/">full {name} profile</a>.</p>
+      </div>"""
+
+        bc = breadcrumb_schema([("Home", "/"), ("Blog", "/blog/"), (post_title, f'/blog/{post_slug}/')])
+        page = f"""{html_head(
+            f"""{post_title} | {SITE_NAME}""",
+            post_meta,
+            f'/blog/{post_slug}/',
+            schema=bc
+        )}
+{nav_html('blog')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>Is {name} Worth It?</h1>
+      <p class="hero-subtitle">Honest ROI analysis for {CURRENT_YEAR}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+      {content_html}
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "blog", post_slug, "index.html"), page)
+        posts.append({"title": post_title, "slug": post_slug, "name": name, "rank": rank})
+
+    print(f"  Built: {len(posts)} blog posts")
+    return posts
+
+
+def build_blog_index():
+    posts = build_blog_posts()
+
+    post_cards = "\n".join(
+        f'<a href="/blog/{p["slug"]}/" class="guide-index-card"><h3>Is {p["name"]} Worth It?</h3><p>Honest ROI analysis: salary data, career outcomes, and the real math behind a {p["name"]} MBA.</p><span class="guide-arrow">&rarr;</span></a>'
+        for p in posts
+    )
+
+    content = f"""{html_head(
+        f"Blog | MBA Admissions Insights | {SITE_NAME}",
+        "MBA admissions insights, career intelligence, and honest takes on business school. From a Berkeley Haas MBA grad.",
+        "/blog/"
+    )}
+{nav_html('blog')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>Blog</h1>
+      <p class="hero-subtitle">MBA admissions insights and career intelligence.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <h2 style="margin-bottom: 24px;">Is Your MBA Worth It?</h2>
+      <div class="guide-index-grid">
+        {post_cards}
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "blog", "index.html"), content)
+    print("  Built: /blog/")
+
+
+def build_roi_calculator():
+    """Build an interactive MBA ROI calculator page."""
+    # Generate school options for the dropdown
+    school_options = "\n".join(
+        f'<option value="{s["slug"]}" data-tuition="{s["tuition"]}" data-salary="{s["avg_salary"]}">{s["short_name"]} (#{s["ranking"]})</option>'
+        for s in sorted(SCHOOLS, key=lambda x: x["ranking"])
+    )
+
+    bc = breadcrumb_schema([("Home", "/"), ("Tools", "/tools/"), ("ROI Calculator", "/tools/roi-calculator/")])
+    content = f"""{html_head(
+        f"""MBA ROI Calculator | Is Your MBA Worth It? | {SITE_NAME}""",
+        f"""Free MBA ROI calculator for {CURRENT_YEAR}. Input your salary, school costs, and career goals to calculate your MBA return on investment. From a Haas MBA grad.""",
+        '/tools/roi-calculator/',
+        schema=bc
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA ROI Calculator</h1>
+      <p class="hero-subtitle">Calculate whether your MBA investment will pay off.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-narrow">
+      <div class="school-section">
+        <h2>Your Inputs</h2>
+        <div class="roi-form" id="roi-form">
+          <div class="roi-field">
+            <label for="roi-school">Target School</label>
+            <select id="roi-school">
+              <option value="custom">Custom / Other</option>
+              {school_options}
+            </select>
+          </div>
+          <div class="roi-field">
+            <label for="roi-current-salary">Current Annual Salary ($)</label>
+            <input type="number" id="roi-current-salary" value="85000" min="0" step="5000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-tuition">Annual Tuition ($)</label>
+            <input type="number" id="roi-tuition" value="72000" min="0" step="1000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-living">Annual Living Expenses ($)</label>
+            <input type="number" id="roi-living" value="30000" min="0" step="1000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-scholarship">Total Scholarship ($)</label>
+            <input type="number" id="roi-scholarship" value="0" min="0" step="5000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-post-salary">Expected Post-MBA Salary ($)</label>
+            <input type="number" id="roi-post-salary" value="165000" min="0" step="5000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-years">Program Length (years)</label>
+            <select id="roi-years">
+              <option value="2" selected>2 years (standard)</option>
+              <option value="1">1 year (accelerated)</option>
+            </select>
+          </div>
+          <button class="btn btn-accent" onclick="calculateROI()" style="margin-top: 16px; width: 100%;">Calculate ROI</button>
+        </div>
+      </div>
+
+      <div class="school-section" id="roi-results" style="display: none;">
+        <h2>Your MBA ROI</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Total MBA Cost</span><span class="stat-value" id="res-total-cost">-</span></div>
+          <div class="stat-item"><span class="label">Opportunity Cost</span><span class="stat-value" id="res-opp-cost">-</span></div>
+          <div class="stat-item"><span class="label">All-In Investment</span><span class="stat-value" id="res-all-in">-</span></div>
+          <div class="stat-item"><span class="label">Annual Salary Uplift</span><span class="stat-value" id="res-uplift">-</span></div>
+          <div class="stat-item"><span class="label">Breakeven (years)</span><span class="stat-value" id="res-breakeven">-</span></div>
+          <div class="stat-item"><span class="label">10-Year Net Gain</span><span class="stat-value" id="res-10yr">-</span></div>
+        </div>
+
+        <div id="roi-verdict" class="verdict-block" style="margin-top: 24px;"></div>
+
+        <div style="margin-top: 24px;">
+          <h3>10-Year Cumulative Earnings Comparison</h3>
+          <div id="roi-chart" style="margin-top: 16px;"></div>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>How We Calculate MBA ROI</h2>
+        <p>The calculator accounts for:</p>
+        <ul>
+          <li><strong>Direct costs:</strong> Tuition, fees, and living expenses for the program duration, minus scholarships.</li>
+          <li><strong>Opportunity cost:</strong> The salary you forgo while in school.</li>
+          <li><strong>Salary uplift:</strong> The difference between your post-MBA salary and what you'd earn without the MBA.</li>
+          <li><strong>Breakeven point:</strong> How many years of post-MBA salary uplift it takes to recoup your total investment.</li>
+          <li><strong>10-year net gain:</strong> Total additional earnings over 10 years after graduation, assuming 3% annual raises for both MBA and non-MBA paths.</li>
+        </ul>
+        <p>This is a simplified model. Real-world factors like signing bonuses, equity compensation, career switches, and promotions can significantly improve MBA returns. See our <a href="/guides/mba-roi-analysis/">full MBA ROI analysis</a> for a deeper discussion.</p>
+      </div>
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}
+<script>
+function calculateROI() {{
+  var currentSalary = parseInt(document.getElementById('roi-current-salary').value) || 0;
+  var tuition = parseInt(document.getElementById('roi-tuition').value) || 0;
+  var living = parseInt(document.getElementById('roi-living').value) || 0;
+  var scholarship = parseInt(document.getElementById('roi-scholarship').value) || 0;
+  var postSalary = parseInt(document.getElementById('roi-post-salary').value) || 0;
+  var years = parseInt(document.getElementById('roi-years').value) || 2;
+
+  var totalDirect = (tuition + living) * years - scholarship;
+  var oppCost = currentSalary * years;
+  var allIn = totalDirect + oppCost;
+  var annualUplift = postSalary - currentSalary;
+  var breakeven = annualUplift > 0 ? (allIn / annualUplift).toFixed(1) : 'N/A';
+
+  // 10-year calculation with 3% annual raises
+  var raise = 1.03;
+  var mbaEarnings = 0;
+  var noMbaEarnings = 0;
+  for (var i = 1; i <= 10; i++) {{
+    mbaEarnings += postSalary * Math.pow(raise, i - 1);
+    noMbaEarnings += currentSalary * Math.pow(raise, i + years - 1);
+  }}
+  var netGain = mbaEarnings - noMbaEarnings - totalDirect;
+
+  // Update results
+  document.getElementById('res-total-cost').textContent = '$' + totalDirect.toLocaleString();
+  document.getElementById('res-opp-cost').textContent = '$' + oppCost.toLocaleString();
+  document.getElementById('res-all-in').textContent = '$' + allIn.toLocaleString();
+  document.getElementById('res-uplift').textContent = annualUplift >= 0 ? '+$' + annualUplift.toLocaleString() : '-$' + Math.abs(annualUplift).toLocaleString();
+  document.getElementById('res-breakeven').textContent = breakeven === 'N/A' ? 'N/A' : breakeven + ' yrs';
+  document.getElementById('res-10yr').textContent = netGain >= 0 ? '+$' + Math.round(netGain).toLocaleString() : '-$' + Math.abs(Math.round(netGain)).toLocaleString();
+
+  // Verdict
+  var verdict = '';
+  var be = parseFloat(breakeven);
+  if (breakeven === 'N/A' || annualUplift <= 0) {{
+    verdict = 'The numbers suggest this MBA may not provide a positive financial return. Consider whether the non-financial benefits (network, career pivot, credential) justify the investment.';
+  }} else if (be <= 4) {{
+    verdict = 'Strong ROI. You\\'ll recoup your investment within ' + breakeven + ' years. The financial case for this MBA is compelling.';
+  }} else if (be <= 7) {{
+    verdict = 'Solid ROI. A ' + breakeven + '-year breakeven is reasonable for a top MBA. Factor in non-financial benefits (network, credential, career acceleration) for the full picture.';
+  }} else {{
+    verdict = 'Longer payback period (' + breakeven + ' years). Consider whether scholarships, a lower-cost program, or alternative paths could improve the math.';
+  }}
+  document.getElementById('roi-verdict').innerHTML = '&ldquo;' + verdict + '&rdquo;';
+
+  // Simple bar chart
+  var maxVal = Math.max(mbaEarnings, noMbaEarnings + totalDirect);
+  var mbaW = Math.round((mbaEarnings / maxVal) * 100);
+  var noMbaW = Math.round(((noMbaEarnings) / maxVal) * 100);
+  document.getElementById('roi-chart').innerHTML =
+    '<div style="margin-bottom:12px;"><span style="font-size:13px;color:var(--color-text-secondary);">With MBA (10yr earnings)</span>' +
+    '<div style="background:var(--color-accent);height:32px;border-radius:4px;width:' + mbaW + '%;display:flex;align-items:center;padding-left:12px;color:#fff;font-weight:600;font-size:14px;">$' + Math.round(mbaEarnings).toLocaleString() + '</div></div>' +
+    '<div><span style="font-size:13px;color:var(--color-text-secondary);">Without MBA (10yr earnings)</span>' +
+    '<div style="background:var(--color-text-secondary);height:32px;border-radius:4px;width:' + noMbaW + '%;display:flex;align-items:center;padding-left:12px;color:#fff;font-weight:600;font-size:14px;">$' + Math.round(noMbaEarnings).toLocaleString() + '</div></div>';
+
+  document.getElementById('roi-results').style.display = 'block';
+  document.getElementById('roi-results').scrollIntoView({{ behavior: 'smooth' }});
+}}
+
+// School selector auto-fill
+document.getElementById('roi-school').addEventListener('change', function() {{
+  var opt = this.options[this.selectedIndex];
+  if (opt.dataset.tuition) {{
+    document.getElementById('roi-tuition').value = opt.dataset.tuition;
+    document.getElementById('roi-post-salary').value = opt.dataset.salary;
+  }}
+}});
+</script>"""
+    write_page(os.path.join(OUTPUT_DIR, "tools", "roi-calculator", "index.html"), content)
+    print("  Built: ROI calculator")
+
+
+def build_sitemap():
+    SUBPAGE_SLUGS = ["acceptance-rate", "class-profile", "deadlines", "essays", "interview", "employment"]
+    urls = ["/"]
+    urls.append("/schools/")
+    for s in SCHOOLS:
+        urls.append(f"/schools/{s['slug']}/")
+        for sp in SUBPAGE_SLUGS:
+            urls.append(f"/schools/{s['slug']}/{sp}/")
+    urls.append("/compare/")
+    for c in COMPARISONS:
+        urls.append(f"/compare/{comparison_slug(c['a'], c['b'])}/")
+    for r in RANKING_TYPES:
+        urls.append(f"/rankings/{r['slug']}/")
+    urls.append("/guides/")
+    for g in GUIDES:
+        urls.append(f"/guides/{g['slug']}/")
+    urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/roi-calculator/", "/tools/gmat-calculator/"])
+    # Blog posts
+    for s in sorted(SCHOOLS, key=lambda x: x["ranking"])[:25]:
+        urls.append(f"/blog/is-{s['slug']}-worth-it/")
+    # Metro pages
+    urls.append("/locations/")
+    for m in METRO_AREAS:
+        urls.append(f"/locations/{m['slug']}/")
+    # Admissions strategy guides
+    for g in ADMISSIONS_STRATEGY:
+        urls.append(f"/guides/{g['slug']}/")
+    # Program format guides
+    for g in PROGRAM_FORMAT_GUIDES:
+        urls.append(f"/guides/{g['slug']}/")
+    # Salary guides
+    for g in SALARY_GUIDES:
+        urls.append(f"/salary/{g['slug']}/")
+    # FAQ pages
+    for f in FAQ_PAGES:
+        urls.append(f"/answers/{f['slug']}/")
+
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for url in urls:
+        xml += f"  <url><loc>{SITE_URL}{url}</loc></url>\n"
+    xml += '</urlset>'
+    write_page(os.path.join(OUTPUT_DIR, "sitemap.xml"), xml)
+    print(f"  Built: sitemap.xml ({len(urls)} URLs)")
+
+
+def build_robots():
+    content = f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n"
+    write_page(os.path.join(OUTPUT_DIR, "robots.txt"), content)
+    print("  Built: robots.txt")
+
+
+def copy_assets():
+    dest = os.path.join(OUTPUT_DIR, "assets")
+    if os.path.exists(dest):
+        shutil.rmtree(dest)
+    shutil.copytree(ASSETS_DIR, dest)
+    print("  Copied: assets/")
+
+
+
+
+# =============================================================================
+# METRO PAGES
+# =============================================================================
+
+def build_metro_pages():
+    """Build 'Best MBA Programs in [City]' pages."""
+    school_map = {s["slug"]: s for s in SCHOOLS}
+
+    for m in METRO_AREAS:
+        schools_in_metro = [school_map[slug] for slug in m["metro_schools"] if slug in school_map]
+        schools_in_metro.sort(key=lambda x: x["ranking"])
+
+        school_cards = ""
+        for s in schools_in_metro:
+            salary_k = s["avg_salary"] // 1000
+            school_cards += f"""
+      <div class="school-card">
+        <div class="school-card-header">
+          <h3><a href="/schools/{s['slug']}/">{s['short_name']}</a></h3>
+          <span class="school-card-rank">#{s['ranking']}</span>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Acceptance Rate</span><span class="stat-value">{s['acceptance_rate']}%</span></div>
+          <div class="stat-item"><span class="label">Avg GMAT</span><span class="stat-value">{s['avg_gmat']}</span></div>
+          <div class="stat-item"><span class="label">Avg Salary</span><span class="stat-value">${salary_k}K</span></div>
+          <div class="stat-item"><span class="label">Employment</span><span class="stat-value">{s['employment_rate']}%</span></div>
+        </div>
+        <p>{s['description'][:200]}...</p>
+        <a href="/schools/{s['slug']}/" class="btn btn-outline">Full Profile &rarr;</a>
+      </div>"""
+
+        industries_html = ", ".join(m["industries"])
+
+        faq_items = ""
+        faq_entities = ""
+        if m.get("faq"):
+            faq_items = "".join(
+                f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                for q, a in m["faq"]
+            )
+            faq_entities = ",".join(
+                f'{{"@type":"Question","name":"{q}","acceptedAnswer":{{"@type":"Answer","text":"{a}"}}}}'
+                for q, a in m["faq"]
+            )
+
+        faq_html = f"""
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        {faq_items}
+      </div>""" if faq_items else ""
+
+        bc = breadcrumb_schema([("Home", "/"), ("Locations", "/locations/"), (m["name"], f'/locations/{m["slug"]}/')])
+        metro_faq_schema = faq_schema(m.get("faq", []))
+
+        page = f"""{html_head(
+            f"""Best MBA Programs in {m["name"]} ({CURRENT_YEAR})""",
+            f"""Best MBA programs in {m["name"]} for {CURRENT_YEAR}. Schools, career opportunities, cost of living, and which industries hire MBAs locally. From a Haas MBA grad.""",
+            f"""/locations/{m["slug"]}/""",
+            schema=bc + metro_faq_schema
+        )}
+{nav_html('schools')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>Best MBA Programs in {m["name"]} ({CURRENT_YEAR})</h1>
+      <p class="hero-subtitle">{m["nearby_label"]} | Key industries: {industries_html}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+
+      <div class="school-section">
+        <h2>MBA Programs in {m["name"]}</h2>
+        {school_cards}
+      </div>
+
+      <div class="school-section">
+        <h2>The {m["name"]} MBA Job Market</h2>
+        <p>{m["job_market"]}</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Cost of Living</h2>
+        <p>{m["cost_of_living"]}</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Why Get an MBA in {m["name"]}</h2>
+        <p>{m["why_here"]}</p>
+      </div>
+
+      <div class="school-section">
+        <h2>What to Watch Out For</h2>
+        <p>{m["watch_out"]}</p>
+      </div>
+
+      {faq_html}
+
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">See also: <a href="/schools/">All Schools</a> &middot; <a href="/rankings/overall/">Overall Rankings</a> &middot; <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a></p>
+      </div>
+
+      <div class="affiliate-cta">
+        <div class="gold-rule"></div>
+        <p>Ready to start your MBA journey?</p>
+        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "locations", m["slug"], "index.html"), page)
+
+    # Locations index page
+    metro_links = "\n".join(
+        f'<a href="/locations/{m["slug"]}/" class="guide-index-card"><h3>{m["name"]}</h3><p>{len(m["metro_schools"])} programs | Industries: {", ".join(m["industries"][:3])}</p><span class="guide-arrow">&rarr;</span></a>'
+        for m in METRO_AREAS
+    )
+    index_page = f"""{html_head(
+        f"Best MBA Programs by City ({CURRENT_YEAR}) | {SITE_NAME}",
+        "Find the best MBA programs by city. Compare schools in NYC, San Francisco, Boston, Chicago, and 11 more metro areas. From a Haas MBA grad.",
+        "/locations/"
+    )}
+{nav_html('schools')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>Best MBA Programs by City</h1>
+      <p class="hero-subtitle">Find the right program in your target city.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="guide-index-grid">
+        {metro_links}
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "locations", "index.html"), index_page)
+    print(f"  Built: {len(METRO_AREAS)} metro pages + index")
+
+
+# =============================================================================
+# ADMISSIONS STRATEGY GUIDES
+# =============================================================================
+
+ADMISSIONS_STRATEGY = [
+    {
+        "title": f"How to Get Off the MBA Waitlist ({CURRENT_YEAR})",
+        "slug": "mba-waitlist-strategy",
+        "meta": f"MBA waitlist strategy for {CURRENT_YEAR}. What to do when you're waitlisted, how to write a waitlist letter, and your real odds. From a Haas MBA grad.",
+        "sections": [
+            ("What the Waitlist Means", "<p>Getting waitlisted feels like limbo, but it's a genuine second chance. Most top MBA programs waitlist 15-25% of applicants. Of those, 5-15% eventually receive offers. The waitlist is the admissions committee saying: you're qualified, but we need to see how the class shapes up before committing to you.</p><p>The waitlist is not a soft rejection. Programs manage yield (the percentage of admitted students who enroll) carefully, and the waitlist is their insurance policy against lower-than-expected yield. In years when more admitted students accept offers elsewhere, waitlist conversions increase. In years when yield is high, fewer waitlist spots open up.</p>"),
+            ("The First 48 Hours", """<p>What to do immediately after a waitlist decision:</p><ol><li><strong>Accept your spot on the waitlist.</strong> This seems obvious, but some candidates interpret the waitlist as a rejection and withdraw. Don't. Accept promptly.</li><li><strong>Read the school's waitlist instructions carefully.</strong> Some schools want you to send updates. Others specifically say not to. Follow the instructions exactly.</li><li><strong>Take a breath.</strong> Don't fire off an emotional letter. You have time. Most waitlist movement happens between April and July. Use the time to strengthen your case.</li></ol>"""),
+            ("Writing the Waitlist Update Letter", "<p>If the school accepts updates (most do), send one strong letter 2-4 weeks after the waitlist decision. The letter should include:</p><ul><li><strong>New accomplishments.</strong> Got promoted? Led a significant project? Raised your GMAT score? Quantify the impact.</li><li><strong>Deeper school-specific knowledge.</strong> Attended an event, spoke with a current student, or identified a specific professor or program you want to work with. Show that you've continued researching the school.</li><li><strong>Reaffirmed commitment.</strong> State clearly that if admitted, you will attend. Admissions committees want to convert waitlisted candidates who are certain to enroll.</li></ul><p>Keep it to one page. Don't rehash your entire application. Focus on what's new since you applied.</p>"),
+            ("What Moves the Needle", '<p>The factors that most influence waitlist conversions:</p><ul><li><strong>Higher GMAT/GRE score:</strong> If your test score was below the median, a significant improvement (20+ points) is the single most impactful update. It removes a red flag and demonstrates commitment.</li><li><strong>Professional achievements:</strong> A promotion, a major project completion, or a quantifiable business impact since you applied.</li><li><strong>Genuine engagement:</strong> Attending admitted student events (if the school invites waitlisted candidates), connecting with current students, and demonstrating real knowledge of the program.</li><li><strong>Commitment signal:</strong> Explicitly stating that the school is your first choice and you will enroll if admitted. Schools want to protect yield.</li></ul>'),
+            ("What Doesn't Help", "<p>Avoid these common waitlist mistakes:</p><ul><li><strong>Bombarding admissions with emails.</strong> One or two substantive updates are appropriate. Weekly check-ins are annoying and signal desperation.</li><li><strong>Additional recommendation letters (unless requested).</strong> Most schools don't want unsolicited letters. If they want more information, they'll ask.</li><li><strong>Repeating your original application narrative.</strong> The committee has already read your essays. Don't restate them. Focus on what's new.</li><li><strong>Visiting campus uninvited.</strong> Unless the school specifically encourages waitlisted candidates to visit, showing up unannounced is awkward, not impressive.</li></ul>"),
+            ("Timeline and Expectations", "<p>Waitlist movement typically follows this pattern:</p><ul><li><strong>March-April:</strong> First-round offers expire. Some candidates withdraw to accept other schools. A small wave of waitlist offers may go out.</li><li><strong>May-June:</strong> The main waitlist movement period. Round 2 deposits are due, and schools have a clearer picture of their class. Most waitlist offers are made during this window.</li><li><strong>July-August:</strong> Late waitlist activity. Some programs continue making offers through the summer as last-minute withdrawals occur. If you haven't heard by late July, the odds are slim.</li></ul><p>Some schools notify waitlisted candidates of their status in waves. Others make you wait until they have a definitive answer. The uncertainty is part of the process. Have a backup plan, but don't give up prematurely.</p>"),
+        ],
+        "faq": [
+            ("What are my odds of getting off the MBA waitlist?", "Typically 5-15% of waitlisted candidates receive offers, though the rate varies significantly by school and year. Schools with larger waitlists (HBS, Wharton) may convert more candidates in absolute numbers. The best thing you can do is submit a strong update and demonstrate genuine commitment."),
+            ("Should I retake the GMAT while waitlisted?", "If your score is below the school's median, yes. A 20+ point improvement is the most impactful update you can provide. If your score is already at or above the median, your time is better spent on professional achievements and school engagement."),
+            ("Can I negotiate a waitlist into an admit?", "You can't negotiate, but you can influence the outcome. Substantive updates, demonstrated commitment, and genuine engagement with the school increase your conversion odds. The admissions committee is looking for reasons to say yes."),
+        ],
+    },
+    {
+        "title": f"Low GPA MBA Admissions Strategy ({CURRENT_YEAR})",
+        "slug": "low-gpa-mba-strategy",
+        "meta": f"How to get into a top MBA program with a low GPA in {CURRENT_YEAR}. Strategies for overcoming a weak academic record. From a Haas MBA grad.",
+        "sections": [
+            ("What Counts as a Low GPA", "<p>Context matters. A 3.3 from MIT engineering is evaluated differently than a 3.3 from a less rigorous program. That said, here are rough benchmarks:</p><ul><li><strong>M7 programs:</strong> Below 3.5 is below median. Below 3.3 requires mitigation.</li><li><strong>Top 15:</strong> Below 3.3 is below median. Below 3.0 requires strong mitigation.</li><li><strong>Top 25:</strong> Below 3.2 is below median. Below 2.8 is a red flag.</li></ul><p>Admissions committees understand that GPA alone doesn't predict MBA success. But a low GPA raises a question: can this candidate handle the academic rigor of our program? Your job is to answer that question convincingly.</p>"),
+            ("The GMAT Offset", """<p>A strong GMAT or GRE score is the most direct way to compensate for a low GPA. It proves current quantitative and analytical ability, which is what the GPA was supposed to demonstrate.</p><p>Rule of thumb: if your GPA is 0.3 below the school's median, aim for a test score 20-30 points above the median. A 3.2 GPA with a 760 GMAT tells a different story than a 3.2 GPA with a 680 GMAT. The high test score says: "My GPA doesn't reflect my current ability."</p>"""),
+            ("The Upward Trend Narrative", "<p>If your GPA improved over time (strong junior and senior year after a rough start), highlight this explicitly. A 2.8 freshman GPA that climbed to a 3.6 by senior year demonstrates growth. Many admissions committees will calculate your last-60-credits GPA separately.</p><p>If your GPA was consistently low, this narrative doesn't apply. Focus instead on professional achievements and test scores.</p>"),
+            ("Professional Track Record", "<p>A strong professional track record is the best long-term offset for a low GPA. If you've been promoted rapidly, managed teams, delivered measurable results, or earned professional certifications (CFA, CPA, PMP), these demonstrate the intellectual capacity that your GPA didn't reflect.</p><p>In your application essays, focus on professional impact. Show quantifiable results: revenue generated, teams led, problems solved. The admissions committee cares more about what you've done recently than what you did as a 19-year-old.</p>"),
+            ("Additional Academic Work", """<p>If your GPA is significantly below the median and your GMAT doesn't fully compensate, consider:</p><ul><li><strong>CFA or CPA certification:</strong> These demonstrate quantitative ability and professional seriousness. Passing the CFA Level 1 or CPA exam is a strong academic signal.</li><li><strong>Quantitative coursework:</strong> Taking statistics, calculus, or financial accounting courses (and earning As) through extension programs at Harvard, Stanford, or other universities shows academic readiness.</li><li><strong>Executive education:</strong> Short programs at business schools provide academic references and demonstrate comfort with MBA-level material.</li></ul><p>These are supplemental strategies, not replacements for GMAT preparation. Start with the test score, then layer in additional credentials as needed.</p>"""),
+            ("Addressing the GPA in Your Application", "<p>Some applications ask you to explain academic performance. If yours does, address it directly and briefly:</p><ul><li><strong>Do:</strong> Acknowledge the low GPA without making excuses. Explain what you learned and how you've demonstrated academic ability since then.</li><li><strong>Don't:</strong> Blame professors, claim the grading was unfair, or write a lengthy defense. Keep it to 2-3 sentences.</li></ul><p>If the application doesn't ask, don't volunteer a long explanation. Let your GMAT score, professional record, and recommendations speak for themselves.</p>"),
+        ],
+        "faq": [
+            ("Can I get into a top MBA with a low GPA?", "Yes. A low GPA is a disadvantage, not a disqualifier. A strong GMAT score (20-30 points above median), compelling professional experience, and a well-crafted application can overcome a weak academic record. Many successful MBA students at M7 programs had undergraduate GPAs below 3.3."),
+            ("What GMAT score do I need to offset a low GPA?", "Aim for 20-30 points above the school's GMAT median. If the median is 730 and your GPA is low, a 750-760 GMAT changes the narrative. The high test score proves current academic ability, which is what admissions committees are trying to assess."),
+            ("Should I explain my low GPA in the application?", "Only if the application specifically asks or if there were extenuating circumstances (illness, family situation, working full-time during school). If it does ask, address it directly and briefly. Don't make excuses. Focus on what you've accomplished since then."),
+        ],
+    },
+    {
+        "title": f"MBA Scholarship Negotiation Guide ({CURRENT_YEAR})",
+        "slug": "mba-scholarship-negotiation",
+        "meta": f"How to negotiate MBA scholarships in {CURRENT_YEAR}. Strategies for increasing your financial aid offer from top business schools. From a Haas MBA grad.",
+        "sections": [
+            ("Yes, You Can Negotiate", "<p>MBA scholarship offers are negotiable at most schools. Not all, but most. Programs want to enroll their top admitted candidates, and scholarship money is a tool they use to compete with peer schools. If you have a competing offer from a peer program, you have leverage.</p><p>The key word is 'peer.' A $50K scholarship from Indiana Kelley won't move the needle at Stanford GSB. But a $40K scholarship from Duke Fuqua gives you negotiating power at Michigan Ross, because they compete for similar candidates. Understanding your school's competitive set is the foundation of effective negotiation.</p>"),
+            ("When and How to Ask", """<p>The process:</p><ol><li><strong>Wait for all offers.</strong> Don't negotiate until you have your full set of admission and scholarship decisions. You need to see the complete picture before making moves.</li><li><strong>Identify your leverage.</strong> Which of your admitted schools compete for the same candidates? Rank them by scholarship generosity and school preference.</li><li><strong>Make the ask.</strong> Email the financial aid office (not the admissions office) at your preferred school. Be professional, specific, and honest. Example: "I've been admitted to [School A] with a $60K scholarship. [Your School] is my top choice, and I'm hoping to discuss whether additional scholarship support might be available."</li><li><strong>Be prepared to share documentation.</strong> Some schools will ask to see the competing offer letter. This is normal.</li></ol>"""),
+            ("What Works", """<ul><li><strong>Competing offers from peer schools.</strong> This is the strongest leverage. An admission with scholarship from a same-tier or higher-tier program creates genuine competitive pressure.</li><li><strong>Professional, specific communication.</strong> State the competing offer amount, express genuine preference for the school you're negotiating with, and ask clearly.</li><li><strong>Timing.</strong> Negotiate within 2-3 weeks of receiving your scholarship offer. Don't wait until the deposit deadline.</li><li><strong>Gratitude and enthusiasm.</strong> Express genuine appreciation for the admission and scholarship. Make it clear you want to attend. Schools increase scholarships for candidates they believe will enroll.</li></ul>"""),
+            ("What Doesn't Work", """<ul><li><strong>Threatening to decline.</strong> Ultimatums backfire. Admissions committees have seen every negotiation tactic. Be collaborative, not adversarial.</li><li><strong>Misrepresenting competing offers.</strong> Lying about scholarship amounts is career suicide. The MBA world is small, and admissions officers talk to each other.</li><li><strong>Negotiating with a non-peer offer.</strong> A scholarship from a school ranked 20 spots below won't create leverage at a top-10 program. Use peer offers only.</li><li><strong>Excessive back-and-forth.</strong> One negotiation round is appropriate. Occasionally two. Three or more is pushing it. Know when to accept or decline.</li></ul>"""),
+            ("Expected Outcomes", "<p>Realistic scholarship negotiation outcomes:</p><ul><li><strong>Best case:</strong> The school matches or comes close to the competing offer. This happens most often at schools ranked 10-25, where scholarship money is used aggressively to compete for candidates.</li><li><strong>Common case:</strong> A $10K-$30K increase. Not a full match, but meaningful. Many schools offer a partial increase as a compromise.</li><li><strong>No increase:</strong> Some schools have firm scholarship policies. HBS and Stanford GSB are need-based only and generally don't negotiate merit awards. If the school says no, accept graciously.</li></ul><p>Even a $20K increase is worth the 30-minute email. Over a 10-year career, that's money you didn't have to repay with interest.</p>"),
+        ],
+        "faq": [
+            ("Can you negotiate MBA scholarships?", "Yes. Most MBA programs (especially those ranked 10-25) will consider increasing scholarship offers when presented with competing offers from peer schools. Some schools (HBS, Stanford GSB) are need-based only and generally don't negotiate."),
+            ("How much can MBA scholarships be negotiated up?", "Typically $10K-$30K per negotiation. In exceptional cases (strong competing offer from a higher-ranked program), schools may match the full competing amount. The outcome depends on your profile strength and the competing offer."),
+            ("When should I negotiate MBA financial aid?", "After you have all admission and scholarship decisions in hand, but at least 2-3 weeks before the deposit deadline. Don't negotiate piecemeal as offers arrive. Wait for the full picture, then make one strategic request."),
+        ],
+    },
+    {
+        "title": f"MBA Letters of Recommendation Guide ({CURRENT_YEAR})",
+        "slug": "mba-recommendation-letters",
+        "meta": f"How to get strong MBA recommendation letters in {CURRENT_YEAR}. Who to ask, what to tell them, and common mistakes. From a Haas MBA grad.",
+        "sections": [
+            ("Who to Ask", "<p>Most MBA programs require two recommendation letters. The ideal combination: your direct supervisor and a senior colleague who has observed your leadership. The worst combination: two famous people who barely know you.</p><p>Admissions committees want recommendations from people who have worked with you closely enough to provide specific examples of your leadership, teamwork, and impact. A detailed letter from a mid-level manager who supervised you daily is more valuable than a vague letter from a CEO you met twice.</p>"),
+            ("When Your Boss Can't Know", "<p>Common dilemma: your direct supervisor doesn't know you're applying to business school, and telling them could jeopardize your job. Solutions:</p><ul><li><strong>Former manager:</strong> A previous supervisor who left the company or who managed you before your current role. They can speak to your performance without alerting your current boss.</li><li><strong>Cross-functional leader:</strong> A senior colleague from another department who has managed you on projects. This works well and provides a different perspective.</li><li><strong>Most programs understand.</strong> HBS, Stanford GSB, and others explicitly state that if you can't ask your current supervisor, they'll accept alternatives. Don't risk your job for a recommendation.</li></ul>"),
+            ("Preparing Your Recommenders", """<p>Don't just ask and disappear. Set your recommenders up for success:</p><ol><li><strong>Share your MBA application narrative.</strong> What are your goals? Why MBA? What strengths do you want highlighted? Give them context.</li><li><strong>Provide 3-5 specific examples.</strong> Remind them of projects where you demonstrated leadership, problem-solving, and impact. They may not remember the details as clearly as you do.</li><li><strong>Share the school's recommendation questions in advance.</strong> Most programs post their recommendation questions. Give your recommenders time to prepare thoughtful responses.</li><li><strong>Set a deadline 2 weeks before the actual deadline.</strong> Recommenders are busy. Build in buffer time.</li></ol>"""),
+            ("Common Mistakes", """<ul><li><strong>Choosing prestige over substance.</strong> A senator who can't provide specific examples is worse than a team lead who can describe your work in detail.</li><li><strong>Not briefing recommenders.</strong> A letter that describes you as "hardworking and reliable" is a death sentence. Brief them on what specific qualities and examples to highlight.</li><li><strong>Asking too late.</strong> Give recommenders at least 6 weeks. Rushed letters read as rushed.</li><li><strong>Using the same examples in your essays and recommendations.</strong> Coordinate with your recommenders to ensure the letters complement your essays rather than repeat them. Different examples, same narrative.</li></ul>"""),
+        ],
+        "faq": [
+            ("How many MBA recommendation letters do I need?", "Most MBA programs require two letters of recommendation. Some accept an optional third. Don't submit a third unless it genuinely adds a new perspective (e.g., a community service leader when your other two are work supervisors)."),
+            ("Can I use a professor as an MBA recommender?", "Only if you're applying directly from undergrad or have very limited work experience. For candidates with 3+ years of professional experience, work supervisors are strongly preferred. Academic recommenders can supplement but shouldn't replace professional references."),
+            ("What if my recommender writes a weak letter?", "You typically can't see the letters, but you can reduce this risk by briefing your recommenders thoroughly. Provide specific examples, share the questions in advance, and follow up. If you suspect a recommender isn't invested, choose someone else."),
+        ],
+    },
+    {
+        "title": f"MBA Work Experience Requirements ({CURRENT_YEAR})",
+        "slug": "mba-work-experience",
+        "meta": f"How much work experience do you need for a top MBA in {CURRENT_YEAR}? Ideal years, too early, too late, and how to position your background.",
+        "sections": [
+            ("The Sweet Spot", f"<p>The average MBA student at a top-15 program has 5 years of work experience. The middle 80% range is 3-7 years. This is the sweet spot: you have enough experience to contribute meaningful perspectives in the classroom, but you're still early enough in your career that the MBA's redirection value is high.</p><p>The averages by tier for {CURRENT_YEAR}:</p><ul><li><strong>M7 programs:</strong> Average 5 years, range 3-8</li><li><strong>Top 15:</strong> Average 5 years, range 3-7</li><li><strong>Top 25:</strong> Average 4-5 years, range 2-7</li></ul>"),
+            ("Too Early (0-2 Years)", "<p>Applying with less than 2 years of experience is an uphill battle at top programs. You haven't had enough time to demonstrate professional impact, lead teams, or develop the perspective that makes classroom contributions valuable. Deferred enrollment programs (HBS 2+2, Yale Silver Scholars, Stanford GSB Deferred) exist for exceptional undergrads, but the acceptance rates are even lower than regular admissions.</p><p>If you're in this camp, consider waiting 1-2 more years. Use the time to earn a promotion, take on leadership responsibility, and build the professional story that applications require.</p>"),
+            ("The Right Time (3-6 Years)", "<p>Three to six years is ideal for most candidates. You've progressed beyond entry-level, demonstrated leadership (even if informally), and built professional expertise that adds value in classroom discussions. You're also young enough that the career redirection value of the MBA is high: you can pivot into a new industry without the salary anchoring that affects older candidates.</p><p>Specifically, the 4-5 year mark is the most competitive. You've likely been promoted at least once, managed a team or project, and have quantifiable professional achievements to write about.</p>"),
+            ("Experienced Candidates (7+ Years)", "<p>Applying with 7+ years of experience is viable but requires a different approach. You're older than the average student, your salary anchoring makes the opportunity cost higher, and admissions committees will scrutinize your reasons for getting an MBA now rather than earlier.</p><p>The successful experienced candidate has a clear, specific reason for the MBA: career pivot that requires the credential, entrepreneurship that requires the network, or international move that requires the degree. Vague reasons ('I want to grow as a leader') are less convincing from someone with 8+ years of experience.</p><p>Consider Executive MBA (EMBA) programs if you have 10+ years of experience and don't want to leave your career for two years.</p>"),
+            ("What Counts as Work Experience", "<p>Full-time professional employment is the standard. Military service, Peace Corps, Teach For America, and other full-time commitments count. Part-time work, internships, and graduate school research generally don't count toward the experience total.</p><p>Quality matters more than quantity. Three years of rapid progression with measurable impact is more compelling than five years of steady-state work. Admissions committees evaluate what you did with your time, not just how much time you spent.</p>"),
+        ],
+        "faq": [
+            ("How many years of work experience do I need for a top MBA?", "The sweet spot is 3-6 years. The average at M7 programs is 5 years. Less than 2 years is a significant disadvantage. More than 7 years is viable but requires a clear rationale for why the MBA makes sense at this stage of your career."),
+            ("Can I apply to MBA programs straight from college?", "Most top programs want at least 2-3 years of work experience. However, deferred enrollment programs (HBS 2+2, Yale Silver Scholars, Stanford Deferred) allow exceptional undergrads to secure an MBA spot while gaining work experience before enrolling."),
+            ("Is 8 years too much experience for an MBA?", "Not necessarily. Many programs have students with 8-10 years of experience. The key is having a clear, specific reason for the MBA that couldn't be achieved through your current career trajectory. Executive MBA programs are worth considering if you have 10+ years."),
+        ],
+    },
+    {
+        "title": f"GMAT Retake Strategy ({CURRENT_YEAR})",
+        "slug": "gmat-retake-strategy",
+        "meta": f"When to retake the GMAT in {CURRENT_YEAR}. Score improvement odds, study strategies, and when additional attempts stop helping.",
+        "sections": [
+            ("When to Retake", "<p>Retake the GMAT if your score is more than 20 points below your target school's median and you have a credible plan for improvement. The average score increase on a second attempt is 30 points. On a third attempt, the average additional increase is 10-15 points. By the fourth attempt, marginal gains are minimal for most test-takers.</p><p>Most programs accept your highest score. Wharton, Booth, and MIT Sloan have all confirmed this. Some schools see all scores but weigh the highest most heavily. A retake with improvement signals determination. A retake without improvement signals a ceiling.</p>"),
+            ("Score Improvement Strategies", """<ul><li><strong>Diagnose your weaknesses.</strong> Don't just study harder. Identify the specific question types where you lose points. GMAT Focus Edition has three sections: Quantitative, Verbal, and Data Insights. Your error pattern reveals where to invest study time.</li><li><strong>Change your approach.</strong> If self-study produced a 680, don't do the same self-study for attempt two. Consider a prep course, a tutor, or a different study program. The definition of insanity applies.</li><li><strong>Increase study hours.</strong> The average successful retaker studies 50-80 additional hours between attempts. This is 3-4 weeks of focused preparation at 15-20 hours per week.</li><li><strong>Time management.</strong> Many retakers lose points not because they don't know the material, but because they spend too much time on hard questions and rush through easier ones. Practice with strict time constraints.</li></ul>"""),
+            ("When to Stop Retaking", "<p>Stop retaking the GMAT if:</p><ul><li>Your score hasn't improved after 3 attempts despite different preparation approaches</li><li>Your score is already at or above the school's median</li><li>You're spending time on GMAT prep that would be better spent on essays, networking, or professional achievements</li><li>The GMAT is the least weak part of your application</li></ul><p>There's an opportunity cost to endless retaking. A 730 with exceptional essays will outperform a 750 with generic essays. At some point, the marginal return on GMAT points is lower than the marginal return on other application components.</p>"),
+            ("GRE as an Alternative", f"""<p>If you've plateaued on the GMAT, consider switching to the GRE. Different question formats suit different thinkers. Some candidates who hit a GMAT ceiling find that the GRE format produces a better score. See our <a href="/guides/gmat-vs-gre/">GMAT vs GRE guide</a> for a detailed comparison.</p><p>Take a cold GRE diagnostic before committing to the switch. If your GRE equivalent score is higher than your GMAT, the switch makes sense. If it's comparable, stick with the GMAT to avoid learning a new test format.</p>"""),
+        ],
+        "faq": [
+            ("How many times can I take the GMAT?", "You can take the GMAT up to 5 times in a 12-month period and 8 times total. Most programs see only your highest score or allow you to choose which scores to send. Two to three attempts is the productive range for most candidates."),
+            ("What's the average GMAT score improvement on a retake?", "The average improvement on a second attempt is approximately 30 points. On a third attempt, additional improvement averages 10-15 points. These averages include both candidates who improved and those who didn't. Your individual improvement depends on how you change your preparation approach."),
+            ("Should I switch to the GRE instead of retaking the GMAT?", "Consider switching if you've plateaued on the GMAT after 2-3 attempts. Take a cold GRE diagnostic first. If your GRE equivalent score is meaningfully higher, the switch is worth it. If scores are similar, stick with the GMAT to avoid learning a new format."),
+        ],
+    },
+]
+
+
+def build_admissions_guides():
+    """Build admissions strategy guide pages."""
+    for g in ADMISSIONS_STRATEGY:
+        sections_html = ""
+        for heading, body in g["sections"]:
+            sections_html += f'<div class="school-section">\n<h2>{heading}</h2>\n{body}\n</div>\n'
+
+        faq_html = ""
+        if g.get("faq"):
+            faq_items = "".join(
+                f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                for q, a in g["faq"]
+            )
+            faq_html = f'\n      <div class="faq-section">\n        <h2>Frequently Asked Questions</h2>\n        {faq_items}\n      </div>'
+
+        bc = breadcrumb_schema([("Home", "/"), ("Guides", "/guides/"), (g["title"], f'/guides/{g["slug"]}/')])
+        adm_faq = faq_schema(g.get("faq", []))
+
+        content = f"""{html_head(
+            f"""{g["title"]} | {SITE_NAME}""",
+            g["meta"],
+            f"""/guides/{g["slug"]}/""",
+            schema=bc + adm_faq
+        )}
+{nav_html('guides')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{g["title"]}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      {sections_html}
+      {faq_html}
+      <div class="affiliate-cta">
+        <div class="gold-rule"></div>
+        <p>Ready to start your MBA journey?</p>
+        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "guides", g["slug"], "index.html"), content)
+    print(f"  Built: {len(ADMISSIONS_STRATEGY)} admissions strategy guides")
+
+
+# =============================================================================
+# PROGRAM FORMAT GUIDES
+# =============================================================================
+
+PROGRAM_FORMAT_GUIDES = [
+    {
+        "title": f"Executive MBA (EMBA) Guide ({CURRENT_YEAR})",
+        "slug": "executive-mba-guide",
+        "meta": f"Executive MBA programs in {CURRENT_YEAR}. When the EMBA makes sense, top programs, costs, and how it compares to the full-time MBA. From a Haas MBA grad.",
+        "sections": [
+            ("Who the EMBA Is For", "<p>The Executive MBA is designed for professionals with 10+ years of experience who want an MBA without leaving their careers. The typical EMBA student is 35-42, earns $150K-$250K, manages a team, and has been tapped for (or is positioning for) senior leadership. They want the credential, the network, and the frameworks without the two-year career interruption.</p><p>If you have 5-7 years of experience and are considering a career change, the full-time MBA is a better fit. The EMBA doesn't provide the recruiting infrastructure or summer internship that makes career pivots possible. It's designed for people who want to accelerate within their current trajectory, not change direction.</p>"),
+            ("Top EMBA Programs", f"""<ul><li><strong>Wharton EMBA (Philadelphia & San Francisco):</strong> The gold standard. Wharton's EMBA runs in both Philadelphia and San Francisco, with classes alternating between coasts. The Wharton brand carries the same weight regardless of format.</li><li><strong>Kellogg-HKUST (Evanston & Hong Kong):</strong> The top EMBA for Asia-focused executives. The dual-campus model provides genuine cross-cultural exposure.</li><li><strong>Chicago Booth EMBA (Chicago, London & Hong Kong):</strong> Booth's flexible curriculum extends to the EMBA format. Three campus options provide global flexibility.</li><li><strong>Columbia EMBA (NYC):</strong> Saturday-format EMBA in Manhattan. The NYC location and Columbia's finance strength make this ideal for financial services executives.</li><li><strong>MIT Sloan EMBA (Cambridge):</strong> Weekend format with MIT's analytical rigor. Strong for tech executives and engineers.</li></ul>"""),
+            ("EMBA vs Full-Time MBA", '<ul><li><strong>Career change:</strong> Full-time MBA wins. The internship and recruiting infrastructure are essential for pivots. EMBA students rarely change industries.</li><li><strong>Career acceleration:</strong> EMBA wins. No income loss, no career gap, and you apply MBA learnings at work in real-time.</li><li><strong>Network:</strong> Different, not better or worse. EMBA classmates are more senior and established. Full-time MBA classmates are more diverse in background and career stage.</li><li><strong>Cost:</strong> Similar tuition ($150K-$200K). Full-time MBA has massive opportunity cost (2 years of lost income). EMBA has lower opportunity cost since you keep working.</li><li><strong>Experience:</strong> Full-time MBA is more immersive and transformative. EMBA is more practical and immediately applicable.</li></ul>'),
+            ("What to Expect", "<p>Most EMBA programs run 18-24 months with classes on alternating weekends (Friday-Saturday or Saturday-Sunday). You'll attend class two days per month and do readings and group projects between sessions. Most programs include 1-2 international residencies (1-2 weeks abroad).</p><p>The workload is significant: expect 15-20 hours per week of preparation and project work on top of your full-time job. The combination is demanding. Your employer, your family, and your personal life will all feel the squeeze. Successful EMBA students set clear expectations with all stakeholders before starting.</p>"),
+            ("Employer Sponsorship", "<p>About 40-50% of EMBA students receive full or partial employer sponsorship. Companies sponsor because the EMBA directly improves job performance: students apply frameworks to real work problems in real-time. The ROI for employers is more tangible than full-time MBA sponsorship.</p><p>If you're asking your employer to sponsor, frame it as a business investment with specific expected outcomes: leadership capacity, strategic thinking, cross-functional skills. Be prepared to commit to staying with the company for 2-3 years post-graduation.</p>"),
+        ],
+        "faq": [
+            ("Is an Executive MBA worth it?", "For career acceleration (not career change), yes. The EMBA adds the MBA credential and network without the two-year career interruption. The ROI is strongest for professionals whose employers sponsor tuition and who apply learnings directly at work."),
+            ("How much does an Executive MBA cost?", "Top EMBA programs cost $150K-$200K in tuition. With 40-50% of students receiving employer sponsorship, the out-of-pocket cost is often lower. The opportunity cost is also lower than full-time MBA, since you continue earning your salary."),
+            ("Can I change careers with an EMBA?", "Rarely. The EMBA doesn't provide summer internships, structured recruiting, or career services designed for industry switchers. If career change is your goal, the full-time MBA is the right format."),
+        ],
+    },
+    {
+        "title": f"Part-Time MBA Guide ({CURRENT_YEAR})",
+        "slug": "part-time-mba-guide",
+        "meta": f"Part-time MBA programs in {CURRENT_YEAR}. Evening and weekend formats, top programs, and whether it's worth it while working. From a Haas MBA grad.",
+        "sections": [
+            ("Who Part-Time MBA Is For", "<p>The part-time MBA is for working professionals who want the MBA degree without quitting their jobs, typically with 3-8 years of experience. Unlike the EMBA (which targets executives with 10+ years), part-time programs serve mid-career professionals who can't afford the income loss of a full-time program but want deeper business education than a certificate provides.</p><p>Part-time programs run 2.5-3 years with evening classes (typically 2-3 nights per week) or weekend classes. You keep your salary, maintain career momentum, and apply what you learn in real-time. The trade-off: you sacrifice evenings, weekends, and personal time for nearly three years.</p>"),
+            ("Top Part-Time Programs", f"""<ul><li><strong>Berkeley Haas Evening & Weekend:</strong> The top-ranked part-time MBA, sharing faculty and curriculum with the full-time program. Bay Area location provides tech and startup proximity.</li><li><strong>Chicago Booth Evening MBA:</strong> Same flexible curriculum as the full-time program. Chicago's central location makes evening classes accessible from across the metro area.</li><li><strong>Northwestern Kellogg Evening & Weekend:</strong> Kellogg's collaborative culture extends to the part-time format. Strong for marketing and consulting-adjacent learning.</li><li><strong>NYU Stern Part-Time:</strong> Manhattan location with evening and weekend options. Strong for finance professionals who want to deepen their expertise without leaving Wall Street.</li><li><strong>UCLA Anderson FEMBA:</strong> Fully Employed MBA with weekend classes. LA's entertainment and tech industries provide strong local application.</li></ul>"""),
+            ("Part-Time vs Full-Time MBA", """<ul><li><strong>Cost:</strong> Tuition is often similar, but part-time students keep their salaries. The total financial impact is dramatically lower than full-time.</li><li><strong>Career change:</strong> Part-time MBA is weaker for career pivots. You don't get the summer internship or structured recruiting that full-time programs provide.</li><li><strong>Network:</strong> Part-time classmates tend to be local professionals in similar career stages. The network is valuable but narrower geographically than full-time programs.</li><li><strong>Credential:</strong> At top programs (Haas, Booth, Kellogg), the diploma is identical to the full-time MBA. Employers increasingly view part-time MBAs from top schools as equivalent to full-time.</li><li><strong>Time commitment:</strong> 2.5-3 years of evening/weekend work. Sustainable, but demanding. Full-time is an intense 2-year sprint; part-time is a longer marathon.</li></ul>"""),
+            ("Is the Degree the Same?", "<p>At top programs, yes. Berkeley Haas, Chicago Booth, and Kellogg award the same MBA degree to part-time and full-time students. Your diploma doesn't say 'part-time.' You take the same courses from the same faculty.</p><p>At some lower-ranked programs, the part-time MBA may have different branding or a more limited curriculum. Research this carefully before enrolling. The value of a part-time MBA comes primarily from the school's overall brand, not the part-time format specifically.</p>"),
+        ],
+        "faq": [
+            ("Is a part-time MBA worth it?", "For career acceleration while working, yes, especially from top programs (Haas, Booth, Kellogg) where the degree is identical to the full-time MBA. For career change, the full-time MBA is a better fit because of structured recruiting and summer internships."),
+            ("How long does a part-time MBA take?", "Typically 2.5-3 years with evening or weekend classes. Some programs offer accelerated options (2 years) for students who can handle a heavier course load."),
+            ("Do employers care if your MBA is part-time?", "At top programs (Haas, Booth, Kellogg, Stern), the diploma is identical to the full-time degree. Most employers don't distinguish. At lower-ranked programs, the part-time format may carry less weight than the full-time equivalent."),
+        ],
+    },
+    {
+        "title": f"Online MBA Programs: Are They Worth It? ({CURRENT_YEAR})",
+        "slug": "online-mba-guide",
+        "meta": f"Online MBA programs in {CURRENT_YEAR}. Which are credible, what they cost, and the honest truth about online MBA career outcomes. From a Haas MBA grad.",
+        "sections": [
+            ("The Honest Assessment", "<p>Online MBAs have improved dramatically, but they're still a different product than in-person programs. The best online MBAs (from schools like Wharton, Indiana Kelley, UNC Kenan-Flagler) deliver strong academics. What they can't replicate: the immersive community, the spontaneous networking, and the structured recruiting that make top full-time programs transformative.</p><p>An online MBA from a top school is a credible credential for career advancement within your current industry. For career changers or candidates seeking the full MBA experience, the online format falls short of in-person programs.</p>"),
+            ("When Online Makes Sense", """<ul><li><strong>You can't relocate.</strong> Family, job, or personal commitments make a full-time or even part-time commute impossible. The online format removes geography.</li><li><strong>You want advancement, not change.</strong> If you want the MBA credential to accelerate in your current field, an online program from a reputable school delivers the education without the career disruption.</li><li><strong>Cost sensitivity.</strong> Online MBAs are often 30-50% cheaper than their in-person equivalents. If minimizing total cost is a priority, the savings are significant.</li><li><strong>International students.</strong> Online MBAs from US schools provide an American business education without the visa requirements. The network is global by default.</li></ul>"""),
+            ("Top Online MBA Programs", f"""<ul><li><strong>Wharton (Online MBA for Executives):</strong> Wharton's brand in an online format. Expensive, but the credential carries the same weight with employers who know Wharton.</li><li><strong>Indiana Kelley (Kelley Direct):</strong> Consistently ranked #1 among online MBAs. Strong curriculum, active student community, and reasonable cost.</li><li><strong>UNC Kenan-Flagler (MBA@UNC):</strong> Well-regarded online program from a top-25 school. Live online classes create more interaction than asynchronous formats.</li><li><strong>Carnegie Mellon Tepper (Online Hybrid):</strong> STEM-designated with CMU's analytical rigor. Weekend residencies supplement online coursework.</li></ul>"""),
+            ("What You Lose", "<p>The honest trade-offs of the online format:</p><ul><li><strong>Recruiting infrastructure:</strong> Online programs don't have the same on-campus recruiting, career fairs, and employer relationships that full-time programs provide. You'll need to drive your own career development.</li><li><strong>Network depth:</strong> Online classmates are spread geographically. You'll build relationships, but the density and spontaneity of in-person networking is missing.</li><li><strong>Immersive experience:</strong> The full-time MBA is designed to be transformative: two years of intense study, social bonding, and personal growth. Online programs deliver education, not transformation.</li><li><strong>Employer perception:</strong> Improving, but some employers still view online MBAs skeptically. This is less true at top-branded programs (Wharton, Kelley) and more true at lesser-known schools.</li></ul>"),
+        ],
+        "faq": [
+            ("Are online MBA programs respected?", "Top-branded online MBAs (Wharton, Indiana Kelley, UNC, CMU Tepper) are increasingly respected by employers. The credential quality depends heavily on the school's overall reputation. Online MBAs from unranked or for-profit schools carry little weight."),
+            ("How much does an online MBA cost?", "Online MBAs range from $20K-$80K at reputable programs, compared to $100K-$200K for top full-time programs. Indiana Kelley Direct is approximately $50K. Wharton's online program is approximately $75K. The savings are significant."),
+            ("Can I change careers with an online MBA?", "Difficult. Online programs lack the summer internship, structured recruiting, and career services that facilitate career changes. For career acceleration in your current field, online MBAs work well. For career pivots, full-time programs are superior."),
+        ],
+    },
+    {
+        "title": f"1-Year MBA Programs ({CURRENT_YEAR})",
+        "slug": "one-year-mba-guide",
+        "meta": f"Best 1-year accelerated MBA programs in {CURRENT_YEAR}. Pros, cons, and whether a shorter MBA is worth it. From a Haas MBA grad.",
+        "sections": [
+            ("The Accelerated Format", "<p>One-year MBA programs compress the MBA into 10-16 months, eliminating the summer internship and reducing elective choices. The format appeals to experienced professionals who want the MBA credential without a full two-year commitment. Most 1-year programs require more pre-MBA business experience (often 5+ years) than their 2-year counterparts.</p><p>In the US, 1-year MBAs are less common than in Europe (where they're the default at INSEAD, LBS, and IMD). Kellogg, Emory Goizueta, and Cornell Johnson offer 1-year options alongside their traditional 2-year programs.</p>"),
+            ("When 1-Year Makes Sense", """<ul><li><strong>You don't need the career switch infrastructure.</strong> Without a summer internship, 1-year programs are less useful for career changers. They work best for professionals continuing in their current industry who want the MBA credential.</li><li><strong>Time is your biggest constraint.</strong> If two years out of the workforce is unacceptable (family obligations, age, opportunity cost), the 1-year format reduces the disruption.</li><li><strong>You have strong pre-MBA business knowledge.</strong> The compressed format skips or condenses foundational courses. If you already know accounting, finance, and statistics, you won't miss the first-year core.</li><li><strong>International programs appeal to you.</strong> INSEAD (France/Singapore), LBS (London), and IMD (Switzerland) are world-class 1-year programs that rival M7 schools in prestige and career outcomes for international careers.</li></ul>"""),
+            ("1-Year Programs to Consider", '<ul><li><strong>Kellogg (1-Year):</strong> For candidates with significant business experience who can waive core courses. Same Kellogg brand and network. Strong for career accelerators.</li><li><strong>Cornell Johnson (Accelerated):</strong> 12-month program starting in May. Designed for experienced professionals. Access to the full Cornell MBA curriculum on a compressed timeline.</li><li><strong>Emory Goizueta (1-Year):</strong> Cohort-based program for experienced professionals. Atlanta location provides corporate recruiting access.</li><li><strong>INSEAD (France/Singapore):</strong> 10 months. Arguably the most prestigious 1-year MBA globally. Two campuses, 90+ nationalities per class. Dominant for international careers, consulting, and PE.</li><li><strong>LBS (London):</strong> 15-21 months (flexible). London location dominates European finance and consulting recruiting.</li></ul>'),
+            ("The Trade-Offs", "<ul><li><strong>No summer internship:</strong> The biggest loss. The summer internship is the primary conversion mechanism for career changers. Without it, you need to secure post-MBA employment through networking and direct applications.</li><li><strong>Fewer electives:</strong> Compressed format means fewer choices. If you want to explore different subjects, the 2-year format provides more intellectual breadth.</li><li><strong>Less time to network:</strong> Relationship-building takes time. One year is enough to build a solid network, but two years creates deeper bonds.</li><li><strong>Same tuition per year:</strong> 1-year programs cost roughly the same per-year tuition as 2-year programs. You save on one year of living expenses and opportunity cost, but you don't save on per-credit costs.</li></ul>"),
+        ],
+        "faq": [
+            ("Is a 1-year MBA worth it?", "For experienced professionals who don't need career change infrastructure, yes. You get the MBA credential and network in half the time. For career changers, the 2-year format with its summer internship is usually the better investment."),
+            ("Which 1-year MBA programs are best?", "In the US: Kellogg, Cornell Johnson, and Emory Goizueta offer strong 1-year options. Internationally: INSEAD and LBS are world-class. INSEAD's 10-month program rivals M7 schools in prestige for international careers."),
+            ("How much cheaper is a 1-year MBA?", "Tuition per year is similar to 2-year programs, but you save one year of living expenses and opportunity cost. The total savings compared to a 2-year MBA at a comparable school is typically $80K-$150K (one year of tuition + living + lost income)."),
+        ],
+    },
+]
+
+
+def build_program_format_guides():
+    """Build program format guide pages (EMBA, part-time, online, 1-year)."""
+    for g in PROGRAM_FORMAT_GUIDES:
+        sections_html = ""
+        for heading, body in g["sections"]:
+            sections_html += f'<div class="school-section">\n<h2>{heading}</h2>\n{body}\n</div>\n'
+
+        faq_html = ""
+        if g.get("faq"):
+            faq_items = "".join(
+                f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                for q, a in g["faq"]
+            )
+            faq_html = f'\n      <div class="faq-section">\n        <h2>Frequently Asked Questions</h2>\n        {faq_items}\n      </div>'
+
+        bc = breadcrumb_schema([("Home", "/"), ("Guides", "/guides/"), (g["title"], f'/guides/{g["slug"]}/')])
+        fmt_faq = faq_schema(g.get("faq", []))
+
+        content = f"""{html_head(
+            f"""{g["title"]} | {SITE_NAME}""",
+            g["meta"],
+            f"""/guides/{g["slug"]}/""",
+            schema=bc + fmt_faq
+        )}
+{nav_html('guides')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{g["title"]}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      {sections_html}
+      {faq_html}
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">See also: <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a> &middot; <a href="/guides/mba-application-timeline/">Application Timeline</a> &middot; <a href="/rankings/overall/">Overall Rankings</a></p>
+      </div>
+      <div class="affiliate-cta">
+        <div class="gold-rule"></div>
+        <p>Ready to start your MBA journey?</p>
+        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "guides", g["slug"], "index.html"), content)
+    print(f"  Built: {len(PROGRAM_FORMAT_GUIDES)} program format guides")
+
+
+# =============================================================================
+# SALARY DEEP DIVES
+# =============================================================================
+
+SALARY_GUIDES = [
+    {
+        "title": f"MBA Salary by Industry ({CURRENT_YEAR})",
+        "slug": "mba-salary-by-industry",
+        "meta": f"MBA salaries by industry in {CURRENT_YEAR}. Consulting, finance, tech, healthcare, and more. Real compensation data from school employment reports.",
+        "sections": [
+            ("The Salary Landscape", f"<p>MBA salaries vary dramatically by industry. A first-year consultant at McKinsey and a first-year hospital administrator both have MBAs, but the compensation gap can be $100K+. Understanding these differences before you apply helps you evaluate ROI, choose the right school, and set realistic expectations.</p><p>All salary data below reflects {CURRENT_YEAR} reported figures from top-25 MBA program employment reports and GMAC surveys. These are median base salaries for first-year post-MBA roles, before signing bonuses and equity.</p>"),
+            ("Consulting", """<p><strong>Median base: $190K | Median total first-year: $220K-$250K</strong></p><p>Management consulting pays the most consistent salaries across MBA programs. MBB (McKinsey, BCG, Bain) pays a standard $190K base with $25K-$35K signing bonus across all offices. Big 4 consulting (Deloitte, PwC, EY, KPMG) pays $165K-$180K base. Boutique strategy firms vary more widely ($150K-$200K).</p><p>The consulting salary advantage: predictability. Unlike finance (where bonuses swing wildly) or tech (where equity value fluctuates), consulting compensation is transparent and standardized. You know what you'll earn before you accept.</p>"""),
+            ("Investment Banking", '<p><strong>Median base: $175K | Median total first-year: $275K-$425K</strong></p><p>IB associates earn lower base salaries than consultants but make up the difference in bonuses. Bulge bracket banks (Goldman, Morgan Stanley, JPMorgan) pay $175K base with $100K-$200K year-end bonuses. Elite boutiques (Evercore, Lazard, Centerview) pay comparable bases with higher bonuses ($150K-$250K).</p><p>The IB bonus is the variable. It depends on deal volume, firm profitability, and individual performance. In strong years, total compensation exceeds $400K. In weak years, it can drop to $275K. The average over a cycle is roughly $325K-$375K.</p>'),
+            ("Technology", '<p><strong>Median base: $165K-$190K | Median total first-year: $220K-$300K</strong></p><p>Tech compensation is base + equity + bonus. The base is often lower than consulting, but the equity component (RSUs or stock options) pushes total compensation higher. At FAANG companies (Meta, Apple, Amazon, Netflix, Google), MBA hires receive equity grants of $100K-$300K vesting over 4 years.</p><p>The equity upside is the draw. If you join a pre-IPO company, that equity could be worth multiples of the grant value. If the company struggles, it could be worth less. Tech compensation has higher variance than consulting or banking, but the ceiling is much higher.</p>'),
+            ("Private Equity & Hedge Funds", """<p><strong>Median base: $175K-$250K | Median total first-year: $300K-$650K</strong></p><p>PE and hedge fund compensation is the highest for first-year MBA hires. Mega-fund PE associates (Blackstone, KKR, Apollo) earn $200K-$250K base with $200K-$400K in bonuses. Hedge fund compensation varies more widely depending on the fund's strategy and size.</p><p>The long-term play is carried interest (PE) or performance fees (hedge funds). These don't materialize for years, but they're the engine of wealth creation in alternative investments. Senior professionals earn $1M-$10M+ annually.</p>"""),
+            ("Healthcare & Pharma", '<p><strong>Median base: $140K-$170K | Median total first-year: $160K-$220K</strong></p><p>Healthcare MBA salaries are lower than finance or consulting but compensate with job stability and purpose. Pharma strategy roles at Pfizer, J&J, and Merck pay $150K-$180K base. Healthcare consulting (McKinsey Healthcare, Huron) pays at standard consulting rates. Hospital administration pays $120K-$160K with strong long-term trajectory into C-suite roles.</p>'),
+            ("Consumer Goods & Retail", '<p><strong>Median base: $130K-$155K | Median total first-year: $150K-$180K</strong></p><p>CPG companies (P&G, Unilever, PepsiCo) and retailers (Amazon, Walmart, Target) hire MBAs into brand management, strategy, and operations roles. Base salaries are lower than finance or consulting, but the career trajectory into general management is clearer. CPG brand managers who perform well can reach VP-level roles ($300K+) within 8-10 years.</p>'),
+        ],
+        "faq": [
+            ("What industry pays MBA graduates the most?", "Private equity and hedge funds offer the highest first-year total compensation ($300K-$650K), followed by investment banking ($275K-$425K) and management consulting ($220K-$250K). Technology total compensation can match banking through equity, but base salaries are lower."),
+            ("How much do MBA consultants make?", "MBB consultants (McKinsey, BCG, Bain) earn $190K base with $25K-$35K signing bonus and $20K-$30K year-end bonus. Total first-year compensation is approximately $235K-$255K. Big 4 consultants earn slightly less, with bases of $165K-$180K."),
+            ("Do MBA salaries vary by school?", "Yes, significantly. M7 graduates earn median base salaries of $175K-$195K. Top-15 graduates earn $155K-$175K. Top-25 graduates earn $140K-$165K. The school premium reflects both employer access and self-selection effects."),
+        ],
+    },
+    {
+        "title": f"MBA Salary by City ({CURRENT_YEAR})",
+        "slug": "mba-salary-by-city",
+        "meta": f"MBA salaries by city in {CURRENT_YEAR}. How much you'll earn in NYC, SF, Chicago, Boston, and other major metros. Cost-adjusted analysis.",
+        "sections": [
+            ("Why Location Matters", "<p>A $190K salary in San Francisco and a $160K salary in Atlanta are not as different as they look. Cost of living, state income tax, and housing costs dramatically affect your real purchasing power. The MBA graduate earning $165K in Dallas (no state income tax, $1,500/month rent) may have more discretionary income than the graduate earning $195K in New York City (high state + city income tax, $3,500/month rent).</p>"),
+            ("New York City", """<p><strong>Median MBA salary: $185K | Cost-adjusted: Medium</strong></p><p>NYC offers the highest volume of MBA-level positions in finance, consulting, and media. The absolute salaries are high, but state + city income tax (combined 10-12%) and rent ($2,500-$4,000/month) eat into purchasing power. NYC makes sense if you're in finance (where NYC comp premiums are real) or if you value the career density.</p>"""),
+            ("San Francisco Bay Area", """<p><strong>Median MBA salary: $180K base + $80K-$150K equity | Cost-adjusted: Medium-High</strong></p><p>Bay Area MBA salaries look moderate in base terms, but equity compensation pushes total comp well above other cities. California state income tax (13.3% top rate) is the highest in the country. Rent ($2,800-$4,500/month in SF/Palo Alto) is extreme. The cost-adjusted picture: strong if your equity pays off, mediocre if it doesn't.</p>"""),
+            ("Chicago", '<p><strong>Median MBA salary: $170K | Cost-adjusted: High</strong></p><p>Chicago offers the best cost-adjusted MBA salary among major metros. Illinois income tax is a flat 4.95% (lower than CA or NY). Rent in good neighborhoods runs $1,500-$2,200/month. Two M7 programs (Booth, Kellogg) produce high salaries in consulting and finance. The cost-adjusted purchasing power is 15-25% higher than NYC or SF at similar nominal salaries.</p>'),
+            ("Boston", '<p><strong>Median MBA salary: $175K | Cost-adjusted: Medium</strong></p><p>Boston salaries are strong, driven by consulting (BCG and Bain HQ), biotech, and tech. Massachusetts income tax is a flat 5%. Rent in Cambridge or Somerville runs $2,000-$3,000/month. The cost-adjusted picture is between NYC and Chicago: not cheap, but not as punishing as SF or Manhattan.</p>'),
+            ("Dallas-Houston-Austin", '<p><strong>Median MBA salary: $155K-$170K | Cost-adjusted: Very High</strong></p><p>Texas has no state income tax. Rent in Dallas or Houston runs $1,200-$1,800/month. Austin is pricier ($1,500-$2,200) but still well below coastal cities. The cost-adjusted purchasing power for Texas MBAs is among the highest in the country. A $160K salary in Dallas provides more discretionary income than a $195K salary in NYC.</p>'),
+            ("Atlanta", '<p><strong>Median MBA salary: $150K-$165K | Cost-adjusted: Very High</strong></p><p>Atlanta combines Fortune 500 headquarters (Coca-Cola, Delta, Home Depot) with affordable living. Georgia income tax tops out at 5.49%. Rent runs $1,200-$2,000/month. The cost-adjusted MBA salary in Atlanta is excellent, and the quality of life is high.</p>'),
+        ],
+        "faq": [
+            ("Which city offers the best MBA salary?", "NYC and SF offer the highest nominal MBA salaries ($180K-$195K base). But cost-adjusted, Chicago, Dallas, Houston, and Atlanta provide more purchasing power. The best city depends on your industry: finance favors NYC, tech favors SF, and cost-conscious careers favor Chicago or Texas."),
+            ("Does location affect MBA starting salary?", "Yes. The same role at the same company often pays differently by office location. Consulting firms pay geographic differentials (NYC and SF offices pay more than regional offices). Tech companies have location-based pay bands. Finance salaries are most standardized regardless of location."),
+            ("Should I choose my MBA program based on salary by city?", "Choose based on career goals first, city second. If you want finance, NYC programs make sense regardless of cost of living. If you have flexibility on industry, cost-adjusted salary is a legitimate factor. Dallas, Chicago, and Atlanta offer strong MBA outcomes at lower cost."),
+        ],
+    },
+    {
+        "title": f"MBA Signing Bonuses by School ({CURRENT_YEAR})",
+        "slug": "mba-signing-bonuses",
+        "meta": f"MBA signing bonuses by school and industry in {CURRENT_YEAR}. What to expect from consulting, banking, and tech employers. From a Haas MBA grad.",
+        "sections": [
+            ("What Signing Bonuses Look Like", f"<p>Most MBA employers offer signing bonuses in addition to base salary. These one-time payments range from $10K at some corporate roles to $100K+ at PE firms. The signing bonus is negotiable at many companies (tech especially) and is often the most flexible component of a compensation package.</p><p>Median signing bonuses by industry for {CURRENT_YEAR}:</p><ul><li><strong>Management consulting (MBB):</strong> $25,000-$35,000</li><li><strong>Investment banking:</strong> $50,000-$75,000</li><li><strong>Private equity:</strong> $50,000-$100,000</li><li><strong>Technology (FAANG):</strong> $25,000-$50,000</li><li><strong>Corporate strategy/LDP:</strong> $15,000-$30,000</li><li><strong>Healthcare/pharma:</strong> $15,000-$25,000</li></ul>"),
+            ("Signing Bonuses by School Tier", """<p>The school you attend affects your signing bonus indirectly, because it determines which employers recruit on campus:</p><ul><li><strong>M7 programs:</strong> Average signing bonus $30K-$50K. Higher because more graduates enter high-paying fields (PE, banking, consulting) that offer larger bonuses.</li><li><strong>Top 15 programs:</strong> Average signing bonus $25K-$35K. Strong consulting and banking placement produces solid bonus numbers.</li><li><strong>Top 25 programs:</strong> Average signing bonus $20K-$30K. More graduates enter corporate roles with lower bonus structures.</li></ul><p>The school brand doesn't directly cause higher bonuses. The correlation exists because top schools place more graduates into industries that pay large bonuses.</p>"""),
+            ("Negotiating Your Signing Bonus", "<p>Signing bonuses are often more negotiable than base salary, especially in tech. Strategies:</p><ul><li><strong>Competing offers:</strong> If you have a higher signing bonus from another employer, share it. Many companies will match or increase.</li><li><strong>Relocation costs:</strong> If you're relocating for the job, frame the signing bonus as relocation support. Some companies have separate relocation packages that stack on top of the signing bonus.</li><li><strong>Timing:</strong> Negotiate before you sign the offer letter. Once you've accepted, leverage disappears.</li><li><strong>Don't forget clawbacks:</strong> Many signing bonuses require you to stay for 12-24 months. If you leave early, you may have to repay a prorated amount. Understand the terms before signing.</li></ul>"),
+        ],
+        "faq": [
+            ("What's the average MBA signing bonus?", "The average MBA signing bonus across all industries is approximately $30K. This varies significantly by industry: consulting ($25K-$35K), banking ($50K-$75K), PE ($50K-$100K), tech ($25K-$50K), corporate ($15K-$30K)."),
+            ("Are MBA signing bonuses negotiable?", "Often, yes. Tech companies are the most flexible on signing bonuses. Consulting and banking bonuses are more standardized but can sometimes be increased with competing offers. Corporate signing bonuses vary widely by company."),
+            ("Do all MBA employers offer signing bonuses?", "No. About 70-80% of major MBA employers offer signing bonuses. Some companies (particularly in CPG, nonprofit, and government) may not offer signing bonuses or offer smaller amounts ($5K-$10K). Consulting, banking, and tech are the most reliable for significant signing bonuses."),
+        ],
+    },
+]
+
+
+def build_salary_guides():
+    """Build salary and compensation deep-dive pages."""
+    for g in SALARY_GUIDES:
+        sections_html = ""
+        for heading, body in g["sections"]:
+            sections_html += f'<div class="school-section">\n<h2>{heading}</h2>\n{body}\n</div>\n'
+
+        faq_html = ""
+        if g.get("faq"):
+            faq_items = "".join(
+                f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                for q, a in g["faq"]
+            )
+            faq_html = f'\n      <div class="faq-section">\n        <h2>Frequently Asked Questions</h2>\n        {faq_items}\n      </div>'
+
+        bc = breadcrumb_schema([("Home", "/"), ("Salary Data", "/salary/"), (g["title"], f'/salary/{g["slug"]}/')])
+        sal_faq = faq_schema(g.get("faq", []))
+
+        content = f"""{html_head(
+            f"""{g["title"]} | {SITE_NAME}""",
+            g["meta"],
+            f"""/salary/{g["slug"]}/""",
+            schema=bc + sal_faq
+        )}
+{nav_html('rankings')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{g["title"]}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      {sections_html}
+      {faq_html}
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">See also: <a href="/rankings/salary/">Highest Salary Rankings</a> &middot; <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a> &middot; <a href="/tools/roi-calculator/">ROI Calculator</a></p>
+      </div>
+      <div class="affiliate-cta">
+        <div class="gold-rule"></div>
+        <p>Ready to start your MBA journey?</p>
+        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "salary", g["slug"], "index.html"), content)
+    print(f"  Built: {len(SALARY_GUIDES)} salary guides")
+
+
+# =============================================================================
+# FAQ PAGES
+# =============================================================================
+
+FAQ_PAGES = [
+    {"slug": "what-gmat-score-do-i-need", "question": "What GMAT Score Do I Need for a Top MBA?",
+     "meta": f"GMAT score requirements for top MBA programs in {CURRENT_YEAR}. Target scores for M7, top 15, and top 25 programs.",
+     "answer": f"""<p>Target GMAT scores by program tier for {CURRENT_YEAR}:</p><ul><li><strong>M7 programs (Stanford, HBS, Wharton, etc.):</strong> 730+ (median 738)</li><li><strong>Top 15 (Haas, Duke, Yale, etc.):</strong> 710+ (median 720)</li><li><strong>Top 25 (McCombs, Tepper, UNC, etc.):</strong> 690+ (median 705)</li><li><strong>Top 50:</strong> 660+ (median 680)</li></ul><p>These are medians, not minimums. Admissions committees evaluate holistically. A 700 GMAT with exceptional work experience and essays can beat a 750 with a generic application at any school. The test score gets you past the initial screen. Everything else gets you admitted.</p><p>See our <a href="/guides/gmat-vs-gre/">GMAT vs GRE guide</a> for a detailed comparison of both tests, and our <a href="/guides/gmat-retake-strategy/">GMAT retake strategy</a> for advice on improving your score.</p>""",
+     "faq": [("Is a 700 GMAT good enough for M7?", "A 700 is below the median at most M7 programs (median 730-740), but not automatically disqualifying. Strong work experience, compelling essays, and demonstrated leadership can compensate. That said, a higher score removes ambiguity."), ("Do MBA programs prefer GMAT over GRE?", "Most programs accept both equally. Finance-heavy programs (Wharton, Booth, Columbia) may have a subtle GMAT preference. For most applicants, the test you score higher on is the right choice.")]},
+    {"slug": "can-i-get-mba-without-work-experience", "question": "Can I Get an MBA Without Work Experience?",
+     "meta": f"Can you get into a top MBA with no work experience? Deferred programs, minimum requirements, and alternatives in {CURRENT_YEAR}.",
+     "answer": f"""<p>Most top MBA programs require 2-3 years minimum work experience. The average is 5 years. Applying with zero professional experience puts you at a significant disadvantage because you can't contribute professional perspectives to classroom discussions, and employers want MBA hires who already have professional maturity.</p><p>The exception: deferred enrollment programs. HBS 2+2, Yale Silver Scholars, and Stanford GSB Deferred allow exceptional undergrads to secure an MBA spot while gaining 2-4 years of work experience before enrolling. These programs are extremely selective (lower acceptance rates than regular admissions) but provide a path for outstanding candidates.</p><p>See our <a href="/guides/mba-work-experience/">work experience guide</a> for details on how much experience you need and how to position different backgrounds.</p>""",
+     "faq": [("What's the minimum work experience for an MBA?", "There's no absolute minimum at most programs, but 2-3 years is the practical floor. Below that, your application needs to be exceptional in every other dimension (GMAT, essays, leadership, recommendations)."), ("Are deferred MBA programs competitive?", "Very. HBS 2+2 and Stanford Deferred accept fewer applicants percentage-wise than their regular admissions cycles. They're designed for truly exceptional undergrads with demonstrated leadership.")]},
+    {"slug": "easiest-top-mba-programs", "question": "What Are the Easiest Top MBA Programs to Get Into?",
+     "meta": f"Most accessible top-ranked MBA programs in {CURRENT_YEAR}. Acceptance rates and realistic chances at top 25 schools.",
+     "answer": f"""<p>No top-25 MBA program is easy to get into. But acceptance rates vary significantly within the top 25:</p><ul><li><strong>Most selective:</strong> Stanford GSB (6.9%), HBS (11%), Columbia (13%)</li><li><strong>Very selective:</strong> Wharton (13%), MIT Sloan (14%), Yale SOM (17%)</li><li><strong>Selective:</strong> Kellogg (19%), Booth (21%), Duke Fuqua (22%)</li><li><strong>More accessible top 25:</strong> Washington Foster (27%), Indiana Kelley (32%), Texas McCombs (30%)</li></ul><p>Higher acceptance rates don't mean lower quality. Washington Foster has 50% tech placement. Indiana Kelley has a top-5 supply chain program. Texas McCombs benefits from Austin's booming tech economy. These programs offer genuine value at less competitive admissions odds.</p><p>If you're looking to maximize your chances at a ranked program, apply to 6-8 schools across selectivity tiers. See our <a href="/schools/">school profiles</a> for detailed data on each program.</p>""",
+     "faq": [("Which top-25 MBA has the highest acceptance rate?", f"Among top-25 programs, Indiana Kelley (32%) and Texas McCombs (30%) have the highest acceptance rates for {CURRENT_YEAR}. These are strong programs that offer excellent career outcomes despite being less competitive to enter."), ("Does a higher acceptance rate mean the school is worse?", "No. Acceptance rate reflects applicant volume relative to class size. Some excellent programs have fewer applicants because of location, size, or reputation for specific industries. The outcomes, not the acceptance rate, determine value.")]},
+    {"slug": "mba-vs-masters", "question": "MBA vs Master's Degree: Which Is Right for You?",
+     "meta": f"MBA vs specialized master's in {CURRENT_YEAR}. When to get an MBA, MS in Finance, MS in Data Science, or other graduate degrees.",
+     "answer": """<p>The MBA is a generalist degree that prepares you for leadership across functions and industries. A specialized master's (MS Finance, MS Data Science, MS Marketing, etc.) provides deep expertise in a single domain. The right choice depends on your career goals:</p><ul><li><strong>Choose an MBA if:</strong> You want career flexibility, you want to lead cross-functional teams, or you're changing industries entirely. The MBA's value is breadth and network.</li><li><strong>Choose a master's if:</strong> You know exactly what you want to do (quantitative finance, data science, accounting), you want deep technical skills, or you want a shorter, cheaper program. Most master's programs are 1 year and cost 50-70% less than an MBA.</li></ul><p>The MBA has a clear advantage for consulting, general management, and leadership roles. The specialized master's has an advantage for technical roles where depth matters more than breadth. For finance, either can work: the MBA opens more doors, but an MS Finance provides deeper technical preparation.</p><p>See our <a href="/guides/mba-roi-analysis/">MBA ROI analysis</a> for a detailed look at whether the MBA investment makes financial sense for your situation.</p>""",
+     "faq": [("Is an MBA better than a master's degree?", "It depends on your goals. MBAs are better for career changers, aspiring leaders, and generalists. Specialized master's degrees are better for technical depth, lower cost, and known career paths. Both are valuable credentials."), ("Which pays more, MBA or MS?", "MBAs earn higher median salaries ($155K-$195K) than most specialized master's degrees ($80K-$130K). The gap reflects the MBA's access to high-paying industries (consulting, banking, PE) rather than inherent degree superiority. An MS in quantitative finance at a top school can match MBA salaries.")]},
+    {"slug": "is-mba-worth-it-for-engineers", "question": "Is an MBA Worth It for Software Engineers?",
+     "meta": f"Should software engineers get an MBA in {CURRENT_YEAR}? Honest analysis of ROI, career paths, and when to skip it.",
+     "answer": f"""<p>If you're a software engineer earning $200K+ at a FAANG company, the MBA ROI is complicated. The salary uplift is modest (tech PM comp is $250K-$350K vs $200K+ as a senior engineer). The MBA's value for high-earning engineers is career trajectory change: moving from individual contributor to business leader, or gaining access to VC, startup founding, or executive-track roles.</p><p>The MBA makes sense if you want to:</p><ul><li>Transition to product management at a company that recruits MBAs (Google, Amazon, Meta)</li><li>Move into venture capital (technical VCs are in demand)</li><li>Found a company and need the network, credibility, and business skills</li><li>Shift from engineering to corporate strategy or general management</li></ul><p>The MBA doesn't make sense if you're happy as an engineer and primarily want a salary increase. The two-year opportunity cost ($400K+ in lost engineering comp) is hard to recoup through salary alone.</p><p>See our <a href="/guides/best-mba-for-engineers/">Best MBA for Engineers guide</a> for specific program recommendations.</p>""",
+     "faq": [("Can I go from software engineer to PM without an MBA?", "Yes, through internal transfers or adjacent roles. But the MBA is the most structured path, with dedicated PM hiring programs at Google, Amazon, and Meta that don't require prior PM experience."), ("What's the salary difference between senior engineer and MBA PM?", "Senior engineers at FAANG earn $200K-$350K total comp. MBA PMs at the same companies earn $220K-$350K total comp. The salary overlap is significant. The MBA value for engineers is career trajectory (PM to VP to C-suite) rather than immediate salary uplift.")]},
+]
+
+
+def build_faq_pages():
+    """Build individual FAQ/question pages."""
+    for fq in FAQ_PAGES:
+        faq_html = ""
+        if fq.get("faq"):
+            faq_items = "".join(
+                f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                for q, a in fq["faq"]
+            )
+            faq_html = f'\n      <div class="faq-section">\n        <h2>Related Questions</h2>\n        {faq_items}\n      </div>'
+
+        bc = breadcrumb_schema([("Home", "/"), ("Answers", "/answers/"), (fq["question"], f'/answers/{fq["slug"]}/')])
+        page_faq = faq_schema(fq.get("faq", []))
+
+        page = f"""{html_head(
+            f"""{fq["question"]} | {SITE_NAME}""",
+            fq["meta"],
+            f"""/answers/{fq["slug"]}/""",
+            schema=bc + page_faq
+        )}
+{nav_html('guides')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{fq["question"]}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      <div class="school-section">
+        {fq["answer"]}
+      </div>
+      {faq_html}
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">See also: <a href="/guides/">All Guides</a> &middot; <a href="/schools/">School Profiles</a> &middot; <a href="/rankings/overall/">Rankings</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "answers", fq["slug"], "index.html"), page)
+    print(f"  Built: {len(FAQ_PAGES)} FAQ pages")
+
+
+# =============================================================================
+# GMAT CALCULATOR TOOL
+# =============================================================================
+
+def build_gmat_calculator():
+    """Build GMAT target score calculator tool."""
+    school_options = ""
+    for s in sorted(SCHOOLS, key=lambda x: x["ranking"]):
+        school_options += f'      <option value="{s["avg_gmat"]}" data-name="{s["short_name"]}" data-rank="{s["ranking"]}" data-ar="{s["acceptance_rate"]}">{s["short_name"]} (#{s["ranking"]})</option>\n'
+
+    bc = breadcrumb_schema([("Home", "/"), ("Tools", "/tools/"), ("GMAT Calculator", "/tools/gmat-calculator/")])
+    content = f"""{html_head(
+        f"GMAT Target Score Calculator | {SITE_NAME}",
+        "Find the GMAT score you need for your target MBA program. Select a school and see the target score, competitive range, and preparation advice.",
+        "/tools/gmat-calculator/",
+        schema=bc
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>GMAT Target Score Calculator</h1>
+      <p class="hero-subtitle">What score do you need for your target school?</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+      <div class="roi-form" id="gmat-form">
+        <div class="roi-field">
+          <label for="target-school">Target School</label>
+          <select id="target-school">
+            <option value="">Select a school...</option>
+{school_options}
+          </select>
+        </div>
+        <div class="roi-field">
+          <label for="current-score">Your Current GMAT Score (optional)</label>
+          <input type="number" id="current-score" placeholder="e.g., 680" min="200" max="800">
+        </div>
+        <button class="btn btn-accent" onclick="calculateGMAT()" style="margin-top: 8px;">Calculate Target Score</button>
+      </div>
+
+      <div id="gmat-results" style="display:none; margin-top: 32px;">
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Target Score</span><span class="stat-value" id="target-score-val">-</span></div>
+          <div class="stat-item"><span class="label">Competitive Range</span><span class="stat-value" id="comp-range">-</span></div>
+          <div class="stat-item"><span class="label">Score Gap</span><span class="stat-value" id="score-gap">-</span></div>
+          <div class="stat-item"><span class="label">Acceptance Rate</span><span class="stat-value" id="accept-rate">-</span></div>
+        </div>
+
+        <div class="school-section" id="gmat-advice" style="margin-top: 24px;"></div>
+      </div>
+
+      <div class="school-section" style="margin-top: 48px;">
+        <h2>How This Calculator Works</h2>
+        <p>The target score is the school's class average GMAT. The competitive range shows the middle 80% of admitted students (approximately +/- 20 points from the average). Scoring within the competitive range means your test score won't hold you back. Scoring below it means other parts of your application need to compensate.</p>
+        <p>Remember: GMAT is one factor in a holistic review. A score 20 points below target with exceptional essays and work experience can still result in admission. A score 20 points above target with a generic application won't guarantee it.</p>
+        <p>For help choosing between the GMAT and GRE, see our <a href="/guides/gmat-vs-gre/">GMAT vs GRE guide</a>. For retake strategy, see our <a href="/guides/gmat-retake-strategy/">GMAT retake guide</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    content = content.replace("</body>", """
+<script>
+function calculateGMAT() {
+  var sel = document.getElementById('target-school');
+  var avg = parseInt(sel.value);
+  if (!avg) return;
+  var name = sel.options[sel.selectedIndex].dataset.name;
+  var rank = sel.options[sel.selectedIndex].dataset.rank;
+  var ar = sel.options[sel.selectedIndex].dataset.ar;
+  var current = parseInt(document.getElementById('current-score').value) || 0;
+  var low = avg - 20;
+  var high = avg + 20;
+  document.getElementById('target-score-val').textContent = avg;
+  document.getElementById('comp-range').textContent = low + '-' + high;
+  document.getElementById('accept-rate').textContent = ar + '%';
+  var gapText = '-';
+  if (current > 0) {
+    var gap = avg - current;
+    if (gap > 0) gapText = '+' + gap + ' needed';
+    else if (gap === 0) gapText = 'At target';
+    else gapText = Math.abs(gap) + ' above';
+  }
+  document.getElementById('score-gap').textContent = gapText;
+  var advice = '';
+  if (current > 0 && current >= high) {
+    advice = '<h3>Strong Position</h3><p>Your ' + current + ' is above the competitive range for ' + name + '. Your GMAT won\\'t hold you back. Focus your energy on essays, recommendations, and school-specific fit. See the <a href="/schools/">school profiles</a> for what each program values.</p>';
+  } else if (current > 0 && current >= low) {
+    advice = '<h3>Competitive Range</h3><p>Your ' + current + ' is within the competitive range for ' + name + '. You\\'re in the game. A retake could help if you have time, but improving your essays and professional narrative may provide a better return on effort.</p>';
+  } else if (current > 0 && current >= low - 30) {
+    advice = '<h3>Below Target</h3><p>Your ' + current + ' is below the competitive range for ' + name + '. A GMAT retake should be a priority. Aim for ' + avg + ' or higher. See our <a href="/guides/gmat-retake-strategy/">GMAT retake guide</a> for strategies. In the meantime, strong essays and work experience can partially compensate.</p>';
+  } else if (current > 0) {
+    advice = '<h3>Significant Gap</h3><p>Your ' + current + ' is significantly below ' + name + '\\'s average of ' + avg + '. Consider intensive GMAT prep, the GRE as an alternative (see <a href="/guides/gmat-vs-gre/">GMAT vs GRE</a>), or targeting programs where your score is more competitive. See our <a href="/rankings/overall/">rankings</a> to explore options.</p>';
+  } else {
+    advice = '<h3>Target: ' + avg + '</h3><p>Aim for ' + avg + ' or higher for ' + name + ' (#' + rank + '). The competitive range is ' + low + '-' + high + '. Start with a diagnostic test to see where you stand. Budget 100-150 hours of study over 2-4 months.</p>';
+  }
+  document.getElementById('gmat-advice').innerHTML = advice;
+  document.getElementById('gmat-results').style.display = 'block';
+}
+</script>
+</body>""")
+    write_page(os.path.join(OUTPUT_DIR, "tools", "gmat-calculator", "index.html"), content)
+    print("  Built: GMAT target score calculator")
+
+
+
+# =============================================================================
+# MAIN
+# =============================================================================
+
+def main():
+    print(f"\n{SITE_NAME} — Building site...\n")
+
+    # Clean output
+    if os.path.exists(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
+    os.makedirs(OUTPUT_DIR)
+
+    # Copy assets
+    copy_assets()
+
+    # Build all pages
+    build_homepage()
+    build_school_listing()
+    build_school_profiles()
+    build_school_subpages()
+    build_comparison_index()
+    build_comparison_pages()
+    build_ranking_pages()
+    build_guide_pages()
+    build_about()
+    build_newsletter()
+    build_blog_index()
+    build_roi_calculator()
+    build_metro_pages()
+    build_admissions_guides()
+    build_program_format_guides()
+    build_salary_guides()
+    build_faq_pages()
+    build_gmat_calculator()
+    build_sitemap()
+    build_robots()
+
+    # Count pages
+    count = sum(1 for root, dirs, files in os.walk(OUTPUT_DIR)
+                for f in files if f.endswith('.html'))
+    print(f"\nDone! Generated {count} HTML pages.")
+    print("Preview: cd output && python3 -m http.server 8084")
+
+
+if __name__ == "__main__":
+    main()
