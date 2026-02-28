@@ -1855,6 +1855,11 @@ th.sortable.desc::after {
   color: var(--color-text-muted);
 }
 
+.tier-badge.tier-6 {
+  background: rgba(107, 114, 128, 0.04);
+  color: var(--color-text-muted);
+}
+
 /* --------------------------------------------------------------------------
    Tools Grid
    -------------------------------------------------------------------------- */
