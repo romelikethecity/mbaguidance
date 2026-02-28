@@ -2,20 +2,32 @@
 
 ## Current State (Feb 28, 2026)
 
-**823 pages live.** 100 schools (50 original + 25 Tier 5 + 25 Tier 6). Homepage updated with Tier 6 filter. Expansion Phase 1 in progress.
+**850 pages live.** 100 schools (50 original + 25 Tier 5 + 25 Tier 6). 25 ranking pages (5 original + 20 specialty). Homepage updated with Tier 6 filter. Expansion Phase 1 in progress.
 
 ### What Exists
 - **100 school profiles** at `/schools/{slug}/` (M7 through Tier 6)
 - **35 comparison pages** at `/compare/{a}-vs-{b}/`
 - **22 guide pages** at `/guides/{slug}/`
 - **25 blog posts** at `/blog/{slug}/`
-- **5 ranking pages** at `/rankings/{category}/` (overall, finance, tech, consulting, entrepreneurship)
+- **25 ranking pages** at `/rankings/{category}/` (overall + ROI + salary + selectivity + career-changers + 20 specialties)
 - **15 metro pages** at `/metro/{city}-mba-programs/`
 - **Tools:** ROI calculator, GMAT target score calculator
 - **FAQ pages** at `/faq/{topic}/`
 - **Homepage:** Dashboard layout with stats ticker, headline, pathways, article list, top 10 table, GMAT inline tool, comparisons, newsletter CTA. Tier 5 and Tier 6 filter buttons added.
 
-### What Was Just Completed (Session 4 — Schools 76-100)
+### What Was Just Completed (Session 5 — Specialty Rankings + Fixes)
+1. **20 new specialty ranking pages** added at `/rankings/{specialty}/`:
+   - Finance, Consulting, Entrepreneurship, Technology, Supply Chain, Marketing
+   - Healthcare, Real Estate, International Business, Accounting, Data Science & AI
+   - Sustainability, Energy, PE & VC, Management, Nonprofit, Quantitative Analysis
+   - Information Systems, Value (Affordable), Product Management
+2. Each ranking page has curated school lists (10-25 schools per specialty) with nav labels
+3. **Duplicate schools fixed:** Replaced Northeastern D'Amore-McKim (#77, duplicate of #50) with Bentley; replaced Tulane Freeman (#98, duplicate of #47) with Syracuse Whitman
+4. Overall ranking limit expanded from 50 to 100 schools
+5. Ranking nav updated with `nav_label` support for cleaner display names
+6. Build verified: 850 pages generated successfully
+
+### Previous Session (Session 4 — Schools 76-100)
 1. **25 new Tier 6 schools added** (rankings 76-100), all with full data model:
    - NC State Jenkins (#76), Northeastern D'Amore-McKim (#77), Iowa Tippie (#78), SUNY Buffalo (#79), Oklahoma Price (#80)
    - Howard (#81), Oregon Lundquist (#82), Denver Daniels (#83), Alabama Manderson (#84), Arkansas Walton (#85)
@@ -46,43 +58,14 @@
 
 ## The Expansion Plan
 
-### Goal: 1,500-2,000+ pages (from current 823)
+### Goal: 1,500-2,000+ pages (from current 850)
 
 ### 1. Expand Schools: 100 → 150
 - **Tier 7 (101-150):** ~50 schools (TO ADD)
 - Each profile generates 7 pages (profile + 6 subpages), so 50 more schools = ~350 more pages
 
-### 2. Tag Schools with Specialty Strengths → Build 20-25 Specialty Ranking Pages
-
-**The competitive advantage:** US News charges $30-40/yr for specialty rankings. Bloomberg charges $340-415/yr. FT charges $540-900/yr. We give it away free.
-
-**Tag each school with specialty strengths**, then generate ranking pages at `/rankings/{specialty}/`.
-
-#### 13 US News Specialties (match them)
-1. Accounting
-2. Entrepreneurship
-3. Finance
-4. Information Systems
-5. International Business
-6. Management
-7. Marketing
-8. Nonprofit Management
-9. Production/Operations
-10. Project Management
-11. Real Estate
-12. Supply Chain/Logistics
-13. Quantitative Analysis
-
-#### 8+ Career-Path Rankings (US News misses these)
-14. Consulting
-15. Private Equity & Venture Capital
-16. Technology & Product
-17. Healthcare Management
-18. Data Science & AI
-19. Sustainability & Social Impact
-20. Product Management
-21. AI & Machine Learning
-22. Energy
+### 2. Specialty Ranking Pages — DONE (20 new pages)
+All 20 specialty rankings built with curated school lists. See `/rankings/{specialty}/`.
 
 ### 3. Expand Comparisons
 
@@ -115,6 +98,7 @@ Expand from 25 to 50+:
 - **Pattern:** All data inline in `build.py` (Provyx single-file pattern)
 - **Stack:** Static HTML/CSS/JS. No frameworks. GitHub Pages hosting.
 - **CSS:** `assets/css/style.css` with `CSS_VERSION = 7` cache-busting
+- **Rankings:** 25 total (5 metric-based + 20 specialty with curated `filter_slugs`)
 - **Fonts:** Playfair Display (headings), Source Sans 3 (body)
 - **Colors:** Navy `#0A1628`, Gold `#C9A84C`, Warm Ivory `#F7F5F0`
 
@@ -169,14 +153,14 @@ Copy-paste to continue in a new window:
 ```
 Continue building mbaguidance.com. Project at /Users/rome/Documents/projects/mbaguidance/. Read CLAUDE.md and HANDOFF.md for full context.
 
-Current state: 823 pages, 100 schools (Tiers 1-6 done). Build: python3 build.py.
+Current state: 850 pages, 100 schools (Tiers 1-6), 25 ranking pages (20 specialty), 35 comparisons, 15 metros. Build: python3 build.py.
 
 Next steps in the expansion plan:
 
-1. Tag all 100 schools with specialty strengths, then build 20-25 specialty ranking pages at /rankings/{specialty}/. This is the highest-value next step — free specialty rankings that US News charges $30-40/yr for.
-2. After rankings: Expand comparisons from 35 to 75-100+.
-3. After comparisons: Expand metros from 15 to 30+.
-4. After metros: Add schools 101-150 (Tier 7).
+1. Expand comparisons from 35 to 75-100+. Cross-tier comparisons (e.g., "Kelley vs Ross"), regional matchups, specialty matchups. Each comparison follows the existing data model in COMPARISONS.
+2. Expand metros from 15 to 30+. Add Nashville, Austin, Raleigh, Salt Lake City, Sacramento, Pittsburgh, etc.
+3. More blog posts: expand from 25 to 50+. "Is [School] Worth It?" series, salary deep-dives, career-switcher guides.
+4. Add schools 101-150 (Tier 7). 50 more schools = ~350 more pages.
 5. Target: 1,500-2,000+ total pages.
 
 Follow all writing rules in CLAUDE.md. Zero tolerance on false reframes, em-dashes, banned words. Stop at ~50% context, commit, update HANDOFF.md, provide resume prompt.
