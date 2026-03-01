@@ -5670,6 +5670,918 @@ COMPARISONS = [
          ("Which is cheaper after aid?", "Ole Miss with Palmer assistantships (net ~$3,250/year) is cheaper than Memphis ($12,300/year). Without Palmer funding, they're comparable."),
          ("Which has a better online MBA?", "Ole Miss's online MBA is ranked #33 nationally by US News. Memphis has a solid online option but doesn't match Ole Miss's online ranking."),
      ]},
+    {"a": 'louisville', "b": 'kentucky-gatton',
+     "choose_a": "you want Louisville's healthcare and logistics employer connections with Humana and UPS in your backyard.",
+     "choose_b": 'you want a higher-ranked program (#64 vs #119) with stronger career services and broader alumni placement.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>These are Kentucky's two flagship MBA programs. Kentucky Gatton (#64) in Lexington outranks Louisville (#119) by 55 spots. Both are affordable. Gatton produces higher average salaries and has stronger national visibility. Louisville wins on healthcare employer access, with Humana and UPS headquarters in the city.</p>"),
+         ('The Honest Take', "<p>Gatton is the better MBA on paper and by outcomes. If you want to stay in Kentucky and work in healthcare administration or logistics, Louisville's location advantage is real. For anything else, Gatton's higher ranking and stronger career placement make it the rational choice. The tuition difference is minimal between the two.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Kentucky Gatton (#64) outranks Louisville (#119) by a significant margin.'),
+         ('Which is better for healthcare?', "Louisville has the edge in healthcare because of Humana's headquarters and UofL Health. Gatton has healthcare connections too, but Louisville's are more concentrated."),
+         ('Which has better salary outcomes?', 'Gatton produces higher average salaries, reflecting its stronger national placement. Louisville salaries are solid for the regional market.'),
+     ]},
+    {"a": 'uab-collat', "b": 'alabama-manderson',
+     "choose_a": "you want an MBA inside one of the country's largest academic medical centers with direct healthcare management access.",
+     "choose_b": 'you want a higher-ranked program (#87 vs #116) with the Alabama brand, SEC network, and broader industry placement.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Alabama's two major MBA programs serve different markets. Alabama Manderson (#87) in Tuscaloosa has the flagship university brand and broader placement. UAB Collat (#116) in Birmingham sits inside a $7 billion healthcare system. Manderson outranks Collat and has stronger alumni networks. Collat wins decisively for healthcare careers.</p>"),
+         ('The Honest Take', "<p>For healthcare management, UAB Collat is the better choice by a wide margin. UAB Health System is one of the largest academic medical centers in the country, and MBA students get direct exposure. For everything else, Manderson's higher ranking, SEC network, and broader placement make it the stronger pick. Both are affordable.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Alabama Manderson (#87) outranks UAB Collat (#116).'),
+         ('Which is better for healthcare?', "UAB Collat, by a wide margin. It sits inside one of the nation's largest academic medical centers. No MBA program in the Southeast is more embedded in healthcare."),
+         ('Which has the stronger alumni network?', "Manderson's SEC network and Alabama brand create a broader alumni base. UAB's alumni network is concentrated in Birmingham healthcare."),
+     ]},
+    {"a": 'memphis-fogelman', "b": 'tennessee-haslam',
+     "choose_a": 'you want supply chain and logistics training in the FedEx capital with lower tuition and no state income tax.',
+     "choose_b": 'you want a higher-ranked program (#72 vs #126) with broader industry placement and the UT Knoxville alumni network.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Tennessee public MBA programs with no state income tax advantage. Tennessee Haslam (#72) in Knoxville significantly outranks Memphis Fogelman (#126). Haslam has stronger overall career outcomes. Memphis wins specifically for supply chain careers because FedEx headquarters and the world's largest cargo airport are right there.</p>"),
+         ('The Honest Take', "<p>Haslam is the better MBA overall. Stronger ranking, better salary outcomes, broader placement. Memphis wins only for supply chain and logistics, where the FedEx proximity creates employer access that Haslam can't match. If supply chain is your career, Memphis makes sense. For everything else, Haslam is the clear choice.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Tennessee Haslam (#72) outranks Memphis Fogelman (#126) significantly.'),
+         ('Which is better for supply chain?', "Memphis Fogelman, because of FedEx headquarters and the largest cargo airport in the world. This is Memphis's defining advantage."),
+         ('Which is cheaper?', 'Both benefit from no Tennessee state income tax. Memphis has slightly lower tuition and significantly lower cost of living than Knoxville.'),
+     ]},
+    {"a": 'loyola-chicago-quinlan', "b": 'marquette',
+     "choose_a": "you want a Chicago Loop location with direct access to Chicago's corporate headquarters and financial district.",
+     "choose_b": "you want a higher-ranked program (#78 vs #108) with strong supply chain training and Milwaukee's lower cost of living.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Jesuit MBA programs in the upper Midwest. Marquette (#78) in Milwaukee outranks Loyola Chicago Quinlan (#108). Loyola's downtown Chicago Loop location gives it access to a much larger job market. Marquette's smaller class size and Milwaukee's lower cost of living create a different value proposition.</p>"),
+         ('The Honest Take', "<p>If you want to work in Chicago, Loyola Quinlan's Loop location is hard to beat at this tier. If you want a higher-ranked MBA with lower living costs and strong Jesuit values-based education, Marquette in Milwaukee delivers. Chicago is an hour north of Milwaukee, so both schools can access each other's markets. Loyola wins on location; Marquette wins on ranking.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Marquette (#78) outranks Loyola Chicago Quinlan (#108).'),
+         ('Which has better job market access?', "Loyola Quinlan's downtown Chicago Loop location provides access to more Fortune 500 headquarters than any city except NYC. Milwaukee's job market is solid but smaller."),
+         ('Which is more affordable overall?', "Marquette's tuition is similar, but Milwaukee's cost of living is 20-30% lower than downtown Chicago. Total cost of attendance favors Marquette."),
+     ]},
+    {"a": 'suffolk-sawyer', "b": 'bentley',
+     "choose_a": 'you want a downtown Boston MBA with evening/weekend flexibility and direct access to the Financial District.',
+     "choose_b": 'you want a higher-ranked program (#69 vs #114) with stronger finance and accounting placement.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Boston-area MBA programs below the BU/BC/Northeastern tier. Bentley (#69) in Waltham is a finance and accounting powerhouse with higher rankings and salary outcomes. Suffolk Sawyer (#114) in downtown Boston wins on location, sitting in the Financial District with easy access to State Street, Fidelity, and Boston's professional services firms.</p>"),
+         ('The Honest Take', "<p>Bentley is the stronger MBA by almost every metric: ranking, salary, employer relationships in finance and accounting. Suffolk's advantage is pure location. If you're working full-time in downtown Boston and need a flexible MBA, Suffolk is convenient. For a full-time MBA with the best career outcomes, Bentley wins despite its suburban campus.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Bentley (#69) outranks Suffolk Sawyer (#114) significantly.'),
+         ('Which is better for finance?', "Bentley. It's one of the best finance and accounting MBA programs outside the top-50 nationally. Suffolk has finance exposure through its downtown location but can't match Bentley's depth."),
+         ('Which is more convenient for working professionals?', "Suffolk Sawyer's downtown Boston Financial District location is more accessible for working professionals in the city. Bentley's Waltham campus requires a commute from Boston proper."),
+     ]},
+    {"a": 'fiu-chapman', "b": 'miami-herbert',
+     "choose_a": "you want international business training with Latin American connections at a fraction of Herbert's cost.",
+     "choose_b": 'you want a much higher-ranked program (#46 vs #109) with stronger career outcomes and a nationally recognized brand.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Miami MBA programs, but the gap is massive. Miami Herbert (#46) is a top-50 program with strong international business reputation. FIU Chapman (#109) serves a more regional market but has deep Latin American business connections and in-state tuition under $20K/year. Herbert costs roughly 3x more.</p>'),
+         ('The Honest Take', "<p>If you can get into Herbert and afford it, it's the better MBA by a wide margin. Higher ranking, stronger salary outcomes, better brand nationally. FIU wins on affordability and Latin American connections. For students who plan to work in South Florida's Latin American business corridor and want to minimize debt, FIU is a rational choice. For national career ambitions, Herbert is worth the premium.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Miami Herbert (#46) outranks FIU Chapman (#109) by over 60 positions.'),
+         ('Which is better for international business?', 'Herbert has the stronger international brand. FIU has deeper practical connections to Latin American markets due to its student body and alumni network in the region.'),
+         ('Which is more affordable?', 'FIU Chapman at roughly $18K/year in-state is dramatically cheaper than Herbert at approximately $55K/year.'),
+     ]},
+    {"a": 'portland-state', "b": 'oregon-lundquist',
+     "choose_a": "you want Portland's urban campus with sustainability focus, tech sector access, and evening program flexibility.",
+     "choose_b": "you want a higher-ranked program (#84 vs #132) with the Oregon Ducks brand and Eugene's lower cost of living.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Oregon's two public MBA programs take different approaches. Oregon Lundquist (#84) in Eugene has the higher ranking and the Ducks athletic brand. Portland State (#132) in downtown Portland has direct access to Nike, Intel, Columbia Sportswear, and Portland's growing tech scene. Both emphasize sustainability. Lundquist costs slightly more.</p>"),
+         ('The Honest Take', "<p>Lundquist is the better-ranked MBA and produces stronger salary outcomes. Portland State wins on location if your career targets are in Portland. Nike, Intel, and Columbia Sportswear are more accessible from Portland State's urban campus than from Eugene (2 hours south). For students who will work in Portland after graduation, PSU's location advantage offsets the ranking gap.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Oregon Lundquist (#84) outranks Portland State (#132).'),
+         ('Which has better employer access?', "Portland State's urban campus puts you closer to Nike, Intel, Columbia Sportswear, and Portland's tech scene. Lundquist in Eugene requires relocating or commuting for Portland employer events."),
+         ('Which is stronger for sustainability?', 'Both emphasize sustainability. Portland State has a longer track record in social enterprise. Lundquist has stronger ties to the outdoor industry through Nike and Columbia Sportswear relationships.'),
+     ]},
+    {"a": 'seton-hall-stillman', "b": 'fordham-gabelli',
+     "choose_a": 'you want a more affordable NYC metro MBA with strong pharmaceutical industry connections in NJ.',
+     "choose_b": 'you want a higher-ranked program (#52 vs #122) in the Bronx/Manhattan with better finance and media placement.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Catholic MBA programs in the NYC metro with Jesuit traditions. Fordham Gabelli (#52) at Lincoln Center and Rose Hill has the higher ranking, Manhattan location, and stronger finance alumni. Seton Hall Stillman (#122) in South Orange, NJ is more affordable and closer to NJ's pharmaceutical corridor. Both access the NYC job market.</p>"),
+         ('The Honest Take', "<p>Fordham is the stronger MBA on every metric except cost. Its Manhattan presence and finance alumni network create real career advantages. Seton Hall wins on affordability and NJ pharma access. If your budget is tight and your target is NJ-based industries (pharma, insurance, professional services), Seton Hall delivers. For finance or media careers in Manhattan, Fordham's brand carries more weight.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Fordham Gabelli (#52) outranks Seton Hall Stillman (#122) by 70 positions.'),
+         ('Which is better for finance in NYC?', 'Fordham. Its Lincoln Center campus, Wall Street alumni, and higher ranking give it a clear finance advantage in the NYC market.'),
+         ('Which is more affordable?', 'Seton Hall Stillman is significantly more affordable than Fordham. For NJ-based careers, the cost savings can be substantial.'),
+     ]},
+    {"a": 'old-dominion-strome', "b": 'william-mary-mason',
+     "choose_a": "you want defense and military career connections with the world's largest naval base in your backyard.",
+     "choose_b": 'you want a much higher-ranked program (#59 vs #139) with the William & Mary brand and Colonial Williamsburg location.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Virginia public MBA programs, 50 miles apart. William & Mary Mason (#59) in Williamsburg carries the prestige of one of America's oldest universities. Old Dominion Strome (#139) in Norfolk sits in the defense capital of the US. The ranking gap is massive (80 positions). The career focus is completely different.</p>"),
+         ('The Honest Take', "<p>Mason is the dramatically better MBA by ranking, salary, and brand. Old Dominion wins only for defense-specific careers where Norfolk's military ecosystem creates irreplaceable employer access. If defense contracting or military transition is your path, ODU's location matters more than Mason's ranking. For any other career goal, Mason is worth the drive to Williamsburg.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'William & Mary Mason (#59) outranks Old Dominion Strome (#139) by 80 positions.'),
+         ('Which is better for defense careers?', "Old Dominion Strome. Norfolk is home to the world's largest naval base and major defense contractors (Huntington Ingalls, BAE Systems). No Virginia MBA is more embedded in the defense sector."),
+         ('Which has better overall career outcomes?', 'William & Mary Mason, by a wide margin. Its higher ranking and broader alumni network produce better salary outcomes and more diverse placement.'),
+     ]},
+    {"a": 'duquesne-palumbo-donahue', "b": 'pitt-katz',
+     "choose_a": 'you want a smaller Jesuit MBA with sustainability focus and personalized attention in Pittsburgh.',
+     "choose_b": 'you want a higher-ranked program (#54 vs #106) with UPMC healthcare connections and the Pitt research university brand.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Pittsburgh's two non-Tepper MBA programs sit just 2 miles apart. Pitt Katz (#54) leverages the University of Pittsburgh's healthcare and research connections. Duquesne Palumbo-Donahue (#106) offers a smaller Jesuit MBA with an ethics and sustainability emphasis. Katz outranks Duquesne by 52 positions.</p>"),
+         ('The Honest Take', "<p>Katz is the stronger MBA by ranking and employer connections, especially in healthcare (UPMC is one of the nation's largest health systems). Duquesne wins on class size and personalized experience. If you want healthcare or you want the best Pittsburgh MBA below Tepper, Katz is the move. If you want a values-driven business education with a smaller cohort, Duquesne's Jesuit approach has real appeal.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Pitt Katz (#54) outranks Duquesne Palumbo-Donahue (#106) by 52 positions.'),
+         ('Which is better for healthcare?', "Pitt Katz, because UPMC is the dominant employer and the university's medical school creates healthcare management pipelines. Duquesne has healthcare coursework but can't match Katz's UPMC connections."),
+         ('Which has smaller class sizes?', "Duquesne's MBA is significantly smaller, which means more personalized faculty attention and a tighter peer network."),
+     ]},
+    {"a": 'rit-saunders', "b": 'syracuse-whitman',
+     "choose_a": "you want a tech-focused MBA with RIT's engineering brand in Rochester's optics and imaging corridor.",
+     "choose_b": 'you want a higher-ranked program (#76 vs #101) with the Syracuse brand, supply chain strength, and ACC athletic network.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Upstate New York MBA programs about 80 miles apart. Syracuse Whitman (#76) in Syracuse has the higher ranking and the Orange brand name. RIT Saunders (#101) in Rochester leverages RIT's technology and engineering reputation. Whitman's supply chain program is nationally ranked. RIT's tech industry connections are its differentiator.</p>"),
+         ('The Honest Take', "<p>Whitman is the higher-ranked program with better national brand recognition and strong supply chain placement. RIT wins for students who want tech-adjacent careers (IT management, product development, engineering management) where RIT's technology reputation opens doors that Syracuse can't. The Upstate NY job market is small for both, so most graduates recruit nationally.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Syracuse Whitman (#76) outranks RIT Saunders (#101).'),
+         ('Which is better for tech?', "RIT Saunders leverages RIT's engineering and technology reputation. For tech management or product roles, RIT's brand carries weight with tech employers."),
+         ('Which has the stronger alumni network?', "Syracuse's larger alumni base and ACC athletic brand create more networking touchpoints nationally. RIT's alumni network is smaller but concentrated in technology."),
+     ]},
+    {"a": 'hofstra-zarb', "b": 'fordham-gabelli',
+     "choose_a": 'you want a Long Island MBA with finance training at lower cost and a suburban campus experience.',
+     "choose_b": 'you want a higher-ranked program (#52 vs #123) in Manhattan with stronger Wall Street connections.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are NYC metro MBA programs accessible to the same commuter population. Fordham Gabelli (#52) has a Manhattan campus at Lincoln Center with direct Wall Street pipeline. Hofstra Zarb (#123) in Hempstead, Long Island is more affordable with a suburban campus. The ranking gap is significant (71 positions), and Fordham's Manhattan location creates career advantages that Hofstra can't match from Long Island.</p>"),
+         ('The Honest Take', "<p>Fordham is the better MBA. Manhattan location, higher ranking, stronger finance alumni. Hofstra wins on cost and convenience for Long Island residents. If you live on Long Island and want a solid regional MBA without the Manhattan commute, Hofstra works. For career ambitions that require NYC employer access, Fordham's Lincoln Center campus is worth the premium.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Fordham Gabelli (#52) outranks Hofstra Zarb (#123) by 71 positions.'),
+         ('Which is more affordable?', 'Hofstra Zarb is significantly more affordable than Fordham Gabelli, with lower tuition and Long Island living costs below Manhattan rates.'),
+         ('Which is better for finance?', "Fordham. Its Manhattan location and Wall Street alumni create finance career pipelines that Hofstra can't replicate from Long Island."),
+     ]},
+    {"a": 'scranton-kania', "b": 'temple-fox',
+     "choose_a": 'you want a small Jesuit MBA with healthcare management focus and low cost of living in northeastern PA.',
+     "choose_b": 'you want a higher-ranked program (#67 vs #148) in Philadelphia with broader industry access and stronger career outcomes.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Pennsylvania MBA programs, but they occupy different tiers. Temple Fox (#67) in Philadelphia is a top-70 program in a major metro. Scranton Kania (#148) in Scranton is a small Jesuit MBA in a much smaller market. The ranking gap (81 positions) reflects significant differences in career outcomes, employer access, and program resources.</p>'),
+         ('The Honest Take', "<p>Temple Fox is the stronger MBA by every quantifiable metric. Philadelphia's job market, employer network, and alumni base are far larger than Scranton's. Scranton wins for students who want a small-cohort Jesuit experience with healthcare management training and prefer northeastern PA's low cost of living. For career outcomes, Temple is worth the Philadelphia cost premium.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Temple Fox (#67) outranks Scranton Kania (#148) by 81 positions.'),
+         ('Which is more affordable to attend?', "Scranton's tuition plus Scranton's extremely low cost of living make it the cheaper overall experience. Temple in Philadelphia costs more in tuition and living expenses."),
+         ('Which has better career outcomes?', "Temple Fox, by a significant margin. Philadelphia's job market provides access to employers that Scranton's smaller market can't match."),
+     ]},
+    {"a": 'north-texas-ryan', "b": 'smu-cox',
+     "choose_a": "you want a large public MBA with supply chain and analytics focus at a fraction of SMU's private school tuition.",
+     "choose_b": "you want a much higher-ranked program (#42 vs #129) with Dallas's strongest executive network and finance placement.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Dallas-Fort Worth MBA programs. SMU Cox (#42) is a top-50 private MBA with deep Dallas corporate connections. North Texas Ryan (#129) is a large public MBA with lower tuition and growing analytics and supply chain programs. The ranking gap (87 positions) reflects SMU's established employer relationships, alumni power, and career outcomes. The tuition gap is equally dramatic.</p>"),
+         ('The Honest Take', "<p>SMU Cox is the dramatically better MBA for anyone who can afford it. Its Dallas corporate connections (AT&T, ExxonMobil, Deloitte, Goldman Sachs) and alumni network are among the strongest in Texas. North Texas wins on affordability: in-state tuition under $15K/year vs SMU's $55K+. For working professionals in DFW who want an MBA without significant debt, UNT is the budget-rational choice.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'SMU Cox (#42) outranks North Texas Ryan (#129) by 87 positions.'),
+         ('Which is more affordable?', 'North Texas Ryan with in-state tuition under $15K/year is roughly one-quarter the cost of SMU Cox at $55K+/year.'),
+         ('Which has the stronger Dallas network?', "SMU Cox. Its alumni dominate Dallas boardrooms, and the school's corporate partnerships with AT&T, ExxonMobil, and Texas-based firms are deep."),
+     ]},
+    {"a": 'unlv-lee', "b": 'arizona-state-carey',
+     "choose_a": 'you want a hospitality-focused MBA in the gaming capital of the world with no state income tax.',
+     "choose_b": 'you want a much higher-ranked program (#29 vs #130) with tech innovation focus and one of the largest MBA alumni networks.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Western state school MBAs in desert cities. ASU Carey (#29) in Tempe is a top-30 program with massive scale and strong tech placement. UNLV Lee (#130) in Las Vegas specializes in hospitality and gaming. The ranking gap is enormous (101 positions). These serve completely different career goals.</p>'),
+         ('The Honest Take', '<p>ASU Carey is the objectively better MBA for almost every career path. Top-30 ranking, strong tech and supply chain placement, enormous alumni network. UNLV Lee wins only for hospitality, gaming, and entertainment management, where Las Vegas provides access that no other city can match. If your career is casino management or resort operations, UNLV makes sense. For everything else, ASU is the clear choice.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'ASU Carey (#29) dramatically outranks UNLV Lee (#130).'),
+         ('Which is better for hospitality?', 'UNLV Lee. Las Vegas is the global center of the gaming and resort industry. No MBA program provides better hospitality employer access.'),
+         ('Which has better overall career outcomes?', "ASU Carey, by a very wide margin. Its tech placement, supply chain program, and massive alumni network create career opportunities that UNLV can't approach for non-hospitality careers."),
+     ]},
+    {"a": 'ucf', "b": 'fiu-chapman',
+     "choose_a": 'you want a Central Florida MBA connected to the simulation, aerospace, and theme park industries in Orlando.',
+     "choose_b": 'you want an international business MBA in Miami with deep Latin American connections and lower tuition.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are large Florida public MBA programs serving different markets. UCF (#112) in Orlando is connected to defense simulation, aerospace (Lockheed Martin, L3Harris), and the hospitality/tourism industry. FIU Chapman (#109) in Miami has deep Latin American business connections and international trade focus. Both are affordable in-state options.</p>'),
+         ('The Honest Take', "<p>FIU has a slight edge on ranking (#109 vs #112) and wins for international business, especially anything Latin America-facing. UCF wins for aerospace, defense, and Orlando's specific employer ecosystem. Both are solid regional MBAs at similar price points. Your choice should come down to geography and industry: Miami + Latin America = FIU. Orlando + defense/tech/tourism = UCF.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', "FIU Chapman (#109) edges UCF (#112), though they're essentially peers in ranking."),
+         ('Which is better for international business?', "FIU Chapman, due to Miami's Latin American business corridor and FIU's bilingual student body."),
+         ('Which is better for defense and aerospace?', "UCF. Orlando's defense simulation corridor (Lockheed Martin, L3Harris, Northrop Grumman) creates employer access that FIU can't match."),
+     ]},
+    {"a": 'utsa-alvarez', "b": 'texas-am-mays',
+     "choose_a": "you want San Antonio's affordable MBA with cybersecurity and analytics strengths and military connections.",
+     "choose_b": 'you want a much higher-ranked program (#34 vs #134) with the Aggie network and broader national placement.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Texas public MBAs, but the gap is significant. Texas A&M Mays (#34) in College Station is a top-35 nationally ranked program with one of the most loyal alumni networks in the country. UTSA Alvarez (#134) in San Antonio is a growing program with cybersecurity and analytics strengths. Mays produces higher salaries and has broader placement. UTSA costs less and San Antonio's military bases create specific career pipelines.</p>"),
+         ('The Honest Take', '<p>Mays is the dramatically stronger MBA. Top-35 ranking, the Aggie network (one of the most passionate alumni bases in higher education), and broader career outcomes. UTSA wins on affordability and San Antonio-specific careers, particularly for military-connected students near JBSA and the growing cybersecurity sector. For ROI-focused Texas students with modest career ambitions, UTSA is budget-rational. For national career ambitions, Mays is the clear choice.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Texas A&M Mays (#34) dramatically outranks UTSA Alvarez (#134).'),
+         ('Which is more affordable?', "UTSA Alvarez with San Antonio's low cost of living is the cheaper overall experience, even though both have competitive in-state tuition."),
+         ('Which has the stronger alumni network?', 'Texas A&M Mays. The Aggie network is one of the most loyal and active alumni communities in American higher education.'),
+     ]},
+    {"a": 'kent-state-crawford', "b": 'ohio-state-fisher',
+     "choose_a": "you want Northeast Ohio's most affordable MBA with data analytics focus and a flexible program format.",
+     "choose_b": 'you want a much higher-ranked program (#27 vs #121) with one of the strongest supply chain programs in the country.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Ohio public MBAs at very different tiers. Ohio State Fisher (#27) is a top-30 program with nationally ranked supply chain and marketing programs. Kent State Crawford (#121) in Kent is a more affordable regional option with growing data analytics strengths. Fisher costs more (especially out-of-state) but produces significantly better career outcomes.</p>'),
+         ('The Honest Take', "<p>Fisher is the dramatically better MBA. Top-30 ranking, nationally ranked supply chain program, Fortune 500 employer access in Columbus. Kent State wins only on affordability and accessibility for Northeast Ohio working professionals. If you can get into Fisher and fund it, there's no comparison. Kent State is a rational choice for budget-constrained students who plan to stay in the Akron-Cleveland market.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Ohio State Fisher (#27) dramatically outranks Kent State Crawford (#121).'),
+         ('Which is better for supply chain?', "Ohio State Fisher has one of the top-5 supply chain programs in the country. Kent State can't match this depth."),
+         ('Which is more affordable?', "Kent State Crawford is significantly more affordable, especially with Northeast Ohio's low cost of living."),
+     ]},
+    {"a": 'hawaii-shidler', "b": 'sdsu-fowler',
+     "choose_a": 'you want Asia-Pacific business focus with the only AACSB-accredited MBA in Hawaii and island lifestyle.',
+     "choose_b": 'you want a higher-ranked program (#82 vs #137) in San Diego with tech and defense career access.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Pacific-region state school MBAs with beach lifestyle appeal. SDSU Fowler (#82) in San Diego offers stronger career outcomes and access to Qualcomm, defense contractors, and biotech. Hawaii Shidler (#137) in Honolulu is the gateway to Asia-Pacific business. SDSU costs less when factoring in Hawaii's elevated cost of living. Fowler produces higher salaries.</p>"),
+         ('The Honest Take', "<p>SDSU Fowler is the better MBA for mainland career outcomes. San Diego's tech, defense, and biotech employers create real career pipelines. Hawaii Shidler wins for Asia-Pacific business and students who want to build careers in Hawaii. The cost of living difference is massive: San Diego is expensive, but Hawaii is even more so. For career ROI, SDSU wins. For lifestyle and Pacific Rim access, Shidler has no mainland equivalent.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'SDSU Fowler (#82) outranks Hawaii Shidler (#137).'),
+         ('Which is better for international business?', "Hawaii Shidler for Asia-Pacific specifically. SDSU has broader international exposure through San Diego's border economy and global companies like Qualcomm."),
+         ('Which has a lower cost of attendance?', "SDSU Fowler, despite San Diego's high prices. Hawaii's cost of living (rent, groceries, gas) exceeds San Diego by 15-25%."),
+     ]},
+    {"a": 'clarkson-reh', "b": 'suny-buffalo',
+     "choose_a": 'you want a small-cohort MBA with supply chain and engineering management focus in a tight-knit campus environment.',
+     "choose_b": 'you want a higher-ranked program (#71 vs #147) in a larger city with healthcare and financial services access.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Upstate New York MBA programs. SUNY Buffalo (#71) is a top-75 program in New York's second-largest city with M&T Bank, Kaleida Health, and a growing tech scene. Clarkson Reh (#147) in Potsdam is a tiny engineering-focused school in the rural North Country. The experiences couldn't be more different. Buffalo has urban amenities; Clarkson has 100 MBA students in a village of 9,000 people.</p>"),
+         ('The Honest Take', "<p>SUNY Buffalo is the stronger MBA by ranking, career outcomes, and job market access. Clarkson wins for students who want an intimate MBA experience connected to engineering and supply chain, and who value small-cohort learning. Buffalo's healthcare and financial services employers create broader career options. Most Clarkson graduates leave the North Country for jobs in Syracuse, Albany, or beyond.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'SUNY Buffalo (#71) outranks Clarkson Reh (#147) significantly.'),
+         ('Which has smaller class sizes?', "Clarkson Reh has roughly 30-50 MBA students per class, creating an intimate learning environment. SUNY Buffalo's MBA is much larger."),
+         ('Which city has more job opportunities?', "Buffalo, by a wide margin. New York's second-largest city has healthcare, banking, and professional services employers. Potsdam is a rural college town with minimal local employer options."),
+     ]},
+    {"a": 'wvu-chambers', "b": 'pitt-katz',
+     "choose_a": 'you want the most affordable MBA in the Appalachian region with energy sector access and Mountaineer pride.',
+     "choose_b": "you want a higher-ranked program (#54 vs #140) with UPMC healthcare connections and Pittsburgh's growing tech scene.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both serve the Appalachian corridor, 75 miles apart. Pitt Katz (#54) in Pittsburgh has the higher ranking, UPMC healthcare pipeline, and access to a revitalized city. WVU Chambers (#140) in Morgantown offers rock-bottom tuition and the West Virginia energy sector. The ranking gap is significant (86 positions), and Pittsburgh's job market dwarfs Morgantown's.</p>"),
+         ('The Honest Take', "<p>Katz is the better MBA. Higher ranking, better career outcomes, Pittsburgh's employer base. WVU wins on cost: in-state tuition under $12K/year with Morgantown's extremely low cost of living makes it one of the cheapest MBAs in the country. For energy sector careers (coal, natural gas, renewables), WVU's West Virginia location provides industry access. For everything else, Katz is worth the drive to Pittsburgh.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Pitt Katz (#54) outranks WVU Chambers (#140) by 86 positions.'),
+         ('Which is more affordable?', "WVU Chambers with in-state tuition under $12K/year and Morgantown's low cost of living is one of the cheapest MBA experiences in the Northeast corridor."),
+         ('Which has better job market access?', "Pitt Katz. Pittsburgh's healthcare, tech, and finance employers far exceed Morgantown's options. Most WVU graduates relocate for career opportunities."),
+     ]},
+    {"a": 'south-florida-muma', "b": 'miami-herbert',
+     "choose_a": "you want Tampa Bay's tech and healthcare employer access at public school tuition with cybersecurity strengths.",
+     "choose_b": 'you want a much higher-ranked program (#46 vs #103) in Miami with international business prestige and stronger career outcomes.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are major Florida public MBA programs. Miami Herbert (#46) is a top-50 program with strong international business reputation and Coral Gables prestige. USF Muma (#103) in Tampa is more affordable with growing cybersecurity, analytics, and healthcare management programs. Herbert costs roughly 3x more than USF in-state. Different coasts of Florida, different employer ecosystems.</p>'),
+         ('The Honest Take', "<p>Herbert is the better MBA on every traditional metric: ranking, salary, brand, alumni network. USF Muma wins on affordability and Tampa Bay's specific employer access (tech corridor, hospitals, military bases). Tampa's cost of living is lower than Miami's. For students who will work in Tampa Bay, USF delivers solid ROI at minimal cost. For national career ambitions or Latin American business, Herbert justifies the premium.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Miami Herbert (#46) outranks USF Muma (#103) significantly.'),
+         ('Which is more affordable?', "USF Muma at roughly $12K/year in-state is dramatically cheaper than Herbert. Tampa's cost of living is also lower than Coral Gables/Miami."),
+         ('Which has better international business?', "Miami Herbert, with its Latin American connections and international student body. USF has international programs but can't match Herbert's global reputation."),
+     ]},
+    {"a": 'belmont-massey', "b": 'tennessee-haslam',
+     "choose_a": "you want Nashville's music, healthcare, and entrepreneurship ecosystem with a small Jesuit-tradition MBA.",
+     "choose_b": 'you want a higher-ranked program (#72 vs #143) with the UT brand, supply chain strength, and larger alumni network.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Tennessee MBA programs. Tennessee Haslam (#72) in Knoxville has the higher ranking and the UT flagship brand. Belmont Massey (#143) in Nashville sits in one of the fastest-growing cities in the US, with healthcare (HCA), music industry, and entrepreneurship access. Neither charges state income tax. Haslam is the stronger program on paper; Belmont has the better city for career opportunities.</p>'),
+         ('The Honest Take', "<p>Haslam is the higher-ranked MBA with broader placement. Belmont wins on Nashville location. HCA Healthcare headquarters, the country music industry, and Nashville's startup scene create career opportunities that Knoxville can't match. If your career targets Nashville specifically (healthcare, entertainment, entrepreneurship), Belmont's city advantage is real. For supply chain or broader career options, Haslam's ranking and UT brand are worth the Knoxville location.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Tennessee Haslam (#72) outranks Belmont Massey (#143) significantly.'),
+         ('Which has the better city for careers?', "Nashville (Belmont) has more corporate headquarters, faster growth, and a stronger job market than Knoxville (Haslam). Nashville's healthcare, music, and startup scenes are national draws."),
+         ('Which is better for healthcare?', "Belmont in Nashville, due to HCA Healthcare headquarters and Nashville's concentration of healthcare companies. Haslam has healthcare exposure but Knoxville's health sector is smaller."),
+     ]},
+    {"a": 'ucf', "b": 'south-florida-muma',
+     "choose_a": "you want Orlando's defense simulation, aerospace, and theme park industry connections.",
+     "choose_b": "you want Tampa Bay's cybersecurity focus, healthcare access, and slightly higher ranking (#103 vs #112).",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Florida's two large urban public MBA programs outside Miami. USF Muma (#103) in Tampa has a slight ranking edge and growing cybersecurity and analytics programs. UCF (#112) in Orlando is connected to defense simulation, aerospace (Lockheed Martin, L3Harris), and the massive hospitality/tourism industry. Both have affordable in-state tuition.</p>"),
+         ('The Honest Take', "<p>USF Muma has the slight edge on ranking and produces marginally better salary outcomes. UCF wins for defense and aerospace careers that Orlando's simulation corridor uniquely supports. For healthcare, USF's Tampa location near major hospital systems gives it an advantage. Both are solid regional MBAs at similar price points. Pick the city where you want to build your career.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', "USF Muma (#103) edges UCF (#112), though they're close."),
+         ('Which is better for defense?', "UCF. Orlando's defense simulation corridor provides unique employer access."),
+         ('Which is cheaper?', 'Both have similar in-state tuition. Tampa and Orlando have comparable costs of living.'),
+     ]},
+    {"a": 'loyola-chicago-quinlan', "b": 'depaul-kellstadt',
+     "choose_a": "you want Loyola's Chicago Loop location with a Jesuit values-based MBA and healthcare management focus.",
+     "choose_b": 'you want a slightly higher-ranked program (#95 vs #108) with marketing and real estate strengths in downtown Chicago.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Chicago's two mid-tier Catholic MBA programs are blocks apart in the Loop. DePaul Kellstadt (#95) has the higher ranking and strong marketing and real estate programs. Loyola Chicago Quinlan (#108) offers Jesuit values-based education with healthcare management emphasis. Both provide evening and weekend options for working professionals. Both access the same Chicago employer market.</p>"),
+         ('The Honest Take', '<p>DePaul has the ranking edge and broader program offerings (marketing, real estate, finance). Loyola wins for healthcare management and students who value Jesuit educational philosophy. Since both schools are in downtown Chicago, the city access is identical. Choose based on specialization: marketing and real estate at DePaul, healthcare and ethics at Loyola.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'DePaul Kellstadt (#95) outranks Loyola Chicago Quinlan (#108).'),
+         ('Which is better for healthcare?', 'Loyola Quinlan has stronger healthcare management connections.'),
+         ('Do both have flexible formats?', 'Yes. Both offer evening and weekend MBA options for working professionals in Chicago.'),
+     ]},
+    {"a": 'gonzaga', "b": 'montana',
+     "choose_a": 'you want Jesuit education in Spokane with ethics-focused MBA and Pacific Northwest employer connections.',
+     "choose_b": 'you want the most affordable MBA in the Northwest with outdoor lifestyle and small-cohort learning in Missoula.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are small MBA programs in the rural Pacific Northwest. Gonzaga (#117) in Spokane, WA has the higher ranking and Jesuit tradition. Montana (#144) in Missoula offers one of the cheapest MBAs in the country with a class size under 30 students. Neither city has a major corporate job market, so most graduates relocate.</p>'),
+         ('The Honest Take', '<p>Gonzaga is the stronger MBA with better career outcomes and a more recognizable brand (thanks to basketball). Montana wins on cost: in-state tuition under $10K/year in a city with low living expenses makes this one of the cheapest MBA experiences anywhere. Both programs require you to relocate for career opportunities. If cost is the primary concern, Montana. If brand and ethics education matter, Gonzaga.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Gonzaga (#117) outranks Montana (#144).'),
+         ('Which is cheaper?', "Montana at under $10K/year in-state tuition with Missoula's low cost of living is dramatically cheaper."),
+         ('Do graduates stay in the region?', 'Some do, but both Spokane and Missoula have small job markets. Most MBA graduates from both programs relocate to Seattle, Portland, or other cities.'),
+     ]},
+    {"a": 'unc-wilmington-cameron', "b": 'elon-love',
+     "choose_a": "you want a coastal North Carolina MBA with analytics focus and Wilmington's growing film and tech industries.",
+     "choose_b": 'you want a smaller MBA with experiential learning emphasis and strong teaching quality in a tight-knit campus.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Two North Carolina MBA programs outside the Research Triangle. UNC Wilmington Cameron (#148) offers a public MBA with growing analytics and finance programs in a coastal city. Elon Love (#133) provides a private liberal arts MBA experience with small classes and experiential learning focus. Elon's higher ranking (#133 vs #148) reflects stronger outcomes.</p>"),
+         ('The Honest Take', '<p>Elon Love is the higher-ranked MBA with a distinctive experiential learning approach and smaller class sizes. UNC Wilmington wins on cost (public school tuition) and coastal location. Neither program has the brand power of UNC Kenan-Flagler or Duke Fuqua. For budget-conscious NC students who want to stay in the Wilmington area, UNCW is rational. For students who value teaching quality and can pay private school tuition, Elon delivers.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Elon Love (#133) outranks UNC Wilmington Cameron (#148).'),
+         ('Which is more affordable?', 'UNC Wilmington with public university tuition is significantly cheaper than private Elon.'),
+         ('Which has smaller classes?', 'Elon Love has much smaller MBA class sizes, consistent with its liberal arts approach to business education.'),
+     ]},
+    {"a": 'suny-new-paltz', "b": 'suny-buffalo',
+     "choose_a": 'you want a tiny SUNY MBA in the Hudson Valley with low cost and NYC accessibility (90 miles north).',
+     "choose_b": 'you want a much higher-ranked program (#71 vs #145) with healthcare and finance employer access in Buffalo.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are SUNY system MBA programs at very different tiers. SUNY Buffalo (#71) is a top-75 program in New York's second-largest city with M&T Bank and Kaleida Health connections. SUNY New Paltz (#145) is one of the smallest AACSB-accredited MBAs in the country, in a Hudson Valley college town 90 miles from NYC. The ranking gap is massive (74 positions).</p>"),
+         ('The Honest Take', "<p>SUNY Buffalo is the dramatically stronger MBA. Higher ranking, larger employer network, better salary outcomes. New Paltz wins on intimacy (tiny class sizes), proximity to NYC (90-minute drive), and rock-bottom tuition even by SUNY standards. For students who want a SUNY MBA and plan to work in the NYC metro area, New Paltz's location provides an advantage that Buffalo can't match from 6 hours away.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'SUNY Buffalo (#71) dramatically outranks SUNY New Paltz (#145).'),
+         ('Which is closer to NYC?', 'SUNY New Paltz at 90 miles from NYC is much closer than Buffalo at 370 miles.'),
+         ('Which is smaller?', 'New Paltz has one of the smallest MBA programs in the SUNY system, with class sizes often under 20 students.'),
+     ]},
+    {"a": 'detroit-mercy', "b": 'michigan-state-broad',
+     "choose_a": 'you want a Detroit-based Jesuit MBA with automotive industry connections and urban campus access.',
+     "choose_b": 'you want a much higher-ranked program (#44 vs #102) with top supply chain training and the Spartan alumni network.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Michigan's two non-Ross MBA programs serve different markets. Michigan State Broad (#44) in East Lansing is a top-45 program with one of the best supply chain programs in the country. Detroit Mercy (#102) in Detroit offers a Jesuit MBA in the heart of the automotive industry. The ranking gap (58 positions) reflects significant differences in career outcomes.</p>"),
+         ('The Honest Take', "<p>Broad is the dramatically better MBA. Top-45 ranking, nationally recognized supply chain program, and the massive Spartan alumni network. Detroit Mercy wins for students who are working in Detroit and need a flexible MBA without relocating. The Jesuit values-based education has appeal, and Detroit's automotive employers (GM, Ford, Stellantis) are accessible. But for pure career outcomes, Broad is in a different tier.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Michigan State Broad (#44) significantly outranks Detroit Mercy (#102).'),
+         ('Which is better for automotive?', "Both access the Michigan auto industry. Broad's supply chain program is among the best in the country. Detroit Mercy's physical proximity to GM, Ford, and Stellantis headquarters is its advantage."),
+         ('Which has the stronger alumni network?', "Michigan State's Spartan alumni network is one of the largest in the Midwest and far exceeds Detroit Mercy's in scale."),
+     ]},
+    {"a": 'fairfield-dolan', "b": 'quinnipiac',
+     "choose_a": "you want a Jesuit MBA in Fairfield County with finance connections to NYC and Stamford's hedge fund corridor.",
+     "choose_b": 'you want a slightly higher-ranked program (#113 vs #120) in Hamden with healthcare management and strong experiential learning.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Connecticut MBA programs 30 miles apart. Quinnipiac (#113) in Hamden has the slight ranking edge and healthcare management strengths. Fairfield Dolan (#120) in Fairfield is closer to Stamford's hedge fund and financial services corridor and NYC (60 miles). Both are mid-sized private schools with reasonable class sizes.</p>"),
+         ('The Honest Take', "<p>Quinnipiac has the slight ranking advantage and wins for healthcare management. Fairfield wins for finance careers because of its proximity to Stamford's financial services companies and easier NYC commute. Both are solid Connecticut MBAs at similar price points. If finance is your target, Fairfield's Fairfield County location matters. If healthcare or general management, Quinnipiac's slight ranking edge applies.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Quinnipiac (#113) slightly edges Fairfield Dolan (#120).'),
+         ('Which is better for finance?', "Fairfield Dolan, due to its proximity to Stamford's hedge fund corridor and easier access to NYC financial services."),
+         ('Which is better for healthcare?', 'Quinnipiac has stronger healthcare management connections and curriculum.'),
+     ]},
+    {"a": 'new-hampshire-paul', "b": 'clark',
+     "choose_a": "you want New England's most affordable MBA with online flexibility and no state income tax in NH.",
+     "choose_b": 'you want a social enterprise-focused MBA in Worcester with a Clark research university brand.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are small New England MBA programs below the BU/BC/Northeastern tier. UNH Paul (#115) in Durham, NH offers one of New England's most affordable MBAs with no state income tax and strong online/hybrid options. Clark (#143) in Worcester, MA is a research university with social enterprise and sustainability focus. Different value propositions entirely.</p>"),
+         ('The Honest Take', "<p>UNH Paul wins on cost: affordable public tuition plus New Hampshire's no-income-tax advantage. Clark wins for students passionate about social enterprise, sustainability, and global impact. Neither has strong brand recognition outside New England. If budget is the priority, UNH. If mission-driven business education matters to you, Clark's focus on social change is distinctive.</p>"),
+     ],
+     "faq": [
+         ('Which is more affordable?', 'UNH Paul with public in-state tuition and no NH state income tax is significantly cheaper.'),
+         ('Which is better for social impact?', "Clark has a distinctive focus on social enterprise and sustainability that UNH doesn't match."),
+         ('Which has more flexible format?', "UNH Paul offers strong online and hybrid MBA options. Clark's MBA is more traditional in format."),
+     ]},
+    {"a": 'kennesaw-state-coles', "b": 'georgia-tech-scheller',
+     "choose_a": "you want an affordable MBA in Atlanta's suburbs with healthcare and project management strengths.",
+     "choose_b": "you want a much higher-ranked program (#36 vs #104) with tech focus and Georgia Tech's engineering brand.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both serve the Atlanta metro area but at vastly different tiers. Georgia Tech Scheller (#36) is a top-40 program with a tech-focused MBA leveraging GT's engineering reputation. Kennesaw State Coles (#104) in the northwest Atlanta suburbs offers an affordable alternative with healthcare and project management concentrations. The ranking gap (68 positions) reflects a major difference in career outcomes and brand value.</p>"),
+         ('The Honest Take', "<p>Scheller is the dramatically better MBA. Top-40 ranking, Georgia Tech's tech brand, and Atlanta corporate access (Coca-Cola, Delta, Home Depot). Kennesaw State wins only on price: in-state tuition is a fraction of Scheller's cost. For working professionals in Atlanta's northern suburbs who need a flexible, affordable credential, Kennesaw is practical. For career advancement or career switching, Scheller is worth the investment.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Georgia Tech Scheller (#36) dramatically outranks Kennesaw State Coles (#104).'),
+         ('Which is more affordable?', 'Kennesaw State Coles with public in-state tuition is significantly cheaper than Georgia Tech Scheller.'),
+         ('Which is better for tech?', "Georgia Tech Scheller, by a wide margin. GT's engineering brand and tech focus make it one of the best tech MBA programs in the Southeast."),
+     ]},
+    {"a": 'appalachian-state-walker', "b": 'unc-kenan-flagler',
+     "choose_a": 'you want the cheapest MBA in North Carolina with Blue Ridge Mountain lifestyle and small-cohort experience.',
+     "choose_b": 'you want a top-20 nationally ranked program (#19 vs #141) with world-class career placement.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are UNC system MBA programs at opposite ends of the ranking spectrum. UNC Kenan-Flagler (#19) in Chapel Hill is a top-20 program with national brand recognition and exceptional career placement. Appalachian State Walker (#141) in Boone is one of the most affordable MBAs in the country with class sizes under 25 students. The ranking gap (122 positions) is the largest in any reasonable comparison.</p>'),
+         ('The Honest Take', '<p>Kenan-Flagler is in a completely different league. Top-20 ranking, $125K+ starting salaries, McKinsey and Goldman Sachs recruiting. Appalachian State wins exclusively on cost: in-state tuition under $8K/year in a mountain town with minimal expenses. For budget-constrained students who want to stay in western North Carolina, Appalachian State provides a credential at rock-bottom cost. For career ambitions beyond the local market, Kenan-Flagler is the only choice.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', "UNC Kenan-Flagler (#19) outranks Appalachian State Walker (#141) by 122 positions. They're in different tiers entirely."),
+         ('Which is more affordable?', "Appalachian State at under $8K/year in-state tuition with Boone's extremely low cost of living is one of the cheapest MBAs in America."),
+         ('Which has better career outcomes?', 'UNC Kenan-Flagler, by an enormous margin. Starting salaries exceed $125,000 with placement at top consulting, finance, and tech firms.'),
+     ]},
+    {"a": 'fiu-chapman', "b": 'fau',
+     "choose_a": "you want Miami's international business connections with Latin American market access and a larger program.",
+     "choose_b": "you want Boca Raton's lower cost of living with finance and real estate focus in Palm Beach County.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>South Florida's two large public MBA programs are 50 miles apart on I-95. FIU Chapman (#109) in Miami has international business strength and Latin American connections. FAU (#136) in Boca Raton has finance and real estate programs that leverage Palm Beach County's wealth management industry. Both offer affordable in-state tuition.</p>"),
+         ('The Honest Take', "<p>FIU has the higher ranking and stronger international business connections. FAU wins for students targeting Palm Beach County's wealth management and real estate sectors. Boca Raton's cost of living is lower than Miami's. For Latin American business or international trade, FIU is the clear choice. For finance careers in Palm Beach County, FAU provides local employer access that FIU doesn't have.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'FIU Chapman (#109) outranks FAU (#136).'),
+         ('Which is better for international business?', "FIU Chapman, due to Miami's Latin American business corridor and FIU's bilingual student body."),
+         ('Which is better for wealth management?', "FAU in Boca Raton has closer connections to Palm Beach County's concentration of wealth management and financial advisory firms."),
+     ]},
+    {"a": 'jmu', "b": 'virginia-darden',
+     "choose_a": "you want Virginia's most affordable MBA with information systems focus and Shenandoah Valley cost of living.",
+     "choose_b": 'you want a top-15 nationally ranked program (#14 vs #111) with world-class case method education.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Virginia MBA programs about 100 miles apart. Darden (#14) in Charlottesville is a top-15 program known for its case method and general management education. JMU (#111) in Harrisonburg is a regional program with affordable public tuition and information systems strength. The ranking gap (97 positions) reflects a massive difference in career outcomes and brand value.</p>'),
+         ('The Honest Take', "<p>Darden is in a completely different tier. Top-15 ranking, $155K+ starting salaries, consulting and finance placement at the highest level. JMU wins exclusively on affordability: in-state tuition under $12K/year with Harrisonburg's low cost of living. JMU is a rational choice for budget-constrained working professionals in the Shenandoah Valley who need a credential. For career ambitions beyond the regional market, Darden is worth the investment many times over.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Virginia Darden (#14) outranks JMU (#111) by 97 positions. Darden is a top-15 national program.'),
+         ('Which is more affordable?', "JMU at under $12K/year in-state tuition with Harrisonburg's low cost of living is dramatically cheaper than Darden."),
+         ('Which has better career placement?', 'Darden, by an enormous margin. Its consulting, finance, and general management placement is among the best in the country.'),
+     ]},
+    {"a": 'chatham', "b": 'carnegie-mellon-tepper',
+     "choose_a": "you want Pittsburgh's most affordable MBA with small cohorts and sustainability focus.",
+     "choose_b": 'you want a top-20 nationally ranked program (#18 vs #146) with the strongest quantitative MBA curriculum in the country.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Pittsburgh MBA programs at opposite ends of the ranking spectrum. Carnegie Mellon Tepper (#18) is a top-20 quantitative powerhouse with tech, finance, and analytics placement. Chatham (#146) is a tiny MBA program with sustainability focus and one of the smallest class sizes of any AACSB-accredited program. The ranking gap (128 positions) is one of the widest possible city comparisons.</p>'),
+         ('The Honest Take', '<p>Tepper is in a completely different league. World-class quantitative curriculum, tech company placement, and $145K+ starting salaries. Chatham wins only on affordability and for students specifically interested in sustainability business education with an intimate learning experience. For any career ambition beyond the immediate Pittsburgh market, Tepper is the investment that pays for itself many times over.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Carnegie Mellon Tepper (#18) outranks Chatham (#146) by 128 positions.'),
+         ('Which is more affordable?', "Chatham is dramatically more affordable than Tepper. Pittsburgh's low cost of living benefits both programs."),
+         ('Which is better for tech?', "Tepper, overwhelmingly. CMU's technology and AI reputation makes Tepper one of the top tech MBA programs in the world."),
+     ]},
+    {"a": 'mississippi-state', "b": 'alabama-manderson',
+     "choose_a": "you want one of the cheapest SEC MBAs with project management and Mississippi's lowest cost of living.",
+     "choose_b": 'you want a higher-ranked program (#87 vs #130) with the Alabama brand, larger alumni network, and broader placement.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are SEC MBA programs in the deep South. Alabama Manderson (#87) in Tuscaloosa has the higher ranking and the Alabama brand. Mississippi State (#130) in Starkville is cheaper and sits in one of the lowest cost-of-living areas in the US. Manderson outranks Mississippi State by 43 positions and produces higher salaries.</p>'),
+         ('The Honest Take', "<p>Manderson is the better MBA. Higher ranking, stronger brand, better career outcomes. Mississippi State wins on cost: Starkville's cost of living is among the lowest of any college town in America, and in-state tuition is minimal. For students who will work in Mississippi and want the cheapest possible credential, Mississippi State delivers. For anything beyond the immediate region, Alabama's brand is significantly stronger.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Alabama Manderson (#87) outranks Mississippi State (#130) significantly.'),
+         ('Which is cheaper?', 'Mississippi State in Starkville has lower tuition and one of the lowest costs of living of any MBA program in the country.'),
+         ('Which has the stronger alumni network?', "Alabama's SEC brand and larger alumni base create a much broader professional network."),
+     ]},
+    {"a": 'kansas-state', "b": 'missouri-trulaske',
+     "choose_a": 'you want a small Great Plains MBA with agricultural business and supply chain strengths.',
+     "choose_b": "you want a higher-ranked program (#79 vs #135) with SEC membership, marketing strength, and Columbia MO's college town experience.",
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Big 12/SEC state school MBAs in the central US. Missouri Trulaske (#79) in Columbia has the higher ranking and SEC brand (as of 2024). Kansas State (#135) in Manhattan, KS is a smaller program with agricultural business and analytics strengths. Trulaske outranks K-State by 56 positions. Both are affordable public MBAs.</p>'),
+         ('The Honest Take', "<p>Trulaske is the stronger MBA with better career outcomes and a broader alumni network enhanced by SEC membership. Kansas State wins for agricultural business, where K-State's College of Agriculture connections are distinctive. Both programs are affordable. For marketing careers, Trulaske has national recognition. For agricultural business or rural economic development, K-State's strengths are real.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Missouri Trulaske (#79) outranks Kansas State (#135) by 56 positions.'),
+         ('Which is better for agriculture?', "Kansas State has stronger agricultural business connections through K-State's agricultural research programs."),
+         ('Which has the stronger brand?', "Missouri's SEC membership and Columbia campus brand carry more weight nationally than Kansas State."),
+     ]},
+    {"a": 'stevens', "b": 'rutgers',
+     "choose_a": 'you want a tech-focused MBA in Hoboken with Manhattan skyline views and fintech/AI specialization.',
+     "choose_b": 'you want a higher-ranked program (#55 vs #73) with pharma industry connections in Newark and a larger state school brand.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are New Jersey MBA programs serving the NYC metro market. Rutgers (#55) in Newark has the higher ranking and deep pharmaceutical industry connections. Stevens (#73) in Hoboken offers a tech-focused MBA with fintech and AI specialization and direct PATH train access to Manhattan. Both access the NYC job market but through different employer pipelines.</p>'),
+         ('The Honest Take', '<p>Rutgers has the ranking edge and wins for pharmaceutical careers (J&J, Merck, Pfizer are all in NJ). Stevens wins for tech, fintech, and AI careers, leveraging its engineering reputation and Hoboken location (one of the most desirable NYC-adjacent locations). For pharma, Rutgers. For tech, Stevens. Both provide NYC access at lower cost than Manhattan-based programs.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Rutgers (#55) outranks Stevens (#73), though both are strong NJ programs.'),
+         ('Which is better for tech?', 'Stevens, with its engineering reputation and fintech/AI specialization.'),
+         ('Which is better for pharma?', "Rutgers, with its deep connections to NJ's pharmaceutical corridor (J&J, Merck, Pfizer, BMS)."),
+     ]},
+    {"a": 'portland-state', "b": 'gonzaga',
+     "choose_a": "you want Portland's urban campus with sustainability focus and tech sector access (Nike, Intel).",
+     "choose_b": 'you want Jesuit ethics-based education in Spokane with supply chain and general management focus.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Already a popular Pacific Northwest comparison. Portland State (#132) in Portland offers urban campus access to Nike, Intel, and Columbia Sportswear. Gonzaga (#117) in Spokane has a Jesuit tradition with ethics-focused MBA education. Gonzaga outranks PSU by 15 positions. Portland's job market is significantly larger than Spokane's.</p>"),
+         ('The Honest Take', "<p>Gonzaga has the ranking advantage. Portland State has the job market advantage. Portland's tech, athletic wear, and sustainability employer base is vastly larger than Spokane's. If you plan to work in Portland after your MBA, PSU's urban location provides better employer access than commuting 350 miles from Gonzaga. If you value Jesuit education and plan to recruit nationally, Gonzaga's higher ranking matters.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Gonzaga (#117) outranks Portland State (#132) by 15 positions.'),
+         ('Which has better employer access?', "Portland State's urban Portland campus provides access to Nike, Intel, Columbia Sportswear, and hundreds of tech companies. Spokane's employer base is much smaller."),
+         ('Which emphasizes sustainability more?', 'Both do. Portland State has a longer sustainability track record. Gonzaga approaches it through Jesuit social justice values.'),
+     ]},
+    {"a": 'northern-illinois', "b": 'illinois-gies',
+     "choose_a": 'you want Chicago-area MBA proximity at a fraction of Gies tuition with accounting and finance focus.',
+     "choose_b": 'you want a much higher-ranked program (#44 vs #125) with the Illinois brand, iMBA innovation, and broader career outcomes.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Illinois public MBA programs. Illinois Gies (#44) in Champaign-Urbana is a top-45 program with the UIUC brand and innovative iMBA online program. Northern Illinois (#125) in DeKalb is closer to Chicago (65 miles) with lower tuition and accounting/finance strengths. The ranking gap (81 positions) reflects significant differences in program quality and career outcomes.</p>'),
+         ('The Honest Take', "<p>Gies is the dramatically better MBA. Top-45 ranking, UIUC's engineering and business reputation, and strong accounting program (historically top-3 nationally). Northern Illinois wins on proximity to Chicago and cost. For working professionals in the Chicago suburbs who need an affordable, nearby MBA credential, NIU is practical. For career outcomes and brand value, Gies is the clear choice despite being 130 miles from Chicago.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Illinois Gies (#44) dramatically outranks Northern Illinois (#125).'),
+         ('Which is closer to Chicago?', 'Northern Illinois in DeKalb (65 miles) is closer than Gies in Champaign-Urbana (130 miles).'),
+         ('Which has the stronger accounting program?', "Illinois Gies has one of the top-3 accounting programs in the country historically. NIU's accounting program is solid but can't match that legacy."),
+     ]},
+    {"a": 'duquesne-palumbo-donahue', "b": 'kent-state-crawford',
+     "choose_a": 'you want a Pittsburgh Jesuit MBA with sustainability focus and UPMC healthcare proximity.',
+     "choose_b": "you want Northeast Ohio's affordable MBA with data analytics programs and flexible format.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are mid-tier MBA programs in the Rust Belt region. Duquesne (#106) in Pittsburgh has Jesuit values education and healthcare proximity (UPMC). Kent State Crawford (#121) in Kent, Ohio has affordable public tuition and growing data analytics programs. Pittsburgh's job market is larger than the Akron-Cleveland corridor. Both programs serve regional markets primarily.</p>"),
+         ('The Honest Take', "<p>Duquesne has the ranking advantage and better job market access through Pittsburgh's healthcare, tech, and finance sectors. Kent State wins on affordability: Ohio public school tuition is lower than Duquesne's private tuition. For healthcare careers, Duquesne's Pittsburgh location near UPMC is an advantage. For data analytics at the lowest possible cost, Kent State delivers. Both are regional MBAs with limited national brand recognition.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Duquesne Palumbo-Donahue (#106) outranks Kent State Crawford (#121).'),
+         ('Which is more affordable?', 'Kent State Crawford with Ohio public school tuition is significantly cheaper than private Duquesne.'),
+         ('Which has better job market access?', "Duquesne in Pittsburgh. Pittsburgh's healthcare (UPMC), tech (autonomous vehicles), and finance (PNC) sectors exceed the Akron-Cleveland corridor."),
+     ]},
+    {"a": 'south-florida-muma', "b": 'ucf',
+     "choose_a": "you want Tampa Bay's cybersecurity and healthcare MBA with a slightly higher ranking (#103 vs #112).",
+     "choose_b": "you want Orlando's defense simulation and theme park industry connections at similar cost.",
+     "analysis": [
+         ('Why People Compare These Two', "<p>Florida's two largest public MBA programs outside Miami serve different metro markets. USF Muma (#103) in Tampa has cybersecurity, analytics, and healthcare management strengths. UCF (#112) in Orlando has defense simulation, aerospace, and tourism connections. Both are affordable with comparable in-state tuition. Tampa and Orlando are 90 minutes apart on I-4.</p>"),
+         ('The Honest Take', "<p>USF has a slight ranking edge and stronger cybersecurity/analytics programs. UCF wins for defense and aerospace careers where Orlando's simulation corridor is unique. Both are solid Florida public MBAs at similar price points. Your decision should come down to geography and industry: Tampa for healthcare and cybersecurity, Orlando for defense and aerospace. Both access Florida's overall job market.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'USF Muma (#103) slightly edges UCF (#112).'),
+         ('Which is better for cybersecurity?', 'USF Muma has a stronger cybersecurity and analytics program.'),
+         ('Which is better for defense?', "UCF. Orlando's defense simulation corridor (Lockheed Martin, L3Harris) is unique."),
+     ]},
+    {"a": 'memphis-fogelman', "b": 'alabama-manderson',
+     "choose_a": 'you want supply chain training in the FedEx capital at rock-bottom tuition with no state income tax.',
+     "choose_b": 'you want a higher-ranked program (#87 vs #126) with the Alabama SEC brand and broader career placement.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are affordable MBA programs in the Deep South. Alabama Manderson (#87) has the higher ranking and SEC brand. Memphis Fogelman (#126) has the FedEx supply chain pipeline and Tennessee's no-income-tax advantage. Manderson produces better overall career outcomes, but Memphis wins specifically for supply chain and logistics careers.</p>"),
+         ('The Honest Take', "<p>Manderson is the better MBA overall. Stronger ranking, broader placement, bigger alumni network. Memphis wins only if supply chain is your career target. The FedEx headquarters advantage is real and specific. For everything else, Alabama's SEC brand and career services edge justify the slightly higher cost.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Alabama Manderson (#87) outranks Memphis Fogelman (#126).'),
+         ('Which is better for supply chain?', 'Memphis Fogelman. FedEx headquarters in Memphis creates unmatched supply chain employer access.'),
+         ('Which has no state income tax?', 'Memphis (Tennessee) has no state income tax. Alabama does have state income tax.'),
+     ]},
+    {"a": 'loyola-chicago-quinlan', "b": 'uic-liautaud',
+     "choose_a": 'you want a Jesuit MBA in the Chicago Loop with healthcare management focus and values-based education.',
+     "choose_b": 'you want a higher-ranked program (#93 vs #108) at UIC public tuition with information systems and marketing strengths.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Chicago MBA programs within a mile of each other in the Loop/Near West Side. UIC Liautaud (#93) has the higher ranking and public school tuition. Loyola Chicago Quinlan (#108) offers Jesuit values-based education with healthcare management strengths. Both serve working professionals with evening and weekend options.</p>'),
+         ('The Honest Take', '<p>UIC has the ranking edge and costs less (public tuition). Loyola wins for healthcare management and students who value Jesuit educational philosophy. Since both are in Chicago, the employer access is identical. UIC is the more rational choice on pure cost and ranking. Loyola appeals to students who want a specific educational values system and healthcare focus.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'UIC Liautaud (#93) outranks Loyola Chicago Quinlan (#108).'),
+         ('Which is more affordable?', 'UIC Liautaud with public university tuition is cheaper than private Loyola.'),
+         ('Which has healthcare focus?', 'Loyola Quinlan has the stronger healthcare management concentration.'),
+     ]},
+    {"a": 'north-texas-ryan', "b": 'utsa-alvarez',
+     "choose_a": 'you want DFW metro access with supply chain and analytics programs in Denton.',
+     "choose_b": "you want San Antonio's military connections with cybersecurity focus and JBSA proximity.",
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Texas public MBA programs serving different metro areas. North Texas Ryan (#129) in Denton accesses the Dallas-Fort Worth market. UTSA Alvarez (#134) in San Antonio connects to the military and cybersecurity sectors. Both have affordable in-state tuition. DFW has a significantly larger corporate job market than San Antonio.</p>'),
+         ('The Honest Take', "<p>North Texas has the slight ranking edge and access to the larger DFW job market (AT&T, American Airlines, Toyota). UTSA wins for cybersecurity, military transition, and San Antonio's specific employer base. Both are affordable Texas public MBAs. Pick the metro where you want to build your career: DFW for corporate, San Antonio for military and cybersecurity.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'North Texas Ryan (#129) slightly edges UTSA Alvarez (#134).'),
+         ('Which has more job opportunities?', "North Texas. DFW's corporate headquarters concentration far exceeds San Antonio."),
+         ('Which is better for cybersecurity?', "UTSA Alvarez, due to San Antonio's concentration of military cybersecurity operations at JBSA."),
+     ]},
+    {"a": 'hofstra-zarb', "b": 'iona-lapenta',
+     "choose_a": 'you want a Long Island MBA with finance training and suburban campus experience in Hempstead.',
+     "choose_b": 'you want a Westchester MBA closer to NYC with small cohorts and business analytics focus.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are small NYC metro MBA programs north of Manhattan. Hofstra Zarb (#123) on Long Island and Iona LaPenta (#149) in New Rochelle serve suburban working professionals who want an MBA without the Manhattan commute. Hofstra has the higher ranking and larger program. Iona offers smaller cohorts and Westchester location.</p>'),
+         ('The Honest Take', '<p>Hofstra has the ranking advantage and broader program. Iona wins on class size intimacy and Westchester accessibility for residents north of the city. Neither has strong brand recognition beyond the NYC metro region. Both are practical choices for working professionals who want a nearby, affordable MBA credential. Hofstra is the stronger pick on paper; Iona is the better fit for Westchester-based students.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Hofstra Zarb (#123) outranks Iona LaPenta (#149).'),
+         ('Which is closer to NYC?', 'Iona in New Rochelle is 15 miles from midtown Manhattan. Hofstra in Hempstead is 25 miles.'),
+         ('Which has smaller classes?', 'Iona LaPenta has smaller MBA cohorts, offering more personalized attention.'),
+     ]},
+    {"a": 'old-dominion-strome', "b": 'jmu',
+     "choose_a": "you want Norfolk's defense contractor connections with Naval Station Norfolk in your backyard.",
+     "choose_b": 'you want a slightly higher-ranked program (#111 vs #139) in the Shenandoah Valley with information systems strengths.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Virginia public MBA programs. JMU (#111) in Harrisonburg has the higher ranking and information systems strengths. Old Dominion Strome (#139) in Norfolk has defense contractor connections in the world's largest naval base market. Different regions of Virginia, different career focuses.</p>"),
+         ('The Honest Take', "<p>JMU has the ranking edge and broader applicability. Old Dominion wins for defense careers where Norfolk's military ecosystem is irreplaceable. JMU's Shenandoah Valley location is charming but has a small job market. Norfolk's defense job market is substantial. Choose based on career target: defense and military = Old Dominion. Information systems and general business = JMU.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'JMU (#111) outranks Old Dominion Strome (#139).'),
+         ('Which is better for defense?', "Old Dominion Strome. Norfolk is home to the world's largest naval base and major defense contractors."),
+         ('Which has better information systems?', 'JMU has stronger information systems programs and curriculum.'),
+     ]},
+    {"a": 'scranton-kania', "b": 'duquesne-palumbo-donahue',
+     "choose_a": "you want northeastern PA's most affordable MBA with Jesuit education and small-town cost of living.",
+     "choose_b": 'you want a higher-ranked program (#106 vs #150) in Pittsburgh with healthcare access and sustainability focus.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Jesuit MBA programs in Pennsylvania. Duquesne (#106) in Pittsburgh has the higher ranking and sits in a revitalized city with UPMC healthcare access. Scranton Kania (#150) in Scranton offers a more intimate program with extremely low cost of living. The ranking gap (44 positions) is significant.</p>'),
+         ('The Honest Take', "<p>Duquesne is the better MBA by ranking, city, and career outcomes. Pittsburgh's job market dwarfs Scranton's. Scranton wins on total cost: Scranton's cost of living is among the lowest in the Northeast. For students already working in northeastern PA who need a local credential, Scranton is practical. For broader career ambitions, Duquesne's Pittsburgh location and ranking justify the higher cost.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Duquesne Palumbo-Donahue (#106) outranks Scranton Kania (#150) by 44 positions.'),
+         ('Which is more affordable overall?', 'Scranton with its extremely low cost of living may have the lower total cost despite comparable tuition.'),
+         ('Which has a better job market?', 'Pittsburgh (Duquesne) has a dramatically larger and more diverse job market than Scranton.'),
+     ]},
+    {"a": 'suffolk-sawyer', "b": 'northeastern',
+     "choose_a": 'you want downtown Boston Financial District location with evening flexibility at lower cost.',
+     "choose_b": 'you want a higher-ranked program (#58 vs #114) with co-op experiential learning and stronger tech connections.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Boston MBA programs. Northeastern (#58) has the higher ranking and distinctive co-op experiential learning model. Suffolk Sawyer (#114) is in the Financial District with lower tuition and convenient evening programs. Northeastern's brand has risen dramatically in the last decade.</p>"),
+         ('The Honest Take', "<p>Northeastern is the stronger MBA with better career outcomes and the co-op advantage. Suffolk wins on cost and location convenience for Financial District professionals. Northeastern's co-op model (6-month work experience during the MBA) provides career switching support that Suffolk can't match. For working professionals who just need the credential, Suffolk is practical. For career advancement or switching, Northeastern delivers more value.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Northeastern (#58) significantly outranks Suffolk Sawyer (#114).'),
+         ("What is Northeastern's co-op?", "Northeastern's MBA includes a 6-month co-op work experience, providing practical career experience during the program."),
+         ('Which is cheaper?', "Suffolk Sawyer has lower tuition. Combined with its downtown location convenience, it's the more affordable option."),
+     ]},
+    {"a": 'slu-chaifetz', "b": 'washu-olin',
+     "choose_a": 'you want an affordable St. Louis Jesuit MBA with healthcare and supply chain strengths.',
+     "choose_b": 'you want a much higher-ranked program (#22 vs #107) with one of the strongest MBA brands in the Midwest.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are St. Louis MBA programs 5 miles apart. WashU Olin (#22) is a top-25 nationally ranked program. SLU Chaifetz (#107) is a Jesuit MBA with healthcare and supply chain concentrations. The ranking gap (85 positions) is enormous. Olin costs significantly more but produces dramatically better career outcomes.</p>'),
+         ('The Honest Take', '<p>Olin is in a completely different league. Top-25 ranking, nationally recruited, $150K+ starting salaries. Chaifetz wins on affordability and for students who value Jesuit educational values. If you can get into Olin and fund it, the career ROI is dramatically higher. Chaifetz is a rational choice for working professionals in St. Louis who need an affordable credential and plan to stay in the region.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'WashU Olin (#22) dramatically outranks SLU Chaifetz (#107).'),
+         ('Which is more affordable?', "SLU Chaifetz is significantly cheaper than Olin's private tuition."),
+         ('Which has better career outcomes?', 'WashU Olin, by an enormous margin. Its starting salaries and placement firms are among the best in the Midwest.'),
+     ]},
+    {"a": 'hawaii-shidler', "b": 'uc-davis',
+     "choose_a": 'you want Asia-Pacific business focus in Honolulu with island lifestyle and Pacific Rim access.',
+     "choose_b": 'you want a higher-ranked program (#60 vs #137) in Northern California wine country with tech and agriculture business access.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Pacific-region public MBA programs with distinctive locations. UC Davis (#60) in Davis, CA has strong tech connections to Sacramento and the Bay Area, plus agricultural business expertise. Hawaii Shidler (#137) in Honolulu is the only AACSB MBA in Hawaii with Asia-Pacific business focus. The ranking gap (77 positions) is substantial.</p>'),
+         ('The Honest Take', "<p>UC Davis is the stronger MBA with better career outcomes, Bay Area proximity, and a UC system brand. Hawaii Shidler wins for Asia-Pacific business specifically and students committed to Hawaii careers. Davis's tech and agricultural business placement is strong. Hawaii's cost of living is much higher than Davis's. For career ROI, UC Davis wins. For Pacific Rim access and lifestyle, Shidler has a unique value.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'UC Davis (#60) significantly outranks Hawaii Shidler (#137).'),
+         ('Which has Asia-Pacific focus?', 'Hawaii Shidler, as the only AACSB MBA in Hawaii with an Asia-Pacific business curriculum.'),
+         ('Which has better tech access?', 'UC Davis, with proximity to Sacramento tech companies and the Bay Area.'),
+     ]},
+    {"a": 'fau', "b": 'miami-herbert',
+     "choose_a": "you want Boca Raton's finance and real estate focus at public school tuition in Palm Beach County.",
+     "choose_b": 'you want a much higher-ranked program (#46 vs #136) with international business prestige in Coral Gables.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are South Florida MBA programs serving different markets. Miami Herbert (#46) is a top-50 program with international business strength and Coral Gables prestige. FAU (#136) in Boca Raton offers affordable public tuition with finance and real estate programs in Palm Beach County. The ranking gap (90 positions) is massive.</p>'),
+         ('The Honest Take', '<p>Herbert is the dramatically better MBA. Top-50 ranking, strong international brand, and significantly better career outcomes. FAU wins on cost and Palm Beach County real estate/wealth management connections. For students targeting Palm Beach County finance careers at minimal cost, FAU provides relevant employer access. For national or international career ambitions, Herbert is worth the premium.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Miami Herbert (#46) dramatically outranks FAU (#136).'),
+         ('Which is cheaper?', "FAU with public university tuition is a fraction of Herbert's cost."),
+         ('Which is better for wealth management?', "FAU in Boca Raton, due to Palm Beach County's concentration of wealth advisory firms."),
+     ]},
+    {"a": 'kansas-state', "b": 'oklahoma-price',
+     "choose_a": "you want agricultural business expertise with Great Plains analytics and K-State's small-cohort experience.",
+     "choose_b": 'you want a higher-ranked program (#66 vs #135) with energy sector connections and the OU brand.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Big 12 MBA programs in the southern Great Plains. Oklahoma Price (#66) in Norman has the significantly higher ranking and energy sector connections. Kansas State (#135) in Manhattan, KS has agricultural business strengths and analytics programs. Price outranks K-State by 69 positions and produces better salary outcomes.</p>'),
+         ('The Honest Take', "<p>Oklahoma Price is the clearly better MBA. Higher ranking, energy sector connections, OU's larger brand, and better career outcomes. Kansas State wins for agricultural business specifically and students committed to the Kansas economy. Oklahoma's energy sector (oil and gas, renewables) creates career opportunities that Kansas can't match. For anything beyond agriculture, OU Price is the stronger choice.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Oklahoma Price (#66) outranks Kansas State (#135) by 69 positions.'),
+         ('Which is better for energy?', "Oklahoma Price, with strong connections to Oklahoma's oil, gas, and renewable energy industries."),
+         ('Which is better for agriculture?', "Kansas State, with K-State's agricultural research programs and Great Plains farming connections."),
+     ]},
+    {"a": 'rit-saunders', "b": 'suny-buffalo',
+     "choose_a": "you want a tech-focused MBA with RIT's engineering brand and Rochester's optics/imaging industry.",
+     "choose_b": 'you want a higher-ranked program (#71 vs #101) with healthcare connections in a larger city.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are Upstate New York MBA programs. SUNY Buffalo (#71) in Buffalo has the higher ranking and sits in New York's second-largest city. RIT Saunders (#101) in Rochester has tech-focused MBA leveraging RIT's engineering reputation. Buffalo has healthcare (Kaleida) and banking (M&T); Rochester has imaging/optics (Xerox legacy) and food science (Wegmans).</p>"),
+         ('The Honest Take', "<p>SUNY Buffalo has the ranking edge and larger city job market. RIT wins for tech-adjacent careers where RIT's engineering brand opens doors. Buffalo's healthcare and banking sectors are larger than Rochester's current employer base. Both are affordable Upstate NY options. For overall career outcomes, SUNY Buffalo wins. For tech management and engineering leadership, RIT has the stronger brand signal.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'SUNY Buffalo (#71) outranks RIT Saunders (#101) significantly.'),
+         ('Which is better for tech?', "RIT Saunders, leveraging RIT's strong engineering and technology reputation."),
+         ('Which city has more employers?', 'Buffalo has the larger overall employer base, including healthcare and banking sectors.'),
+     ]},
+    {"a": 'belmont-massey', "b": 'vanderbilt-owen',
+     "choose_a": "you want Nashville's affordable MBA with entrepreneurship and healthcare focus at a fraction of Owen's cost.",
+     "choose_b": "you want a much higher-ranked program (#30 vs #143) with Vanderbilt's brand and top healthcare management placement.",
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Nashville MBA programs. Vanderbilt Owen (#30) is a top-30 nationally ranked program with exceptional healthcare management placement. Belmont Massey (#143) offers an affordable alternative with entrepreneurship and healthcare connections in the same city. The ranking gap (113 positions) is among the widest same-city comparisons in the country.</p>'),
+         ('The Honest Take', '<p>Owen is in a completely different league. Top-30 ranking, $155K+ starting salaries, consulting and healthcare placement at the highest level. Belmont wins only on cost. If you can get into Owen and fund it, the ROI calculation is clear. Belmont is a rational choice for Nashville working professionals who need a credential at minimal cost and plan to stay in the region.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Vanderbilt Owen (#30) dramatically outranks Belmont Massey (#143).'),
+         ('Which is more affordable?', "Belmont Massey at a fraction of Vanderbilt's private tuition."),
+         ('Which is better for healthcare?', "Both access Nashville's healthcare economy, but Owen's healthcare management program is nationally ranked and places at a much higher level."),
+     ]},
+    {"a": 'wvu-chambers', "b": 'ohio-state-fisher',
+     "choose_a": "you want Appalachia's most affordable MBA with energy sector connections and Mountaineer community.",
+     "choose_b": 'you want a top-30 nationally ranked program (#27 vs #140) with world-class supply chain and marketing programs.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are state flagship MBA programs. Ohio State Fisher (#27) in Columbus is a top-30 program with nationally ranked supply chain and marketing programs. WVU Chambers (#140) in Morgantown offers rock-bottom tuition in Appalachia's energy corridor. The ranking gap (113 positions) makes this an extreme cross-tier comparison, but both serve Appalachian-region students.</p>"),
+         ('The Honest Take', "<p>Fisher is in a completely different tier. Top-30 ranking, strong Fortune 500 placement, and one of the best supply chain programs in the country. WVU wins exclusively on cost: in-state tuition under $12K/year is among the cheapest in the region. WVU graduates who stay in West Virginia's energy sector do well. For national career ambitions, Fisher is worth every dollar of the higher cost.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Ohio State Fisher (#27) dramatically outranks WVU Chambers (#140).'),
+         ('Which is cheaper?', 'WVU Chambers with in-state tuition under $12K/year is one of the cheapest MBAs in the region.'),
+         ('Which has better career outcomes?', 'Ohio State Fisher, by an enormous margin. Its supply chain, marketing, and general management placement is nationally competitive.'),
+     ]},
+    {"a": 'ucf', "b": 'florida-warrington',
+     "choose_a": "you want Orlando's defense simulation and aerospace MBA at affordable in-state tuition.",
+     "choose_b": 'you want a much higher-ranked program (#32 vs #112) with the Gators brand and broader career placement.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Florida public MBA programs. Florida Warrington (#32) in Gainesville is a top-35 nationally ranked program with strong marketing and real estate placement. UCF (#112) in Orlando is a regional program with defense and aerospace connections. The ranking gap (80 positions) reflects major differences in career outcomes, brand value, and recruiting access.</p>'),
+         ('The Honest Take', "<p>Warrington is the dramatically better MBA. Top-35 ranking, Gators brand, and strong placement into Fortune 500 marketing, real estate, and consulting roles. UCF wins for Orlando-specific careers (defense simulation, theme parks, aerospace) at lower total cost. UCF students benefit from Orlando's large population and employer base. For national career ambitions, Warrington is the clear choice.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Florida Warrington (#32) dramatically outranks UCF (#112).'),
+         ('Which is better for defense?', "UCF, due to Orlando's defense simulation corridor with Lockheed Martin and L3Harris."),
+         ('Which is better for marketing?', 'Florida Warrington has one of the strongest marketing MBA programs in the Southeast.'),
+     ]},
+    {"a": 'north-texas-ryan', "b": 'texas-mccombs',
+     "choose_a": 'you want DFW metro access at a fraction of McCombs cost with supply chain and analytics focus.',
+     "choose_b": 'you want a top-25 nationally ranked program (#25 vs #129) with the UT Austin brand and the highest-ranked MBA in Texas.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Texas public MBA programs. McCombs (#25) in Austin is the highest-ranked MBA in Texas, a top-25 program with strong tech, energy, and consulting placement. North Texas Ryan (#129) in Denton is a large regional program in the DFW metro with supply chain and analytics strengths. The ranking gap (104 positions) reflects a vast difference in program quality and outcomes.</p>'),
+         ('The Honest Take', "<p>McCombs is in a completely different league. Top-25 ranking, in-state tuition that's a bargain for a top-25 MBA, and placement at the highest levels. North Texas wins only on price and DFW proximity. For budget-constrained DFW working professionals, UNT provides a credential at minimal cost. For career advancement to the executive level, McCombs is the rational investment.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Texas McCombs (#25) dramatically outranks North Texas Ryan (#129).'),
+         ('Which is in DFW?', 'North Texas in Denton is in the DFW metro. McCombs is in Austin (3 hours south). Both access the broader Texas job market.'),
+         ('Which is more affordable?', "Both are Texas public schools, but UNT's lower tuition and DFW proximity make it cheaper overall. McCombs in-state tuition is still a bargain for a top-25 MBA."),
+     ]},
+    {"a": 'unlv-lee', "b": 'hawaii-shidler',
+     "choose_a": 'you want hospitality and gaming management in the entertainment capital of the world with no state income tax.',
+     "choose_b": 'you want Asia-Pacific business focus with island lifestyle and the only MBA in Hawaii.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are hospitality-adjacent MBA programs in unique locations. UNLV Lee (#130) in Las Vegas specializes in gaming and resort management. Hawaii Shidler (#137) in Honolulu focuses on Asia-Pacific business and tourism. Both are affordable public MBAs. The career focus is different: Las Vegas is entertainment/gaming, Hawaii is Pacific Rim/tourism. Neither provides strong national career placement outside their niches.</p>'),
+         ('The Honest Take', "<p>These serve different career paths despite the hospitality overlap. UNLV wins for gaming, casino management, and resort operations where Las Vegas is the undisputed global center. Hawaii wins for Asia-Pacific business and students committed to working in the Pacific region. UNLV has no state income tax; Hawaii has the highest cost of living in the US. For career ROI, UNLV's lower living costs and gaming industry salaries provide the edge.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'UNLV Lee (#130) slightly edges Hawaii Shidler (#137).'),
+         ('Which is better for hospitality?', 'Both are strong. UNLV for gaming and casinos. Hawaii for resort tourism and international hospitality.'),
+         ('Which has lower cost of living?', "UNLV in Las Vegas, by a significant margin. Hawaii's cost of living is among the highest in the US."),
+     ]},
+    {"a": 'seton-hall-stillman', "b": 'rutgers',
+     "choose_a": 'you want a smaller MBA with Catholic values in suburban South Orange and strong NJ employer connections.',
+     "choose_b": 'you want a higher-ranked program (#55 vs #122) in Newark with pharmaceutical industry access and larger alumni network.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are New Jersey MBA programs 10 miles apart. Rutgers (#55) in Newark has the higher ranking, pharma industry connections, and larger state university brand. Seton Hall Stillman (#122) in South Orange offers a Catholic education alternative with smaller class sizes. The ranking gap (67 positions) is significant.</p>'),
+         ('The Honest Take', "<p>Rutgers is the stronger MBA. Higher ranking, pharma connections (J&J, Merck, Pfizer), and a larger alumni network. Seton Hall wins for students who prefer a smaller, Catholic educational environment and don't need the pharmaceutical industry pipeline. Both access the NYC metro job market. For career outcomes, Rutgers delivers more value.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Rutgers (#55) significantly outranks Seton Hall Stillman (#122).'),
+         ('Which is better for pharma?', "Rutgers, with deep connections to NJ's pharmaceutical corridor."),
+         ('Which has smaller classes?', 'Seton Hall Stillman offers a more intimate class experience than larger Rutgers.'),
+     ]},
+    {"a": 'sjsu-lucas', "b": 'sdsu-fowler',
+     "choose_a": 'you want the cheapest MBA in California with Silicon Valley tech access at $16K/year in-state.',
+     "choose_b": 'you want a higher-ranked program (#82 vs #128) in San Diego with tech, defense, and biotech career access.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are California State University MBA programs. SDSU Fowler (#82) in San Diego has the higher ranking and access to Qualcomm, defense contractors, and biotech. SJSU Lucas (#128) in San Jose offers the cheapest MBA in the Bay Area at $16K/year with direct Silicon Valley access. Both are excellent value plays for California residents.</p>'),
+         ('The Honest Take', "<p>SDSU has the ranking edge and more diverse employer base (tech, defense, biotech, healthcare). SJSU wins on pure tech access and rock-bottom tuition. At $16K/year in the heart of Silicon Valley, SJSU's value proposition is hard to beat for tech-oriented students. San Diego's lifestyle and employer diversity make SDSU attractive for students who want career options beyond pure tech.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'SDSU Fowler (#82) outranks SJSU Lucas (#128) significantly.'),
+         ('Which is cheaper?', 'SJSU Lucas at $16K/year for CA residents is cheaper than SDSU, and both are far below private school tuition.'),
+         ('Which has better tech access?', "SJSU in San Jose is physically in Silicon Valley. SDSU in San Diego has Qualcomm and growing tech, but San Jose's density of tech employers is unmatched."),
+     ]},
+    {"a": 'kentucky-gatton', "b": 'tennessee-haslam',
+     "choose_a": "you want affordable SEC MBA with Lexington's horse country lifestyle and healthcare connections.",
+     "choose_b": 'you want a slightly higher-ranked program (#72 vs #64) with supply chain strength and no state income tax.',
+     "analysis": [
+         ('Why People Compare These Two', "<p>Both are mid-ranked SEC MBA programs in neighboring states. Kentucky Gatton (#64) in Lexington has the slightly higher ranking. Tennessee Haslam (#72) in Knoxville has supply chain strengths and Tennessee's no-income-tax advantage. Both are affordable public school MBAs with strong regional placement. Gatton is 8 positions higher in the rankings.</p>"),
+         ('The Honest Take', "<p>Gatton has the slight ranking edge. Haslam has the no-income-tax advantage (meaningful over 2 years and beyond if you stay in Tennessee). Haslam's supply chain program is nationally recognized. Gatton's healthcare connections through UK HealthCare are strong. For supply chain careers, Haslam wins. For healthcare management in the Southeast, Gatton wins. Both are solid mid-tier SEC MBAs at affordable prices.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Kentucky Gatton (#64) edges Tennessee Haslam (#72), though both are competitive.'),
+         ('Which has no state income tax?', 'Tennessee Haslam. Tennessee has no state income tax, which benefits both MBA students and post-graduation earnings.'),
+         ('Which is better for supply chain?', 'Tennessee Haslam has the stronger supply chain program, nationally recognized in the field.'),
+     ]},
+    {"a": 'south-florida-muma', "b": 'florida-warrington',
+     "choose_a": "you want Tampa Bay's cybersecurity and healthcare focus at affordable in-state tuition.",
+     "choose_b": 'you want a much higher-ranked program (#32 vs #103) with the Gators brand and top marketing placement.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are major Florida public MBA programs. Warrington (#32) in Gainesville is a top-35 nationally ranked program with strong marketing, real estate, and consulting placement. USF Muma (#103) in Tampa offers cybersecurity, analytics, and healthcare management at lower tuition. The ranking gap (71 positions) reflects significant differences in career outcomes.</p>'),
+         ('The Honest Take', "<p>Warrington is the clearly better MBA. Top-35 ranking, Gator brand, and stronger career placement nationally. USF Muma wins for students working in Tampa who need a flexible, affordable MBA without relocating. Tampa's cybersecurity and healthcare sectors are accessible from USF. For national career ambitions, Warrington's brand and career services justify the difference.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Florida Warrington (#32) significantly outranks USF Muma (#103).'),
+         ('Which is more convenient for Tampa professionals?', 'USF Muma in Tampa is the obvious choice for working professionals in the Tampa Bay area.'),
+         ('Which has better marketing placement?', 'Florida Warrington has one of the strongest marketing MBA programs in the Southeast.'),
+     ]},
+    {"a": 'detroit-mercy', "b": 'indiana-kelley',
+     "choose_a": 'you want a Detroit Jesuit MBA with automotive connections and flexible evening format.',
+     "choose_b": 'you want a top-25 nationally ranked program (#24 vs #102) with world-class marketing, supply chain, and career switching support.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both serve Midwest MBA students, though at vastly different tiers. Indiana Kelley (#24) in Bloomington is a top-25 program with nationally ranked marketing, supply chain, and consulting placement. Detroit Mercy (#102) in Detroit is a Jesuit MBA with automotive connections. The ranking gap (78 positions) reflects enormous differences in program quality and career outcomes.</p>'),
+         ('The Honest Take', '<p>Kelley is in a completely different league. Top-25 ranking, exceptional career switching support, and placement at McKinsey, Amazon, and P&G. Detroit Mercy wins only for Detroit-based working professionals who need a flexible, local credential. For any career ambition that extends beyond the Detroit metro, Kelley is the investment worth making.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Indiana Kelley (#24) dramatically outranks Detroit Mercy (#102).'),
+         ('Which is better for career switching?', 'Kelley, by a wide margin. Its career switching support, consulting placement, and marketing programs are among the best in the country.'),
+         ('Which is more convenient for Detroit professionals?', "Detroit Mercy's downtown Detroit campus and evening format serve working professionals without relocation."),
+     ]},
+    {"a": 'gonzaga', "b": 'washington-foster',
+     "choose_a": 'you want a Jesuit MBA in Spokane with small cohorts, ethics focus, and lower cost of living.',
+     "choose_b": 'you want a much higher-ranked program (#25 vs #117) with Amazon, Microsoft, and Seattle tech access.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Pacific Northwest MBA programs. Washington Foster (#25) in Seattle is a top-25 program with Amazon, Microsoft, and Boeing connections. Gonzaga (#117) in Spokane is a Jesuit MBA with small classes and ethics-based education. The ranking gap (92 positions) and job market difference (Seattle vs Spokane) are both massive.</p>'),
+         ('The Honest Take', "<p>Foster is in a completely different league. Top-25 ranking, Seattle tech access, and $145K+ starting salaries. Gonzaga wins on cost, class size, and Jesuit educational values. Spokane's cost of living is much lower than Seattle's. For any career ambition that involves tech, consulting, or Fortune 500 companies, Foster is the clear investment. Gonzaga is rational for budget-constrained students in eastern Washington who want a local MBA.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Washington Foster (#25) dramatically outranks Gonzaga (#117).'),
+         ('Which has better tech access?', 'Foster. Seattle is home to Amazon, Microsoft, Boeing, Starbucks, and hundreds of tech companies.'),
+         ('Which is more affordable?', "Gonzaga's tuition plus Spokane's lower cost of living make it significantly cheaper overall."),
+     ]},
+    {"a": 'elon-love', "b": 'wake-forest',
+     "choose_a": 'you want experiential learning emphasis at lower cost in the Piedmont Triad with small class intimacy.',
+     "choose_b": 'you want a much higher-ranked program (#39 vs #133) with the Wake Forest brand and stronger career placement.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are private North Carolina MBA programs about 30 miles apart. Wake Forest (#39) in Winston-Salem is a top-40 nationally ranked program with strong consulting and finance placement. Elon Love (#133) in Elon offers experiential learning with small classes. The ranking gap (94 positions) is massive, reflecting very different career outcomes and brand value.</p>'),
+         ('The Honest Take', '<p>Wake Forest is the dramatically better MBA. Top-40 ranking, Deloitte and consulting placement, and a nationally recognized brand. Elon wins on class size intimacy and experiential learning approach. For career ambitions beyond the Piedmont Triad, Wake Forest is the clear investment. Elon is for students who prioritize teaching quality and small-cohort learning over brand and career placement.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Wake Forest (#39) dramatically outranks Elon Love (#133).'),
+         ('Which has smaller classes?', 'Elon Love has much smaller MBA cohorts with more personalized faculty attention.'),
+         ('Which has better career placement?', 'Wake Forest, by a very wide margin. Its consulting and finance placement is among the best outside the top-25.'),
+     ]},
+    {"a": 'ole-miss', "b": 'alabama-manderson',
+     "choose_a": 'you want the cheapest SEC MBA with Palmer assistantships covering 75% of tuition and a strong online MBA option.',
+     "choose_b": 'you want a higher-ranked program (#87 vs #140) with the Alabama brand, larger alumni network, and broader placement.',
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are SEC MBA programs in the Deep South. Alabama Manderson (#87) in Tuscaloosa has the higher ranking and the Crimson Tide brand. Ole Miss (#140) in Oxford offers Palmer assistantships that reduce tuition by 75%, making it nearly free. Manderson outranks Ole Miss by 53 positions and has broader career outcomes.</p>'),
+         ('The Honest Take', '<p>Manderson is the better MBA by ranking and career outcomes. Ole Miss wins on cost: Palmer assistantships reduce net tuition to roughly $3,250/year, making it one of the cheapest MBA experiences in the country. Ole Miss also has a well-ranked online MBA for remote students. For students who prioritize minimal debt above all else, Ole Miss with Palmer funding is the value play. For career outcomes, Alabama wins.</p>'),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'Alabama Manderson (#87) outranks Ole Miss (#140) by 53 positions.'),
+         ('Which is cheaper after aid?', 'Ole Miss with Palmer assistantships at net ~$3,250/year is dramatically cheaper. Without Palmer funding, Alabama is comparable.'),
+         ('Which has the better online MBA?', 'Ole Miss has a top-35 nationally ranked online MBA. Alabama also offers online options but Ole Miss leads in this format.'),
+     ]},
+    {"a": 'clark', "b": 'bu-questrom',
+     "choose_a": 'you want a social enterprise-focused MBA in Worcester with small cohorts and research university brand.',
+     "choose_b": "you want a much higher-ranked program (#47 vs #143) with Boston's employer base and BU's larger alumni network.",
+     "analysis": [
+         ('Why People Compare These Two', '<p>Both are Massachusetts private MBA programs. BU Questrom (#47) in Boston is a top-50 program with healthcare, consulting, and finance placement. Clark (#143) in Worcester offers social enterprise and sustainability-focused MBA education with small classes. The ranking gap (96 positions) reflects vast differences in career outcomes and brand value.</p>'),
+         ('The Honest Take', "<p>BU Questrom is the dramatically better MBA for career outcomes. Top-50 ranking, Boston employer access, and placement into healthcare, consulting, and tech. Clark wins for students passionate about social enterprise and sustainability who want intimate class sizes. Worcester's job market is much smaller than Boston's. For career ambitions in mainstream business, BU is the clear choice. For mission-driven careers at lower cost, Clark has distinctive appeal.</p>"),
+     ],
+     "faq": [
+         ('Which is higher ranked?', 'BU Questrom (#47) dramatically outranks Clark (#143).'),
+         ('Which is better for social impact?', 'Clark has a distinctive focus on social enterprise and sustainability not matched by BU.'),
+         ('Which has better employer access?', "BU Questrom in Boston, with access to healthcare, biotech, consulting, and finance employers that Worcester can't match."),
+     ]},
+    {"a": "ucf", "b": "kennesaw-state-coles",
+     "choose_a": "you want Orlando's defense simulation and aerospace industry connections with a larger research university.",
+     "choose_b": "you want Atlanta's suburban MBA with healthcare and project management strengths closer to Fortune 500 HQs.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Both are large Tier 7 public MBA programs in fast-growing Southeast metros. UCF (#112) in Orlando connects to defense simulation and aerospace. Kennesaw State Coles (#104) in Atlanta's northwestern suburbs has healthcare and project management strengths. Kennesaw has the slight ranking edge (#104 vs #112). Atlanta's corporate market is larger than Orlando's.</p>"),
+         ("The Honest Take", "<p>Kennesaw State has the slight ranking advantage and access to Atlanta's larger corporate base (Coca-Cola, Delta, Home Depot, UPS). UCF wins for defense and aerospace careers specific to Orlando's simulation corridor. Both are affordable public MBAs. Pick the metro where you want to build your career: Atlanta for corporate diversity, Orlando for defense and tourism.</p>"),
+     ],
+     "faq": [
+         ("Which is higher ranked?", "Kennesaw State Coles (#104) slightly edges UCF (#112)."),
+         ("Which city has more employers?", "Atlanta has significantly more Fortune 500 headquarters and corporate diversity than Orlando."),
+         ("Which is better for defense?", "UCF. Orlando's defense simulation corridor is unique in the Southeast."),
+     ]},
+    {"a": "chapman-argyros", "b": "loyola-marymount",
+     "choose_a": "you want an Orange County MBA with entrepreneurship and entertainment industry connections near Disneyland.",
+     "choose_b": "you want a higher-ranked program (#85 vs #127) on LA's Westside with ethics-based Jesuit education.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Both are small private MBA programs in Southern California. LMU (#85) on LA's Westside has the higher ranking and Jesuit values-based education. Chapman Argyros (#127) in Orange has entrepreneurship focus and entertainment industry connections through Chapman's film school. LMU outranks Chapman by 42 positions.</p>"),
+         ("The Honest Take", "<p>LMU has the ranking advantage and stronger LA employer connections through its Westside location. Chapman wins for entertainment industry careers where the film school crossover creates unique MBA/MFA dual-degree opportunities. Both are pricey private California MBAs. For general LA business careers, LMU is the better choice. For entertainment and entrepreneurship, Chapman has distinctive value.</p>"),
+     ],
+     "faq": [
+         ("Which is higher ranked?", "Loyola Marymount (#85) outranks Chapman Argyros (#127)."),
+         ("Which is better for entertainment?", "Chapman Argyros, due to its film school crossover and Orange County entertainment connections."),
+         ("Which is better for general management?", "LMU's higher ranking and LA Westside location give it broader career placement in general management roles."),
+     ]},
+    {"a": "mississippi-state", "b": "ole-miss",
+     "choose_a": "you want Starkville's lowest-cost-of-living MBA with engineering and project management connections.",
+     "choose_b": "you want Palmer assistantships covering 75% of tuition with a strong online MBA and SEC Oxford campus life.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Mississippi's two flagship MBA programs 100 miles apart. Mississippi State (#130) in Starkville has engineering connections through MSU's engineering school. Ole Miss (#140) in Oxford has Palmer assistantships that reduce tuition by 75%. Both are affordable. Mississippi State has the higher ranking; Ole Miss has the better financial aid package.</p>"),
+         ("The Honest Take", "<p>Mississippi State has the ranking edge (#130 vs #140) and Starkville's cost of living is among the lowest in the US. Ole Miss with Palmer assistantships is nearly free (net $3,250/year), making it the value champion. Ole Miss also has a higher-ranked online MBA. For in-person MBA, Mississippi State's ranking and engineering connections give it the edge. For cost minimization, Ole Miss with Palmer funding is the rational play.</p>"),
+     ],
+     "faq": [
+         ("Which is higher ranked?", "Mississippi State (#130) outranks Ole Miss (#140) by 10 positions."),
+         ("Which is cheaper after aid?", "Ole Miss with Palmer assistantships at net ~$3,250/year is dramatically cheaper."),
+         ("Which has the better online MBA?", "Ole Miss has a top-35 nationally ranked online MBA option."),
+     ]},
+    {"a": "uab-collat", "b": "belmont-massey",
+     "choose_a": "you want an MBA inside one of the nation's largest academic medical centers in Birmingham.",
+     "choose_b": "you want Nashville's entrepreneurship and music industry ecosystem with healthcare employer access (HCA).",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Both are mid-South MBA programs with healthcare connections. UAB Collat (#116) in Birmingham sits inside UAB Health System. Belmont Massey (#143) in Nashville has HCA Healthcare headquarters and Nashville's music and startup scene. Birmingham is a healthcare-heavy economy. Nashville is more diversified with healthcare, entertainment, and tech.</p>"),
+         ("The Honest Take", "<p>UAB Collat has the ranking advantage (#116 vs #143) and deeper healthcare integration (literally inside an academic medical center). Belmont wins on city appeal: Nashville is one of the fastest-growing cities in the US with more career diversity. For pure healthcare management, UAB's embedded position is unmatched. For career flexibility and city lifestyle, Nashville with Belmont offers more options.</p>"),
+     ],
+     "faq": [
+         ("Which is higher ranked?", "UAB Collat (#116) outranks Belmont Massey (#143)."),
+         ("Which is better for healthcare?", "UAB Collat is more deeply embedded in healthcare. Belmont has HCA access but Nashville's healthcare is less concentrated than UAB's."),
+         ("Which city has more career diversity?", "Nashville has more corporate diversity, entertainment, and tech than Birmingham's healthcare-dominated economy."),
+     ]},
+    {"a": "mercer-stetson", "b": "kennesaw-state-coles",
+     "choose_a": "you want a smaller private MBA in Atlanta with close ties to Mercer's law and pharmacy schools.",
+     "choose_b": "you want an affordable public MBA (#104 vs #132) with healthcare and project management in Atlanta's northern suburbs.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Both serve the metro Atlanta market. Kennesaw State Coles (#104) in Kennesaw has the higher ranking, public school tuition, and healthcare/project management strengths. Mercer Stetson (#132) in Atlanta has a smaller private program with connections to Mercer's law and pharmacy schools. Kennesaw outranks Mercer by 28 positions and costs less.</p>"),
+         ("The Honest Take", "<p>Kennesaw State wins on ranking, cost, and program size. Mercer wins for students who value a smaller private school experience and want cross-disciplinary connections with law or pharmacy. For most Atlanta-area MBA seekers, Kennesaw State's public tuition and higher ranking make it the rational choice. Mercer appeals to students who want a boutique MBA experience with specific professional school connections.</p>"),
+     ],
+     "faq": [
+         ("Which is higher ranked?", "Kennesaw State Coles (#104) outranks Mercer Stetson (#132)."),
+         ("Which is more affordable?", "Kennesaw State with public university tuition is significantly cheaper than private Mercer."),
+         ("Which has cross-disciplinary opportunities?", "Mercer Stetson can connect MBA students with Mercer's law school and pharmacy school for unique cross-disciplinary learning."),
+     ]},
+    {"a": "dayton", "b": "xavier-williams",
+     "choose_a": "you want a Catholic MBA in Dayton with engineering management and defense contractor connections (Wright-Patterson AFB).",
+     "choose_b": "you want a higher-ranked program (#77 vs #126) in Cincinnati with accounting and finance strengths.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Both are Catholic MBA programs in Southwest Ohio, 50 miles apart. Xavier Williams (#77) in Cincinnati has the higher ranking with strong accounting and finance programs. Dayton (#126) leverages proximity to Wright-Patterson Air Force Base for defense engineering and management careers. Xavier outranks Dayton by 49 positions.</p>"),
+         ("The Honest Take", "<p>Xavier is the clearly stronger MBA. Higher ranking, Cincinnati's larger job market, and nationally recognized accounting program. Dayton wins for defense and engineering management careers connected to Wright-Patterson AFB. Both share Catholic educational values. If your career is defense-related, Dayton's AFB connections are unique. For everything else, Xavier's ranking and Cincinnati employer access make it the better investment.</p>"),
+     ],
+     "faq": [
+         ("Which is higher ranked?", "Xavier Williams (#77) outranks Dayton (#126) by 49 positions."),
+         ("Which is better for defense?", "Dayton. Wright-Patterson Air Force Base and its associated defense contractors create unique career opportunities."),
+         ("Which has better accounting?", "Xavier Williams has one of the stronger accounting programs in the Midwest, nationally recognized."),
+     ]},
+    {"a": "montana", "b": "portland-state",
+     "choose_a": "you want the most affordable MBA in the Northwest with outdoor lifestyle and intimate class sizes under 30.",
+     "choose_b": "you want Portland's urban campus with Nike, Intel, and Columbia Sportswear access at higher ranking (#132 vs #144).",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Both are Pacific Northwest public MBA programs emphasizing sustainability. Portland State (#132) in Portland has urban campus employer access. Montana (#144) in Missoula offers one of the cheapest MBAs anywhere with class sizes under 30. Portland's job market dwarfs Missoula's. Montana's cost of living is dramatically lower.</p>"),
+         ("The Honest Take", "<p>Portland State wins on employer access. Nike, Intel, Columbia Sportswear, and Portland's tech scene provide real career opportunities that Missoula can't match. Montana wins on cost: sub-$10K tuition with minimal living expenses. Most Montana MBA graduates relocate for employment. If you plan to work in the Portland area, PSU is the rational choice. If you want the cheapest possible MBA credential, Montana delivers.</p>"),
+     ],
+     "faq": [
+         ("Which is higher ranked?", "Portland State (#132) outranks Montana (#144)."),
+         ("Which has better employer access?", "Portland State, with direct access to Nike, Intel, Columbia Sportswear, and Portland's growing tech scene."),
+         ("Which is cheapest?", "Montana at under $10K/year in Missoula is one of the cheapest MBA programs in America."),
+     ]},
 ]
 
 # =============================================================================
@@ -6284,7 +7196,7 @@ RANKING_TYPES = [
         "slug": "finance",
         "title": f"Best MBA Programs for Finance ({CURRENT_YEAR})",
         "description": "The top MBA programs for investment banking, private equity, hedge funds, and corporate finance careers.",
-        "sort_key": "ranking", "reverse": False, "limit": 25,
+        "sort_key": "ranking", "reverse": False, "limit": 29,
         "filter_slugs": [
             "wharton", "booth", "columbia-business-school", "nyu-stern", "mit-sloan",
             "stanford-gsb", "harvard-business-school", "berkeley-haas", "michigan-ross",
@@ -6292,6 +7204,7 @@ RANKING_TYPES = [
             "virginia-darden", "usc-marshall", "rice-jones", "washu-olin",
             "rochester-simon", "fordham-gabelli", "baruch-zicklin",
             "tulane-freeman", "iowa-tippie", "bentley", "oklahoma-price", "denver-daniels",
+            "hofstra-zarb", "iona-lapenta", "fau", "fairfield-dolan",
         ],
     },
     {
@@ -6311,33 +7224,35 @@ RANKING_TYPES = [
         "slug": "entrepreneurship",
         "title": f"Best MBA Programs for Entrepreneurship ({CURRENT_YEAR})",
         "description": "The MBA programs that produce the most founders, have the best startup resources, and connect you to venture capital.",
-        "sort_key": "ranking", "reverse": False, "limit": 20,
+        "sort_key": "ranking", "reverse": False, "limit": 22,
         "filter_slugs": [
             "stanford-gsb", "harvard-business-school", "mit-sloan", "berkeley-haas",
             "kellogg", "columbia-business-school", "michigan-ross", "duke-fuqua",
             "ucla-anderson", "virginia-darden", "cornell-johnson", "rice-jones",
             "babson-olin", "colorado-leeds", "chapman-argyros", "tcu-neeley",
             "utah-eccles", "clemson", "oregon-lundquist", "syracuse-whitman",
+            "san-francisco-usf", "belmont-massey",
         ],
     },
     {
         "slug": "technology",
         "title": f"Best MBA Programs for Tech Careers ({CURRENT_YEAR})",
         "description": "Top MBA programs for product management, tech strategy, and leadership roles at Google, Amazon, Apple, Meta, and startups.",
-        "sort_key": "ranking", "reverse": False, "limit": 20,
+        "sort_key": "ranking", "reverse": False, "limit": 22,
         "filter_slugs": [
             "stanford-gsb", "mit-sloan", "berkeley-haas", "harvard-business-school",
             "booth", "kellogg", "columbia-business-school", "carnegie-mellon-tepper",
             "ucla-anderson", "washington-foster", "cornell-johnson", "duke-fuqua",
             "georgia-tech-scheller", "texas-mccombs", "uc-irvine-merage",
             "ucsd-rady", "stevens", "nc-state-jenkins", "utah-eccles", "sdsu-fowler",
+            "sjsu-lucas", "south-florida-muma",
         ],
     },
     {
         "slug": "supply-chain",
         "title": f"Best MBA Programs for Supply Chain & Operations ({CURRENT_YEAR})",
         "description": "The strongest MBA programs for supply chain management, logistics, operations, and manufacturing leadership.",
-        "sort_key": "ranking", "reverse": False, "limit": 20,
+        "sort_key": "ranking", "reverse": False, "limit": 24,
         "filter_slugs": [
             "mit-sloan", "michigan-ross", "carnegie-mellon-tepper", "indiana-kelley",
             "ohio-state-fisher", "purdue-krannert", "penn-state-smeal", "wisconsin",
@@ -6345,6 +7260,7 @@ RANKING_TYPES = [
             "arkansas-walton", "tcu-neeley", "clemson", "marquette",
             "alabama-manderson", "syracuse-whitman", "san-diego-knauss",
             "nc-state-jenkins", "iowa-tippie",
+            "memphis-fogelman", "north-texas-ryan", "clarkson-reh", "slu-chaifetz",
         ],
     },
     {
@@ -6364,13 +7280,14 @@ RANKING_TYPES = [
         "slug": "healthcare",
         "title": f"Best MBA Programs for Healthcare Management ({CURRENT_YEAR})",
         "description": "MBA programs with the strongest healthcare management, health policy, and hospital administration programs.",
-        "sort_key": "ranking", "reverse": False, "limit": 15,
+        "sort_key": "ranking", "reverse": False, "limit": 21,
         "filter_slugs": [
             "wharton", "harvard-business-school", "yale-som", "michigan-ross",
             "unc-kenan-flagler", "cornell-johnson", "vanderbilt-owen",
             "bu-questrom", "arizona-state-carey", "case-western-weatherhead",
             "suny-buffalo", "kentucky-gatton", "marquette",
             "northeastern", "howard",
+            "slu-chaifetz", "quinnipiac", "belmont-massey", "scranton-kania", "uab-collat", "louisville",
         ],
     },
     {
@@ -6389,13 +7306,14 @@ RANKING_TYPES = [
         "slug": "international-business",
         "title": f"Best MBA Programs for International Business ({CURRENT_YEAR})",
         "description": "MBA programs with the strongest global focus, international study trips, and cross-border business training.",
-        "sort_key": "ranking", "reverse": False, "limit": 15,
+        "sort_key": "ranking", "reverse": False, "limit": 17,
         "filter_slugs": [
             "harvard-business-school", "wharton", "columbia-business-school",
             "yale-som", "mit-sloan", "duke-fuqua", "georgetown-mcdonough",
             "michigan-ross", "virginia-darden", "miami-herbert",
             "tulane-freeman", "american-kogod", "loyola-marymount",
             "san-diego-knauss", "george-washington",
+            "hawaii-shidler", "fiu-chapman",
         ],
     },
     {
@@ -6415,38 +7333,41 @@ RANKING_TYPES = [
         "slug": "data-science-ai", "nav_label": "Data Science & AI",
         "title": f"Best MBA Programs for Data Science & AI ({CURRENT_YEAR})",
         "description": "MBA programs with the strongest data science, artificial intelligence, and machine learning curriculum for business leaders.",
-        "sort_key": "ranking", "reverse": False, "limit": 15,
+        "sort_key": "ranking", "reverse": False, "limit": 19,
         "filter_slugs": [
             "mit-sloan", "stanford-gsb", "booth", "carnegie-mellon-tepper",
             "columbia-business-school", "nyu-stern", "berkeley-haas",
             "georgia-tech-scheller", "michigan-ross", "duke-fuqua",
             "uc-davis", "ucsd-rady", "stevens", "nc-state-jenkins",
             "xavier-williams",
+            "sjsu-lucas", "south-florida-muma", "kent-state-crawford", "utsa-alvarez",
         ],
     },
     {
         "slug": "sustainability",
         "title": f"Best MBA Programs for Sustainability & Social Impact ({CURRENT_YEAR})",
         "description": "MBA programs leading in sustainable business, ESG, social entrepreneurship, and impact-focused careers.",
-        "sort_key": "ranking", "reverse": False, "limit": 15,
+        "sort_key": "ranking", "reverse": False, "limit": 19,
         "filter_slugs": [
             "yale-som", "stanford-gsb", "berkeley-haas", "michigan-ross",
             "duke-fuqua", "cornell-johnson", "virginia-darden",
             "notre-dame-mendoza", "colorado-leeds", "oregon-lundquist",
             "denver-daniels", "american-kogod", "boston-college-carroll",
             "creighton-heider", "loyola-marymount",
+            "portland-state", "san-francisco-usf", "clark", "duquesne-palumbo-donahue",
         ],
     },
     {
         "slug": "energy",
         "title": f"Best MBA Programs for Energy ({CURRENT_YEAR})",
         "description": "Top MBA programs for oil and gas, renewable energy, energy finance, and energy management careers.",
-        "sort_key": "ranking", "reverse": False, "limit": 12,
+        "sort_key": "ranking", "reverse": False, "limit": 13,
         "filter_slugs": [
             "rice-jones", "texas-mccombs", "tulane-freeman", "oklahoma-price",
             "colorado-leeds", "denver-daniels", "unc-kenan-flagler",
             "duke-fuqua", "virginia-darden", "cornell-johnson",
             "utah-eccles", "tcu-neeley",
+            "wvu-chambers",
         ],
     },
     {
@@ -6504,13 +7425,14 @@ RANKING_TYPES = [
         "slug": "information-systems",
         "title": f"Best MBA Programs for Information Systems ({CURRENT_YEAR})",
         "description": "Top MBA programs for MIS, IT management, cybersecurity leadership, and digital transformation careers.",
-        "sort_key": "ranking", "reverse": False, "limit": 15,
+        "sort_key": "ranking", "reverse": False, "limit": 17,
         "filter_slugs": [
             "mit-sloan", "carnegie-mellon-tepper", "indiana-kelley",
             "arizona-state-carey", "georgia-tech-scheller", "texas-mccombs",
             "minnesota-carlson", "maryland-smith", "michigan-state-broad",
             "stevens", "nc-state-jenkins", "oklahoma-price",
             "temple-fox", "uic-liautaud", "drexel-lebow",
+            "utsa-alvarez", "jmu",
         ],
     },
     {
@@ -6990,6 +7912,96 @@ METRO_AREAS = [
             ("What MBA programs are in New Jersey?", "Rutgers (#55) in Newark and Stevens (#73) in Hoboken. Rutgers has the stronger pharma network; Stevens offers a tech-focused MBA across the river from Manhattan."),
             ("Is New Jersey good for pharma MBA careers?", "The best in the country. J&J, Merck, Pfizer, BMS, and dozens of biotech companies are headquartered in New Jersey. Rutgers MBA graduates have direct access to this ecosystem. No other state matches NJ's pharmaceutical concentration."),
             ("Can I access NYC from NJ MBA programs?", "Yes. Stevens in Hoboken is a 10-minute PATH ride from Manhattan. Rutgers in Newark is a 25-minute PATH/NJ Transit ride. Both provide NYC access at lower tuition and living costs than Manhattan-based programs."),
+        ],
+    },
+    {
+        "name": "Las Vegas", "slug": "las-vegas", "state": "NV",
+        "metro_schools": ["unlv-lee"],
+        "nearby_label": "Las Vegas, NV",
+        "industries": ["Hospitality", "Entertainment", "Real Estate", "Healthcare"],
+        "job_market": "Las Vegas is the hospitality and entertainment capital of the world. MGM Resorts, Caesars Entertainment, Wynn Resorts, and Las Vegas Sands dominate the Strip. Beyond gaming, the city's healthcare sector (HCA, UMC) is growing fast, and a population boom has created opportunities in real estate development, construction management, and professional services. The Raiders and F1 Grand Prix have added sports business to the mix.",
+        "cost_of_living": "Among the most affordable major metros in the West. Rent runs $1,200-$1,800/month for a one-bedroom. No state income tax in Nevada means higher take-home pay. Food and entertainment are surprisingly affordable off-Strip. Housing prices have risen since 2020 but remain well below California.",
+        "why_here": "UNLV Lee (#130) offers a specialized MBA in one of the world's most concentrated hospitality markets. If your career is in hotels, gaming, entertainment, or resort management, no other city gives you this level of employer access. The no-income-tax advantage stretches your salary further.",
+        "watch_out": "UNLV's MBA brand doesn't carry weight outside hospitality and the regional market. Las Vegas summers exceed 110 degrees regularly. The job market is heavily cyclical and tied to tourism spending. If you want consulting, finance, or tech careers, this isn't the right metro.",
+        "faq": [
+            ("What MBA programs are in Las Vegas?", f"UNLV Lee (#130) is the city's MBA program. It has particular strength in hospitality management, which makes sense given Las Vegas is the global center of the hotel and gaming industry for {CURRENT_YEAR}."),
+            ("Is Las Vegas good for hospitality MBA careers?", "The best in the country for gaming, hotels, and resort management. MGM, Caesars, Wynn, and dozens of hotel brands have their headquarters or major operations here. UNLV's hospitality program is among the most respected globally."),
+            ("What's the cost of living for MBA students in Las Vegas?", "Very affordable for a major metro. No state income tax, rent under $1,800/month, and cheap food make Las Vegas one of the best-value MBA locations in the western US."),
+        ],
+    },
+    {
+        "name": "Louisville", "slug": "louisville", "state": "KY",
+        "metro_schools": ["louisville"],
+        "nearby_label": "Louisville, KY",
+        "industries": ["Healthcare", "Logistics", "Manufacturing", "Bourbon & Spirits"],
+        "job_market": "Louisville punches above its weight in healthcare and logistics. Humana is headquartered here. UPS has its global air hub at Louisville International Airport, making the city a logistics nerve center. Brown-Forman (Jack Daniel's, Woodford Reserve) anchors a bourbon industry that generates billions in revenue. GE Appliances, Yum! Brands, and Kindred Healthcare add Fortune 500 depth.",
+        "cost_of_living": "Very affordable. Rent runs $900-$1,400/month for a one-bedroom. Louisville's cost of living is 15-20% below the national average. Your MBA scholarship dollars and post-graduation salary stretch significantly further here than in coastal cities.",
+        "why_here": "Louisville (#119) offers a solid regional MBA with direct access to Humana, UPS, Brown-Forman, and Yum! Brands. The healthcare concentration is particularly strong. If you want to stay in the Ohio River Valley region, this MBA gives you strong employer connections at a fraction of coastal tuition.",
+        "watch_out": "Louisville's MBA doesn't carry national brand recognition. The job market, while diverse, is mid-sized. Most graduates stay in the region. If your target is NYC consulting or Bay Area tech, you'll need to network beyond Louisville's local ecosystem.",
+        "faq": [
+            ("What MBA programs are in Louisville?", f"The University of Louisville (#119) offers the city's MBA program. It has strong connections to Louisville's healthcare and logistics industries for {CURRENT_YEAR}."),
+            ("What industries hire MBAs in Louisville?", "Healthcare (Humana, Kindred), logistics (UPS global air hub), consumer goods (Yum! Brands), and bourbon/spirits (Brown-Forman). Louisville also has growing fintech and professional services sectors."),
+            ("Is Louisville affordable for MBA students?", "Very. Cost of living runs 15-20% below the national average. Combined with in-state tuition, Louisville is one of the most affordable MBA options in the Southeast."),
+        ],
+    },
+    {
+        "name": "Memphis", "slug": "memphis", "state": "TN",
+        "metro_schools": ["memphis-fogelman"],
+        "nearby_label": "Memphis, TN",
+        "industries": ["Logistics", "Supply Chain", "Healthcare", "Financial Services"],
+        "job_market": "Memphis is the logistics capital of North America. FedEx is headquartered here and operates the world's largest cargo hub at Memphis International Airport. AutoZone, International Paper, and First Horizon add Fortune 500 presence. The healthcare sector is anchored by St. Jude Children's Research Hospital and Methodist Le Bonheur. Supply chain and logistics companies choose Memphis specifically for its central US location and infrastructure.",
+        "cost_of_living": "One of the most affordable major metros in the country. Rent runs $800-$1,300/month for a one-bedroom. Groceries, dining, and entertainment are well below national averages. No state income tax in Tennessee means higher take-home pay.",
+        "why_here": "Memphis Fogelman (#126) gives you an MBA in the FedEx backyard. If supply chain, logistics, or operations management is your target career, few cities offer this level of employer concentration. The cost of living makes this one of the cheapest MBA experiences in the US, and Tennessee's no-income-tax policy adds to the value.",
+        "watch_out": "Memphis is a small MBA market outside of logistics and healthcare. The program's brand doesn't travel far nationally. Crime rates in Memphis are among the highest in the US, which affects quality of life. If your target is consulting or finance, look elsewhere.",
+        "faq": [
+            ("What MBA programs are in Memphis?", f"The University of Memphis Fogelman (#126) is the city's MBA program. Its supply chain and logistics concentration leverages Memphis's position as the FedEx hub and logistics capital of North America for {CURRENT_YEAR}."),
+            ("Is Memphis good for supply chain careers?", "One of the best cities in the country. FedEx's global headquarters and the world's largest cargo airport are here. AutoZone, International Paper, and numerous 3PL companies also operate from Memphis. Supply chain MBA graduates have direct employer access."),
+            ("What's the cost of living in Memphis?", "Very low. Rent under $1,300/month, no state income tax, and cheap food make Memphis one of the most affordable MBA cities in America. Your student loans will be manageable compared to coastal programs."),
+        ],
+    },
+    {
+        "name": "Hampton Roads", "slug": "hampton-roads", "state": "VA",
+        "metro_schools": ["old-dominion-strome"],
+        "nearby_label": "Norfolk-Virginia Beach, VA",
+        "industries": ["Defense & Military", "Maritime", "Healthcare", "Government"],
+        "job_market": "Hampton Roads is the largest military concentration in the world. Naval Station Norfolk is the world's largest naval base. Huntington Ingalls Industries builds aircraft carriers and submarines here. BAE Systems, Leidos, and dozens of defense contractors have significant operations. Sentara Healthcare is a major regional employer. The Port of Virginia is one of the fastest-growing container ports on the East Coast.",
+        "cost_of_living": "Moderate and well below DC or Richmond. Rent runs $1,100-$1,600/month for a one-bedroom. Beach proximity (Virginia Beach) adds lifestyle value without the price tag of coastal cities in the Northeast. Groceries and dining are at or slightly below national averages.",
+        "why_here": "Old Dominion Strome (#139) serves a defense-heavy region with strong demand for business-trained professionals. If your career is in defense contracting, military transition, maritime logistics, or government services, Hampton Roads gives you direct access to the employers who dominate this sector. Tuition is among the lowest for any accredited MBA.",
+        "watch_out": "The MBA market here is narrow. Defense and government dominate. If you want to work in tech, consulting, or finance outside the defense sector, Hampton Roads won't provide the connections you need. The program's brand is regional.",
+        "faq": [
+            ("What MBA programs are in Hampton Roads?", f"Old Dominion Strome (#139) in Norfolk is the primary MBA program in the Hampton Roads region. It serves the largest military and defense market in the United States for {CURRENT_YEAR}."),
+            ("What industries hire MBAs in Hampton Roads?", "Defense contracting (Huntington Ingalls, BAE Systems, Leidos), military (Naval Station Norfolk), maritime logistics (Port of Virginia), and healthcare (Sentara). The region's economy revolves around the military-industrial complex."),
+            ("Is Hampton Roads affordable?", "Yes. Cost of living is well below DC or Richmond, with rent under $1,600/month. Combined with Old Dominion's low tuition, this is one of the most affordable MBA options on the East Coast."),
+        ],
+    },
+    {
+        "name": "Honolulu", "slug": "honolulu", "state": "HI",
+        "metro_schools": ["hawaii-shidler"],
+        "nearby_label": "Honolulu, HI",
+        "industries": ["Tourism & Hospitality", "International Business", "Military & Defense", "Real Estate"],
+        "job_market": "Hawaii's economy runs on tourism, military spending, and real estate. Marriott, Hilton, Hyatt, and local hotel chains employ thousands. Joint Base Pearl Harbor-Hickam and other military installations create defense sector demand. Hawaii's geographic position makes it a bridge between the US mainland and Asia-Pacific markets. Bank of Hawaii, First Hawaiian Bank, and Hawaiian Electric anchor the local financial and utilities sectors.",
+        "cost_of_living": "Among the highest in the US. Rent runs $1,800-$2,600/month for a one-bedroom. Groceries cost 30-50% more than the mainland. Gas and utilities are expensive. The trade-off is living in one of the most beautiful places on Earth, but MBA students should budget carefully.",
+        "why_here": "Hawaii Shidler (#137) is the only AACSB-accredited MBA program in the state and a gateway to Asia-Pacific business. If your career targets hospitality, international trade, or you want to work in Hawaii long-term, Shidler provides connections that no mainland program can match. The program's Asia focus attracts students from Japan, China, South Korea, and Southeast Asia.",
+        "watch_out": "Hawaii's job market is small and heavily tourism-dependent. MBA salaries are lower than mainland averages, and the high cost of living erodes purchasing power. If you want mainland careers in finance, consulting, or tech, Shidler won't open those doors. You're choosing lifestyle and Asia-Pacific access over raw career outcomes.",
+        "faq": [
+            ("What MBA programs are in Hawaii?", f"Hawaii Shidler (#137) at the University of Hawaii Manoa is the state's only AACSB-accredited MBA program. It has particular strength in Asia-Pacific business and hospitality management for {CURRENT_YEAR}."),
+            ("Is Hawaii a good place for an MBA?", "It depends on your goals. For Asia-Pacific business, hospitality, or building a career in Hawaii, Shidler is ideal. For mainland corporate careers, the isolation and small job market are real limitations. The lifestyle is unmatched, but you'll pay a premium for it."),
+            ("How expensive is living in Hawaii during an MBA?", "Expensive. Expect $2,000+/month for rent alone, plus elevated food and utility costs. Budget 30-50% more than mainland living. In-state tuition helps offset the cost if you're a Hawaii resident."),
+        ],
+    },
+    {
+        "name": "Birmingham", "slug": "birmingham", "state": "AL",
+        "metro_schools": ["uab-collat"],
+        "nearby_label": "Birmingham, AL",
+        "industries": ["Healthcare", "Banking", "Manufacturing", "Engineering"],
+        "job_market": "Birmingham is a healthcare and banking center for the Southeast. UAB Health System is the largest employer in Alabama and one of the top academic medical centers in the country. Regions Financial, Protective Life (now Dai-ichi Life), and BBVA USA (now PNC) anchor financial services. Vulcan Materials and Southern Company add industrial depth. The city's healthcare cluster, anchored by UAB, generates significant demand for business professionals in hospital administration, biotech, and health services management.",
+        "cost_of_living": "Among the lowest of any metro in the country. Rent runs $800-$1,200/month for a one-bedroom. Groceries, dining, and entertainment are 20-25% below national averages. Alabama has state income tax, but the overall cost of living makes Birmingham one of the cheapest MBA experiences available.",
+        "why_here": "UAB Collat (#116) sits inside one of the country's largest academic medical centers. If healthcare management is your target, you'll have unmatched clinical and administrative exposure during your MBA. Birmingham's low cost of living means minimal student debt. The banking sector (Regions, PNC) provides finance career options locally.",
+        "watch_out": "Birmingham's MBA market is regional. UAB Collat won't carry brand weight in NYC, Chicago, or the Bay Area. The city's professional job market, while growing, is much smaller than Atlanta (3 hours away). Most graduates stay in Alabama or the broader Southeast.",
+        "faq": [
+            ("What MBA programs are in Birmingham?", f"UAB Collat (#116) at the University of Alabama at Birmingham is the city's MBA program. It benefits from sitting inside one of the country's largest academic medical centers for {CURRENT_YEAR}."),
+            ("Is Birmingham good for healthcare MBA careers?", "Excellent. UAB Health System is the largest employer in Alabama and a nationally recognized academic medical center. MBA students get direct access to hospital administration, health services management, and biotech opportunities. Few MBA programs are this embedded in a healthcare ecosystem."),
+            ("How affordable is Birmingham for MBA students?", "One of the cheapest MBA cities in America. Rent under $1,200/month, food and entertainment well below national averages. Combined with UAB's moderate tuition, this is one of the highest-ROI MBA options for students who plan to stay in the Southeast."),
         ],
     },
 ]
@@ -8549,10 +9561,949 @@ def build_newsletter():
     print("  Built: /newsletter/")
 
 
-def build_blog_posts():
-    """Build 'Is [School] Worth It?' blog posts for top 50 schools."""
+# =============================================================================
+# STANDALONE BLOG POSTS — Manual content, not auto-generated from school data
+# =============================================================================
+
+STANDALONE_BLOG_POSTS = [
+    # --- SALARY DEEP-DIVES ---
+    {
+        "title": f"MBA Salary in Consulting: What You'll Earn at MBB and Beyond ({CURRENT_YEAR})",
+        "slug": "mba-salary-consulting",
+        "meta": f"MBA consulting salaries in {CURRENT_YEAR}. Compensation at McKinsey, BCG, Bain, Big 4, and boutiques. Base, bonus, and total comp from a Haas MBA grad.",
+        "sections": [
+            ("The Standard MBB Package", f"""<p>McKinsey, BCG, and Bain pay a standard package across all US offices: $190K base salary, $25K-$35K signing bonus, and $20K-$30K performance bonus. First-year total comp lands at $235K-$255K. These numbers hold whether you're in the NYC office or the Atlanta office. MBB firms standardize compensation nationally to remove salary as a variable in office selection.</p>
+<p>The predictability is the draw. Unlike banking (where bonuses swing with deal volume) or tech (where equity value fluctuates), consulting compensation is transparent. You know what year-one looks like before you accept. Year-two increases typically run 10-15%, with senior associate salaries reaching $210K-$230K base.</p>"""),
+            ("Big 4 and Tier 2 Firms", f"""<p>Deloitte Strategy (Monitor Deloitte), PwC Strategy& , EY-Parthenon, and KPMG Strategy pay $165K-$185K base with $15K-$25K signing bonuses. Total first-year comp is $190K-$220K. The gap with MBB has narrowed in recent years as Big 4 firms compete harder for top MBA talent.</p>
+<p>Tier 2 strategy firms (Oliver Wyman, Roland Berger, L.E.K., Simon-Kucher) pay comparably to Big 4, with bases of $160K-$180K. Boutique firms vary more widely: some specialized shops (like healthcare-focused Putnam Associates) pay $150K-$170K, while elite boutiques (like Kearney) match Big 4 rates.</p>"""),
+            ("The Trajectory: Year 3 to Partner", f"""<p>Consulting salary growth follows a predictable path. At MBB, the typical trajectory looks like:</p>
+<ul><li><strong>Year 1 (Associate/Consultant):</strong> $190K base, $250K total</li>
+<li><strong>Year 3 (Manager/Engagement Manager):</strong> $250K-$300K base, $350K-$400K total</li>
+<li><strong>Year 5-6 (Principal/Associate Partner):</strong> $350K-$450K base, $500K-$700K total</li>
+<li><strong>Year 8-10 (Partner):</strong> $800K-$2M+ total, with significant profit-sharing</li></ul>
+<p>The catch: most people exit before partner. Only 5-10% of MBA hires at MBB reach partnership. The two-year post-MBA "consulting sprint" is common: work at MBB for 2-3 years, then exit to a corporate strategy role, PE firm, or startup with the brand on your resume.</p>"""),
+            ("Which MBA Programs Place Best in Consulting", f"""<p>Consulting firms recruit from most top-25 programs, but concentration varies. The programs sending the highest percentage of graduates into consulting:</p>
+<ul><li><strong>Virginia Darden:</strong> 40%+ into consulting. The case-method school is a consulting farm.</li>
+<li><strong>Dartmouth Tuck:</strong> 35-38%. Small class, concentrated outcomes.</li>
+<li><strong>Kellogg:</strong> 30-35%. Collaborative culture aligns with consulting teamwork.</li>
+<li><strong>Duke Fuqua:</strong> 30-33%. Team Fuqua culture maps well to consulting.</li>
+<li><strong>Michigan Ross:</strong> 28-32%. MAP program provides consulting-style experience.</li></ul>
+<p>MBB firms recruit heavily from all M7 programs plus Haas, Fuqua, Darden, Tuck, Ross, Yale SOM, and Stern. Outside the top 15, on-campus MBB recruiting becomes less consistent, though individual candidates still break through. See our <a href="/rankings/consulting/">best MBA for consulting ranking</a> for the full list.</p>"""),
+            ("Consulting vs Other MBA Careers: The Money Comparison", f"""<p>Consulting pays well relative to most MBA careers, but it's not the top earner. First-year total comp comparison:</p>
+<ul><li><strong>Private equity:</strong> $350K-$600K (much higher, but far fewer spots)</li>
+<li><strong>Investment banking:</strong> $275K-$425K (higher, with more hours)</li>
+<li><strong>Consulting (MBB):</strong> $235K-$255K</li>
+<li><strong>Tech (FAANG PM):</strong> $220K-$300K (base + equity)</li>
+<li><strong>Corporate strategy:</strong> $150K-$190K</li></ul>
+<p>Consulting's advantage is accessibility. MBB firms hire hundreds of MBAs per year. PE mega-funds hire dozens. The probability of landing a consulting role from a target school is meaningfully higher than landing a PE role. For most MBA candidates, consulting is the highest-probability path to $250K+ first-year comp.</p>"""),
+        ],
+        "faq": [
+            ("How much do MBA consultants make at McKinsey?", f"McKinsey MBA hires in {CURRENT_YEAR} earn approximately $190K base salary with $25K-$35K signing bonus and $20K-$30K performance bonus. Total first-year compensation is $235K-$255K. The pay is standardized across US offices."),
+            ("Is consulting the highest-paying MBA career?", "No. Private equity and investment banking pay more in total compensation. Consulting offers the best combination of high pay and high probability of landing the role from a target MBA program. MBB firms hire at greater volume than PE or banking."),
+            ("How long do MBA graduates stay in consulting?", "The median tenure is 2-3 years. Most MBA hires leave for corporate strategy roles, PE, startups, or other opportunities after gaining the consulting brand and skill set. Only 5-10% reach partnership at MBB firms."),
+        ],
+    },
+    {
+        "title": f"MBA Salary in Tech: Base, Equity, and What Total Comp Looks Like ({CURRENT_YEAR})",
+        "slug": "mba-salary-tech",
+        "meta": f"MBA tech salaries in {CURRENT_YEAR}. Product management, strategy, and ops comp at Google, Amazon, Apple, Meta, and startups. From a Haas MBA grad.",
+        "sections": [
+            ("The FAANG Package", f"""<p>MBA hires at Meta, Apple, Amazon, Netflix, and Google (plus Microsoft) receive a compensation package with three components: base salary, equity (RSUs), and annual bonus. The typical first-year package for an MBA PM or strategy hire:</p>
+<ul><li><strong>Base salary:</strong> $165K-$190K</li>
+<li><strong>Annual RSU vest:</strong> $50K-$100K (from a 4-year grant of $200K-$400K)</li>
+<li><strong>Annual bonus:</strong> $20K-$40K (15-20% target)</li>
+<li><strong>Signing bonus:</strong> $25K-$75K</li></ul>
+<p>Total first-year comp, including the signing bonus and first-year RSU vest, runs $260K-$380K depending on the company and role. Amazon skews lower on base but higher on RSUs (back-weighted vesting). Google and Meta offer more balanced packages. Netflix pays all-cash with no equity, and bases are $250K+.</p>"""),
+            ("Product Management: The MBA Default in Tech", f"""<p>Product management is where most MBA graduates land in tech. The PM role sits at the intersection of business, engineering, and design, making it a natural fit for MBA skill sets. Google APM, Amazon PM, Meta RPM, and Microsoft PM all have dedicated MBA hiring programs.</p>
+<p>PM compensation at the major companies for MBA hires:</p>
+<ul><li><strong>Google (L5):</strong> $185K base, $80K RSUs/year, $40K bonus = ~$305K total</li>
+<li><strong>Amazon (L6):</strong> $170K base, $60K RSUs/year, $25K bonus = ~$255K total (RSUs back-weighted)</li>
+<li><strong>Meta (IC5):</strong> $180K base, $90K RSUs/year, $35K bonus = ~$305K total</li>
+<li><strong>Microsoft (L63):</strong> $175K base, $50K RSUs/year, $30K bonus = ~$255K total</li></ul>
+<p>The variation between companies is significant. A Meta offer can be $50K+ higher than an Amazon offer for the same-level role, largely driven by equity differences. This is why PM candidates at top programs typically aim for multiple offers and negotiate.</p>"""),
+            ("Beyond PM: Strategy, Ops, and BizDev", f"""<p>Tech companies hire MBAs into roles beyond product management. Strategy and operations roles at tech companies pay slightly less than PM but offer different career paths:</p>
+<ul><li><strong>Corporate strategy:</strong> $155K-$175K base + equity. Think Apple business strategy or Google strategy & operations.</li>
+<li><strong>Business development:</strong> $150K-$180K base + equity. Partnership and deal roles at major tech companies.</li>
+<li><strong>Operations/supply chain:</strong> $145K-$170K base + equity. Amazon ops and Apple operations are major MBA employers.</li>
+<li><strong>Marketing:</strong> $150K-$175K base + equity. Brand and growth marketing at tech companies.</li></ul>
+<p>The equity component makes the tech compensation conversation unusual. A $155K base in tech strategy with $60K/year in RSUs produces $215K total comp, which beats a $190K consulting salary without equity.</p>"""),
+            ("Startups and Growth-Stage Companies", f"""<p>Startup MBA compensation trades cash for equity upside. A Series B startup might offer:</p>
+<ul><li><strong>Base:</strong> $140K-$170K (15-20% below FAANG)</li>
+<li><strong>Equity:</strong> 0.05%-0.30% (paper value, highly uncertain)</li>
+<li><strong>Signing bonus:</strong> $0-$25K</li></ul>
+<p>The calculation is a bet. If the company reaches a $5B valuation, 0.1% equity is worth $5M (before dilution). If it fails, it's worth nothing. The expected value calculation depends on the company's stage, traction, and your risk tolerance.</p>
+<p>Most MBA graduates who join startups do so after 2-3 years at a FAANG or MBB firm. The brand on the resume plus the MBA provides a safety net if the startup doesn't work out.</p>"""),
+            ("Which MBA Programs Place Best in Tech", f"""<p>Tech placement correlates strongly with geography. The programs sending the highest percentages into tech:</p>
+<ul><li><strong>Stanford GSB:</strong> 32-35% tech placement. Silicon Valley home court.</li>
+<li><strong>MIT Sloan:</strong> 30-33%. Boston/Cambridge tech plus strong West Coast recruiting.</li>
+<li><strong>Berkeley Haas:</strong> 28-32%. Bay Area location with strong Google, Meta, Amazon placement.</li>
+<li><strong>Washington Foster:</strong> 45-50%. Amazon and Microsoft home turf. Highest tech % of any top program.</li>
+<li><strong>CMU Tepper:</strong> 25-30%. STEM designation and Pittsburgh's AI ecosystem.</li></ul>
+<p>See our <a href="/rankings/technology/">best MBA for tech ranking</a> for the complete list. Geography matters for tech more than almost any other MBA career path.</p>"""),
+        ],
+        "faq": [
+            ("How much do MBA product managers make at Google?", f"Google MBA PMs (L5) earn approximately $185K base, $80K/year in RSUs, and $40K annual bonus in {CURRENT_YEAR}. Total first-year comp is approximately $305K, plus a signing bonus of $30K-$75K."),
+            ("Is tech the highest-paying MBA career?", "In total comp terms, tech can match or exceed banking for first-year MBAs, depending on the company and equity performance. PE still pays more on average. The key difference: tech equity has upside potential that cash-heavy banking comp doesn't."),
+            ("Do I need a CS degree for MBA tech roles?", "No. MBA PM programs at Google, Amazon, and Meta are designed for candidates without engineering backgrounds. You need to be comfortable discussing technology, but a CS degree is not required. The MBA is the credential that matters for these roles."),
+        ],
+    },
+    {
+        "title": f"MBA Salary in Investment Banking: What Associates Earn ({CURRENT_YEAR})",
+        "slug": "mba-salary-investment-banking",
+        "meta": f"MBA investment banking salaries in {CURRENT_YEAR}. Associate compensation at bulge brackets, elite boutiques, and middle market banks. From a Haas MBA grad.",
+        "sections": [
+            ("The Bulge Bracket Package", f"""<p>Goldman Sachs, Morgan Stanley, JPMorgan, Bank of America, and Citi pay MBA associate hires a standard package: $175K base salary with $50K-$75K signing bonus. The year-end bonus, which depends on deal volume and individual performance, adds $100K-$200K. Total first-year comp ranges from $325K to $450K.</p>
+<p>This is meaningfully more than consulting ($250K) or tech ($260K-$300K), and the gap is the bonus. Banking associates work more hours (70-80/week on average) and have less predictable schedules, but the compensation reflects it. The all-in hourly rate for banking and consulting is surprisingly similar when you adjust for actual hours worked.</p>"""),
+            ("Elite Boutiques: Even More", f"""<p>Evercore, Lazard, Centerview, PJT Partners, and Moelis pay base salaries comparable to bulge brackets ($175K-$185K) with larger bonuses. Elite boutique bonuses for strong first-year associates can reach $200K-$250K, pushing total comp to $400K-$450K.</p>
+<p>The elite boutique model runs leaner, with fewer associates per deal, which means more responsibility earlier. The pay premium reflects both the work intensity and the selectivity of hiring. Elite boutiques typically hire from M7 and top-10 programs almost exclusively.</p>"""),
+            ("Middle Market and Regional Banks", f"""<p>Middle market banks (Jefferies, Piper Sandler, William Blair, Baird) pay $150K-$170K base with bonuses of $75K-$150K. Total first-year comp: $225K-$320K. These firms offer a slightly more manageable lifestyle than bulge brackets, though 60-70 hour weeks are still standard.</p>
+<p>Regional banks and community banks hire MBAs into commercial banking, wealth management, and credit analyst roles at lower compensation ($100K-$140K base). These aren't typical MBA banking paths, but they provide local market opportunities for candidates who don't want the intensity of investment banking.</p>"""),
+            ("The Exit: Where Bankers Go After 2 Years", f"""<p>Most MBA bankers leave IB after 2-3 years. The common exits:</p>
+<ul><li><strong>Private equity:</strong> The most prestigious exit. Associates move to PE firms as vice presidents or associates, with comp jumping to $400K-$700K total. This is the path most MBA bankers target when they start.</li>
+<li><strong>Hedge funds:</strong> L/S equity funds, credit funds, and event-driven funds all hire from banking. Comp is highly variable: $300K-$1M+ depending on fund performance.</li>
+<li><strong>Corporate development:</strong> M&A experience translates directly to corporate strategy roles at Fortune 500 companies. Comp drops to $200K-$300K, but hours drop to 50/week.</li>
+<li><strong>Startups and growth equity:</strong> Some bankers use their deal skills in operating roles or growth-stage investing.</li></ul>
+<p>The banking-to-PE path is the most lucrative long-term trajectory. PE partners earn $1M-$10M+ annually through management fees and carried interest. The 2-year banking stint is the apprenticeship.</p>"""),
+            ("Which MBA Programs Place Best in Banking", f"""<p>IB recruiting is concentrated at a small number of schools. The dominant programs:</p>
+<ul><li><strong>Wharton:</strong> 34% into finance, the deepest Wall Street network</li>
+<li><strong>Columbia:</strong> NYC location + finance curriculum = banking powerhouse</li>
+<li><strong>Booth:</strong> 32% into finance, strong in Chicago and NYC</li>
+<li><strong>NYU Stern:</strong> Wall Street's backyard</li>
+<li><strong>MIT Sloan:</strong> Quant-heavy curriculum attracts trading and banking</li></ul>
+<p>Banks recruit at most top-25 programs, but the volume of offers drops significantly outside the top 10. If IB is your goal, school selection matters more than in almost any other career path. See our <a href="/rankings/finance/">best MBA for finance ranking</a>.</p>"""),
+        ],
+        "faq": [
+            ("How much do MBA investment banking associates make?", f"MBA IB associates at bulge bracket banks earn $175K base with $100K-$200K bonus in {CURRENT_YEAR}. Total first-year comp is $325K-$450K. Elite boutiques pay slightly higher bonuses, pushing total comp to $400K-$450K."),
+            ("How many hours do MBA banking associates work?", "Average 70-80 hours per week, with peaks during live deals reaching 90-100 hours. Weekends are often required during deal execution. The hours are the trade-off for the compensation premium over consulting."),
+            ("Is investment banking worth it after an MBA?", "For the 2-year stint, the math works if your goal is PE, hedge funds, or corporate development exits. The comp is high, the brand is valuable, and the exit options are strong. If you want banking as a long-term career, prepare for 70+ hour weeks for many years."),
+        ],
+    },
+    {
+        "title": f"MBA Salary After 5 Years: Where the Real Money Is ({CURRENT_YEAR})",
+        "slug": "mba-salary-five-years",
+        "meta": f"MBA salary 5 years after graduation. How compensation grows by industry and why starting salary doesn't tell the full story. From a Haas MBA grad.",
+        "sections": [
+            ("Why 5-Year Salary Matters More Than Starting Salary", f"""<p>MBA programs love to advertise starting salaries. Stanford touts $192K median, Wharton shows $178K. But starting salary is a snapshot. The 5-year salary tells you where the career trajectory actually goes.</p>
+<p>A GMAC survey of MBA alumni 5 years out shows median total compensation of $180K-$250K for most industries and $400K+ for PE and banking. The spread between high and low widens over time. Two classmates who started at the same $175K salary can be at $250K and $600K five years later, depending on industry and performance.</p>"""),
+            ("5-Year Comp by Industry", f"""<p>Typical total compensation 5 years after MBA graduation:</p>
+<ul><li><strong>Private equity (VP level):</strong> $500K-$800K total. Carried interest begins vesting, which can add hundreds of thousands over time.</li>
+<li><strong>Investment banking (VP level):</strong> $400K-$600K total. Bonuses grow with seniority, and base increases to $275K-$350K.</li>
+<li><strong>Management consulting (Principal/AP):</strong> $350K-$500K total. The jump from Manager to Principal is the steepest salary increase in consulting.</li>
+<li><strong>Technology (Senior PM/Director):</strong> $350K-$500K total. Equity refreshers are the primary comp driver. A promotion to Director at Google or Meta pushes total comp above $500K.</li>
+<li><strong>Corporate strategy (VP/Director):</strong> $200K-$350K total. More moderate growth, but better work-life balance.</li>
+<li><strong>Healthcare/pharma (Director):</strong> $200K-$300K total. Steady growth with strong job stability.</li></ul>"""),
+            ("The PE and VC Trajectory", f"""<p>Private equity is where the long-term MBA payoff is most dramatic. The carried interest model means that PE professionals who stay and perform will earn compensation that dwarfs other industries:</p>
+<ul><li><strong>Year 1 (Associate):</strong> $250K-$400K total</li>
+<li><strong>Year 3-4 (VP):</strong> $500K-$800K total</li>
+<li><strong>Year 6-8 (Principal):</strong> $800K-$1.5M total</li>
+<li><strong>Year 10+ (Partner):</strong> $2M-$10M+ total with carried interest</li></ul>
+<p>Venture capital follows a similar but flatter trajectory because fund sizes are smaller. VC partners at top firms earn $1M-$5M, with carry representing the majority of compensation.</p>
+<p>The challenge: getting there. PE and VC firms are the most selective MBA employers. If you can get in, the long-term payoff is extraordinary. If you can't, the opportunity cost of pursuing it (extra years in banking, uncertain outcomes) is real.</p>"""),
+            ("School Tier and 5-Year Earnings", f"""<p>The school premium compounds over time. Five years out:</p>
+<ul><li><strong>M7 graduates:</strong> $300K-$500K median total compensation. Access to PE, elite banking, and senior tech roles drives the premium.</li>
+<li><strong>Top 15 graduates:</strong> $200K-$350K median total comp. Strong consulting and corporate placement with some PE access.</li>
+<li><strong>Top 25 graduates:</strong> $170K-$280K median total comp. More concentrated in corporate roles with lower upside but still significant career acceleration.</li></ul>
+<p>The M7 premium isn't just about starting salary. It's about access to the career paths (PE, VC, elite consulting partnerships) where 5-year and 10-year comp is dramatically higher. That access is what you're paying for.</p>"""),
+            ("Does School Ranking Still Matter at Year 5?", f"""<p>Less than at graduation, more than people admit. By year 5, your professional track record matters more than your school. A Michigan Ross graduate who made VP at Blackstone will out-earn most Harvard MBAs. Individual performance dominates.</p>
+<p>Where school still matters at year 5: network access. Reaching out to a fellow Stanford GSB alum at a PE firm still opens doors. The alumni network creates optionality that persists long after the degree. The question is whether that optionality is worth the incremental cost of a higher-ranked program. For many careers, the answer is yes.</p>
+<p>Use our <a href="/tools/roi-calculator/">ROI calculator</a> to model your specific scenario with different salary growth assumptions.</p>"""),
+        ],
+        "faq": [
+            ("How much do MBA graduates earn after 5 years?", f"Median total compensation 5 years after an MBA ranges from $200K (corporate roles) to $500K+ (PE, banking, tech directors). Industry choice is the biggest driver of 5-year comp, more than school ranking or starting salary."),
+            ("Which MBA career has the highest 5-year salary?", "Private equity. VP-level PE professionals earn $500K-$800K total comp 5 years out, driven by carried interest and bonuses. Investment banking and senior tech roles also reach $400K-$500K."),
+            ("Does starting salary predict 5-year salary?", "Loosely. A higher starting salary in the same industry correlates with higher 5-year comp. But industry switches (consultant to PE, for example) create large jumps that starting salary doesn't predict."),
+        ],
+    },
+    # --- CAREER-SWITCHER GUIDES ---
+    {
+        "title": f"Engineers to MBA: When It Makes Sense ({CURRENT_YEAR})",
+        "slug": "engineers-to-mba",
+        "meta": f"Should engineers get an MBA in {CURRENT_YEAR}? When it pays off, when to skip it, and which programs are best for technical backgrounds.",
+        "sections": [
+            ("The Engineering-to-MBA Pipeline", f"""<p>Engineers are the second-largest pre-MBA profession after financial services, making up 15-20% of classes at top programs. The MBA appeals to engineers for a clear reason: it opens career paths that engineering alone doesn't. Product management at FAANG, management consulting, venture capital, and startup leadership all hire heavily from the engineering-to-MBA pipeline.</p>
+<p>The question is whether you need the MBA to make the jump, or whether internal transfers and networking can get you there without the two-year detour and $200K investment.</p>"""),
+            ("When the MBA Makes Sense for Engineers", f"""<ul><li><strong>You want to move from IC to business leadership:</strong> Engineering career paths can top out at principal/staff engineer or engineering manager. The MBA signals a deliberate pivot to business roles: PM, corporate strategy, consulting. Employers read it as commitment to the business side.</li>
+<li><strong>You want VC or PE:</strong> Technical VCs are in demand. Firms like a16z, Sequoia, and Bessemer actively recruit engineers with MBAs because they can evaluate technical founders and products. The MBA provides the financial and business toolkit.</li>
+<li><strong>You want to found a company:</strong> Stanford GSB and MIT Sloan have disproportionate startup outcomes. The MBA provides co-founders, investors, and 2 years of protected time to build. The network is the product, not the degree itself.</li>
+<li><strong>You're stuck in a specialty:</strong> Aerospace engineers at Boeing and EE specialists at Qualcomm sometimes find that the engineering credential limits them to technical roles. The MBA breaks the specialization trap.</li></ul>"""),
+            ("When to Skip the MBA", f"""<ul><li><strong>You're already earning $250K+ as a senior engineer:</strong> The opportunity cost is massive. Two years of lost comp ($500K+) plus tuition ($160K) means you're spending $660K+ on a degree that might not increase your salary.</li>
+<li><strong>You can get to PM internally:</strong> Google, Amazon, and Meta all have internal transfer paths from engineering to product management. If you can make the jump without leaving, the MBA isn't worth the cost.</li>
+<li><strong>You love engineering:</strong> If your goal is to be a better engineer or reach staff/principal level, the MBA won't help. Consider an MS in CS, a management program, or engineering leadership courses instead.</li></ul>"""),
+            ("Best MBA Programs for Engineers", f"""<p>Programs where engineers thrive and tech placement is highest:</p>
+<ul><li><strong>MIT Sloan:</strong> Engineers feel at home. The analytical culture and Cambridge ecosystem attract technical founders. 30%+ tech placement.</li>
+<li><strong>Stanford GSB:</strong> The entrepreneurship epicenter. Engineers who want to build companies belong here.</li>
+<li><strong>Berkeley Haas:</strong> Bay Area location with accessible, collegial culture. Strong for engineers pivoting to product roles.</li>
+<li><strong>CMU Tepper:</strong> STEM-designated MBA. The quant-heavy curriculum aligns with engineering thinking.</li>
+<li><strong>Georgia Tech Scheller:</strong> Engineers who want to stay in the Southeast. The GT brand in tech is strong.</li></ul>
+<p>See our <a href="/rankings/technology/">best MBA for tech ranking</a> and <a href="/schools/">school profiles</a> for detailed data.</p>"""),
+        ],
+        "faq": [
+            ("Is an MBA worth it for software engineers?", f"It depends on your salary and goals. If you earn $250K+ and love engineering, probably not. If you want to transition to PM, consulting, VC, or startup leadership, the MBA provides a structured path with better outcomes than self-navigation."),
+            ("What MBA programs are best for engineers?", "MIT Sloan, Stanford GSB, Berkeley Haas, CMU Tepper, and Georgia Tech Scheller attract the most engineers and have the strongest tech placement rates. STEM-designated programs provide OPT extensions for international engineers."),
+            ("Can engineers become management consultants?", "Yes, and firms love them. McKinsey, BCG, and Bain actively recruit engineers for their analytical rigor. The MBA is the standard transition path from engineering to consulting."),
+        ],
+    },
+    {
+        "title": f"Military to MBA: Programs, Funding, and Outcomes ({CURRENT_YEAR})",
+        "slug": "military-to-mba",
+        "meta": f"Military to MBA guide for {CURRENT_YEAR}. GI Bill, Yellow Ribbon, veteran-friendly programs, and post-MBA career outcomes for veterans.",
+        "sections": [
+            ("Why Military Veterans Excel in MBA Programs", f"""<p>Military veterans are overrepresented at top MBA programs relative to the general applicant pool. HBS, Wharton, Darden, and Tuck all have veteran populations of 10-15% per class. The reason: military leadership experience translates directly to the skills MBA programs value. Managing teams under pressure, making decisions with incomplete information, and operating across cultures are exactly what case studies simulate.</p>
+<p>Admissions committees also recognize that military service provides the kind of structured leadership development that most civilian candidates don't have at age 26-30. A platoon leader with 4 years of experience has led more people in higher-stakes situations than most MBA applicants with 6 years in corporate roles.</p>"""),
+            ("Funding: GI Bill, Yellow Ribbon, and Scholarships", f"""<p>Military veterans have access to MBA funding sources that civilian candidates don't:</p>
+<ul><li><strong>Post-9/11 GI Bill:</strong> Covers tuition and fees up to the in-state public school maximum (approximately $28K/year). At private schools, the cap means significant out-of-pocket costs. The BAH (Basic Allowance for Housing) stipend adds $2K-$4K/month depending on location.</li>
+<li><strong>Yellow Ribbon Program:</strong> Schools voluntarily match VA contributions to cover tuition gaps above the GI Bill cap. HBS, Wharton, Darden, Yale, and many top programs participate. At participating schools, veterans can attend tuition-free.</li>
+<li><strong>Veteran-specific scholarships:</strong> The Tillman Foundation, Service to School, and individual school scholarships target military applicants. Many programs offer full-tuition merit scholarships to competitive veteran candidates.</li></ul>
+<p>Bottom line: a military veteran with Post-9/11 GI Bill and Yellow Ribbon eligibility at a participating school can attend a top MBA program with zero tuition cost. This makes the ROI calculation dramatically better for veterans than for civilian candidates taking on $200K in debt.</p>"""),
+            ("Veteran-Friendly MBA Programs", f"""<p>Programs known for strong veteran communities and support:</p>
+<ul><li><strong>Virginia Darden:</strong> One of the largest veteran populations (12-15%). The case-method teaching aligns with military decision-making training. Charlottesville's proximity to military installations is a plus.</li>
+<li><strong>HBS:</strong> 10-12% veterans. The Armed Forces Club is active and connected. Section-based teaching resembles military team dynamics.</li>
+<li><strong>Wharton:</strong> Strong veteran network with dedicated career support. Good for veterans targeting finance.</li>
+<li><strong>Tuck:</strong> Small class size creates a tight veteran community. Dartmouth's collaborative culture fits well with military team orientation.</li>
+<li><strong>Yale SOM:</strong> Mission-driven ethos attracts veterans interested in social impact and government-adjacent careers.</li></ul>"""),
+            ("Post-MBA Career Paths for Veterans", f"""<p>Veterans most commonly enter these post-MBA careers:</p>
+<ul><li><strong>Management consulting (35-40%):</strong> The largest single destination. The leadership experience and comfort with ambiguity are strong consulting qualifications.</li>
+<li><strong>Technology (15-20%):</strong> PM and operations roles, particularly at Amazon (which values leadership principles that align with military values).</li>
+<li><strong>Finance (10-15%):</strong> Corporate finance, PE, and banking. The discipline and quantitative rigor transfer well.</li>
+<li><strong>Government and defense (10%):</strong> Some veterans return to government-adjacent roles in defense consulting or policy.</li></ul>
+<p>Veteran MBA graduates earn median salaries comparable to their civilian classmates. The MBA effectively resets the compensation trajectory from military pay scales to private-sector levels. See <a href="/guides/mba-work-experience/">our work experience guide</a> for how military service is evaluated.</p>"""),
+        ],
+        "faq": [
+            ("Can veterans go to MBA school for free?", "Often, yes. The Post-9/11 GI Bill plus Yellow Ribbon Program at participating schools (HBS, Wharton, Darden, Yale, and others) can cover full tuition. Many programs also offer veteran-specific scholarships."),
+            ("Which MBA programs have the most veterans?", f"Darden (12-15%), HBS (10-12%), Wharton (10%), and Tuck (10%) have the largest veteran populations. These schools also have the strongest veteran career support and alumni networks."),
+            ("What GMAT score do military veterans need?", "Veterans are evaluated holistically, and military leadership experience carries significant weight. That said, the GMAT matters. Most competitive veteran applicants at M7 programs score 700+ (median for veterans is often slightly below the class median, offset by leadership experience)."),
+        ],
+    },
+    {
+        "title": f"Teachers to MBA: Making the Career Change ({CURRENT_YEAR})",
+        "slug": "teachers-to-mba",
+        "meta": f"Can teachers get into top MBA programs? Career change guide for educators considering business school in {CURRENT_YEAR}. From a Haas MBA grad.",
+        "sections": [
+            ("Why Teachers Make Strong MBA Candidates", f"""<p>Former teachers bring undervalued skills to MBA classrooms: public speaking, curriculum design, data-driven performance tracking, and managing diverse groups of people who don't want to be managed. Teach For America alumni are especially well-represented at top programs, with 5-8% of classes at HBS, Wharton, and other M7 schools coming from TFA or similar education organizations.</p>
+<p>The challenge for teachers is the perception gap. MBA admissions committees may wonder whether you can handle quantitative coursework and whether your leadership experience translates to business contexts. Your application needs to address both directly.</p>"""),
+            ("Positioning Your Teaching Experience", f"""<p>Frame your teaching experience in business terms:</p>
+<ul><li><strong>Managing performance:</strong> You tracked student outcomes with data, adjusted strategies based on results, and were accountable for measurable improvement. That's performance management.</li>
+<li><strong>Leading teams:</strong> Whether you managed TAs, coordinated with administrators, or led grade-level teams, you have leadership experience. Quantify the scale: "Led a team of 5 educators serving 150 students."</li>
+<li><strong>Stakeholder management:</strong> Parents, administrators, school boards, and students are all stakeholders with conflicting interests. Navigating those relationships is a business skill.</li>
+<li><strong>Resource constraints:</strong> Teaching with inadequate budgets, outdated materials, and large class sizes demonstrates resourcefulness that MBA programs value.</li></ul>"""),
+            ("The Quantitative Question", f"""<p>Teaching backgrounds are viewed as "non-quantitative" by admissions committees. You need to offset this perception. Three approaches:</p>
+<ol><li><strong>GMAT/GRE score:</strong> A strong quant score (Q49+ on GMAT) is the most direct proof of quantitative ability. Prioritize quant prep if your score is below median.</li>
+<li><strong>Pre-MBA coursework:</strong> Take statistics, financial accounting, or calculus through an extension program. Harvard Extension, Stanford Online, or community college all work.</li>
+<li><strong>Data-driven teaching:</strong> If you used data to drive instructional decisions (A/B testing curriculum approaches, analyzing assessment results, using EdTech tools), highlight this prominently.</li></ol>"""),
+            ("Common Post-MBA Paths for Former Teachers", f"""<p>Former teachers typically pivot to:</p>
+<ul><li><strong>EdTech:</strong> The most natural transition. Companies like Khan Academy, Coursera, 2U, and Duolingo hire MBAs who understand education from the inside.</li>
+<li><strong>Consulting:</strong> Education practice groups at McKinsey, BCG, and Bain hire former teachers. The sector expertise is a genuine differentiator.</li>
+<li><strong>Nonprofit management:</strong> Education nonprofits (KIPP, Achievement First, Teach For All) hire MBAs into leadership roles. Your teaching experience is directly relevant.</li>
+<li><strong>Tech product management:</strong> Former teachers who can articulate user needs and design learning experiences have a path into PM, especially in EdTech and consumer products.</li></ul>
+<p>See our <a href="/rankings/career-changers/">best programs for career changers</a> for schools that specialize in supporting non-traditional backgrounds.</p>"""),
+        ],
+        "faq": [
+            ("Can teachers get into M7 MBA programs?", "Yes. TFA alumni and career educators are admitted to HBS, Wharton, Stanford GSB, and other M7 programs every year. The key is demonstrating leadership impact (not just classroom teaching), strong test scores, and a clear post-MBA goal."),
+            ("What MBA programs are best for former teachers?", "Yale SOM (mission-driven), Stanford GSB (education innovation), HBS (education case studies), and Berkeley Haas (Bay Area EdTech proximity) all have strong pathways for educators. Programs with large TFA alumni populations are most familiar with teacher applications."),
+            ("Is the MBA worth it for teachers financially?", "Usually yes. Teachers earn $45K-$65K on average. The MBA salary uplift to $140K-$180K is among the largest percentage increases of any pre-MBA career. The ROI is strong, especially with scholarships for career changers."),
+        ],
+    },
+    # --- APPLICATION STRATEGY ---
+    {
+        "title": f"MBA Essays That Work: What Admissions Committees Want ({CURRENT_YEAR})",
+        "slug": "mba-essays-that-work",
+        "meta": f"How to write MBA essays that get you admitted in {CURRENT_YEAR}. Structure, common mistakes, and what top programs look for. From a Haas MBA grad.",
+        "sections": [
+            ("What the Essay Is Testing", f"""<p>MBA essays aren't testing your writing ability. They're testing three things: self-awareness (do you understand your own strengths, weaknesses, and motivations?), clarity of goals (do you know what you want and why the MBA helps you get there?), and fit (are you the kind of person this specific school wants in its classroom?).</p>
+<p>The most common mistake is treating the essay as a resume in paragraph form. Admissions committees already have your resume. The essay should reveal things the resume can't: how you think, what drives you, and why you made the choices you made.</p>"""),
+            ("The Goals Essay", f"""<p>Almost every MBA program asks some version of "What are your goals and why do you need an MBA?" The structure that works:</p>
+<ol><li><strong>Start with the specific post-MBA role.</strong> "I want to join McKinsey's healthcare practice as an associate" is better than "I want to explore consulting." Specificity signals genuine research and clear thinking.</li>
+<li><strong>Connect it to your past.</strong> Why healthcare consulting? Because you spent 3 years at a health system and saw how poor strategy decisions wasted resources. The connection between past experience and future goals should feel logical, not forced.</li>
+<li><strong>Explain why MBA is necessary.</strong> What specific skills or access does the MBA provide that you can't get without it? "I need the strategic frameworks and consulting recruiting pipeline" is a real answer. "I want to grow as a leader" is not.</li>
+<li><strong>Explain why this school.</strong> Name specific professors, clubs, courses, or alumni who connect to your goals. Generic praise ("your world-class faculty") is a red flag.</li></ol>"""),
+            ("The Personal Essay", f"""<p>HBS asks "What more would you like us to know?" Stanford GSB asks "What matters most to you and why?" These open-ended questions are where candidates win or lose.</p>
+<p>What works: genuine vulnerability, specific stories, and evidence of personal growth. A candidate who writes about overcoming a specific failure and what they learned from it is more memorable than one who lists achievements.</p>
+<p>What fails: performative humility ("My biggest weakness is that I work too hard"), generic leadership stories ("I led my team to success"), and trying to sound impressive instead of honest. Admissions committees read 5,000+ essays per season. They can spot performance from a mile away.</p>
+<p>The best essays read like you're talking to a friend. Clear language, specific details, and emotional honesty beat eloquent prose every time.</p>"""),
+            ("Common Mistakes That Kill Applications", f"""<ul><li><strong>Vague goals:</strong> "I want to make an impact in business" tells the committee nothing. Be specific about the role, industry, and company.</li>
+<li><strong>School-generic praise:</strong> If you could swap the school name for any other top program and the essay still works, it's too generic.</li>
+<li><strong>Resume rehash:</strong> Don't retell your professional history. The committee has your resume. Use the essay for insights, motivations, and personal stories.</li>
+<li><strong>Overwriting:</strong> Word limits exist for a reason. A 500-word limit means 450-500 words, not 497 words of padding to hit the limit. Say what you mean clearly and stop.</li>
+<li><strong>Dishonesty:</strong> Admissions committees verify claims. Don't exaggerate achievements, inflate titles, or fabricate stories. The MBA world is small, and dishonesty surfaces eventually.</li></ul>"""),
+        ],
+        "faq": [
+            ("How long should MBA essays be?", "Follow the word limit exactly. If the school says 500 words, write 450-500. Going over is disrespectful of the guidelines. Going significantly under suggests you didn't put in the effort. Most programs specify limits of 300-750 words per essay."),
+            ("Should I hire an MBA admissions consultant?", f"It depends. A good consultant provides structure, feedback, and accountability. A bad one writes generic essays that admissions committees immediately identify as outsourced. If you hire a consultant, make sure the voice and stories are genuinely yours."),
+            ("How many MBA programs should I apply to?", "6-8 is the sweet spot. Apply to 2-3 reaches, 2-3 targets, and 1-2 safeties. Fewer than 5 is risky. More than 10 dilutes your effort, because each application requires school-specific research and customized essays."),
+        ],
+    },
+    {
+        "title": f"MBA Interview Prep: What They Ask and How to Answer ({CURRENT_YEAR})",
+        "slug": "mba-interview-prep",
+        "meta": f"MBA interview preparation guide for {CURRENT_YEAR}. Common questions, answer frameworks, and school-specific formats. From a Haas MBA grad.",
+        "sections": [
+            ("Interview Formats Vary by School", f"""<p>MBA interviews come in three formats, and the preparation differs for each:</p>
+<ul><li><strong>Blind interview (HBS, Wharton):</strong> The interviewer hasn't read your application. They're evaluating you as a person in a 30-minute conversation. You need to tell your story clearly and compellingly from scratch.</li>
+<li><strong>Application-based interview (Booth, Haas, Ross):</strong> The interviewer has read your essays and resume. Questions will be specific: "Tell me about the project you mentioned in your second essay." You need to know your own application cold.</li>
+<li><strong>Alumni interview (Tuck, Columbia, Stern):</strong> A graduate of the program interviews you, typically over coffee or video. The tone is more conversational, but the evaluation is real. They're assessing fit and communication skills.</li></ul>"""),
+            ("The Questions You'll Get", f"""<p>MBA interviews revolve around a core set of questions with variations:</p>
+<ul><li><strong>"Walk me through your resume"</strong> — Tell a coherent 2-3 minute narrative. Not a chronological list. A story with a theme: "I've spent my career at the intersection of X and Y, and I want to move into Z."</li>
+<li><strong>"Why MBA? Why now?"</strong> — Same answer as your goals essay, but conversational. Specific post-MBA goal, why the MBA is necessary, and why this school.</li>
+<li><strong>"Why [this school]?"</strong> — Name 2-3 specific things. A class, a club, an alum you spoke with. If you can't name specifics, you haven't done the research.</li>
+<li><strong>"Tell me about a time you led a team"</strong> — STAR format (Situation, Task, Action, Result). Focus on what YOU did, not what the team accomplished. Quantify the result.</li>
+<li><strong>"Tell me about a failure"</strong> — Pick a real failure, not a humble brag. What went wrong, what you learned, and how you've applied that learning since. Admissions committees are evaluating self-awareness.</li>
+<li><strong>"What questions do you have?"</strong> — Have 2-3 thoughtful questions ready. Not questions answered on the website. Questions that demonstrate research and genuine curiosity about the program.</li></ul>"""),
+            ("How to Prepare", f"""<ol><li><strong>Practice out loud.</strong> Not in your head. Not in writing. Out loud. Record yourself on your phone and listen back. You'll catch filler words, tangents, and unclear phrasing immediately.</li>
+<li><strong>Mock interviews.</strong> Ask a friend, colleague, or admissions consultant to conduct a practice interview. The discomfort of answering unexpected questions with someone watching is exactly the condition you need to train for.</li>
+<li><strong>Know your stories.</strong> Prepare 5-6 stories from your career that demonstrate leadership, teamwork, failure, impact, and creativity. Map each story to common question types. You should be able to deploy any story on command.</li>
+<li><strong>Research the school.</strong> Read student blogs, attend webinars, talk to current students or alumni. The "Why this school?" question requires specific, non-googleable knowledge.</li></ol>"""),
+            ("What Gets People Rejected", f"""<ul><li><strong>Lack of specificity.</strong> Vague answers signal that you haven't thought deeply about your goals or the program. Generic enthusiasm is not persuasive.</li>
+<li><strong>Arrogance.</strong> Confidence is good. Dismissing classmates, previous employers, or competing schools is a red flag. MBA programs are collaborative environments.</li>
+<li><strong>Not answering the question.</strong> Listen carefully and answer what's being asked. Going off on tangents or delivering a rehearsed answer that doesn't match the question is the most common interview mistake.</li>
+<li><strong>No energy.</strong> The interviewer is spending 30 minutes with you. If you seem bored, distracted, or unenthused, they'll question your commitment. Be engaged and genuine.</li></ul>"""),
+        ],
+        "faq": [
+            ("How long are MBA interviews?", "Typically 30 minutes, though some programs (HBS, Stanford GSB) run 30-45 minutes. Alumni interviews are often 45-60 minutes in a more casual setting."),
+            ("What should I wear to an MBA interview?", "Business casual for in-person or video interviews. A blazer with a collared shirt works for both men and women. Overdressing (full suit) can feel stiff for informal alumni interviews. Underdressing signals you don't take it seriously."),
+            ("How important is the MBA interview?", "Very. The interview is the final filter. Most programs interview 40-60% of applicants and admit 40-60% of interviewees. If you get the interview, you have a real shot. Preparation is the difference between admission and rejection."),
+        ],
+    },
+    {
+        "title": f"R1 vs R2 vs R3: When to Apply to MBA Programs ({CURRENT_YEAR})",
+        "slug": "mba-application-rounds",
+        "meta": f"Should you apply R1 or R2 for MBA programs in {CURRENT_YEAR}? Round-by-round strategy, deadlines, and acceptance rates. From a Haas MBA grad.",
+        "sections": [
+            ("How Application Rounds Work", f"""<p>Most top MBA programs have three application rounds with distinct deadlines. The class fills progressively across rounds, which means each subsequent round is more competitive:</p>
+<ul><li><strong>Round 1 (September):</strong> Early deadline. Programs fill 40-50% of the class. Highest acceptance rate relative to subsequent rounds.</li>
+<li><strong>Round 2 (January):</strong> Main deadline. Most applicants apply here. Programs fill 30-40% of remaining seats. Still competitive but slightly harder than R1.</li>
+<li><strong>Round 3 (April):</strong> Late deadline. Programs fill the final 10-20% of seats. Significantly harder. Only apply R3 if you have a compelling reason for the late timing.</li></ul>"""),
+            ("Why R1 Has an Advantage", f"""<p>R1 applicants benefit from two dynamics: more available seats and less competition for scholarship money. Schools have their full class to fill in R1, and they're eager to lock in strong candidates early. Scholarship pools are also freshest in R1.</p>
+<p>The R1 advantage is most pronounced at programs that explicitly admit a majority in R1 (Columbia, Tuck, Darden). At other programs (Booth, Kellogg), the R1/R2 acceptance rates are closer.</p>
+<p>R1 is the right choice if your application is ready. Don't rush an incomplete application just to hit the early deadline. A polished R2 application beats a rushed R1 application.</p>"""),
+            ("When R2 Is the Right Move", f"""<p>R2 is the most popular round for a reason: most applicants aren't ready by September. If you're still studying for the GMAT, haven't drafted your essays, or need another promotion before applying, R2 gives you 4 more months of preparation.</p>
+<p>R2 is also appropriate when:</p>
+<ul><li>You need more time to visit schools and research programs</li>
+<li>A major professional achievement is coming (promotion, project completion) that will strengthen your application</li>
+<li>You're retaking the GMAT/GRE and expect a higher score</li></ul>
+<p>The R2 acceptance rate is typically 5-10 percentage points lower than R1 at most programs, but a stronger application offsets this difference.</p>"""),
+            ("The R3 Gamble", f"""<p>R3 is a long shot at most top programs. By April, 80-90% of seats are filled. Schools use R3 to fill specific gaps in the class (underrepresented backgrounds, unusual career paths, niche expertise).</p>
+<p>Apply R3 only if:</p>
+<ul><li>You have a unique profile that fills a class gap (unusual country, rare industry, underrepresented background)</li>
+<li>Circumstances prevented an earlier application (job relocation, family emergency)</li>
+<li>You received a significant professional achievement after R2 closed</li></ul>
+<p>The financial aid and scholarship pool is largely depleted by R3. Even if admitted, you'll likely receive less funding than R1/R2 admits. Factor this into your decision.</p>"""),
+            ("Applying to Multiple Schools Across Rounds", f"""<p>A common strategy: apply R1 to your top 2-3 choices and R2 to 3-5 additional schools. This gives you early results from your top picks while keeping options open.</p>
+<p>The sequencing matters. If you're admitted R1 to a strong school with scholarship, that gives you leverage to negotiate scholarship at R2 schools. If you're rejected R1, you can adjust your R2 applications based on the feedback (if available).</p>
+<p>Don't apply to the same school in multiple rounds. Most programs explicitly prevent this. Apply once, in the round that presents your strongest application.</p>"""),
+        ],
+        "faq": [
+            ("Is R1 easier to get into than R2?", f"Statistically, yes. R1 acceptance rates are typically 5-10 percentage points higher than R2. But a polished R2 application beats a rushed R1 application. Apply when your materials are strongest."),
+            ("Should I ever apply R3?", "Only with a unique profile or compelling circumstances. R3 acceptance rates are the lowest, and financial aid is largely committed. Most candidates are better served by waiting and applying R1 of the following year."),
+            ("How many schools should I apply to?", "6-8 across R1 and R2. Apply to 2-3 reaches, 2-3 targets, and 1-2 safeties. This gives you enough shots while ensuring each application gets adequate attention and research."),
+        ],
+    },
+    # --- GENERAL/EVERGREEN ---
+    {
+        "title": f"MBA at 30: Is It Too Late? ({CURRENT_YEAR})",
+        "slug": "mba-at-30",
+        "meta": f"Is 30 too old for an MBA in {CURRENT_YEAR}? How age affects admissions, career outcomes, and ROI. Honest assessment from a Haas MBA grad.",
+        "sections": [
+            ("The Short Answer: No", f"""<p>The average MBA student at a top program is 27-28 years old with 5 years of work experience. At 30, you're above average but well within the range. Every M7 program has students aged 30-35. Some have students in their late 30s.</p>
+<p>The median age at MBA programs has been climbing. GMAC data shows the average is now 28, up from 26 a decade ago. The 30-year-old MBA student is increasingly common, and admissions committees are comfortable with older candidates who bring more experience to the classroom.</p>"""),
+            ("When 30 Is an Advantage", f"""<ul><li><strong>More leadership experience:</strong> You've had 7-8 years to lead teams, manage budgets, and make strategic decisions. Your classroom contributions will be richer than a 25-year-old's.</li>
+<li><strong>Clearer career goals:</strong> You've tried enough careers (or spent enough time in one) to know exactly what you want from the MBA. Admissions committees value this clarity.</li>
+<li><strong>Financial stability:</strong> You may have savings, a paid-down car, or a partner with income. The financial burden of the MBA is less acute than for someone with $0 in savings.</li>
+<li><strong>Professional network:</strong> Eight years of professional relationships give you a broader network to leverage during and after the MBA.</li></ul>"""),
+            ("When 30 Raises Questions", f"""<ul><li><strong>Salary anchoring:</strong> If you're earning $150K+ already, the MBA salary uplift is smaller in percentage terms. The ROI calculation changes when your starting salary is already high.</li>
+<li><strong>"Why now?":</strong> Admissions committees will ask why you didn't do the MBA earlier. You need a clear, credible answer. "I needed more experience to know what I wanted" is valid. "I just didn't get around to it" is not.</li>
+<li><strong>Two-year gap:</strong> Re-entering the workforce at 32-33 means competing with 28-year-olds for the same entry-level post-MBA roles. Some employers (particularly in banking) subtly prefer younger candidates.</li>
+<li><strong>Classroom dynamics:</strong> Being 3-4 years older than classmates isn't a problem. Being 8+ years older can create social distance. Consider the EMBA if you're 35+.</li></ul>"""),
+            ("The ROI Math at 30", f"""<p>The ROI calculation for a 30-year-old differs from a 25-year-old:</p>
+<ul><li><strong>Higher opportunity cost:</strong> If you earn $130K at 30 vs $80K at 25, you give up $100K more in lost income over two years.</li>
+<li><strong>Fewer earning years:</strong> You have 30-35 working years remaining to recoup the investment, vs 35-40 years for a younger candidate. The difference is marginal, but it's real.</li>
+<li><strong>Potentially lower salary uplift:</strong> If you're already in a high-paying industry, the percentage increase from MBA salary is smaller.</li></ul>
+<p>The ROI is still positive for most 30-year-old candidates, especially career changers coming from lower-paying industries (education, nonprofit, government, military). The salary uplift from $60K to $175K more than justifies the investment at any age.</p>
+<p>Model your specific scenario with our <a href="/tools/roi-calculator/">ROI calculator</a>.</p>"""),
+        ],
+        "faq": [
+            ("Is 30 too old for an MBA?", "No. The average MBA age is 27-28, with a typical range of 25-32. Candidates at 30 bring more experience and clearer goals, which admissions committees value. Every M7 program enrolls students aged 30-35."),
+            ("What's the oldest you should be for a full-time MBA?", "There's no hard cutoff, but most programs' core age range is 25-32. Above 35, Executive MBA programs are typically a better fit. Between 30-35, full-time MBA is viable if your goals require career change or structured recruiting."),
+            ("Does age affect post-MBA salary?", "Not directly. Post-MBA salary is driven by industry, role, and school, not age. A 32-year-old and a 27-year-old entering the same consulting firm receive the same starting salary."),
+        ],
+    },
+    {
+        "title": f"Full-Ride MBA vs Higher-Ranked School: Which Is the Better Deal? ({CURRENT_YEAR})",
+        "slug": "full-ride-vs-higher-ranked",
+        "meta": f"Should you take a full-ride MBA scholarship at a lower-ranked school or pay full price at a top program? Decision framework for {CURRENT_YEAR}.",
+        "sections": [
+            ("The Real Question", f"""<p>A full-ride scholarship at Indiana Kelley (#24) or a full-price seat at Wharton (#3). Kelley saves you $160K+ in tuition. Wharton opens doors that Kelley can't. Which produces better lifetime outcomes?</p>
+<p>The answer depends on your career goals, risk tolerance, and financial situation. There's no universal right answer, but the framework for deciding is clear.</p>"""),
+            ("When to Take the Full Ride", f"""<ul><li><strong>You want a career where school ranking matters less:</strong> In marketing, operations, supply chain, and corporate strategy, the school brand matters less than your skills and network. A debt-free MBA from a top-30 school gives you runway to choose careers based on fit, not loan payments.</li>
+<li><strong>You have a specific employer or geography in mind:</strong> If you know you want to work at P&G in Cincinnati and you have a full ride at Cincinnati Lindner, the location advantage plus zero debt may beat a Wharton degree for that specific outcome.</li>
+<li><strong>Debt aversion is genuine:</strong> $200K in MBA debt constrains your post-MBA choices. You may feel pressured to take the highest-paying offer (banking, consulting) rather than the best career fit. The full ride provides freedom.</li>
+<li><strong>Your pre-MBA salary is modest:</strong> If you earn $50K-$70K and a full ride puts you at $140K-$165K debt-free, that's a life-changing outcome. The incremental salary from a higher-ranked school ($175K-$195K) doesn't justify $200K in debt.</li></ul>"""),
+            ("When to Pay Full Price for the Brand", f"""<ul><li><strong>You want PE, VC, or MBB:</strong> These employers recruit almost exclusively from M7 and top-15 programs. A full ride at a top-40 school doesn't open the same doors. If your goal is Blackstone or McKinsey, the school brand is the ticket.</li>
+<li><strong>You want maximum optionality:</strong> An M7 degree provides career insurance for life. You can pivot across industries, geographies, and functions with a credential that carries everywhere. A lower-ranked full ride provides less flexibility.</li>
+<li><strong>The salary difference will compound:</strong> If Wharton grads earn $50K more per year than Kelley grads in your target industry, and that gap compounds over 20+ years with promotions and raises, the lifetime earnings difference can be $1M-$3M. The $200K tuition investment is small relative to that.</li>
+<li><strong>You have financial backing:</strong> Family support, a working partner, or substantial savings change the debt equation. If you can attend Wharton without crippling debt, the brand value is pure upside.</li></ul>"""),
+            ("The Decision Framework", f"""<p>Ask yourself these three questions:</p>
+<ol><li><strong>Does my target career require a top-10 brand?</strong> If yes (PE, VC, MBB, Wall Street), take the higher-ranked school. If no (corporate strategy, marketing, operations, regional business), the full ride is compelling.</li>
+<li><strong>What's my debt tolerance?</strong> $200K in loans at 7% interest means $2,300/month in payments for 10 years. Can you handle that without feeling trapped?</li>
+<li><strong>What's the realistic salary difference?</strong> Look at the specific employment reports for both schools. If the median salary gap is $30K+, the higher-ranked school's lifetime value likely exceeds the scholarship amount. If the gap is $10K-$15K, the full ride may win.</li></ol>
+<p>Use our <a href="/tools/roi-calculator/">ROI calculator</a> to model both scenarios with your actual numbers.</p>"""),
+        ],
+        "faq": [
+            ("Is a full-ride MBA at a lower-ranked school worth it?", "For many career paths, yes. If your goals don't require a top-10 brand (PE, MBB), graduating debt-free from a top-30 school provides financial freedom and strong career outcomes. The full ride is especially compelling for candidates with modest pre-MBA salaries."),
+            ("Should I choose Wharton with debt over a full ride elsewhere?", "If your goal is PE, banking, or MBB consulting, probably yes. The lifetime earnings premium from M7 access to these industries typically exceeds the debt. If your goals are in corporate strategy, marketing, or operations, the full ride deserves serious consideration."),
+            ("Can I negotiate a scholarship at a top-10 school?", "Some top-10 schools negotiate (MIT Sloan, Kellogg, Ross). Others don't (Stanford GSB, HBS are need-based). Present your full-ride offer from the lower-ranked school as part of the conversation. See our scholarship negotiation guide for strategies."),
+        ],
+    },
+    {
+        "title": f"The Real Cost of an MBA: Beyond Tuition ({CURRENT_YEAR})",
+        "slug": "real-cost-of-mba",
+        "meta": f"The total cost of an MBA in {CURRENT_YEAR}. Tuition, living expenses, opportunity cost, and hidden costs nobody tells you about. From a Haas MBA grad.",
+        "sections": [
+            ("The Three Cost Buckets", f"""<p>MBA cost conversations focus on tuition. Tuition is important, but it's only one-third of the actual cost. The three buckets:</p>
+<ol><li><strong>Direct cost (tuition + fees + books):</strong> $80K-$170K for two years at a top program</li>
+<li><strong>Living expenses (rent + food + insurance + personal):</strong> $60K-$120K for two years, depending on location</li>
+<li><strong>Opportunity cost (lost salary + lost career progression):</strong> $120K-$500K for two years, depending on your current salary</li></ol>
+<p>For a candidate earning $100K at a program with $80K/year tuition in a high-cost city, the all-in cost looks like: $160K (tuition) + $90K (living) + $200K (lost salary) = $450K. That's the real number. It's higher than most candidates expect.</p>"""),
+            ("Tuition by Tier", f"""<p>Annual tuition at top MBA programs for {CURRENT_YEAR}:</p>
+<ul><li><strong>M7 (Stanford, HBS, Wharton, Booth, Kellogg, Columbia, MIT):</strong> $78K-$84K/year ($156K-$168K total)</li>
+<li><strong>Top 15 (Haas, Duke, Yale, Darden, etc.):</strong> $65K-$82K/year ($130K-$164K total)</li>
+<li><strong>Top 25 (Foster, McCombs, Tepper, etc.):</strong> $50K-$70K/year ($100K-$140K total)</li>
+<li><strong>Top 50 (public school in-state):</strong> $20K-$40K/year ($40K-$80K total)</li></ul>
+<p>The tuition gap between public and private programs is enormous. In-state tuition at Texas McCombs ($40K/year) is less than half of Columbia ($84K/year). The career outcomes aren't half as good, but they're 80% as good for most career paths. That math matters.</p>"""),
+            ("Living Costs That Surprise You", f"""<p>MBA students consistently underestimate living costs. The surprises:</p>
+<ul><li><strong>Health insurance:</strong> $3K-$8K/year. Most employer-sponsored plans disappear when you leave. Student health plans are expensive.</li>
+<li><strong>Social life:</strong> $3K-$10K/year. MBA social events, trips, dinners, bar tabs, and team activities add up fast. The "MBA social tax" is real.</li>
+<li><strong>Recruiting costs:</strong> $2K-$5K/year. Interview travel, suits, case competition trips, and conference attendance aren't covered by tuition.</li>
+<li><strong>Summer housing:</strong> $3K-$8K. If your internship is in a different city, you need a sublet for the summer while potentially still paying rent on your school apartment.</li>
+<li><strong>International trips:</strong> $3K-$8K/year. Most programs offer (or culturally expect) international treks. They're valuable for networking and education, but they're not free.</li></ul>"""),
+            ("Opportunity Cost: The Hidden Majority", f"""<p>Opportunity cost is the largest component for anyone earning above $80K. Two years of lost salary plus lost career progression:</p>
+<ul><li><strong>$60K salary:</strong> $120K opportunity cost. The MBA uplift to $150K+ makes this a clear win.</li>
+<li><strong>$100K salary:</strong> $200K+ opportunity cost (plus the raises and promotions you'd have received). The math still works for most career changers.</li>
+<li><strong>$150K salary:</strong> $300K+ opportunity cost. The MBA needs to provide either a large salary jump or access to a career path you can't reach otherwise.</li>
+<li><strong>$200K+ salary:</strong> $400K+ opportunity cost. The financial case for the MBA weakens. The value has to be in career change, network, or founding a company.</li></ul>
+<p>Engineers at FAANG companies, senior consultants, and mid-career finance professionals face the hardest ROI calculation. The salary is already high, and the MBA uplift may not justify the cost.</p>"""),
+        ],
+        "faq": [
+            ("What's the total cost of an MBA at Harvard?", f"All-in for HBS in {CURRENT_YEAR}: $168K tuition + $90K living expenses + $200K opportunity cost (from $100K salary) = approximately $458K. With scholarships or a lower opportunity cost, the number decreases significantly."),
+            ("Is an MBA still worth the cost?", "For career changers from lower-paying industries, almost always. For candidates already earning $150K+, the ROI depends on whether the MBA provides access to career paths (PE, VC, executive leadership) that justify the investment. Use our ROI calculator to model your scenario."),
+            ("Can I afford an MBA without loans?", "Possible but uncommon. About 40% of MBA students borrow less than $50K. Scholarships, savings, employer sponsorship, and the GI Bill can all reduce out-of-pocket costs. Most students borrow $80K-$120K."),
+        ],
+    },
+    {
+        "title": f"What MBA Class Profiles Tell You ({CURRENT_YEAR})",
+        "slug": "mba-class-profile-guide",
+        "meta": f"How to read MBA class profiles in {CURRENT_YEAR}. What GMAT ranges, work experience, and demographics reveal about your chances. From a Haas MBA grad.",
+        "sections": [
+            ("What the Numbers Mean", f"""<p>Every MBA program publishes a class profile with averages and ranges for GMAT, GPA, work experience, and demographic breakdowns. These numbers tell you where you stand relative to the admitted pool and where you need to compensate if you're below average.</p>
+<p>Critical: the published numbers are averages and medians, not minimums. The "80% range" (middle 80% of the class) is more useful than the average. If the average GMAT is 730 and the 80% range is 700-760, a 710 is competitive. A 680 requires offsetting strength elsewhere.</p>"""),
+            ("GMAT and GPA: Where You Stand", f"""<p>Here's how to interpret your position:</p>
+<ul><li><strong>At or above the median:</strong> Your scores aren't holding you back. Focus energy on essays, work experience, and school fit.</li>
+<li><strong>Within the 80% range but below median:</strong> You're competitive but not comfortable. Strong essays and work experience can compensate. Consider a GMAT retake if you have time.</li>
+<li><strong>Below the 80% range:</strong> Your score is a liability. You need exceptional strength in other areas (leadership, unique background, work experience) to overcome it. A retake or GRE switch should be seriously considered.</li></ul>
+<p>GPA context matters. A 3.3 from MIT engineering is evaluated differently than a 3.3 from a less quantitative program. If your GPA is low, the GMAT is your opportunity to prove academic capability. See our <a href="/guides/low-gpa-mba-strategy/">low GPA strategy guide</a>.</p>"""),
+            ("Work Experience Breakdown", f"""<p>Class profiles show the average years of work experience (typically 4-6 years) and the industry breakdown. The industry breakdown reveals what the school values and what gaps exist:</p>
+<ul><li><strong>Consulting/finance heavy (Columbia, Wharton):</strong> These schools attract business-experienced candidates. If you come from a non-traditional background, you're the diversity they want.</li>
+<li><strong>Tech/engineering heavy (MIT Sloan, CMU Tepper):</strong> Technical backgrounds are the norm. Non-technical candidates should demonstrate quantitative comfort.</li>
+<li><strong>Diverse backgrounds (HBS, Stanford GSB, Yale SOM):</strong> Military, nonprofit, government, and arts are well-represented. These schools actively seek non-traditional profiles.</li></ul>
+<p>If your background is overrepresented in the class profile (e.g., you're a consultant applying to a program where 25% of the class is from consulting), you need to differentiate on fit, goals, and personal story. If your background is underrepresented, you have a diversity advantage.</p>"""),
+            ("What Demographics Tell You", f"""<p>Class profiles include gender, international student percentage, and underrepresented minority statistics. These numbers matter for two reasons:</p>
+<ol><li><strong>Community:</strong> If you're an international student, knowing that 35% of the class is international tells you there's a critical mass of people with shared experience.</li>
+<li><strong>Admissions strategy:</strong> Programs with lower female enrollment percentages are actively trying to increase them. Being a woman at a program targeting 50% female enrollment can be a mild advantage. Being from a country that sends 200 applicants per year (India, China) means more competition within your demographic.</li></ol>
+<p>See individual <a href="/schools/">school profiles</a> for detailed class profile data on all 150 programs.</p>"""),
+        ],
+        "faq": [
+            ("What's the average GMAT score at M7 programs?", f"M7 programs report average GMAT scores of 730-740 for {CURRENT_YEAR}, with 80% ranges of 700-770. Booth and Columbia are slightly lower (725-730); Stanford and Wharton are slightly higher (733-740)."),
+            ("How many years of work experience do top MBA programs want?", "The average is 5 years at most M7 programs, with an 80% range of 3-7 years. Applying with 2 or fewer years is a significant disadvantage. 7-8 years is viable but requires a clear rationale."),
+            ("Do MBA programs have diversity quotas?", "Not quotas, but goals. Programs actively build diverse classes across gender, nationality, industry, and background. Being from an underrepresented group (in the school's specific context) can provide a mild admissions advantage."),
+        ],
+    },
+    {
+        "title": f"MBA Networking: Before, During, and After Business School ({CURRENT_YEAR})",
+        "slug": "mba-networking-guide",
+        "meta": f"How to network for MBA admissions and career success in {CURRENT_YEAR}. Before, during, and after business school. From a Haas MBA grad.",
+        "sections": [
+            ("Before the MBA: Networking for Admissions", f"""<p>Networking before the MBA serves two purposes: strengthening your application and evaluating school fit. Here's how to do it without being annoying:</p>
+<ul><li><strong>Attend school events.</strong> Information sessions, webinars, and campus visits are the easiest way to connect with admissions staff and current students. Attendance is tracked and noted.</li>
+<li><strong>Connect with alumni.</strong> Reach out to graduates of your target schools on LinkedIn with a specific, short message: "I'm applying to Haas and noticed you graduated in 2022. I'd love to ask 2-3 questions about the culture and career services. Would you have 15 minutes this week?" Keep it brief and respectful of their time.</li>
+<li><strong>Current student outreach.</strong> Student ambassadors want to help applicants. Ask genuine questions that aren't answered on the website. "What surprised you about the culture?" beats "What's the class size?"</li></ul>
+<p>The networking you do before the MBA directly improves your "Why this school?" essay and interview answers. Specific references to conversations with students or alumni are more persuasive than anything you can find on a website.</p>"""),
+            ("During the MBA: Building Your Network", f"""<p>The MBA network is the most valuable long-term asset of the degree. How to build it intentionally:</p>
+<ul><li><strong>Your section/cohort comes first.</strong> The 60-90 people in your section are your closest network. You'll see them daily for a year. Invest in those relationships, even with people in industries you don't think you care about. You don't know who you'll need in 10 years.</li>
+<li><strong>Clubs and activities matter.</strong> Join 2-3 clubs aligned with your career interests. The club leadership positions, case competitions, and speaker events create natural networking opportunities. Don't join 8 clubs and attend none.</li>
+<li><strong>Second-year students are a goldmine.</strong> They just went through recruiting, have internship experience, and know which classes, professors, and recruiters to prioritize. Seek them out early.</li>
+<li><strong>Alumni events.</strong> Attend alumni panels and networking receptions. These people are your future network. Introduce yourself, ask one specific question, and follow up with a thank-you email.</li></ul>"""),
+            ("After the MBA: Maintaining the Network", f"""<p>The MBA network compounds in value over time, but only if you maintain it. Strategies for the long game:</p>
+<ul><li><strong>Give first.</strong> The strongest networkers help others before asking for anything. Share job leads, make introductions, and offer expertise. The reciprocity builds over years.</li>
+<li><strong>Stay visible.</strong> Attend reunion events (most schools have them every 5 years). Participate in alumni chapter activities. The effort is minimal; the relationship maintenance is priceless.</li>
+<li><strong>LinkedIn isn't networking.</strong> A LinkedIn connection without a real conversation is a contact, not a network member. Turn online connections into real relationships: a coffee, a phone call, a meaningful exchange.</li>
+<li><strong>Help future students.</strong> Interview applicants, speak at panels, and mentor current students. This deepens your connection to the school and puts you in front of the next generation of the network.</li></ul>"""),
+        ],
+        "faq": [
+            ("How important is the MBA network?", "It's the most durable asset from the MBA. Skills can be learned elsewhere. The network of 400-900 classmates (plus tens of thousands of alumni) who share a bond and are willing to help each other is unique to the MBA experience."),
+            ("Can I network my way into an MBA program?", "Networking doesn't guarantee admission, but it strengthens your application significantly. Conversations with students and alumni provide material for your essays and interviews that generic research can't match. Demonstrated interest matters."),
+            ("How do I network without being annoying?", "Be specific, be brief, and be respectful of time. A message that says 'I'd love 15 minutes to ask about your experience in healthcare consulting at Fuqua' is fine. A message that says 'Can I pick your brain about business school?' is too vague. Always follow up with a thank-you."),
+        ],
+    },
+    {
+        "title": f"Best MBA Programs for Career Changers ({CURRENT_YEAR})",
+        "slug": "best-mba-career-changers",
+        "meta": f"The best MBA programs for career changers in {CURRENT_YEAR}. Which schools welcome non-traditional backgrounds and support industry pivots.",
+        "sections": [
+            ("What Makes a Program Good for Career Changers", f"""<p>Career changers need three things from an MBA program: structured recruiting (companies hiring on campus), career services that support pivots (not just industry-trackers), and a culture that values diverse backgrounds (not just consulting and banking pre-MBA).</p>
+<p>Some programs are optimized for career acceleration (moving up in your current industry). Others are built for career transformation (moving to a new industry). If you're changing careers, you want the latter.</p>"""),
+            ("Top Programs for Career Changers", f"""<ul><li><strong>Virginia Darden (#14):</strong> 60%+ of students change functions or industries. The case-method format and collaborative culture support career exploration. Darden's career services team is structured around pivots, not just placement.</li>
+<li><strong>Indiana Kelley (#24):</strong> Best-in-class career services, period. The Academy system matches you with industry tracks from day one. Kelley actively recruits career changers and has one of the highest "career change" percentages in the top 25.</li>
+<li><strong>Berkeley Haas (#8):</strong> The Bay Area location provides access to tech, startups, and social impact roles that attract career changers from military, nonprofit, government, and education backgrounds.</li>
+<li><strong>Yale SOM (#13):</strong> Mission-driven culture attracts career changers from nonprofit, government, education, and healthcare. If you're pivoting from a social sector background, Yale SOM's culture will feel welcoming.</li>
+<li><strong>Michigan Ross (#12):</strong> The MAP (Multidisciplinary Action Projects) program sends students on 7-week consulting projects with real companies. Career changers use MAP as a way to test new industries before committing.</li></ul>
+<p>See our <a href="/rankings/career-changers/">career changers ranking</a> for the complete list.</p>"""),
+            ("The Career Change Playbook", f"""<p>Career changing through an MBA follows a pattern:</p>
+<ol><li><strong>Pre-MBA (6-12 months before):</strong> Network into your target industry. Attend industry events. Read industry publications. Build enough knowledge to be conversational in interviews.</li>
+<li><strong>Fall semester (Year 1):</strong> Take core courses plus 1-2 electives in your target area. Join relevant clubs. Start coffee chats with second-year students who made similar pivots.</li>
+<li><strong>Winter recruiting (Year 1):</strong> The summer internship is the most important career-change moment. Apply broadly in your target industry. The internship proves you can perform in the new field.</li>
+<li><strong>Summer internship:</strong> Perform well enough to get a return offer. 70-80% of MBA graduates accept full-time offers from their summer employer. This is where the career change becomes real.</li>
+<li><strong>Year 2:</strong> If you have a return offer, use the year to deepen expertise. If not, recruit again with the internship experience on your resume.</li></ol>"""),
+            ("Career Changes That Work Best", f"""<p>Some career pivots are more natural through the MBA than others:</p>
+<ul><li><strong>Engineering to PM:</strong> Very common, well-supported. 15-20% of MBA classes are engineers.</li>
+<li><strong>Military to consulting:</strong> Strong pipeline. MBB firms value military leadership. 10-15% of top program classes are veterans.</li>
+<li><strong>Nonprofit to corporate strategy:</strong> Common and well-received. The MBA bridges the sector gap.</li>
+<li><strong>Teaching to EdTech/consulting:</strong> Growing path. TFA alumni are well-represented at top programs.</li>
+<li><strong>Finance to tech:</strong> Easy transition with the MBA. The skill translation is straightforward.</li>
+<li><strong>Harder pivots (journalism to banking, arts to PE):</strong> Possible but require exceptional positioning. The further the pivot, the more important the internship becomes.</li></ul>"""),
+        ],
+        "faq": [
+            ("Which MBA programs are best for career changers?", f"Darden, Kelley, Haas, Yale SOM, and Ross are consistently cited as the best programs for career changers. They combine strong career services, diverse student bodies, and recruiting infrastructure that supports industry pivots."),
+            ("Can the MBA help me change industries?", "Yes. 60-70% of MBA graduates at top programs change either their function or industry post-MBA. The summer internship is the critical transition point. Programs with structured career services make the change easier."),
+            ("Is it harder to change careers with an MBA from a lower-ranked school?", "Somewhat. Top-15 programs have broader recruiting pipelines, which gives career changers more options. At lower-ranked schools, you may need to network more aggressively to access your target industry. The career change is still possible but requires more self-driven effort."),
+        ],
+    },
+    {
+        "title": f"MBA with a Liberal Arts Degree: How to Position Yourself ({CURRENT_YEAR})",
+        "slug": "mba-with-liberal-arts-degree",
+        "meta": f"How liberal arts graduates get into top MBA programs in {CURRENT_YEAR}. Positioning your humanities background for business school admissions.",
+        "sections": [
+            ("Liberal Arts Graduates Belong in MBA Programs", f"""<p>English majors, political science majors, history majors, and philosophy majors are all represented at every top MBA program. The MBA is a graduate professional degree, not a continuation of an undergraduate business track. Many of the best MBA candidates have liberal arts backgrounds because they bring writing skills, critical thinking, and broad intellectual curiosity that business-only candidates sometimes lack.</p>
+<p>That said, liberal arts applicants face a specific challenge: proving quantitative readiness. The MBA curriculum includes statistics, accounting, finance, and economics. Admissions committees need evidence that you can handle this material.</p>"""),
+            ("Proving Quantitative Ability", f"""<p>Three paths to demonstrate quant readiness:</p>
+<ol><li><strong>GMAT/GRE quant score:</strong> The most direct proof. A Q49+ on the GMAT or 165+ on the GRE quant section removes the question mark. Invest disproportionately in quant prep if your undergraduate work was entirely humanities.</li>
+<li><strong>Pre-MBA coursework:</strong> Take financial accounting, statistics, or calculus through an accredited program. Harvard Extension, Wharton Online, or community college courses all work. Earning an A in a quantitative course proves you can do the work.</li>
+<li><strong>Professional quant experience:</strong> If your job involves financial modeling, data analysis, budgeting, or quantitative decision-making, highlight this prominently. A liberal arts major who built financial models at a consulting firm has demonstrated quant ability through work.</li></ol>"""),
+            ("What Liberal Arts Brings to the MBA", f"""<p>Your liberal arts background is a strength in several dimensions:</p>
+<ul><li><strong>Writing:</strong> MBA programs are writing-intensive (essays, case analyses, executive summaries). Humanities majors write better than most business-track candidates. This matters more than people think.</li>
+<li><strong>Critical thinking:</strong> The ability to analyze arguments, question assumptions, and synthesize diverse viewpoints is the core of what liberal arts teaches. MBA case discussions reward this skill.</li>
+<li><strong>Communication:</strong> Presenting ideas clearly, persuading stakeholders, and translating complex concepts into accessible language are fundamental business skills that humanities training develops.</li>
+<li><strong>Intellectual breadth:</strong> The best business leaders read widely, think across disciplines, and connect ideas from different fields. Liberal arts education cultivates this breadth.</li></ul>
+<p>Don't apologize for your major. Frame it as a differentiator. "My English degree taught me to construct arguments and communicate persuasively, which I've applied to [specific professional achievement]."</p>"""),
+            ("Best Programs for Liberal Arts Backgrounds", f"""<p>Programs that particularly welcome non-traditional academic backgrounds:</p>
+<ul><li><strong>HBS:</strong> The case method rewards the broad thinking and communication skills that liberal arts develops. HBS classes include significant percentages of humanities majors.</li>
+<li><strong>Stanford GSB:</strong> The "What Matters Most" essay invites personal, philosophical reflection that liberal arts graduates handle well.</li>
+<li><strong>Yale SOM:</strong> The most humanities-friendly MBA culture. The mission-driven focus and interdisciplinary approach align with liberal arts values.</li>
+<li><strong>Darden:</strong> Case-method teaching rewards articulate thinkers who can synthesize information quickly. Liberal arts graduates excel in this format.</li></ul>
+<p>See our <a href="/schools/">school profiles</a> for detailed class composition data.</p>"""),
+        ],
+        "faq": [
+            ("Can I get into an MBA program with a liberal arts degree?", f"Yes. Liberal arts graduates are admitted to every top MBA program. The key is demonstrating quantitative ability through your GMAT/GRE quant score, pre-MBA coursework, or professional experience with data and finance."),
+            ("Do I need to take business courses before applying?", "Not required, but helpful if your quant background is thin. Financial accounting and statistics courses prove you can handle MBA coursework. A strong GMAT quant score can substitute for formal coursework."),
+            ("What majors do MBA students have?", "MBA classes are diverse. At top programs, 30-40% come from business/economics backgrounds, 15-20% from engineering/STEM, and 15-25% from liberal arts, social sciences, and humanities. There's no 'right' major for the MBA."),
+        ],
+    },
+    {
+        "slug": 'mba-vs-masters',
+        "title": "MBA vs Master's Degree: Which Is Worth More?",
+        "meta": "MBA vs specialized master's degree: salary data, career outcomes, and which makes more sense for your goals. From a Berkeley Haas MBA grad.",
+        "sections": [
+            ('The Short Answer', "<p>An MBA is a generalist business degree. A specialized master's (MS Finance, MS Data Science, MA Economics) goes deep in one field. The MBA costs more, takes longer, and produces broader career optionality. The specialized master's costs less, finishes faster, and can produce competitive salaries in specific fields.</p><p>For career changers, the MBA wins. For people who already know their field and want technical depth, a specialized master's often delivers better ROI.</p>"),
+            ('Salary Comparison', "<p>Top MBA graduates average $150,000-$175,000 in starting salary at M7 programs. Top MS Finance programs (MIT, Princeton) produce $120,000-$150,000. MS Computer Science graduates from Stanford or CMU can exceed MBA salaries entirely, hitting $180,000+ at FAANG companies.</p><p>The MBA salary premium exists primarily in consulting and general management. In quantitative fields (data science, software engineering, quantitative finance), specialized master's degrees often match or exceed MBA outcomes at lower cost.</p>"),
+            ('When the MBA Wins', "<p>The MBA wins when you need to pivot industries, build a cross-functional network, or target general management roles. If your goal is McKinsey, brand management at P&G, or running a startup, the MBA's breadth and network are irreplaceable.</p><p>The MBA also wins if you don't know exactly what you want to do. Two years of exploration, recruiting, and networking help you figure it out. A specialized master's doesn't offer that luxury.</p>"),
+            ("When the Master's Wins", "<p>If you want to be a data scientist, a quant trader, or a supply chain analyst, a specialized master's gives you more relevant training at lower cost. MS programs typically run 1-1.5 years vs the MBA's 2 years. That's 6-12 months of additional salary you're earning instead of paying tuition.</p><p>For international students who need STEM OPT extensions, specialized STEM master's degrees provide 3 years of US work authorization vs the MBA's standard 1 year (unless the program qualifies for STEM designation).</p>"),
+            ('The Hybrid Option', "<p>Some MBA programs now offer STEM-designated concentrations or dual MBA/MS degrees. <a href='/schools/mit-sloan/'>MIT Sloan</a>, <a href='/schools/carnegie-mellon-tepper/'>Tepper</a>, and <a href='/schools/booth/'>Booth</a> have programs that combine MBA breadth with quantitative depth. These hybrid options cost more time and money but provide both the network and the technical credential.</p>"),
+        ],
+        "faq": [
+            ("Is an MBA worth more than a master's?", "It depends on your field. For consulting, general management, and career changes, yes. For technical roles in data science, finance quant, or engineering, a specialized master's can match or exceed MBA salary outcomes at lower cost."),
+            ("Can I get into consulting with a master's degree?", "Yes, but it's harder. MBB firms recruit heavily from MBA programs. With a specialized master's, you'll need to network more aggressively and may enter at a lower level than MBA hires."),
+            ('Which takes longer?', "MBA programs typically take 2 years full-time. Most specialized master's programs take 1-1.5 years. Some accelerated MBA programs run 1 year but offer less recruiting time."),
+        ],
+    },
+    {
+        "slug": 'part-time-vs-full-time-mba',
+        "title": 'Part-Time vs Full-Time MBA: The Real Trade-offs',
+        "meta": 'Part-time vs full-time MBA comparison: salary outcomes, career switching ability, networking, and total cost. What each format actually delivers.',
+        "sections": [
+            ('The Core Trade-off', '<p>Full-time MBA programs give you two years of immersive recruiting, networking, and career switching. Part-time programs let you keep your salary while earning the degree. The full-time path costs more in opportunity cost but opens more doors for career changers. The part-time path is cheaper overall but limits your ability to pivot industries.</p>'),
+            ('Career Switching', "<p>If you want to change careers, go full-time. Companies recruit full-time MBA students for roles that require summer internships, structured rotational programs, and on-campus interviews. Consulting firms, banks, and tech companies run recruiting pipelines designed for full-time MBA students. Part-time students rarely access these pipelines.</p><p>Part-time works for career advancement within your current field. If you're already in finance and want to move up, a part-time MBA adds the credential without the income gap. If you're in marketing and want to break into private equity, the part-time format won't get you there.</p>"),
+            ('The Money Math', '<p>A full-time MBA at a top-20 program costs $200,000-$250,000 in tuition plus $150,000-$250,000 in lost salary over two years. Total cost: $350,000-$500,000.</p><p>A part-time MBA at the same school costs $150,000-$200,000 in tuition with zero lost salary. You might even get employer tuition reimbursement, reducing out-of-pocket cost to $50,000-$100,000.</p><p>The full-time ROI only wins if you achieve a significant salary jump (30%+ increase) after graduation. If your post-MBA salary is similar to your pre-MBA salary, part-time was the rational financial choice.</p>'),
+            ('Network Quality', "<p>Full-time programs build deeper cohort bonds. You're in class together, studying together, socializing together for two years. These relationships last decades. Part-time students build real connections too, but the intensity is lower. You're fitting networking around work and family instead of making it your primary activity.</p><p>Both formats give you alumni network access. <a href='/schools/booth/'>Booth's</a> part-time graduates have the same Booth alumni card as full-time graduates. The brand value is identical.</p>"),
+            ('Which Schools Offer Both?', "<p><a href='/schools/kellogg/'>Kellogg</a>, <a href='/schools/booth/'>Booth</a>, <a href='/schools/berkeley-haas/'>Haas</a>, <a href='/schools/nyu-stern/'>Stern</a>, <a href='/schools/ucla-anderson/'>Anderson</a>, and <a href='/schools/columbia-business-school/'>Columbia</a> all offer well-regarded part-time or evening MBA programs. At these schools, the brand value of part-time and full-time degrees is virtually identical. At lower-ranked schools, the brand gap can be wider.</p>"),
+        ],
+        "faq": [
+            ('Do employers value part-time MBAs less?', 'At top schools like Booth, Kellogg, and Haas, no. The degree is the same. At lower-ranked schools, full-time programs sometimes carry more weight because part-time programs may have lower admission standards.'),
+            ('Can I switch careers with a part-time MBA?', "It's difficult. Full-time MBA programs provide summer internships, structured recruiting, and dedicated career services for career changers. Part-time programs support career advancement, not career switching."),
+            ('How long does a part-time MBA take?', 'Typically 2.5-3 years, though some programs offer accelerated 2-year tracks. Evening and weekend formats are most common.'),
+        ],
+    },
+    {
+        "slug": 'mba-for-engineers',
+        "title": 'Do Engineers Need an MBA?',
+        "meta": "Should engineers get an MBA? When it makes sense, when it doesn't, and which programs are best for engineers transitioning to business leadership.",
+        "sections": [
+            ('When Engineers Should Get an MBA', "<p>Engineers should get an MBA when they want to move from building things to running the teams and businesses that build things. Product management, strategy, venture capital, and general management all value the combination of technical depth and business acumen.</p><p>The MBA is also valuable when your engineering career has plateaued at the individual contributor level and you want to transition to management without starting over in a new company's internal track.</p>"),
+            ("When They Shouldn't", "<p>If you want to stay technical, an MBA is the wrong investment. An MS in Computer Science, an ML specialization, or a PhD will advance your engineering career more than an MBA. If you're already on a strong engineering management track at a FAANG company, the MBA might slow your career rather than accelerate it. Many engineering managers at Google, Apple, and Meta rose through internal promotion without an MBA.</p>"),
+            ('Best Programs for Engineers', "<p><a href='/schools/mit-sloan/'>MIT Sloan</a> and <a href='/schools/stanford-gsb/'>Stanford GSB</a> attract the most engineers. <a href='/schools/carnegie-mellon-tepper/'>Tepper</a> and <a href='/schools/georgia-tech-scheller/'>Georgia Tech Scheller</a> offer technically rigorous MBA environments where engineers feel at home. <a href='/schools/berkeley-haas/'>Haas</a> benefits from UC Berkeley's engineering school and Bay Area tech ecosystem.</p><p>Programs with STEM MBA designations give international engineers 3 years of OPT work authorization, which is a significant advantage over non-STEM MBAs.</p>"),
+            ('The Product Management Pipeline', "<p>The most common post-MBA path for engineers is product management. Companies like Google, Amazon, Meta, and Microsoft hire engineering-background MBAs into PM roles where technical knowledge provides an edge over non-technical peers.</p><p>Top PM-placing programs include <a href='/schools/stanford-gsb/'>Stanford</a>, <a href='/schools/mit-sloan/'>MIT Sloan</a>, <a href='/schools/berkeley-haas/'>Haas</a>, <a href='/schools/kellogg/'>Kellogg</a>, and <a href='/schools/carnegie-mellon-tepper/'>Tepper</a>. These schools place 15-25% of graduates into product and tech roles.</p>"),
+            ('Salary Expectations', '<p>Engineers with MBAs from top programs can expect $160,000-$200,000 in starting salary for product management roles, plus $50,000-$100,000 in signing bonus and stock. This compares to $180,000-$250,000 for senior software engineers at the same companies without an MBA.</p><p>The MBA creates a different trajectory: PM to Senior PM to Director of Product to VP of Product. The engineering track goes Staff Engineer to Principal Engineer to Distinguished Engineer. Both paths can reach $500,000+ total compensation. The MBA path leads to general management; the engineering path keeps you closer to the technology.</p>'),
+        ],
+        "faq": [
+            ('What percentage of MBA students are engineers?', 'At top programs, 25-40% of incoming students have engineering or STEM backgrounds. MIT Sloan and Stanford GSB are on the higher end. Programs like Darden and Tuck tend to attract fewer engineers.'),
+            ('Is an MBA or MS better for engineers?', 'For career changers who want business roles, the MBA. For engineers who want to stay technical but advance, an MS or PhD. For engineers who want product management, the MBA is the standard path.'),
+            ('Do I need work experience between engineering and MBA?', 'Yes. Most top MBA programs expect 3-7 years of work experience. The experience matters for classroom discussions, recruiting, and post-MBA placement.'),
+        ],
+    },
+    {
+        "slug": 'mba-without-business-background',
+        "title": 'Getting an MBA Without a Business Background',
+        "meta": 'No business degree? No problem. How non-business majors succeed in MBA programs, which schools welcome them, and how to prepare.',
+        "sections": [
+            ("You Don't Need a Business Degree", "<p>Roughly 60% of MBA students at top programs did NOT major in business as undergrads. English, political science, engineering, biology, history, psychology, and dozens of other majors are well-represented. MBA programs are designed to teach business fundamentals from scratch. That's the entire point.</p>"),
+            ('What You DO Need', '<p>Quantitative comfort. MBA programs assume you can handle statistics, financial modeling, and data analysis. If your undergrad was qualitative (English, history, philosophy), take a stats course and a basic accounting or finance course before applying. Free options through Coursera, edX, or local community colleges work fine.</p><p>Most top programs also require the GMAT or GRE, which tests quantitative reasoning. A strong GMAT quant score (48+) signals that you can handle the quantitative coursework even without a business undergrad.</p>'),
+            ('The Advantage of Non-Business Backgrounds', "<p>MBA cohorts are intentionally diverse. Programs want scientists, military officers, teachers, journalists, and nonprofit workers alongside the bankers and consultants. Your non-business perspective adds value to case discussions and team projects.</p><p>Career changers are what MBA programs do best. <a href='/schools/virginia-darden/'>Darden</a>, <a href='/schools/yale-som/'>Yale SOM</a>, <a href='/schools/kellogg/'>Kellogg</a>, and <a href='/schools/indiana-kelley/'>Kelley</a> all explicitly welcome career changers and provide structured support for the transition.</p>"),
+            ('How to Prepare', "<p>Before starting your MBA, take these free/cheap steps to level up: complete an accounting fundamentals course (Coursera or Khan Academy), read a basic finance textbook (Brealey, Myers & Allen is the standard), learn Excel at an intermediate level (pivot tables, VLOOKUP, basic formulas), and practice reading financial statements (pick any public company's 10-K filing).</p><p>Most programs offer a pre-MBA math or analytics bootcamp for students without quantitative backgrounds. Take it. It's free and saves you stress in the first semester.</p>"),
+        ],
+        "faq": [
+            ('Do MBA programs prefer business majors?', 'No. Top programs actively seek diverse academic backgrounds. Having a non-business undergrad is not a disadvantage. Your work experience and GMAT score matter more than your major.'),
+            ('What courses should I take before an MBA?', 'At minimum: introductory accounting, introductory statistics, and basic finance or economics. These are available free online. A strong GMAT quant score can substitute for formal coursework.'),
+            ('Is the MBA harder without a business degree?', 'The first semester may feel steeper, especially in accounting and finance courses. By second semester, the playing field is level. Non-business majors often outperform business majors in strategy and marketing courses.'),
+        ],
+    },
+    {
+        "slug": 'mba-gmat-waiver',
+        "title": 'MBA Programs with GMAT Waivers: What You Need to Know',
+        "meta": 'Which MBA programs offer GMAT waivers, who qualifies, and whether waiving the test helps or hurts your application. Data-driven analysis.',
+        "sections": [
+            ('The Waiver Landscape', '<p>Post-COVID, GMAT waivers exploded. Over 80% of AACSB-accredited MBA programs now offer some form of test waiver or test-optional admission. This includes many top-50 programs. The question is no longer whether you CAN waive the test, but whether you SHOULD.</p>'),
+            ('Who Qualifies', '<p>Most waiver programs require one or more of: strong undergraduate GPA (3.3+), significant work experience (7+ years), advanced degrees (JD, MD, PhD), professional certifications (CPA, CFA, PE), or relevant quantitative coursework. Military service qualifies at many programs.</p><p>Some programs are fully test-optional with no criteria: you simply choose not to submit a score. Others have a formal waiver application process where you must demonstrate quantitative readiness through your academic or professional record.</p>'),
+            ('Does Waiving Help or Hurt?', '<p>At highly-ranked programs (top 25), submitting a strong GMAT score still helps your application. Admissions committees use test scores to calibrate candidates, and a high score provides evidence of your ability to handle quantitative coursework.</p><p>At programs ranked 50+, waivers are generally safe. Many of these programs adopted test-optional policies to attract more applicants, and they genuinely evaluate waived applications on par with tested ones.</p><p>The worst position: applying to a top program without a test score AND without other strong quantitative evidence (GPA, certifications, work metrics). In that case, take the test.</p>'),
+            ('Programs Known for Generous Waivers', "<p>Several ranked programs have fully test-optional policies: <a href='/schools/wake-forest/'>Wake Forest</a>, <a href='/schools/oregon-lundquist/'>Oregon Lundquist</a>, and most Tier 6-7 programs. <a href='/schools/indiana-kelley/'>Kelley</a> and <a href='/schools/unc-kenan-flagler/'>UNC Kenan-Flagler</a> offer conditional waivers based on experience and GPA criteria.</p>"),
+            ('My Take', "<p>If you can score 700+ on the GMAT, take it and submit it. The score strengthens your application everywhere. If you're testing in the 600-680 range and have strong work experience (8+ years), a waiver at a top-30 program may serve you better than submitting a below-median score. At rank 50+, waive freely if you meet the criteria.</p>"),
+        ],
+        "faq": [
+            ('Do GMAT waivers hurt your MBA application?', 'At top-25 programs, not submitting a score can be a slight disadvantage versus candidates with strong scores. At rank 50+, waivers are generally neutral. Strong work experience and GPA can offset the missing test score.'),
+            ('Which top MBA programs are test-optional?', "The list changes annually. Several top-50 programs now offer test-optional or waiver paths, including some that were historically test-required. Check each school's current admissions page."),
+            ('Should I waive if I can get a 700+?', "No. A 700+ GMAT strengthens your application at every program. Only consider waiving if your expected score is below the school's median and your profile is otherwise strong."),
+        ],
+    },
+    {
+        "slug": 'mba-return-on-investment',
+        "title": 'MBA ROI: How to Calculate If Your MBA Will Pay Off',
+        "meta": 'Calculate your real MBA return on investment. Total cost formula, break-even timeline, and which programs deliver the highest ROI by the numbers.',
+        "sections": [
+            ('The Real Cost Formula', "<p>MBA ROI is not just tuition. The real cost includes: tuition (2 years), fees, living expenses, lost salary (2 years of income you won't earn), lost retirement contributions, and interest on loans. For a top-20 full-time MBA, the all-in cost ranges from $350,000 to $500,000.</p><p>The return side: post-MBA starting salary, signing bonus, year-over-year salary growth, and career acceleration. The salary bump matters less than the trajectory. An MBA that adds $30,000/year in starting salary but opens a path to VP-level compensation ($300,000+) within 10 years creates significant long-term ROI.</p>"),
+            ('Break-Even Analysis', "<p>The average break-even point for a top-20 MBA is 4-6 years after graduation. This assumes you finance the degree with loans at 6-7% interest and your pre-MBA salary was $80,000-$120,000.</p><p>Programs with the fastest break-even: public schools with in-state tuition (<a href='/schools/texas-mccombs/'>McCombs</a>, <a href='/schools/unc-kenan-flagler/'>UNC</a>, <a href='/schools/indiana-kelley/'>Kelley</a>) where tuition runs $40,000-$60,000 total. Slowest break-even: high-tuition programs where you had a high pre-MBA salary (giving up $150,000+/year of income for a $230,000 degree).</p>"),
+            ('Which Programs Have the Best ROI?', "<p>Highest ROI by the numbers: <a href='/schools/virginia-darden/'>Darden</a>, <a href='/schools/indiana-kelley/'>Kelley</a>, <a href='/schools/texas-mccombs/'>McCombs</a>, <a href='/schools/unc-kenan-flagler/'>UNC Kenan-Flagler</a>, and <a href='/schools/byu-marriott/'>BYU Marriott</a>. These programs combine strong salary outcomes ($140,000-$165,000) with moderate tuition ($40,000-$110,000 total).</p><p>Lowest ROI by the numbers (still positive): high-tuition private programs where graduates enter industries with moderate salaries. An MBA that costs $200,000 and leads to a $95,000 nonprofit salary has a 15+ year break-even.</p>"),
+            ('When ROI Is Negative', "<p>An MBA has negative ROI when: you attend a low-ranked program at full tuition, you don't change jobs or industries after graduation, or you had a high pre-MBA salary that you can't exceed post-MBA. Military officers who leave the service for a top MBA almost always have positive ROI. Investment bankers who leave $200,000+ comp for a $250,000 MBA may not see positive ROI for a decade.</p>"),
+            ('Use Our Calculator', "<p>Try the <a href='/tools/roi-calculator/'>MBA ROI Calculator</a> to estimate your personal break-even point. Input your current salary, target program costs, and expected post-MBA compensation to see the numbers.</p>"),
+        ],
+        "faq": [
+            ('How long does it take for an MBA to pay off?', 'Typically 4-6 years after graduation for top-20 programs. Public school MBAs with in-state tuition can break even in 2-3 years. High-cost private programs may take 7-10 years.'),
+            ('What is the average MBA salary increase?', 'The average salary increase from pre-MBA to post-MBA is approximately 50-80% at top-25 programs. This varies significantly by pre-MBA salary, industry, and program rank.'),
+            ('Is an MBA worth it if I already make $150K?', "It depends on your trajectory. If your current path leads to $250K+ within 5 years without an MBA, the degree may not be worth the opportunity cost. If you're stuck at $150K without the MBA credential, the degree creates upward mobility."),
+        ],
+    },
+    {
+        "slug": 'mba-for-healthcare',
+        "title": 'Best MBA Programs for Healthcare Careers',
+        "meta": 'Top MBA programs for healthcare management, hospital administration, pharma, and biotech. Rankings, salary data, and career paths from a Haas MBA.',
+        "sections": [
+            ('Why Healthcare Needs MBAs', "<p>Healthcare is a $4.3 trillion industry in the US. Hospitals, insurance companies, pharmaceutical firms, medical device companies, and health tech startups all need business leaders who understand both the clinical and financial sides of medicine.</p><p>The MBA is increasingly the credential of choice for healthcare administration. An MHA (Master of Health Administration) remains the traditional path for hospital management, but the MBA opens doors to pharma, biotech, consulting (healthcare practice), and health tech that the MHA doesn't.</p>"),
+            ('Top Programs for Healthcare', "<p><a href='/schools/wharton/'>Wharton's</a> healthcare management program is considered the gold standard. The school's Health Care Management department is fully integrated into the MBA curriculum. <a href='/schools/yale-som/'>Yale SOM</a> benefits from Yale School of Medicine and Yale New Haven Health System proximity. <a href='/schools/michigan-ross/'>Michigan Ross</a> has a dedicated healthcare initiative.</p><p><a href='/schools/unc-kenan-flagler/'>UNC Kenan-Flagler</a> and <a href='/schools/vanderbilt-owen/'>Vanderbilt Owen</a> both place heavily into healthcare, benefiting from strong regional health systems. For students targeting healthcare at a lower price point, <a href='/schools/uab-collat/'>UAB Collat</a> sits inside one of the nation's largest academic medical centers.</p>"),
+            ('MBA vs MHA vs MPH', '<p>MBA: broadest career options. Finance, consulting, pharma, biotech, hospital administration, health tech. The MBA is the most versatile healthcare credential.</p><p>MHA: hospital and health system administration. If you know you want to run a hospital or health system, the MHA provides more specialized training.</p><p>MPH: public health, policy, government, and nonprofit. If your interest is population health rather than healthcare business, the MPH is the right degree.</p><p>Dual degrees (MBA/MPH, MBA/MHA) exist at several programs and can be completed in 3 years.</p>'),
+            ('Salary Expectations', '<p>MBA graduates entering healthcare management earn $110,000-$150,000 starting. Pharma and biotech MBA roles (marketing, strategy, business development) pay $130,000-$170,000 plus bonus. Healthcare consulting at McKinsey, BCG, or Deloitte pays the standard consulting salary ($165,000-$190,000 base).</p><p>Long-term, healthcare administration leads to C-suite roles (CEO, COO, CFO of health systems) with compensation of $500,000-$2,000,000+.</p>'),
+        ],
+        "faq": [
+            ('Is an MBA or MHA better for healthcare?', 'MBA for breadth (pharma, consulting, biotech, health tech). MHA for depth (hospital administration). If you want options beyond hospital management, the MBA is more versatile.'),
+            ('What do healthcare MBAs earn?', 'Starting salaries range from $110,000-$170,000 depending on role and sector. Healthcare consulting pays the most initially. Hospital administration has the highest long-term earning potential at the C-suite level.'),
+            ('Can I work in healthcare without a clinical background?', 'Yes. Healthcare MBA roles are business-focused: strategy, operations, finance, marketing. Clinical experience helps but is not required. Many healthcare MBA students come from non-clinical backgrounds.'),
+        ],
+    },
+    {
+        "slug": 'online-mba-worth-it',
+        "title": 'Is an Online MBA Worth It?',
+        "meta": "Online MBA programs: who they work for, who they don't, salary outcomes vs in-person, and which online MBAs carry real weight with employers.",
+        "sections": [
+            ('The Honest Assessment', "<p>Online MBAs have improved dramatically since 2020. Several top-ranked programs now offer online formats with the same degree (no 'online' designation on the diploma). <a href='/schools/indiana-kelley/'>Kelley</a>, <a href='/schools/unc-kenan-flagler/'>UNC Kenan-Flagler</a>, <a href='/schools/carnegie-mellon-tepper/'>Tepper</a>, and <a href='/schools/usc-marshall/'>USC Marshall</a> all offer well-regarded online MBAs.</p><p>The degree is worth it when: you're a working professional who can't relocate, you're advancing in your current career (not switching), and you choose a program where the online and in-person degrees are identical.</p>"),
+            ("When Online Doesn't Work", "<p>Online MBAs are poor choices for career switchers. The recruiting pipelines, summer internships, and on-campus employer events that make career switching possible happen in person. If you want to pivot from engineering to consulting, or from marketing to finance, a full-time in-person MBA is the path.</p><p>Online also struggles to replicate the network intensity of in-person programs. You'll build connections, but not the same deep cohort bonds that form from two years of daily interaction.</p>"),
+            ('Salary Outcomes', "<p>Online MBA graduates from top programs report salary increases of 20-40% within 2 years of graduation. This is lower than the 50-80% jump for full-time MBA graduates, but the comparison is misleading: online students don't lose two years of salary, so total financial impact is often comparable.</p><p>The caveat: these salary increases largely reflect career advancement within existing companies and industries. The MBA credential helps online students get promoted or switch to higher-paying employers in the same field. It doesn't typically unlock entirely new career paths the way full-time programs do.</p>"),
+            ('Red Flags to Avoid', "<p>Avoid online MBA programs that: aren't AACSB accredited, use a different name or designation for their online degree ('MBA - Online Program'), have admission standards significantly lower than their in-person program, or can't show you employment outcome data specific to online graduates.</p><p>The most important signal: does the diploma say the same thing as the in-person degree? If yes, the brand value is equivalent. If the diploma says 'online' or 'distance,' employers will notice.</p>"),
+        ],
+        "faq": [
+            ('Do employers respect online MBAs?', "From top-ranked programs where the degree is identical to in-person, yes. From for-profit schools or programs with low admission standards, often not. The school's brand matters more than the format."),
+            ('How long does an online MBA take?', 'Most programs run 24-36 months. Some offer accelerated 18-month options. Flexibility is the main advantage: you control the pace.'),
+            ('Can I switch careers with an online MBA?', "It's very difficult. Online programs don't provide the internship and recruiting infrastructure needed for career switching. For career advancement in your current field, online works well."),
+        ],
+    },
+    {
+        "slug": 'mba-scholarship-strategy',
+        "title": 'MBA Scholarship Strategy: How to Get the Most Money',
+        "meta": 'How to maximize MBA scholarship offers: timing, negotiation tactics, which schools give the most money, and when to choose money over rank.',
+        "sections": [
+            ('The Scholarship Landscape', "<p>MBA scholarships range from $10,000 to full-tuition ($200,000+). Most come from the school itself, not external sources. Schools use scholarships strategically to attract candidates who strengthen their class profile. If your GMAT score or work experience exceeds a school's median, you're a scholarship candidate.</p>"),
+            ('The Apply-Up-Down Strategy', "<p>Apply to 2-3 reach schools (where you're below median), 2-3 target schools (where you're at median), and 2-3 safety schools (where you're above median). Your safety schools will likely offer the most scholarship money because they want you to choose them over higher-ranked options.</p><p>This creates leverage. A $60,000 scholarship from a #40 program can be used to negotiate more money from a #30 program. Schools want to protect their yield rates.</p>"),
+            ('Negotiation Tactics', "<p>Wait until you have all offers before negotiating. Contact the financial aid office (not admissions) and present competing offers from peer schools. Be professional and specific: 'I've received a $40,000 scholarship from [peer school]. [Your school] is my first choice, but the cost difference is significant. Is there additional scholarship support available?'</p><p>Schools with the most negotiation room: private programs with high sticker prices. Schools with the least: public programs where tuition is already low.</p>"),
+            ('When to Take the Money', "<p>A full ride at a #40 program vs full-price at a #20 program is a real decision. The math: $200,000 in saved tuition and zero student loans vs a marginally stronger brand. If both programs place into your target industry, take the money.</p><p>The exception: if your target career is hyper-selective (MBB consulting, bulge bracket banking, top-tier VC), the brand of a top-15 program matters enough to justify paying full price. For most other career paths, the scholarship money wins. Read our <a href='/blog/full-ride-vs-higher-ranked/'>full analysis</a>.</p>"),
+        ],
+        "faq": [
+            ('How much scholarship money do MBA programs give?', 'It varies enormously. Some programs fund 50%+ of students with partial or full scholarships. Others are stingy. Generally, private programs with high tuition offer more scholarship dollars than public programs with lower tuition.'),
+            ('Can I negotiate an MBA scholarship?', 'Yes. Most programs will consider matching or increasing scholarship offers when presented with competitive offers from peer schools. Be professional and specific about competing offers.'),
+            ('Is a full ride at a lower-ranked school worth it?', "Often yes. Zero debt gives you career flexibility that debt-loaded graduates don't have. If both schools place into your target industry, the financial freedom of zero loans is valuable."),
+        ],
+    },
+    {
+        "slug": 'mba-consulting-recruiting',
+        "title": 'MBA Consulting Recruiting: The Complete Timeline',
+        "meta": 'MBB and Big 4 consulting recruiting timeline for MBA students. When to prepare, what firms look for, and which schools place best.',
+        "sections": [
+            ('The Timeline', "<p>Consulting recruiting starts before you even begin your MBA. Here's the realistic timeline:</p><p><strong>Summer before MBA (June-August):</strong> Study case prep. Read Case in Point. Practice 50+ cases. Learn frameworks. This is not optional.</p><p><strong>Fall semester (September-November):</strong> Attend company presentations. Coffee chats with consultants (alums and recruiters). Submit applications for summer internships. First-round interviews in October-November.</p><p><strong>Winter (December-January):</strong> Final-round interviews. MBB typically runs final rounds in January. Big 4 may extend through February. Decisions come fast: offers within 1-2 weeks of final rounds.</p><p><strong>Summer between years (June-August):</strong> 10-week summer internship. This is your 10-week job interview. 70-80% of interns receive full-time offers.</p>"),
+            ('What Firms Want', "<p>MBB (McKinsey, BCG, Bain) looks for: structured thinking, executive presence, analytical rigor, and leadership experience. Prior consulting experience is NOT required and is NOT an advantage. They want career changers who bring new perspectives.</p><p>The case interview tests structured problem-solving. The behavioral interview tests leadership and impact. You need both. A candidate who aces cases but can't articulate leadership stories won't get offers. A charismatic leader who can't structure a market sizing problem won't get offers either.</p>"),
+            ('Which Schools Place Best', "<p>MBB recruit heavily at: <a href='/schools/harvard-business-school/'>HBS</a>, <a href='/schools/wharton/'>Wharton</a>, <a href='/schools/booth/'>Booth</a>, <a href='/schools/kellogg/'>Kellogg</a>, <a href='/schools/columbia-business-school/'>CBS</a>, <a href='/schools/duke-fuqua/'>Fuqua</a>, <a href='/schools/michigan-ross/'>Ross</a>, <a href='/schools/virginia-darden/'>Darden</a>, <a href='/schools/yale-som/'>Yale SOM</a>, and <a href='/schools/dartmouth-tuck/'>Tuck</a>. These schools send 25-35% of graduates into consulting.</p><p>Beyond the top 15, consulting placement drops significantly. Schools ranked 20-50 send 10-20% to consulting, but almost none to MBB. Big 4 consulting (Deloitte, EY-Parthenon, PwC Strategy&, KPMG) recruits more broadly.</p>"),
+            ('Preparation That Actually Matters', "<p>1. Practice 100+ cases before recruiting starts. Join a case prep group with 2-3 peers. 2. Network with consultants at your target firms starting week 1 of your MBA. 3. Prepare 5-7 leadership stories using the STAR format. 4. Understand the profit improvement, market entry, and growth strategy frameworks cold. 5. Read the consulting firm's latest publications to understand their current focus areas.</p>"),
+        ],
+        "faq": [
+            ('When does consulting recruiting start?', 'Effectively before your MBA begins. Case preparation should start in June. Company presentations begin in September. Applications and first-round interviews happen in October-November. Final rounds in January.'),
+            ('Do I need consulting experience to get into MBB?', 'No. MBB firms actively recruit career changers. Military, engineering, finance, nonprofit, and government backgrounds are all represented. Prior consulting experience is neither required nor preferred.'),
+            ('How many cases should I practice?', 'Minimum 50, ideally 100+. Practice with real people, not just books. Join a case prep group of 2-3 MBA peers and practice 3-5 cases per week starting summer before your first year.'),
+        ],
+    },
+    {
+        "slug": 'mba-for-finance-careers',
+        "title": 'MBA for Finance Careers: Investment Banking, PE, and Beyond',
+        "meta": 'Which MBA programs place best into investment banking, private equity, and hedge funds. Salary data, recruiting timelines, and career paths.',
+        "sections": [
+            ('The Finance MBA Landscape', '<p>Finance remains one of the top MBA career paths, with 20-35% of graduates from top programs entering financial services. The MBA is the primary gateway to investment banking associate roles, PE associate positions, and corporate finance leadership.</p>'),
+            ('Investment Banking', "<p>IB recruiting follows a tight timeline. Summer internship recruiting begins in September of your first year and wraps by January. Goldman Sachs, JPMorgan, Morgan Stanley, and Bank of America Merrill Lynch dominate MBA IB hiring.</p><p>Best schools for IB placement: <a href='/schools/wharton/'>Wharton</a> (34% finance), <a href='/schools/columbia-business-school/'>CBS</a> (36% finance), <a href='/schools/booth/'>Booth</a> (32% finance), and <a href='/schools/nyu-stern/'>Stern</a> (30% finance). These four schools send more MBA graduates to Wall Street than all other programs combined.</p>"),
+            ('Private Equity and Venture Capital', "<p>PE firms increasingly hire from MBA programs, but competition is fierce. Most PE associate roles require pre-MBA IB or consulting experience. The MBA serves as a credential accelerator rather than a career entry point.</p><p>VC roles are even more competitive. Top VC-placing programs: <a href='/schools/stanford-gsb/'>Stanford</a>, <a href='/schools/harvard-business-school/'>HBS</a>, <a href='/schools/wharton/'>Wharton</a>, and <a href='/schools/mit-sloan/'>MIT Sloan</a>. These schools benefit from proximity to VC ecosystems (Sand Hill Road, NYC, Boston).</p>"),
+            ('Corporate Finance and CFO Track', "<p>For students targeting corporate finance (FP&A, treasury, corporate development), the school list broadens significantly. Any top-30 MBA provides a credible path to Fortune 500 finance roles. <a href='/schools/indiana-kelley/'>Kelley</a>, <a href='/schools/unc-kenan-flagler/'>UNC</a>, <a href='/schools/texas-mccombs/'>McCombs</a>, and <a href='/schools/ohio-state-fisher/'>Fisher</a> all place well into corporate finance at strong salaries.</p><p>The corporate finance trajectory: MBA &rarr; Senior Financial Analyst &rarr; Finance Manager &rarr; Director of Finance &rarr; VP of Finance &rarr; CFO. The timeline from MBA to CFO is typically 12-18 years at large companies.</p>"),
+        ],
+        "faq": [
+            ('Which MBA is best for investment banking?', 'Wharton, Columbia, Booth, and NYU Stern are the traditional IB powerhouses. These schools send 25-35% of graduates into finance. Beyond these four, Duke Fuqua, Michigan Ross, and Darden also have strong IB placement.'),
+            ('Can I break into PE without IB experience?', "It's rare. Most PE firms prefer candidates with 2-3 years of pre-MBA IB or consulting experience. Some growth equity and middle market PE firms will hire directly from MBA programs, but top PE firms (KKR, Blackstone, Apollo) almost exclusively hire candidates with IB backgrounds."),
+            ("What's the salary for MBA finance roles?", 'IB associate base salary: $175,000-$200,000 plus $100,000-$150,000 bonus. PE associate: $150,000-$200,000 base plus carry and bonus. Corporate finance: $120,000-$160,000 starting.'),
+        ],
+    },
+    {
+        "slug": 'mba-admissions-mistakes',
+        "title": '10 MBA Admissions Mistakes That Kill Applications',
+        "meta": 'The most common MBA application mistakes and how to avoid them. From a Berkeley Haas MBA who has reviewed hundreds of applications.',
+        "sections": [
+            ('Mistake 1-3: The Application Itself', "<p><strong>1. Generic 'why this school' essays.</strong> Saying you want Kellogg for 'its collaborative culture and strong alumni network' tells admissions nothing. Every applicant says this. Name specific professors, courses, clubs, and alumni you've spoken with. Show you've done the homework.</p><p><strong>2. Resume reads like a job description.</strong> Your resume should show impact, not responsibilities. 'Managed a team of 5' says nothing. 'Built a 5-person team that increased revenue 40% in 18 months' says everything.</p><p><strong>3. Recommenders who don't know you well.</strong> A VP who barely knows you is less valuable than a manager who can tell specific stories about your leadership. Choose people who can speak to concrete examples, not impressive titles.</p>"),
+            ('Mistake 4-6: Strategy Errors', "<p><strong>4. Applying to only reach schools.</strong> If your GMAT is 680, don't apply exclusively to M7 programs. Include target and safety schools. A full scholarship at a #30 program is often better than rejection from all 7 M7 schools.</p><p><strong>5. Waiting for a perfect GMAT score.</strong> The difference between a 720 and 740 matters far less than a compelling application. If you've taken the test 3 times and can't break 720, submit the 720 and focus on making the rest of your application exceptional.</p><p><strong>6. Applying in Round 3.</strong> Round 1 and Round 2 are where most offers go. Round 3 is for exceptional candidates or programs that didn't fill their class. Unless you have a compelling reason for the late application, you're competing for significantly fewer spots.</p>"),
+            ('Mistake 7-10: The Interview and Beyond', "<p><strong>7. Not preparing your career narrative.</strong> 'Why MBA?' and 'Why now?' are the most important questions in the entire process. If you can't articulate a clear story connecting your past, the MBA, and your future goals, you'll lose to candidates who can.</p><p><strong>8. Under-preparing for the interview.</strong> MBA interviews aren't casual conversations. Prepare 5-7 stories using the STAR format. Practice your 'walk me through your resume' answer until it flows naturally in under 3 minutes.</p><p><strong>9. Not visiting campus.</strong> For schools you're seriously considering, visit. Attending a class, meeting students, and experiencing the culture shows demonstrated interest and helps you write a genuine 'why this school' essay.</p><p><strong>10. Ignoring the yield question.</strong> Schools want to admit people who will enroll. If you're applying to a program that's clearly your safety school, find a way to make your interest seem genuine. Schools track demonstrated interest.</p>"),
+        ],
+        "faq": [
+            ("What's the biggest MBA application mistake?", "Generic essays. When your 'why this school' essay could apply to any program by changing the name, admissions officers notice. Specificity signals genuine interest and research."),
+            ('How important is the GMAT for MBA admissions?', "Important but not everything. A GMAT score at or above the school's median puts you in the running. Below median doesn't disqualify you, but you need strength elsewhere (leadership, diversity, work experience)."),
+            ('Should I apply Round 1 or Round 2?', 'Both are viable. Round 1 (September-October deadlines) shows initiative. Round 2 (January deadlines) allows more prep time. Round 3 is a disadvantage at most programs.'),
+        ],
+    },
+    {
+        "slug": 'mba-for-international-students',
+        "title": 'MBA in the US for International Students: The Complete Guide',
+        "meta": 'International student guide to US MBA programs: visa considerations, STEM OPT, scholarship opportunities, and which schools welcome global applicants.',
+        "sections": [
+            ('Why US MBA Programs', '<p>US MBA programs dominate global rankings and produce the highest salaries. International students represent 30-45% of enrollment at top programs. Schools actively recruit globally because diverse perspectives strengthen the classroom.</p><p>The US MBA is the strongest credential for careers in the US, but increasingly valuable globally. INSEAD and LBS are strong alternatives for students who plan to work in Europe or Asia.</p>'),
+            ('Visa and Work Authorization', "<p>F-1 student visa for the MBA. Post-graduation, you get OPT (Optional Practical Training): 12 months of work authorization. If your MBA program has a STEM designation (many do now), you get an additional 24 months for a total of 36 months of work authorization.</p><p>STEM-designated MBAs: <a href='/schools/mit-sloan/'>MIT Sloan</a>, <a href='/schools/carnegie-mellon-tepper/'>Tepper</a>, <a href='/schools/cornell-johnson/'>Cornell Johnson</a>, <a href='/schools/duke-fuqua/'>Fuqua</a>, <a href='/schools/michigan-ross/'>Ross</a>, and <a href='/schools/usc-marshall/'>Marshall</a> all offer STEM concentrations. This is a significant advantage for international students seeking US employment.</p>"),
+            ('Scholarship Strategies', "<p>Many top programs offer need-based and merit-based scholarships to international students. <a href='/schools/yale-som/'>Yale SOM</a> and <a href='/schools/dartmouth-tuck/'>Tuck</a> are known for generous international student funding. <a href='/schools/cornell-johnson/'>Cornell Johnson</a> offers the Park Leadership Fellows program with full tuition for exceptional international candidates.</p><p>External scholarships: Fulbright, Forté Foundation (for women), and country-specific scholarships (Aga Khan Foundation, Chevening, etc.) can supplement school-based aid.</p>"),
+            ('H-1B Considerations', '<p>After OPT, most international MBA graduates need H-1B visa sponsorship to stay in the US. Large employers (McKinsey, Goldman Sachs, Google, Amazon, Deloitte) routinely sponsor H-1B visas for MBA hires. Smaller companies and startups are less likely to sponsor.</p><p>The H-1B lottery creates uncertainty. STEM OPT gives you 3 years of work authorization and 3 chances at the H-1B lottery. Non-STEM MBA graduates get 1 year and 1 chance. This is why STEM MBA designations matter so much for international students.</p>'),
+        ],
+        "faq": [
+            ('Can international students work in the US after an MBA?', 'Yes. OPT provides 12 months of work authorization (36 months with STEM designation). After OPT, you need H-1B visa sponsorship. Major employers routinely sponsor MBA graduates.'),
+            ('Do US MBA programs offer scholarships to international students?', 'Yes. Top programs offer both merit-based and need-based scholarships to international students. Yale SOM, Tuck, and Cornell Johnson are known for generous international student funding.'),
+            ('What GMAT score do international students need?', "The same as domestic students. International applicants are evaluated against the same criteria. A GMAT score at or above the school's median is competitive regardless of nationality."),
+        ],
+    },
+    {
+        "slug": 'mba-networking-tips',
+        "title": 'MBA Networking: 7 Rules That Actually Work',
+        "meta": "Practical MBA networking advice that goes beyond 'attend events.' How to build relationships that lead to jobs, deals, and career opportunities.",
+        "sections": [
+            ('Rule 1: Give Before You Ask', '<p>The fastest way to burn a networking contact is asking for something in your first interaction. Lead with value. Share a relevant article, make an introduction, offer a perspective from your industry experience. People remember the MBA student who helped them, not the one who asked for an informational interview.</p>'),
+            ('Rule 2: Be Specific in Your Ask', "<p>'Can I pick your brain about consulting?' is a terrible ask. 'I'm deciding between McKinsey and BCG for my summer internship and would love your perspective on the culture difference, having worked at both' is a great ask. Specific questions get specific answers and show you've done your homework.</p>"),
+            ('Rule 3: Follow Up Within 48 Hours', '<p>After every networking conversation, send a follow-up within 48 hours. Reference something specific from the conversation. Keep it short: 3-4 sentences. LinkedIn connection request with a personalized note works. Email works. A handwritten note for especially impactful conversations stands out.</p>'),
+            ('Rule 4: Build Your Network Before You Need It', "<p>The worst time to start networking is when you're desperate for a job. Start building relationships in your first week of business school. Go to every club event, every company presentation, every alumni happy hour in your first month. By the time recruiting starts, you should have a warm network at your target companies.</p>"),
+            ('Rule 5: Your Classmates Are Your Best Network', '<p>MBA students obsess over alumni networking and ignore their classmates. Your classmates will be your network for the next 30 years. The person sitting next to you in accounting might be a VP at Goldman in 10 years. Invest in these relationships as seriously as you invest in alumni outreach.</p>'),
+            ('Rule 6: LinkedIn Is Not Networking', '<p>Connecting on LinkedIn is a transaction, not a relationship. Real networking happens in person, over coffee, or on the phone. Use LinkedIn to identify and research contacts, then engage through more personal channels. A 20-minute coffee conversation creates more connection than 100 LinkedIn messages.</p>'),
+            ('Rule 7: Stay in Touch After You Get What You Want', '<p>The biggest networking mistake: ghosting contacts after you land the job. Send updates. Share wins. Refer opportunities to people who helped you. The MBA network compounds over decades, but only if you maintain it.</p>'),
+        ],
+        "faq": [
+            ('How important is networking during an MBA?', 'Critical. Most MBA career opportunities come through network connections, not job postings. The network is arguably the most valuable part of the MBA investment.'),
+            ('How many people should I network with during my MBA?', 'Quality over quantity. Build 20-30 strong relationships rather than 200 shallow connections. Focus on people in your target industry and geography.'),
+            ('Should I network with alumni or current students?', "Both. Alumni provide industry connections and career advice. Current classmates provide long-term peer relationships. Don't neglect either."),
+        ],
+    },
+    {
+        "slug": 'mba-dual-degree-programs',
+        "title": 'MBA Dual Degree Programs: Are They Worth the Extra Year?',
+        "meta": 'MBA/JD, MBA/MD, MBA/MPH, MBA/MS: which dual degrees deliver real career value and which are resume padding. Data and analysis.',
+        "sections": [
+            ('The Dual Degree Value Proposition', '<p>MBA dual degrees add 1-2 years of school (3-4 years total instead of 2) but combine two credentials. The question is whether the second degree creates career opportunities that neither degree alone can access.</p><p>Some dual degrees have clear career value. Others are expensive resume decorations. The difference comes down to whether the combination unlocks roles that require both skill sets.</p>'),
+            ('MBA/JD: The Power Combo', '<p>The MBA/JD combination (4 years at most programs) is valuable for corporate law partners who want to understand client business decisions, for venture capital investors who evaluate both business models and legal structures, and for executives at regulated industries (healthcare, financial services, energy).</p><p>Top MBA/JD programs: Harvard (HBS + HLS), Stanford (GSB + SLS), Columbia (CBS + CLS), Northwestern (Kellogg + Pritzker), and UPenn (Wharton + Penn Law). These programs produce graduates who command premium salaries in both law and business.</p>'),
+            ('MBA/MD: Healthcare Leadership', "<p>The MBA/MD combination (5-6 years) is for physicians who want to lead healthcare organizations rather than practice medicine full-time. Hospital CEOs, pharma company executives, and health tech founders with MD/MBA credentials have a significant advantage.</p><p>This is a long investment. 5-6 years of school plus residency. But the ceiling is high: physician-executives at major health systems earn $1,000,000+. <a href='/schools/wharton/'>Wharton</a>, <a href='/schools/harvard-business-school/'>HBS</a>, and <a href='/schools/yale-som/'>Yale SOM</a> have the strongest MBA/MD pathways.</p>"),
+            ('MBA/MPH: Public Health Impact', "<p>The MBA/MPH (3 years) targets health policy, global health organizations, and public health leadership. The WHO, Gates Foundation, and CDC value this combination. For students targeting nonprofit healthcare or international development, the MPH adds legitimacy that the MBA alone doesn't provide.</p>"),
+            ("When Dual Degrees Don't Add Value", "<p>MBA/MA in International Studies, MBA/MS in Information Systems, MBA/MA in Education: these combinations rarely create career value beyond what the MBA alone delivers. The extra year of tuition and lost salary isn't offset by meaningfully different job opportunities.</p><p>The test: can you name 5 specific roles that require both degrees? If you can't, the dual degree is resume padding, not career strategy.</p>"),
+        ],
+        "faq": [
+            ('Are MBA dual degrees worth the extra time?', 'It depends on the combination. MBA/JD and MBA/MD create clear career value in specific fields. MBA/MA or MBA/MS combinations rarely justify the extra year unless you have a very specific career target.'),
+            ('How long do MBA dual degree programs take?', 'Typically 3-4 years for MBA/JD, MBA/MPH, or MBA/MS combinations. MBA/MD programs take 5-6 years. Some programs allow course sharing that reduces total time.'),
+            ('Do dual degrees lead to higher salaries?', "MBA/JD and MBA/MD graduates often command premium salaries because they access roles that require both credentials. Other dual degree combinations don't consistently produce higher starting salaries than the MBA alone."),
+        ],
+    },
+    {
+        "slug": 'executive-mba-guide',
+        "title": "Executive MBA Programs: Who They're For and What They Cost",
+        "meta": 'Executive MBA guide: who should consider an EMBA, cost comparison, top programs, and whether an EMBA carries the same weight as a full-time MBA.',
+        "sections": [
+            ('Who EMBA Programs Are For', "<p>Executive MBA programs target working professionals with 10+ years of experience who can't take 2 years off work. Classes meet on weekends, in weekday intensives, or in modular blocks. Students keep their jobs and salaries throughout the program.</p><p>The typical EMBA student is 35-42 years old, manages teams or P&Ls, and wants the credential and network to reach the C-suite. Many have employer sponsorship covering part or all of the tuition.</p>"),
+            ('Cost Reality', "<p>EMBA tuition ranges from $60,000 at regional programs to $220,000+ at top-tier programs like <a href='/schools/wharton/'>Wharton</a> and <a href='/schools/kellogg/'>Kellogg</a>. The total cost is often comparable to full-time MBA tuition, but without the lost salary. This makes the effective cost significantly lower.</p><p>Employer sponsorship is common. 40-60% of EMBA students receive partial or full tuition reimbursement from their employers. If your company will pay, the EMBA ROI is almost always positive.</p>"),
+            ('EMBA vs Full-Time MBA', "<p>Same degree, different format. At most top schools, the EMBA diploma is identical to the full-time MBA diploma. The difference is experience level (EMBA students are more senior), class format (weekends vs daily), and career switching ability (EMBA doesn't support career pivots).</p><p>EMBA networking tends to be more senior. Your classmates are VPs and directors, not analysts and associates. This creates a different kind of network with more immediate business value.</p>"),
+            ('Top EMBA Programs', "<p><a href='/schools/wharton/'>Wharton</a>, <a href='/schools/kellogg/'>Kellogg</a>, <a href='/schools/columbia-business-school/'>Columbia</a>, <a href='/schools/booth/'>Booth</a>, and <a href='/schools/duke-fuqua/'>Duke Fuqua</a> run the most prestigious EMBA programs. <a href='/schools/michigan-ross/'>Ross</a> and <a href='/schools/ucla-anderson/'>UCLA Anderson</a> are strong on the West Coast. <a href='/schools/emory-goizueta/'>Emory Goizueta</a> and <a href='/schools/unc-kenan-flagler/'>UNC</a> are excellent in the Southeast.</p>"),
+        ],
+        "faq": [
+            ('Is an EMBA the same as an MBA?', 'At most top schools, yes. The degree is identical. The format is different (weekends/modular vs daily), and the student profile is more senior. The brand value is equivalent.'),
+            ('How much does an Executive MBA cost?', 'Ranges from $60,000 at regional programs to $220,000+ at top-tier programs. 40-60% of students receive employer sponsorship.'),
+            ('Can I switch careers with an EMBA?', "It's difficult. EMBA programs are designed for career advancement, not career switching. The format doesn't include summer internships or structured recruiting for industry changers."),
+        ],
+    },
+    {
+        "slug": 'mba-deferred-enrollment',
+        "title": 'MBA Deferred Enrollment: Apply Now, Attend Later',
+        "meta": 'Deferred MBA enrollment programs explained: 2+2, Deferred MBA, and bridge programs. Which schools offer them and who should apply.',
+        "sections": [
+            ('What Is Deferred Enrollment?', "<p>Deferred enrollment programs let you apply to MBA programs during your senior year of college (or within 1-2 years of graduation), receive an admission decision, and then attend the MBA program 2-5 years later after gaining work experience.</p><p>This removes the biggest uncertainty from the MBA process: you know you're in before you start working. You can focus entirely on gaining meaningful work experience without MBA application stress.</p>"),
+            ('Top Deferred Programs', "<p><a href='/schools/harvard-business-school/'>HBS 2+2</a>: Apply as a college senior, attend after 2+ years of work experience. The most prestigious deferred program.</p><p><a href='/schools/stanford-gsb/'>Stanford GSB Deferred Enrollment</a>: Similar to HBS 2+2. Apply as a senior, defer 2-5 years.</p><p><a href='/schools/yale-som/'>Yale SOM Silver Scholars</a>: Unique 3-year program (1 year MBA, 1 year internship, 1 year MBA). Can be deferred.</p><p><a href='/schools/booth/'>Booth</a>, <a href='/schools/columbia-business-school/'>Columbia</a>, <a href='/schools/wharton/'>Wharton</a>, <a href='/schools/virginia-darden/'>Darden</a>, <a href='/schools/duke-fuqua/'>Fuqua</a>, and <a href='/schools/michigan-ross/'>Ross</a> all offer some form of deferred enrollment or early admission.</p>"),
+            ('Who Should Apply', '<p>Strong college seniors with exceptional academic records, leadership, and a clear vision for why they want an MBA. The acceptance rates for deferred programs are lower than standard admission (HBS 2+2 admits roughly 100 students from thousands of applicants).</p><p>The ideal candidate: 3.7+ GPA, strong GMAT (730+), leadership positions in college, and a compelling story about why the MBA will matter for their career goals.</p>'),
+            ('Pros and Cons', "<p><strong>Pros:</strong> Eliminates application stress during early career. Guaranteed admission at a top program. Can focus on gaining work experience without worrying about MBA applications. Some programs offer pre-MBA mentorship and events.</p><p><strong>Cons:</strong> Your interests and goals may change over 2-5 years. You're committing to a specific school without shopping around later. The deferral period may make you less competitive if your work experience isn't compelling. Some students outgrow the need for an MBA during the deferral period.</p>"),
+        ],
+        "faq": [
+            ('How competitive are deferred MBA programs?', 'Very competitive. HBS 2+2 admits roughly 100 students per year. Acceptance rates for deferred programs are typically lower than standard MBA admission rates.'),
+            ('Can I change my mind after being deferred?', "Yes. You can decline your deferred admission at most programs without penalty. You lose your deposit but aren't obligated to attend."),
+            ('Do I need work experience to apply for deferred enrollment?', "No. That's the point. You apply as a college senior or recent graduate and gain work experience during the deferral period."),
+        ],
+    },
+    {
+        "slug": 'best-mba-cities',
+        "title": 'Best Cities for MBA Students: Location Matters More Than You Think',
+        "meta": 'How MBA program location affects career outcomes, recruiting access, and quality of life. The cities that deliver the best MBA experience.',
+        "sections": [
+            ('Location Shapes Careers', '<p>Where you get your MBA matters almost as much as where you rank. Geography determines which employers recruit on campus, which industries you can access, and where your alumni network is concentrated. A top-20 MBA in Atlanta places differently than a top-20 MBA in Boston.</p>'),
+            ('The Big Three: NYC, SF Bay Area, Boston', "<p><a href='/locations/new-york-city/'>New York City</a>: Finance, consulting, media. The densest MBA job market in the country. <a href='/schools/columbia-business-school/'>CBS</a> and <a href='/schools/nyu-stern/'>Stern</a> benefit from physical proximity to Wall Street and midtown consulting offices.</p><p><a href='/locations/san-francisco-bay-area/'>San Francisco Bay Area</a>: Tech, venture capital, startups. <a href='/schools/stanford-gsb/'>Stanford</a> and <a href='/schools/berkeley-haas/'>Haas</a> are embedded in the tech ecosystem. If you want to work at Google, Apple, or a startup, Bay Area presence helps.</p><p><a href='/locations/boston/'>Boston</a>: Consulting, healthcare, biotech, education. <a href='/schools/harvard-business-school/'>HBS</a>, <a href='/schools/mit-sloan/'>MIT Sloan</a>, and several strong programs create a concentrated MBA market.</p>"),
+            ('Strong Regional Markets', "<p><a href='/locations/chicago/'>Chicago</a>: Finance, consulting, CPG. <a href='/schools/booth/'>Booth</a> and <a href='/schools/kellogg/'>Kellogg</a> anchor a strong Midwest MBA ecosystem. Lower cost of living than coastal cities.</p><p><a href='/locations/dallas-houston/'>Dallas-Houston</a>: Energy, tech (increasingly), corporate HQs. <a href='/schools/texas-mccombs/'>McCombs</a>, <a href='/schools/rice-jones/'>Rice Jones</a>, and <a href='/schools/smu-cox/'>SMU Cox</a> serve the Texas economy. No state income tax.</p><p><a href='/locations/atlanta/'>Atlanta</a>: Consulting, tech, consumer goods. <a href='/schools/emory-goizueta/'>Emory Goizueta</a> and <a href='/schools/georgia-tech-scheller/'>Georgia Tech Scheller</a> access Atlanta's growing corporate base.</p>"),
+            ('The Cost-of-Living Factor', "<p>Two years of living costs vary dramatically by city. NYC and SF add $40,000-$60,000 to your MBA cost compared to cities like <a href='/locations/nashville/'>Nashville</a>, <a href='/locations/central-indiana/'>Indianapolis</a>, or <a href='/locations/st-louis/'>St. Louis</a>. This difference compounds when you include post-graduation housing costs.</p><p>If you plan to stay in the city where you get your MBA, the cost of living is a long-term decision, not just a 2-year expense. A $170,000 salary in NYC has the same purchasing power as $110,000 in <a href='/locations/durham-chapel-hill/'>Durham-Chapel Hill</a>.</p>"),
+        ],
+        "faq": [
+            ('Does MBA location matter for career outcomes?', "Yes, significantly. Schools recruit locally, and your alumni network is concentrated in the program's region. A Booth MBA opens more doors in Chicago than in San Francisco, and vice versa for Haas."),
+            ('What are the cheapest cities for MBA students?', 'Nashville, Indianapolis, Durham-Chapel Hill, Columbus, and St. Louis offer the lowest cost of living among cities with ranked MBA programs.'),
+            ('Should I go to school where I want to work?', 'Ideally, yes. Local recruiting, alumni networks, and internship access are all stronger when the school is in your target market. But top-15 programs have national reach regardless of location.'),
+        ],
+    },
+    {
+        "slug": 'mba-for-women',
+        "title": 'MBA Programs for Women: Scholarships, Support, and Outcomes',
+        "meta": 'Best MBA programs for women: enrollment percentages, dedicated scholarships, support networks, and which schools produce the best outcomes for female graduates.',
+        "sections": [
+            ('Where Women Are Enrolling', "<p>Women represent 40-48% of incoming MBA classes at most top-15 programs. <a href='/schools/yale-som/'>Yale SOM</a> and <a href='/schools/kellogg/'>Kellogg</a> consistently lead with 46-48% female enrollment. <a href='/schools/stanford-gsb/'>Stanford GSB</a> and <a href='/schools/harvard-business-school/'>HBS</a> are close behind at 44-46%.</p><p>The gap narrows every year. In 2015, most programs were 35-38% female. The shift reflects aggressive recruiting, scholarship support, and cultural changes within programs.</p>"),
+            ('Scholarships for Women', "<p>The Forte Foundation partners with 50+ MBA programs to provide fellowships and scholarships for women. Forte Fellows receive $15,000-$100,000+ in funding. Participating schools include <a href='/schools/dartmouth-tuck/'>Tuck</a>, <a href='/schools/virginia-darden/'>Darden</a>, <a href='/schools/michigan-ross/'>Ross</a>, <a href='/schools/duke-fuqua/'>Fuqua</a>, and <a href='/schools/cornell-johnson/'>Johnson</a>.</p><p>Additional sources: school-specific scholarships for women (Wharton's Lauder Women's Fellowship, CBS's Merit Fellowship), corporate-sponsored fellowships (McKinsey, Goldman Sachs), and external scholarships (Ellevate Network, 85 Broads alumni).</p>"),
+            ('Support and Community', "<p>Every top MBA program has a Women in Business club (WIB) that organizes recruiting events, mentorship programs, and leadership conferences. The quality varies. Schools with the strongest women's communities: <a href='/schools/kellogg/'>Kellogg</a>, <a href='/schools/yale-som/'>Yale SOM</a>, <a href='/schools/dartmouth-tuck/'>Tuck</a>, <a href='/schools/virginia-darden/'>Darden</a>, and <a href='/schools/michigan-ross/'>Ross</a>.</p><p>Look for programs where women hold leadership positions in student government, investment funds, and major clubs, not just the women's club. That signals genuine gender integration rather than siloed support.</p>"),
+            ('Career Outcomes', '<p>Female MBA graduates from top programs earn starting salaries comparable to male peers at the same level. The gender pay gap in MBA outcomes has narrowed significantly at top-15 programs, though it persists in finance (particularly at the partner/MD level) and in certain industries.</p><p>Women increasingly dominate consulting placement, with 50%+ female representation in MBA consulting cohorts at several programs. Tech product management is another field where female MBA graduates are well-represented.</p>'),
+        ],
+        "faq": [
+            ('Which MBA programs have the highest percentage of women?', 'Yale SOM and Kellogg consistently lead at 46-48% female enrollment. Stanford GSB and HBS are at 44-46%. Most top-15 programs are now above 40%.'),
+            ('Are there MBA scholarships specifically for women?', 'Yes. The Forte Foundation provides fellowships at 50+ programs. Individual schools and corporations also offer women-specific MBA scholarships. Total available funding is in the millions.'),
+            ('Do women earn less after an MBA?', 'At the starting salary level from top programs, the gap has narrowed significantly. Gender pay disparities tend to emerge later in careers (5-10 years post-MBA) rather than at graduation.'),
+        ],
+    },
+    {
+        "slug": 'one-year-mba-programs',
+        "title": 'One-Year MBA Programs: Faster, Cheaper, but Different',
+        "meta": 'One-year MBA programs in the US: which schools offer them, how they differ from 2-year programs, and who should consider the accelerated format.',
+        "sections": [
+            ('How One-Year Programs Work', "<p>One-year MBA programs compress the curriculum into 10-16 months, typically eliminating the summer internship. Classes are intensive, and there's less time for clubs, networking events, and career exploration. You graduate faster and spend less on tuition, but you sacrifice the internship-to-offer pipeline that two-year programs provide.</p>"),
+            ('US One-Year Options', "<p><a href='/schools/kellogg/'>Kellogg</a> offers a 1-year MBA for students with business backgrounds. <a href='/schools/emory-goizueta/'>Emory Goizueta</a> has a well-regarded 1-year option. <a href='/schools/cornell-johnson/'>Cornell Johnson</a>, <a href='/schools/notre-dame-mendoza/'>Notre Dame Mendoza</a>, and <a href='/schools/rice-jones/'>Rice Jones</a> also offer accelerated tracks.</p><p>These programs typically require prior business coursework or significant professional experience to waive foundational classes. If you already have an undergraduate business degree, you're likely eligible.</p>"),
+            ('Who Should Consider It', "<p>The 1-year MBA makes sense for: career advancers (not career changers) who want the credential without the two-year opportunity cost, professionals with 8+ years of experience who know their industry and just need the MBA brand, and international students who can't afford two years of US tuition.</p><p>It doesn't make sense for: career changers who need the summer internship to pivot industries, students who want maximum networking time, or anyone unsure about their post-MBA direction.</p>"),
+            ('Cost Comparison', "<p>One-year programs cost roughly 50-60% of the two-year tuition (one year instead of two). Add zero lost salary (since you're only away for 10-16 months), and the total financial investment is 40-50% lower than a two-year program. This makes the ROI calculation significantly more favorable for career advancers who return to similar salary levels.</p>"),
+        ],
+        "faq": [
+            ('Which US MBA programs offer a one-year option?', 'Kellogg, Emory Goizueta, Cornell Johnson, Notre Dame Mendoza, and Rice Jones all offer one-year or accelerated MBA tracks for students with prior business education.'),
+            ('Is a one-year MBA as respected as a two-year MBA?', 'At schools that offer both formats, yes. The degree is identical. The difference is in the experience: less networking time, no summer internship, and a more compressed learning curve.'),
+            ('Can I switch careers with a one-year MBA?', "It's very difficult without the summer internship. One-year programs are designed for career advancement, not career switching."),
+        ],
+    },
+]
+
+
+
+def build_standalone_blog_posts():
+    """Build standalone blog posts (salary, career-switcher, strategy content)."""
     posts = []
-    top_schools = sorted(SCHOOLS, key=lambda x: x["ranking"])[:50]
+    for bp in STANDALONE_BLOG_POSTS:
+        slug = bp["slug"]
+        title = bp["title"]
+        meta = bp["meta"]
+
+        sections_html = ""
+        for heading, body in bp["sections"]:
+            sections_html += f'<div class="school-section">\n<h2>{heading}</h2>\n{body}\n</div>\n'
+
+        faq_html = ""
+        faq_pairs = bp.get("faq", [])
+        if faq_pairs:
+            faq_items = "".join(
+                f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                for q, a in faq_pairs
+            )
+            faq_html = f'\n      <div class="faq-section">\n        <h2>Frequently Asked Questions</h2>\n        {faq_items}\n      </div>'
+
+        bc = breadcrumb_schema([("Home", "/"), ("Blog", "/blog/"), (title, f'/blog/{slug}/')])
+        faq_ld = faq_schema(faq_pairs)
+
+        page = f"""{html_head(
+            f"""{title} | {SITE_NAME}""",
+            meta,
+            f'/blog/{slug}/',
+            schema=bc + faq_ld
+        )}
+{nav_html('blog')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>{title}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      {sections_html}
+      {faq_html}
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">See also: <a href="/rankings/overall/">Overall Rankings</a> &middot; <a href="/tools/roi-calculator/">ROI Calculator</a> &middot; <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a></p>
+      </div>
+      <div class="affiliate-cta">
+        <div class="gold-rule"></div>
+        <p>Ready to start your MBA journey?</p>
+        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "blog", slug, "index.html"), page)
+        posts.append({"title": title, "slug": slug, "name": title.split(":")[0] if ":" in title else title, "rank": 0, "standalone": True})
+
+    print(f"  Built: {len(posts)} standalone blog posts")
+    return posts
+
+
+def build_blog_posts():
+    """Build 'Is [School] Worth It?' blog posts for all 150 schools."""
+    posts = []
+    top_schools = sorted(SCHOOLS, key=lambda x: x["ranking"])
 
     for s in top_schools:
         name = s["short_name"]
@@ -8647,16 +10598,24 @@ def build_blog_posts():
 
 
 def build_blog_index():
-    posts = build_blog_posts()
+    school_posts = build_blog_posts()
+    standalone_posts = build_standalone_blog_posts()
 
-    post_cards = "\n".join(
+    # Standalone posts first (featured content)
+    standalone_cards = "\n".join(
+        f'<a href="/blog/{p["slug"]}/" class="guide-index-card"><h3>{p["title"]}</h3><span class="guide-arrow">&rarr;</span></a>'
+        for p in standalone_posts
+    )
+
+    # School ROI posts
+    school_cards = "\n".join(
         f'<a href="/blog/{p["slug"]}/" class="guide-index-card"><h3>Is {p["name"]} Worth It?</h3><p>Honest ROI analysis: salary data, career outcomes, and the real math behind a {p["name"]} MBA.</p><span class="guide-arrow">&rarr;</span></a>'
-        for p in posts
+        for p in school_posts
     )
 
     content = f"""{html_head(
         f"Blog | MBA Admissions Insights | {SITE_NAME}",
-        "MBA admissions insights, career intelligence, and honest takes on business school. From a Berkeley Haas MBA grad.",
+        f"MBA admissions insights, salary data, career intelligence, and ROI analysis for 150 programs in {CURRENT_YEAR}. From a Haas MBA grad.",
         "/blog/"
     )}
 {nav_html('blog')}
@@ -8665,14 +10624,22 @@ def build_blog_index():
     <div class="container">
       <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
       <h1>Blog</h1>
-      <p class="hero-subtitle">MBA admissions insights and career intelligence.</p>
+      <p class="hero-subtitle">MBA admissions insights, salary data, and career intelligence.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <h2 style="margin-bottom: 24px;">Salary, Careers &amp; Strategy</h2>
+      <div class="guide-index-grid">
+        {standalone_cards}
+      </div>
     </div>
   </section>
   <section class="section">
     <div class="container">
       <h2 style="margin-bottom: 24px;">Is Your MBA Worth It?</h2>
       <div class="guide-index-grid">
-        {post_cards}
+        {school_cards}
       </div>
     </div>
   </section>
