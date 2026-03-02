@@ -1,6 +1,6 @@
 # mbaguidance.com — Handoff Document
 
-## Current State (Feb 28, 2026)
+## Current State (Mar 1, 2026)
 
 **1,501 pages live.** 150 schools (Tiers 1-7). 175 comparisons. 36 metros. 150 school blog posts + 37 standalone blog posts. 25 ranking pages. 1,500+ target reached.
 
@@ -8,15 +8,47 @@
 - **150 school profiles** at `/schools/{slug}/` (M7 through Tier 7)
 - **175 comparison pages** at `/compare/{a}-vs-{b}/`
 - **22 guide pages** at `/guides/{slug}/`
-- **150 blog posts** at `/blog/is-{slug}-worth-it/` (all 150 schools)
+- **150 blog posts** at `/blog/is-{slug}-worth-it/` (all 150 schools, with FAQ + FAQPage schema)
 - **37 standalone blog posts** at `/blog/{slug}/` (salary, career-switcher, strategy, admissions)
-- **25 ranking pages** at `/rankings/{category}/` (overall + ROI + salary + selectivity + career-changers + 20 specialties)
+- **25 ranking pages** at `/rankings/{category}/` (overall + ROI + salary + selectivity + career-changers + 20 specialties, with ItemList schema)
 - **36 metro pages** at `/locations/{slug}/`
 - **Tools:** ROI calculator, GMAT target score calculator
 - **FAQ pages** at `/faq/{topic}/`
 - **Homepage:** Dashboard layout with stats ticker, headline, pathways, article list, top 10 table, GMAT inline tool, comparisons, newsletter CTA. Tier 5, Tier 6, and Tier 7 filter buttons.
 
-### What Was Just Completed (Session 8 — 1,500+ Page Milestone)
+### What Was Just Completed (Session 9 — Quality & SEO Audit Remediation)
+
+Comprehensive audit against CLAUDE.md, ROME_WRITING_STYLE.md, SEO-BEST-PRACTICES.md, and the marketingskills repo (pSEO, AI SEO, schema, content strategy, site architecture).
+
+1. **Homepage title/meta fixed:** "50 MBAs" updated to "150 MBAs" (title, description, WebSite schema, comment)
+
+2. **BlogPosting (Article) schema added** to all blog posts, standalone blog posts, guides, admissions guides, program format guides, salary guides, and FAQ pages (~220 pages). Includes headline, author (Person), publisher (Organization), datePublished, dateModified.
+
+3. **ItemList schema added** to all 25 ranking pages (lists schools with position, name, URL).
+
+4. **BreadcrumbList schema added** to school listing page (`/schools/`).
+
+5. **Visible "Updated 2026" date** added to byline on every content page via `byline_html()`. Data freshness note ("Data reflects 2026 admissions cycle") added to school profile stats grids.
+
+6. **FAQ sections + FAQPage schema added** to all 150 school "worth it" blog posts (3 programmatic FAQs per school: cost, salary, career paths).
+
+7. **robots.txt expanded** with explicit AI bot allowances: GPTBot, ChatGPT-User, PerplexityBot, ClaudeBot, anthropic-ai, Google-Extended, Amazonbot.
+
+8. **Banned word cleanup (103 replacements):**
+   - "genuinely" (29 → 0): removed as empty intensifier
+   - "holistic/holistically" (24 → 0): replaced with "reviews the complete profile", "comprehensive review", etc.
+   - "leverage" verb usage (~30 → 0): replaced with "draws on", "builds on", "capitalizes on", "taps into". Noun usage ("career leverage", "brand leverage") kept.
+   - "truly" (3 → 0): removed
+   - "robust" (3 → 0): replaced with "strong", "active"
+   - Em-dashes in interview questions (6): replaced with colons
+
+9. **Newsletter form:** Placeholder ("coming soon") replaced with Buttondown embed form. Ready to go once account is created at buttondown.com/mbaguidance.
+
+10. **Stale Fortune (2025) reference** updated to timeless phrasing.
+
+11. **CSS_VERSION bumped** from 7 to 8. Added `.byline-date` and `.data-freshness` styles.
+
+### Previous Session (Session 8 — 1,500+ Page Milestone)
 
 1. **Blog posts expanded to all 150 schools** (was top 50 only). +100 blog posts.
 
@@ -158,17 +190,20 @@ Copy-paste to continue in a new window:
 ```
 Continue building mbaguidance.com. Project at /Users/rome/Documents/projects/mbaguidance/. Read CLAUDE.md and HANDOFF.md for full context.
 
-Current state: 1,501 pages, 150 schools (Tiers 1-7), 175 comparisons, 36 metros, 150 school blog posts + 37 standalone blog posts, 25 ranking pages. Build: python3 build.py.
+Current state: 1,501 pages, 150 schools (Tiers 1-7), 175 comparisons, 36 metros, 150 school blog posts + 37 standalone blog posts, 25 ranking pages. All banned words cleaned. BlogPosting + ItemList + FAQPage schema on all content pages. AI bots welcomed in robots.txt. Build: python3 build.py.
+
+Remaining quality tasks:
+1. Set up Buttondown account (buttondown.com/mbaguidance) — form embed is already in the newsletter page, just needs the account created.
+2. Hyperlink source citations in top 15 school profiles (employment report URLs, US News, GMAC).
+3. Clean up ~12 duplicate comparison pairs (same schools in both directions).
 
 Next steps to reach 2,000+ pages:
-
-1. Clean up ~12 duplicate comparison pairs (same schools in both directions). Remove the lower-quality duplicate from each pair.
-2. Add more standalone blog posts: industry deep-dives (pharma MBA, real estate MBA, nonprofit MBA), geographic guides (best MBA in California, Texas, NYC), format guides (weekend MBA, accelerated programs). Target 20-30 new posts.
-3. Add international school profiles: INSEAD, LBS, IESE, HEC Paris, CEIBS, ISB. Requires new data structure for non-US schools.
-4. Add industry-specific MBA guides: consulting career guide, tech career guide, healthcare career guide, finance career guide. 4-6 pages.
-5. Add glossary pages: MBA admissions terminology (yield, matriculation, R1/R2, GMAT sections). 20-30 term pages.
-6. Add more comparisons if needed for page count.
-7. Target: 2,000+ total pages.
+1. Add more standalone blog posts: industry deep-dives (pharma MBA, real estate MBA, nonprofit MBA), geographic guides (best MBA in California, Texas, NYC), format guides (weekend MBA, accelerated programs). Target 20-30 new posts.
+2. Add international school profiles: INSEAD, LBS, IESE, HEC Paris, CEIBS, ISB. Requires new data structure for non-US schools.
+3. Add industry-specific MBA guides: consulting career guide, tech career guide, healthcare career guide, finance career guide. 4-6 pages.
+4. Add glossary pages: MBA admissions terminology (yield, matriculation, R1/R2, GMAT sections). 20-30 term pages.
+5. Add more comparisons if needed for page count.
+6. Target: 2,000+ total pages.
 
 Follow all writing rules in CLAUDE.md. Zero tolerance on false reframes, em-dashes, banned words. Stop at ~50% context, commit, update HANDOFF.md, provide resume prompt.
 ```
