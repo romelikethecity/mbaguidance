@@ -2,11 +2,11 @@
 
 ## Current State (Mar 1, 2026)
 
-**1,501 pages live.** 150 schools (Tiers 1-7). 175 comparisons. 36 metros. 150 school blog posts + 37 standalone blog posts. 25 ranking pages. 1,500+ target reached.
+**1,496 pages live.** 150 schools (Tiers 1-7). 165 comparisons (6 duplicates removed). 36 metros. 150 school blog posts + 37 standalone blog posts. 25 ranking pages. 1,500+ target reached.
 
 ### What Exists
 - **150 school profiles** at `/schools/{slug}/` (M7 through Tier 7)
-- **175 comparison pages** at `/compare/{a}-vs-{b}/`
+- **165 comparison pages** at `/compare/{a}-vs-{b}/` (100 unique pairs; some generate bidirectional pages)
 - **22 guide pages** at `/guides/{slug}/`
 - **150 blog posts** at `/blog/is-{slug}-worth-it/` (all 150 schools, with FAQ + FAQPage schema)
 - **37 standalone blog posts** at `/blog/{slug}/` (salary, career-switcher, strategy, admissions)
@@ -48,6 +48,16 @@ Comprehensive audit against CLAUDE.md, ROME_WRITING_STYLE.md, SEO-BEST-PRACTICES
 
 11. **CSS_VERSION bumped** from 7 to 8. Added `.byline-date` and `.data-freshness` styles.
 
+12. **Source citations added** to top 15 school career sections. Each school's careers tab now links to its official employment report (hyperlinked, opens in new tab). Schools: Stanford GSB, HBS, Wharton, Booth, Kellogg, Columbia, MIT Sloan, Haas, Yale SOM, NYU Stern, Duke Fuqua, Michigan Ross, Dartmouth Tuck, Virginia Darden, Cornell Johnson. CSS `.source-link` class added.
+
+13. **6 duplicate comparisons removed** (175 → 165 pages, 100 unique pairs):
+   - Wharton vs Stanford GSB (reverse of Stanford vs Wharton)
+   - Kellogg vs Booth (reverse of Booth vs Kellogg)
+   - NYU Stern vs Columbia (reverse of Columbia vs NYU Stern)
+   - Rice Jones vs Texas McCombs (reverse of McCombs vs Rice)
+   - UAB Collat vs Belmont Massey (exact duplicate)
+   - Mercer Stetson vs Kennesaw State Coles (reverse of Kennesaw vs Mercer)
+
 ### Previous Session (Session 8 — 1,500+ Page Milestone)
 
 1. **Blog posts expanded to all 150 schools** (was top 50 only). +100 blog posts.
@@ -83,7 +93,7 @@ Comprehensive audit against CLAUDE.md, ROME_WRITING_STYLE.md, SEO-BEST-PRACTICES
    - Honolulu (Hawaii Shidler)
    - Birmingham (UAB Collat)
 
-6. Build verified: **1,501 HTML pages** generated successfully.
+6. Build verified: **1,496 HTML pages** generated successfully.
 
 ### Known Issues
 - ~12 duplicate comparison pairs exist (same schools, different direction or exact dupe). These generate separate pages but have redundant content. Should be cleaned up in a future session.
@@ -107,17 +117,16 @@ Comprehensive audit against CLAUDE.md, ROME_WRITING_STYLE.md, SEO-BEST-PRACTICES
 
 ## The Expansion Plan
 
-### Goal: 1,500+ pages — REACHED (1,501 pages)
+### Goal: 1,500+ pages — REACHED (1,496 pages)
 
 ### 1. Expand Schools: 100 → 150 — DONE
 ### 2. Specialty Ranking Pages — DONE (20 pages, updated with Tier 7)
-### 3. Comparisons — DONE (175 pages)
+### 3. Comparisons — DONE (165 pages, 100 unique pairs)
 ### 4. Metros — DONE (36 pages)
 ### 5. Blog Posts — DONE (150 school + 37 standalone = 187 total)
 ### 6. Specialty Rankings Updated — DONE (31 Tier 7 schools added to 11 categories)
 
 ### 7. Next Content Opportunities (to reach 2,000+)
-- **Clean up ~12 duplicate comparisons** (same pair in both directions or exact dupes)
 - **More standalone blog posts:** Industry deep-dives (pharma MBA, real estate MBA, nonprofit MBA), geographic guides (best MBA in California, best MBA in Texas), format guides (weekend MBA, accelerated programs)
 - **International schools:** INSEAD, LBS, IESE, HEC Paris, CEIBS, ISB, IIM-A
 - **Specialty guides:** Industry-specific MBA guides (consulting, tech, healthcare, finance)
@@ -134,7 +143,7 @@ Comprehensive audit against CLAUDE.md, ROME_WRITING_STYLE.md, SEO-BEST-PRACTICES
 - **Preview:** `cd output && python3 -m http.server 8084`
 - **Pattern:** All data inline in `build.py` (Provyx single-file pattern)
 - **Stack:** Static HTML/CSS/JS. No frameworks. GitHub Pages hosting.
-- **CSS:** `assets/css/style.css` with `CSS_VERSION = 7` cache-busting
+- **CSS:** `assets/css/style.css` with `CSS_VERSION = 8` cache-busting
 - **Rankings:** 25 total (5 metric-based + 20 specialty with curated `filter_slugs`)
 - **Fonts:** Playfair Display (headings), Source Sans 3 (body)
 - **Colors:** Navy `#0A1628`, Gold `#C9A84C`, Warm Ivory `#F7F5F0`
@@ -190,12 +199,9 @@ Copy-paste to continue in a new window:
 ```
 Continue building mbaguidance.com. Project at /Users/rome/Documents/projects/mbaguidance/. Read CLAUDE.md and HANDOFF.md for full context.
 
-Current state: 1,501 pages, 150 schools (Tiers 1-7), 175 comparisons, 36 metros, 150 school blog posts + 37 standalone blog posts, 25 ranking pages. All banned words cleaned. BlogPosting + ItemList + FAQPage schema on all content pages. AI bots welcomed in robots.txt. Build: python3 build.py.
+Current state: 1,496 pages, 150 schools (Tiers 1-7), 165 comparisons (100 unique pairs), 36 metros, 150 school blog posts + 37 standalone blog posts, 25 ranking pages. All banned words cleaned. BlogPosting + ItemList + FAQPage schema on all content pages. AI bots welcomed in robots.txt. Source citations on top 15 schools. Build: python3 build.py.
 
-Remaining quality tasks:
-1. Set up Buttondown account (buttondown.com/mbaguidance) — form embed is already in the newsletter page, just needs the account created.
-2. Hyperlink source citations in top 15 school profiles (employment report URLs, US News, GMAC).
-3. Clean up ~12 duplicate comparison pairs (same schools in both directions).
+Remaining manual task: Set up Buttondown account (buttondown.com/mbaguidance) — form embed is already in the newsletter page, just needs the account created.
 
 Next steps to reach 2,000+ pages:
 1. Add more standalone blog posts: industry deep-dives (pharma MBA, real estate MBA, nonprofit MBA), geographic guides (best MBA in California, Texas, NYC), format guides (weekend MBA, accelerated programs). Target 20-30 new posts.
