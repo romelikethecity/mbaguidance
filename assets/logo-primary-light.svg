@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" fill="none">
+  <!-- MBA GUIDANCE wordmark -->
+  <text x="0" y="38" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#FFFFFF" letter-spacing="1.5">MBA GUIDANCE</text>
+  <!-- Gold rule -->
+  <rect x="0" y="48" width="400" height="2" fill="#C9A84C"/>
+  <!-- Author byline -->
+  <text x="0" y="68" font-family="'Source Sans 3', 'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#E8E4DC" letter-spacing="1.4">
+    <tspan>BY ROME THORNDIKE · BERKELEY HAAS MBA</tspan>
+  </text>
+</svg>

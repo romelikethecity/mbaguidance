@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Shield shape -->
+  <path d="M32 4L8 14V34C8 48 32 60 32 60C32 60 56 48 56 34V14L32 4Z" fill="#0A1628"/>
+  <!-- Inner shield border -->
+  <path d="M32 8L12 16.5V34C12 45.5 32 56 32 56C32 56 52 45.5 52 34V16.5L32 8Z" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <!-- Stylized M letterform -->
+  <path d="M22 40V24L32 34L42 24V40" fill="none" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Small gold accent dot -->
+  <circle cx="32" cy="18" r="2" fill="#C9A84C"/>
+</svg>

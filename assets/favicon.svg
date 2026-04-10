@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Shield shape -->
+  <path d="M16 2L4 7V17C4 24 16 30 16 30C16 30 28 24 28 17V7L16 2Z" fill="#0A1628"/>
+  <!-- Simplified M -->
+  <path d="M11 20V12L16 17L21 12V20" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

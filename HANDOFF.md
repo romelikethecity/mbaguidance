@@ -197,7 +197,7 @@ Read `CLAUDE.md` and `docs/ROME_WRITING_STYLE.md` before creating ANY content.
 Copy-paste to continue in a new window:
 
 ```
-Continue building mbaguidance.com. Project at /Users/rome/Documents/projects/mbaguidance/. Read CLAUDE.md and HANDOFF.md for full context.
+Continue building mbaguidance.com. Project at ~/Documents/websites/content/mbaguidance/. Read CLAUDE.md and HANDOFF.md for full context.
 
 Current state: 1,496 pages, 150 schools (Tiers 1-7), 165 comparisons (100 unique pairs), 36 metros, 150 school blog posts + 37 standalone blog posts, 25 ranking pages. All banned words cleaned. BlogPosting + ItemList + FAQPage schema on all content pages. AI bots welcomed in robots.txt. Source citations on top 15 schools. Build: python3 build.py.
 
