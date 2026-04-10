@@ -8103,6 +8103,12 @@ def footer_html():
         <a href="/newsletter/">Newsletter</a>
         <a href="/blog/">Blog</a>
       </div>
+      <div class="footer-col">
+        <h4>Career Intelligence</h4>
+        <a href="https://thecroreport.com" target="_blank" rel="noopener">The CRO Report</a>
+        <a href="https://theaimarketpulse.com" target="_blank" rel="noopener">AI Market Pulse</a>
+        <a href="https://fractionalpulse.com" target="_blank" rel="noopener">Fractional Pulse</a>
+      </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; {CURRENT_YEAR} {SITE_NAME} &middot; {AUTHOR} &middot; {AUTHOR_CREDENTIAL}</p>
