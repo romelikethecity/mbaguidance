@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBA ROI Calculator | Is Your MBA Worth It? | MBA Guidance</title>
+  <meta name="description" content="Free MBA ROI calculator for 2026. Input your salary, school costs, and career goals to calculate your MBA return on investment. From a Haas MBA grad.">
+  <link rel="canonical" href="https://mbaguidance.com/tools/roi-calculator/">
+  <meta property="og:title" content="MBA ROI Calculator | Is Your MBA Worth It? | MBA Guidance">
+  <meta property="og:description" content="Free MBA ROI calculator for 2026. Input your salary, school costs, and career goals to calculate your MBA return on investment. From a Haas MBA grad.">
+  <meta property="og:image" content="https://mbaguidance.com/assets/og-default.png">
+  <meta property="og:url" content="https://mbaguidance.com/tools/roi-calculator/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MBA Guidance">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/style.css?v=8">
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mbaguidance.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mbaguidance.com/tools/"},{"@type":"ListItem","position":3,"name":"ROI Calculator","item":"https://mbaguidance.com/tools/roi-calculator/"}]}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-text">MBA GUIDANCE</span>
+        <span class="nav-logo-rule"></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="/schools/" class="nav-link">Schools</a>
+        <a href="/rankings/overall/" class="nav-link">Rankings</a>
+        <a href="/compare/" class="nav-link">Compare</a>
+        <a href="/guides/" class="nav-link">Guides</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/newsletter/" class="btn btn-accent nav-cta">Free Newsletter</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA ROI Calculator</h1>
+      <p class="hero-subtitle">Calculate whether your MBA investment will pay off.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-narrow">
+      <div class="school-section">
+        <h2>Your Inputs</h2>
+        <div class="roi-form" id="roi-form">
+          <div class="roi-field">
+            <label for="roi-school">Target School</label>
+            <select id="roi-school">
+              <option value="custom">Custom / Other</option>
+              <option value="stanford-gsb" data-tuition="78432" data-salary="192000">Stanford GSB (#1)</option>
+<option value="harvard-business-school" data-tuition="76800" data-salary="195000">Harvard Business School (#2)</option>
+<option value="wharton" data-tuition="80432" data-salary="185000">Wharton (#3)</option>
+<option value="booth" data-tuition="77841" data-salary="180000">Booth (#4)</option>
+<option value="kellogg" data-tuition="76368" data-salary="175000">Kellogg (#5)</option>
+<option value="columbia-business-school" data-tuition="80472" data-salary="180000">Columbia Business School (#6)</option>
+<option value="mit-sloan" data-tuition="77168" data-salary="178000">MIT Sloan (#7)</option>
+<option value="berkeley-haas" data-tuition="68444" data-salary="175000">Berkeley Haas (#8)</option>
+<option value="yale-som" data-tuition="76300" data-salary="165000">Yale SOM (#9)</option>
+<option value="nyu-stern" data-tuition="76780" data-salary="170000">NYU Stern (#10)</option>
+<option value="duke-fuqua" data-tuition="72800" data-salary="168000">Duke Fuqua (#11)</option>
+<option value="michigan-ross" data-tuition="72508" data-salary="170000">Michigan Ross (#12)</option>
+<option value="dartmouth-tuck" data-tuition="77520" data-salary="172000">Dartmouth Tuck (#13)</option>
+<option value="virginia-darden" data-tuition="72200" data-salary="168000">Virginia Darden (#14)</option>
+<option value="cornell-johnson" data-tuition="74480" data-salary="165000">Cornell Johnson (#15)</option>
+<option value="ucla-anderson" data-tuition="67246" data-salary="160000">UCLA Anderson (#16)</option>
+<option value="usc-marshall" data-tuition="66156" data-salary="155000">USC Marshall (#17)</option>
+<option value="carnegie-mellon-tepper" data-tuition="72800" data-salary="158000">Carnegie Mellon Tepper (#18)</option>
+<option value="unc-kenan-flagler" data-tuition="47938" data-salary="152000">UNC Kenan-Flagler (#19)</option>
+<option value="georgetown-mcdonough" data-tuition="62784" data-salary="155000">Georgetown McDonough (#20)</option>
+<option value="emory-goizueta" data-tuition="64200" data-salary="150000">Emory Goizueta (#21)</option>
+<option value="vanderbilt-owen" data-tuition="62196" data-salary="148000">Vanderbilt Owen (#22)</option>
+<option value="washington-foster" data-tuition="54966" data-salary="152000">Washington Foster (#23)</option>
+<option value="indiana-kelley" data-tuition="28274" data-salary="145000">Indiana Kelley (#24)</option>
+<option value="texas-mccombs" data-tuition="41666" data-salary="155000">Texas McCombs (#25)</option>
+<option value="georgia-tech-scheller" data-tuition="33340" data-salary="140000">Georgia Tech Scheller (#26)</option>
+<option value="washu-olin" data-tuition="65400" data-salary="148000">WashU Olin (#27)</option>
+<option value="rice-jones" data-tuition="62000" data-salary="148000">Rice Jones (#28)</option>
+<option value="notre-dame-mendoza" data-tuition="60220" data-salary="145000">Notre Dame Mendoza (#29)</option>
+<option value="wisconsin" data-tuition="27104" data-salary="138000">Wisconsin (#30)</option>
+<option value="arizona-state-carey" data-tuition="31360" data-salary="135000">Arizona State Carey (#31)</option>
+<option value="bu-questrom" data-tuition="62160" data-salary="140000">BU Questrom (#32)</option>
+<option value="minnesota-carlson" data-tuition="43234" data-salary="138000">Minnesota Carlson (#33)</option>
+<option value="ohio-state-fisher" data-tuition="32376" data-salary="140000">Ohio State Fisher (#34)</option>
+<option value="purdue-krannert" data-tuition="22408" data-salary="130000">Purdue Krannert (#35)</option>
+<option value="uc-davis" data-tuition="44458" data-salary="135000">UC Davis (#36)</option>
+<option value="maryland-smith" data-tuition="48172" data-salary="140000">Maryland Smith (#37)</option>
+<option value="penn-state-smeal" data-tuition="28556" data-salary="132000">Penn State Smeal (#38)</option>
+<option value="byu-marriott" data-tuition="14460" data-salary="135000">BYU Marriott (#39)</option>
+<option value="babson-olin" data-tuition="54400" data-salary="130000">Babson Olin (#40)</option>
+<option value="michigan-state-broad" data-tuition="32640" data-salary="128000">Michigan State Broad (#41)</option>
+<option value="rochester-simon" data-tuition="55260" data-salary="135000">Rochester Simon (#42)</option>
+<option value="florida-warrington" data-tuition="30130" data-salary="138000">Florida Warrington (#43)</option>
+<option value="illinois-gies" data-tuition="29000" data-salary="132000">Illinois Gies (#44)</option>
+<option value="wake-forest" data-tuition="52000" data-salary="132000">Wake Forest (#45)</option>
+<option value="smu-cox" data-tuition="55000" data-salary="138000">SMU Cox (#46)</option>
+<option value="tulane-freeman" data-tuition="57720" data-salary="128000">Tulane Freeman (#47)</option>
+<option value="george-washington" data-tuition="59760" data-salary="130000">George Washington (#48)</option>
+<option value="boston-college-carroll" data-tuition="57500" data-salary="135000">Boston College Carroll (#49)</option>
+<option value="northeastern" data-tuition="54000" data-salary="130000">Northeastern (#50)</option>
+<option value="uga-terry" data-tuition="13918" data-salary="119000">UGA Terry (#51)</option>
+<option value="uc-irvine-merage" data-tuition="55340" data-salary="125000">UC Irvine Merage (#52)</option>
+<option value="texas-am-mays" data-tuition="31240" data-salary="129000">Texas A&M Mays (#53)</option>
+<option value="pitt-katz" data-tuition="65820" data-salary="113000">Pitt Katz (#54)</option>
+<option value="rutgers" data-tuition="31152" data-salary="110000">Rutgers (#55)</option>
+<option value="baylor-hankamer" data-tuition="42842" data-salary="105000">Baylor Hankamer (#56)</option>
+<option value="temple-fox" data-tuition="30000" data-salary="100000">Temple Fox (#57)</option>
+<option value="fordham-gabelli" data-tuition="62250" data-salary="122000">Fordham Gabelli (#58)</option>
+<option value="miami-herbert" data-tuition="46145" data-salary="110000">Miami Herbert (#59)</option>
+<option value="colorado-leeds" data-tuition="31000" data-salary="95000">Colorado Leeds (#60)</option>
+<option value="baruch-zicklin" data-tuition="37338" data-salary="118000">Baruch Zicklin (#61)</option>
+<option value="william-mary-mason" data-tuition="39394" data-salary="98000">William & Mary Mason (#62)</option>
+<option value="arizona-eller" data-tuition="27393" data-salary="109000">Arizona Eller (#63)</option>
+<option value="ucsd-rady" data-tuition="57700" data-salary="104000">UCSD Rady (#64)</option>
+<option value="case-western-weatherhead" data-tuition="53000" data-salary="100000">Case Western Weatherhead (#65)</option>
+<option value="south-carolina-moore" data-tuition="35000" data-salary="102000">South Carolina Moore (#66)</option>
+<option value="kansas" data-tuition="22800" data-salary="96000">Kansas (#67)</option>
+<option value="auburn-harbert" data-tuition="29653" data-salary="95000">Auburn Harbert (#68)</option>
+<option value="cincinnati-lindner" data-tuition="42711" data-salary="93000">Cincinnati Lindner (#69)</option>
+<option value="umass-isenberg" data-tuition="3000" data-salary="115000">UMass Isenberg (#70)</option>
+<option value="chapman-argyros" data-tuition="50000" data-salary="95000">Chapman Argyros (#71)</option>
+<option value="pepperdine-graziadio" data-tuition="50940" data-salary="105000">Pepperdine Graziadio (#72)</option>
+<option value="stevens" data-tuition="40000" data-salary="105000">Stevens (#73)</option>
+<option value="tennessee-haslam" data-tuition="28000" data-salary="108000">Tennessee Haslam (#74)</option>
+<option value="kentucky-gatton" data-tuition="18777" data-salary="90000">Kentucky Gatton (#75)</option>
+<option value="nc-state-jenkins" data-tuition="27866" data-salary="101000">NC State Jenkins (#76)</option>
+<option value="bentley" data-tuition="48000" data-salary="95000">Bentley (#77)</option>
+<option value="iowa-tippie" data-tuition="22514" data-salary="113000">Iowa Tippie (#78)</option>
+<option value="suny-buffalo" data-tuition="15230" data-salary="75000">SUNY Buffalo (#79)</option>
+<option value="oklahoma-price" data-tuition="16653" data-salary="81000">Oklahoma Price (#80)</option>
+<option value="howard" data-tuition="35016" data-salary="105000">Howard (#81)</option>
+<option value="oregon-lundquist" data-tuition="17824" data-salary="85000">Oregon Lundquist (#82)</option>
+<option value="denver-daniels" data-tuition="48000" data-salary="100000">Denver Daniels (#83)</option>
+<option value="alabama-manderson" data-tuition="11380" data-salary="72000">Alabama Manderson (#84)</option>
+<option value="arkansas-walton" data-tuition="12027" data-salary="80000">Arkansas Walton (#85)</option>
+<option value="tcu-neeley" data-tuition="46170" data-salary="120000">TCU Neeley (#86)</option>
+<option value="utah-eccles" data-tuition="39000" data-salary="110000">Utah Eccles (#87)</option>
+<option value="drexel-lebow" data-tuition="34000" data-salary="95000">Drexel LeBow (#88)</option>
+<option value="clemson" data-tuition="16742" data-salary="78000">Clemson (#89)</option>
+<option value="uic-liautaud" data-tuition="11660" data-salary="101000">UIC Liautaud (#90)</option>
+<option value="missouri-trulaske" data-tuition="22500" data-salary="80000">Missouri Trulaske (#91)</option>
+<option value="depaul-kellstadt" data-tuition="36000" data-salary="86000">DePaul Kellstadt (#92)</option>
+<option value="sdsu-fowler" data-tuition="12420" data-salary="92000">SDSU Fowler (#93)</option>
+<option value="xavier-williams" data-tuition="36738" data-salary="88000">Xavier Williams (#94)</option>
+<option value="marquette" data-tuition="46620" data-salary="91000">Marquette (#95)</option>
+<option value="loyola-marymount" data-tuition="44000" data-salary="90000">Loyola Marymount (#96)</option>
+<option value="creighton-heider" data-tuition="33234" data-salary="80000">Creighton Heider (#97)</option>
+<option value="syracuse-whitman" data-tuition="50000" data-salary="90000">Syracuse Whitman (#98)</option>
+<option value="san-diego-knauss" data-tuition="39000" data-salary="78000">San Diego (Knauss) (#99)</option>
+<option value="american-kogod" data-tuition="48000" data-salary="85000">American Kogod (#100)</option>
+<option value="rit-saunders" data-tuition="48000" data-salary="82000">RIT (Saunders) (#101)</option>
+<option value="detroit-mercy" data-tuition="28000" data-salary="73000">Detroit Mercy (#102)</option>
+<option value="south-florida-muma" data-tuition="14000" data-salary="72000">South Florida (Muma) (#103)</option>
+<option value="kennesaw-state-coles" data-tuition="15000" data-salary="113000">Kennesaw State (Coles) (#104)</option>
+<option value="duquesne-palumbo-donahue" data-tuition="31000" data-salary="77000">Duquesne (Palumbo-Donahue) (#105)</option>
+<option value="quinnipiac" data-tuition="26000" data-salary="85000">Quinnipiac (#106)</option>
+<option value="loyola-chicago-quinlan" data-tuition="46000" data-salary="92000">Loyola Chicago (Quinlan) (#107)</option>
+<option value="fiu-chapman" data-tuition="18000" data-salary="75000">FIU (Chapman) (#108)</option>
+<option value="stevens" data-tuition="38000" data-salary="116000">Stevens (#109)</option>
+<option value="jmu" data-tuition="11500" data-salary="92000">JMU (#110)</option>
+<option value="ucf" data-tuition="13500" data-salary="78000">UCF (#111)</option>
+<option value="new-hampshire-paul" data-tuition="20000" data-salary="67000">New Hampshire (Paul) (#112)</option>
+<option value="suffolk-sawyer" data-tuition="34000" data-salary="115000">Suffolk (Sawyer) (#113)</option>
+<option value="louisville" data-tuition="19000" data-salary="72000">Louisville (#114)</option>
+<option value="uab-collat" data-tuition="16200" data-salary="75000">UAB (Collat) (#115)</option>
+<option value="gonzaga" data-tuition="41000" data-salary="101000">Gonzaga (#116)</option>
+<option value="fairfield-dolan" data-tuition="31000" data-salary="85000">Fairfield (Dolan) (#117)</option>
+<option value="kent-state-crawford" data-tuition="20000" data-salary="68000">Kent State (Crawford) (#118)</option>
+<option value="portland-state" data-tuition="21000" data-salary="78000">Portland State (#119)</option>
+<option value="slu-chaifetz" data-tuition="46000" data-salary="76000">SLU (Chaifetz) (#120)</option>
+<option value="hofstra-zarb" data-tuition="30000" data-salary="110000">Hofstra (Zarb) (#121)</option>
+<option value="seton-hall-stillman" data-tuition="27000" data-salary="78000">Seton Hall (Stillman) (#122)</option>
+<option value="unlv-lee" data-tuition="22000" data-salary="94000">UNLV (Lee) (#123)</option>
+<option value="memphis-fogelman" data-tuition="12300" data-salary="92000">Memphis (Fogelman) (#124)</option>
+<option value="northern-illinois" data-tuition="13000" data-salary="93000">Northern Illinois (#125)</option>
+<option value="dayton" data-tuition="17000" data-salary="110000">Dayton (#126)</option>
+<option value="chapman-argyros" data-tuition="52000" data-salary="76000">Chapman (Argyros) (#127)</option>
+<option value="sjsu-lucas" data-tuition="16000" data-salary="91000">SJSU (Lucas) (#128)</option>
+<option value="north-texas-ryan" data-tuition="17000" data-salary="73000">North Texas (Ryan) (#129)</option>
+<option value="mississippi-state" data-tuition="12300" data-salary="92000">Mississippi State (#130)</option>
+<option value="san-francisco-usf" data-tuition="40000" data-salary="83000">San Francisco (USF) (#131)</option>
+<option value="mercer-stetson" data-tuition="18000" data-salary="72000">Mercer (Stetson) (#132)</option>
+<option value="elon-love" data-tuition="22000" data-salary="83000">Elon (Love) (#133)</option>
+<option value="utsa-alvarez" data-tuition="12000" data-salary="79000">UTSA (Alvarez) (#134)</option>
+<option value="kansas-state" data-tuition="8000" data-salary="78000">Kansas State (#135)</option>
+<option value="fau" data-tuition="11000" data-salary="78000">FAU (#136)</option>
+<option value="hawaii-shidler" data-tuition="21000" data-salary="80000">Hawaii (Shidler) (#137)</option>
+<option value="old-dominion-strome" data-tuition="13000" data-salary="76000">Old Dominion (Strome) (#138)</option>
+<option value="wvu-chambers" data-tuition="16000" data-salary="71000">WVU (Chambers) (#139)</option>
+<option value="ole-miss" data-tuition="13000" data-salary="72000">Ole Miss (#140)</option>
+<option value="appalachian-state-walker" data-tuition="7500" data-salary="68000">Appalachian State (Walker) (#141)</option>
+<option value="belmont-massey" data-tuition="27000" data-salary="82000">Belmont (Massey) (#142)</option>
+<option value="clark" data-tuition="31000" data-salary="63000">Clark (#143)</option>
+<option value="montana" data-tuition="14000" data-salary="71000">Montana (#144)</option>
+<option value="suny-new-paltz" data-tuition="15000" data-salary="68000">SUNY New Paltz (#145)</option>
+<option value="chatham" data-tuition="16500" data-salary="65000">Chatham (#146)</option>
+<option value="clarkson-reh" data-tuition="38000" data-salary="71000">Clarkson (Reh) (#147)</option>
+<option value="unc-wilmington-cameron" data-tuition="11000" data-salary="70000">UNC Wilmington (Cameron) (#148)</option>
+<option value="iona-lapenta" data-tuition="25000" data-salary="85000">Iona (LaPenta) (#149)</option>
+<option value="scranton-kania" data-tuition="22000" data-salary="68000">Scranton (Kania) (#150)</option>
+            </select>
+          </div>
+          <div class="roi-field">
+            <label for="roi-current-salary">Current Annual Salary ($)</label>
+            <input type="number" id="roi-current-salary" value="85000" min="0" step="5000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-tuition">Annual Tuition ($)</label>
+            <input type="number" id="roi-tuition" value="72000" min="0" step="1000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-living">Annual Living Expenses ($)</label>
+            <input type="number" id="roi-living" value="30000" min="0" step="1000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-scholarship">Total Scholarship ($)</label>
+            <input type="number" id="roi-scholarship" value="0" min="0" step="5000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-post-salary">Expected Post-MBA Salary ($)</label>
+            <input type="number" id="roi-post-salary" value="165000" min="0" step="5000">
+          </div>
+          <div class="roi-field">
+            <label for="roi-years">Program Length (years)</label>
+            <select id="roi-years">
+              <option value="2" selected>2 years (standard)</option>
+              <option value="1">1 year (accelerated)</option>
+            </select>
+          </div>
+          <button class="btn btn-accent" onclick="calculateROI()" style="margin-top: 16px; width: 100%;">Calculate ROI</button>
+        </div>
+      </div>
+
+      <div class="school-section" id="roi-results" style="display: none;">
+        <h2>Your MBA ROI</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><span class="label">Total MBA Cost</span><span class="stat-value" id="res-total-cost">-</span></div>
+          <div class="stat-item"><span class="label">Opportunity Cost</span><span class="stat-value" id="res-opp-cost">-</span></div>
+          <div class="stat-item"><span class="label">All-In Investment</span><span class="stat-value" id="res-all-in">-</span></div>
+          <div class="stat-item"><span class="label">Annual Salary Uplift</span><span class="stat-value" id="res-uplift">-</span></div>
+          <div class="stat-item"><span class="label">Breakeven (years)</span><span class="stat-value" id="res-breakeven">-</span></div>
+          <div class="stat-item"><span class="label">10-Year Net Gain</span><span class="stat-value" id="res-10yr">-</span></div>
+        </div>
+
+        <div id="roi-verdict" class="verdict-block" style="margin-top: 24px;"></div>
+
+        <div style="margin-top: 24px;">
+          <h3>10-Year Cumulative Earnings Comparison</h3>
+          <div id="roi-chart" style="margin-top: 16px;"></div>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>How We Calculate MBA ROI</h2>
+        <p>The calculator accounts for:</p>
+        <ul>
+          <li><strong>Direct costs:</strong> Tuition, fees, and living expenses for the program duration, minus scholarships.</li>
+          <li><strong>Opportunity cost:</strong> The salary you forgo while in school.</li>
+          <li><strong>Salary uplift:</strong> The difference between your post-MBA salary and what you'd earn without the MBA.</li>
+          <li><strong>Breakeven point:</strong> How many years of post-MBA salary uplift it takes to recoup your total investment.</li>
+          <li><strong>10-year net gain:</strong> Total additional earnings over 10 years after graduation, assuming 3% annual raises for both MBA and non-MBA paths.</li>
+        </ul>
+        <p>This is a simplified model. Real-world factors like signing bonuses, equity compensation, career switches, and promotions can significantly improve MBA returns. See our <a href="/guides/mba-roi-analysis/">full MBA ROI analysis</a> for a deeper discussion.</p>
+      </div>
+
+      
+<div class="byline">
+  <div class="byline-avatar">RT</div>
+  <div>
+    <a href="/about/" class="byline-name">Rome Thorndike</a>
+    <div class="byline-credential">Berkeley Haas MBA</div>
+    <div class="byline-date">Updated 2026</div>
+  </div>
+</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Schools</h4>
+        <a href="/schools/">All Schools</a>
+        <a href="/schools/stanford-gsb/">Stanford GSB</a>
+        <a href="/schools/harvard-business-school/">Harvard Business School</a>
+        <a href="/schools/wharton/">Wharton</a>
+        <a href="/schools/booth/">Booth (Chicago)</a>
+        <a href="/schools/berkeley-haas/">Berkeley Haas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/rankings/overall/">Rankings</a>
+        <a href="/compare/">Comparisons</a>
+        <a href="/guides/gmat-vs-gre/">GMAT vs GRE</a>
+        <a href="/guides/mba-roi-analysis/">Is an MBA Worth It?</a>
+        <a href="/guides/mba-application-timeline/">Application Timeline</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="/about/">About the Author</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/blog/">Blog</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MBA Guidance &middot; Rome Thorndike &middot; Berkeley Haas MBA</p>
+      <p class="footer-disclaimer">Data reflects most recent available admissions cycle. Individual results may vary.</p>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+<script>
+function calculateROI() {
+  var currentSalary = parseInt(document.getElementById('roi-current-salary').value) || 0;
+  var tuition = parseInt(document.getElementById('roi-tuition').value) || 0;
+  var living = parseInt(document.getElementById('roi-living').value) || 0;
+  var scholarship = parseInt(document.getElementById('roi-scholarship').value) || 0;
+  var postSalary = parseInt(document.getElementById('roi-post-salary').value) || 0;
+  var years = parseInt(document.getElementById('roi-years').value) || 2;
+
+  var totalDirect = (tuition + living) * years - scholarship;
+  var oppCost = currentSalary * years;
+  var allIn = totalDirect + oppCost;
+  var annualUplift = postSalary - currentSalary;
+  var breakeven = annualUplift > 0 ? (allIn / annualUplift).toFixed(1) : 'N/A';
+
+  // 10-year calculation with 3% annual raises
+  var raise = 1.03;
+  var mbaEarnings = 0;
+  var noMbaEarnings = 0;
+  for (var i = 1; i <= 10; i++) {
+    mbaEarnings += postSalary * Math.pow(raise, i - 1);
+    noMbaEarnings += currentSalary * Math.pow(raise, i + years - 1);
+  }
+  var netGain = mbaEarnings - noMbaEarnings - totalDirect;
+
+  // Update results
+  document.getElementById('res-total-cost').textContent = '$' + totalDirect.toLocaleString();
+  document.getElementById('res-opp-cost').textContent = '$' + oppCost.toLocaleString();
+  document.getElementById('res-all-in').textContent = '$' + allIn.toLocaleString();
+  document.getElementById('res-uplift').textContent = annualUplift >= 0 ? '+$' + annualUplift.toLocaleString() : '-$' + Math.abs(annualUplift).toLocaleString();
+  document.getElementById('res-breakeven').textContent = breakeven === 'N/A' ? 'N/A' : breakeven + ' yrs';
+  document.getElementById('res-10yr').textContent = netGain >= 0 ? '+$' + Math.round(netGain).toLocaleString() : '-$' + Math.abs(Math.round(netGain)).toLocaleString();
+
+  // Verdict
+  var verdict = '';
+  var be = parseFloat(breakeven);
+  if (breakeven === 'N/A' || annualUplift <= 0) {
+    verdict = 'The numbers suggest this MBA may not provide a positive financial return. Consider whether the non-financial benefits (network, career pivot, credential) justify the investment.';
+  } else if (be <= 4) {
+    verdict = 'Strong ROI. You\'ll recoup your investment within ' + breakeven + ' years. The financial case for this MBA is compelling.';
+  } else if (be <= 7) {
+    verdict = 'Solid ROI. A ' + breakeven + '-year breakeven is reasonable for a top MBA. Factor in non-financial benefits (network, credential, career acceleration) for the full picture.';
+  } else {
+    verdict = 'Longer payback period (' + breakeven + ' years). Consider whether scholarships, a lower-cost program, or alternative paths could improve the math.';
+  }
+  document.getElementById('roi-verdict').innerHTML = '&ldquo;' + verdict + '&rdquo;';
+
+  // Simple bar chart
+  var maxVal = Math.max(mbaEarnings, noMbaEarnings + totalDirect);
+  var mbaW = Math.round((mbaEarnings / maxVal) * 100);
+  var noMbaW = Math.round(((noMbaEarnings) / maxVal) * 100);
+  document.getElementById('roi-chart').innerHTML =
+    '<div style="margin-bottom:12px;"><span style="font-size:13px;color:var(--color-text-secondary);">With MBA (10yr earnings)</span>' +
+    '<div style="background:var(--color-accent);height:32px;border-radius:4px;width:' + mbaW + '%;display:flex;align-items:center;padding-left:12px;color:#fff;font-weight:600;font-size:14px;">$' + Math.round(mbaEarnings).toLocaleString() + '</div></div>' +
+    '<div><span style="font-size:13px;color:var(--color-text-secondary);">Without MBA (10yr earnings)</span>' +
+    '<div style="background:var(--color-text-secondary);height:32px;border-radius:4px;width:' + noMbaW + '%;display:flex;align-items:center;padding-left:12px;color:#fff;font-weight:600;font-size:14px;">$' + Math.round(noMbaEarnings).toLocaleString() + '</div></div>';
+
+  document.getElementById('roi-results').style.display = 'block';
+  document.getElementById('roi-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+// School selector auto-fill
+document.getElementById('roi-school').addEventListener('change', function() {
+  var opt = this.options[this.selectedIndex];
+  if (opt.dataset.tuition) {
+    document.getElementById('roi-tuition').value = opt.dataset.tuition;
+    document.getElementById('roi-post-salary').value = opt.dataset.salary;
+  }
+});
+</script>
