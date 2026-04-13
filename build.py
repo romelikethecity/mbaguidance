@@ -11526,22 +11526,47 @@ def build_robots():
 Allow: /
 Sitemap: {SITE_URL}/sitemap.xml
 
+# AI/LLM crawlers - explicitly allowed for AI search citations
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
 User-agent: anthropic-ai
 Allow: /
 
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
 User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
 Allow: /
 
 User-agent: Amazonbot
@@ -11549,6 +11574,66 @@ Allow: /
 """
     write_page(os.path.join(OUTPUT_DIR, "robots.txt"), content)
     print("  Built: robots.txt")
+
+
+def build_llms_txt():
+    content = f"""# MBA Guidance
+
+> MBA Guidance is an independent MBA admissions resource covering 150 business school programs. The site provides acceptance rates, GMAT scores, salary outcomes, and honest program verdicts written by a Berkeley Haas MBA graduate. Content includes school-by-school profiles with application deadlines and essay guides, head-to-head program comparisons, specialty rankings across 25 categories, admissions strategy guides, an ROI calculator, and a GMAT target score calculator. 2026 data.
+
+## Core Pages
+- [Homepage]({SITE_URL}/)
+- [All Schools]({SITE_URL}/schools/): 150 MBA program profiles
+- [Compare Programs]({SITE_URL}/compare/): Side-by-side school comparisons
+- [Guides]({SITE_URL}/guides/): Admissions strategy and career guides
+- [Blog]({SITE_URL}/blog/): School analysis articles
+- [Newsletter]({SITE_URL}/newsletter/)
+
+## School Profiles (M7 + Top Programs)
+- [Stanford GSB]({SITE_URL}/schools/stanford-gsb/)
+- [Harvard Business School]({SITE_URL}/schools/harvard-business-school/)
+- [Wharton]({SITE_URL}/schools/wharton/)
+- [Booth]({SITE_URL}/schools/booth/)
+- [Kellogg]({SITE_URL}/schools/kellogg/)
+- [Columbia Business School]({SITE_URL}/schools/columbia-business-school/)
+- [MIT Sloan]({SITE_URL}/schools/mit-sloan/)
+- [Berkeley Haas]({SITE_URL}/schools/berkeley-haas/)
+- [Yale SOM]({SITE_URL}/schools/yale-som/)
+- [NYU Stern]({SITE_URL}/schools/nyu-stern/)
+- [Duke Fuqua]({SITE_URL}/schools/duke-fuqua/)
+
+Each school profile includes sub-pages: /acceptance-rate/, /class-profile/, /deadlines/, /essays/, /interview/, /employment/
+
+## Rankings
+- [Overall Rankings]({SITE_URL}/rankings/overall/)
+- [Best ROI]({SITE_URL}/rankings/roi/)
+- [Highest Salary]({SITE_URL}/rankings/salary/)
+- [Most Selective]({SITE_URL}/rankings/selectivity/)
+- [Best for Finance]({SITE_URL}/rankings/finance/)
+- [Best for Consulting]({SITE_URL}/rankings/consulting/)
+- [Best for Tech]({SITE_URL}/rankings/technology/)
+- [Best for Entrepreneurship]({SITE_URL}/rankings/entrepreneurship/)
+- [Best for Career Changers]({SITE_URL}/rankings/career-changers/)
+- [Best for Private Equity/VC]({SITE_URL}/rankings/private-equity-vc/)
+- [Best for Data Science/AI]({SITE_URL}/rankings/data-science-ai/)
+- [Best for Product Management]({SITE_URL}/rankings/product-management/)
+
+## Admissions Guides
+- [GMAT vs GRE]({SITE_URL}/guides/gmat-vs-gre/)
+- [MBA Application Timeline]({SITE_URL}/guides/mba-application-timeline/)
+- [MBA Essay Writing]({SITE_URL}/guides/mba-essay-writing/)
+- [MBA ROI Analysis]({SITE_URL}/guides/mba-roi-analysis/)
+- [Best MBA for Tech]({SITE_URL}/guides/best-mba-for-tech/)
+- [Best MBA for Finance]({SITE_URL}/guides/best-mba-for-finance/)
+- [Best MBA for Consulting]({SITE_URL}/guides/best-mba-for-consulting/)
+- [Best MBA for Career Changers]({SITE_URL}/guides/best-mba-for-career-changers/)
+
+## Tools
+- [ROI Calculator]({SITE_URL}/tools/roi-calculator/)
+- [GMAT Target Score Calculator]({SITE_URL}/tools/gmat-calculator/)
+"""
+    write_page(os.path.join(OUTPUT_DIR, "llms.txt"), content)
+    print("  Built: llms.txt")
 
 
 def copy_assets():
@@ -12331,6 +12416,7 @@ def main():
     build_gmat_calculator()
     build_sitemap()
     build_robots()
+    build_llms_txt()
 
     # Count pages
     count = sum(1 for root, dirs, files in os.walk(OUTPUT_DIR)

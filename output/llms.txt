@@ -1,0 +1,60 @@
+# MBA Guidance
+
+> MBA Guidance is an independent MBA admissions resource covering 150 business school programs. The site provides acceptance rates, GMAT scores, salary outcomes, and honest program verdicts written by a Berkeley Haas MBA graduate. Content includes school-by-school profiles with application deadlines and essay guides, head-to-head program comparisons, specialty rankings across 25 categories, admissions strategy guides, an ROI calculator, and a GMAT target score calculator. 2026 data.
+
+## Core Pages
+- [Homepage](https://mbaguidance.com/)
+- [All Schools](https://mbaguidance.com/schools/): 150 MBA program profiles
+- [Compare Programs](https://mbaguidance.com/compare/): Side-by-side school comparisons
+- [Guides](https://mbaguidance.com/guides/): Admissions strategy and career guides
+- [Blog](https://mbaguidance.com/blog/): "Is [School] Worth It?" analyses
+- [Newsletter](https://mbaguidance.com/newsletter/)
+
+## School Profiles (M7 + Top Programs)
+- [Stanford GSB](https://mbaguidance.com/schools/stanford-gsb/)
+- [Harvard Business School](https://mbaguidance.com/schools/harvard-business-school/)
+- [Wharton](https://mbaguidance.com/schools/wharton/)
+- [Booth](https://mbaguidance.com/schools/booth/)
+- [Kellogg](https://mbaguidance.com/schools/kellogg/)
+- [Columbia Business School](https://mbaguidance.com/schools/columbia-business-school/)
+- [MIT Sloan](https://mbaguidance.com/schools/mit-sloan/)
+- [Berkeley Haas](https://mbaguidance.com/schools/berkeley-haas/)
+- [Yale SOM](https://mbaguidance.com/schools/yale-som/)
+- [NYU Stern](https://mbaguidance.com/schools/nyu-stern/)
+- [Duke Fuqua](https://mbaguidance.com/schools/duke-fuqua/)
+
+Each school profile includes sub-pages: /acceptance-rate/, /class-profile/, /deadlines/, /essays/, /interview/, /employment/
+
+## Rankings
+- [Overall Rankings](https://mbaguidance.com/rankings/overall/)
+- [Best ROI](https://mbaguidance.com/rankings/roi/)
+- [Highest Salary](https://mbaguidance.com/rankings/salary/)
+- [Most Selective](https://mbaguidance.com/rankings/selectivity/)
+- [Best for Finance](https://mbaguidance.com/rankings/finance/)
+- [Best for Consulting](https://mbaguidance.com/rankings/consulting/)
+- [Best for Tech](https://mbaguidance.com/rankings/technology/)
+- [Best for Entrepreneurship](https://mbaguidance.com/rankings/entrepreneurship/)
+- [Best for Career Changers](https://mbaguidance.com/rankings/career-changers/)
+- [Best for Private Equity/VC](https://mbaguidance.com/rankings/private-equity-vc/)
+- [Best for Data Science/AI](https://mbaguidance.com/rankings/data-science-ai/)
+- [Best for Healthcare](https://mbaguidance.com/rankings/healthcare/)
+- [Best for Marketing](https://mbaguidance.com/rankings/marketing/)
+- [Best for Product Management](https://mbaguidance.com/rankings/product-management/)
+- [Best Value](https://mbaguidance.com/rankings/value/)
+
+## Admissions Guides
+- [GMAT vs GRE](https://mbaguidance.com/guides/gmat-vs-gre/)
+- [MBA Application Timeline](https://mbaguidance.com/guides/mba-application-timeline/)
+- [MBA Essay Writing](https://mbaguidance.com/guides/mba-essay-writing/)
+- [MBA ROI Analysis](https://mbaguidance.com/guides/mba-roi-analysis/)
+- [Best MBA for Tech](https://mbaguidance.com/guides/best-mba-for-tech/)
+- [Best MBA for Finance](https://mbaguidance.com/guides/best-mba-for-finance/)
+- [Best MBA for Consulting](https://mbaguidance.com/guides/best-mba-for-consulting/)
+- [Best MBA for Career Changers](https://mbaguidance.com/guides/best-mba-for-career-changers/)
+- [Best MBA for Engineers](https://mbaguidance.com/guides/best-mba-for-engineers/)
+- [Best MBA for Military](https://mbaguidance.com/guides/best-mba-for-military/)
+- [Best MBA for International Students](https://mbaguidance.com/guides/best-mba-for-international-students/)
+
+## Tools
+- [ROI Calculator](https://mbaguidance.com/tools/roi-calculator/)
+- [GMAT Target Score Calculator](https://mbaguidance.com/tools/gmat-calculator/)
