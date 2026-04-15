@@ -8064,6 +8064,7 @@ def nav_html(active=None):
         <a href="/rankings/overall/" class="nav-link{cls('rankings')}">Rankings</a>
         <a href="/compare/" class="nav-link{cls('compare')}">Compare</a>
         <a href="/guides/" class="nav-link{cls('guides')}">Guides</a>
+        <a href="/voices/" class="nav-link{cls('voices')}">Top Voices</a>
         <a href="/blog/" class="nav-link{cls('blog')}">Blog</a>
         <a href="/newsletter/" class="btn btn-accent nav-cta">Free Newsletter</a>
       </div>
@@ -8100,6 +8101,7 @@ def footer_html():
       <div class="footer-col">
         <h4>About</h4>
         <a href="/about/">About the Author</a>
+        <a href="/voices/">Top Voices</a>
         <a href="/newsletter/">Newsletter</a>
         <a href="/blog/">Blog</a>
       </div>
@@ -12380,6 +12382,150 @@ function calculateGMAT() {
 
 
 
+def build_top_voices():
+    """Build top voices page from data/top_voices.json."""
+    import json as _json
+    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "top_voices.json")
+    with open(data_path, "r", encoding="utf-8") as f:
+        data = _json.load(f)
+    voices = data["voices"]
+    leaders = [v for v in voices if v.get("tier") == "leader"]
+    rising = [v for v in voices if v.get("tier") == "rising"]
+    last_updated = data.get("last_updated", "2026-04-14")
+
+    # Schema
+    list_items = []
+    for v in voices:
+        list_items.append(f'''{{"@type":"ListItem","position":{v["rank"]},"item":{{"@type":"Person","name":"{v["name"]}","jobTitle":"{v["title"]}","worksFor":{{"@type":"Organization","name":"{v["company"]}"}},"url":"{v["linkedin_url"]}"}}}}''')
+    item_list_json = f'{{"@context":"https://schema.org","@type":"ItemList","name":"{data["title"]}","description":"{data.get("subtitle","")}","numberOfItems":{len(voices)},"itemListElement":[{",".join(list_items)}]}}'
+    article_json = f'{{"@context":"https://schema.org","@type":"Article","headline":"{data["title"]}","description":"{data.get("subtitle","")}","author":{{"@type":"Person","name":"{AUTHOR}","description":"{AUTHOR_CREDENTIAL}","url":"{SITE_URL}/about/"}},"publisher":{{"@type":"Organization","name":"{SITE_NAME}","url":"{SITE_URL}"}},"datePublished":"2026-04-14","dateModified":"{last_updated}","url":"{SITE_URL}/voices/","mainEntityOfPage":"{SITE_URL}/voices/"}}'
+    bc_json = breadcrumb_schema([("Home", "/"), ("Top Voices", "/voices/")])
+    schemas = bc_json + f"""
+<script type="application/ld+json">{item_list_json}</script>
+<script type="application/ld+json">{article_json}</script>"""
+
+    def voice_card(v):
+        tags = ''.join(f'<span class="voice-tag">{t}</span>' for t in v.get("tags", []))
+        rank_cls = "voice-rank-top" if v["rank"] <= 3 else "voice-rank"
+        return f'''<div class="voice-card" id="voice-{v["rank"]}">
+  <div class="voice-card-header">
+    <div class="{rank_cls}">#{v["rank"]}</div>
+    <div class="voice-card-info">
+      <h3 class="voice-name"><a href="{v["linkedin_url"]}" target="_blank" rel="noopener">{v["name"]}</a></h3>
+      <p class="voice-title">{v["title"]} at {v["company"]}</p>
+      <div class="voice-tags">{tags}</div>
+    </div>
+    <a href="{v["linkedin_url"]}" target="_blank" rel="noopener" class="voice-linkedin-btn" aria-label="View {v["name"]} on LinkedIn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+  </div>
+  <p class="voice-bio">{v["bio"]}</p>
+</div>'''
+
+    leaders_html = ''.join(voice_card(v) for v in leaders)
+    rising_html = ''.join(voice_card(v) for v in rising)
+
+    jump_links = ''.join(
+        f'<a href="#voice-{v["rank"]}" class="voice-jump-link">#{v["rank"]} {v["name"].split()[0]}</a>'
+        for v in voices
+    )
+
+    voices_css = """<style>
+.voices-hero { text-align: center; padding: 3rem 1.5rem 2rem; max-width: 800px; margin: 0 auto; }
+.voices-hero .eyebrow { color: var(--color-accent); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.voices-hero h1 { font-family: var(--font-heading); font-size: clamp(1.75rem, 4vw, 2.5rem); letter-spacing: -0.5px; margin-bottom: 0.75rem; color: var(--color-text); }
+.voices-subtitle { font-size: 1.1rem; color: var(--color-text-secondary); margin-bottom: 0.5rem; }
+.voices-meta { font-size: 0.85rem; color: var(--color-text-secondary); }
+.voices-content { max-width: 800px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+.voice-methodology { margin-bottom: 2rem; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+.voice-methodology summary { padding: 1rem 1.25rem; cursor: pointer; font-size: 0.95rem; color: var(--color-text); font-weight: 600; }
+.voice-methodology summary:hover { color: var(--color-accent); }
+.methodology-content { padding: 0 1.25rem 1.25rem; font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; }
+.methodology-content ul { padding-left: 1.25rem; margin: 0.75rem 0; }
+.methodology-content li { margin-bottom: 0.5rem; }
+.voices-jump-nav { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 2rem; padding: 0.75rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; }
+.voice-jump-link { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 6px; color: var(--color-text-secondary); text-decoration: none; transition: background 0.15s, color 0.15s; }
+.voice-jump-link:hover { background: var(--color-accent); color: #fff; }
+.voices-section-heading { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent); color: var(--color-text); }
+.voices-grid { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+.voice-card { border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); padding: 1.25rem; transition: border-color 0.2s, box-shadow 0.2s; }
+.voice-card:hover { border-color: var(--color-accent); box-shadow: 0 2px 12px rgba(201,168,76,0.12); }
+.voice-card-header { display: flex; align-items: flex-start; gap: 0.75rem; }
+.voice-rank, .voice-rank-top { font-weight: 700; font-size: 1.1rem; min-width: 2.5rem; text-align: center; flex-shrink: 0; padding-top: 0.15rem; color: var(--color-text-secondary); }
+.voice-rank-top { color: var(--color-accent); font-size: 1.25rem; }
+.voice-card-info { flex: 1; min-width: 0; }
+.voice-name { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.25rem; line-height: 1.3; }
+.voice-name a { color: var(--color-text); text-decoration: none; }
+.voice-name a:hover { color: var(--color-accent); }
+.voice-title { font-size: 0.85rem; color: var(--color-text-secondary); margin: 0 0 0.5rem; }
+.voice-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.voice-tag { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 999px; background: rgba(201,168,76,0.12); color: var(--color-accent-hover); font-weight: 500; }
+.voice-linkedin-btn { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 6px; color: var(--color-text-secondary); text-decoration: none; transition: color 0.15s, background 0.15s; }
+.voice-linkedin-btn:hover { color: #0077B5; background: rgba(0,119,181,0.1); }
+.voice-bio { margin: 0.75rem 0 0; font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; padding-left: calc(2.5rem + 0.75rem); }
+.voices-share-cta { text-align: center; padding: 2rem 1.5rem; max-width: 600px; margin: 0 auto; }
+.voices-share-cta h2 { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--color-text); }
+.voices-share-cta p { color: var(--color-text-secondary); margin-bottom: 0.5rem; }
+@media (max-width: 640px) {
+    .voice-bio { padding-left: 0; }
+    .voice-card-header { flex-wrap: wrap; }
+    .voice-card { position: relative; }
+    .voice-linkedin-btn { position: absolute; top: 1rem; right: 1rem; }
+    .voices-jump-nav { display: none; }
+}
+</style>"""
+
+    content = html_head(
+        f"{data['title']} | {SITE_NAME}",
+        data.get("subtitle", ""),
+        "/voices/",
+        schema=schemas
+    ) + voices_css + nav_html(active="voices") + f"""
+<main>
+  <section class="voices-hero">
+    <div class="container">
+      <div class="eyebrow">2026 RANKINGS</div>
+      <h1>{data["title"]}</h1>
+      <p class="voices-subtitle">{data.get("subtitle", "")}</p>
+      <p class="voices-meta">Last updated: {last_updated} &middot; {len(voices)} voices ranked</p>
+    </div>
+  </section>
+  <div class="voices-content">
+    <details class="voice-methodology">
+      <summary>How We Ranked These Voices</summary>
+      <div class="methodology-content">
+        <p>{data.get("methodology", "")}</p>
+        <p>We evaluated candidates across five dimensions:</p>
+        <ul>
+          <li><strong>Topic relevance</strong> (required): Must actively contribute to MBA admissions consulting, test prep, or business school journalism.</li>
+          <li><strong>Client outcomes</strong> (30%): Verified admissions results and client satisfaction scores from Poets&Quants and other review platforms.</li>
+          <li><strong>Content reach</strong> (25%): Published work, podcast audiences, and newsletter subscribers.</li>
+          <li><strong>Community impact</strong> (25%): Free resources, public content, and accessibility of advice.</li>
+          <li><strong>Originality</strong> (20%): Unique perspectives, insider experience, and differentiated methodologies.</li>
+        </ul>
+        <p>This list is updated annually. <a href="/newsletter/">Subscribe to MBA Guidance</a> to get notified when we refresh the rankings.</p>
+      </div>
+    </details>
+    <div class="voices-jump-nav">{jump_links}</div>
+    <h2 class="voices-section-heading">Top 10 Leaders</h2>
+    <p style="color: var(--color-text-secondary); margin-bottom: 1rem;">The most recognized and influential voices in MBA admissions and career strategy.</p>
+    <div class="voices-grid">{leaders_html}</div>
+    <h2 class="voices-section-heading">Rising Voices (11-25)</h2>
+    <p style="color: var(--color-text-secondary); margin-bottom: 1rem;">Consultants, educators, and journalists gaining momentum in the MBA community.</p>
+    <div class="voices-grid">{rising_html}</div>
+  </div>
+  <section class="voices-share-cta">
+    <h2>Made the List?</h2>
+    <p>Share it. Tag us on LinkedIn. We will amplify your post.</p>
+    <p>Know someone who should be on next year's list? <a href="mailto:rome@getprovyx.com">Let us know</a>.</p>
+  </section>
+</main>
+""" + footer_html()
+
+    write_page(os.path.join(OUTPUT_DIR, "voices", "index.html"), content)
+    print(f"  Built: /voices/ ({len(voices)} voices)")
+
+
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -12414,6 +12560,7 @@ def main():
     build_salary_guides()
     build_faq_pages()
     build_gmat_calculator()
+    build_top_voices()
     build_sitemap()
     build_robots()
     build_llms_txt()

@@ -1,0 +1,258 @@
+{
+  "title": "Top 25 MBA Admissions & Career Voices of 2026",
+  "subtitle": "The consultants, editors, and educators with the most influence on how candidates evaluate MBA programs and build their applications",
+  "last_updated": "2026-04-14",
+  "methodology": "Ranked by direct influence on MBA admissions decisions, cross-list appearances on industry publications (Poets&Quants, TopMBA, US News, Financial Times, Beat the GMAT), verified client outcomes, content reach, and depth of expertise. We evaluated 40+ candidates and filtered for people whose advice actively changes how applicants approach the MBA process.",
+  "voices": [
+    {
+      "rank": 1,
+      "name": "John Byrne",
+      "title": "Founder & Editor-in-Chief",
+      "company": "Poets&Quants",
+      "linkedin_url": "https://www.linkedin.com/in/johnabyrne/",
+      "bio": "Founded Poets&Quants in 2010 and turned it into the most-read publication in MBA admissions. Former editor-in-chief at BusinessWeek and Fast Company. His annual rankings of admissions consultants, MBA programs, and career outcomes have become the reference standard for anyone evaluating business school. If you're applying to an MBA, you've read his work whether you know it or not.",
+      "tags": ["Media", "Rankings", "MBA Journalism"],
+      "tier": "leader"
+    },
+    {
+      "rank": 2,
+      "name": "Jeremy Shinewald",
+      "title": "Founder & President",
+      "company": "mbaMission",
+      "linkedin_url": "https://www.linkedin.com/in/jeremyshinewald/",
+      "bio": "Founded mbaMission in 1999 and built it into the most favorably reviewed large MBA admissions consulting firm for 5 consecutive years on Poets&Quants. 214 positive verified client reviews with a 9.86 satisfaction score. His firm produces more free content (school guides, essay analyses, webinars) than any competitor, making high-quality admissions advice accessible beyond the paying client base.",
+      "tags": ["Admissions Consulting", "Essay Strategy", "Free Resources"],
+      "tier": "leader"
+    },
+    {
+      "rank": 3,
+      "name": "Sandy Kreisberg",
+      "title": "Founder",
+      "company": "HBSGuru",
+      "linkedin_url": "https://www.linkedin.com/in/sandykreisberg/",
+      "bio": "The original MBA admissions consultant. Former Director of Communications at MIT Sloan who started HBSGuru.com in 1995, making him one of the first people to offer MBA admissions consulting as a service. Has placed hundreds of applicants into HBS, Wharton, Stanford, and other M7 schools. His 'Fridays with Sandy' column on Poets&Quants is a long-running fixture in the admissions world.",
+      "tags": ["HBS Expert", "Pioneer", "Poets&Quants"],
+      "tier": "leader"
+    },
+    {
+      "rank": 4,
+      "name": "Stacy Blackman",
+      "title": "Founder",
+      "company": "Stacy Blackman Consulting",
+      "linkedin_url": "https://www.linkedin.com/in/stacyblackman/",
+      "bio": "Kellogg MBA who founded SBC in 2001 and grew it into one of the largest admissions consulting firms in the industry. Her panel of 30+ consultants includes former admissions officers from HBS, Stanford GSB, and Wharton. She's been featured in the Wall Street Journal, Fortune, and Bloomberg Businessweek. The firm's track record spans thousands of successful admits across all top programs.",
+      "tags": ["Admissions Consulting", "HBS", "Stanford"],
+      "tier": "leader"
+    },
+    {
+      "rank": 5,
+      "name": "Linda Abraham",
+      "title": "Founder & CEO",
+      "company": "Accepted.com",
+      "linkedin_url": "https://www.linkedin.com/in/lindaabraham/",
+      "bio": "Founded Accepted.com in 1994, making it one of the oldest MBA admissions consulting firms in existence. Her Admissions Straight Talk podcast has run for years, providing free admissions advice to a broad audience. She was one of the dominant voices on early business school message boards alongside Sandy Kreisberg, helping shape the online MBA admissions advice industry before social media existed.",
+      "tags": ["Admissions Pioneer", "Podcast", "Accepted.com"],
+      "tier": "leader"
+    },
+    {
+      "rank": 6,
+      "name": "Betsy Massar",
+      "title": "Founder",
+      "company": "Master Admissions",
+      "linkedin_url": "https://www.linkedin.com/in/betsymassar/",
+      "bio": "Harvard Business School MBA who spent 10+ years as an admissions consultant focused exclusively on top-tier programs. Her clients consistently land at M7 schools, and she's become one of the most-recommended individual consultants in MBA forums. Known for her direct, no-fluff approach to application strategy, she tells candidates what they need to hear, not what they want to hear.",
+      "tags": ["HBS Grad", "M7 Focus", "Direct Approach"],
+      "tier": "leader"
+    },
+    {
+      "rank": 7,
+      "name": "Matt Symonds",
+      "title": "Co-Founder",
+      "company": "Fortuna Admissions",
+      "linkedin_url": "https://www.linkedin.com/in/mattsymonds/",
+      "bio": "Co-founded Fortuna Admissions in 2012 after co-founding QS (the global university ranking company) and the World MBA Tour. Fortuna's team includes former admissions directors from Wharton, INSEAD, HBS, and Stanford GSB. The firm earned a 9.90 satisfaction score on Poets&Quants with 136 positive reviews. His dual perspective as a rankings creator and admissions advisor is unique in the space.",
+      "tags": ["Fortuna", "QS Rankings", "Global"],
+      "tier": "leader"
+    },
+    {
+      "rank": 8,
+      "name": "Rajdeep Chimni",
+      "title": "Founder",
+      "company": "Admissions Gateway",
+      "linkedin_url": "https://www.linkedin.com/in/rajdeepchimni/",
+      "bio": "Earned a perfect 10.0 client satisfaction score on Poets&Quants in 2025 with 38 favorable reviews. His clients secured 185 M7 admits in the 2023-2024 cycle alone, with 275+ invites into Top 12 programs. Based in India, he's proven that world-class admissions consulting doesn't require a US zip code. His structured, data-driven approach to application strategy consistently produces outsized results.",
+      "tags": ["Top Ranked", "M7 Results", "Data-Driven"],
+      "tier": "leader"
+    },
+    {
+      "rank": 9,
+      "name": "Maria Wich-Vila",
+      "title": "Founder",
+      "company": "ApplicantLab",
+      "linkedin_url": "https://www.linkedin.com/in/mariawv/",
+      "bio": "Harvard Business School MBA who founded ApplicantLab in 2012 to make admissions consulting accessible to everyone, not just people who can afford $5,000+ consulting packages. Her self-service platform gives applicants the same strategic guidance as premium consultants at a fraction of the cost. She's the democratizer of MBA admissions advice, and her MBA Insider Podcast is one of the most practical shows in the space.",
+      "tags": ["Accessible Admissions", "HBS Grad", "Platform"],
+      "tier": "leader"
+    },
+    {
+      "rank": 10,
+      "name": "Alice van Harten",
+      "title": "Founding Partner",
+      "company": "Menlo Coaching",
+      "linkedin_url": "https://www.linkedin.com/in/alicevanharten/",
+      "bio": "The only MBA admissions consultant to appear on all 7 of Poets&Quants' annual rankings since the debut list in 2017. Menlo Coaching earned a near-perfect 9.98/10 NPS, the highest of any firm ranked. She charges $20,000 for a three-school package, the premium end of the market, and her results justify the price. Known for an extremely structured, research-backed process that leaves nothing to chance.",
+      "tags": ["Top Ranked", "Premium", "Research-Backed"],
+      "tier": "leader"
+    },
+    {
+      "rank": 11,
+      "name": "Chioma Isiadinso",
+      "title": "Founder & CEO",
+      "company": "EXPARTUS",
+      "linkedin_url": "https://www.linkedin.com/in/chiomaisiadinso/",
+      "bio": "Former admissions board member at Harvard Business School and former Director of Admissions at Carnegie Mellon's Heinz College. One of the few consultants who's actually sat on the other side of the table at a top program. Author of 'The Best Business Schools' Admissions Secrets.' Her insider perspective on what adcoms actually look for is more credible than most because she's lived it.",
+      "tags": ["Former Adcom", "HBS", "Author"],
+      "tier": "rising"
+    },
+    {
+      "rank": 12,
+      "name": "Scott Edinburgh",
+      "title": "MBA Admissions Consultant",
+      "company": "Independent",
+      "linkedin_url": "https://www.linkedin.com/in/scottedinburgh/",
+      "bio": "Ranked #2 in Poets&Quants' 2025 individual consultant rankings with a 9.97 satisfaction score. His client list reads like an M7 matriculation report. Works as an independent consultant, which means his clients get his direct attention rather than being handed off to junior associates. The high ranking with an independent practice proves that results, not firm size, drive reputation.",
+      "tags": ["Top Ranked", "Independent", "Results"],
+      "tier": "rising"
+    },
+    {
+      "rank": 13,
+      "name": "Judith Silverman Hodara",
+      "title": "Co-Founder",
+      "company": "Fortuna Admissions",
+      "linkedin_url": "https://www.linkedin.com/in/judithsilvermanhodara/",
+      "bio": "Co-founded Fortuna after serving as Acting Director of MBA Admissions at Wharton. She's one of the few consultants who ran admissions at a top-3 program before switching to consulting. Her Wharton expertise is obvious, but her broader knowledge of how adcoms at peer schools evaluate candidates makes her advice applicable across the M7.",
+      "tags": ["Former Wharton Adcom", "Fortuna", "Insider"],
+      "tier": "rising"
+    },
+    {
+      "rank": 14,
+      "name": "Caroline Diarte-Edwards",
+      "title": "Co-Founder",
+      "company": "Fortuna Admissions",
+      "linkedin_url": "https://www.linkedin.com/in/carolinediarteedwards/",
+      "bio": "Co-founded Fortuna after a career at INSEAD where she held senior roles in admissions and program management. Her INSEAD background makes her the go-to voice for candidates considering European MBA programs. She brings a global perspective that US-centric consultants often lack, especially valuable for international applicants deciding between US and European schools.",
+      "tags": ["INSEAD Expert", "European MBA", "Global"],
+      "tier": "rising"
+    },
+    {
+      "rank": 15,
+      "name": "Eli David",
+      "title": "Founder",
+      "company": "Ellin Lolis Consulting",
+      "linkedin_url": "https://www.linkedin.com/in/elidavid/",
+      "bio": "Accumulated 20 perfect 10.0 client satisfaction ratings on Poets&Quants. Specializes in international applicants and has built a consulting practice with particularly strong results for candidates from India, Brazil, and other high-competition applicant pools. His understanding of how adcoms evaluate international profiles gives his clients an edge in the most competitive demographics.",
+      "tags": ["International Focus", "Top Rated", "Perfect Scores"],
+      "tier": "rising"
+    },
+    {
+      "rank": 16,
+      "name": "Candy Lee LaBalle",
+      "title": "MBA Admissions Consultant",
+      "company": "Independent",
+      "linkedin_url": "https://www.linkedin.com/in/candyleelaballe/",
+      "bio": "Accumulated 25 perfect client satisfaction scores on Poets&Quants, the most of any individual consultant. That's not a ranking, it's a client verdict. She works independently and maintains a small client roster, which means she's selective about who she takes on. The perfect score count speaks louder than any marketing copy.",
+      "tags": ["Most Perfect Scores", "Independent", "Selective"],
+      "tier": "rising"
+    },
+    {
+      "rank": 17,
+      "name": "Alex Cheatham",
+      "title": "Founder",
+      "company": "GMAT Ninja",
+      "linkedin_url": "https://www.linkedin.com/in/alexcheatham/",
+      "bio": "Built GMAT Ninja into one of the most respected GMAT tutoring brands through YouTube content that's been viewed millions of times. His free video lessons on quantitative and verbal strategy have helped more applicants improve their scores than most paid prep courses. He proved that building authority through free content creates a tutoring business that premium pricing alone can't replicate.",
+      "tags": ["GMAT Prep", "YouTube", "Test Strategy"],
+      "tier": "rising"
+    },
+    {
+      "rank": 18,
+      "name": "Petia Whitmore",
+      "title": "Founder",
+      "company": "My MBA Path",
+      "linkedin_url": "https://www.linkedin.com/in/petiawhitmore/",
+      "bio": "Former Director of Admissions at Babson's Olin School and former Assistant Dean at Georgetown McDonough. Earned 16 perfect satisfaction scores on Poets&Quants. Her background running admissions at strong-but-not-M7 programs gives her a practical perspective for the majority of applicants who are targeting top-20 schools, not just the top 7.",
+      "tags": ["Former Adcom", "Top-20 Focus", "Practical"],
+      "tier": "rising"
+    },
+    {
+      "rank": 19,
+      "name": "Devi Vallabhaneni",
+      "title": "MBA Admissions Consultant",
+      "company": "V Admissions",
+      "linkedin_url": "https://www.linkedin.com/in/devivallabhaneni/",
+      "bio": "Ranked #3 on Poets&Quants' 2025 individual consultant list with a 9.69 satisfaction score. Her practice is focused on candidates with non-traditional backgrounds, helping them frame their experiences in ways that resonate with adcoms used to seeing bankers and consultants. That niche focus means she sees patterns in successful non-traditional applications that generalist consultants miss.",
+      "tags": ["Non-Traditional", "Top Ranked", "Niche Focus"],
+      "tier": "rising"
+    },
+    {
+      "rank": 20,
+      "name": "Nisha Kaul",
+      "title": "MBA Admissions Consultant",
+      "company": "Independent",
+      "linkedin_url": "https://www.linkedin.com/in/nishakaul/",
+      "bio": "Earned 16 perfect satisfaction scores on Poets&Quants, tying with Petia Whitmore for one of the highest counts among individual consultants. Her practice focuses on MBA admissions strategy for candidates from healthcare, tech, and non-profit backgrounds. She brings a methodical, evidence-based approach to application positioning that her clients consistently praise.",
+      "tags": ["Top Rated", "Healthcare", "Independent"],
+      "tier": "rising"
+    },
+    {
+      "rank": 21,
+      "name": "Jon Frank",
+      "title": "Founder & CEO",
+      "company": "Admissionado",
+      "linkedin_url": "https://www.linkedin.com/in/jonfrank1/",
+      "bio": "Founded Admissionado in 2007 and has reviewed over 35,000 applications. The firm claims a 96-97% success rate for premium clients. His team focuses on storytelling, strategic planning, and interview preparation. Admissionado was one of the first firms to scale admissions consulting beyond a solo-practitioner model into a full-service operation with global reach.",
+      "tags": ["Storytelling", "Scale", "Global"],
+      "tier": "rising"
+    },
+    {
+      "rank": 22,
+      "name": "Mandy Woodroof",
+      "title": "Senior Editor",
+      "company": "Poets&Quants",
+      "linkedin_url": "https://www.linkedin.com/in/mandywoodroof/",
+      "bio": "Senior editor at Poets&Quants covering MBA rankings, admissions trends, and career outcomes. Her reporting on application volume shifts, acceptance rate changes, and employment data shapes how candidates and schools alike understand the MBA market. She's the journalist who breaks the stories that admissions consultants then advise their clients about.",
+      "tags": ["Journalism", "Rankings", "Market Data"],
+      "tier": "rising"
+    },
+    {
+      "rank": 23,
+      "name": "Soojin Kwon",
+      "title": "Managing Director of Full-Time MBA Admissions (former)",
+      "company": "Michigan Ross",
+      "linkedin_url": "https://www.linkedin.com/in/soojinkwon/",
+      "bio": "Former Managing Director of Full-Time MBA Admissions at Michigan Ross, where she was one of the most transparent and accessible admissions leaders in the top-20 space. Her blog posts and interviews gave applicants rare insight into how admissions decisions actually get made. She's now transitioned to consulting, bringing a decade of direct admissions leadership experience.",
+      "tags": ["Former Adcom", "Transparency", "Michigan Ross"],
+      "tier": "rising"
+    },
+    {
+      "rank": 24,
+      "name": "Brett Ethridge",
+      "title": "Founder",
+      "company": "Dominate the GMAT",
+      "linkedin_url": "https://www.linkedin.com/in/brettethridge/",
+      "bio": "Built Dominate the GMAT into a well-known prep brand focusing on accessible, structured study plans for working professionals. His approach acknowledges that most MBA applicants are studying while holding full-time jobs, which means efficiency matters more than total study hours. His free GMAT study guides and YouTube content have helped thousands of applicants hit their target scores.",
+      "tags": ["GMAT Prep", "Working Professionals", "Study Plans"],
+      "tier": "rising"
+    },
+    {
+      "rank": 25,
+      "name": "Shelly Heinrich",
+      "title": "Founder",
+      "company": "Apogee Admissions",
+      "linkedin_url": "https://www.linkedin.com/in/shellyheinrich/",
+      "bio": "Wharton MBA and former management consultant who founded Apogee Admissions. Known for working with military and government applicants who are transitioning to business school, a niche that most generalist consultants don't serve well. Her understanding of how to translate military leadership into MBA application language has helped dozens of veterans land at top programs.",
+      "tags": ["Military Applicants", "Wharton Grad", "Niche"],
+      "tier": "rising"
+    }
+  ]
+}
