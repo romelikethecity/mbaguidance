@@ -8043,6 +8043,14 @@ def html_head(title, description, canonical_path, og_image=None, schema=""):
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/assets/css/style.css?v={CSS_VERSION}">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0ZQVR88NY"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-N0ZQVR88NY');
+  </script>
   {schema}
 </head>
 <body>"""
