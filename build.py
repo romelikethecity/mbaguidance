@@ -8118,6 +8118,8 @@ def footer_html():
         <a href="https://thecroreport.com" target="_blank" rel="noopener">The CRO Report</a>
         <a href="https://theaimarketpulse.com" target="_blank" rel="noopener">AI Market Pulse</a>
         <a href="https://fractionalpulse.com" target="_blank" rel="noopener">Fractional Pulse</a>
+        <a href="https://execsignals.com" target="_blank" rel="noopener">ExecSignals</a>
+        <a href="https://thegtmindex.com" target="_blank" rel="noopener">The GTM Index</a>
       </div>
     </div>
     <div class="footer-bottom">
