@@ -9515,14 +9515,47 @@ def build_newsletter():
         </ul>
 
         <div class="newsletter-form">
-          <form action="https://buttondown.com/api/emails/embed-subscribe/mbaguidance" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/mbaguidance', 'popupwindow')" class="embeddable-buttondown-form">
-            <div style="display: flex; gap: 12px; max-width: 480px;">
+          <form onsubmit="handleSignup(event)" style="max-width: 480px;">
+            <div style="display: flex; gap: 12px;">
               <input type="email" name="email" placeholder="your@email.com" required style="flex: 1; padding: 12px 16px; border: 1px solid #D4CFC4; border-radius: 2px; font-size: 16px;">
               <button type="submit" class="btn btn-accent">Subscribe</button>
             </div>
             <p style="font-size: 12px; color: #6B7280; margin-top: 8px;">Free. No spam. Unsubscribe anytime.</p>
           </form>
+          <div id="signup-msg" style="margin-top: 8px; font-size: 14px;"></div>
         </div>
+        <script>
+        async function handleSignup(e) {{
+          e.preventDefault();
+          const form = e.target;
+          const email = form.email.value;
+          const btn = form.querySelector('button');
+          const msg = document.getElementById('signup-msg');
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+          try {{
+            const res = await fetch('https://newsletter-subscribe.rome-workers.workers.dev/subscribe', {{
+              method: 'POST',
+              headers: {{'Content-Type': 'application/json'}},
+              body: JSON.stringify({{email, list: 'mbaguidance'}})
+            }});
+            const data = await res.json();
+            if (data.ok) {{
+              msg.style.color = '#059669';
+              msg.textContent = "You're in. We'll keep you posted.";
+              form.email.value = '';
+            }} else {{
+              throw new Error(data.error || 'Something went wrong');
+            }}
+          }} catch(err) {{
+            msg.style.color = '#DC2626';
+            msg.textContent = err.message;
+          }} finally {{
+            btn.disabled = false;
+            btn.textContent = 'Subscribe';
+          }}
+        }}
+        </script>
 
         <h3>Who it's for</h3>
         <p>Prospective MBA applicants researching programs. Current MBA students tracking the job market. Recent grads benchmarking compensation. Anyone who wants real data instead of admissions marketing.</p>
