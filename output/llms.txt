@@ -7,7 +7,7 @@
 - [All Schools](https://mbaguidance.com/schools/): 150 MBA program profiles
 - [Compare Programs](https://mbaguidance.com/compare/): Side-by-side school comparisons
 - [Guides](https://mbaguidance.com/guides/): Admissions strategy and career guides
-- [Blog](https://mbaguidance.com/blog/): "Is [School] Worth It?" analyses
+- [Blog](https://mbaguidance.com/blog/): School analysis articles
 - [Newsletter](https://mbaguidance.com/newsletter/)
 
 ## School Profiles (M7 + Top Programs)
@@ -37,10 +37,7 @@ Each school profile includes sub-pages: /acceptance-rate/, /class-profile/, /dea
 - [Best for Career Changers](https://mbaguidance.com/rankings/career-changers/)
 - [Best for Private Equity/VC](https://mbaguidance.com/rankings/private-equity-vc/)
 - [Best for Data Science/AI](https://mbaguidance.com/rankings/data-science-ai/)
-- [Best for Healthcare](https://mbaguidance.com/rankings/healthcare/)
-- [Best for Marketing](https://mbaguidance.com/rankings/marketing/)
 - [Best for Product Management](https://mbaguidance.com/rankings/product-management/)
-- [Best Value](https://mbaguidance.com/rankings/value/)
 
 ## Admissions Guides
 - [GMAT vs GRE](https://mbaguidance.com/guides/gmat-vs-gre/)
@@ -51,9 +48,6 @@ Each school profile includes sub-pages: /acceptance-rate/, /class-profile/, /dea
 - [Best MBA for Finance](https://mbaguidance.com/guides/best-mba-for-finance/)
 - [Best MBA for Consulting](https://mbaguidance.com/guides/best-mba-for-consulting/)
 - [Best MBA for Career Changers](https://mbaguidance.com/guides/best-mba-for-career-changers/)
-- [Best MBA for Engineers](https://mbaguidance.com/guides/best-mba-for-engineers/)
-- [Best MBA for Military](https://mbaguidance.com/guides/best-mba-for-military/)
-- [Best MBA for International Students](https://mbaguidance.com/guides/best-mba-for-international-students/)
 
 ## Tools
 - [ROI Calculator](https://mbaguidance.com/tools/roi-calculator/)

@@ -11537,9 +11537,12 @@ def build_sitemap():
     for g in GUIDES:
         urls.append(f"/guides/{g['slug']}/")
     urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/roi-calculator/", "/tools/gmat-calculator/"])
-    # Blog posts
-    for s in sorted(SCHOOLS, key=lambda x: x["ranking"])[:25]:
+    # Blog posts — ALL school ROI posts
+    for s in SCHOOLS:
         urls.append(f"/blog/is-{s['slug']}-worth-it/")
+    # Standalone blog posts
+    for bp in STANDALONE_BLOG_POSTS:
+        urls.append(f"/blog/{bp['slug']}/")
     # Metro pages
     urls.append("/locations/")
     for m in METRO_AREAS:
@@ -11550,12 +11553,16 @@ def build_sitemap():
     # Program format guides
     for g in PROGRAM_FORMAT_GUIDES:
         urls.append(f"/guides/{g['slug']}/")
-    # Salary guides
+    # Salary hub + guides
+    urls.append("/salary/")
     for g in SALARY_GUIDES:
         urls.append(f"/salary/{g['slug']}/")
-    # FAQ pages
+    # Answers hub + FAQ pages
+    urls.append("/answers/")
     for f in FAQ_PAGES:
         urls.append(f"/answers/{f['slug']}/")
+    # Voices
+    urls.append("/voices/")
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -12240,6 +12247,53 @@ def build_salary_guides():
         write_page(os.path.join(OUTPUT_DIR, "salary", g["slug"], "index.html"), content)
     print(f"  Built: {len(SALARY_GUIDES)} salary guides")
 
+    # Salary hub/index page
+    salary_cards = "\n".join(
+        f'<a href="/salary/{g["slug"]}/" class="guide-index-card"><h3>{g["title"]}</h3><p>{g["meta"][:120]}...</p><span class="guide-arrow">&rarr;</span></a>'
+        for g in SALARY_GUIDES
+    )
+    bc = breadcrumb_schema([("Home", "/"), ("Salary Data", "/salary/")])
+    hub = f"""{html_head(
+        f"MBA Salary Data & Compensation Guides ({CURRENT_YEAR}) | {SITE_NAME}",
+        f"MBA salary data by industry, city, and career path. Signing bonus data, five-year earnings trajectories, and compensation benchmarks for {CURRENT_YEAR}.",
+        "/salary/",
+        schema=bc
+    )}
+{nav_html('rankings')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Salary Data &amp; Compensation</h1>
+      <p class="hero-subtitle">What MBAs earn by industry, city, and years of experience.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      <div class="school-section">
+        <p>Salary is the number everyone asks about and the number most MBA websites get wrong. They quote averages without context, mix self-reported survey data with verified employment reports, and ignore the massive variance between industries, geographies, and program tiers.</p>
+        <p>These guides use reported figures from top-25 MBA program employment reports and GMAC surveys. Median base salaries for first-year post-MBA roles, before signing bonuses and equity. Where the data conflicts, we say so.</p>
+      </div>
+      <div class="guide-index-grid">
+        {salary_cards}
+      </div>
+      <div class="school-section">
+        <h2>Related Resources</h2>
+        <ul>
+          <li><a href="/rankings/salary/">Highest Salary Rankings</a></li>
+          <li><a href="/guides/mba-roi-analysis/">MBA ROI Analysis Guide</a></li>
+          <li><a href="/tools/roi-calculator/">ROI Calculator</a></li>
+          <li><a href="/blog/real-cost-of-mba/">The Real Cost of an MBA</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "salary", "index.html"), hub)
+    print("  Built: /salary/ hub")
+
 
 # =============================================================================
 # FAQ PAGES
@@ -12314,6 +12368,53 @@ def build_faq_pages():
 {footer_html()}"""
         write_page(os.path.join(OUTPUT_DIR, "answers", fq["slug"], "index.html"), page)
     print(f"  Built: {len(FAQ_PAGES)} FAQ pages")
+
+    # Answers hub/index page
+    answer_cards = "\n".join(
+        f'<a href="/answers/{fq["slug"]}/" class="guide-index-card"><h3>{fq["question"]}</h3><p>{fq["meta"][:120]}...</p><span class="guide-arrow">&rarr;</span></a>'
+        for fq in FAQ_PAGES
+    )
+    bc = breadcrumb_schema([("Home", "/"), ("Answers", "/answers/")])
+    hub = f"""{html_head(
+        f"MBA Admissions Questions Answered ({CURRENT_YEAR}) | {SITE_NAME}",
+        f"Direct answers to the most common MBA admissions questions. GMAT scores, work experience, program types, and career ROI for {CURRENT_YEAR}.",
+        "/answers/",
+        schema=bc
+    )}
+{nav_html('guides')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Admissions Questions, Answered</h1>
+      <p class="hero-subtitle">No fluff. Straight answers backed by data.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow guide-content">
+      {byline_html()}
+      <div class="school-section">
+        <p>Every MBA applicant has the same handful of questions. What GMAT score do I need? Can I apply without work experience? Is the MBA even worth it for my career? The answers are rarely simple, but they shouldn't be buried under 3,000 words of filler either.</p>
+        <p>Each page below gives you the data-backed answer first, then the context behind it. If you want the deep dive, follow the links to our full guides and school profiles.</p>
+      </div>
+      <div class="guide-index-grid">
+        {answer_cards}
+      </div>
+      <div class="school-section">
+        <h2>Go Deeper</h2>
+        <ul>
+          <li><a href="/guides/">All Admissions &amp; Career Guides</a></li>
+          <li><a href="/schools/">150 School Profiles</a></li>
+          <li><a href="/tools/gmat-calculator/">GMAT Target Score Calculator</a></li>
+          <li><a href="/blog/">Blog: ROI Analysis &amp; Career Intel</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "answers", "index.html"), hub)
+    print("  Built: /answers/ hub")
 
 
 # =============================================================================
