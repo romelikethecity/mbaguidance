@@ -8289,13 +8289,13 @@ def build_homepage():
       <div class="homepage-headline">
         <h1>Pick the right MBA without the 200+ hour research project.</h1>
         <p class="homepage-subtitle">Real acceptance rates, salary data, and honest verdicts. From someone who went through it.</p>
-        <div class="homepage-newsletter">
-          <p class="homepage-nl-label">Get weekly MBA hiring intel free:</p>
-          <form onsubmit="handleNewsletterSignup(event)" class="nl-form homepage-nl-form">
-            <input type="email" placeholder="your@email.com" required>
+        <div style="margin-top: 28px; text-align: center;">
+          <p style="font-size: 1.1rem; color: #0A1628; margin: 0 0 14px; font-weight: 700;">Get weekly MBA hiring intel free:</p>
+          <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 460px; margin: 0 auto;">
+            <input type="email" placeholder="your@email.com" required style="padding: 14px 16px; border: 2px solid #0A1628; border-radius: 2px; font-size: 16px; background: #fff; color: #0A1628; flex: 1;">
             <button type="submit" class="btn btn-accent">Subscribe</button>
           </form>
-          <div class="nl-msg"></div>
+          <div class="nl-msg" style="text-align: center;"></div>
         </div>
       </div>
     </div>
