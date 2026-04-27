@@ -60,3 +60,34 @@ function getCardValue(card, key) {
       return 0;
   }
 }
+
+// Newsletter inline signup
+function handleNewsletterSignup(e) {
+  e.preventDefault();
+  var form = e.target;
+  var email = form.querySelector('input[type="email"]').value;
+  var btn = form.querySelector('button');
+  var msg = form.parentElement.querySelector('.nl-msg');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  fetch('https://newsletter-subscribe.rome-workers.workers.dev/subscribe', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({email: email, list: 'mbaguidance'})
+  }).then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        msg.style.color = '#059669';
+        msg.textContent = "You're in. First issue lands next week.";
+        form.querySelector('input[type="email"]').value = '';
+      } else {
+        throw new Error(data.error || 'Something went wrong');
+      }
+    }).catch(function(err) {
+      msg.style.color = '#DC2626';
+      msg.textContent = err.message;
+    }).finally(function() {
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    });
+}

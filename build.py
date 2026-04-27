@@ -16,7 +16,7 @@ AUTHOR = "Rome Thorndike"
 AUTHOR_CREDENTIAL = "Berkeley Haas MBA"
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-CSS_VERSION = 8
+CSS_VERSION = 9
 DATE_PUBLISHED = "2026-02-01"
 DATE_MODIFIED = "2026-03-01"
 
@@ -8145,6 +8145,21 @@ def byline_html():
 </div>"""
 
 
+def newsletter_cta_html():
+    return """
+<div class="newsletter-inline-cta">
+  <div class="nl-inner">
+    <p class="nl-headline">Get MBA hiring data in your inbox every week.</p>
+    <p class="nl-sub">Which companies are hiring, what they're paying, and which programs are placing. Free.</p>
+    <form onsubmit="handleNewsletterSignup(event)" class="nl-form">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit" class="btn btn-accent">Subscribe</button>
+    </form>
+    <div class="nl-msg"></div>
+  </div>
+</div>"""
+
+
 def school_card_html(school, show_verdict=True):
     s = school
     salary_k = s["avg_salary"] // 1000
@@ -8428,8 +8443,13 @@ def build_homepage():
     <div class="container" style="text-align: center; max-width: 600px;">
       <p class="hero-eyebrow" style="color: var(--color-accent);">Free Weekly Newsletter</p>
       <h2 style="color: #fff;">Who's hiring MBAs this week?</h2>
-      <p style="color: var(--color-text-on-dark-secondary); margin: 16px auto 24px;">Companies hiring MBA grads, salary trends, and which programs are placing. No spam.</p>
-      <a href="/newsletter/" class="btn btn-accent" style="border-bottom: none;">Subscribe &rarr;</a>
+      <p style="color: var(--color-text-on-dark-secondary); margin: 16px auto 24px;">Companies hiring MBA grads, salary trends, and which programs are placing. One email, every week.</p>
+      <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 440px; margin: 0 auto;">
+        <input type="email" placeholder="your@email.com" required>
+        <button type="submit" class="btn btn-accent">Subscribe</button>
+      </form>
+      <div class="nl-msg" style="margin-top: 8px;"></div>
+      <p style="font-size: 12px; color: var(--color-text-on-dark-secondary); margin-top: 8px; opacity: 0.7;">No spam. Unsubscribe anytime.</p>
     </div>
   </section>
 </main>
@@ -8746,6 +8766,8 @@ def build_school_profiles():
         <p class="text-secondary" style="font-size: 13px;">See also: {ranking_links} &middot; <a href="/guides/mba-roi-analysis/">Is an MBA Worth It?</a> &middot; <a href="/guides/gmat-vs-gre/">GMAT vs GRE Guide</a>{guide_links_html}</p>
       </div>
 
+      {newsletter_cta_html()}
+
       {byline_html()}
 
     </div>
@@ -8886,6 +8908,8 @@ def build_comparison_pages():
         <h2>Frequently Asked Questions</h2>
         {''.join(f'<div class="faq-item"><h3>{q}</h3><p>{ans}</p></div>' for q, ans in c["faq"])}
       </div>""" if c.get("faq") else ""}
+
+      {newsletter_cta_html()}
 
       {byline_html()}
     </div>
@@ -9269,6 +9293,8 @@ def build_school_subpages():
         </div>
       </div>
 
+      {newsletter_cta_html()}
+
       {byline_html()}
     </div>
   </section>
@@ -9402,11 +9428,7 @@ def build_guide_pages():
       {faq_html}
       {see_also_html}
 
-      <div class="affiliate-cta">
-        <div class="gold-rule"></div>
-        <p>Ready to start your MBA journey?</p>
-        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
-      </div>
+      {newsletter_cta_html()}
     </div>
   </section>
 </main>
@@ -11157,11 +11179,7 @@ def build_standalone_blog_posts():
       <div class="school-section">
         <p class="text-secondary" style="font-size: 13px;">See also: <a href="/rankings/overall/">Overall Rankings</a> &middot; <a href="/tools/roi-calculator/">ROI Calculator</a> &middot; <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a></p>
       </div>
-      <div class="affiliate-cta">
-        <div class="gold-rule"></div>
-        <p>Ready to start your MBA journey?</p>
-        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
-      </div>
+      {newsletter_cta_html()}
     </div>
   </section>
 </main>
@@ -11277,6 +11295,7 @@ def build_blog_posts():
         <h2>Frequently Asked Questions</h2>
         {blog_faq_html}
       </div>
+      {newsletter_cta_html()}
       {byline_html()}
     </div>
   </section>
@@ -11802,11 +11821,7 @@ def build_metro_pages():
         <p class="text-secondary" style="font-size: 13px;">See also: <a href="/schools/">All Schools</a> &middot; <a href="/rankings/overall/">Overall Rankings</a> &middot; <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a></p>
       </div>
 
-      <div class="affiliate-cta">
-        <div class="gold-rule"></div>
-        <p>Ready to start your MBA journey?</p>
-        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
-      </div>
+      {newsletter_cta_html()}
     </div>
   </section>
 </main>
@@ -11993,11 +12008,7 @@ def build_admissions_guides():
       {byline_html()}
       {sections_html}
       {faq_html}
-      <div class="affiliate-cta">
-        <div class="gold-rule"></div>
-        <p>Ready to start your MBA journey?</p>
-        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
-      </div>
+      {newsletter_cta_html()}
     </div>
   </section>
 </main>
@@ -12120,11 +12131,7 @@ def build_program_format_guides():
       <div class="school-section">
         <p class="text-secondary" style="font-size: 13px;">See also: <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a> &middot; <a href="/guides/mba-application-timeline/">Application Timeline</a> &middot; <a href="/rankings/overall/">Overall Rankings</a></p>
       </div>
-      <div class="affiliate-cta">
-        <div class="gold-rule"></div>
-        <p>Ready to start your MBA journey?</p>
-        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
-      </div>
+      {newsletter_cta_html()}
     </div>
   </section>
 </main>
@@ -12235,11 +12242,7 @@ def build_salary_guides():
       <div class="school-section">
         <p class="text-secondary" style="font-size: 13px;">See also: <a href="/rankings/salary/">Highest Salary Rankings</a> &middot; <a href="/guides/mba-roi-analysis/">MBA ROI Analysis</a> &middot; <a href="/tools/roi-calculator/">ROI Calculator</a></p>
       </div>
-      <div class="affiliate-cta">
-        <div class="gold-rule"></div>
-        <p>Ready to start your MBA journey?</p>
-        <a href="#" class="btn btn-accent affiliate-link">Get GMAT Prep Resources &rarr;</a>
-      </div>
+      {newsletter_cta_html()}
     </div>
   </section>
 </main>
