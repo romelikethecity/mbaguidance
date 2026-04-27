@@ -16,7 +16,7 @@ AUTHOR = "Rome Thorndike"
 AUTHOR_CREDENTIAL = "Berkeley Haas MBA"
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-CSS_VERSION = 9
+CSS_VERSION = 10
 DATE_PUBLISHED = "2026-02-01"
 DATE_MODIFIED = "2026-03-01"
 
@@ -8289,6 +8289,14 @@ def build_homepage():
       <div class="homepage-headline">
         <h1>Pick the right MBA without the 200+ hour research project.</h1>
         <p class="homepage-subtitle">Real acceptance rates, salary data, and honest verdicts. From someone who went through it.</p>
+        <div class="homepage-newsletter">
+          <p class="homepage-nl-label">Get weekly MBA hiring intel free:</p>
+          <form onsubmit="handleNewsletterSignup(event)" class="nl-form homepage-nl-form">
+            <input type="email" placeholder="your@email.com" required>
+            <button type="submit" class="btn btn-accent">Subscribe</button>
+          </form>
+          <div class="nl-msg"></div>
+        </div>
       </div>
     </div>
   </section>
