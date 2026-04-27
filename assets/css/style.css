@@ -2003,18 +2003,18 @@ th.sortable.desc::after {
   text-align: center;
 }
 .homepage-nl-label {
-  font-size: 0.95rem;
-  color: var(--color-text-secondary);
-  margin: 0 0 12px;
-  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-text);
+  margin: 0 0 14px;
+  font-weight: 700;
 }
 .homepage-nl-form {
-  max-width: 440px;
+  max-width: 460px;
   margin: 0 auto;
 }
 .homepage-nl-form input[type="email"] {
   padding: 14px 16px;
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-secondary);
   border-radius: 2px;
   font-size: 16px;
   font-family: var(--font-body);

@@ -16,7 +16,7 @@ AUTHOR = "Rome Thorndike"
 AUTHOR_CREDENTIAL = "Berkeley Haas MBA"
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-CSS_VERSION = 10
+CSS_VERSION = 11
 DATE_PUBLISHED = "2026-02-01"
 DATE_MODIFIED = "2026-03-01"
 
