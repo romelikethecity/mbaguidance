@@ -16,7 +16,7 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="/assets/css/style.css?v=11">
+  <link rel="stylesheet" href="/assets/css/style.css?v=12">
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0ZQVR88NY"></script>
   <script>
@@ -45,7 +45,7 @@
         <a href="/guides/" class="nav-link">Guides</a>
         <a href="/voices/" class="nav-link">Top Voices</a>
         <a href="/blog/" class="nav-link">Blog</a>
-        <a href="/newsletter/" class="btn btn-accent nav-cta">Free Newsletter</a>
+        <a href="/newsletter/" class="btn btn-accent nav-cta">Weekly Briefing</a>
       </div>
       <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -126,8 +126,33 @@
     </div>
   </section>
 
-  <!-- This Week -->
+  <!-- Newsletter Preview -->
   <section class="section">
+    <div class="container">
+      <div class="homepage-nl-preview">
+        <div class="nl-preview-text">
+          <h2>The Weekly Briefing</h2>
+          <p>Every week I send a free email with the companies hiring MBAs, what they're paying, and which programs are placing. Sourced from live postings, not self-reported surveys.</p>
+          <ul class="nl-preview-list">
+            <li>Hiring companies + open roles + salary ranges</li>
+            <li>Placement trends by school and industry</li>
+            <li>Admissions intel and deadline reminders</li>
+          </ul>
+          <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 380px;">
+            <input type="email" placeholder="your@email.com" required style="padding: 12px 14px; border: 2px solid #0A1628; border-radius: 2px; font-size: 15px; background: #fff; color: #0A1628; flex: 1;">
+            <button type="submit" class="btn btn-accent">Subscribe</button>
+          </form>
+          <div class="nl-msg"></div>
+        </div>
+        <div class="nl-preview-img">
+          <img src="/assets/newsletter-preview.svg" alt="MBA Guidance Weekly Briefing preview" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- This Week -->
+  <section class="section section-ivory">
     <div class="container">
       <div class="section-header">
         <h2>This Week on MBA Guidance</h2>
