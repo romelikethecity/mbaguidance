@@ -16,7 +16,7 @@ AUTHOR = "Rome Thorndike"
 AUTHOR_CREDENTIAL = "Berkeley Haas MBA"
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-CSS_VERSION = 11
+CSS_VERSION = 12
 DATE_PUBLISHED = "2026-02-01"
 DATE_MODIFIED = "2026-03-01"
 
@@ -8074,7 +8074,7 @@ def nav_html(active=None):
         <a href="/guides/" class="nav-link{cls('guides')}">Guides</a>
         <a href="/voices/" class="nav-link{cls('voices')}">Top Voices</a>
         <a href="/blog/" class="nav-link{cls('blog')}">Blog</a>
-        <a href="/newsletter/" class="btn btn-accent nav-cta">Free Newsletter</a>
+        <a href="/newsletter/" class="btn btn-accent nav-cta">Weekly Briefing</a>
       </div>
       <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -8157,6 +8157,18 @@ def newsletter_cta_html():
     </form>
     <div class="nl-msg"></div>
   </div>
+</div>"""
+
+
+def newsletter_mid_cta_html():
+    return """
+<div class="newsletter-mid-cta">
+  <p class="mid-cta-text"><strong>Get this data weekly.</strong> Companies hiring MBAs, salary intel, placement trends. <a href="/newsletter/">Free newsletter &rarr;</a></p>
+  <form onsubmit="handleNewsletterSignup(event)" class="nl-form mid-cta-form">
+    <input type="email" placeholder="your@email.com" required>
+    <button type="submit" class="btn btn-accent btn-sm">Subscribe</button>
+  </form>
+  <div class="nl-msg"></div>
 </div>"""
 
 
@@ -8327,8 +8339,33 @@ def build_homepage():
     </div>
   </section>
 
-  <!-- This Week -->
+  <!-- Newsletter Preview -->
   <section class="section">
+    <div class="container">
+      <div class="homepage-nl-preview">
+        <div class="nl-preview-text">
+          <h2>The Weekly Briefing</h2>
+          <p>Every week I send a free email with the companies hiring MBAs, what they're paying, and which programs are placing. Sourced from live postings, not self-reported surveys.</p>
+          <ul class="nl-preview-list">
+            <li>Hiring companies + open roles + salary ranges</li>
+            <li>Placement trends by school and industry</li>
+            <li>Admissions intel and deadline reminders</li>
+          </ul>
+          <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 380px;">
+            <input type="email" placeholder="your@email.com" required style="padding: 12px 14px; border: 2px solid #0A1628; border-radius: 2px; font-size: 15px; background: #fff; color: #0A1628; flex: 1;">
+            <button type="submit" class="btn btn-accent">Subscribe</button>
+          </form>
+          <div class="nl-msg"></div>
+        </div>
+        <div class="nl-preview-img">
+          <img src="/assets/newsletter-preview.svg" alt="MBA Guidance Weekly Briefing preview" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- This Week -->
+  <section class="section section-ivory">
     <div class="container">
       <div class="section-header">
         <h2>This Week on MBA Guidance</h2>
@@ -8906,6 +8943,8 @@ def build_comparison_pages():
         </div>
       </div>
 
+      {newsletter_mid_cta_html()}
+
       {''.join(f"""
       <div class="school-section content-narrow">
         <h2>{heading}</h2>
@@ -9433,6 +9472,7 @@ def build_guide_pages():
     <div class="container content-narrow guide-content">
       {byline_html()}
       {sections_html}
+      {newsletter_mid_cta_html()}
       {faq_html}
       {see_also_html}
 
@@ -9535,7 +9575,22 @@ def build_newsletter():
   </section>
   <section class="section">
     <div class="container content-narrow">
+
+      <!-- Newsletter mockup -->
+      <div style="text-align: center; margin-bottom: 40px;">
+        <img src="/assets/newsletter-preview.svg" alt="MBA Guidance Weekly Briefing preview" style="max-width: 480px; width: 100%; border-radius: 8px; box-shadow: 0 4px 24px rgba(10,22,40,0.12);">
+      </div>
+
       <div class="newsletter-signup">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 480px; margin: 0 auto;">
+            <input type="email" placeholder="your@email.com" required style="padding: 14px 16px; border: 2px solid #0A1628; border-radius: 2px; font-size: 16px; background: #fff; color: #0A1628; flex: 1;">
+            <button type="submit" class="btn btn-accent">Subscribe</button>
+          </form>
+          <div class="nl-msg" style="margin-top: 8px;"></div>
+          <p style="font-size: 13px; color: #6B7280; margin-top: 10px;">Free. No spam. Unsubscribe anytime. Joins MBA applicants and grads already reading.</p>
+        </div>
+
         <h3>What you get</h3>
         <ul class="newsletter-features">
           <li><strong>Companies actively hiring MBAs:</strong> sourced from live job postings, updated weekly</li>
@@ -9543,49 +9598,6 @@ def build_newsletter():
           <li><strong>Program placement trends:</strong> which schools are placing into which companies and industries</li>
           <li><strong>Admissions intel:</strong> deadline reminders, application tips, and the occasional honest take</li>
         </ul>
-
-        <div class="newsletter-form">
-          <form onsubmit="handleSignup(event)" style="max-width: 480px;">
-            <div style="display: flex; gap: 12px;">
-              <input type="email" name="email" placeholder="your@email.com" required style="flex: 1; padding: 12px 16px; border: 1px solid #D4CFC4; border-radius: 2px; font-size: 16px;">
-              <button type="submit" class="btn btn-accent">Subscribe</button>
-            </div>
-            <p style="font-size: 12px; color: #6B7280; margin-top: 8px;">Free. No spam. Unsubscribe anytime.</p>
-          </form>
-          <div id="signup-msg" style="margin-top: 8px; font-size: 14px;"></div>
-        </div>
-        <script>
-        async function handleSignup(e) {{
-          e.preventDefault();
-          const form = e.target;
-          const email = form.email.value;
-          const btn = form.querySelector('button');
-          const msg = document.getElementById('signup-msg');
-          btn.disabled = true;
-          btn.textContent = 'Sending...';
-          try {{
-            const res = await fetch('https://newsletter-subscribe.rome-workers.workers.dev/subscribe', {{
-              method: 'POST',
-              headers: {{'Content-Type': 'application/json'}},
-              body: JSON.stringify({{email, list: 'mbaguidance'}})
-            }});
-            const data = await res.json();
-            if (data.ok) {{
-              msg.style.color = '#059669';
-              msg.textContent = "You're in. We'll keep you posted.";
-              form.email.value = '';
-            }} else {{
-              throw new Error(data.error || 'Something went wrong');
-            }}
-          }} catch(err) {{
-            msg.style.color = '#DC2626';
-            msg.textContent = err.message;
-          }} finally {{
-            btn.disabled = false;
-            btn.textContent = 'Subscribe';
-          }}
-        }}
-        </script>
 
         <h3>Who it's for</h3>
         <p>Prospective MBA applicants researching programs. Current MBA students tracking the job market. Recent grads benchmarking compensation. Anyone who wants real data instead of admissions marketing.</p>
