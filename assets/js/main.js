@@ -80,6 +80,20 @@ function handleNewsletterSignup(e) {
         msg.style.color = '#059669';
         msg.textContent = "You're in. First issue lands next week.";
         form.querySelector('input[type="email"]').value = '';
+        if (typeof gtag === 'function') {
+          var loc = form.closest('.homepage-nl-preview') ? 'homepage_preview'
+            : form.closest('.homepage-headline') ? 'homepage_hero'
+            : form.closest('.newsletter-mid-cta') ? 'mid_content'
+            : form.closest('.newsletter-inline-cta') ? 'bottom_cta'
+            : form.closest('.newsletter-signup') ? 'newsletter_page'
+            : form.closest('.section-dark') ? 'homepage_footer'
+            : 'unknown';
+          gtag('event', 'newsletter_signup', {
+            event_category: 'engagement',
+            event_label: loc,
+            page_path: window.location.pathname
+          });
+        }
       } else {
         throw new Error(data.error || 'Something went wrong');
       }
