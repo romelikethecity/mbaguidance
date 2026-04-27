@@ -1,15 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 520" fill="none">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap');
-    .heading { font-family: 'Playfair Display', Georgia, serif; }
-    .body { font-family: 'Source Sans 3', 'Segoe UI', sans-serif; }
+    .heading { font-family: Georgia, 'Times New Roman', serif; }
+    .body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
     @keyframes slideUp {
       0% { opacity: 0; transform: translateY(12px); }
       100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
     }
     @keyframes pulse {
       0%, 100% { opacity: 0.6; }
@@ -52,7 +47,7 @@
     <!-- Company rows -->
     <g class="body" font-size="12">
       <rect x="32" y="152" width="416" height="28" rx="4" fill="#FFFFFF" stroke="#E8E4DC" stroke-width="0.5"/>
-      <text x="44" y="170" fill="#0A1628" font-weight="600">McKinsey & Co.</text>
+      <text x="44" y="170" fill="#0A1628" font-weight="600">McKinsey &amp; Co.</text>
       <text x="200" y="170" fill="#6B7280">Associate — 14 openings</text>
       <rect x="380" y="160" width="56" height="18" rx="9" fill="#0A1628"/>
       <text x="408" y="173" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="600">$198K</text>
