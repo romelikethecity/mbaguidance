@@ -11559,6 +11559,33 @@ document.getElementById('roi-school').addEventListener('change', function() {{
     print("  Built: ROI calculator")
 
 
+REDIRECTS = [
+    ("/full-time-or-part-time/", "/blog/part-time-vs-full-time-mba/"),
+]
+
+
+def build_redirects():
+    for old_path, new_path in REDIRECTS:
+        slug = old_path.strip("/")
+        page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting | {SITE_NAME}</title>
+<link rel="canonical" href="{SITE_URL}{new_path}">
+<meta http-equiv="refresh" content="0;url={SITE_URL}{new_path}">
+<meta name="robots" content="noindex,follow">
+</head>
+<body>
+<p>This page has moved. <a href="{new_path}">Click here</a> if you are not redirected.</p>
+</body>
+</html>"""
+        out_dir = os.path.join(OUTPUT_DIR, slug)
+        os.makedirs(out_dir, exist_ok=True)
+        write_page(os.path.join(out_dir, "index.html"), page)
+    print(f"  Built: {len(REDIRECTS)} redirect(s)")
+
+
 def build_sitemap():
     SUBPAGE_SLUGS = ["acceptance-rate", "class-profile", "deadlines", "essays", "interview", "employment"]
     urls = ["/"]
@@ -12728,6 +12755,7 @@ def main():
     build_faq_pages()
     build_gmat_calculator()
     build_top_voices()
+    build_redirects()
     build_sitemap()
     build_robots()
     build_llms_txt()
