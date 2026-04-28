@@ -8017,7 +8017,7 @@ def article_schema(title, canonical_path, description=""):
     t = title.replace('"', '\\"')
     d = description.replace('"', '\\"') if description else t
     return f"""<script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"BlogPosting","headline":"{t}","description":"{d}","author":{{"@type":"Person","name":"{AUTHOR}","description":"{AUTHOR_CREDENTIAL}","url":"{SITE_URL}/about/"}},"publisher":{{"@type":"Organization","name":"{SITE_NAME}","url":"{SITE_URL}"}},"datePublished":"{DATE_PUBLISHED}","dateModified":"{DATE_MODIFIED}","mainEntityOfPage":"{SITE_URL}{canonical_path}"}}
+{{"@context":"https://schema.org","@type":"BlogPosting","headline":"{t}","description":"{d}","author":{{"@type":"Person","name":"{AUTHOR}","description":"{AUTHOR_CREDENTIAL}","url":"https://www.linkedin.com/in/romethorndike/"}},"publisher":{{"@type":"Organization","name":"{SITE_NAME}","url":"{SITE_URL}"}},"datePublished":"{DATE_PUBLISHED}","dateModified":"{DATE_MODIFIED}","mainEntityOfPage":"{SITE_URL}{canonical_path}"}}
 </script>"""
 
 
@@ -8138,7 +8138,7 @@ def byline_html():
 <div class="byline">
   <div class="byline-avatar">RT</div>
   <div>
-    <a href="/about/" class="byline-name">{AUTHOR}</a>
+    <a href="https://www.linkedin.com/in/romethorndike/" target="_blank" rel="noopener" class="byline-name">{AUTHOR}</a>
     <div class="byline-credential">{AUTHOR_CREDENTIAL}</div>
     <div class="byline-date">Updated {CURRENT_YEAR}</div>
   </div>
@@ -12565,7 +12565,7 @@ def build_top_voices():
     for v in voices:
         list_items.append(f'''{{"@type":"ListItem","position":{v["rank"]},"item":{{"@type":"Person","name":"{v["name"]}","jobTitle":"{v["title"]}","worksFor":{{"@type":"Organization","name":"{v["company"]}"}},"url":"{v["linkedin_url"]}"}}}}''')
     item_list_json = f'{{"@context":"https://schema.org","@type":"ItemList","name":"{data["title"]}","description":"{data.get("subtitle","")}","numberOfItems":{len(voices)},"itemListElement":[{",".join(list_items)}]}}'
-    article_json = f'{{"@context":"https://schema.org","@type":"Article","headline":"{data["title"]}","description":"{data.get("subtitle","")}","author":{{"@type":"Person","name":"{AUTHOR}","description":"{AUTHOR_CREDENTIAL}","url":"{SITE_URL}/about/"}},"publisher":{{"@type":"Organization","name":"{SITE_NAME}","url":"{SITE_URL}"}},"datePublished":"2026-04-14","dateModified":"{last_updated}","url":"{SITE_URL}/voices/","mainEntityOfPage":"{SITE_URL}/voices/"}}'
+    article_json = f'{{"@context":"https://schema.org","@type":"Article","headline":"{data["title"]}","description":"{data.get("subtitle","")}","author":{{"@type":"Person","name":"{AUTHOR}","description":"{AUTHOR_CREDENTIAL}","url":"https://www.linkedin.com/in/romethorndike/"}},"publisher":{{"@type":"Organization","name":"{SITE_NAME}","url":"{SITE_URL}"}},"datePublished":"2026-04-14","dateModified":"{last_updated}","url":"{SITE_URL}/voices/","mainEntityOfPage":"{SITE_URL}/voices/"}}'
     bc_json = breadcrumb_schema([("Home", "/"), ("Top Voices", "/voices/")])
     schemas = bc_json + f"""
 <script type="application/ld+json">{item_list_json}</script>
