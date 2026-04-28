@@ -11559,31 +11559,23 @@ document.getElementById('roi-school').addEventListener('change', function() {{
     print("  Built: ROI calculator")
 
 
-REDIRECTS = [
+# Canonical aliases: serve full content at old URL with canonical pointing to preferred URL.
+# GitHub Pages can't do 301s, so this lets Google crawl real content and consolidate via canonical.
+CANONICAL_ALIASES = [
     ("/full-time-or-part-time/", "/blog/part-time-vs-full-time-mba/"),
 ]
 
 
 def build_redirects():
-    for old_path, new_path in REDIRECTS:
-        slug = old_path.strip("/")
-        page = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Redirecting | {SITE_NAME}</title>
-<link rel="canonical" href="{SITE_URL}{new_path}">
-<meta http-equiv="refresh" content="0;url={SITE_URL}{new_path}">
-<meta name="robots" content="noindex,follow">
-</head>
-<body>
-<p>This page has moved. <a href="{new_path}">Click here</a> if you are not redirected.</p>
-</body>
-</html>"""
-        out_dir = os.path.join(OUTPUT_DIR, slug)
-        os.makedirs(out_dir, exist_ok=True)
-        write_page(os.path.join(out_dir, "index.html"), page)
-    print(f"  Built: {len(REDIRECTS)} redirect(s)")
+    for old_path, new_path in CANONICAL_ALIASES:
+        src = os.path.join(OUTPUT_DIR, new_path.strip("/"), "index.html")
+        if not os.path.exists(src):
+            print(f"  WARNING: redirect source {new_path} not found, skipping")
+            continue
+        dest_dir = os.path.join(OUTPUT_DIR, old_path.strip("/"))
+        os.makedirs(dest_dir, exist_ok=True)
+        shutil.copy2(src, os.path.join(dest_dir, "index.html"))
+    print(f"  Built: {len(CANONICAL_ALIASES)} canonical alias(es)")
 
 
 def build_sitemap():
