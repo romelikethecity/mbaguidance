@@ -9172,7 +9172,7 @@ def build_school_subpages():
           <div class="stat-item"><span class="label">Avg. GPA</span><span class="stat-value">{gpa}</span></div>
           <div class="stat-item"><span class="label">Class Size</span><span class="stat-value">{cs}</span></div>
         </div>
-        <p>Competitive applicants typically score within 20 points of the GMAT average ({gmat_target}-{gmat_high} range) and have a GPA of {gpa} or above. However, admissions is comprehensive. A candidate with a 3.2 GPA but exceptional work experience and a compelling story can be admitted over a candidate with a 3.9 GPA and a generic application.</p>
+        <p>Competitive applicants typically score within 20 points of the GMAT average ({gmat_target}-{gmat_high} range) and have a GPA of {gpa} or above. Admissions reads the full application, not just the numbers. A candidate with a 3.2 GPA but exceptional work experience and a compelling story can be admitted over a candidate with a 3.9 GPA and a generic application.</p>
       </div>
       <div class="school-section">
         <h2>How to Improve Your Chances</h2>
