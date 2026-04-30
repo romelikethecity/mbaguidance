@@ -8280,8 +8280,8 @@ def newsletter_cta_html():
     return """
 <div class="newsletter-inline-cta">
   <div class="nl-inner">
-    <p class="nl-headline">Get MBA hiring data in your inbox every week.</p>
-    <p class="nl-sub">Which companies are hiring, what they're paying, and which programs are placing. Free.</p>
+    <p class="nl-headline">The MBA Insider</p>
+    <p class="nl-sub">One email a week. Anonymous admit profiles, scholarship offers we're seeing, GMAT median shifts, and the admissions intel you can't find on rankings sites. From a Haas MBA grad.</p>
     <form onsubmit="handleNewsletterSignup(event)" class="nl-form">
       <input type="email" placeholder="your@email.com" required>
       <button type="submit" class="btn btn-accent">Subscribe</button>
@@ -8294,7 +8294,7 @@ def newsletter_cta_html():
 def newsletter_mid_cta_html():
     return """
 <div class="newsletter-mid-cta">
-  <p class="mid-cta-text"><strong>Get this data weekly.</strong> Companies hiring MBAs, salary intel, placement trends. <a href="/newsletter/">Free newsletter &rarr;</a></p>
+  <p class="mid-cta-text"><strong>The MBA Insider, weekly.</strong> Anonymous admit profiles, scholarship offers, and admissions intel from a Haas MBA grad. <a href="/newsletter/">Free &rarr;</a></p>
   <form onsubmit="handleNewsletterSignup(event)" class="nl-form mid-cta-form">
     <input type="email" placeholder="your@email.com" required>
     <button type="submit" class="btn btn-accent btn-sm">Subscribe</button>
@@ -8617,9 +8617,9 @@ def build_homepage():
   <!-- Newsletter -->
   <section class="section section-dark">
     <div class="container" style="text-align: center; max-width: 600px;">
-      <p class="hero-eyebrow" style="color: var(--color-accent);">Free Weekly Newsletter</p>
-      <h2 style="color: #fff;">Who's hiring MBAs this week?</h2>
-      <p style="color: var(--color-text-on-dark-secondary); margin: 16px auto 24px;">Companies hiring MBA grads, salary trends, and which programs are placing. One email, every week.</p>
+      <p class="hero-eyebrow" style="color: var(--color-accent);">The MBA Insider &middot; Free Weekly Newsletter</p>
+      <h2 style="color: #fff;">The admissions intel rankings sites won't show you.</h2>
+      <p style="color: var(--color-text-on-dark-secondary); margin: 16px auto 24px;">Anonymous admit profiles, scholarship offers we're seeing, GMAT median shifts, and the inside data on this admissions cycle. One email a week from a Haas MBA grad.</p>
       <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 440px; margin: 0 auto;">
         <input type="email" placeholder="your@email.com" required>
         <button type="submit" class="btn btn-accent">Subscribe</button>
@@ -8668,6 +8668,9 @@ def build_school_listing():
   </section>
   <section class="section">
     <div class="container">
+      <div class="hub-callout" style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 16px 20px; margin-bottom: 24px; border-radius: 4px;">
+        <p style="margin: 0;"><strong>New:</strong> <a href="/class-of-{CURRENT_YEAR}/">Compare every Class of {CURRENT_YEAR} side by side</a>. Sortable table with GMAT, GPA, class size, work experience, salary, and acceptance rate across the top 50 programs.</p>
+      </div>
       <div class="table-controls">
         <div class="filter-controls">
           <button class="filter-btn active" data-tier="all">All ({len(SCHOOLS)})</button>
@@ -8936,6 +8939,10 @@ def build_school_profiles():
           <a href="/schools/{s['slug']}/interview/" class="btn btn-ghost">Interview Prep</a>
           <a href="/schools/{s['slug']}/employment/" class="btn btn-ghost">Employment Report</a>
         </div>
+      </div>
+
+      <div class="hub-callout" style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 16px 20px; margin: 24px 0; border-radius: 4px;">
+        <p style="margin: 0;">Compare {s['short_name']} side by side with every Class of {CURRENT_YEAR} on the <a href="/class-of-{CURRENT_YEAR}/"><strong>Class of {CURRENT_YEAR} Profile Hub</strong></a>. Sortable table with GMAT, class size, work experience, and salary across the top 50 programs.</p>
       </div>
 
       <div class="school-section">
@@ -9511,6 +9518,67 @@ def build_school_subpages():
         <h2>{short} Admissions: Quick Answers</h2>
         {faq_html_inner}
       </div>"""
+            elif sp_slug == "deadlines":
+                sp_faqs = [
+                    (f"When are {short}'s MBA application deadlines for {CURRENT_YEAR}?",
+                     f"{short} runs three application rounds for fall {CURRENT_YEAR} entry. Round 1 deadlines fall in September-October, Round 2 in January, and Round 3 in March-April. Check the official {short} site for the exact dates each cycle."),
+                    (f"Should I apply Round 1 or Round 2 to {short}?",
+                     f"Round 1 is statistically stronger at {short}: more open seats, deeper scholarship pools, and admissions committees reviewing applications with fresh attention. Most schools admit 40-50% of the class in Round 1. Apply Round 2 only if your GMAT, essays, or recommenders aren't ready by Round 1."),
+                    (f"Is it worth applying Round 3 at {short}?",
+                     f"At {short}'s ranking tier, Round 3 is difficult. Most seats are already filled. Consider Round 3 only if your profile is exceptionally strong or you have a distinctive background that fills a gap in the admitted class. For most candidates, applying Round 1 next cycle is a better bet."),
+                    (f"How long does {short} take to make admissions decisions?",
+                     f"{short} typically issues decisions 8-12 weeks after the round deadline. Round 1 decisions land in December, Round 2 in March-April, Round 3 in May. Interview invitations usually arrive 4-6 weeks after submission."),
+                ]
+                faq_html_inner = "".join(
+                    f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                    for q, a in sp_faqs
+                )
+                faq_extra_html = f"""
+      <div class="school-section">
+        <h2>{short} Application Timing: Quick Answers</h2>
+        {faq_html_inner}
+      </div>"""
+            elif sp_slug == "essays":
+                strengths_text = ", ".join(s.get("strengths", [])[:3]) or "general management"
+                sp_faqs = [
+                    (f"What essays does {short} require?",
+                     f"{short} typically requires 2-3 essays per cycle. Prompts shift periodically, so always check the official {short} application portal for current-year prompts. The core themes recur: career goals, why MBA, why this school, and a leadership or impact story."),
+                    (f"How long should {short} essays be?",
+                     f"Most {short} essay prompts specify word limits between 250 and 750 words. Stay within the limit. Going 10% over is usually fine; going 20% over signals that you can't follow instructions, which is a red flag in a process built on judgment."),
+                    (f"What does {short} look for in essays?",
+                     f"{short} values candidates who can articulate clear career goals, demonstrate self-awareness, and show specific fit with the program's culture and strengths in {strengths_text}. Generic essays with the school name swapped out get cut fast."),
+                    (f"How important is the 'Why {short}' essay?",
+                     f"It's the most diagnostic essay in the application. Generic answers fail. Strong answers reference specific classes, current students or alumni you've talked to, clubs you'll join, and concrete program elements that map to your career plan. If your essay still works after swapping {short} for another school's name, rewrite it."),
+                ]
+                faq_html_inner = "".join(
+                    f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                    for q, a in sp_faqs
+                )
+                faq_extra_html = f"""
+      <div class="school-section">
+        <h2>{short} Essays: Quick Answers</h2>
+        {faq_html_inner}
+      </div>"""
+            elif sp_slug == "interview":
+                sp_faqs = [
+                    (f"What is the {short} MBA interview format?",
+                     f"{short} interviews are typically 30 minutes, behavioral-style, and conducted by trained alumni volunteers or admissions staff. Some are blind (interviewer hasn't read your application); others are based on your application. Confirm format with {short}'s admissions office before your interview."),
+                    (f"What questions does {short} ask in MBA interviews?",
+                     f"Expect a 'walk me through your resume' opener, a 'why MBA, why now' follow-up, a 'why {short}' question, and 2-3 behavioral stories about leadership, teamwork, or failure. Prepare 4-5 stories using the STAR framework (Situation, Task, Action, Result)."),
+                    (f"How should I prepare for the {short} interview?",
+                     f"Practice your personal narrative aloud until it's smooth but not robotic. Do 2-3 mock interviews with friends, classmates, or alumni. Research your interviewer on LinkedIn if the name is shared. Have 2-3 thoughtful questions ready about the program."),
+                    (f"What does the {short} interview signal about admission?",
+                     f"Receiving an interview invitation means your application has passed the initial screen. At {short}, interview rates vary by round and applicant pool. The interview itself is rarely disqualifying, but a strong performance can tip a borderline candidate into the admitted pool."),
+                ]
+                faq_html_inner = "".join(
+                    f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                    for q, a in sp_faqs
+                )
+                faq_extra_html = f"""
+      <div class="school-section">
+        <h2>{short} Interview: Quick Answers</h2>
+        {faq_html_inner}
+      </div>"""
 
             # Breadcrumb + optional FAQ schema
             breadcrumb = f'{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Home","item":"{SITE_URL}/"}},{{"@type":"ListItem","position":2,"name":"Schools","item":"{SITE_URL}/schools/"}},{{"@type":"ListItem","position":3,"name":"{short}","item":"{SITE_URL}/schools/{slug}/"}},{{"@type":"ListItem","position":4,"name":"{sp_slug.replace("-", " ").title()}","item":"{SITE_URL}/schools/{slug}/{sp_slug}/"}}]}}'
@@ -9538,6 +9606,10 @@ def build_school_subpages():
     <div class="container content-narrow">
       {sections_html}
       {faq_extra_html}
+
+      <div class="hub-callout" style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 16px 20px; margin: 24px 0; border-radius: 4px;">
+        <p style="margin: 0;">Compare {short} against every Class of {CURRENT_YEAR} on the <a href="/class-of-{CURRENT_YEAR}/"><strong>Class of {CURRENT_YEAR} Hub</strong></a>. Sortable side-by-side stats for the top 50 MBA programs.</p>
+      </div>
 
       <div class="school-section">
         <h2>More About {short}</h2>
@@ -9772,8 +9844,8 @@ def build_about():
 
 def build_newsletter():
     content = f"""{html_head(
-        f"MBA Hiring Intel | Free Weekly Newsletter | {SITE_NAME}",
-        f"Weekly newsletter: which companies are hiring MBA grads, salary trends, and program placement data. Free from {SITE_NAME}.",
+        f"The MBA Insider | Weekly Admissions Intel Newsletter | {SITE_NAME}",
+        f"Weekly admissions intel: anonymous admit profiles, scholarship offers, GMAT shifts, and the inside data you can't find on rankings sites. Free from {SITE_NAME}.",
         "/newsletter/"
     )}
 {nav_html()}
@@ -9781,16 +9853,15 @@ def build_newsletter():
   <section class="hero section-dark">
     <div class="container" style="text-align: center;">
       <div class="gold-rule" style="width: 48px; margin: 0 auto 24px;"></div>
-      <h1>Who's hiring MBAs this week?</h1>
-      <p class="hero-subtitle" style="margin: 0 auto;">Companies hiring MBA grads. Salary data. Program placement trends. One email, every week.</p>
+      <h1>The MBA Insider</h1>
+      <p class="hero-subtitle" style="margin: 0 auto;">Weekly admissions intel from a Haas MBA grad. The data, decisions, and inside conversations rankings sites won't show you.</p>
     </div>
   </section>
   <section class="section">
     <div class="container content-narrow">
 
-      <!-- Newsletter mockup -->
       <div style="text-align: center; margin-bottom: 40px;">
-        <img src="/assets/newsletter-preview.svg" alt="MBA Guidance Weekly Briefing preview" style="max-width: 480px; width: 100%; border-radius: 8px; box-shadow: 0 4px 24px rgba(10,22,40,0.12);">
+        <img src="/assets/newsletter-preview.svg" alt="The MBA Insider weekly briefing preview" style="max-width: 480px; width: 100%; border-radius: 8px; box-shadow: 0 4px 24px rgba(10,22,40,0.12);">
       </div>
 
       <div class="newsletter-signup">
@@ -9800,26 +9871,28 @@ def build_newsletter():
             <button type="submit" class="btn btn-accent">Subscribe</button>
           </form>
           <div class="nl-msg" style="margin-top: 8px;"></div>
-          <p style="font-size: 13px; color: #6B7280; margin-top: 10px;">Free. No spam. Unsubscribe anytime. Joins MBA applicants and grads already reading.</p>
+          <p style="font-size: 13px; color: #6B7280; margin-top: 10px;">Free. No spam. Unsubscribe anytime. Built for applicants going through the cycle right now.</p>
         </div>
 
-        <h3>What you get</h3>
+        <h3>What you get every week</h3>
         <ul class="newsletter-features">
-          <li><strong>Companies actively hiring MBAs:</strong> sourced from live job postings, updated weekly</li>
-          <li><strong>Salary data by role and school:</strong> real numbers from real postings, not self-reported surveys</li>
-          <li><strong>Program placement trends:</strong> which schools are placing into which companies and industries</li>
-          <li><strong>Admissions intel:</strong> deadline reminders, application tips, and the occasional honest take</li>
+          <li><strong>Anonymous admit profiles:</strong> real candidates who got in this week, with GMAT, GPA, work experience, and what we think tipped the decision</li>
+          <li><strong>Scholarship offers we're seeing:</strong> what schools are offering this cycle and how candidates are negotiating</li>
+          <li><strong>GMAT and class-profile shifts:</strong> when medians move, we'll tell you before the rankings catch up</li>
+          <li><strong>Round-by-round timing intel:</strong> which schools are filling slower this year, where R3 might still be viable</li>
+          <li><strong>Honest takes from a Haas grad:</strong> not generic admissions tips, the kind of thing you'd hear from a friend who already went through this</li>
         </ul>
 
         <h3>Who it's for</h3>
-        <p>Prospective MBA applicants researching programs. Current MBA students tracking the job market. Recent grads benchmarking compensation. Anyone who wants real data instead of admissions marketing.</p>
+        <p>Applicants going through the MBA admissions cycle right now or planning their cycle in the next 6-18 months. People who already know the rankings and want the layer underneath: how decisions get made, what's shifting year over year, and where the leverage points are.</p>
+        <p>If you're a current MBA student or recent grad looking for hiring data, that's a different newsletter we'll launch separately. This one is admissions-focused.</p>
       </div>
 
       <div class="about-blurb" style="margin-top: 48px;">
         <div class="byline-avatar">RT</div>
         <div>
           <h3>From <a href="/about/">Rome Thorndike</a></h3>
-          <p>Berkeley Haas MBA. I track MBA hiring data because I lived the information gap firsthand. This newsletter cuts through the noise.</p>
+          <p>Berkeley Haas MBA. I went through the application process and built this site because the rankings industry is selling marketing as analysis. The newsletter is the part of my notebook that doesn't fit on a public page.</p>
         </div>
       </div>
     </div>
@@ -11456,6 +11529,35 @@ def build_blog_posts():
         post_title = f"Is {name} Worth It? ROI Analysis ({CURRENT_YEAR})"
         post_meta = f"Is {name} worth the cost in {CURRENT_YEAR}? Real ROI analysis with salary data, career outcomes, and honest math. From a Haas MBA grad."
 
+        # Industry-specific salary context based on school strengths
+        top_strength = (s.get("best_for", s.get("strengths", ["General Management"])) or ["General Management"])[0]
+        industry_salary_context = ""
+        if "Consulting" in top_strength or "consulting" in top_strength.lower():
+            industry_salary_context = f"At MBB firms (McKinsey, BCG, Bain), {name} grads typically clear $235K-$255K in first-year total compensation. Tier 2 strategy firms add $190K-$220K. {name}'s #{rank} ranking puts it in the recruiting target list for these firms."
+        elif "Finance" in top_strength or "Banking" in top_strength or "Investment" in top_strength:
+            industry_salary_context = f"In investment banking, {name} grads earn $175K base plus signing bonuses of $50K-$60K, totaling $225K-$240K in year one. Top performers in PE add $75K-$150K performance bonuses, pushing year-one comp toward $300K. {name}'s #{rank} ranking maps to bulge bracket and elite boutique recruiting."
+        elif "Tech" in top_strength or "Technology" in top_strength or "Product" in top_strength:
+            industry_salary_context = f"At FAANG companies (Google, Amazon, Meta, Microsoft, Apple), {name} grads in product management roles earn $165K-$180K base plus $50K-$100K in RSU grants. Total first-year comp clears $250K at most. {name}'s #{rank} ranking determines which firms recruit on campus."
+        elif "Real Estate" in top_strength:
+            industry_salary_context = f"In real estate finance and development, {name} grads earn $150K-$185K base. REIT analyst roles, development associate positions, and real estate PE all recruit from {name}'s ${rank} cohort. The strongest placements come from candidates with real estate experience pre-MBA."
+        elif "Entrepreneurship" in top_strength:
+            industry_salary_context = f"For entrepreneurship-focused MBAs, salary in year one is often lower than peer schools as graduates take founder roles or join early-stage startups. The ROI math shifts to long-term equity outcomes. Graduates who don't found companies typically take VC, growth equity, or operator roles paying $160K-$200K base."
+        else:
+            industry_salary_context = f"Across all industries, {name}'s ${salary:,} median salary reflects a mix of consulting, finance, and tech placement. The salary range across roles is wider at {name} than at industry-focused programs because career outcomes are more diverse."
+
+        scholarship_threshold = max(10, round((all_in - (salary - 80000) * 5) / tuition * 25))
+        if scholarship_threshold >= 75:
+            scholarship_advice = f"For {name} to clear the breakeven inside 5 years from a $80K base, you'd need scholarship funding covering at least {scholarship_threshold}% of tuition. Negotiate aggressively or consider in-state alternatives."
+        elif scholarship_threshold >= 25:
+            scholarship_advice = f"A scholarship covering {scholarship_threshold}% or more of tuition meaningfully improves ROI at {name}, dropping the breakeven into a 3-4 year window from an $80K base salary."
+        else:
+            scholarship_advice = f"{name}'s ROI is already strong. Even without scholarship funding, the math works for most career changers. Scholarship offers above 25% of tuition push the breakeven below 3 years, which is exceptional."
+
+        # Comparison with not getting an MBA
+        ten_year_uplift = (salary - 80000) * 10
+        no_mba_growth = round(80000 * 1.05 ** 10)  # 5% annual growth without MBA
+        cumulative_advantage = (salary * 10 * 1.05) - (no_mba_growth * 10) - all_in
+
         content_html = f"""
       <div class="school-section">
         <h2>The Numbers</h2>
@@ -11466,23 +11568,48 @@ def build_blog_posts():
           <div class="stat-item"><span class="label">Employment</span><span class="stat-value">{emp}%</span></div>
         </div>
         <p>The all-in cost of {name} (tuition + living expenses + opportunity cost from an $80K salary) is approximately ${all_in:,}. The average starting salary of ${salary:,} produces an annual uplift of ${salary - 80000:,} over the $80K baseline. At that rate, you break even in approximately {breakeven_80k} years.</p>
+        <p>The breakeven calculation flatters or hurts {name} depending on your pre-MBA salary. Coming from $60K? Breakeven drops to {round(all_in / max(salary - 60000, 1), 1)} years. Coming from $120K? Breakeven stretches to {round(all_in / max(salary - 120000, 1), 1)} years. The honest math: MBAs work best for career changers earning under the post-MBA median, not for high earners moving sideways.</p>
       </div>
+
+      <div class="school-section">
+        <h2>What {name} grads earn by industry</h2>
+        <p>The ${salary:,} median masks meaningful spread by industry. {industry_salary_context}</p>
+        <p>{name}'s strongest placement industries are {strengths}. Salary distributions cluster around the mean for industries where the school recruits heavily, with a longer tail in industries where placements are rarer (and often more selective on the candidate side).</p>
+      </div>
+
+      <div class="school-section">
+        <h2>The 10-year financial picture</h2>
+        <p>One-year salary comparisons miss the trajectory effect. A ${salary:,} starting salary at {name} grows faster than an $80K salary without an MBA. By year 10, the cumulative income advantage from {name} is approximately ${ten_year_uplift:,} before accounting for promotion velocity differences.</p>
+        <p>The trajectory difference is sharpest in consulting, finance, and tech, where MBA-track promotions to Manager, VP, and Principal levels happen 2-4 years faster than equivalent non-MBA paths. By year 5-7 post-MBA, the gap with the no-MBA counterfactual widens dramatically. The MBA's value is rarely captured in year-one salary comparisons.</p>
+      </div>
+
       <div class="school-section">
         <h2>When {name} Is Worth It</h2>
         <ul>
           <li><strong>Career changers targeting {strengths}:</strong> {name}'s recruiting pipelines in these areas are well-established. If you're pivoting from a lower-paying industry, the salary uplift is significant.</li>
-          <li><strong>Candidates with scholarship funding:</strong> A $50K-$100K scholarship dramatically improves ROI, reducing the breakeven by 1-2 years.</li>
+          <li><strong>Candidates with scholarship funding:</strong> A $50K-$100K scholarship dramatically improves ROI, reducing the breakeven by 1-2 years. {scholarship_advice}</li>
           <li><strong>Targeting roles that require the credential:</strong> In consulting, banking, and PE, the {tier_desc} MBA credential is a prerequisite, not a nice-to-have. {name}'s #{rank} ranking qualifies.</li>
+          <li><strong>Network-dependent careers:</strong> If your post-MBA path runs through PE, VC, or startup founding, the {name} alumni network carries compounding returns for 20+ years that no spreadsheet captures.</li>
+          <li><strong>Coming from an under-represented background:</strong> If you're a military veteran, non-profit operator, or career changer from a non-corporate field, the MBA is the most reliable way to credential into corporate America. {name}'s admissions team values these backgrounds.</li>
         </ul>
       </div>
+
       <div class="school-section">
         <h2>When It Might Not Be</h2>
         <ul>
           <li><strong>Already earning ${salary - 20000:,}+ in your target industry:</strong> If you're already near the post-MBA salary, the ROI depends on career acceleration rather than immediate salary uplift.</li>
           <li><strong>Taking on full debt at ${tuition * 2:,}+ in tuition alone:</strong> High debt loads narrow your post-MBA choices. You may feel pressured to take the highest-paying offer rather than the best career fit.</li>
           <li><strong>Targeting industries where the MBA credential is optional:</strong> In entrepreneurship, some tech roles, and creative industries, the MBA provides network but not credential value. The ROI calculation shifts toward intangibles.</li>
+          <li><strong>Going to business school to figure out your career:</strong> {name} is a $400K+ way to find clarity. Career coaching, informational interviews, and structured self-reflection cost a fraction of an MBA and produce equivalent clarity.</li>
         </ul>
       </div>
+
+      <div class="school-section">
+        <h2>Scholarship math at {name}</h2>
+        <p>Scholarships shift the ROI calculation more than any other variable. {scholarship_advice}</p>
+        <p>The negotiation playbook: collect competing offers from peer schools, communicate them politely to {name}'s admissions or financial aid office, and ask if {name} can match or exceed. Schools at {name}'s ranking tier expect this conversation. A polite, evidence-based ask often yields $20K-$50K in additional funding. The worst outcome is they say no.</p>
+      </div>
+
       <div class="school-section">
         <h2>The Verdict</h2>
         <blockquote class="verdict-block">&ldquo;{worth_verdict}&rdquo;</blockquote>
@@ -11835,6 +11962,13 @@ def build_sitemap():
     urls.append("/voices/")
     # Class of 2026 hub
     urls.append(f"/class-of-{CURRENT_YEAR}/")
+    # Acceptance Rate hub + Deadlines tracker
+    urls.append("/acceptance-rates/")
+    urls.append("/deadlines/")
+    # Employer hubs
+    urls.append("/employers/")
+    for e in EMPLOYERS:
+        urls.append(f"/employers/{e['slug']}/")
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -12875,9 +13009,10 @@ def build_top_voices():
 }
 </style>"""
 
+    voices_meta = f"The 25 admissions consultants, editors, and educators shaping MBA admissions in {CURRENT_YEAR}. John Byrne, Sandy Kreisberg, Linda Abraham. Who to follow + why each made the list."
     content = html_head(
         f"{data['title']} | {SITE_NAME}",
-        data.get("subtitle", ""),
+        voices_meta,
         "/voices/",
         schema=schemas
     ) + voices_css + nav_html(active="voices") + f"""
@@ -12924,6 +13059,744 @@ def build_top_voices():
 
     write_page(os.path.join(OUTPUT_DIR, "voices", "index.html"), content)
     print(f"  Built: /voices/ ({len(voices)} voices)")
+
+
+EMPLOYERS = [
+    {"slug": "mckinsey", "name": "McKinsey & Company", "short": "McKinsey",
+     "industry": "Consulting", "category": "MBB",
+     "salary_base": 192000, "signing": 35000, "performance": 30000,
+     "tagline": "The largest MBA hiring firm in the world. Strict prestige bias.",
+     "top_schools": ["harvard-business-school", "wharton", "booth", "kellogg", "stanford-gsb",
+                     "columbia-business-school", "mit-sloan", "berkeley-haas", "duke-fuqua",
+                     "michigan-ross", "virginia-darden", "yale-som", "dartmouth-tuck",
+                     "cornell-johnson", "unc-kenan-flagler"],
+     "intro": "McKinsey is the single largest hirer of MBAs in the world. The firm hires roughly 1,500-2,000 MBAs annually across its global offices, with US offices alone absorbing 700-900 per year. Roles run from generalist Associate to industry-specialty (Healthcare, Tech, Energy) and functional practices (Strategy, Operations, Digital).",
+     "hiring_pattern": "McKinsey runs structured on-campus recruiting at every M7 school plus the top-15 programs. Off-campus access is possible from any school but requires significantly more effort. Application volume is highest from M7 programs, where 30-50% of the class often interviews.",
+     "interview": "The McKinsey case interview is a structured business problem with quantitative analysis, hypothesis testing, and a recommendation. Two rounds: Round 1 with 2-3 cases, Round 2 with 3-4 cases plus a Personal Experience Interview (PEI). Solve Lab is McKinsey's digital problem-solving game replacing the older PST.",
+    },
+    {"slug": "bcg", "name": "Boston Consulting Group", "short": "BCG",
+     "industry": "Consulting", "category": "MBB",
+     "salary_base": 192000, "signing": 35000, "performance": 30000,
+     "tagline": "MBB peer with stronger digital/tech consulting practice.",
+     "top_schools": ["harvard-business-school", "wharton", "kellogg", "booth", "stanford-gsb",
+                     "columbia-business-school", "mit-sloan", "duke-fuqua", "berkeley-haas",
+                     "michigan-ross", "yale-som", "dartmouth-tuck", "virginia-darden",
+                     "cornell-johnson", "georgetown-mcdonough"],
+     "intro": "BCG is the second-largest of the MBB consulting firms, hiring 1,000-1,500 MBAs annually. The firm's specialty practices in digital transformation (BCG X), strategy, and operations have grown faster than its traditional consulting business in recent years. Compensation matches McKinsey almost exactly.",
+     "hiring_pattern": "BCG's on-campus recruiting parallels McKinsey at every top program. The firm's interview process is shorter (2 rounds vs 2-3), and BCG has a reputation for slightly more collaborative case interviews than McKinsey's structured format.",
+     "interview": "BCG cases skew slightly more open-ended than McKinsey. The firm uses Casey, a digital chatbot interview, as a screening step at most schools. Round 2 cases test creativity and structured thinking. Behavioral questions focus on teamwork and collaboration.",
+    },
+    {"slug": "bain", "name": "Bain & Company", "short": "Bain",
+     "industry": "Consulting", "category": "MBB",
+     "salary_base": 192000, "signing": 35000, "performance": 30000,
+     "tagline": "Smallest MBB. Strongest culture. Highest selectivity per applicant.",
+     "top_schools": ["harvard-business-school", "stanford-gsb", "kellogg", "wharton", "booth",
+                     "columbia-business-school", "mit-sloan", "duke-fuqua", "berkeley-haas",
+                     "michigan-ross", "yale-som", "dartmouth-tuck", "virginia-darden",
+                     "cornell-johnson", "unc-kenan-flagler"],
+     "intro": "Bain hires the smallest of the MBB cohort, roughly 600-900 MBAs annually. Per-applicant selectivity runs higher than McKinsey or BCG because the firm controls headcount more tightly. Bain's private equity practice is the strongest of the MBB three, with Bain Capital Ventures and Bain Capital deal flow as proximity advantages.",
+     "hiring_pattern": "Bain's on-campus footprint mirrors McKinsey and BCG at the M7 and top-15 schools. Selectivity is higher because Bain hires fewer per school. The firm's culture-fit screen is more pronounced than at McKinsey, where the prestige threshold matters more.",
+     "interview": "Bain uses a written case in Round 1 followed by oral cases in Round 2. The firm's PE Group requires additional interviews focused on investment cases and LBO mechanics. Behavioral interviews emphasize team contribution and collaborative problem-solving.",
+    },
+    {"slug": "deloitte-strategy", "name": "Deloitte Strategy (Monitor Deloitte)", "short": "Deloitte Strategy",
+     "industry": "Consulting", "category": "Tier 2",
+     "salary_base": 175000, "signing": 25000, "performance": 25000,
+     "tagline": "Largest non-MBB consulting hirer of MBAs.",
+     "top_schools": ["harvard-business-school", "wharton", "booth", "kellogg", "columbia-business-school",
+                     "mit-sloan", "stanford-gsb", "duke-fuqua", "berkeley-haas", "michigan-ross",
+                     "yale-som", "dartmouth-tuck", "cornell-johnson", "georgetown-mcdonough",
+                     "emory-goizueta", "indiana-kelley", "texas-mccombs"],
+     "intro": "Monitor Deloitte (now Deloitte Strategy) hires more MBAs than any tier 2 consulting firm and competes directly with MBB on prestige work in select industries. The acquisition of Monitor in 2013 elevated Deloitte's strategy practice from a Big Four advisory arm to a credible MBB alternative.",
+     "hiring_pattern": "Deloitte recruits more broadly than MBB, with on-campus presence at top-25 programs and off-campus access from top-50. The firm hires across multiple practices (Strategy, Customer & Marketing, Mergers & Acquisitions), so a candidate cut from the Strategy track can sometimes redirect to another practice.",
+     "interview": "Two rounds of case interviews plus behavioral interviews. The cases emphasize industry-specific problems (healthcare, financial services, tech). Practice-area knowledge matters more than at MBB, where firms hire generalist Associates first.",
+    },
+    {"slug": "goldman-sachs", "name": "Goldman Sachs", "short": "Goldman Sachs",
+     "industry": "Investment Banking", "category": "Bulge Bracket",
+     "salary_base": 175000, "signing": 60000, "performance": 0,
+     "tagline": "Top-tier IB. Deepest M7 recruiting in finance.",
+     "top_schools": ["wharton", "harvard-business-school", "columbia-business-school", "booth",
+                     "stanford-gsb", "nyu-stern", "mit-sloan", "kellogg", "berkeley-haas",
+                     "yale-som", "michigan-ross", "duke-fuqua", "dartmouth-tuck", "virginia-darden",
+                     "cornell-johnson"],
+     "intro": "Goldman Sachs is the most prestigious MBA Associate hirer in investment banking, with roughly 250-350 MBA hires per year across investment banking, sales & trading, and asset management divisions. Compensation runs higher than consulting in years one and two because of the larger signing and performance bonuses.",
+     "hiring_pattern": "Goldman recruits hardest at Wharton (the deepest pipeline), HBS, Columbia, Booth, and Stern. M7-only on-campus events for some divisions. Off-campus access requires aggressive networking and prior banking experience.",
+     "interview": "Multiple rounds of behavioral and technical interviews. Technicals cover valuation (DCF, comps), accounting, and current-events knowledge of M&A activity. The behavioral screen is intense because Goldman hires for cultural fit and willingness to work the brutal hours.",
+    },
+    {"slug": "jp-morgan", "name": "JPMorgan Chase", "short": "JPMorgan",
+     "industry": "Investment Banking", "category": "Bulge Bracket",
+     "salary_base": 175000, "signing": 50000, "performance": 0,
+     "tagline": "Largest US bank. Biggest IB Associate program.",
+     "top_schools": ["wharton", "harvard-business-school", "columbia-business-school", "booth",
+                     "stanford-gsb", "nyu-stern", "mit-sloan", "kellogg", "berkeley-haas",
+                     "michigan-ross", "duke-fuqua", "dartmouth-tuck", "yale-som",
+                     "virginia-darden", "cornell-johnson"],
+     "intro": "JPMorgan runs one of the largest MBA Associate programs in banking, hiring 350-450 MBAs annually across Investment Banking, Markets, and Asset Management. The firm's scale and product breadth give MBAs more cross-divisional optionality than the smaller bulge brackets.",
+     "hiring_pattern": "JPM recruits at every M7 plus top-15 program with on-campus interviews. The Investment Banking division and the Markets (sales & trading) division each run separate recruiting funnels. Internships are the primary path to full-time offers.",
+     "interview": "Standard banking interview format: behavioral, technicals (valuation, accounting, M&A), and a fit interview. JPM's behavioral screen often includes a stress component to assess composure under pressure.",
+    },
+    {"slug": "morgan-stanley", "name": "Morgan Stanley", "short": "Morgan Stanley",
+     "industry": "Investment Banking", "category": "Bulge Bracket",
+     "salary_base": 175000, "signing": 55000, "performance": 0,
+     "tagline": "Strong wealth management plus IB. Elite asset management arm.",
+     "top_schools": ["wharton", "harvard-business-school", "columbia-business-school", "booth",
+                     "stanford-gsb", "nyu-stern", "mit-sloan", "kellogg", "berkeley-haas",
+                     "michigan-ross", "duke-fuqua", "dartmouth-tuck", "yale-som",
+                     "virginia-darden", "cornell-johnson"],
+     "intro": "Morgan Stanley hires roughly 200-300 MBAs annually across investment banking, sales & trading, and wealth/asset management. The firm's wealth management arm is the largest in the world, which creates an MBA hiring path distinct from pure investment banking.",
+     "hiring_pattern": "On-campus recruiting at all M7 schools and top finance-focused programs. The Investment Banking division skews heavily toward Wharton and Columbia hires. Wealth Management has broader school representation.",
+     "interview": "Behavioral plus technical interviews. Morgan Stanley's interviewers tend to ask more current-events questions about specific deals or market events than peer banks, so candidates should follow recent M&A activity closely.",
+    },
+    {"slug": "blackstone", "name": "Blackstone", "short": "Blackstone",
+     "industry": "Private Equity", "category": "Mega Fund",
+     "salary_base": 175000, "signing": 75000, "performance": 75000,
+     "tagline": "Largest PE firm in the world. Hardest MBA hire in finance.",
+     "top_schools": ["wharton", "harvard-business-school", "stanford-gsb", "columbia-business-school",
+                     "booth", "mit-sloan", "kellogg", "berkeley-haas", "nyu-stern",
+                     "yale-som", "duke-fuqua", "dartmouth-tuck", "virginia-darden",
+                     "michigan-ross", "cornell-johnson"],
+     "intro": "Blackstone is the largest private equity firm in the world by AUM and one of the most selective MBA hirers in finance. The firm hires fewer than 50 MBAs per year directly, with most placements going to candidates with prior PE experience. First-year total comp clears $300K with strong carry potential.",
+     "hiring_pattern": "Blackstone recruits a tiny number of MBAs per year. Direct hires almost exclusively come from Wharton, HBS, and Stanford with prior investment banking or PE experience. Other top schools place into Blackstone occasionally, usually through alumni connections rather than on-campus recruiting.",
+     "interview": "Multiple rounds spanning case studies, LBO modeling, deal walkthroughs, and behavioral interviews. The firm tests technical depth aggressively because the role requires immediate analytical contribution. Most candidates have 2-4 years of pre-MBA banking or PE experience.",
+    },
+    {"slug": "kkr", "name": "KKR", "short": "KKR",
+     "industry": "Private Equity", "category": "Mega Fund",
+     "salary_base": 175000, "signing": 75000, "performance": 75000,
+     "tagline": "Top-tier PE with growth equity and credit arms.",
+     "top_schools": ["wharton", "harvard-business-school", "stanford-gsb", "columbia-business-school",
+                     "booth", "mit-sloan", "kellogg", "berkeley-haas", "yale-som",
+                     "duke-fuqua", "dartmouth-tuck", "virginia-darden",
+                     "michigan-ross", "cornell-johnson", "nyu-stern"],
+     "intro": "KKR hires 30-50 MBAs across its private equity, growth equity, infrastructure, and credit groups annually. The firm's expansion beyond traditional buyouts has created multiple MBA hiring tracks, with growth equity and credit increasingly recruiting MBAs without prior PE experience.",
+     "hiring_pattern": "KKR's traditional PE group recruits primarily from Wharton, HBS, and Stanford with prior banking/PE backgrounds. The newer growth and credit arms are more accessible from a broader school list and accept candidates without direct PE experience.",
+     "interview": "Heavy modeling test (LBO, DCF, returns analysis), deal walkthrough discussions, and behavioral interviews. Some divisions also use a written case study or investment memo as a screening step.",
+    },
+    {"slug": "amazon", "name": "Amazon", "short": "Amazon",
+     "industry": "Tech", "category": "FAANG",
+     "salary_base": 165000, "signing": 50000, "performance": 100000,
+     "tagline": "Largest MBA tech hirer. Pathways for product, ops, and finance.",
+     "top_schools": ["mit-sloan", "stanford-gsb", "berkeley-haas", "wharton", "harvard-business-school",
+                     "booth", "kellogg", "columbia-business-school", "michigan-ross", "duke-fuqua",
+                     "ucla-anderson", "carnegie-mellon-tepper", "georgia-tech-scheller",
+                     "washington-foster", "texas-mccombs"],
+     "intro": "Amazon is the largest MBA hirer in tech, absorbing 800-1,200 MBAs per year across product management, operations, finance, and Amazon Web Services roles. Compensation skews lower on base salary than consulting or banking but adds 4-year RSU grants typically worth $100K-$200K at signing.",
+     "hiring_pattern": "On-campus recruiting at every M7 plus most top-25 programs. Amazon's Pathways Operations Leadership program is a structured rotational path that hires aggressively from supply chain and operations-focused MBA programs. Product management hires concentrate at MIT Sloan, Stanford, Berkeley Haas, and Booth.",
+     "interview": "Amazon interviews are intense behavioral screens centered on the company's 16 Leadership Principles. Candidates should prepare 2-3 stories per principle, using the STAR framework. Some roles add written case studies or product sense exercises.",
+    },
+    {"slug": "google", "name": "Google", "short": "Google",
+     "industry": "Tech", "category": "FAANG",
+     "salary_base": 175000, "signing": 50000, "performance": 150000,
+     "tagline": "Top tech employer for product management. Strong AI/ML pipeline.",
+     "top_schools": ["stanford-gsb", "berkeley-haas", "mit-sloan", "wharton", "harvard-business-school",
+                     "booth", "kellogg", "columbia-business-school", "duke-fuqua", "michigan-ross",
+                     "ucla-anderson", "carnegie-mellon-tepper", "georgia-tech-scheller",
+                     "washington-foster", "cornell-johnson"],
+     "intro": "Google hires 300-500 MBAs per year across product management, business operations, partnerships, and finance roles. The Associate Product Manager (APM) program, while traditionally for new graduates, has expanded to include MBA-level Product Manager hires through campus recruiting.",
+     "hiring_pattern": "Heavy on-campus presence at Stanford, Haas, MIT Sloan, Booth, Wharton, and HBS. Off-campus access is feasible from any top-25 school for product management roles, particularly for candidates with prior PM or technical experience. Google's hiring pace fluctuates with broader tech hiring cycles.",
+     "interview": "Multiple rounds of behavioral interviews, product sense interviews (for PM roles), analytical/case interviews (for business operations), and a hiring committee review. Technical fluency matters but coding is not required for most MBA roles.",
+    },
+    {"slug": "microsoft", "name": "Microsoft", "short": "Microsoft",
+     "industry": "Tech", "category": "FAANG",
+     "salary_base": 165000, "signing": 50000, "performance": 80000,
+     "tagline": "Steady MBA tech hirer. Stronger work-life balance than peers.",
+     "top_schools": ["stanford-gsb", "berkeley-haas", "mit-sloan", "wharton", "harvard-business-school",
+                     "booth", "kellogg", "columbia-business-school", "duke-fuqua", "michigan-ross",
+                     "ucla-anderson", "carnegie-mellon-tepper", "washington-foster",
+                     "georgia-tech-scheller", "cornell-johnson"],
+     "intro": "Microsoft hires 400-600 MBAs annually, with roles concentrated in product management, business strategy, finance, and the company's growing cloud (Azure) and AI businesses. Microsoft's MBA hiring has been less volatile than Meta or Amazon during tech downturns.",
+     "hiring_pattern": "On-campus recruiting at top-15 programs. The MACH (Microsoft Academy of College Hires) program is the structured MBA rotational path. Microsoft's Seattle headquarters means Washington Foster has historically deep alumni density at the company.",
+     "interview": "Behavioral interviews, product sense (for PM), and case-style interviews depending on role. Microsoft's interview cadence is less stress-driven than Amazon, with more emphasis on collaboration and growth mindset.",
+    },
+    {"slug": "apple", "name": "Apple", "short": "Apple",
+     "industry": "Tech", "category": "FAANG",
+     "salary_base": 175000, "signing": 50000, "performance": 100000,
+     "tagline": "Smallest MBA hirer in FAANG. High selectivity, secretive culture.",
+     "top_schools": ["stanford-gsb", "berkeley-haas", "wharton", "harvard-business-school",
+                     "booth", "kellogg", "mit-sloan", "columbia-business-school", "duke-fuqua",
+                     "michigan-ross", "ucla-anderson", "carnegie-mellon-tepper",
+                     "washington-foster", "yale-som", "dartmouth-tuck"],
+     "intro": "Apple hires the fewest MBAs of the FAANG group, roughly 100-200 per year, concentrated in product marketing, supply chain, and finance roles. The company's secrecy and tight cultural fit screen make it the hardest tech MBA hire after Stanford-only firms.",
+     "hiring_pattern": "Apple's on-campus presence is limited compared to peers, with focused recruiting at Stanford, Haas, Wharton, and HBS. Off-campus access requires deep networking. Apple rarely posts MBA roles publicly until the candidate has been informally identified.",
+     "interview": "Apple's interview process is famously opaque and lengthy, often spanning 6-10 weeks with multiple rounds. Behavioral interviews emphasize attention to detail, customer obsession, and ability to thrive in ambiguous, secretive environments.",
+    },
+    {"slug": "meta", "name": "Meta (Facebook)", "short": "Meta",
+     "industry": "Tech", "category": "FAANG",
+     "salary_base": 180000, "signing": 75000, "performance": 200000,
+     "tagline": "Highest MBA tech compensation. Volatile hiring volume.",
+     "top_schools": ["stanford-gsb", "berkeley-haas", "wharton", "mit-sloan", "harvard-business-school",
+                     "booth", "kellogg", "columbia-business-school", "duke-fuqua", "michigan-ross",
+                     "ucla-anderson", "carnegie-mellon-tepper", "washington-foster",
+                     "georgia-tech-scheller", "cornell-johnson"],
+     "intro": "Meta hires 200-400 MBAs annually, with the heaviest concentration in product management, business operations, and product marketing roles. Total comp at Meta is the highest of the FAANG group due to stronger RSU grants, which can push first-year total comp above $400K at peak grant values.",
+     "hiring_pattern": "Heavy concentration at Stanford, Haas, Wharton, and MIT Sloan. Meta's hiring volume swings significantly with company performance and broader tech cycles. The firm has paused or reduced MBA hiring during multiple correction periods since 2022.",
+     "interview": "Behavioral interviews focused on Meta's values (Move Fast, Be Bold, Focus on Long-Term Impact, Build Awesome Things, Live in the Open, Build Social Value), product sense for PM roles, analytical interviews, and a hiring committee evaluation.",
+    },
+    {"slug": "accenture", "name": "Accenture Strategy", "short": "Accenture",
+     "industry": "Consulting", "category": "Tier 2",
+     "salary_base": 165000, "signing": 25000, "performance": 20000,
+     "tagline": "Largest non-Big-Four consulting hirer. Scale across geographies.",
+     "top_schools": ["harvard-business-school", "wharton", "booth", "kellogg", "columbia-business-school",
+                     "mit-sloan", "duke-fuqua", "berkeley-haas", "michigan-ross",
+                     "yale-som", "cornell-johnson", "georgetown-mcdonough", "indiana-kelley",
+                     "texas-mccombs", "emory-goizueta"],
+     "intro": "Accenture Strategy is the strategy arm of the world's largest consulting firm, hiring 400-600 MBAs per year across the US. The firm's scale and breadth (technology consulting, operations, change management) provide more lateral career options than MBB or boutiques.",
+     "hiring_pattern": "On-campus recruiting at top-25 programs. Accenture hires more aggressively from technology-focused MBA programs (CMU Tepper, Georgia Tech Scheller, Foster) than MBB does. The firm's bench depth means MBAs can rotate across practices more easily than at boutique strategy shops.",
+     "interview": "Two rounds of case interviews plus behavioral. Cases lean toward technology and digital transformation themes. Behavioral interviews emphasize adaptability and willingness to travel, since Accenture's project-based model often requires significant client-site time.",
+    },
+]
+
+
+def build_employer_hubs():
+    """Build /employers/ index plus per-employer hub pages.
+    Targets the 'where does {firm} hire MBAs from' query universe."""
+
+    # Index page
+    cards_html = ""
+    for e in EMPLOYERS:
+        cards_html += f"""
+      <a href="/employers/{e['slug']}/" class="ranking-row" style="text-decoration: none;">
+        <div class="ranking-info">
+          <span class="ranking-school-name">{e['name']}</span>
+          <span class="ranking-location">{e['industry']} &middot; {e['category']}</span>
+        </div>
+        <div class="ranking-stats">
+          <span class="ranking-stat"><span class="label">Base</span> ${e['salary_base'] // 1000}K</span>
+          <span class="ranking-stat"><span class="label">Signing</span> ${e['signing'] // 1000}K</span>
+        </div>
+      </a>"""
+
+    bc = breadcrumb_schema([("Home", "/"), ("Top MBA Employers", "/employers/")])
+    item_list = (
+        '<script type="application/ld+json">\n'
+        f'{{"@context":"https://schema.org","@type":"ItemList","name":"Top MBA Employers","numberOfItems":{len(EMPLOYERS)},"itemListElement":['
+        + ",".join(
+            f'{{"@type":"ListItem","position":{i+1},"name":"{e["name"]}","url":"{SITE_URL}/employers/{e["slug"]}/"}}'
+            for i, e in enumerate(EMPLOYERS)
+        )
+        + "]}\n</script>"
+    )
+
+    index_content = f"""{html_head(
+        f"Top MBA Employers {CURRENT_YEAR}: Who's Hiring + Salaries + Target Schools | {SITE_NAME}",
+        f"The {len(EMPLOYERS)} biggest MBA employers in {CURRENT_YEAR}: McKinsey, BCG, Bain, Goldman, JPM, Amazon, Google, Apple, Meta, Microsoft. Salary, hiring patterns, and target schools.",
+        "/employers/",
+        schema=bc + item_list
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>Top MBA Employers {CURRENT_YEAR}</h1>
+      <p class="hero-subtitle">Where MBAs go after graduation. Hiring volume, compensation, target schools, and how to land each role.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+      <div class="ranking-list">
+        {cards_html}
+      </div>
+
+      <div class="school-section" style="margin-top: 32px;">
+        <h2>How to read these</h2>
+        <p>Every page covers the same fields: hiring volume per year, target schools (where the firm recruits hardest), compensation breakdown (base, signing, performance bonus, stock), and the interview process. The data comes from public employment reports, recruiter conversations, and post-MBA placement data across the top 50 programs.</p>
+        <p>Compensation numbers are first-year totals for US-based hires. International offices pay differently. RSU values are based on grants at signing, not realized value, since stock prices move.</p>
+      </div>
+
+      {newsletter_cta_html()}
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "employers", "index.html"), index_content)
+
+    # Per-employer pages
+    for e in EMPLOYERS:
+        # Find the schools that map to this employer (use top_schools list)
+        target_schools = []
+        for slug in e["top_schools"]:
+            school = next((s for s in SCHOOLS if s["slug"] == slug), None)
+            if school:
+                target_schools.append(school)
+
+        schools_html = ""
+        for s in target_schools[:15]:
+            salary_k = s["avg_salary"] // 1000
+            schools_html += f"""
+        <a href="/schools/{s['slug']}/" class="ranking-row" style="text-decoration: none;">
+          <span class="ranking-position">#{s['ranking']}</span>
+          <div class="ranking-info">
+            <span class="ranking-school-name">{s['short_name']}</span>
+            <span class="ranking-location">{s['location']}</span>
+          </div>
+          <div class="ranking-stats">
+            <span class="ranking-stat"><span class="label">GMAT</span> {s['avg_gmat']}</span>
+            <span class="ranking-stat"><span class="label">Salary</span> ${salary_k}K</span>
+          </div>
+        </a>"""
+
+        total_first_year = e['salary_base'] + e['signing'] + e['performance']
+
+        emp_faqs = [
+            (f"What MBA programs does {e['short']} hire from?",
+             f"{e['short']} recruits hardest at {target_schools[0]['short_name']}, {target_schools[1]['short_name']}, and {target_schools[2]['short_name']}, with significant on-campus presence at the rest of the M7 plus the top 15. Off-campus hires from outside this list are possible but require deeper networking and stronger backgrounds."),
+            (f"What's the starting salary at {e['short']} for MBAs?",
+             f"First-year compensation at {e['short']} runs ${e['salary_base'] // 1000}K base, ${e['signing'] // 1000}K signing bonus, and ${e['performance'] // 1000}K performance bonus, totaling roughly ${total_first_year // 1000}K. RSU grants and other variable compensation can shift the total significantly for tech firms."),
+            (f"How hard is it to get hired by {e['short']} after an MBA?",
+             f"{e['short']} is a {e['category']} firm in {e['industry']}, which puts it in the top tier of MBA selectivity. Even at target schools, only 10-30% of applicants typically receive offers. Most successful candidates come in with relevant pre-MBA experience and strong campus interview performance."),
+            (f"What's the {e['short']} interview process like?",
+             e['interview']),
+        ]
+        faq_items_html = "".join(
+            f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+            for q, a in emp_faqs
+        )
+
+        emp_bc = breadcrumb_schema([
+            ("Home", "/"),
+            ("Top MBA Employers", "/employers/"),
+            (e['short'], f"/employers/{e['slug']}/"),
+        ])
+        emp_faq_schema = faq_schema(emp_faqs)
+
+        emp_title = f"{e['name']} MBA Hiring {CURRENT_YEAR}: Salary, Target Schools, Interview"
+        emp_meta = f"{e['name']} MBA hiring guide for {CURRENT_YEAR}. Target schools, ${e['salary_base'] // 1000}K base salary, signing bonus, interview format, hiring volume. From a Haas MBA grad."
+
+        emp_content = f"""{html_head(
+            f"{emp_title} | {SITE_NAME}",
+            emp_meta,
+            f"/employers/{e['slug']}/",
+            schema=emp_bc + emp_faq_schema
+        )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <span class="ranking-badge">{e['industry']} &middot; {e['category']}</span>
+      <h1>{e['name']}</h1>
+      <div class="gold-rule" style="width: 48px; margin-top: 16px;"></div>
+      <p class="hero-subtitle">{e['tagline']}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="stats-grid" style="margin-bottom: 32px;">
+        <div class="stat-item"><span class="label">Base Salary</span><span class="stat-value">${e['salary_base'] // 1000}K</span></div>
+        <div class="stat-item"><span class="label">Signing</span><span class="stat-value">${e['signing'] // 1000}K</span></div>
+        <div class="stat-item"><span class="label">Performance</span><span class="stat-value">${e['performance'] // 1000}K</span></div>
+        <div class="stat-item"><span class="label">First Year Total</span><span class="stat-value">${total_first_year // 1000}K</span></div>
+      </div>
+
+      <div class="school-section">
+        <h2>How {e['short']} hires MBAs</h2>
+        <p>{e['intro']}</p>
+        <p>{e['hiring_pattern']}</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Target schools for {e['short']}</h2>
+        <p>These are the MBA programs where {e['short']} recruits hardest. On-campus presence at these schools means structured interview pipelines, dedicated recruiters, and the highest hire rates per applicant.</p>
+        <div class="ranking-list" style="margin-top: 16px;">
+          {schools_html}
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>Interview process</h2>
+        <p>{e['interview']}</p>
+      </div>
+
+      <div class="school-section">
+        <h2>{e['short']} compensation breakdown</h2>
+        <p>First-year total compensation at {e['short']} runs about ${total_first_year // 1000}K for US-based MBA hires. The breakdown: ${e['salary_base'] // 1000}K base, ${e['signing'] // 1000}K signing bonus paid at start, ${e['performance'] // 1000}K performance bonus or stock vest in the first year.</p>
+        <p>Year-two compensation typically grows 10-15%, with promotion to Senior Associate or equivalent in years 2-3 producing larger jumps. Top performers in {e['industry']} can clear $400K total comp by year 4-5.</p>
+      </div>
+
+      {faq_items_html}
+
+      <div class="school-section">
+        <h2>Related</h2>
+        <div class="compare-link-grid">
+          <a href="/employers/" class="btn btn-primary">All MBA Employers</a>
+          {''.join(f'<a href="/rankings/{r}/" class="btn btn-outline">Best for {r.replace("-", " ").title()}</a>' for r in (["consulting"] if e["industry"] == "Consulting" else ["finance"] if e["industry"] in ["Investment Banking", "Private Equity"] else ["technology"]))}
+          <a href="/class-of-{CURRENT_YEAR}/" class="btn btn-outline">Class of {CURRENT_YEAR} Hub</a>
+        </div>
+      </div>
+
+      {newsletter_cta_html()}
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+        write_page(os.path.join(OUTPUT_DIR, "employers", e["slug"], "index.html"), emp_content)
+
+    print(f"  Built: /employers/ + {len(EMPLOYERS)} employer pages")
+
+
+def build_deadlines_tracker():
+    """Hub page for the 'MBA deadlines' query universe.
+    Sortable list of every school's R1/R2/R3 windows."""
+    schools = sorted(SCHOOLS, key=lambda s: s["ranking"])
+
+    # Rough deadline windows by tier. Schools publish exact dates;
+    # these are the typical week ranges for fall {CURRENT_YEAR+1} entry.
+    DEADLINE_WINDOWS = {
+        1: {"r1": "Sep 4-12", "r2": "Jan 3-7", "r3": "Apr 2-9", "label": "M7"},
+        2: {"r1": "Sep 18-26", "r2": "Jan 5-10", "r3": "Apr 5-12", "label": "Top 15"},
+        3: {"r1": "Sep 25-Oct 5", "r2": "Jan 8-15", "r3": "Apr 5-15", "label": "Top 25"},
+        4: {"r1": "Oct 1-15", "r2": "Jan 10-25", "r3": "Mar 15-Apr 15", "label": "Notable"},
+        5: {"r1": "Oct 10-30", "r2": "Jan 15-Feb 1", "r3": "Apr-Rolling", "label": "Tier 5"},
+        6: {"r1": "Oct-Nov", "r2": "Jan-Feb", "r3": "Rolling", "label": "Tier 6"},
+        7: {"r1": "Rolling", "r2": "Rolling", "r3": "Rolling", "label": "Tier 7"},
+    }
+
+    rows_html = ""
+    for s in schools:
+        w = DEADLINE_WINDOWS.get(s["tier"], DEADLINE_WINDOWS[4])
+        rows_html += f"""
+      <tr data-rank="{s['ranking']}" data-tier="{s['tier']}">
+        <td><a href="/schools/{s['slug']}/deadlines/">{s['short_name']}</a><div class="text-secondary" style="font-size:12px">{s['location']}</div></td>
+        <td>{w['r1']}</td>
+        <td>{w['r2']}</td>
+        <td>{w['r3']}</td>
+        <td>#{s['ranking']}</td>
+      </tr>"""
+
+    sortable_js = """<script>
+(function() {
+  var table = document.getElementById('dl-table');
+  if (!table) return;
+  var headers = table.querySelectorAll('th.sortable');
+  var tbody = table.querySelector('tbody');
+  headers.forEach(function(th) {
+    th.addEventListener('click', function() {
+      var key = th.dataset.sort;
+      var dir = th.classList.contains('asc') ? 'desc' : 'asc';
+      headers.forEach(function(h) { h.classList.remove('asc', 'desc', 'active'); });
+      th.classList.add(dir, 'active');
+      var rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b) {
+        var av = parseFloat(a.dataset[key]);
+        var bv = parseFloat(b.dataset[key]);
+        return dir === 'asc' ? av - bv : bv - av;
+      });
+      rows.forEach(function(r) { tbody.appendChild(r); });
+    });
+  });
+  var search = document.getElementById('dl-search');
+  if (search) {
+    search.addEventListener('input', function() {
+      var q = search.value.toLowerCase();
+      tbody.querySelectorAll('tr').forEach(function(r) {
+        r.style.display = r.textContent.toLowerCase().indexOf(q) !== -1 ? '' : 'none';
+      });
+    });
+  }
+  var tierFilter = document.querySelectorAll('.tier-filter');
+  tierFilter.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tierFilter.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var tier = btn.dataset.tier;
+      tbody.querySelectorAll('tr').forEach(function(r) {
+        r.style.display = (tier === 'all' || r.dataset.tier === tier) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>"""
+
+    faqs = [
+        ("When are MBA application deadlines for fall " + str(CURRENT_YEAR + 1) + "?",
+         f"Round 1 deadlines fall in early September (M7), late September (Top 15), and early October (Top 25 and below). Round 2 deadlines cluster in early-to-mid January. Round 3 deadlines run from late March to mid-April. Each school publishes exact dates each cycle on its admissions site."),
+        ("Should I apply Round 1 or Round 2?",
+         "Round 1 if your application is ready. M7 schools admit 40-50% of the class in Round 1, with the deepest scholarship pools and freshest admissions reviewers. Round 2 is competitive but more crowded, since many candidates use the extra months to retake the GMAT or refine essays. Apply Round 1 unless your application would suffer from the rush."),
+        ("Are MBA Round 3 deadlines worth applying to?",
+         "At M7 and top-15 programs, Round 3 admit rates drop into the single digits because most seats are filled. Apply Round 3 only if you have an exceptional profile or are targeting programs ranked outside the top 15. For most candidates, applying Round 1 next cycle produces a better outcome than rushing Round 3 this cycle."),
+        ("What's the typical Round 1 MBA deadline at top schools?",
+         "M7 programs (Stanford GSB, HBS, Wharton, Kellogg, Booth, Columbia, MIT Sloan) cluster their Round 1 deadlines in early-to-mid September. Top 15 programs run late September to early October. The exact dates shift by 1-2 weeks each cycle, so check the official admissions site before submitting."),
+        ("How many MBA deadlines should I plan for?",
+         "Most successful applicants target 5-8 schools across 2-3 reach, 2-3 target, and 1-2 safety programs. With 5-8 schools, you'll be writing 10-24 essays and managing different deadlines. Group your schools by deadline week and treat each group as a sprint."),
+    ]
+
+    faq_items = "".join(
+        f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+        for q, a in faqs
+    )
+
+    bc = breadcrumb_schema([("Home", "/"), ("MBA Deadlines", "/deadlines/")])
+    page_faq = faq_schema(faqs)
+
+    title = f"MBA Application Deadlines {CURRENT_YEAR}: R1, R2, R3 by School"
+    meta = f"MBA application deadlines for fall {CURRENT_YEAR + 1} entry across {len(schools)} programs. Round 1, Round 2, and Round 3 windows by school. Updated each cycle."
+
+    content = f"""{html_head(
+        f"{title} | {SITE_NAME}",
+        meta,
+        "/deadlines/",
+        schema=bc + page_faq
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Application Deadlines {CURRENT_YEAR}</h1>
+      <p class="hero-subtitle">Round 1, Round 2, and Round 3 windows for fall {CURRENT_YEAR + 1} entry across {len(schools)} top programs. Sortable, filterable, with strategy notes.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="school-section">
+        <h2>How to use this tracker</h2>
+        <p>The dates below are typical windows for each tier. Each school publishes exact dates each cycle on its admissions site, and dates shift by 1-2 weeks year over year. Use this tracker to plan your application sprints; confirm exact dates before submitting.</p>
+        <p>Click any school for its dedicated deadlines page with round-specific strategy advice.</p>
+      </div>
+
+      <div class="table-controls" style="margin-bottom: 16px;">
+        <div class="filter-controls">
+          <button class="filter-btn tier-filter active" data-tier="all">All</button>
+          <button class="filter-btn tier-filter" data-tier="1">M7</button>
+          <button class="filter-btn tier-filter" data-tier="2">Top 15</button>
+          <button class="filter-btn tier-filter" data-tier="3">Top 25</button>
+          <button class="filter-btn tier-filter" data-tier="4">Notable</button>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <input type="text" id="dl-search" placeholder="Search schools..." style="width: 100%; padding: 12px; margin-bottom: 16px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 14px;">
+        <div style="overflow-x: auto;">
+          <table id="dl-table" class="comparison-table" style="min-width: 720px;">
+            <thead>
+              <tr>
+                <th>School</th>
+                <th>Round 1</th>
+                <th>Round 2</th>
+                <th>Round 3</th>
+                <th class="sortable asc active" data-sort="rank">Rank</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows_html}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>The honest take on rounds</h2>
+        <p>Round 1 wins on math. The committee reviews fewer applications, the seats are open, and scholarship money sits at its highest level of the cycle. If you can credibly submit by Round 1, do it.</p>
+        <p>Round 2 is the largest applicant pool. Most candidates wait the extra months to refine essays or retake the GMAT, which increases competition without proportionally increasing seats. Round 2 is fine if your application is meaningfully stronger after the wait. It's not fine if you're using Round 2 to procrastinate.</p>
+        <p>Round 3 is a longshot at top-15 programs. The math is unforgiving: most seats are filled, the marginal candidate has to beat a higher bar, and admissions committees know they can defer to next year's pool. Apply Round 3 only with a distinctive profile or at programs ranked 25 and below where rolling admissions still has room.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>The five-school rule</h2>
+        <p>Applying to fewer than 5 schools concentrates your risk. Applying to more than 8 dilutes your essays. The sweet spot is 5-7: 2 reach schools, 2-3 target schools, 1-2 safety schools. Each school gets enough essay attention to feel custom-written.</p>
+        <p>Map your 5-7 schools onto Round 1 deadlines first. If the deadlines bunch in the same week, assign them to different days for submission so you can do final reviews on each. Round 1 is a 4-6 week sprint with tight deadlines; treat it like a project plan.</p>
+      </div>
+
+      {faq_items}
+
+      <div class="school-section">
+        <h2>Related</h2>
+        <div class="compare-link-grid">
+          <a href="/guides/mba-application-timeline/" class="btn btn-primary">12-Month Timeline</a>
+          <a href="/class-of-{CURRENT_YEAR}/" class="btn btn-outline">Class of {CURRENT_YEAR} Hub</a>
+          <a href="/acceptance-rates/" class="btn btn-outline">Acceptance Rates</a>
+          <a href="/guides/gmat-vs-gre/" class="btn btn-outline">GMAT vs GRE</a>
+        </div>
+      </div>
+
+      {newsletter_cta_html()}
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}
+{sortable_js}"""
+
+    write_page(os.path.join(OUTPUT_DIR, "deadlines", "index.html"), content)
+    print(f"  Built: /deadlines/ tracker ({len(schools)} schools)")
+
+
+def build_acceptance_rate_hub():
+    """Hub page for the 'MBA acceptance rate' query universe.
+    Sortable table covering every school we track."""
+    schools = sorted(SCHOOLS, key=lambda s: s["acceptance_rate"])
+    most_selective = schools[:5]
+    least_selective = schools[-5:]
+    median_ar = schools[len(schools) // 2]["acceptance_rate"]
+
+    rows_html = ""
+    for s in schools:
+        rows_html += f"""
+      <tr data-rank="{s['ranking']}" data-acceptance="{s['acceptance_rate']}" data-gmat="{s['avg_gmat']}" data-gpa="{s['avg_gpa']}" data-class-size="{s['class_size']}">
+        <td><a href="/schools/{s['slug']}/acceptance-rate/">{s['short_name']}</a><div class="text-secondary" style="font-size:12px">{s['location']}</div></td>
+        <td><strong>{s['acceptance_rate']}%</strong></td>
+        <td>{s['avg_gmat']}</td>
+        <td>{s['avg_gpa']}</td>
+        <td>{s['class_size']}</td>
+        <td>#{s['ranking']}</td>
+      </tr>"""
+
+    sortable_js = """<script>
+(function() {
+  var table = document.getElementById('ar-table');
+  if (!table) return;
+  var headers = table.querySelectorAll('th.sortable');
+  var tbody = table.querySelector('tbody');
+  headers.forEach(function(th) {
+    th.addEventListener('click', function() {
+      var key = th.dataset.sort;
+      var dir = th.classList.contains('asc') ? 'desc' : 'asc';
+      headers.forEach(function(h) { h.classList.remove('asc', 'desc', 'active'); });
+      th.classList.add(dir, 'active');
+      var rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b) {
+        var av = parseFloat(a.dataset[key]);
+        var bv = parseFloat(b.dataset[key]);
+        return dir === 'asc' ? av - bv : bv - av;
+      });
+      rows.forEach(function(r) { tbody.appendChild(r); });
+    });
+  });
+  var search = document.getElementById('ar-search');
+  if (search) {
+    search.addEventListener('input', function() {
+      var q = search.value.toLowerCase();
+      tbody.querySelectorAll('tr').forEach(function(r) {
+        r.style.display = r.textContent.toLowerCase().indexOf(q) !== -1 ? '' : 'none';
+      });
+    });
+  }
+})();
+</script>"""
+
+    faqs = [
+        ("What's the average MBA acceptance rate?",
+         f"Across the {len(schools)} programs we track, acceptance rates range from {schools[0]['acceptance_rate']}% at the most selective schools to over 80% at the least selective. The median is {median_ar}%. Top-7 programs cluster between 7% and 25%; top-25 programs sit between 15% and 40%."),
+        ("Which MBA program has the lowest acceptance rate?",
+         f"{most_selective[0]['short_name']} at {most_selective[0]['acceptance_rate']}% leads the list. Stanford GSB has been the hardest M7 program for years; rates can swing year to year, but Stanford has stayed under 10% since the early 2010s."),
+        ("Why are MBA acceptance rates so different across schools?",
+         "Acceptance rate is mostly a function of brand strength and class size. M7 programs receive 6-12 applications per seat. Mid-tier programs get 3-5 applications per seat. Regional programs get 1-2. Acceptance rate alone doesn't tell you about program quality; it tells you about applicant volume relative to capacity."),
+        ("Does acceptance rate predict difficulty of admission?",
+         "Loosely. A 10% acceptance rate means a more competitive applicant pool, which raises the implicit bar on every dimension (GMAT, GPA, work experience, essays). But two schools with identical acceptance rates can have very different admissions criteria. Look at the median GMAT and GPA, not just the rate."),
+        ("How do MBA acceptance rates change between rounds?",
+         "Significantly. Round 1 acceptance rates run dramatically higher than Round 3 at every top school. The aggregate published rate flattens this. If you're applying Round 3 to a top-25 program, your effective acceptance rate is closer to the 5-10% range, regardless of what the school publishes."),
+    ]
+
+    faq_items = "".join(
+        f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+        for q, a in faqs
+    )
+
+    bc = breadcrumb_schema([("Home", "/"), ("MBA Acceptance Rates", "/acceptance-rates/")])
+    page_faq = faq_schema(faqs)
+
+    title = f"MBA Acceptance Rates {CURRENT_YEAR}: Every Top Program by Selectivity"
+    meta = f"Acceptance rates for {len(schools)} MBA programs, sortable by selectivity, GMAT, GPA, and class size. Real numbers from each school's admissions report."
+
+    content = f"""{html_head(
+        f"{title} | {SITE_NAME}",
+        meta,
+        "/acceptance-rates/",
+        schema=bc + page_faq
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Acceptance Rates {CURRENT_YEAR}</h1>
+      <p class="hero-subtitle">Selectivity, GMAT median, class size, and rank for {len(schools)} MBA programs. Sort, filter, compare.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="stats-grid" style="margin-bottom: 32px;">
+        <div class="stat-item"><span class="label">Most Selective</span><span class="stat-value">{most_selective[0]['acceptance_rate']}%</span></div>
+        <div class="stat-item"><span class="label">Median Rate</span><span class="stat-value">{median_ar}%</span></div>
+        <div class="stat-item"><span class="label">Programs Tracked</span><span class="stat-value">{len(schools)}</span></div>
+        <div class="stat-item"><span class="label">Top 7 Range</span><span class="stat-value">7-25%</span></div>
+      </div>
+
+      <div class="school-section">
+        <h2>How to read this</h2>
+        <p>Sort by acceptance rate, GMAT, GPA, class size, or rank. Search by school name. Click any school for its full acceptance rate page with class profile context, application strategy, and what the rate predicts about your odds.</p>
+      </div>
+
+      <div class="school-section">
+        <input type="text" id="ar-search" placeholder="Search schools..." style="width: 100%; padding: 12px; margin-bottom: 16px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 14px;">
+        <div style="overflow-x: auto;">
+          <table id="ar-table" class="comparison-table" style="min-width: 720px;">
+            <thead>
+              <tr>
+                <th>School</th>
+                <th class="sortable asc active" data-sort="acceptance">Accept %</th>
+                <th class="sortable" data-sort="gmat">GMAT</th>
+                <th class="sortable" data-sort="gpa">GPA</th>
+                <th class="sortable" data-sort="class-size">Class Size</th>
+                <th class="sortable" data-sort="rank">Rank</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows_html}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>The five most selective MBA programs</h2>
+        <ol>
+          {"".join(f"<li><a href='/schools/{s['slug']}/'>{s['short_name']}</a> at {s['acceptance_rate']}% (GMAT median {s['avg_gmat']})</li>" for s in most_selective)}
+        </ol>
+        <p>Stanford has held the top spot for over a decade. Harvard and MIT Sloan trade positions year to year. The single-digit rates at these programs reflect application volume more than program superiority. Stanford GSB receives over 7,000 applications for roughly 430 seats. Even strong candidates get rejected because the funnel is unforgiving.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>The acceptance rate mistake most applicants make</h2>
+        <p>Sorting your school list by acceptance rate produces a worse decision than sorting by fit. A 12% acceptance rate at <a href="/schools/berkeley-haas/">Berkeley Haas</a> doesn't mean Haas is harder than a 25% acceptance rate at <a href="/schools/booth/">Booth</a>. Haas has a smaller class, a more specific cultural fit, and a different recruiting volume. Booth's looser rate reflects a larger class that can absorb more admits without dropping the median GMAT.</p>
+        <p>Optimizing for low acceptance rate also leads applicants to chase prestige rather than fit. The post-MBA result is a graduate at a name-brand school whose career goals don't align with that school's strengths. The honest move: identify the 6-8 schools where your goals, learning style, and cultural fit map to the program. Worry about acceptance rate second.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Round 1 vs Round 3: the hidden gap</h2>
+        <p>Published acceptance rates blend all rounds together. The reality: Round 1 admissions runs dramatically more favorably than Round 3 at every top school. A school publishing a 20% overall rate may admit 28% in Round 1, 18% in Round 2, and 6% in Round 3.</p>
+        <p>If you're targeting a school with a 15% published rate, that's not your real number. Your real number depends on which round you apply, your applicant pool's strength, and how full the class is by the time you submit. Apply Round 1 if you can. The rate gap is worth the urgency.</p>
+      </div>
+
+      {faq_items}
+
+      <div class="school-section">
+        <h2>Related</h2>
+        <div class="compare-link-grid">
+          <a href="/class-of-{CURRENT_YEAR}/" class="btn btn-primary">Class of {CURRENT_YEAR} Hub</a>
+          <a href="/rankings/selectivity/" class="btn btn-outline">Most Selective Programs</a>
+          <a href="/rankings/overall/" class="btn btn-outline">Overall Rankings</a>
+          <a href="/guides/mba-application-timeline/" class="btn btn-outline">Application Timeline</a>
+        </div>
+      </div>
+
+      {newsletter_cta_html()}
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}
+{sortable_js}"""
+
+    write_page(os.path.join(OUTPUT_DIR, "acceptance-rates", "index.html"), content)
+    print(f"  Built: /acceptance-rates/ hub ({len(schools)} schools)")
 
 
 def build_class_of_2026_hub():
@@ -13154,6 +14027,9 @@ def main():
     build_gmat_calculator()
     build_top_voices()
     build_class_of_2026_hub()
+    build_acceptance_rate_hub()
+    build_deadlines_tracker()
+    build_employer_hubs()
     build_redirects()
     build_sitemap()
     build_robots()
