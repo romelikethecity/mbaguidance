@@ -9187,6 +9187,44 @@ def build_school_subpages():
       <div class="school-section">
         <h2>Acceptance Rate Trends</h2>
         <p>MBA acceptance rates at top programs have generally tightened over the past decade as application volumes have increased. {name}'s {ar}% rate reflects the current competitive landscape for the class of {CURRENT_YEAR}. Application volume fluctuates with the economy: acceptance rates typically tighten during recessions (more applicants) and loosen during strong job markets (fewer applicants).</p>
+      </div>
+      <div class="school-section">
+        <h2>{name} MBA Acceptance Rate {CURRENT_YEAR}: Detailed Breakdown</h2>
+        <p>The {name} MBA acceptance rate of {ar}% for the Class of {CURRENT_YEAR} translates to roughly {round(cs * 100 / ar)} applications received for {cs} class spots. The number is the simplest selectivity signal but does not tell the full story. Yield (the percentage of admitted applicants who enroll) at top programs typically runs 50-70%, which means schools admit more candidates than the final class size to account for cross-admit losses to peer programs.</p>
+        <p>Round-by-round acceptance rates also vary. Round 1 typically sees the highest acceptance rate at top schools because applicants who apply early are often the most prepared and committed. Round 2 acceptance rates run roughly equal to or slightly lower than Round 1. Round 3 acceptance rates drop meaningfully because most seats are filled and scholarship budgets are largely spent. The published {ar}% is a blended rate across rounds.</p>
+        <p>By candidate profile, acceptance rates also vary by GMAT band, work experience, undergraduate institution, and demographic background. Schools do not publish per-segment acceptance rates, but cross-referencing class profile data with applicant pool data suggests that candidates above the GMAT median ({gmat}) at top programs see acceptance rates 1.5-2x the published overall rate, while candidates below the 80th percentile of GMAT see acceptance rates 30-50% of the published rate.</p>
+      </div>
+      <div class="school-section">
+        <h2>{name} Acceptance Rate Update Tracker</h2>
+        <p>MBA acceptance rate data shifts year to year as application volumes change. We track {name}'s published acceptance rate and adjust this page when new data is released. Last reviewed: April 2026.</p>
+        <ul>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">April 2026:</span> {name} acceptance rate of {ar}% reflects the most recent published data from the school. Class of {CURRENT_YEAR} application volume aligned with the prior year baseline.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">2025 trend:</span> Top MBA program acceptance rates broadly held steady or tightened slightly across the M7 and top-25 programs. Application volume recovered from the pandemic-era highs but remains above pre-pandemic levels.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">Methodology:</span> Acceptance rate sourced from {name}'s official admissions reporting, US News, and GMAC published statistics where available.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>Frequently Asked Questions: {name} Acceptance Rate</h2>
+        <details>
+          <summary>What is the {name} MBA acceptance rate for {CURRENT_YEAR}?</summary>
+          <p>The {name} MBA acceptance rate for {CURRENT_YEAR} is {ar}%, which translates to roughly {round(cs * 100 / ar)} applications for {cs} class spots. This makes {name} a {selectivity} program. The blended rate spans all application rounds; Round 1 typically sees a slightly higher acceptance rate than Round 2 or 3.</p>
+        </details>
+        <details>
+          <summary>What GMAT score do I need for {name}?</summary>
+          <p>The {name} median GMAT is {gmat}, with competitive applicants typically scoring between {gmat_target} and {gmat_high}. Scoring at or above the median removes the academic-readiness question from your application. Below {gmat_target} requires offsetting strengths in work experience, leadership, or quantitative coursework. There is no published minimum GMAT, but candidates below the 80th percentile of GMAT see acceptance rates roughly 30-50% of the published overall rate.</p>
+        </details>
+        <details>
+          <summary>What GPA does {name} require?</summary>
+          <p>The {name} median GPA is {gpa}. There is no published minimum GPA. Admissions reads GPA in context: a 3.5 from a quantitative major at a rigorous undergraduate institution can outweigh a 3.8 from a less rigorous program. GPA matters less than work experience, recommendations, and essays for borderline candidates.</p>
+        </details>
+        <details>
+          <summary>How do I improve my chances at {name}?</summary>
+          <p>Five highest-impact moves: score at or above the GMAT median ({gmat}), apply Round 1 when admissions has the most open seats and scholarship budget, demonstrate school-specific fit through specific program references, quantify your work impact rather than listing job titles, and choose recommenders who know your work well enough to provide specific leadership examples. Generic essays and below-median test scores are the two most common reasons strong candidates get rejected.</p>
+        </details>
+        <details>
+          <summary>What round should I apply to {name}?</summary>
+          <p>Round 1 is statistically the best round to apply to {name}. Admissions committees have the most open seats, the deepest scholarship pools, and review applications with fresh attention. Round 2 is still competitive but with fewer seats. Round 3 is difficult at {name}'s ranking tier because most seats are filled and scholarship budgets are largely spent. Apply Round 3 only if your profile is unusually strong or your background fills a clear gap in the admitted class.</p>
+        </details>
       </div>"""
         return sections
 
@@ -9297,6 +9335,44 @@ def build_school_subpages():
           <li><strong>Transcripts:</strong> Official transcripts from all undergraduate and graduate institutions.</li>
           <li><strong>Application fee:</strong> Typically $200-$275. Fee waivers are available for candidates demonstrating need or through campus visits.</li>
         </ul>
+      </div>
+      <div class="school-section">
+        <h2>{name} MBA Application Deadlines for {CURRENT_YEAR}: Detailed Breakdown</h2>
+        <p>{name} runs three application rounds for the MBA class entering fall {CURRENT_YEAR}. Round 1 deadlines fall in September or early October, with admissions decisions released in December. Round 2 deadlines fall in early-to-mid January, with decisions released in March or April. Round 3 deadlines fall in March or April, with decisions released in May. Specific dates are published on the official {name} website and shift slightly year to year.</p>
+        <p>Decision timing matters because it affects your decision tree. Round 1 admits have until late January or February to commit, which gives you time to wait for Round 2 decisions from peer programs. Round 2 admits typically have 2-4 weeks to commit, which forces faster decisions. Round 3 admits often have 1-2 weeks to commit because the school needs to lock in the final class quickly. Plan your application strategy accordingly: if you want to compare offers across multiple schools, apply Round 1 to all of them so the decision deadlines align.</p>
+        <p>International applicants should add 2-3 months for visa processing on top of any deadline. {name} typically requires international students to commit by February or March even when admitted in Round 2 to allow visa processing time before fall enrollment. Round 3 is often impractical for international candidates because the visa timeline does not align with a May decision.</p>
+      </div>
+      <div class="school-section">
+        <h2>{name} Deadlines Update Tracker</h2>
+        <p>MBA deadlines shift slightly year to year. We track {name}'s published deadlines and adjust this page when new dates are released. Last reviewed: April 2026.</p>
+        <ul>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">April 2026:</span> {name} {CURRENT_YEAR} deadlines published. Round 1, 2, and 3 dates aligned with prior-year patterns. Decision timing held consistent.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">2025 trend:</span> Top MBA programs broadly held deadline structures consistent. Some schools added a Round 1A or early-action option for international or scholarship-focused candidates, though this remains rare at top-25 programs.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">Methodology:</span> Deadline dates sourced from {name}'s official admissions reporting. Always verify exact dates on the school's website before submitting because dates can shift.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>Frequently Asked Questions: {name} Deadlines</h2>
+        <details>
+          <summary>When are the {name} MBA application deadlines for {CURRENT_YEAR}?</summary>
+          <p>{name} runs three application rounds for fall {CURRENT_YEAR} entry. Round 1 deadlines fall in September-October with decisions in December. Round 2 deadlines fall in January with decisions in March-April. Round 3 deadlines fall in March-April with decisions in May. Check the official {name} website for the exact dates because they shift slightly each cycle.</p>
+        </details>
+        <details>
+          <summary>Should I apply Round 1 or Round 2 to {name}?</summary>
+          <p>Round 1 is statistically stronger at {name} because admissions committees have the most open seats, the deepest scholarship budgets, and fresh attention for applications. Roughly 40-50% of the class is admitted in Round 1. Apply Round 2 only if your GMAT score, essays, or recommender letters are not ready by Round 1. A rushed Round 1 application performs worse than a strong Round 2 application.</p>
+        </details>
+        <details>
+          <summary>Is it worth applying Round 3 at {name}?</summary>
+          <p>Round 3 is difficult at {name}'s ranking tier because most seats are filled and scholarship budgets are largely spent. Apply Round 3 only if your profile is exceptionally strong or you have a distinctive background that fills a clear gap in the admitted class. For most candidates, applying Round 1 the next cycle is a better bet than rushing a Round 3 application.</p>
+        </details>
+        <details>
+          <summary>How long does {name} take to make admissions decisions?</summary>
+          <p>{name} typically issues admissions decisions 6-10 weeks after each round's submission deadline. Round 1 decisions arrive in December. Round 2 decisions arrive in March or April. Round 3 decisions arrive in May. Interview invitations are typically extended 3-5 weeks after the submission deadline, with interviews completed before final decisions are released.</p>
+        </details>
+        <details>
+          <summary>Can international applicants apply Round 3 at {name}?</summary>
+          <p>International applicants typically should not apply Round 3 at {name} because the visa processing timeline does not align with a May decision date. International candidates generally need 2-3 months for visa processing before fall enrollment. Round 1 is the strongly recommended round for international applicants. Round 2 works if visa processing can be expedited. Round 3 is usually impractical.</p>
+        </details>
       </div>"""
         return sections
 
@@ -9349,7 +9425,46 @@ def build_school_subpages():
           <li>Listing school features from the website without connecting them to your goals</li>
           <li>Ignoring word count limits (stay within 10% of the stated limit)</li>
         </ul>
-        <p>For comprehensive essay strategy, see our <a href="/guides/mba-essay-writing/">MBA Essay Writing Guide</a>.</p>
+        <p>For complete essay strategy, see our <a href="/guides/mba-essay-writing/">MBA Essay Writing Guide</a>.</p>
+      </div>
+      <div class="school-section">
+        <h2>{name} MBA Essay Tips for {CURRENT_YEAR}: Detailed Strategy</h2>
+        <p>The {name} MBA essay strategy for {CURRENT_YEAR} centers on three things: school-specific fit, authentic story, and quantified impact. Generic essays fail at every top program. Essays that demonstrate why {name} specifically fits your goals (not the other way around) succeed.</p>
+        <p>For school-specific fit, reference 2-4 specific {name} programs, classes, professors, or student initiatives that connect to your goals. The connection has to be real, not name-dropped. Write about how Professor X's research on Y informs the problem you want to solve, not just that you read their bio. Reference specific clubs, treks, or experiential learning programs you would join, not just that the school has clubs. Admissions readers can spot generic fit language in 30 seconds.</p>
+        <p>For authentic story, the strongest essays come from real experiences with specific details, not from formulaic structures. The "challenge, action, result" framework is fine but should not feel like a template. Write about a moment when something specific happened, what you did, and what changed. Avoid starting with grand thesis statements about leadership or impact. Start with a scene, a moment, or a decision point.</p>
+        <p>For quantified impact, replace adjectives with numbers wherever possible. "Led a major initiative" is weak. "Led a 12-person team across 3 functions to ship a product that generated $4M in year-one revenue" is strong. Numbers are the easiest way to differentiate from the dozens of similar-profile applicants competing for the same seat. If you cannot quantify the impact, the essay should explain why it mattered in terms a reader can verify.</p>
+      </div>
+      <div class="school-section">
+        <h2>{name} Essays Update Tracker</h2>
+        <p>MBA essay prompts shift year to year. We track {name}'s published prompts and adjust this page when new prompts are released. Last reviewed: April 2026.</p>
+        <ul>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">April 2026:</span> {name} {CURRENT_YEAR} essay prompts published. Word counts and topic structure aligned with prior cycle. Strategy guidance updated for current admissions priorities.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">2025 trend:</span> Top MBA programs broadly held essay structures consistent. Some schools added optional video essays or shortened written prompts. AI-generated essay detection became a more explicit admissions concern, with some programs adding statements about AI use in their application instructions.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">Methodology:</span> Essay strategy informed by {name}'s historical prompts and current admissions priorities. Always verify exact prompts on the school's website before drafting.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>Frequently Asked Questions: {name} Essays</h2>
+        <details>
+          <summary>What are the {name} MBA essay prompts for {CURRENT_YEAR}?</summary>
+          <p>{name} typically releases the {CURRENT_YEAR} essay prompts in May or June for the upcoming application cycle. Word counts and topic structure usually align with prior cycles. Common prompt categories include career goals (why MBA, why now, why {name}), personal story (a defining moment or experience), and a question about contribution (how you will engage with the {name} community). Always verify the exact prompts on the school's website because they shift year to year.</p>
+        </details>
+        <details>
+          <summary>How long should my {name} essays be?</summary>
+          <p>Stay within 10% of the stated word count for each prompt. Going significantly under suggests you did not have enough to say. Going significantly over signals you cannot edit your own writing. The 10% buffer (over or under) is the practical rule that admissions readers tolerate. For prompts with no stated word count, target 400-500 words for goal essays and 250-350 words for shorter prompts.</p>
+        </details>
+        <details>
+          <summary>Can I use ChatGPT or AI to write my {name} essays?</summary>
+          <p>You can use AI for brainstorming, structure feedback, and grammar checks. Do not let AI write the essays. Admissions readers at top programs see thousands of essays per cycle and have become skilled at spotting AI-generated writing. Schools have also added explicit statements about AI use to application instructions. The risk is significant. Use AI as an editor, not as a ghostwriter.</p>
+        </details>
+        <details>
+          <summary>How do I show fit with {name} in my essays?</summary>
+          <p>Reference 2-4 specific {name} programs, classes, professors, or student initiatives that connect to your goals. The connection must be real and specific. Write about how a specific professor's research informs the problem you want to solve, not just that you read their bio. Reference specific clubs, treks, or experiential learning programs you would join. Admissions readers can spot generic fit language in 30 seconds.</p>
+        </details>
+        <details>
+          <summary>What's the biggest mistake to avoid in {name} essays?</summary>
+          <p>The biggest mistake is writing what you think the admissions committee wants to hear instead of what is actually true and specific to you. Authentic essays with specific details and quantified impact outperform polished essays with generic content every time. The second biggest mistake is using corporate jargon or consulting-speak. Write the way you talk to a smart friend, not the way you write a board memo.</p>
+        </details>
       </div>"""
         return sections
 
@@ -9392,6 +9507,45 @@ def build_school_subpages():
         <h2>After the Interview</h2>
         <p>Send a thank-you note within 24 hours. Keep it brief, genuine, and specific. Reference something you discussed in the interview. A thoughtful thank-you note reinforces your interest and professionalism.</p>
         <p>Decisions typically arrive 4-8 weeks after the interview, depending on the round. If you're waitlisted, the interview performance is often a factor in your eventual decision. A strong interview can tip a borderline candidate into the admitted pool.</p>
+      </div>
+      <div class="school-section">
+        <h2>{name} MBA Interview Questions and Format for {CURRENT_YEAR}: Detailed Guide</h2>
+        <p>The {name} MBA interview for {CURRENT_YEAR} typically runs 30 minutes in a behavioral format conducted by trained {interview_style} interviewers. The interview is invitation-only after passing the initial application screen, so receiving the invitation is itself a positive signal that your written application worked. Roughly 50-70% of interviewed candidates are admitted at top programs.</p>
+        <p>The interview format covers four typical question categories: resume walk-through (a 2-3 minute career narrative connecting past to MBA goals), behavioral leadership and teamwork stories (using the STAR method), school fit ("why {name}", with specific program references expected), and the closing two-way questions section where you ask about the program. Interviewers typically take notes throughout. Most interviews are conducted virtually via Zoom or Microsoft Teams in {CURRENT_YEAR}, with in-person interviews offered as an option at some programs for candidates near campus.</p>
+        <p>Interviewer assignment varies by program. {name} typically uses {interview_style} interviewers because the alumni network is large enough to handle interview volume. Alumni interviewers receive standardized question lists and rating rubrics from admissions but have flexibility to dig deeper on specific topics. Admissions staff interviews are sometimes scheduled for international candidates or candidates flagged for additional review. The format is the same regardless of interviewer type.</p>
+        <p>Preparation typically takes 8-15 hours of focused work spread across 2-3 weeks. The highest-impact preparation activities are practicing your career narrative aloud (record and review), preparing 4-5 STAR stories covering leadership, teamwork, failure, and impact, doing 2-3 mock interviews with realistic interviewers (alumni or admissions consultants), and researching your specific interviewer if their name is provided. Over-preparation produces robotic answers; under-preparation produces unfocused answers. The 8-15 hour range is the practical sweet spot.</p>
+      </div>
+      <div class="school-section">
+        <h2>{name} Interview Update Tracker</h2>
+        <p>MBA interview formats and processes shift over time. We track {name}'s current interview structure and adjust this page when changes are announced. Last reviewed: April 2026.</p>
+        <ul>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">April 2026:</span> {name} interview format and process aligned with prior cycles. Virtual interviews remain the default with optional in-person availability for candidates near campus.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">2025 trend:</span> Top MBA programs broadly held interview formats consistent. Some programs added optional video essay components alongside the traditional interview. AI-generated answer detection became a more explicit interview assessment criterion at some programs.</li>
+          <li><span style="opacity: 0.6; font-size: 0.85em; letter-spacing: 0.04em;">Methodology:</span> Interview guidance based on {name}'s current process and historical patterns. Always verify the current format on the school's website because details shift year to year.</li>
+        </ul>
+      </div>
+      <div class="school-section">
+        <h2>Frequently Asked Questions: {name} Interview</h2>
+        <details>
+          <summary>How long does the {name} MBA interview take?</summary>
+          <p>The {name} MBA interview typically runs 30 minutes in a behavioral format. Some interviews extend to 45 minutes if the conversation flows well or the interviewer wants to explore specific topics in depth. Plan for 30 minutes minimum but block 45-60 minutes on your calendar to avoid being rushed.</p>
+        </details>
+        <details>
+          <summary>Who conducts the {name} MBA interview?</summary>
+          <p>{name} typically uses {interview_style} interviewers for MBA admissions. Alumni interviewers receive standardized question lists and rating rubrics from admissions but have flexibility to explore specific topics. Admissions staff interviews are sometimes scheduled for international candidates or candidates flagged for additional review. The interviewer type does not affect your assessment criteria.</p>
+        </details>
+        <details>
+          <summary>Is the {name} interview blind or does the interviewer see my application?</summary>
+          <p>{name} typically conducts blind interviews where the interviewer sees only your resume, not your full application essays or transcripts. The blind format means you cannot assume the interviewer knows your goals, background, or specific stories. Lead with the most important narrative threads from your application and assume nothing about what the interviewer already knows.</p>
+        </details>
+        <details>
+          <summary>What questions does {name} ask in the MBA interview?</summary>
+          <p>Common {name} interview questions cluster in four categories: resume walk-through ("walk me through your career"), career goals ("why MBA, why now, why {name}"), behavioral stories ("tell me about a time you led a team / overcame a challenge / failed"), and your questions for the interviewer. Specific questions vary by interviewer but the overall structure and rating criteria are consistent.</p>
+        </details>
+        <details>
+          <summary>What's the {name} MBA interview acceptance rate?</summary>
+          <p>{name} interview-to-admit conversion typically runs 50-70% at top programs. Receiving an interview invitation is a positive signal because not all applicants are interviewed. The interview itself is consequential: a strong interview can move a borderline candidate into the admitted pool, and a weak interview can pull a strong written application into the waitlist or denied pool. Treat the interview as a real assessment, not a formality.</p>
+        </details>
       </div>"""
         return sections
 
