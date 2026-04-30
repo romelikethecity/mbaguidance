@@ -6521,6 +6521,137 @@ COMPARISONS = [
          ("Which has better employer access?", "Portland State, with direct access to Nike, Intel, Columbia Sportswear, and Portland's growing tech scene."),
          ("Which is cheapest?", "Montana at under $10K/year in Missoula is one of the cheapest MBA programs in America."),
      ]},
+    # ========== BATCH: Mid-tier regional rivalries (added 2026-04-30) ==========
+    {"a": "tulane-freeman", "b": "rice-jones",
+     "choose_a": "you want a New Orleans MBA with energy and Latin America connections, smaller cohort, and lower acceptance bar.",
+     "choose_b": "you want a top-30 program with Houston energy ties, a 130-student class, and the academic prestige of a Rice degree.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Rice Jones (#28) and Tulane Freeman (#47) are private MBA programs in adjacent Gulf Coast metros, both with strong energy industry placement. Rice's 19-spot ranking advantage is real and shows up in employer access. Freeman compensates with location and a wider acceptance gate (42% vs 28%). Candidates targeting energy or Latin American markets often weigh both.</p>"),
+         ("Career Markets", "<p>Houston is the energy capital. Rice's network at ExxonMobil, Chevron, ConocoPhillips, and the dozens of private equity funds focused on oil and gas runs deep, and recruiters show up to campus. New Orleans offers strong Gulf Coast logistics and energy exposure but at a smaller scale. Freeman places more graduates into Latin America and shipping than any peer school its size.</p>"),
+         ("The Honest Take", "<p>If you can get into Rice, take Rice. The ranking, brand, and Houston access produce more career optionality. Freeman is the right call if you receive a meaningful scholarship, want to be in New Orleans specifically, or your target industry runs through the Gulf logistics corridor rather than the energy capital itself.</p>"),
+     ],
+     "faq": [
+         ("Which is harder to get into?", "Rice Jones at 28% acceptance is significantly more selective than Tulane Freeman at 42%. The GMAT median is 705 at Rice vs 680 at Freeman."),
+         ("Which is better for energy careers?", "Rice. Houston's concentration of oil and gas majors, energy traders, and energy-focused PE funds creates an unmatched recruiting environment. Freeman places into energy too, but at smaller scale."),
+         ("How does class size compare?", "Rice's 130-student class is small for a top-30 program. Freeman's 90-student class is even smaller. Both produce tight cohorts. Rice's smaller ratio comes from its university selectivity, not a deliberate cap."),
+     ]},
+    {"a": "maryland-smith", "b": "george-washington",
+     "choose_a": "you want a Big Ten public MBA in the DC metro with strong tech and government contractor placement.",
+     "choose_b": "you want a private DC university with international affairs proximity, a smaller cohort, and direct K Street access.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Maryland Smith (#37) and George Washington (#48) sit on opposite sides of the DC metro with very different value propositions. Smith is a public Big Ten program in College Park with deep federal contractor placement. GW is a private university in downtown DC with a smaller class and walkable access to think tanks, federal agencies, and international organizations.</p>"),
+         ("Location and Access", "<p>Maryland's College Park campus is closer to the federal IT and contractor ecosystem (Lockheed, Northrop Grumman, Booz Allen). GW is six blocks from the World Bank and three subway stops from Capitol Hill. If you want federal contractors, Smith. If you want international development, multilateral organizations, or government policy, GW.</p>"),
+         ("The Honest Take", "<p>Smith outranks GW by 11 spots and produces stronger national recruiting outcomes. For private sector roles, take Smith. For DC-specific careers in international development, public sector consulting, or policy, GW's location and alumni network in those circles outweigh the ranking gap. In-state Maryland tuition tilts the value math heavily toward Smith for state residents.</p>"),
+     ],
+     "faq": [
+         ("Which is more affordable?", "Maryland Smith for in-state students at roughly half GW's tuition. Out-of-state, the cost gap closes significantly. GW offers merit scholarships that can level the field for strong applicants."),
+         ("Which has better federal placement?", "Maryland Smith for IT, defense, and federal contractors. George Washington for international agencies, policy roles, and federal regulatory work."),
+         ("Which has the smaller class?", "George Washington at 100 students vs Maryland Smith at 120. Both are mid-sized programs. GW's smaller class produces tighter cohorts; Smith's larger class produces broader networks."),
+     ]},
+    {"a": "pitt-katz", "b": "penn-state-smeal",
+     "choose_a": "you want a Pittsburgh MBA with healthcare and CMU cross-registration access, smaller class, and lower in-state tuition.",
+     "choose_b": "you want a Big Ten supply chain program ranked in the top 40, more traditional Penn State alumni network, and rural campus.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Smeal (#38) and Katz (#54) are Pennsylvania's two flagship public MBA programs with very different orientations. Smeal in State College is a supply chain and operations powerhouse. Katz in Pittsburgh has healthcare and analytics focus, plus cross-registration with Carnegie Mellon. The 16-spot ranking gap favors Smeal for national recruiting.</p>"),
+         ("Career Markets", "<p>Pittsburgh's healthcare sector (UPMC, Highmark) and growing tech scene (Duolingo, Aurora) provide local employer access for Katz students. State College has fewer local employers, so Smeal recruits primarily through national career services. Smeal's supply chain reputation pulls recruiters from Procter & Gamble, Johnson & Johnson, Amazon, and Target. If you want operations or supply chain, Smeal is the obvious pick.</p>"),
+         ("The Honest Take", "<p>Smeal is the higher-ranked, more nationally recognized program. Take Smeal for supply chain, operations, and traditional corporate paths. Katz is the smarter choice for healthcare careers, candidates who want CMU cross-listed analytics courses, or anyone who wants to be in a real city during their MBA. Pittsburgh's cost of living and post-grad job density beat State College for most non-rural-corporate paths.</p>"),
+     ],
+     "faq": [
+         ("Which is better for supply chain?", "Penn State Smeal. Top-10 supply chain program nationally, with the corresponding recruiter footprint. Pitt Katz has solid operations courses but doesn't compete with Smeal in this specialty."),
+         ("Which is better for healthcare?", "Pitt Katz. UPMC is one of the largest integrated health systems in the country, headquartered in Pittsburgh, and the recruiting and capstone access reflects that."),
+         ("Can I take CMU classes at Katz?", "Yes. Pitt Katz students can cross-register at Carnegie Mellon's Tepper School for select MBA electives. This is a real differentiator for analytics, computer science, and AI-adjacent coursework."),
+     ]},
+    {"a": "tcu-neeley", "b": "smu-cox",
+     "choose_a": "you want a small Fort Worth MBA with TCU's energy and supply chain focus, accessible admissions, and tight Texas alumni network.",
+     "choose_b": "you want a higher-ranked Dallas program with stronger national recruiting, larger class, and elite Texas business network.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>SMU Cox (#46) and TCU Neeley (#86) are both private Texas MBA programs in the DFW metro, an hour apart. Cox outranks Neeley by 40 spots and produces stronger national outcomes. Neeley competes on intimacy (45-student class vs Cox's 120) and accessibility (50% acceptance vs 40%). The DFW market is large enough to support both, and they recruit from overlapping but distinct alumni pools.</p>"),
+         ("Career Markets", "<p>Dallas hosts more Fortune 500 headquarters (AT&T, ExxonMobil, McKesson, Texas Instruments) and a deeper financial services presence than Fort Worth. SMU Cox's location and longer history give it stronger ties to these employers. TCU Neeley placement skews toward energy, real estate, and family business operations, with strong alumni density in Fort Worth's privately held companies.</p>"),
+         ("The Honest Take", "<p>Cox is the right answer for most candidates. The 40-spot ranking gap matters for national recruiting, and Dallas access is broader. Neeley is the call for candidates targeting specific Fort Worth industries (energy services, family-owned manufacturing), wanting a class small enough to know everyone, or receiving substantial scholarship money. Compare offers; the tuition gap can flip the decision.</p>"),
+     ],
+     "faq": [
+         ("Which is more selective?", "SMU Cox at 40% acceptance is more selective than TCU Neeley at 50%. The GMAT median is 680 at Cox vs 617 at Neeley. Cox is also higher ranked."),
+         ("Which has better Texas employer connections?", "Both have strong Texas presence. Cox produces more Dallas-area corporate placements; Neeley dominates Fort Worth's privately held and family-owned business segment."),
+         ("Which has the smaller class?", "TCU Neeley at 45 students vs SMU Cox at 120. Neeley's small cohort means everyone knows everyone. Cox's larger class trades intimacy for a broader alumni network."),
+     ]},
+    {"a": "notre-dame-mendoza", "b": "boston-college-carroll",
+     "choose_a": "you want a top-30 Catholic MBA with Notre Dame's globally recognizable brand and tight alumni network in finance and consulting.",
+     "choose_b": "you want a Boston-area Jesuit MBA with strong New England financial services and biotech access, smaller class, and the BC alumni network.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Mendoza (#29) and Carroll (#49) are both Catholic university MBA programs with values-driven business education. Mendoza outranks Carroll by 20 spots and carries the stronger national brand. Carroll wins on Boston-area employer access. Both programs attract candidates who want a tight community and a faith-informed business education.</p>"),
+         ("Brand and Recruiting", "<p>Notre Dame's brand pulls recruiters who don't visit comparable mid-tier programs. The football-driven national visibility translates into alumni in senior roles across consulting, finance, and corporate America. Carroll benefits from BC's broader university brand and proximity to the Boston biotech, asset management, and consulting ecosystem (Bain, Wellington, State Street, Vertex). The Boston advantage is real for local careers but doesn't carry as far nationally.</p>"),
+         ("The Honest Take", "<p>For most career goals, take Mendoza. The brand premium, ranking, and Notre Dame alumni density create more career optionality. Carroll is the better call if you want to be in Boston specifically, target New England biotech or asset management, or value a Jesuit-flavored community over a Catholic one. Compare scholarship packages, since Mendoza's tuition runs higher.</p>"),
+     ],
+     "faq": [
+         ("Which alumni network is stronger?", "Notre Dame's alumni network is among the most loyal of any university. Mendoza taps into that asset directly. BC has a strong Northeast network, particularly in Boston financial services. The networks serve different markets."),
+         ("Which is better for Boston careers?", "Boston College Carroll. Direct access to Boston employers, professors with current industry ties, and an alumni network concentrated in New England. Mendoza places into Boston but at a fraction of Carroll's local density."),
+         ("Which has stronger consulting placement?", "Mendoza has higher consulting placement nationally, including better MBB representation. Carroll places strongly into Northeast consulting and Big Four advisory, but with a more regional footprint."),
+     ]},
+    {"a": "babson-olin", "b": "northeastern",
+     "choose_a": "you want the top entrepreneurship MBA in the country with hands-on startup curriculum and a global founder alumni base.",
+     "choose_b": "you want a Boston MBA with the Co-op model, strong corporate partnerships, and lower tuition.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Babson Olin (#40) and Northeastern (#50) are Boston-area private MBA programs with very different identities. Babson is the entrepreneurship program; founders, family business operators, and venture-track candidates pick it specifically for the startup curriculum. Northeastern is the Co-op program; the corporate partnerships and experiential learning model are the differentiator. Candidates rarely choose between them on rankings; they choose on fit.</p>"),
+         ("Curriculum Identity", "<p>Babson's entire MBA is built around the entrepreneurship thesis. Every student takes founder-track courses, and the alumni network is dense with operators and founders. Northeastern's MBA is structured around the Co-op rotation, where students complete substantial corporate placements as part of the degree. The Co-op model is a Northeastern signature; no peer Boston program offers it at the same depth.</p>"),
+         ("The Honest Take", "<p>This isn't a head-to-head comparison; it's a fit check. If you want to start a company, take Babson. If you want corporate placement with real work experience baked into the degree, take Northeastern. The rankings are 10 spots apart but the schools occupy different lanes. Apply to both if you're undecided, then visit. The fit becomes obvious after a campus day.</p>"),
+     ],
+     "faq": [
+         ("Which is better for entrepreneurs?", "Babson Olin. The school's entire MBA curriculum is built around founders and operators. Babson regularly tops entrepreneurship rankings, and the alumni network is the deepest founder community of any business school."),
+         ("What is the Northeastern Co-op?", "An integrated work placement of three to six months built into the MBA program. Students complete substantial paid corporate roles as part of earning the degree, often converting these placements into post-MBA offers."),
+         ("Which is more affordable?", "Northeastern is generally cheaper, particularly when factoring in Co-op earnings during the placement. Babson costs more but produces different career outcomes that may justify the gap for founders."),
+     ]},
+    {"a": "georgetown-mcdonough", "b": "maryland-smith",
+     "choose_a": "you want a top-20 DC MBA with elite international affairs proximity, a 260-student class, and Jesuit-flavored business education.",
+     "choose_b": "you want a Big Ten public DC-metro MBA with strong tech and federal contractor placement at half the tuition for in-state students.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Georgetown McDonough (#20) and Maryland Smith (#37) are both DC-metro MBA programs but they recruit different audiences. McDonough is private, top-20, and structurally tied to international affairs through Georgetown's policy and foreign service strengths. Smith is a public Big Ten program with deep federal contractor and tech placement. The 17-spot ranking gap favors McDonough nationally.</p>"),
+         ("Career Markets", "<p>McDonough places strongly into management consulting (McKinsey, BCG, Bain all recruit), international development organizations (World Bank, IFC, IMF are walking distance), and federal public sector roles. Smith places into IT consulting, defense and federal contractors (Lockheed, Northrop, Booz Allen), and Maryland's tech corridor. McDonough's recruiting is more national; Smith's is more regional.</p>"),
+         ("The Honest Take", "<p>Take McDonough if you can pay for it or earn substantial aid. The 17-spot ranking gap shows up in MBB consulting placement and post-MBA optionality. Take Smith if you're a Maryland in-state resident, target federal contractors specifically, or receive a meaningful scholarship. The cost difference for in-state students is large enough to flip the decision for budget-conscious candidates.</p>"),
+     ],
+     "faq": [
+         ("Which has stronger consulting placement?", "Georgetown McDonough. MBB recruits actively, and McDonough produces more consulting outcomes per capita. Smith places into Big Four advisory and federal consulting, but at lower MBB density."),
+         ("Which is better for international careers?", "McDonough by a wide margin. Georgetown's foreign service and international affairs reputation creates direct alumni networks at the World Bank, IFC, IMF, and the State Department."),
+         ("Which is more affordable?", "Maryland Smith for in-state students. Roughly half McDonough's tuition. Out-of-state, the gap narrows but Smith remains cheaper. McDonough offers merit scholarships."),
+     ]},
+    {"a": "indiana-kelley", "b": "wisconsin",
+     "choose_a": "you want the highest-ranked Midwest public MBA, top-tier career services, and a 200-student class with broad industry placement.",
+     "choose_b": "you want top-30 ranking with strong supply chain and operations focus, Madison's college town quality of life, and lower tuition.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Kelley (#24) and Wisconsin (#30) are Big Ten public MBA programs with similar profiles. Kelley's six-spot ranking edge is meaningful for national recruiting but not dispositive. Wisconsin counters with one of the strongest supply chain and operations curricula in the Midwest, plus Madison's quality-of-life advantage over Bloomington.</p>"),
+         ("Career Services and Placement", "<p>Kelley's career services team is consistently rated among the best in the country, and that shows up in placement breadth (consulting, marketing, operations, finance, tech). Wisconsin's career services are solid but more focused on Midwest corporate placement. Kelley produces more Chicago and East Coast outcomes; Wisconsin produces more Wisconsin and Minneapolis outcomes.</p>"),
+         ("The Honest Take", "<p>Take Kelley if you want maximum career optionality and the strongest career services in the Big Ten. Take Wisconsin if supply chain or operations is your specific target, you want Madison's lifestyle, or you receive substantially better aid. For non-residents of either state, the value math is similar enough that fit and career goals should drive the decision.</p>"),
+     ],
+     "faq": [
+         ("Which has better career services?", "Indiana Kelley. The career services team is consistently ranked among the best in MBA programs nationally and produces broad placement across industries."),
+         ("Which is better for supply chain?", "Wisconsin has stronger supply chain and operations depth. Kelley has top-10 operations curriculum too. Both are credible. Wisconsin's specialty edge is real but narrow."),
+         ("Which is the better value?", "Similar in-state tuition for residents. For non-residents, both charge premium tuition and the cost difference is small. Compare scholarship offers, since both schools negotiate."),
+     ]},
+    {"a": "bentley", "b": "boston-college-carroll",
+     "choose_a": "you want a Waltham-based business-focused MBA with finance and accounting strength, smaller class, and lower acceptance bar.",
+     "choose_b": "you want a higher-ranked Jesuit university MBA with the BC brand, stronger national recruiting, and access to the broader Boston ecosystem.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>Boston College Carroll (#49) and Bentley (#77) are private Boston-area MBA programs with overlapping markets but different brands. Carroll outranks Bentley by 28 spots and benefits from BC's stronger overall university reputation. Bentley counters with a tighter business-school focus, stronger accounting and finance specialization, and easier admissions.</p>"),
+         ("Brand and Specialty", "<p>BC's brand carries weight beyond the MBA program because it spans the entire university. Bentley is essentially a business-only school, which gives the MBA a more vocational feel and stronger alumni density in accounting (Big Four), wealth management, and finance operations. Bentley graduates often outpace BC graduates in narrow finance specialties; BC graduates tend to win broader strategy and consulting roles.</p>"),
+         ("The Honest Take", "<p>For most career goals, take Carroll. The brand, ranking, and broader alumni network produce more optionality. Bentley is the right call for candidates targeting accounting (especially Big Four), wealth management firms, or financial operations roles where Bentley alumni dominate. The acceptance gap (55% Bentley vs 40% BC) means Bentley is also the safer admit.</p>"),
+     ],
+     "faq": [
+         ("Which is more selective?", "Boston College Carroll at 40% acceptance is more selective than Bentley at 55%. GMAT median is 680 at BC vs 620 at Bentley."),
+         ("Which is better for accounting?", "Bentley. The undergraduate and graduate accounting programs are top-tier nationally, and the Big Four recruit hard from the MBA program."),
+         ("Which has better Boston employer access?", "Both have strong Boston access. BC's broader brand opens more doors in consulting and tech. Bentley's depth in finance operations and accounting opens more doors at financial services firms specifically."),
+     ]},
+    {"a": "texas-mccombs", "b": "texas-am-mays",
+     "choose_a": "you want the highest-ranked Texas public MBA, Austin's tech and PE ecosystem, and broad national recruiting.",
+     "choose_b": "you want a Texas A&M MBA with Aggie network density, supply chain strength, and lower in-state tuition with a smaller class.",
+     "analysis": [
+         ("Why People Compare These Two", "<p>McCombs (#25) and Mays (#53) are the two Texas public MBA flagships, separated by 28 ranking spots. McCombs in Austin is the higher-profile program with strong national recruiting and access to the city's tech and PE scene. Mays in College Station benefits from the Texas A&M alumni network, which is among the most loyal of any US university, and a top-15 supply chain program.</p>"),
+         ("Career Markets", "<p>Austin's economy (Tesla, Apple, Indeed, Oracle, Whole Foods, Bumble, plus a deep PE bench) creates direct employer access for McCombs students. College Station has a smaller local market and recruits primarily through national career services. The Aggie network is a real asset in Houston and Dallas energy and industrial companies, where Mays graduates often outperform pedigree expectations.</p>"),
+         ("The Honest Take", "<p>Take McCombs if you can. The ranking, Austin location, and tech/PE access produce stronger national outcomes. Mays is the right call for candidates committed to the Aggie identity, targeting Texas-based supply chain or industrial roles, or receiving a substantial scholarship. The Aggie alumni effect is real but narrow; outside Texas industrial sectors, McCombs's broader brand wins.</p>"),
+     ],
+     "faq": [
+         ("Which is more selective?", "Texas McCombs at 30% acceptance is more selective than Mays at 45%. GMAT median is 705 at McCombs vs 660 at Mays."),
+         ("Which is better for tech?", "McCombs. Austin's tech ecosystem provides direct employer access. Mays produces tech outcomes but at lower density and primarily through national recruiting."),
+         ("How strong is the Aggie network?", "Among the strongest of any US university. Texas A&M alumni density in Houston, Dallas, and statewide industrial companies creates real career advantages for Mays graduates. The network effect doesn't extend as strongly outside Texas."),
+     ]},
 ]
 
 # =============================================================================
@@ -6649,7 +6780,7 @@ GUIDES = [
     {
         "title": f"Best MBA Programs for Tech ({CURRENT_YEAR})",
         "slug": "best-mba-for-tech",
-        "meta_description": f"Best MBA programs for tech careers in {CURRENT_YEAR}. Top schools for product management, tech strategy, and startup roles. From a Haas MBA grad.",
+        "meta_description": f"Stanford GSB, MIT Sloan, Berkeley Haas, Booth, Kellogg. Where FAANG and growth-stage startups recruit hardest in {CURRENT_YEAR}, with placement % and PM salary data.",
         "sections": [
             ("Why Tech Companies Hire MBAs", f"<p>Tech companies hire MBAs for product management, strategy, business development, and general management rotations. The skills gap that MBAs fill is the bridge between technical teams and business outcomes. Product management in particular has become the dominant post-MBA tech role, with companies like Google, Amazon, Meta, and Apple each hiring 100+ MBA interns every summer.</p><p>In {CURRENT_YEAR}, tech roles represent the single largest industry destination for MBA graduates at 8 of the top 15 programs. The trend has accelerated as tech companies have expanded beyond Silicon Valley into every major metro area, creating PM, strategy, and biz dev roles that need business-trained leaders who can speak the language of engineers.</p>"),
             ("The Top Tech MBA Programs", """<p>These programs consistently place the highest percentage of graduates into tech roles:</p><ul><li><strong><a href=\"/schools/stanford-gsb/\">Stanford GSB</a></strong> (32% tech placement): The gold standard for tech MBAs. Palo Alto location puts you walking distance from Sand Hill Road and every major tech company. Strongest pipeline for startup founding and VC-backed roles. 18% of graduates start their own companies within 5 years.</li><li><strong><a href=\"/schools/berkeley-haas/\">Berkeley Haas</a></strong> (42% tech placement): The highest tech placement rate of any top-15 program. Direct pipelines to Google, Apple, Meta, Salesforce, and hundreds of Bay Area startups. The 290-person class creates a tight community in the heart of the Bay Area tech ecosystem.</li><li><strong><a href=\"/schools/mit-sloan/\">MIT Sloan</a></strong> (35% tech placement): Deep integration with MIT's engineering and computer science programs. Strongest program for deep tech (AI, robotics, biotech). The MIT brand carries unique weight in technical roles.</li><li><strong><a href=\"/schools/washington-foster/\">Washington Foster</a></strong> (50% tech placement): The highest percentage of any ranked program. Amazon is the single largest employer. Microsoft, T-Mobile, and Seattle's growing startup scene hire heavily. In-state tuition makes this an exceptional value.</li><li><strong><a href=\"/schools/carnegie-mellon-tepper/\">Carnegie Mellon Tepper</a></strong> (40% tech placement): STEM-designated MBA with the deepest analytics curriculum of any business school. CMU's computer science reputation gives Tepper graduates credibility in technical conversations that other MBAs lack.</li></ul>"""),
@@ -6704,7 +6835,7 @@ GUIDES = [
     {
         "title": f"Best MBA Programs for Consulting ({CURRENT_YEAR})",
         "slug": "best-mba-for-consulting",
-        "meta_description": f"Best MBA programs for consulting careers in {CURRENT_YEAR}. Top schools for McKinsey, BCG, Bain, and boutique firms. From a Haas MBA grad.",
+        "meta_description": f"HBS, Booth, Kellogg, Wharton, Columbia top the consulting list for {CURRENT_YEAR}. MBB placement rates by school plus the next 10 firms recruit at.",
         "sections": [
             ("How Consulting Recruiting Works", "<p>MBB (McKinsey, BCG, Bain) and the Big 4 (Deloitte, PwC, EY, KPMG) recruit from a target list of schools. If your school is on the list, you get first-round interviews. If it's not, you're networking your way to an interview, which is possible but harder.</p><p>The target list roughly maps to the top 25 programs, with M7 schools getting the most interview slots per capita. MBB firms each hire 200-400 MBA associates per year globally, drawn from roughly 15-20 core schools. The Big 4 consulting practices hire even more and recruit from a broader set of 30-40 programs.</p><p>Consulting recruiting timeline:</p><ol><li><strong>September-October:</strong> Firm presentations on campus, networking events, coffee chats with consultants. Attendance is tracked. Show up.</li><li><strong>November-December:</strong> Applications submitted. Resume and cover letter reviewed. First cuts made.</li><li><strong>January:</strong> First-round interviews (1-2 case interviews + behavioral). Usually on campus or virtual.</li><li><strong>February:</strong> Final-round interviews at the firm's office. Multiple case interviews plus partner conversations. Decisions within 1-2 weeks.</li><li><strong>Summer:</strong> 10-week consulting internship. Return offer rates at MBB are 85-95%.</li></ol>"),
             ("The Top Consulting MBA Programs", """<p>These programs have the highest consulting placement rates and deepest MBB pipelines:</p><ul><li><strong><a href=\"/schools/kellogg/\">Kellogg</a></strong> (34% consulting placement): The consulting school. Kellogg's collaborative culture aligns perfectly with consulting firm culture. The team-based curriculum means you're practicing group problem-solving daily. More Kellogg graduates enter consulting than any single other industry, and the alumni network in MBB is massive.</li><li><strong><a href=\"/schools/dartmouth-tuck/\">Dartmouth Tuck</a></strong> (40% consulting placement): The highest consulting placement rate of any top-15 program. Tuck's 280-person class means MBB firms interview a significant percentage of the student body. The alumni loyalty is legendary: Tuck graduates in consulting actively champion current students during recruiting.</li><li><strong><a href=\"/schools/harvard-business-school/\">Harvard Business School</a></strong> (27% consulting placement): The case method is consulting training. Every class prepares you for case interviews by forcing you to analyze business situations, form recommendations, and defend them under pressure. HBS places the most absolute graduates into MBB due to its 930-person class.</li><li><strong><a href=\"/schools/duke-fuqua/\">Duke Fuqua</a></strong> (35% consulting placement): The strongest consulting feeder outside the M7. Fuqua's team-based culture (\"Team Fuqua\" is the school's identity) produces graduates that consulting firms love. MBB, Big 4, and boutique firms all recruit actively.</li><li><strong><a href=\"/schools/virginia-darden/\">Virginia Darden</a></strong> (32% consulting placement): Darden's case method curriculum provides daily case practice that directly translates to consulting interviews. The school produces strong generalists, which is exactly what consulting firms want.</li></ul>"""),
@@ -6733,7 +6864,7 @@ GUIDES = [
     {
         "title": f"Best MBA Programs for Career Changers ({CURRENT_YEAR})",
         "slug": "best-mba-for-career-changers",
-        "meta_description": f"Best MBA programs for career changers in {CURRENT_YEAR}. Top schools for switching industries, pivoting roles, and starting fresh. From a Haas MBA grad.",
+        "meta_description": f"Top 10 MBAs for industry pivots in {CURRENT_YEAR}: Darden, Kellogg, Haas, Tuck, Yale SOM. Career-switch placement rates plus which schools welcome non-traditional backgrounds.",
         "sections": [
             ("Why Career Changers Need an MBA", """<p>The MBA exists to rebrand you. If you're a nurse who wants to work in healthcare consulting, or an engineer who wants to run product at a tech company, the MBA is the bridge. The degree gives you the credential, the network, and the recruiting infrastructure to make a pivot that would otherwise take years of internal maneuvering.</p><p>Without an MBA, career changes happen through slow internal moves, personal networking, or starting over at entry level. The MBA compresses a 5-7 year career pivot into 2 years by giving you access to employers who specifically recruit MBA candidates for roles that would be hard to land otherwise.</p><p>The numbers support this. At top-15 programs, 60-70% of students change industries between their pre-MBA and post-MBA roles. At some programs like <a href=\"/schools/virginia-darden/\">Virginia Darden</a>, that number exceeds 80%. The MBA is a career-change machine.</p>"""),
             ("The Best Programs for Career Changers", """<p>Not all MBA programs are equally good at supporting pivots. These schools stand out for career changers:</p><ul><li><strong><a href=\"/schools/virginia-darden/\">Virginia Darden</a>:</strong> Over 80% of Darden students change industries. The case method teaches broad general management skills applicable to any industry. Career services are built around helping students pivot, with industry immersion treks and alumni coaching. The 340-person class creates a tight community where career changers support each other.</li><li><strong><a href=\"/schools/kellogg/\">Kellogg</a>:</strong> The broadest recruiting pipelines of any M7 program. Consulting, tech, marketing, healthcare, and social enterprise all recruit actively. Kellogg's collaborative culture means you're learning from classmates with diverse backgrounds, which expands your perspective on career options.</li><li><strong><a href=\"/schools/michigan-ross/\">Michigan Ross</a>:</strong> MAP (Multidisciplinary Action Projects) give students real consulting projects across industries during the first year. These projects let career changers build experience in their target industry before summer internships begin. Ross's Action-Based Learning philosophy is designed for learning by doing.</li><li><strong><a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>:</strong> Attracts mission-driven career changers. The Bay Area location provides access to tech, social enterprise, and sustainability careers. Haas's 290-person class creates a supportive community. The \"Students Always\" principle encourages experimentation and career exploration.</li><li><strong><a href=\"/schools/yale-som/\">Yale SOM</a>:</strong> The integrated curriculum exposes students to all functional areas in the first year, which is ideal for career changers who need broad exposure. Access to Yale's broader university (School of Public Health, Law School, School of the Environment) creates unique career paths.</li><li><strong><a href=\"/schools/indiana-kelley/\">Indiana Kelley</a>:</strong> The best value option for career changers. At $28,000/year in-state tuition, Kelley minimizes financial risk while providing strong career services and Midwest recruiting access. The class composition is diverse, and career changers represent a significant portion of each class.</li></ul>"""),
@@ -6762,7 +6893,7 @@ GUIDES = [
     {
         "title": f"Best MBA Programs for Engineers ({CURRENT_YEAR})",
         "slug": "best-mba-for-engineers",
-        "meta_description": f"Best MBA programs for engineers in {CURRENT_YEAR}. How to pivot from engineering into product management, strategy, or leadership. From a Haas MBA grad.",
+        "meta_description": f"Engineer to MBA in {CURRENT_YEAR}: MIT Sloan, Stanford GSB, CMU Tepper, Haas top picks. PM salary uplift, target schools by industry, and when to skip the MBA.",
         "sections": [
             ("Why Engineers Get MBAs", "<p>Engineers are the most successful career changers in MBA programs. The analytical skills transfer directly, the technical credibility opens doors in tech companies, and the MBA fills the gap between building products and running businesses. Product management, tech strategy, venture capital, and general management are all natural post-MBA destinations for engineers.</p><p>The typical engineer getting an MBA has 3-6 years of software, hardware, or systems engineering experience. They've hit a ceiling: they want to influence product direction, not just execute on specifications. The MBA gives them the business vocabulary, leadership training, and recruiting access to make that jump.</p>"),
             ("The Best Programs for Engineers", """<p>Engineers should prioritize programs with strong tech placement, technical culture, and proximity to employers who value the engineer-to-MBA pipeline:</p><ul><li><strong><a href=\"/schools/mit-sloan/\">MIT Sloan</a>:</strong> The obvious choice. MIT's engineering school is next door. The culture is analytical. Faculty include engineers-turned-professors. The MIT brand carries unique weight in technical roles. 35% tech placement.</li><li><strong><a href=\"/schools/stanford-gsb/\">Stanford GSB</a>:</strong> Silicon Valley location, deep startup ecosystem, and access to Stanford's engineering school. 32% tech placement. Best for engineers targeting VC or startup founding.</li><li><strong><a href=\"/schools/berkeley-haas/\">Berkeley Haas</a>:</strong> 42% tech placement, Bay Area proximity, and Berkeley's engineering reputation. The \"Students Always\" and \"Question the Status Quo\" principles resonate with engineers' growth mindset.</li><li><strong><a href=\"/schools/carnegie-mellon-tepper/\">Carnegie Mellon Tepper</a>:</strong> STEM-designated MBA. CMU's computer science program is #1 in the world, and Tepper's analytics curriculum speaks engineers' language. 40% tech placement.</li><li><strong><a href=\"/schools/washington-foster/\">Washington Foster</a>:</strong> 50% tech placement. Amazon and Microsoft hire aggressively. Engineers from Boeing, Amazon, and Microsoft form a significant cohort.</li></ul>"""),
@@ -6784,7 +6915,7 @@ GUIDES = [
     {
         "title": f"Best MBA Programs for Military Veterans ({CURRENT_YEAR})",
         "slug": "best-mba-for-military",
-        "meta_description": f"Best MBA programs for military veterans in {CURRENT_YEAR}. GI Bill, Yellow Ribbon, veteran communities, and career transition paths. From a Haas MBA grad.",
+        "meta_description": f"Top MBAs for veterans in {CURRENT_YEAR}: full Yellow Ribbon coverage at HBS, Stanford, Wharton, Tuck. Vet club rosters, GI Bill stacking, post-MBA outcomes by school.",
         "sections": [
             ("Why Veterans Excel in MBA Programs", "<p>Military veterans bring leadership experience that most MBA applicants can't match. By age 26, a typical veteran has led teams of 10-50 people in high-pressure environments, managed multi-million-dollar equipment, and made decisions with real consequences. MBA admissions committees know this, and veterans are actively recruited by top programs.</p><p>The numbers reflect this advantage. Veterans typically have higher admit rates than the general applicant pool at M7 programs. Schools want the leadership, maturity, and diversity of perspective that veterans bring to the classroom. The challenge for veterans isn't getting in. It's choosing the right program and navigating the career transition.</p>"),
             ("Funding Your MBA: GI Bill and Yellow Ribbon", f"""<p>The Post-9/11 GI Bill covers tuition and fees at public institutions and up to approximately $27,000/year at private institutions. The Yellow Ribbon Program fills the gap: participating schools match VA contributions to cover remaining tuition costs. In {CURRENT_YEAR}, most top MBA programs participate in Yellow Ribbon with unlimited slots and full gap coverage.</p><p>Programs with strong Yellow Ribbon coverage (covering full tuition gap):</p><ul><li><a href=\"/schools/harvard-business-school/\">Harvard Business School</a></li><li><a href=\"/schools/stanford-gsb/\">Stanford GSB</a></li><li><a href=\"/schools/wharton/\">Wharton</a></li><li><a href=\"/schools/virginia-darden/\">Virginia Darden</a> (strong veteran community)</li><li><a href=\"/schools/dartmouth-tuck/\">Dartmouth Tuck</a></li><li><a href=\"/schools/duke-fuqua/\">Duke Fuqua</a></li><li><a href=\"/schools/michigan-ross/\">Michigan Ross</a></li></ul><p>For veterans with GI Bill + Yellow Ribbon, many M7 and top-15 programs cost $0 in tuition. This makes the ROI calculation dramatically better than for civilian applicants paying full price.</p>"""),
@@ -6945,7 +7076,7 @@ GUIDES = [
     {
         "title": f"Best MBA Programs for Private Equity ({CURRENT_YEAR})",
         "slug": "best-mba-for-private-equity",
-        "meta_description": f"Best MBA programs for private equity careers in {CURRENT_YEAR}. Target schools for KKR, Blackstone, Apollo, and top PE firms. From a Haas MBA grad.",
+        "meta_description": f"Wharton, HBS, Booth, Columbia, Stanford for PE in {CURRENT_YEAR}. Where KKR, Blackstone, and Apollo recruit, plus mega-fund vs middle-market placement by school.",
         "sections": [
             ("How PE Firms Recruit MBAs", "<p>Private equity recruiting is narrow and elite. The mega-funds (KKR, Blackstone, Apollo, Carlyle, TPG, Warburg Pincus) hire 15-40 MBA associates each per year. They recruit almost exclusively from a short list of schools: HBS, Wharton, Stanford GSB, Booth, and Columbia. Getting into PE from outside these programs is possible but significantly harder.</p><p>Most PE firms require pre-MBA investment banking or consulting experience. The typical path: 2-3 years in IB or MBB consulting, then MBA, then PE associate role. The MBA serves as a re-credentialing step that opens doors to firms you couldn't access from your analyst seat.</p>"),
             ("Target Schools for PE", f"""<ul><li><strong><a href="/schools/wharton/">Wharton</a>:</strong> The #1 feeder into PE. Wharton's finance curriculum, PE/VC club, and alumni network at every major fund make it the default choice for PE-bound MBAs. Wharton places more graduates into PE than any other school.</li><li><strong><a href="/schools/harvard-business-school/">Harvard Business School</a>:</strong> The HBS brand opens PE doors that few other schools can. The school's 930-person class produces a large absolute number of PE hires. Alumni sit on portfolio company boards worldwide.</li><li><strong><a href="/schools/stanford-gsb/">Stanford GSB</a>:</strong> Strong for growth equity and West Coast PE firms. Stanford's VC connections extend into growth-stage PE, and the brand carries everywhere.</li><li><strong><a href="/schools/booth/">Booth</a>:</strong> Booth's analytical rigor and finance depth produce strong PE candidates. The school has a growing track record of placing into mega-funds and middle-market PE.</li><li><strong><a href="/schools/columbia-business-school/">Columbia</a>:</strong> NYC location and the value investing program (inspired by Graham and Dodd) produce graduates with the financial acumen PE firms value. Strong Wall Street alumni network.</li></ul>"""),
@@ -7036,7 +7167,7 @@ GUIDES = [
     {
         "title": f"Best MBA Programs for Nonprofit & Social Impact ({CURRENT_YEAR})",
         "slug": "best-mba-for-nonprofit",
-        "meta_description": f"Best MBA programs for nonprofit and social impact careers in {CURRENT_YEAR}. Schools that support mission-driven MBAs with funding and career services.",
+        "meta_description": f"Yale SOM, Harvard, Stanford GSB, Berkeley Haas, Ross top the nonprofit list in {CURRENT_YEAR}. Loan forgiveness programs, social impact funds, and post-MBA salary realities.",
         "sections": [
             ("Can You Do Good and Get an MBA?", "<p>Yes, and the demand for business-trained leaders in the social sector has never been higher. Nonprofits, social enterprises, impact investing firms, and government agencies all need people who can manage budgets, build organizations, and measure outcomes. The MBA provides these skills, and the best programs actively support students who want to use them for social impact.</p><p>The challenge is financial. Social sector salaries are lower than corporate alternatives, and MBA debt can make that gap feel painful. The programs that excel for social impact address this directly through loan forgiveness, scholarship funding, and career services tailored to mission-driven organizations.</p>"),
             ("Top Programs for Social Impact", f"""<ul><li><strong><a href="/schools/yale-som/">Yale SOM</a>:</strong> The mission is in the name: School of Management, not School of Business. Yale SOM was founded to educate leaders for business and society, and the commitment is real. The Program on Social Enterprise provides funding, fellowships, and career support for impact-focused students.</li><li><strong><a href="/schools/stanford-gsb/">Stanford GSB</a>:</strong> "Change lives. Change organizations. Change the world." GSB sends more graduates into social impact than any other M7 program. The Center for Social Innovation provides fellowships and project funding.</li><li><strong><a href="/schools/harvard-business-school/">HBS</a>:</strong> The Social Enterprise Initiative and Dillon House provide infrastructure for social impact careers. HBS's brand opens doors at every major foundation, government agency, and international development organization.</li><li><strong><a href="/schools/michigan-ross/">Michigan Ross</a>:</strong> The Center for Social Impact provides project-based learning and career support. Ross's collaborative culture attracts socially-minded students.</li><li><strong><a href="/schools/duke-fuqua/">Duke Fuqua</a>:</strong> The Center for the Advancement of Social Entrepreneurship (CASE) is one of the leading academic centers for social entrepreneurship. Strong connections to the Research Triangle's nonprofit ecosystem.</li></ul>"""),
@@ -7103,7 +7234,7 @@ RANKING_TYPES = [
     {
         "slug": "salary",
         "title": f"Highest Salary MBA Programs ({CURRENT_YEAR})",
-        "description": "MBA programs ranked by average starting salary. Where the paychecks are biggest.",
+        "description": "MBA programs ranked by median starting salary. Stanford GSB, HBS, Wharton clear $185K+ at graduation. Top 25 schools, base + signing bonus.",
         "sort_key": "avg_salary",
         "reverse": True,
         "limit": 25,
@@ -7119,7 +7250,7 @@ RANKING_TYPES = [
     {
         "slug": "career-changers",
         "title": f"Best MBA Programs for Career Changers ({CURRENT_YEAR})",
-        "description": "Top MBA programs for career changers. Schools that welcome non-traditional backgrounds and support industry pivots.",
+        "description": "Darden, Kellogg, Haas, Yale SOM, Tuck welcome non-traditional backgrounds. The 15 MBA programs with the highest industry-pivot success rates.",
         "sort_key": "ranking",
         "reverse": False,
         "limit": 15,
@@ -7134,7 +7265,7 @@ RANKING_TYPES = [
     {
         "slug": "finance",
         "title": f"Best MBA Programs for Finance ({CURRENT_YEAR})",
-        "description": "The top MBA programs for investment banking, private equity, hedge funds, and corporate finance careers.",
+        "description": "Wharton, Booth, Columbia, Stern, MIT Sloan top the finance list. Where IB, PE, and hedge fund recruiters fight hardest for MBA talent.",
         "sort_key": "ranking", "reverse": False, "limit": 29,
         "filter_slugs": [
             "wharton", "booth", "columbia-business-school", "nyu-stern", "mit-sloan",
@@ -7205,7 +7336,7 @@ RANKING_TYPES = [
     {
         "slug": "marketing",
         "title": f"Best MBA Programs for Marketing ({CURRENT_YEAR})",
-        "description": "Top MBA programs for brand management, digital marketing, consumer insights, and CMO-track careers.",
+        "description": "Kellogg, Wharton, HBS, Columbia, Duke Fuqua top the marketing rankings. Brand management, digital strategy, and CMO-track placement by school.",
         "sort_key": "ranking", "reverse": False, "limit": 20,
         "filter_slugs": [
             "kellogg", "wharton", "harvard-business-school", "columbia-business-school",
@@ -7218,7 +7349,7 @@ RANKING_TYPES = [
     {
         "slug": "healthcare",
         "title": f"Best MBA Programs for Healthcare Management ({CURRENT_YEAR})",
-        "description": "MBA programs with the strongest healthcare management, health policy, and hospital administration programs.",
+        "description": "Wharton, HBS, Yale SOM, Michigan Ross, UNC top the healthcare list. Provider, payer, biotech, and digital health placement by school.",
         "sort_key": "ranking", "reverse": False, "limit": 21,
         "filter_slugs": [
             "wharton", "harvard-business-school", "yale-som", "michigan-ross",
@@ -7232,7 +7363,7 @@ RANKING_TYPES = [
     {
         "slug": "real-estate",
         "title": f"Best MBA Programs for Real Estate ({CURRENT_YEAR})",
-        "description": "Top MBA programs for real estate finance, development, and investment careers.",
+        "description": "Wharton, Columbia, Stern, Cornell Johnson, UCLA Anderson top the real estate list. Development, REITs, and investment careers by school.",
         "sort_key": "ranking", "reverse": False, "limit": 15,
         "filter_slugs": [
             "wharton", "columbia-business-school", "nyu-stern", "cornell-johnson",
@@ -7285,7 +7416,7 @@ RANKING_TYPES = [
     {
         "slug": "sustainability",
         "title": f"Best MBA Programs for Sustainability & Social Impact ({CURRENT_YEAR})",
-        "description": "MBA programs leading in sustainable business, ESG, social entrepreneurship, and impact-focused careers.",
+        "description": "Yale SOM, Stanford GSB, Haas, Ross, Fuqua lead the ESG list. Social entrepreneurship, climate finance, and impact placement by school.",
         "sort_key": "ranking", "reverse": False, "limit": 19,
         "filter_slugs": [
             "yale-som", "stanford-gsb", "berkeley-haas", "michigan-ross",
@@ -7312,7 +7443,7 @@ RANKING_TYPES = [
     {
         "slug": "private-equity-vc", "nav_label": "PE & VC",
         "title": f"Best MBA Programs for Private Equity & Venture Capital ({CURRENT_YEAR})",
-        "description": "The MBA programs that place the most graduates into PE firms, VC funds, and growth equity. Where the deals get done.",
+        "description": "Wharton, Stanford, HBS, Booth, Columbia where PE megafunds and tier-one VCs recruit. Mega-fund vs middle-market vs early-stage placement by school.",
         "sort_key": "ranking", "reverse": False, "limit": 15,
         "filter_slugs": [
             "wharton", "stanford-gsb", "harvard-business-school", "booth",
@@ -8973,38 +9104,38 @@ def build_school_subpages():
     SUBPAGE_TYPES = [
         {
             "slug": "acceptance-rate",
-            "title_tpl": "{short_name} Acceptance Rate",
-            "meta_tpl": "{short_name} acceptance rate, admissions stats, and what you need to get in for {year}. GMAT scores, GPA, and honest analysis from a Haas MBA grad.",
+            "title_tpl": "{short_name} Acceptance Rate {year}: {ar}%",
+            "meta_tpl": "{short_name} accepts {ar}% of MBA applicants. Class stats: {gmat} GMAT median, {gpa} GPA, {class_size}-student class. How to get in.",
             "content_fn": "_subpage_acceptance_rate",
         },
         {
             "slug": "class-profile",
-            "title_tpl": "{short_name} MBA Class Profile",
-            "meta_tpl": "{short_name} class profile for {year}: demographics, work experience, GMAT range, and what the typical student looks like. From a Haas MBA grad.",
+            "title_tpl": "{short_name} MBA Class of {year} Profile",
+            "meta_tpl": "{short_name} Class of {year}: {class_size} students, {gmat} GMAT median, ~5 yrs work experience, {gpa} GPA. Demographics, employment, sources.",
             "content_fn": "_subpage_class_profile",
         },
         {
             "slug": "deadlines",
-            "title_tpl": "{short_name} MBA Deadlines ({year})",
-            "meta_tpl": "{short_name} MBA application deadlines for {year}. Round 1, Round 2, and Round 3 dates plus when to apply. From a Haas MBA grad.",
+            "title_tpl": "{short_name} MBA Deadlines {year}",
+            "meta_tpl": "{short_name} MBA deadlines for fall {year} entry. Round 1, 2, and 3 dates plus when to apply for the best odds. From a Haas MBA grad.",
             "content_fn": "_subpage_deadlines",
         },
         {
             "slug": "essays",
-            "title_tpl": "{short_name} MBA Essays: Tips & Strategy",
-            "meta_tpl": "How to write {short_name} MBA essays that get you admitted. Prompts, strategy, and examples from a Haas MBA grad.",
+            "title_tpl": "{short_name} MBA Essays Guide",
+            "meta_tpl": "Write {short_name} MBA essays that get you admitted. Current prompts, school-specific strategy, and what admissions wants. From a Haas MBA grad.",
             "content_fn": "_subpage_essays",
         },
         {
             "slug": "interview",
-            "title_tpl": "{short_name} MBA Interview: What to Expect",
-            "meta_tpl": "{short_name} MBA interview format, questions, and preparation tips. What to expect and how to stand out. From a Haas MBA grad.",
+            "title_tpl": "{short_name} MBA Interview Guide",
+            "meta_tpl": "What to expect in the {short_name} MBA interview. Format, common questions, sample answers, and prep strategy. From a Haas MBA grad.",
             "content_fn": "_subpage_interview",
         },
         {
             "slug": "employment",
-            "title_tpl": "{short_name} MBA Employment Report",
-            "meta_tpl": "{short_name} employment report: salary data, top employers, industry breakdown, and career outcomes for {year}. From a Haas MBA grad.",
+            "title_tpl": "{short_name} Employment Report {year}",
+            "meta_tpl": "{short_name} grads earned ${salary_k}K median salary, {employment}% employed at graduation. Industries, top employers, year-over-year trends.",
             "content_fn": "_subpage_employment",
         },
     ]
@@ -9298,14 +9429,94 @@ def build_school_subpages():
 
         for sp in SUBPAGE_TYPES:
             sp_slug = sp["slug"]
-            title = sp["title_tpl"].format(short_name=short, year=CURRENT_YEAR)
-            meta = sp["meta_tpl"].format(short_name=short, year=CURRENT_YEAR)
+            tpl_kwargs = {
+                "short_name": short,
+                "year": CURRENT_YEAR,
+                "ar": s["acceptance_rate"],
+                "gmat": s["avg_gmat"],
+                "gpa": s["avg_gpa"],
+                "class_size": s["class_size"],
+                "salary_k": s["avg_salary"] // 1000,
+                "employment": s["employment_rate"],
+            }
+            title = sp["title_tpl"].format(**tpl_kwargs)
+            meta = sp["meta_tpl"].format(**tpl_kwargs)
             fn = fn_map[sp["content_fn"]]
             sections_html = fn(s)
 
-            # Breadcrumb schema
+            # Subpage-specific FAQ targeting the GSC compound queries
+            sp_faqs = []
+            faq_extra_html = ""
+            if sp_slug == "class-profile":
+                sp_faqs = [
+                    (f"What is the class size for {short}'s MBA Class of {CURRENT_YEAR}?",
+                     f"{short}'s Class of {CURRENT_YEAR} has {s['class_size']} students. " + (
+                        "That puts it among the largest M7 programs." if s['class_size'] > 700
+                        else "That's a mid-sized class, balancing community and network breadth." if s['class_size'] > 300
+                        else "That's a smaller, more intimate class size, typical of programs that prioritize tight cohorts.")),
+                    (f"What's the average GMAT for {short}'s Class of {CURRENT_YEAR}?",
+                     f"The Class of {CURRENT_YEAR} median GMAT at {short} is {s['avg_gmat']}, with the middle 80% typically falling between {s['avg_gmat']-30} and {s['avg_gmat']+20}. Strong candidates score within 20 points of the median."),
+                    (f"What's the average work experience at {short}?",
+                     f"{short} students have an average of about 5 years of work experience. Most admitted candidates have 3-7 years pre-MBA, with the median around 5."),
+                    (f"What's the average GPA at {short}?",
+                     f"The Class of {CURRENT_YEAR} median GPA at {short} is {s['avg_gpa']}. Admissions reads GPA in context: a 3.5 from a quantitative major can outweigh a 3.8 from a less rigorous program."),
+                ]
+                faq_html_inner = "".join(
+                    f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                    for q, a in sp_faqs
+                )
+                faq_extra_html = f"""
+      <div class="school-section">
+        <h2>{short} Class of {CURRENT_YEAR}: Quick Answers</h2>
+        {faq_html_inner}
+      </div>"""
+            elif sp_slug == "employment":
+                salary_k = s['avg_salary'] // 1000
+                top_strengths = s.get("strengths", [])[:3]
+                industries = ", ".join(top_strengths) if top_strengths else "consulting, finance, and technology"
+                sp_faqs = [
+                    (f"What's the average salary for {short} MBA graduates?",
+                     f"{short} graduates earn a median base salary of ${salary_k},000, with signing bonuses typically adding $25,000-$35,000. Total first-year compensation lands in the ${salary_k+25}K-${salary_k+45}K range depending on industry and role."),
+                    (f"What's the employment rate at {short}?",
+                     f"{s['employment_rate']}% of {short} graduates were employed within three months of graduation. The remainder are typically founders, candidates pursuing additional credentials, or those still actively recruiting."),
+                    (f"What industries do {short} grads enter?",
+                     f"{short}'s strongest placement industries are {industries}. Industry mix varies by class, with consulting and finance generally leading and technology growing year over year."),
+                    (f"What percentage of {short} grads go into consulting?",
+                     f"Consulting is among {short}'s top employment outcomes, with placement rates at top programs ranging from 25% to 35% depending on the year. McKinsey, BCG, and Bain are perennial top employers, joined by Big Four strategy practices and boutique firms."),
+                ]
+                faq_html_inner = "".join(
+                    f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                    for q, a in sp_faqs
+                )
+                faq_extra_html = f"""
+      <div class="school-section">
+        <h2>{short} Employment: Quick Answers</h2>
+        {faq_html_inner}
+      </div>"""
+            elif sp_slug == "acceptance-rate":
+                sp_faqs = [
+                    (f"What is {short}'s MBA acceptance rate?",
+                     f"{short} accepts {s['acceptance_rate']}% of MBA applicants. The Class of {CURRENT_YEAR} has {s['class_size']} students drawn from a much larger applicant pool."),
+                    (f"What GMAT score do I need for {short}?",
+                     f"The {short} median GMAT is {s['avg_gmat']}, with competitive applicants typically scoring between {s['avg_gmat']-20} and {s['avg_gmat']+20}. Scoring at or above the median removes the academic-readiness question from your application."),
+                    (f"What GPA does {short} require?",
+                     f"There's no minimum GPA at {short}, but the median is {s['avg_gpa']}. A lower GPA is offset by strong work experience, GMAT score, or quantitative coursework."),
+                ]
+                faq_html_inner = "".join(
+                    f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+                    for q, a in sp_faqs
+                )
+                faq_extra_html = f"""
+      <div class="school-section">
+        <h2>{short} Admissions: Quick Answers</h2>
+        {faq_html_inner}
+      </div>"""
+
+            # Breadcrumb + optional FAQ schema
             breadcrumb = f'{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Home","item":"{SITE_URL}/"}},{{"@type":"ListItem","position":2,"name":"Schools","item":"{SITE_URL}/schools/"}},{{"@type":"ListItem","position":3,"name":"{short}","item":"{SITE_URL}/schools/{slug}/"}},{{"@type":"ListItem","position":4,"name":"{sp_slug.replace("-", " ").title()}","item":"{SITE_URL}/schools/{slug}/{sp_slug}/"}}]}}'
             schema = f'<script type="application/ld+json">\n{breadcrumb}\n</script>'
+            if sp_faqs:
+                schema += faq_schema(sp_faqs)
 
             content = f"""{html_head(
                 f"""{title} | {SITE_NAME}""",
@@ -9326,6 +9537,7 @@ def build_school_subpages():
   <section class="section">
     <div class="container content-narrow">
       {sections_html}
+      {faq_extra_html}
 
       <div class="school-section">
         <h2>More About {short}</h2>
@@ -11621,6 +11833,8 @@ def build_sitemap():
         urls.append(f"/answers/{f['slug']}/")
     # Voices
     urls.append("/voices/")
+    # Class of 2026 hub
+    urls.append(f"/class-of-{CURRENT_YEAR}/")
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -12081,7 +12295,7 @@ PROGRAM_FORMAT_GUIDES = [
     {
         "title": f"Part-Time MBA Guide ({CURRENT_YEAR})",
         "slug": "part-time-mba-guide",
-        "meta": f"Part-time MBA programs in {CURRENT_YEAR}. Evening and weekend formats, top programs, and whether it's worth it while working. From a Haas MBA grad.",
+        "meta": f"Top part-time MBAs in {CURRENT_YEAR}: Haas EWMBA, Booth Evening, Kellogg, Stern, UCLA. Tuition, evening vs weekend formats, and is the diploma the same as full-time?",
         "sections": [
             ("Who Part-Time MBA Is For", "<p>The part-time MBA is for working professionals who want the MBA degree without quitting their jobs, typically with 3-8 years of experience. Unlike the EMBA (which targets executives with 10+ years), part-time programs serve mid-career professionals who can't afford the income loss of a full-time program but want deeper business education than a certificate provides.</p><p>Part-time programs run 2.5-3 years with evening classes (typically 2-3 nights per week) or weekend classes. You keep your salary, maintain career momentum, and apply what you learn in real-time. The trade-off: you sacrifice evenings, weekends, and personal time for nearly three years.</p>"),
             ("Top Part-Time Programs", f"""<ul><li><strong>Berkeley Haas Evening & Weekend:</strong> The top-ranked part-time MBA, sharing faculty and curriculum with the full-time program. Bay Area location provides tech and startup proximity.</li><li><strong>Chicago Booth Evening MBA:</strong> Same flexible curriculum as the full-time program. Chicago's central location makes evening classes accessible from across the metro area.</li><li><strong>Northwestern Kellogg Evening & Weekend:</strong> Kellogg's collaborative culture extends to the part-time format. Strong for marketing and consulting-adjacent learning.</li><li><strong>NYU Stern Part-Time:</strong> Manhattan location with evening and weekend options. Strong for finance professionals who want to deepen their expertise without leaving Wall Street.</li><li><strong>UCLA Anderson FEMBA:</strong> Fully Employed MBA with weekend classes. LA's entertainment and tech industries provide strong local application.</li></ul>"""),
@@ -12712,6 +12926,198 @@ def build_top_voices():
     print(f"  Built: /voices/ ({len(voices)} voices)")
 
 
+def build_class_of_2026_hub():
+    """Hub page for the 'MBA class of 2026 profile' query universe.
+    Sortable, filterable table of every M7 + Top 25 school with class stats."""
+
+    schools = [s for s in SCHOOLS if s.get("ranking", 999) <= 50]
+    schools = sorted(schools, key=lambda s: s["ranking"])
+
+    total_students = sum(s["class_size"] for s in schools)
+    avg_gmat = round(sum(s["avg_gmat"] for s in schools) / len(schools))
+    median_class = sorted([s["class_size"] for s in schools])[len(schools) // 2]
+    most_selective = min(schools, key=lambda s: s["acceptance_rate"])
+    largest = max(schools, key=lambda s: s["class_size"])
+
+    rows_html = ""
+    for s in schools:
+        salary_k = s["avg_salary"] // 1000
+        rows_html += f"""
+      <tr data-rank="{s['ranking']}" data-gmat="{s['avg_gmat']}" data-gpa="{s['avg_gpa']}" data-class-size="{s['class_size']}" data-acceptance="{s['acceptance_rate']}" data-salary="{s['avg_salary']}">
+        <td><a href="/schools/{s['slug']}/class-profile/">{s['short_name']}</a><div class="text-secondary" style="font-size:12px">{s['location']}</div></td>
+        <td>{s['avg_gmat']}</td>
+        <td>{s['avg_gpa']}</td>
+        <td>{s['class_size']}</td>
+        <td>{s['acceptance_rate']}%</td>
+        <td>${salary_k}K</td>
+        <td>{s['employment_rate']}%</td>
+      </tr>"""
+
+    sortable_js = """<script>
+(function() {
+  var table = document.getElementById('class-table');
+  if (!table) return;
+  var headers = table.querySelectorAll('th.sortable');
+  var tbody = table.querySelector('tbody');
+  headers.forEach(function(th) {
+    th.addEventListener('click', function() {
+      var key = th.dataset.sort;
+      var dir = th.classList.contains('asc') ? 'desc' : 'asc';
+      headers.forEach(function(h) { h.classList.remove('asc', 'desc', 'active'); });
+      th.classList.add(dir, 'active');
+      var rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b) {
+        var av = parseFloat(a.dataset[key]);
+        var bv = parseFloat(b.dataset[key]);
+        return dir === 'asc' ? av - bv : bv - av;
+      });
+      rows.forEach(function(r) { tbody.appendChild(r); });
+    });
+  });
+  var search = document.getElementById('class-search');
+  if (search) {
+    search.addEventListener('input', function() {
+      var q = search.value.toLowerCase();
+      tbody.querySelectorAll('tr').forEach(function(r) {
+        r.style.display = r.textContent.toLowerCase().indexOf(q) !== -1 ? '' : 'none';
+      });
+    });
+  }
+})();
+</script>"""
+
+    faqs = [
+        ("What is the typical MBA Class of 2026 profile?",
+         f"Across the top 50 US MBA programs, the median Class of 2026 has a {avg_gmat} GMAT, a class of about {median_class} students, and roughly 5 years of average work experience. The most selective program is {most_selective['short_name']} at {most_selective['acceptance_rate']}%. The largest M7 class is {largest['short_name']} with {largest['class_size']} students."),
+        ("How big are MBA classes at top programs?",
+         f"Class sizes for the Class of 2026 range from {min(s['class_size'] for s in schools)} students at the smallest program to {largest['class_size']} at {largest['short_name']}. Harvard Business School is the largest M7 with 938. Stanford GSB keeps it small at 436. Berkeley Haas is intentionally smaller at 300, which produces tighter cohorts and more access to professors."),
+        ("What is the average GMAT for the Class of 2026?",
+         f"M7 schools cluster between 728 and 740 GMAT median for the Class of 2026. Stanford GSB leads at 738, then Harvard at 740, Wharton at 733, Booth at 730, Kellogg at 727, Columbia at 729, MIT Sloan at 730. Top 15 medians range from 715 to 728. Outside the top 25, medians drop into the 680-710 range."),
+        ("How much work experience do MBA Class of 2026 students have?",
+         "Most top programs target 4-6 years of work experience, with an average of about 5. Harvard's Class of 2026 has a slightly younger profile (about 4.7 years average). Booth and Stanford GSB skew older (closer to 5.5 years average) because of their preference for candidates with more professional impact and clearer career narratives."),
+        ("Which MBA program has the highest acceptance rate?",
+         f"Within the top 50, acceptance rates range from {min(s['acceptance_rate'] for s in schools)}% (most selective) up into the 50%+ range at the regional programs. Stanford GSB is the hardest at 6.9%. Harvard sits at 11%. Berkeley Haas at 12%. Acceptance rate alone is misleading. A 35% acceptance rate at a school known for strong specialty placement may be a better fit than chasing a 12% acceptance rate at a generalist program."),
+    ]
+
+    faq_items = "".join(
+        f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
+        for q, a in faqs
+    )
+
+    bc = breadcrumb_schema([("Home", "/"), ("MBA Class of 2026", "/class-of-2026/")])
+    page_faq = faq_schema(faqs)
+    item_list = (
+        '<script type="application/ld+json">\n'
+        f'{{"@context":"https://schema.org","@type":"ItemList","name":"MBA Class of {CURRENT_YEAR} Profile","numberOfItems":{len(schools)},"itemListElement":['
+        + ",".join(
+            f'{{"@type":"ListItem","position":{i+1},"name":"{s["short_name"]} Class of {CURRENT_YEAR}","url":"{SITE_URL}/schools/{s["slug"]}/class-profile/"}}'
+            for i, s in enumerate(schools)
+        )
+        + "]}\n</script>"
+    )
+
+    title = f"MBA Class of {CURRENT_YEAR} Profile: GMAT, Class Size, Work Experience by School"
+    meta = f"Class of {CURRENT_YEAR} stats for the top 50 MBA programs. Sortable table: GMAT, GPA, class size, acceptance rate, salary, employment. Real data from each school's report."
+
+    content = f"""{html_head(
+        f"{title} | {SITE_NAME}",
+        meta,
+        "/class-of-2026/",
+        schema=bc + page_faq + item_list
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Class of {CURRENT_YEAR} Profile</h1>
+      <p class="hero-subtitle">Class size, GMAT median, work experience, acceptance rate, salary, and employment for the top 50 US MBA programs. Sort, filter, compare.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="stats-grid" style="margin-bottom: 32px;">
+        <div class="stat-item"><span class="label">Schools Tracked</span><span class="stat-value">{len(schools)}</span></div>
+        <div class="stat-item"><span class="label">Total Students</span><span class="stat-value">{total_students:,}</span></div>
+        <div class="stat-item"><span class="label">Avg GMAT</span><span class="stat-value">{avg_gmat}</span></div>
+        <div class="stat-item"><span class="label">Most Selective</span><span class="stat-value">{most_selective['acceptance_rate']}%</span></div>
+      </div>
+
+      <div class="school-section">
+        <h2>How to read this</h2>
+        <p>Every top program publishes a class profile, but the formats differ. Some report GMAT median, some report mean. Some include international student percentage, some don't. This table normalizes the most-asked numbers so you can compare across schools without flipping between PDFs.</p>
+        <p>Sort by any column. Search by school name. Click any school to see the full class profile page with employment data, demographics, and source citations.</p>
+      </div>
+
+      <div class="school-section">
+        <input type="text" id="class-search" placeholder="Search schools..." style="width: 100%; padding: 12px; margin-bottom: 16px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 14px;">
+        <div style="overflow-x: auto;">
+          <table id="class-table" class="comparison-table" style="min-width: 720px;">
+            <thead>
+              <tr>
+                <th>School</th>
+                <th class="sortable" data-sort="gmat">GMAT</th>
+                <th class="sortable" data-sort="gpa">GPA</th>
+                <th class="sortable" data-sort="class-size">Class Size</th>
+                <th class="sortable" data-sort="acceptance">Accept</th>
+                <th class="sortable" data-sort="salary">Salary</th>
+                <th class="sortable" data-sort="rank">Rank</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows_html}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>What the Class of {CURRENT_YEAR} looks like</h2>
+        <p>The headline numbers are predictable. Top-7 medians cluster between 728 and 740 GMAT. Top-15 medians sit between 715 and 728. After that, the curve drops into the high 600s and low 700s.</p>
+        <p>Class size tells you more than rank does. <a href="/schools/harvard-business-school/class-profile/">HBS</a> at 938 and <a href="/schools/wharton/class-profile/">Wharton</a> at 915 buy you the largest networks in business school. <a href="/schools/stanford-gsb/class-profile/">Stanford GSB</a> at 436 buys you the most selective room in MBA admissions, with the smallest student-to-faculty ratio at the M7. <a href="/schools/berkeley-haas/class-profile/">Berkeley Haas</a> at 300 sits in a different bucket entirely. Smaller cohort, tighter relationships, and a culture that's easier to feel from day one.</p>
+        <p>Average work experience hovers around 5 years across most programs. The exception worth flagging: Harvard runs younger (closer to 4.7 years) because of the 2+2 program and direct-from-undergrad admits. Booth and Stanford skew older, closer to 5.5 years.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Class size vs class quality</h2>
+        <p>The instinct is to chase the highest-ranked program with the lowest acceptance rate. That's the wrong frame. A class of 938 at HBS gives you scale, but you're competing with a much larger cohort for recruiting slots and section attention. A class of 300 at Haas means every recruiter on campus knows the size of the room, and faculty know your name by week three.</p>
+        <p>Pick the class size that matches how you learn and how you network. Big classes if you want maximum optionality and a city-sized alumni network in every major industry. Small classes if you want strong relationships, faster faculty access, and a tight-knit alumni group that picks up the phone when you call.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>What the data doesn't show</h2>
+        <p>Two numbers are missing from most class profiles, and they matter. First: how many of the admitted students would have been admitted if they'd applied as Round 3 candidates instead of Round 1. The answer is almost none. Round 1 admit rates run dramatically higher than Round 3 at every top school. The published acceptance rate flattens that gap.</p>
+        <p>Second: how the median student profile compares to the marginal student profile. Schools publish the median, not the bottom decile. The 80% range gives a better picture, and several schools (notably <a href="/schools/yale-som/class-profile/">Yale SOM</a> and <a href="/schools/dartmouth-tuck/class-profile/">Tuck</a>) publish wider ranges than the median alone suggests.</p>
+        <p>Use this table for the headline comparison. Use the school-specific class profile pages for the data that predicts your odds.</p>
+      </div>
+
+      {faq_items}
+
+      <div class="school-section">
+        <h2>Compare schools head to head</h2>
+        <div class="compare-link-grid">
+          <a href="/compare/harvard-business-school-vs-stanford-gsb/" class="btn btn-outline">HBS vs Stanford GSB</a>
+          <a href="/compare/wharton-vs-booth/" class="btn btn-outline">Wharton vs Booth</a>
+          <a href="/compare/columbia-business-school-vs-nyu-stern/" class="btn btn-outline">Columbia vs Stern</a>
+          <a href="/compare/berkeley-haas-vs-ucla-anderson/" class="btn btn-outline">Haas vs UCLA Anderson</a>
+          <a href="/compare/" class="btn btn-primary">All Comparisons &rarr;</a>
+        </div>
+      </div>
+
+      {newsletter_cta_html()}
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}
+{sortable_js}"""
+
+    write_page(os.path.join(OUTPUT_DIR, "class-of-2026", "index.html"), content)
+    print(f"  Built: /class-of-{CURRENT_YEAR}/ hub ({len(schools)} schools)")
+
+
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -12747,6 +13153,7 @@ def main():
     build_faq_pages()
     build_gmat_calculator()
     build_top_voices()
+    build_class_of_2026_hub()
     build_redirects()
     build_sitemap()
     build_robots()
