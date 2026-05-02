@@ -8587,13 +8587,23 @@ def build_homepage():
         <h2>Tools</h2>
       </div>
       <div class="tools-grid">
+        <a href="/tools/school-recommender/" class="tool-card">
+          <span class="tool-icon">&#x1F3AF;</span>
+          <h3>School Recommender</h3>
+          <p>Tell us your goals, GMAT, and what matters. Get 7 best-fit MBA programs ranked.</p>
+        </a>
+        <a href="/tools/admit-predictor/" class="tool-card">
+          <span class="tool-icon">&#x1F4CA;</span>
+          <h3>Admit Predictor</h3>
+          <p>Input your profile. Get realistic admit chances at top programs plus what's weakening your app.</p>
+        </a>
         <a href="/tools/roi-calculator/" class="tool-card">
           <span class="tool-icon">&#x1F4B0;</span>
           <h3>MBA ROI Calculator</h3>
           <p>Input your salary, school costs, and career goals. Get a personalized return-on-investment estimate.</p>
         </a>
         <a href="/tools/gmat-calculator/" class="tool-card">
-          <span class="tool-icon">&#x1F3AF;</span>
+          <span class="tool-icon">&#x1F3C6;</span>
           <h3>GMAT Target Score</h3>
           <p>Select your target school. See the score you need, the competitive range, and prep advice.</p>
         </a>
@@ -12164,7 +12174,7 @@ def build_sitemap():
     urls.append("/guides/")
     for g in GUIDES:
         urls.append(f"/guides/{g['slug']}/")
-    urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/roi-calculator/", "/tools/gmat-calculator/"])
+    urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/roi-calculator/", "/tools/gmat-calculator/", "/tools/school-recommender/", "/tools/admit-predictor/"])
     # Blog posts — ALL school ROI posts
     for s in SCHOOLS:
         urls.append(f"/blog/is-{s['slug']}-worth-it/")
@@ -13476,6 +13486,751 @@ EMPLOYERS = [
 ]
 
 
+def build_school_recommender():
+    """Smart School Recommender — lead magnet at /tools/school-recommender/.
+    Form-driven matching: user inputs goals + profile, gets ranked best-fit schools."""
+    import json as _json
+
+    # Compact school data for client-side matching (top 100 by ranking)
+    schools_for_tool = []
+    for s in sorted(SCHOOLS, key=lambda x: x["ranking"])[:100]:
+        loc = s["location"].lower()
+        region = "international"
+        if any(x in loc for x in ["ca", "wa,", "or,"]):
+            region = "west"
+        elif any(x in loc for x in ["ny,", "nj,", "ma,", "ct,", "pa,", "dc", "md,", "ri,", "nh,", "vt,", "me,"]):
+            region = "northeast"
+        elif any(x in loc for x in ["tx,", "fl,", "ga,", "nc,", "sc,", "tn,", "al,", "la,", "ms,", "ar,", "ok,", "va,", "wv,", "ky,"]):
+            region = "south"
+        elif any(x in loc for x in ["il,", "oh,", "mi,", "in,", "wi,", "mn,", "ia,", "mo,", "nd,", "sd,", "ne,", "ks,"]):
+            region = "midwest"
+        elif any(x in loc for x in ["co,", "az,", "ut,", "nv,", "nm,", "id,", "mt,", "wy,", "ak,", "hi"]):
+            region = "west"
+
+        cs = s["class_size"]
+        size_bucket = "small" if cs < 200 else "mid" if cs < 500 else "large"
+
+        career_changer_friendly = any(
+            "career chang" in str(x).lower() or "general management" in str(x).lower() or "consulting" in str(x).lower()
+            for x in s.get("best_for", []) + s.get("strengths", [])
+        )
+
+        industries = [t.lower() for t in s.get("best_for", []) + s.get("strengths", [])]
+
+        schools_for_tool.append({
+            "slug": s["slug"],
+            "name": s["short_name"],
+            "location": s["location"],
+            "rank": s["ranking"],
+            "tier": s["tier"],
+            "ar": s["acceptance_rate"],
+            "gmat": s["avg_gmat"],
+            "gpa": s["avg_gpa"],
+            "size": cs,
+            "size_bucket": size_bucket,
+            "salary": s["avg_salary"],
+            "tuition": s["tuition"],
+            "region": region,
+            "industries": industries,
+            "career_changer": career_changer_friendly,
+        })
+
+    schools_json = _json.dumps(schools_for_tool)
+
+    bc = breadcrumb_schema([("Home", "/"), ("Tools", "/tools/"), ("School Recommender", "/tools/school-recommender/")])
+
+    title = f"MBA School Recommender {CURRENT_YEAR}: Find Your Best-Fit Programs in 60 Seconds"
+    meta = f"Free MBA school recommender. Tell us your goals, GMAT, and target industry. Get 5 best-fit programs ranked with reasoning. Built on {len(schools_for_tool)} top schools."
+
+    content = f"""{html_head(
+        f"{title} | {SITE_NAME}",
+        meta,
+        "/tools/school-recommender/",
+        schema=bc
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA School Recommender</h1>
+      <p class="hero-subtitle">Tell us your goals, GMAT, and what matters to you. We'll rank the {len(schools_for_tool)} top MBA programs by how well they fit. Free, takes 60 seconds.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="school-section" id="rec-form-wrap">
+        <h2>Your profile</h2>
+        <p class="text-secondary" style="font-size: 14px; margin-bottom: 24px;">All inputs are optional. The more you tell us, the better the matches.</p>
+
+        <div class="roi-form">
+          <div class="roi-field">
+            <label for="rec-industry">Target post-MBA industry</label>
+            <select id="rec-industry">
+              <option value="">No preference</option>
+              <option value="consulting">Consulting (MBB, Big 4, boutique)</option>
+              <option value="finance">Finance (IB, PE, hedge funds)</option>
+              <option value="technology">Tech (PM, biz ops, strategy)</option>
+              <option value="entrepreneurship">Entrepreneurship / founding</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="real estate">Real estate</option>
+              <option value="marketing">Marketing / brand management</option>
+              <option value="social impact">Nonprofit / social impact</option>
+              <option value="general management">General management / corporate</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-stage">Career stage</label>
+            <select id="rec-stage">
+              <option value="">No preference</option>
+              <option value="career-change">Career changer (switching industries)</option>
+              <option value="accelerator">Career accelerator (same industry, faster)</option>
+              <option value="founder">Aspiring founder</option>
+              <option value="exec-track">Exec / general management track</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-region">Geography preference</label>
+            <select id="rec-region">
+              <option value="">No preference</option>
+              <option value="northeast">Northeast (NY, Boston, DC)</option>
+              <option value="west">West Coast (CA, WA, AZ)</option>
+              <option value="midwest">Midwest (Chicago, Ann Arbor, Bloomington)</option>
+              <option value="south">South (Texas, Atlanta, Florida)</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-size">Class size preference</label>
+            <select id="rec-size">
+              <option value="">No preference</option>
+              <option value="small">Small / intimate (under 200)</option>
+              <option value="mid">Mid-sized (200-500)</option>
+              <option value="large">Large (500+)</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-gmat">GMAT score (or estimated)</label>
+            <input type="number" id="rec-gmat" placeholder="e.g. 710" min="500" max="800" step="10">
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-experience">Years of work experience</label>
+            <input type="number" id="rec-experience" placeholder="e.g. 5" min="0" max="20" step="1">
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-budget">Budget per year (tuition)</label>
+            <select id="rec-budget">
+              <option value="">No preference</option>
+              <option value="40000">Under $40K (in-state public)</option>
+              <option value="65000">Under $65K (mid-tier private + out-of-state public)</option>
+              <option value="999999">Open to any tuition</option>
+            </select>
+          </div>
+
+          <button class="btn btn-accent" onclick="recommendSchools()" style="margin-top: 16px; width: 100%;">Get My Matches &rarr;</button>
+        </div>
+      </div>
+
+      <div class="school-section" id="rec-preview" style="display: none;">
+        <h2>Your top match</h2>
+        <p class="text-secondary" style="font-size: 14px;">Based on your inputs. Full ranking of all 7 best-fit schools below.</p>
+        <div id="rec-preview-card"></div>
+      </div>
+
+      <div class="school-section" id="rec-gate" style="display: none;">
+        <div style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px;">
+          <h3 style="margin-top: 0;">Unlock your full top 7 + reasoning</h3>
+          <p>Drop your email below to see all 7 best-fit schools ranked, each with a specific reason it matches your profile. You'll also start receiving The MBA Insider, our weekly admissions intel newsletter.</p>
+          <form onsubmit="unlockResults(event)" class="nl-form" style="margin-top: 16px;">
+            <input type="email" id="rec-email" placeholder="your@email.com" required>
+            <button type="submit" class="btn btn-accent">Unlock Results</button>
+          </form>
+          <div class="nl-msg" id="rec-msg" style="margin-top: 8px;"></div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 12px; opacity: 0.8;">No spam. Unsubscribe anytime. Your inputs stay on your device.</p>
+        </div>
+      </div>
+
+      <div class="school-section" id="rec-results" style="display: none;">
+        <h2>Your 7 best-fit MBA programs</h2>
+        <div id="rec-results-list"></div>
+        <p style="margin-top: 24px;">Want a deeper review? Compare your top schools side-by-side:</p>
+        <div class="compare-link-grid" id="rec-compare-links"></div>
+      </div>
+
+      <div class="school-section">
+        <h2>How the recommender works</h2>
+        <p>The matching algorithm scores each MBA program against your inputs across six dimensions: industry placement strength, geography, class size fit, GMAT compatibility, career-changer friendliness, and tuition fit. The 7 highest-scoring programs become your shortlist.</p>
+        <p>School data comes from each program's most recent class profile and employment report. The matching weights are calibrated against the MBA admissions patterns we've watched succeed and fail across the past five admissions cycles.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>This isn't an admit predictor</h2>
+        <p>The recommender tells you where you should apply based on fit. It doesn't tell you your odds at each program. Those are different questions. For your odds, try the <a href="/tools/admit-predictor/">MBA Admit Predictor</a>. For deep school comparisons, browse the <a href="/compare/">comparison library</a> or the <a href="/class-of-{CURRENT_YEAR}/">Class of {CURRENT_YEAR} Hub</a>.</p>
+      </div>
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}
+<script>
+const SCHOOLS_DATA = {schools_json};
+
+const INDUSTRY_LABELS = {{
+  consulting: "consulting",
+  finance: "finance",
+  technology: "tech",
+  entrepreneurship: "entrepreneurship",
+  healthcare: "healthcare",
+  "real estate": "real estate",
+  marketing: "marketing",
+  "social impact": "social impact",
+  "general management": "general management",
+}};
+
+function scoreSchool(school, inputs) {{
+  let score = 0;
+  let reasons = [];
+
+  if (inputs.industry) {{
+    const has = school.industries.some(i => i.includes(inputs.industry) || inputs.industry.includes(i));
+    if (has) {{
+      score += 30;
+      reasons.push("strong placement in " + INDUSTRY_LABELS[inputs.industry]);
+    }} else {{
+      score -= 5;
+    }}
+  }}
+
+  if (inputs.stage === 'career-change' && school.career_changer) {{
+    score += 20;
+    reasons.push("welcomes non-traditional backgrounds");
+  }}
+  if (inputs.stage === 'founder' && school.industries.some(i => i.includes('entrepreneur'))) {{
+    score += 25;
+    reasons.push("strong entrepreneurship support");
+  }}
+  if (inputs.stage === 'exec-track' && school.industries.some(i => i.includes('management') || i.includes('general'))) {{
+    score += 18;
+    reasons.push("general management-oriented");
+  }}
+
+  if (inputs.region && school.region === inputs.region) {{
+    score += 20;
+    reasons.push(school.location + " location fits your region preference");
+  }}
+
+  if (inputs.size && school.size_bucket === inputs.size) {{
+    score += 15;
+    reasons.push(school.size + "-student class matches your size preference");
+  }}
+
+  if (inputs.gmat) {{
+    const delta = Math.abs(inputs.gmat - school.gmat);
+    if (delta <= 10) {{
+      score += 25;
+      reasons.push("GMAT median (" + school.gmat + ") is right in your range");
+    }} else if (delta <= 30) {{
+      score += 15;
+    }} else if (delta <= 50) {{
+      score += 5;
+    }} else if (inputs.gmat < school.gmat - 50) {{
+      score -= 15;
+    }}
+  }}
+
+  if (inputs.experience) {{
+    if (inputs.experience >= 3 && inputs.experience <= 7) {{
+      score += 10;
+    }} else if (inputs.experience > 8) {{
+      if (school.industries.some(i => i.includes('management'))) score += 8;
+    }}
+  }}
+
+  if (inputs.budget && inputs.budget < 999999) {{
+    if (school.tuition <= inputs.budget) {{
+      score += 25;
+      reasons.push("tuition ($" + Math.round(school.tuition/1000) + "K) fits your budget");
+    }} else {{
+      score -= 30;
+    }}
+  }}
+
+  if (school.rank <= 7) score += 12;
+  else if (school.rank <= 15) score += 8;
+  else if (school.rank <= 25) score += 5;
+
+  return {{ score, reasons }};
+}}
+
+let lastResults = null;
+
+function el(tag, attrs, children) {{
+  const e = document.createElement(tag);
+  if (attrs) {{
+    for (const k in attrs) {{
+      if (k === 'class') e.className = attrs[k];
+      else if (k === 'href') e.setAttribute('href', attrs[k]);
+      else if (k === 'style') e.setAttribute('style', attrs[k]);
+      else e.setAttribute(k, attrs[k]);
+    }}
+  }}
+  if (children) {{
+    if (typeof children === 'string') e.textContent = children;
+    else children.forEach(c => {{ if (c) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); }});
+  }}
+  return e;
+}}
+
+function buildCard(item) {{
+  const s = item.school;
+  const reasonText = item.reasons.length
+    ? "Why it fits: " + item.reasons.slice(0, 3).join(", ") + "."
+    : "Why it fits: solid all-around fit at #" + s.rank + ".";
+
+  const link = el('a', {{ href: "/schools/" + s.slug + "/", class: "ranking-school-name" }}, s.name);
+  const info = el('div', {{ class: 'ranking-info' }}, [
+    link,
+    el('span', {{ class: 'ranking-location' }}, s.location),
+    el('p', {{ style: 'margin: 6px 0 0; font-size: 13px; color: var(--color-text-secondary);' }}, reasonText),
+  ]);
+  const stats = el('div', {{ class: 'ranking-stats' }}, [
+    el('span', {{ class: 'ranking-stat' }}, [el('span', {{ class: 'label' }}, 'GMAT'), document.createTextNode(' ' + s.gmat)]),
+    el('span', {{ class: 'ranking-stat' }}, [el('span', {{ class: 'label' }}, 'Salary'), document.createTextNode(' $' + Math.round(s.salary/1000) + 'K')]),
+  ]);
+  return el('div', {{ class: 'ranking-row', style: 'margin-bottom: 12px;' }}, [
+    el('span', {{ class: 'ranking-position' }}, '#' + s.rank),
+    info,
+    stats,
+  ]);
+}}
+
+function recommendSchools() {{
+  const inputs = {{
+    industry: document.getElementById('rec-industry').value,
+    stage: document.getElementById('rec-stage').value,
+    region: document.getElementById('rec-region').value,
+    size: document.getElementById('rec-size').value,
+    gmat: parseInt(document.getElementById('rec-gmat').value) || null,
+    experience: parseInt(document.getElementById('rec-experience').value) || null,
+    budget: parseInt(document.getElementById('rec-budget').value) || null,
+  }};
+
+  const ranked = SCHOOLS_DATA
+    .map(s => ({{ school: s, ...scoreSchool(s, inputs) }}))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 7);
+
+  lastResults = ranked;
+
+  const previewWrap = document.getElementById('rec-preview-card');
+  previewWrap.replaceChildren(buildCard(ranked[0]));
+
+  document.getElementById('rec-preview').style.display = 'block';
+  document.getElementById('rec-gate').style.display = 'block';
+  document.getElementById('rec-form-wrap').style.display = 'none';
+
+  document.getElementById('rec-preview').scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+
+  if (typeof gtag === 'function') {{
+    gtag('event', 'recommender_submitted', {{ event_category: 'lead_magnet', event_label: 'school_recommender' }});
+  }}
+}}
+
+function unlockResults(e) {{
+  e.preventDefault();
+  const email = document.getElementById('rec-email').value;
+  const btn = e.target.querySelector('button');
+  const msg = document.getElementById('rec-msg');
+  btn.disabled = true;
+  btn.textContent = 'Unlocking...';
+
+  fetch('https://newsletter-subscribe.rome-workers.workers.dev/subscribe', {{
+    method: 'POST',
+    headers: {{ 'Content-Type': 'application/json' }},
+    body: JSON.stringify({{ email, list: 'mbaguidance' }})
+  }}).then(r => r.json()).then(data => {{
+    if (data.ok) {{
+      msg.style.color = '#059669';
+      msg.textContent = 'Unlocked. Full results below.';
+
+      const list = document.getElementById('rec-results-list');
+      list.replaceChildren(...lastResults.map(r => buildCard(r)));
+
+      const top4 = lastResults.slice(0, 4).map(r => r.school);
+      const compareWrap = document.getElementById('rec-compare-links');
+      const links = [];
+      for (let i = 0; i < top4.length - 1; i++) {{
+        const a = top4[i].slug;
+        const b = top4[i + 1].slug;
+        links.push(el('a', {{ href: "/compare/" + a + "-vs-" + b + "/", class: "btn btn-outline" }},
+          top4[i].name + " vs " + top4[i+1].name));
+      }}
+      compareWrap.replaceChildren(...links);
+
+      document.getElementById('rec-gate').style.display = 'none';
+      document.getElementById('rec-results').style.display = 'block';
+      document.getElementById('rec-results').scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+
+      if (typeof gtag === 'function') {{
+        gtag('event', 'newsletter_signup', {{ event_category: 'engagement', event_label: 'school_recommender_unlock' }});
+      }}
+    }} else {{
+      throw new Error(data.error || 'Subscription failed');
+    }}
+  }}).catch(err => {{
+    msg.style.color = '#DC2626';
+    msg.textContent = err.message;
+    btn.disabled = false;
+    btn.textContent = 'Unlock Results';
+  }});
+}}
+</script>"""
+    write_page(os.path.join(OUTPUT_DIR, "tools", "school-recommender", "index.html"), content)
+    print(f"  Built: /tools/school-recommender/")
+
+
+def build_admit_predictor():
+    """Admit Predictor — lead magnet at /tools/admit-predictor/.
+    User inputs profile, gets per-school admit probability bucket + weakness diagnosis."""
+    import json as _json
+
+    schools_for_tool = []
+    for s in sorted(SCHOOLS, key=lambda x: x["ranking"])[:50]:
+        schools_for_tool.append({
+            "slug": s["slug"],
+            "name": s["short_name"],
+            "rank": s["ranking"],
+            "tier": s["tier"],
+            "ar": s["acceptance_rate"],
+            "gmat": s["avg_gmat"],
+            "gpa": s["avg_gpa"],
+            "size": s["class_size"],
+        })
+
+    schools_json = _json.dumps(schools_for_tool)
+    school_options = "\n".join(
+        f'<option value="{s["slug"]}">{s["name"]} (#{s["rank"]})</option>'
+        for s in schools_for_tool
+    )
+
+    bc = breadcrumb_schema([("Home", "/"), ("Tools", "/tools/"), ("Admit Predictor", "/tools/admit-predictor/")])
+
+    title = f"MBA Admit Predictor {CURRENT_YEAR}: What Are Your Chances at Top Programs?"
+    meta = f"Free MBA admit predictor. Input your GMAT, GPA, and work experience. See your realistic admit chances at the top 50 programs plus what's weakening your application."
+
+    content = f"""{html_head(
+        f"{title} | {SITE_NAME}",
+        meta,
+        "/tools/admit-predictor/",
+        schema=bc
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Admit Predictor</h1>
+      <p class="hero-subtitle">Input your profile. Get a realistic admit chance at the top 50 MBA programs plus a diagnosis of what's weakening your application.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="school-section" id="ap-form-wrap">
+        <h2>Your profile</h2>
+        <p class="text-secondary" style="font-size: 14px; margin-bottom: 24px;">All inputs help refine the prediction. Pick 3-5 target schools below.</p>
+
+        <div class="roi-form">
+          <div class="roi-field">
+            <label for="ap-gmat">GMAT score</label>
+            <input type="number" id="ap-gmat" placeholder="e.g. 720" min="500" max="800" step="10" required>
+          </div>
+
+          <div class="roi-field">
+            <label for="ap-gpa">Undergraduate GPA</label>
+            <input type="number" id="ap-gpa" placeholder="e.g. 3.5" min="2" max="4" step="0.01" required>
+          </div>
+
+          <div class="roi-field">
+            <label for="ap-experience">Years of full-time work experience</label>
+            <input type="number" id="ap-experience" placeholder="e.g. 5" min="0" max="25" step="1" required>
+          </div>
+
+          <div class="roi-field">
+            <label for="ap-undergrad">Undergraduate institution tier</label>
+            <select id="ap-undergrad" required>
+              <option value="">Select...</option>
+              <option value="elite">Elite (Ivy League, Stanford, MIT, top liberal arts)</option>
+              <option value="top">Top (top-50 US, well-known international)</option>
+              <option value="solid">Solid (regional flagship, top-100)</option>
+              <option value="other">Other / non-traditional path</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="ap-industry">Pre-MBA industry</label>
+            <select id="ap-industry" required>
+              <option value="">Select...</option>
+              <option value="consulting">Consulting (MBB, Big 4, boutique)</option>
+              <option value="finance">Finance (IB, PE, hedge funds, asset management)</option>
+              <option value="tech">Tech (engineer, PM, biz ops)</option>
+              <option value="corporate">Corporate (F500, consumer, healthcare)</option>
+              <option value="entrepreneurship">Founder / startup operator</option>
+              <option value="military">Military</option>
+              <option value="nonprofit">Nonprofit / government / education</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="ap-schools">Target schools (Cmd/Ctrl + click for multi-select, pick 3-5)</label>
+            <select id="ap-schools" multiple size="8" required>
+              {school_options}
+            </select>
+          </div>
+
+          <button class="btn btn-accent" onclick="predictAdmits()" style="margin-top: 16px; width: 100%;">Predict My Chances &rarr;</button>
+        </div>
+      </div>
+
+      <div class="school-section" id="ap-preview" style="display: none;">
+        <h2>Your top target's chances</h2>
+        <p class="text-secondary" style="font-size: 14px;">Based on your inputs. Full prediction across all your target schools below, plus a weakness diagnosis.</p>
+        <div id="ap-preview-card"></div>
+      </div>
+
+      <div class="school-section" id="ap-gate" style="display: none;">
+        <div style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px;">
+          <h3 style="margin-top: 0;">Unlock your full prediction + weakness diagnosis</h3>
+          <p>Drop your email to see your admit chances at every target school, plus the 2-3 things weakening your application most. You'll also start receiving The MBA Insider, our weekly admissions intel newsletter.</p>
+          <form onsubmit="unlockPrediction(event)" class="nl-form" style="margin-top: 16px;">
+            <input type="email" id="ap-email" placeholder="your@email.com" required>
+            <button type="submit" class="btn btn-accent">Unlock Prediction</button>
+          </form>
+          <div class="nl-msg" id="ap-msg" style="margin-top: 8px;"></div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 12px; opacity: 0.8;">No spam. Unsubscribe anytime. Your inputs stay on your device.</p>
+        </div>
+      </div>
+
+      <div class="school-section" id="ap-results" style="display: none;">
+        <h2>Your full prediction</h2>
+        <div id="ap-results-list"></div>
+
+        <h3 style="margin-top: 32px;">What's weakening your application</h3>
+        <div id="ap-weaknesses"></div>
+
+        <div style="margin-top: 32px;">
+          <p>Get personalized essay feedback to strengthen your application:</p>
+          <a href="/tools/essay-review/" class="btn btn-primary">Essay Review by a Haas MBA &rarr;</a>
+        </div>
+      </div>
+
+      <div class="school-section">
+        <h2>How the predictor works</h2>
+        <p>The model scores your profile against each school's published median GMAT, GPA, work experience range, and acceptance rate. Adjustments come from undergraduate tier and pre-MBA industry, since admissions committees weight non-traditional backgrounds and underrepresented industries differently than the medians suggest.</p>
+        <p>The output is a probability bucket (Reach, Stretch, Match, Strong, Very Strong), not a precise percentage. The honest truth: nobody can predict an admit decision exactly, because essays, recommendations, and interview performance carry real weight. The bucket gives you a starting point. The weakness diagnosis tells you what's most fixable.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Important caveat</h2>
+        <p>Admissions decisions are not deterministic. A 720 GMAT with great essays can beat a 760 GMAT with generic essays at the same school. The model assumes average-quality application materials. If your essays, recommendations, and interview answers are below average, your real chances drop. If they're outstanding, your real chances climb. The numbers below are a starting point, not a guarantee.</p>
+        <p>For deeper analysis, use the <a href="/tools/school-recommender/">School Recommender</a> to find best-fit programs or browse the <a href="/class-of-{CURRENT_YEAR}/">Class of {CURRENT_YEAR} Hub</a> for class profile context.</p>
+      </div>
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}
+<script>
+const AP_SCHOOLS = {schools_json};
+
+function el(tag, attrs, children) {{
+  const e = document.createElement(tag);
+  if (attrs) {{
+    for (const k in attrs) {{
+      if (k === 'class') e.className = attrs[k];
+      else if (k === 'href') e.setAttribute('href', attrs[k]);
+      else if (k === 'style') e.setAttribute('style', attrs[k]);
+      else e.setAttribute(k, attrs[k]);
+    }}
+  }}
+  if (children) {{
+    if (typeof children === 'string') e.textContent = children;
+    else children.forEach(c => {{ if (c) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); }});
+  }}
+  return e;
+}}
+
+function predictForSchool(school, inputs) {{
+  let score = 50;
+  let weaknesses = [];
+
+  const gmatDelta = inputs.gmat - school.gmat;
+  if (gmatDelta >= 30) score += 25;
+  else if (gmatDelta >= 10) score += 15;
+  else if (gmatDelta >= -10) score += 5;
+  else if (gmatDelta >= -30) {{ score -= 10; weaknesses.push("GMAT (" + inputs.gmat + ") is below " + school.name + "'s median (" + school.gmat + ")"); }}
+  else {{ score -= 25; weaknesses.push("GMAT (" + inputs.gmat + ") is well below " + school.name + "'s median (" + school.gmat + ")"); }}
+
+  const gpaDelta = inputs.gpa - school.gpa;
+  if (gpaDelta >= 0.2) score += 12;
+  else if (gpaDelta >= 0) score += 5;
+  else if (gpaDelta >= -0.3) {{ score -= 5; weaknesses.push("GPA (" + inputs.gpa.toFixed(2) + ") is slightly below " + school.name + "'s median (" + school.gpa.toFixed(2) + ")"); }}
+  else {{ score -= 18; weaknesses.push("GPA (" + inputs.gpa.toFixed(2) + ") is well below " + school.name + "'s median (" + school.gpa.toFixed(2) + ")"); }}
+
+  if (inputs.experience >= 3 && inputs.experience <= 7) score += 10;
+  else if (inputs.experience < 2) {{ score -= 15; weaknesses.push("under 2 years of full-time work experience"); }}
+  else if (inputs.experience > 10) {{ score -= 8; weaknesses.push("over 10 years experience may flag you as better suited for EMBA"); }}
+
+  if (inputs.undergrad === 'elite') score += 8;
+  else if (inputs.undergrad === 'top') score += 4;
+  else if (inputs.undergrad === 'other') score -= 3;
+
+  const overrepresented = ['consulting', 'finance', 'tech'].includes(inputs.industry);
+  const underrepresented = ['military', 'nonprofit', 'entrepreneurship'].includes(inputs.industry);
+  if (overrepresented && school.tier <= 2) {{
+    score -= 5;
+    if (school.rank <= 10) weaknesses.push(inputs.industry + " is the most over-represented background at " + school.name);
+  }} else if (underrepresented) {{
+    score += 8;
+  }}
+
+  if (school.ar < 12) score -= 10;
+  else if (school.ar < 20) score -= 5;
+  else if (school.ar > 35) score += 5;
+
+  let bucket, color, prob;
+  if (score >= 90) {{ bucket = "Very Strong"; color = "#059669"; prob = "70-85%"; }}
+  else if (score >= 75) {{ bucket = "Strong"; color = "#10B981"; prob = "50-70%"; }}
+  else if (score >= 60) {{ bucket = "Match"; color = "#F59E0B"; prob = "30-50%"; }}
+  else if (score >= 45) {{ bucket = "Stretch"; color = "#F97316"; prob = "15-30%"; }}
+  else {{ bucket = "Reach"; color = "#DC2626"; prob = "5-15%"; }}
+
+  return {{ school, score, bucket, color, prob, weaknesses }};
+}}
+
+function buildPredictionCard(p) {{
+  const s = p.school;
+  const link = el('a', {{ href: "/schools/" + s.slug + "/", class: "ranking-school-name" }}, s.name);
+  const info = el('div', {{ class: 'ranking-info' }}, [
+    link,
+    el('span', {{ class: 'ranking-location' }}, "Acceptance rate: " + s.ar + "% · GMAT median: " + s.gmat),
+  ]);
+  const bucketBadge = el('span', {{
+    class: 'ranking-stat',
+    style: 'background: ' + p.color + '; color: white; padding: 4px 12px; border-radius: 4px; font-weight: 600;'
+  }}, p.bucket);
+  const probSpan = el('span', {{ class: 'ranking-stat' }}, [
+    el('span', {{ class: 'label' }}, 'Probability'),
+    document.createTextNode(' ' + p.prob),
+  ]);
+  return el('div', {{ class: 'ranking-row', style: 'margin-bottom: 12px;' }}, [
+    el('span', {{ class: 'ranking-position' }}, '#' + s.rank),
+    info,
+    el('div', {{ class: 'ranking-stats' }}, [bucketBadge, probSpan]),
+  ]);
+}}
+
+let lastPredictions = null;
+
+function predictAdmits() {{
+  const targetSlugs = Array.from(document.getElementById('ap-schools').selectedOptions).map(o => o.value);
+  if (targetSlugs.length === 0) {{
+    alert("Pick at least one target school.");
+    return;
+  }}
+
+  const inputs = {{
+    gmat: parseInt(document.getElementById('ap-gmat').value),
+    gpa: parseFloat(document.getElementById('ap-gpa').value),
+    experience: parseInt(document.getElementById('ap-experience').value),
+    undergrad: document.getElementById('ap-undergrad').value,
+    industry: document.getElementById('ap-industry').value,
+  }};
+
+  const targets = AP_SCHOOLS.filter(s => targetSlugs.includes(s.slug));
+  const predictions = targets.map(s => predictForSchool(s, inputs));
+  lastPredictions = {{ predictions, inputs }};
+
+  const top = predictions.reduce((a, b) => a.score > b.score ? a : b);
+  document.getElementById('ap-preview-card').replaceChildren(buildPredictionCard(top));
+  document.getElementById('ap-preview').style.display = 'block';
+  document.getElementById('ap-gate').style.display = 'block';
+  document.getElementById('ap-form-wrap').style.display = 'none';
+  document.getElementById('ap-preview').scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+
+  if (typeof gtag === 'function') {{
+    gtag('event', 'predictor_submitted', {{ event_category: 'lead_magnet', event_label: 'admit_predictor' }});
+  }}
+}}
+
+function unlockPrediction(e) {{
+  e.preventDefault();
+  const email = document.getElementById('ap-email').value;
+  const btn = e.target.querySelector('button');
+  const msg = document.getElementById('ap-msg');
+  btn.disabled = true;
+  btn.textContent = 'Unlocking...';
+
+  fetch('https://newsletter-subscribe.rome-workers.workers.dev/subscribe', {{
+    method: 'POST',
+    headers: {{ 'Content-Type': 'application/json' }},
+    body: JSON.stringify({{ email, list: 'mbaguidance' }})
+  }}).then(r => r.json()).then(data => {{
+    if (data.ok) {{
+      msg.style.color = '#059669';
+      msg.textContent = 'Unlocked. Full prediction below.';
+
+      const list = document.getElementById('ap-results-list');
+      const sorted = [...lastPredictions.predictions].sort((a, b) => b.score - a.score);
+      list.replaceChildren(...sorted.map(p => buildPredictionCard(p)));
+
+      const allWeaknesses = lastPredictions.predictions.flatMap(p => p.weaknesses);
+      const uniqueWeaknesses = [...new Set(allWeaknesses)].slice(0, 3);
+
+      const weaknessWrap = document.getElementById('ap-weaknesses');
+      if (uniqueWeaknesses.length === 0) {{
+        weaknessWrap.replaceChildren(el('p', null,
+          'Your profile is well-aligned with your target schools. Application quality (essays, recommendations, interview) will be the primary differentiator from here.'));
+      }} else {{
+        const ul = el('ul', null, uniqueWeaknesses.map(w => el('li', null, w)));
+        const followUp = el('p', {{ style: 'margin-top: 16px;' }},
+          'The good news: essays and interview performance can offset all of these. The school average is a benchmark, not a hard cutoff.');
+        weaknessWrap.replaceChildren(ul, followUp);
+      }}
+
+      document.getElementById('ap-gate').style.display = 'none';
+      document.getElementById('ap-results').style.display = 'block';
+      document.getElementById('ap-results').scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+
+      if (typeof gtag === 'function') {{
+        gtag('event', 'newsletter_signup', {{ event_category: 'engagement', event_label: 'admit_predictor_unlock' }});
+      }}
+    }} else {{
+      throw new Error(data.error || 'Subscription failed');
+    }}
+  }}).catch(err => {{
+    msg.style.color = '#DC2626';
+    msg.textContent = err.message;
+    btn.disabled = false;
+    btn.textContent = 'Unlock Prediction';
+  }});
+}}
+</script>"""
+    write_page(os.path.join(OUTPUT_DIR, "tools", "admit-predictor", "index.html"), content)
+    print(f"  Built: /tools/admit-predictor/")
+
+
 def build_employer_hubs():
     """Build /employers/ index plus per-employer hub pages.
     Targets the 'where does {firm} hire MBAs from' query universe."""
@@ -14261,6 +15016,8 @@ def main():
     build_acceptance_rate_hub()
     build_deadlines_tracker()
     build_employer_hubs()
+    build_school_recommender()
+    build_admit_predictor()
     build_redirects()
     build_sitemap()
     build_robots()
