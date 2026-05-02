@@ -8202,6 +8202,7 @@ def nav_html(active=None):
         <a href="/schools/" class="nav-link{cls('schools')}">Schools</a>
         <a href="/rankings/overall/" class="nav-link{cls('rankings')}">Rankings</a>
         <a href="/compare/" class="nav-link{cls('compare')}">Compare</a>
+        <a href="/tools/" class="nav-link{cls('tools')}">Tools</a>
         <a href="/guides/" class="nav-link{cls('guides')}">Guides</a>
         <a href="/voices/" class="nav-link{cls('voices')}">Top Voices</a>
         <a href="/blog/" class="nav-link{cls('blog')}">Blog</a>
@@ -8451,10 +8452,15 @@ def build_homepage():
         <h2>What are you looking for?</h2>
       </div>
       <div class="pathways-grid">
-        <a href="/schools/" class="pathway-card">
-          <span class="pathway-icon">&#x1F3EB;</span>
-          <h3>Find My School</h3>
-          <p>Browse {len(SCHOOLS)} programs by tier, GMAT score, location, or salary. Full profiles with honest verdicts.</p>
+        <a href="/tools/school-recommender/" class="pathway-card">
+          <span class="pathway-icon">&#x1F3AF;</span>
+          <h3>Find My School (60 sec)</h3>
+          <p>Tell us your goals, GMAT, and what matters. We'll rank the top 100 MBA programs by how well they fit you.</p>
+        </a>
+        <a href="/tools/admit-predictor/" class="pathway-card">
+          <span class="pathway-icon">&#x1F4CA;</span>
+          <h3>Predict My Chances</h3>
+          <p>Enter your profile. See realistic admit chances at the top 50 programs plus what's weakening your application.</p>
         </a>
         <a href="/compare/" class="pathway-card">
           <span class="pathway-icon">&#x2696;&#xFE0F;</span>
@@ -8475,12 +8481,12 @@ def build_homepage():
     <div class="container">
       <div class="homepage-nl-preview">
         <div class="nl-preview-text">
-          <h2>The Weekly Briefing</h2>
-          <p>Every week I send a free email with the companies hiring MBAs, what they're paying, and which programs are placing. Sourced from live postings, not self-reported surveys.</p>
+          <h2>The MBA Insider</h2>
+          <p>Weekly admissions intel from a Haas MBA grad. The data, decisions, and inside conversations rankings sites won't show you.</p>
           <ul class="nl-preview-list">
-            <li>Hiring companies + open roles + salary ranges</li>
-            <li>Placement trends by school and industry</li>
-            <li>Admissions intel and deadline reminders</li>
+            <li>Anonymous admit profiles + what got them in</li>
+            <li>Scholarship offers we're seeing this cycle</li>
+            <li>GMAT median shifts and round-by-round timing intel</li>
           </ul>
           <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 380px;">
             <input type="email" placeholder="your@email.com" required style="padding: 12px 14px; border: 2px solid #0A1628; border-radius: 2px; font-size: 15px; background: #fff; color: #0A1628; flex: 1;">
@@ -8489,7 +8495,7 @@ def build_homepage():
           <div class="nl-msg"></div>
         </div>
         <div class="nl-preview-img">
-          <img src="/assets/newsletter-preview.svg" alt="MBA Guidance Weekly Briefing preview" loading="lazy">
+          <img src="/assets/newsletter-preview.svg" alt="The MBA Insider weekly briefing preview" loading="lazy">
         </div>
       </div>
     </div>
@@ -12174,7 +12180,7 @@ def build_sitemap():
     urls.append("/guides/")
     for g in GUIDES:
         urls.append(f"/guides/{g['slug']}/")
-    urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/roi-calculator/", "/tools/gmat-calculator/", "/tools/school-recommender/", "/tools/admit-predictor/"])
+    urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/", "/tools/roi-calculator/", "/tools/gmat-calculator/", "/tools/school-recommender/", "/tools/admit-predictor/"])
     # Blog posts — ALL school ROI posts
     for s in SCHOOLS:
         urls.append(f"/blog/is-{s['slug']}-worth-it/")
@@ -13484,6 +13490,76 @@ EMPLOYERS = [
      "interview": "Two rounds of case interviews plus behavioral. Cases lean toward technology and digital transformation themes. Behavioral interviews emphasize adaptability and willingness to travel, since Accenture's project-based model often requires significant client-site time.",
     },
 ]
+
+
+def build_tools_index():
+    """Index page at /tools/ listing every interactive tool."""
+    bc = breadcrumb_schema([("Home", "/"), ("Tools", "/tools/")])
+
+    title = f"Free MBA Tools {CURRENT_YEAR}: School Recommender, Admit Predictor, ROI & GMAT Calculators"
+    meta = f"Free interactive tools for MBA applicants: school recommender, admit predictor, ROI calculator, GMAT target score. Built on {len(SCHOOLS)} schools' data."
+
+    content = f"""{html_head(
+        f"{title} | {SITE_NAME}",
+        meta,
+        "/tools/",
+        schema=bc
+    )}
+{nav_html('tools')}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA Tools</h1>
+      <p class="hero-subtitle">Free interactive tools to help you decide where to apply, predict your odds, and run the numbers on your MBA decision.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="tools-grid">
+        <a href="/tools/school-recommender/" class="tool-card">
+          <span class="tool-icon">&#x1F3AF;</span>
+          <h3>School Recommender</h3>
+          <p>Tell us your goals, GMAT, geography preference, and budget. We'll rank the top 100 MBA programs by how well they fit you. 60 seconds.</p>
+        </a>
+        <a href="/tools/admit-predictor/" class="tool-card">
+          <span class="tool-icon">&#x1F4CA;</span>
+          <h3>Admit Predictor</h3>
+          <p>Input your GMAT, GPA, and profile. See realistic admit chances at the top 50 programs plus the 2-3 things weakening your application most.</p>
+        </a>
+        <a href="/tools/roi-calculator/" class="tool-card">
+          <span class="tool-icon">&#x1F4B0;</span>
+          <h3>ROI Calculator</h3>
+          <p>Input your salary, tuition, and post-MBA expectations. Get your breakeven year, 10-year net gain, and an honest verdict on the math.</p>
+        </a>
+        <a href="/tools/gmat-calculator/" class="tool-card">
+          <span class="tool-icon">&#x1F3C6;</span>
+          <h3>GMAT Target Score</h3>
+          <p>Pick your target school. See the GMAT score you actually need, the competitive range, and the prep time to get there.</p>
+        </a>
+      </div>
+
+      <div class="content-narrow" style="margin-top: 48px;">
+        <div class="school-section">
+          <h2>How to use these together</h2>
+          <p>The fastest way to get a useful answer about your MBA: run the School Recommender first. It produces your shortlist of best-fit programs based on goals and constraints. Then take that shortlist into the Admit Predictor to see your realistic chances at each.</p>
+          <p>If the predictor flags weaknesses, fix them before submitting. Then use the ROI Calculator to make sure the math works once you know which schools are real targets, and the GMAT Target Score tool to set the right prep goal if you haven't taken the test yet.</p>
+        </div>
+
+        <div class="school-section">
+          <h2>Why these tools exist</h2>
+          <p>The MBA admissions process punishes people who can't afford a $10K consultant. Most applicants pick schools based on rankings, then spend months wondering if they're a fit. These tools shortcut that. Each runs on the same school data we publish on the site, calibrated against the admissions patterns we've watched succeed and fail across five cycles.</p>
+          <p>None of these replace the work of writing a great application. They get you to the starting line with a real shortlist and an honest read on your odds. From there, the essays do the rest.</p>
+        </div>
+
+        {byline_html()}
+      </div>
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "tools", "index.html"), content)
+    print(f"  Built: /tools/ index")
 
 
 def build_school_recommender():
@@ -15016,6 +15092,7 @@ def main():
     build_acceptance_rate_hub()
     build_deadlines_tracker()
     build_employer_hubs()
+    build_tools_index()
     build_school_recommender()
     build_admit_predictor()
     build_redirects()
