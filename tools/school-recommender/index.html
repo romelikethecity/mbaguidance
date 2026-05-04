@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBA School Recommender 2026: Find Your Best-Fit Programs in 60 Seconds | MBA Guidance</title>
+  <meta name="description" content="Free MBA school recommender. Tell us your goals, GMAT, and target industry. Get 5 best-fit programs ranked with reasoning. Built on 100 top schools.">
+  <link rel="canonical" href="https://mbaguidance.com/tools/school-recommender/">
+  <meta property="og:title" content="MBA School Recommender 2026: Find Your Best-Fit Programs in 60 Seconds | MBA Guidance">
+  <meta property="og:description" content="Free MBA school recommender. Tell us your goals, GMAT, and target industry. Get 5 best-fit programs ranked with reasoning. Built on 100 top schools.">
+  <meta property="og:image" content="https://mbaguidance.com/assets/og-default.png">
+  <meta property="og:url" content="https://mbaguidance.com/tools/school-recommender/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MBA Guidance">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/style.css?v=12">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0ZQVR88NY"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0ZQVR88NY');
+  </script>
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mbaguidance.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mbaguidance.com/tools/"},{"@type":"ListItem","position":3,"name":"School Recommender","item":"https://mbaguidance.com/tools/school-recommender/"}]}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-text">MBA GUIDANCE</span>
+        <span class="nav-logo-rule"></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="/schools/" class="nav-link">Schools</a>
+        <a href="/rankings/overall/" class="nav-link">Rankings</a>
+        <a href="/compare/" class="nav-link">Compare</a>
+        <a href="/tools/" class="nav-link">Tools</a>
+        <a href="/guides/" class="nav-link">Guides</a>
+        <a href="/voices/" class="nav-link">Top Voices</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/newsletter/" class="btn btn-accent nav-cta">Weekly Briefing</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>MBA School Recommender</h1>
+      <p class="hero-subtitle">Tell us your goals, GMAT, and what matters to you. We'll rank the 100 top MBA programs by how well they fit. Free, takes 60 seconds.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="school-section" id="rec-form-wrap">
+        <h2>Your profile</h2>
+        <p class="text-secondary" style="font-size: 14px; margin-bottom: 24px;">All inputs are optional. The more you tell us, the better the matches.</p>
+
+        <div class="roi-form">
+          <div class="roi-field">
+            <label for="rec-industry">Target post-MBA industry</label>
+            <select id="rec-industry">
+              <option value="">No preference</option>
+              <option value="consulting">Consulting (MBB, Big 4, boutique)</option>
+              <option value="finance">Finance (IB, PE, hedge funds)</option>
+              <option value="technology">Tech (PM, biz ops, strategy)</option>
+              <option value="entrepreneurship">Entrepreneurship / founding</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="real estate">Real estate</option>
+              <option value="marketing">Marketing / brand management</option>
+              <option value="social impact">Nonprofit / social impact</option>
+              <option value="general management">General management / corporate</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-stage">Career stage</label>
+            <select id="rec-stage">
+              <option value="">No preference</option>
+              <option value="career-change">Career changer (switching industries)</option>
+              <option value="accelerator">Career accelerator (same industry, faster)</option>
+              <option value="founder">Aspiring founder</option>
+              <option value="exec-track">Exec / general management track</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-region">Geography preference</label>
+            <select id="rec-region">
+              <option value="">No preference</option>
+              <option value="northeast">Northeast (NY, Boston, DC)</option>
+              <option value="west">West Coast (CA, WA, AZ)</option>
+              <option value="midwest">Midwest (Chicago, Ann Arbor, Bloomington)</option>
+              <option value="south">South (Texas, Atlanta, Florida)</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-size">Class size preference</label>
+            <select id="rec-size">
+              <option value="">No preference</option>
+              <option value="small">Small / intimate (under 200)</option>
+              <option value="mid">Mid-sized (200-500)</option>
+              <option value="large">Large (500+)</option>
+            </select>
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-gmat">GMAT score (or estimated)</label>
+            <input type="number" id="rec-gmat" placeholder="e.g. 710" min="500" max="800" step="10">
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-experience">Years of work experience</label>
+            <input type="number" id="rec-experience" placeholder="e.g. 5" min="0" max="20" step="1">
+          </div>
+
+          <div class="roi-field">
+            <label for="rec-budget">Budget per year (tuition)</label>
+            <select id="rec-budget">
+              <option value="">No preference</option>
+              <option value="40000">Under $40K (in-state public)</option>
+              <option value="65000">Under $65K (mid-tier private + out-of-state public)</option>
+              <option value="999999">Open to any tuition</option>
+            </select>
+          </div>
+
+          <button class="btn btn-accent" onclick="recommendSchools()" style="margin-top: 16px; width: 100%;">Get My Matches &rarr;</button>
+        </div>
+      </div>
+
+      <div class="school-section" id="rec-preview" style="display: none;">
+        <h2>Your top match</h2>
+        <p class="text-secondary" style="font-size: 14px;">Based on your inputs. Full ranking of all 7 best-fit schools below.</p>
+        <div id="rec-preview-card"></div>
+      </div>
+
+      <div class="school-section" id="rec-gate" style="display: none;">
+        <div style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px;">
+          <h3 style="margin-top: 0;">Unlock your full top 7 + reasoning</h3>
+          <p>Drop your email below to see all 7 best-fit schools ranked, each with a specific reason it matches your profile. You'll also start receiving The MBA Insider, our weekly admissions intel newsletter.</p>
+          <form onsubmit="unlockResults(event)" class="nl-form" style="margin-top: 16px;">
+            <input type="email" id="rec-email" placeholder="your@email.com" required>
+            <button type="submit" class="btn btn-accent">Unlock Results</button>
+          </form>
+          <div class="nl-msg" id="rec-msg" style="margin-top: 8px;"></div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 12px; opacity: 0.8;">No spam. Unsubscribe anytime. Your inputs stay on your device.</p>
+        </div>
+      </div>
+
+      <div class="school-section" id="rec-results" style="display: none;">
+        <h2>Your 7 best-fit MBA programs</h2>
+        <div id="rec-results-list"></div>
+        <p style="margin-top: 24px;">Want a deeper review? Compare your top schools side-by-side:</p>
+        <div class="compare-link-grid" id="rec-compare-links"></div>
+      </div>
+
+      <div class="school-section">
+        <h2>How the recommender works</h2>
+        <p>The matching algorithm scores each MBA program against your inputs across six dimensions: industry placement strength, geography, class size fit, GMAT compatibility, career-changer friendliness, and tuition fit. The 7 highest-scoring programs become your shortlist.</p>
+        <p>School data comes from each program's most recent class profile and employment report. The matching weights are calibrated against the MBA admissions patterns we've watched succeed and fail across the past five admissions cycles.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>This isn't an admit predictor</h2>
+        <p>The recommender tells you where you should apply based on fit. It doesn't tell you your odds at each program. Those are different questions. For your odds, try the <a href="/tools/admit-predictor/">MBA Admit Predictor</a>. For deep school comparisons, browse the <a href="/compare/">comparison library</a> or the <a href="/class-of-2026/">Class of 2026 Hub</a>.</p>
+      </div>
+
+      
+<div class="byline">
+  <div class="byline-avatar">RT</div>
+  <div>
+    <a href="https://www.linkedin.com/in/romethorndike/" target="_blank" rel="noopener" class="byline-name">Rome Thorndike</a>
+    <div class="byline-credential">Berkeley Haas MBA</div>
+    <div class="byline-date">Updated 2026</div>
+  </div>
+</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Schools</h4>
+        <a href="/schools/">All Schools</a>
+        <a href="/schools/stanford-gsb/">Stanford GSB</a>
+        <a href="/schools/harvard-business-school/">Harvard Business School</a>
+        <a href="/schools/wharton/">Wharton</a>
+        <a href="/schools/booth/">Booth (Chicago)</a>
+        <a href="/schools/berkeley-haas/">Berkeley Haas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/rankings/overall/">Rankings</a>
+        <a href="/compare/">Comparisons</a>
+        <a href="/guides/gmat-vs-gre/">GMAT vs GRE</a>
+        <a href="/guides/mba-roi-analysis/">Is an MBA Worth It?</a>
+        <a href="/guides/mba-application-timeline/">Application Timeline</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="/about/">About the Author</a>
+        <a href="/voices/">Top Voices</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/blog/">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Career Intelligence</h4>
+        <a href="https://thecroreport.com" target="_blank" rel="noopener">The CRO Report</a>
+        <a href="https://theaimarketpulse.com" target="_blank" rel="noopener">AI Market Pulse</a>
+        <a href="https://fractionalpulse.com" target="_blank" rel="noopener">Fractional Pulse</a>
+        <a href="https://execsignals.com" target="_blank" rel="noopener">ExecSignals</a>
+        <a href="https://thegtmindex.com" target="_blank" rel="noopener">The GTM Index</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MBA Guidance &middot; Rome Thorndike &middot; Berkeley Haas MBA</p>
+      <p class="footer-disclaimer">Data reflects most recent available admissions cycle. Individual results may vary.</p>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+<script>
+const SCHOOLS_DATA = [{"slug": "stanford-gsb", "name": "Stanford GSB", "location": "Stanford, CA", "rank": 1, "tier": 1, "ar": 6.9, "gmat": 738, "gpa": 3.75, "size": 436, "size_bucket": "mid", "salary": 192000, "tuition": 78432, "region": "west", "industries": ["tech", "entrepreneurship", "vc/pe", "entrepreneurship", "technology", "general management", "vc/pe"], "career_changer": true}, {"slug": "harvard-business-school", "name": "Harvard Business School", "location": "Boston, MA", "rank": 2, "tier": 1, "ar": 11, "gmat": 740, "gpa": 3.73, "size": 938, "size_bucket": "large", "salary": 195000, "tuition": 76800, "region": "international", "industries": ["general management", "consulting", "entrepreneurship", "general management", "finance", "entrepreneurship", "case method"], "career_changer": true}, {"slug": "wharton", "name": "Wharton", "location": "Philadelphia, PA", "rank": 3, "tier": 1, "ar": 18, "gmat": 733, "gpa": 3.6, "size": 915, "size_bucket": "large", "salary": 185000, "tuition": 80432, "region": "midwest", "industries": ["finance", "consulting", "healthcare", "finance", "analytics", "healthcare", "real estate"], "career_changer": true}, {"slug": "booth", "name": "Booth", "location": "Chicago, IL", "rank": 4, "tier": 1, "ar": 21, "gmat": 730, "gpa": 3.6, "size": 600, "size_bucket": "large", "salary": 180000, "tuition": 77841, "region": "west", "industries": ["finance", "consulting", "analytics", "finance", "analytics", "flexible curriculum", "economics"], "career_changer": true}, {"slug": "kellogg", "name": "Kellogg", "location": "Evanston, IL", "rank": 5, "tier": 1, "ar": 20, "gmat": 727, "gpa": 3.6, "size": 500, "size_bucket": "large", "salary": 175000, "tuition": 76368, "region": "international", "industries": ["marketing", "consulting", "general management", "marketing", "leadership", "team-based learning", "consulting"], "career_changer": true}, {"slug": "columbia-business-school", "name": "Columbia Business School", "location": "New York, NY", "rank": 6, "tier": 1, "ar": 15, "gmat": 729, "gpa": 3.6, "size": 850, "size_bucket": "large", "salary": 180000, "tuition": 80472, "region": "international", "industries": ["finance", "media/entertainment", "real estate", "finance", "media", "real estate", "value investing"], "career_changer": false}, {"slug": "mit-sloan", "name": "MIT Sloan", "location": "Cambridge, MA", "rank": 7, "tier": 1, "ar": 12, "gmat": 730, "gpa": 3.58, "size": 480, "size_bucket": "mid", "salary": 178000, "tuition": 77168, "region": "west", "industries": ["tech", "entrepreneurship", "operations", "technology", "operations", "analytics", "entrepreneurship"], "career_changer": false}, {"slug": "berkeley-haas", "name": "Berkeley Haas", "location": "Berkeley, CA", "rank": 8, "tier": 2, "ar": 12, "gmat": 726, "gpa": 3.65, "size": 300, "size_bucket": "mid", "salary": 175000, "tuition": 68444, "region": "west", "industries": ["tech", "social impact", "entrepreneurship", "tech", "social impact", "innovation", "bay area access"], "career_changer": false}, {"slug": "yale-som", "name": "Yale SOM", "location": "New Haven, CT", "rank": 9, "tier": 2, "ar": 17, "gmat": 720, "gpa": 3.7, "size": 350, "size_bucket": "mid", "salary": 165000, "tuition": 76300, "region": "international", "industries": ["social enterprise", "healthcare", "nonprofit", "social enterprise", "healthcare", "nonprofit", "integrated curriculum"], "career_changer": false}, {"slug": "nyu-stern", "name": "NYU Stern", "location": "New York, NY", "rank": 10, "tier": 2, "ar": 23, "gmat": 723, "gpa": 3.55, "size": 400, "size_bucket": "mid", "salary": 170000, "tuition": 76780, "region": "international", "industries": ["finance", "media", "entertainment", "finance", "media", "entertainment", "luxury"], "career_changer": false}, {"slug": "duke-fuqua", "name": "Duke Fuqua", "location": "Durham, NC", "rank": 11, "tier": 2, "ar": 22, "gmat": 720, "gpa": 3.55, "size": 450, "size_bucket": "mid", "salary": 168000, "tuition": 72800, "region": "international", "industries": ["consulting", "healthcare", "general management", "consulting", "healthcare", "team fuqua culture", "energy"], "career_changer": true}, {"slug": "michigan-ross", "name": "Michigan Ross", "location": "Ann Arbor, MI", "rank": 12, "tier": 2, "ar": 24, "gmat": 720, "gpa": 3.5, "size": 450, "size_bucket": "mid", "salary": 170000, "tuition": 72508, "region": "west", "industries": ["consulting", "general management", "tech", "general management", "consulting", "action-based learning", "tech"], "career_changer": true}, {"slug": "dartmouth-tuck", "name": "Dartmouth Tuck", "location": "Hanover, NH", "rank": 13, "tier": 2, "ar": 22, "gmat": 722, "gpa": 3.55, "size": 290, "size_bucket": "mid", "salary": 172000, "tuition": 77520, "region": "international", "industries": ["consulting", "general management", "leadership", "general management", "consulting", "tight alumni network", "leadership"], "career_changer": true}, {"slug": "virginia-darden", "name": "Virginia Darden", "location": "Charlottesville, VA", "rank": 14, "tier": 2, "ar": 24, "gmat": 718, "gpa": 3.5, "size": 350, "size_bucket": "mid", "salary": 168000, "tuition": 72200, "region": "international", "industries": ["consulting", "general management", "career changers", "general management", "case method", "consulting", "leadership"], "career_changer": true}, {"slug": "cornell-johnson", "name": "Cornell Johnson", "location": "Ithaca, NY", "rank": 15, "tier": 2, "ar": 27, "gmat": 710, "gpa": 3.45, "size": 300, "size_bucket": "mid", "salary": 165000, "tuition": 74480, "region": "west", "industries": ["tech", "real estate", "hospitality", "tech", "immersive learning", "real estate", "hospitality"], "career_changer": false}, {"slug": "ucla-anderson", "name": "UCLA Anderson", "location": "Los Angeles, CA", "rank": 16, "tier": 3, "ar": 25, "gmat": 714, "gpa": 3.5, "size": 360, "size_bucket": "mid", "salary": 160000, "tuition": 67246, "region": "west", "industries": ["entertainment", "tech", "entrepreneurship", "entertainment", "tech", "entrepreneurship", "real estate"], "career_changer": false}, {"slug": "usc-marshall", "name": "USC Marshall", "location": "Los Angeles, CA", "rank": 17, "tier": 3, "ar": 27, "gmat": 710, "gpa": 3.45, "size": 240, "size_bucket": "mid", "salary": 155000, "tuition": 66156, "region": "west", "industries": ["entertainment", "real estate", "entrepreneurship", "entertainment", "real estate", "entrepreneurship", "trojan network"], "career_changer": false}, {"slug": "carnegie-mellon-tepper", "name": "Carnegie Mellon Tepper", "location": "Pittsburgh, PA", "rank": 18, "tier": 3, "ar": 28, "gmat": 710, "gpa": 3.45, "size": 200, "size_bucket": "mid", "salary": 158000, "tuition": 72800, "region": "international", "industries": ["tech", "analytics", "operations", "analytics", "tech", "operations", "quantitative methods"], "career_changer": false}, {"slug": "unc-kenan-flagler", "name": "UNC Kenan-Flagler", "location": "Chapel Hill, NC", "rank": 19, "tier": 3, "ar": 30, "gmat": 705, "gpa": 3.4, "size": 300, "size_bucket": "mid", "salary": 152000, "tuition": 47938, "region": "west", "industries": ["healthcare", "real estate", "career changers", "healthcare", "real estate", "consulting", "value"], "career_changer": true}, {"slug": "georgetown-mcdonough", "name": "Georgetown McDonough", "location": "Washington, DC", "rank": 20, "tier": 3, "ar": 35, "gmat": 700, "gpa": 3.4, "size": 260, "size_bucket": "mid", "salary": 155000, "tuition": 62784, "region": "northeast", "industries": ["international business", "government", "consulting", "international business", "policy", "government", "consulting"], "career_changer": true}, {"slug": "emory-goizueta", "name": "Emory Goizueta", "location": "Atlanta, GA", "rank": 21, "tier": 3, "ar": 28, "gmat": 705, "gpa": 3.4, "size": 180, "size_bucket": "small", "salary": 150000, "tuition": 64200, "region": "international", "industries": ["consulting", "healthcare", "finance", "consulting", "healthcare", "finance", "small class"], "career_changer": true}, {"slug": "vanderbilt-owen", "name": "Vanderbilt Owen", "location": "Nashville, TN", "rank": 22, "tier": 3, "ar": 32, "gmat": 700, "gpa": 3.35, "size": 180, "size_bucket": "small", "salary": 148000, "tuition": 62196, "region": "international", "industries": ["healthcare", "real estate", "finance", "healthcare", "real estate", "finance", "nashville"], "career_changer": false}, {"slug": "washington-foster", "name": "Washington Foster", "location": "Seattle, WA", "rank": 23, "tier": 3, "ar": 28, "gmat": 710, "gpa": 3.45, "size": 140, "size_bucket": "small", "salary": 152000, "tuition": 54966, "region": "international", "industries": ["tech", "entrepreneurship", "sustainability", "tech", "entrepreneurship", "sustainability", "pacific northwest"], "career_changer": false}, {"slug": "indiana-kelley", "name": "Indiana Kelley", "location": "Bloomington, IN", "rank": 24, "tier": 3, "ar": 35, "gmat": 690, "gpa": 3.35, "size": 200, "size_bucket": "mid", "salary": 145000, "tuition": 28274, "region": "international", "industries": ["marketing", "consulting", "career changers", "marketing", "consulting", "finance", "roi"], "career_changer": true}, {"slug": "texas-mccombs", "name": "Texas McCombs", "location": "Austin, TX", "rank": 25, "tier": 3, "ar": 30, "gmat": 705, "gpa": 3.4, "size": 260, "size_bucket": "mid", "salary": 155000, "tuition": 41666, "region": "midwest", "industries": ["tech", "energy", "consulting", "tech", "energy", "consulting", "austin ecosystem"], "career_changer": true}, {"slug": "georgia-tech-scheller", "name": "Georgia Tech Scheller", "location": "Atlanta, GA", "rank": 26, "tier": 4, "ar": 28, "gmat": 695, "gpa": 3.35, "size": 100, "size_bucket": "small", "salary": 140000, "tuition": 33340, "region": "international", "industries": ["tech", "analytics", "operations", "analytics", "operations", "technology management"], "career_changer": false}, {"slug": "washu-olin", "name": "WashU Olin", "location": "St. Louis, MO", "rank": 27, "tier": 4, "ar": 30, "gmat": 700, "gpa": 3.45, "size": 160, "size_bucket": "small", "salary": 148000, "tuition": 65400, "region": "international", "industries": ["consulting", "healthcare", "analytics", "consulting", "healthcare", "customer analytics", "finance"], "career_changer": true}, {"slug": "rice-jones", "name": "Rice Jones", "location": "Houston, TX", "rank": 28, "tier": 4, "ar": 28, "gmat": 705, "gpa": 3.4, "size": 130, "size_bucket": "small", "salary": 148000, "tuition": 62000, "region": "international", "industries": ["energy", "healthcare", "entrepreneurship", "energy", "healthcare", "entrepreneurship", "small class"], "career_changer": false}, {"slug": "notre-dame-mendoza", "name": "Notre Dame Mendoza", "location": "Notre Dame, IN", "rank": 29, "tier": 4, "ar": 32, "gmat": 695, "gpa": 3.35, "size": 110, "size_bucket": "small", "salary": 145000, "tuition": 60220, "region": "northeast", "industries": ["consulting", "finance", "values-driven careers", "ethics", "consulting", "finance", "alumni network"], "career_changer": true}, {"slug": "wisconsin", "name": "Wisconsin", "location": "Madison, WI", "rank": 30, "tier": 4, "ar": 35, "gmat": 690, "gpa": 3.3, "size": 120, "size_bucket": "small", "salary": 138000, "tuition": 27104, "region": "international", "industries": ["supply chain", "real estate", "marketing", "supply chain", "real estate", "marketing", "risk management"], "career_changer": false}, {"slug": "arizona-state-carey", "name": "Arizona State Carey", "location": "Tempe, AZ", "rank": 31, "tier": 4, "ar": 35, "gmat": 688, "gpa": 3.3, "size": 120, "size_bucket": "small", "salary": 135000, "tuition": 31360, "region": "international", "industries": ["supply chain", "innovation", "career changers", "innovation", "supply chain", "analytics", "online flexibility"], "career_changer": true}, {"slug": "bu-questrom", "name": "BU Questrom", "location": "Boston, MA", "rank": 32, "tier": 4, "ar": 35, "gmat": 690, "gpa": 3.3, "size": 150, "size_bucket": "small", "salary": 140000, "tuition": 62160, "region": "international", "industries": ["healthcare", "technology", "social impact", "health sector", "digital technology", "social impact"], "career_changer": false}, {"slug": "minnesota-carlson", "name": "Minnesota Carlson", "location": "Minneapolis, MN", "rank": 33, "tier": 4, "ar": 38, "gmat": 685, "gpa": 3.3, "size": 100, "size_bucket": "small", "salary": 138000, "tuition": 43234, "region": "international", "industries": ["medical devices", "supply chain", "general management", "medical devices", "fortune 500", "supply chain", "general management"], "career_changer": true}, {"slug": "ohio-state-fisher", "name": "Ohio State Fisher", "location": "Columbus, OH", "rank": 34, "tier": 4, "ar": 35, "gmat": 690, "gpa": 3.35, "size": 110, "size_bucket": "small", "salary": 140000, "tuition": 32376, "region": "international", "industries": ["operations", "finance", "healthcare", "operations", "logistics", "finance", "healthcare"], "career_changer": false}, {"slug": "purdue-krannert", "name": "Purdue Krannert", "location": "West Lafayette, IN", "rank": 35, "tier": 4, "ar": 40, "gmat": 680, "gpa": 3.25, "size": 90, "size_bucket": "small", "salary": 130000, "tuition": 22408, "region": "international", "industries": ["operations", "analytics", "stem careers", "stem mba", "operations", "analytics", "manufacturing"], "career_changer": false}, {"slug": "uc-davis", "name": "UC Davis", "location": "Davis, CA", "rank": 36, "tier": 4, "ar": 38, "gmat": 685, "gpa": 3.3, "size": 80, "size_bucket": "small", "salary": 135000, "tuition": 44458, "region": "west", "industries": ["agriculture/food", "clean tech", "sustainability", "food & agriculture", "clean tech", "sustainability"], "career_changer": false}, {"slug": "maryland-smith", "name": "Maryland Smith", "location": "College Park, MD", "rank": 37, "tier": 4, "ar": 38, "gmat": 685, "gpa": 3.3, "size": 120, "size_bucket": "small", "salary": 140000, "tuition": 48172, "region": "international", "industries": ["analytics", "government", "consulting", "analytics", "information systems", "government", "consulting"], "career_changer": true}, {"slug": "penn-state-smeal", "name": "Penn State Smeal", "location": "University Park, PA", "rank": 38, "tier": 4, "ar": 40, "gmat": 680, "gpa": 3.25, "size": 80, "size_bucket": "small", "salary": 132000, "tuition": 28556, "region": "international", "industries": ["supply chain", "real estate", "operations", "supply chain", "real estate", "corporate innovation"], "career_changer": false}, {"slug": "byu-marriott", "name": "BYU Marriott", "location": "Provo, UT", "rank": 39, "tier": 4, "ar": 38, "gmat": 685, "gpa": 3.45, "size": 120, "size_bucket": "small", "salary": 135000, "tuition": 14460, "region": "international", "industries": ["consulting", "finance", "entrepreneurship", "finance", "consulting", "ethics", "roi", "entrepreneurship"], "career_changer": true}, {"slug": "babson-olin", "name": "Babson Olin", "location": "Wellesley, MA", "rank": 40, "tier": 4, "ar": 45, "gmat": 675, "gpa": 3.2, "size": 100, "size_bucket": "small", "salary": 130000, "tuition": 54400, "region": "international", "industries": ["entrepreneurship", "family business", "startups", "entrepreneurship", "family business", "innovation"], "career_changer": false}, {"slug": "michigan-state-broad", "name": "Michigan State Broad", "location": "East Lansing, MI", "rank": 41, "tier": 4, "ar": 40, "gmat": 680, "gpa": 3.25, "size": 80, "size_bucket": "small", "salary": 128000, "tuition": 32640, "region": "international", "industries": ["supply chain", "operations", "marketing", "supply chain", "marketing", "operations"], "career_changer": false}, {"slug": "rochester-simon", "name": "Rochester Simon", "location": "Rochester, NY", "rank": 42, "tier": 4, "ar": 40, "gmat": 680, "gpa": 3.3, "size": 100, "size_bucket": "small", "salary": 135000, "tuition": 55260, "region": "international", "industries": ["finance", "analytics", "brand management", "finance", "analytics", "brand management"], "career_changer": false}, {"slug": "florida-warrington", "name": "Florida Warrington", "location": "Gainesville, FL", "rank": 43, "tier": 4, "ar": 35, "gmat": 690, "gpa": 3.4, "size": 120, "size_bucket": "small", "salary": 138000, "tuition": 30130, "region": "international", "industries": ["real estate", "finance", "general management", "real estate", "finance", "general management"], "career_changer": true}, {"slug": "illinois-gies", "name": "Illinois Gies", "location": "Champaign, IL", "rank": 44, "tier": 4, "ar": 38, "gmat": 680, "gpa": 3.35, "size": 100, "size_bucket": "small", "salary": 132000, "tuition": 29000, "region": "international", "industries": ["finance", "technology", "accounting", "finance", "accounting", "technology management"], "career_changer": false}, {"slug": "wake-forest", "name": "Wake Forest", "location": "Winston-Salem, NC", "rank": 45, "tier": 4, "ar": 38, "gmat": 685, "gpa": 3.35, "size": 90, "size_bucket": "small", "salary": 132000, "tuition": 52000, "region": "international", "industries": ["consulting", "analytics", "healthcare", "consulting", "analytics", "healthcare", "small class"], "career_changer": true}, {"slug": "smu-cox", "name": "SMU Cox", "location": "Dallas, TX", "rank": 46, "tier": 4, "ar": 40, "gmat": 680, "gpa": 3.35, "size": 120, "size_bucket": "small", "salary": 138000, "tuition": 55000, "region": "international", "industries": ["finance", "real estate", "energy", "finance", "real estate", "energy", "dallas network"], "career_changer": false}, {"slug": "tulane-freeman", "name": "Tulane Freeman", "location": "New Orleans, LA", "rank": 47, "tier": 4, "ar": 42, "gmat": 680, "gpa": 3.25, "size": 90, "size_bucket": "small", "salary": 128000, "tuition": 57720, "region": "international", "industries": ["energy", "finance", "entrepreneurship", "energy", "finance", "entrepreneurship"], "career_changer": false}, {"slug": "george-washington", "name": "George Washington", "location": "Washington, DC", "rank": 48, "tier": 4, "ar": 42, "gmat": 675, "gpa": 3.25, "size": 100, "size_bucket": "small", "salary": 130000, "tuition": 59760, "region": "northeast", "industries": ["government", "international business", "policy", "government", "international business", "consulting"], "career_changer": true}, {"slug": "boston-college-carroll", "name": "Boston College Carroll", "location": "Chestnut Hill, MA", "rank": 49, "tier": 4, "ar": 40, "gmat": 680, "gpa": 3.3, "size": 100, "size_bucket": "small", "salary": 135000, "tuition": 57500, "region": "west", "industries": ["finance", "consulting", "values-driven careers", "finance", "consulting", "ethics", "jesuit tradition"], "career_changer": true}, {"slug": "northeastern", "name": "Northeastern", "location": "Boston, MA", "rank": 50, "tier": 4, "ar": 42, "gmat": 675, "gpa": 3.25, "size": 80, "size_bucket": "small", "salary": 130000, "tuition": 54000, "region": "international", "industries": ["tech", "healthcare", "experiential learning", "innovation", "co-op experience", "tech", "healthcare"], "career_changer": false}, {"slug": "uga-terry", "name": "UGA Terry", "location": "Athens, GA", "rank": 51, "tier": 5, "ar": 41, "gmat": 641, "gpa": 3.5, "size": 78, "size_bucket": "small", "salary": 119000, "tuition": 13918, "region": "international", "industries": ["consulting", "healthcare", "value seekers", "consulting", "analytics", "healthcare", "real estate"], "career_changer": true}, {"slug": "uc-irvine-merage", "name": "UC Irvine Merage", "location": "Irvine, CA", "rank": 52, "tier": 5, "ar": 32, "gmat": 660, "gpa": 3.46, "size": 55, "size_bucket": "small", "salary": 125000, "tuition": 55340, "region": "west", "industries": ["tech", "healthcare", "stem careers", "technology", "healthcare", "innovation", "digital transformation"], "career_changer": false}, {"slug": "texas-am-mays", "name": "Texas A&M Mays", "location": "College Station, TX", "rank": 53, "tier": 5, "ar": 45, "gmat": 660, "gpa": 3.24, "size": 80, "size_bucket": "small", "salary": 129000, "tuition": 31240, "region": "international", "industries": ["energy", "finance", "texas careers", "finance", "supply chain", "energy", "aggie network"], "career_changer": false}, {"slug": "pitt-katz", "name": "Pitt Katz", "location": "Pittsburgh, PA", "rank": 54, "tier": 5, "ar": 38, "gmat": 645, "gpa": 3.39, "size": 58, "size_bucket": "small", "salary": 113000, "tuition": 65820, "region": "international", "industries": ["healthcare", "tech in pittsburgh", "analytics", "healthcare", "technology", "analytics", "operations"], "career_changer": false}, {"slug": "rutgers", "name": "Rutgers", "location": "Newark, NJ", "rank": 55, "tier": 5, "ar": 34, "gmat": 664, "gpa": 3.26, "size": 95, "size_bucket": "small", "salary": 110000, "tuition": 31152, "region": "international", "industries": ["pharma/healthcare", "supply chain", "nyc metro careers", "pharmaceuticals", "supply chain", "analytics", "nyc access"], "career_changer": false}, {"slug": "baylor-hankamer", "name": "Baylor Hankamer", "location": "Waco, TX", "rank": 56, "tier": 5, "ar": 53, "gmat": 624, "gpa": 3.43, "size": 47, "size_bucket": "small", "salary": 105000, "tuition": 42842, "region": "west", "industries": ["values-driven careers", "texas business", "small cohort experience", "employment rate", "values-based leadership", "focus firms", "texas network"], "career_changer": false}, {"slug": "temple-fox", "name": "Temple Fox", "location": "Philadelphia, PA", "rank": 57, "tier": 5, "ar": 50, "gmat": 622, "gpa": 3.35, "size": 56, "size_bucket": "small", "salary": 100000, "tuition": 30000, "region": "midwest", "industries": ["marketing", "philadelphia careers", "budget-conscious applicants", "marketing", "risk management", "value pricing", "urban access"], "career_changer": false}, {"slug": "fordham-gabelli", "name": "Fordham Gabelli", "location": "New York, NY", "rank": 58, "tier": 5, "ar": 48, "gmat": 630, "gpa": 3.2, "size": 106, "size_bucket": "small", "salary": 122000, "tuition": 62250, "region": "international", "industries": ["finance in nyc", "international business", "values-driven leadership", "finance", "nyc location", "global business", "jesuit values"], "career_changer": false}, {"slug": "miami-herbert", "name": "Miami Herbert", "location": "Coral Gables, FL", "rank": 59, "tier": 5, "ar": 38, "gmat": 640, "gpa": 3.54, "size": 38, "size_bucket": "small", "salary": 110000, "tuition": 46145, "region": "international", "industries": ["latin america careers", "innovation", "south florida business", "latin america business", "innovation", "stem-designated", "healthcare"], "career_changer": false}, {"slug": "colorado-leeds", "name": "Colorado Leeds", "location": "Boulder, CO", "rank": 60, "tier": 5, "ar": 55, "gmat": 610, "gpa": 3.3, "size": 60, "size_bucket": "small", "salary": 95000, "tuition": 31000, "region": "international", "industries": ["entrepreneurship", "sustainability", "denver/boulder tech", "entrepreneurship", "sustainability", "tech", "outdoor lifestyle"], "career_changer": false}, {"slug": "baruch-zicklin", "name": "Baruch Zicklin", "location": "New York, NY", "rank": 61, "tier": 5, "ar": 54, "gmat": 637, "gpa": 3.21, "size": 72, "size_bucket": "small", "salary": 118000, "tuition": 37338, "region": "international", "industries": ["finance on a budget", "nyc careers", "diverse communities", "finance", "value pricing", "nyc location", "diversity"], "career_changer": false}, {"slug": "william-mary-mason", "name": "William & Mary Mason", "location": "Williamsburg, VA", "rank": 62, "tier": 5, "ar": 55, "gmat": 620, "gpa": 3.3, "size": 110, "size_bucket": "small", "salary": 98000, "tuition": 39394, "region": "international", "industries": ["consulting", "government", "leadership development", "consulting", "leadership", "experiential learning", "government"], "career_changer": true}, {"slug": "arizona-eller", "name": "Arizona Eller", "location": "Tucson, AZ", "rank": 63, "tier": 5, "ar": 31, "gmat": 673, "gpa": 3.43, "size": 28, "size_bucket": "small", "salary": 109000, "tuition": 27393, "region": "international", "industries": ["technology management", "consulting", "small cohort", "mis/technology", "consulting", "entrepreneurship", "selectivity"], "career_changer": true}, {"slug": "ucsd-rady", "name": "UCSD Rady", "location": "La Jolla, CA", "rank": 64, "tier": 5, "ar": 49, "gmat": 645, "gpa": 3.37, "size": 36, "size_bucket": "small", "salary": 104000, "tuition": 57700, "region": "west", "industries": ["biotech/life sciences", "entrepreneurship", "san diego careers", "entrepreneurship", "biotech", "innovation", "lab to market"], "career_changer": false}, {"slug": "case-western-weatherhead", "name": "Case Western Weatherhead", "location": "Cleveland, OH", "rank": 65, "tier": 5, "ar": 50, "gmat": 640, "gpa": 3.3, "size": 65, "size_bucket": "small", "salary": 100000, "tuition": 53000, "region": "midwest", "industries": ["healthcare", "design thinking", "organizational leadership", "design thinking", "healthcare", "organizational behavior", "sustainability"], "career_changer": false}, {"slug": "south-carolina-moore", "name": "South Carolina Moore", "location": "Columbia, SC", "rank": 66, "tier": 5, "ar": 55, "gmat": 656, "gpa": 3.3, "size": 48, "size_bucket": "small", "salary": 102000, "tuition": 35000, "region": "midwest", "industries": ["international business", "supply chain", "global careers", "international business", "supply chain", "risk management"], "career_changer": false}, {"slug": "kansas", "name": "Kansas", "location": "Lawrence, KS", "rank": 67, "tier": 5, "ar": 55, "gmat": 630, "gpa": 3.32, "size": 53, "size_bucket": "small", "salary": 96000, "tuition": 22800, "region": "international", "industries": ["value seekers", "career changers", "midwest careers", "value", "accelerated format", "analytics", "supply chain"], "career_changer": true}, {"slug": "auburn-harbert", "name": "Auburn Harbert", "location": "Auburn, AL", "rank": 68, "tier": 5, "ar": 50, "gmat": 598, "gpa": 3.4, "size": 55, "size_bucket": "small", "salary": 95000, "tuition": 29653, "region": "international", "industries": ["southeast careers", "supply chain", "high employment probability", "employment rate", "supply chain", "finance", "value"], "career_changer": false}, {"slug": "cincinnati-lindner", "name": "Cincinnati Lindner", "location": "Cincinnati, OH", "rank": 69, "tier": 5, "ar": 50, "gmat": 633, "gpa": 3.44, "size": 55, "size_bucket": "small", "salary": 93000, "tuition": 42711, "region": "international", "industries": ["cpg careers", "real estate", "ohio-based careers", "roi", "co-op heritage", "real estate", "consumer packaged goods"], "career_changer": false}, {"slug": "umass-isenberg", "name": "UMass Isenberg", "location": "Amherst, MA", "rank": 70, "tier": 5, "ar": 30, "gmat": 648, "gpa": 3.44, "size": 42, "size_bucket": "small", "salary": 115000, "tuition": 3000, "region": "international", "industries": ["value seekers", "analytics", "career changers", "free tuition", "selectivity", "analytics", "entrepreneurship"], "career_changer": true}, {"slug": "chapman-argyros", "name": "Chapman Argyros", "location": "Orange, CA", "rank": 71, "tier": 5, "ar": 54, "gmat": 623, "gpa": 3.4, "size": 55, "size_bucket": "small", "salary": 95000, "tuition": 50000, "region": "west", "industries": ["entertainment/media", "entrepreneurship", "orange county careers", "entrepreneurship", "entertainment", "stem-designated", "small cohorts"], "career_changer": false}, {"slug": "pepperdine-graziadio", "name": "Pepperdine Graziadio", "location": "Malibu, CA", "rank": 72, "tier": 5, "ar": 60, "gmat": 615, "gpa": 3.26, "size": 57, "size_bucket": "small", "salary": 105000, "tuition": 50940, "region": "west", "industries": ["values-driven careers", "socal business", "real estate", "values-based leadership", "socal network", "experiential learning", "real estate"], "career_changer": false}, {"slug": "stevens", "name": "Stevens", "location": "Hoboken, NJ", "rank": 73, "tier": 5, "ar": 55, "gmat": 620, "gpa": 3.15, "size": 50, "size_bucket": "small", "salary": 105000, "tuition": 40000, "region": "international", "industries": ["tech careers", "ai/ml management", "nyc metro careers", "technology", "ai/analytics", "stem-designated", "nyc proximity"], "career_changer": false}, {"slug": "tennessee-haslam", "name": "Tennessee Haslam", "location": "Knoxville, TN", "rank": 74, "tier": 5, "ar": 45, "gmat": 635, "gpa": 3.4, "size": 60, "size_bucket": "small", "salary": 108000, "tuition": 28000, "region": "international", "industries": ["supply chain", "operations", "southeast careers", "supply chain", "operations", "analytics", "value"], "career_changer": false}, {"slug": "kentucky-gatton", "name": "Kentucky Gatton", "location": "Lexington, KY", "rank": 75, "tier": 5, "ar": 60, "gmat": 634, "gpa": 3.5, "size": 55, "size_bucket": "small", "salary": 90000, "tuition": 18777, "region": "international", "industries": ["healthcare administration", "value seekers", "career accelerators", "value", "healthcare", "one-year format", "finance"], "career_changer": false}, {"slug": "nc-state-jenkins", "name": "NC State Jenkins", "location": "Raleigh, NC", "rank": 76, "tier": 6, "ar": 48, "gmat": 609, "gpa": 3.39, "size": 47, "size_bucket": "small", "salary": 101000, "tuition": 27866, "region": "international", "industries": ["tech management", "analytics", "research triangle careers", "technology management", "innovation", "business analytics", "stem-designated"], "career_changer": false}, {"slug": "bentley", "name": "Bentley", "location": "Waltham, MA", "rank": 77, "tier": 6, "ar": 55, "gmat": 620, "gpa": 3.4, "size": 45, "size_bucket": "small", "salary": 95000, "tuition": 48000, "region": "international", "industries": ["accounting careers", "finance", "boston metro careers", "accounting", "finance", "business analytics", "cis"], "career_changer": false}, {"slug": "iowa-tippie", "name": "Iowa Tippie", "location": "Iowa City, IA", "rank": 78, "tier": 6, "ar": 55, "gmat": 650, "gpa": 3.5, "size": 65, "size_bucket": "small", "salary": 113000, "tuition": 22514, "region": "international", "industries": ["analytics careers", "value seekers", "midwest careers", "analytics", "finance", "marketing", "value"], "career_changer": false}, {"slug": "suny-buffalo", "name": "SUNY Buffalo", "location": "Buffalo, NY", "rank": 79, "tier": 6, "ar": 66, "gmat": 599, "gpa": 3.39, "size": 60, "size_bucket": "small", "salary": 75000, "tuition": 15230, "region": "international", "industries": ["value seekers", "healthcare administration", "new york state careers", "finance", "healthcare management", "mis", "value"], "career_changer": false}, {"slug": "oklahoma-price", "name": "Oklahoma Price", "location": "Norman, OK", "rank": 80, "tier": 6, "ar": 73, "gmat": 604, "gpa": 3.31, "size": 25, "size_bucket": "small", "salary": 81000, "tuition": 16653, "region": "international", "industries": ["energy careers", "oklahoma/texas careers", "small cohort seekers", "energy management", "finance", "mis", "entrepreneurship"], "career_changer": false}, {"slug": "howard", "name": "Howard", "location": "Washington, DC", "rank": 81, "tier": 6, "ar": 42, "gmat": 615, "gpa": 3.3, "size": 50, "size_bucket": "small", "salary": 105000, "tuition": 35016, "region": "northeast", "industries": ["minority business leaders", "dc careers", "fortune 500 pipelines", "finance", "consulting", "entrepreneurship", "fortune 500 recruiting"], "career_changer": true}, {"slug": "oregon-lundquist", "name": "Oregon Lundquist", "location": "Eugene, OR", "rank": 82, "tier": 6, "ar": 58, "gmat": 610, "gpa": 3.37, "size": 55, "size_bucket": "small", "salary": 85000, "tuition": 17824, "region": "midwest", "industries": ["sustainability careers", "sports industry", "pacific northwest careers", "sustainable business", "sports business", "innovation", "entrepreneurship"], "career_changer": false}, {"slug": "denver-daniels", "name": "Denver Daniels", "location": "Denver, CO", "rank": 83, "tier": 6, "ar": 65, "gmat": 616, "gpa": 3.23, "size": 40, "size_bucket": "small", "salary": 100000, "tuition": 48000, "region": "international", "industries": ["denver careers", "ethics-focused professionals", "real estate", "ethics", "sustainability", "real estate", "finance"], "career_changer": false}, {"slug": "alabama-manderson", "name": "Alabama Manderson", "location": "Tuscaloosa, AL", "rank": 84, "tier": 6, "ar": 63, "gmat": 652, "gpa": 3.7, "size": 50, "size_bucket": "small", "salary": 72000, "tuition": 11380, "region": "west", "industries": ["value seekers", "stem mba candidates", "southeast careers", "value", "stem mba path", "supply chain", "finance"], "career_changer": false}, {"slug": "arkansas-walton", "name": "Arkansas Walton", "location": "Fayetteville, AR", "rank": 85, "tier": 6, "ar": 64, "gmat": 580, "gpa": 3.65, "size": 32, "size_bucket": "small", "salary": 80000, "tuition": 12027, "region": "international", "industries": ["supply chain careers", "retail industry", "cpg/fmcg careers", "supply chain (#1)", "retail", "business analytics", "walmart proximity"], "career_changer": false}, {"slug": "tcu-neeley", "name": "TCU Neeley", "location": "Fort Worth, TX", "rank": 86, "tier": 6, "ar": 50, "gmat": 617, "gpa": 3.36, "size": 45, "size_bucket": "small", "salary": 120000, "tuition": 46170, "region": "international", "industries": ["entrepreneurship", "dfw careers", "high-outcome seekers", "entrepreneurship", "supply chain", "finance", "stem-designated"], "career_changer": false}, {"slug": "utah-eccles", "name": "Utah Eccles", "location": "Salt Lake City, UT", "rank": 87, "tier": 6, "ar": 50, "gmat": 651, "gpa": 3.49, "size": 55, "size_bucket": "small", "salary": 110000, "tuition": 39000, "region": "international", "industries": ["entrepreneurship", "utah tech careers", "startup founders", "entrepreneurship", "technology", "venture capital", "silicon slopes"], "career_changer": false}, {"slug": "drexel-lebow", "name": "Drexel LeBow", "location": "Philadelphia, PA", "rank": 88, "tier": 6, "ar": 45, "gmat": 600, "gpa": 3.2, "size": 30, "size_bucket": "small", "salary": 95000, "tuition": 34000, "region": "midwest", "industries": ["career changers", "philadelphia careers", "accelerated mba seekers", "co-op experience", "marketing analytics", "technology innovation", "accelerated format"], "career_changer": true}, {"slug": "clemson", "name": "Clemson", "location": "Clemson, SC", "rank": 89, "tier": 6, "ar": 60, "gmat": 580, "gpa": 3.3, "size": 35, "size_bucket": "small", "salary": 78000, "tuition": 16742, "region": "international", "industries": ["innovation careers", "southeast careers", "stem backgrounds", "innovation", "entrepreneurship", "business analytics", "supply chain"], "career_changer": false}, {"slug": "uic-liautaud", "name": "UIC Liautaud", "location": "Chicago, IL", "rank": 90, "tier": 6, "ar": 65, "gmat": 600, "gpa": 3.3, "size": 60, "size_bucket": "small", "salary": 101000, "tuition": 11660, "region": "west", "industries": ["value seekers", "chicago careers", "career accelerators", "value", "finance", "business analytics", "accelerated format"], "career_changer": false}, {"slug": "missouri-trulaske", "name": "Missouri Trulaske", "location": "Columbia, MO", "rank": 91, "tier": 6, "ar": 68, "gmat": 621, "gpa": 3.59, "size": 42, "size_bucket": "small", "salary": 80000, "tuition": 22500, "region": "midwest", "industries": ["midwest careers", "value seekers", "management careers", "management", "marketing", "finance", "value"], "career_changer": false}, {"slug": "depaul-kellstadt", "name": "DePaul Kellstadt", "location": "Chicago, IL", "rank": 92, "tier": 6, "ar": 46, "gmat": 580, "gpa": 3.3, "size": 28, "size_bucket": "small", "salary": 86000, "tuition": 36000, "region": "west", "industries": ["real estate careers", "hospitality management", "chicago careers", "real estate", "hospitality", "entrepreneurship", "14 concentrations"], "career_changer": false}, {"slug": "sdsu-fowler", "name": "SDSU Fowler", "location": "San Diego, CA", "rank": 93, "tier": 6, "ar": 47, "gmat": 621, "gpa": 3.42, "size": 50, "size_bucket": "small", "salary": 92000, "tuition": 12420, "region": "west", "industries": ["california value seekers", "biotech careers", "san diego careers", "value", "biotech", "marketing", "finance"], "career_changer": false}, {"slug": "xavier-williams", "name": "Xavier Williams", "location": "Cincinnati, OH", "rank": 94, "tier": 6, "ar": 65, "gmat": 600, "gpa": 3.3, "size": 32, "size_bucket": "small", "salary": 88000, "tuition": 36738, "region": "international", "industries": ["analytics careers", "cincinnati careers", "values-driven professionals", "business analytics", "finance", "marketing", "jesuit ethics"], "career_changer": false}, {"slug": "marquette", "name": "Marquette", "location": "Milwaukee, WI", "rank": 95, "tier": 6, "ar": 69, "gmat": 570, "gpa": 3.4, "size": 30, "size_bucket": "small", "salary": 91000, "tuition": 46620, "region": "international", "industries": ["sports industry", "healthcare administration", "milwaukee careers", "sports business", "healthcare admin", "supply chain", "real estate"], "career_changer": false}, {"slug": "loyola-marymount", "name": "Loyola Marymount", "location": "Los Angeles, CA", "rank": 96, "tier": 6, "ar": 55, "gmat": 580, "gpa": 3.3, "size": 29, "size_bucket": "small", "salary": 90000, "tuition": 44000, "region": "west", "industries": ["la careers", "international business", "entrepreneurship", "international business (#10)", "entrepreneurship (#11)", "management", "la access"], "career_changer": false}, {"slug": "creighton-heider", "name": "Creighton Heider", "location": "Omaha, NE", "rank": 97, "tier": 6, "ar": 72, "gmat": 560, "gpa": 3.3, "size": 35, "size_bucket": "small", "salary": 80000, "tuition": 33234, "region": "international", "industries": ["values-driven careers", "omaha/midwest careers", "finance professionals", "ethical leadership", "finance", "general management", "jesuit values"], "career_changer": true}, {"slug": "syracuse-whitman", "name": "Syracuse Whitman", "location": "Syracuse, NY", "rank": 98, "tier": 6, "ar": 48, "gmat": 630, "gpa": 3.4, "size": 60, "size_bucket": "small", "salary": 90000, "tuition": 50000, "region": "international", "industries": ["supply chain careers", "entrepreneurship", "northeast careers", "supply chain", "entrepreneurship", "accounting", "data analytics"], "career_changer": false}, {"slug": "san-diego-knauss", "name": "San Diego (Knauss)", "location": "San Diego, CA", "rank": 99, "tier": 6, "ar": 67, "gmat": 586, "gpa": 3.1, "size": 35, "size_bucket": "small", "salary": 78000, "tuition": 39000, "region": "west", "industries": ["real estate careers", "international business", "san diego careers", "real estate", "international business", "supply chain", "small cohorts"], "career_changer": false}, {"slug": "american-kogod", "name": "American Kogod", "location": "Washington, DC", "rank": 100, "tier": 6, "ar": 55, "gmat": 600, "gpa": 3.3, "size": 45, "size_bucket": "small", "salary": 85000, "tuition": 48000, "region": "northeast", "industries": ["dc careers", "sustainability", "government consulting", "sustainability", "government/policy", "consulting", "international business"], "career_changer": true}];
+
+const INDUSTRY_LABELS = {
+  consulting: "consulting",
+  finance: "finance",
+  technology: "tech",
+  entrepreneurship: "entrepreneurship",
+  healthcare: "healthcare",
+  "real estate": "real estate",
+  marketing: "marketing",
+  "social impact": "social impact",
+  "general management": "general management",
+};
+
+function scoreSchool(school, inputs) {
+  let score = 0;
+  let reasons = [];
+
+  if (inputs.industry) {
+    const has = school.industries.some(i => i.includes(inputs.industry) || inputs.industry.includes(i));
+    if (has) {
+      score += 30;
+      reasons.push("strong placement in " + INDUSTRY_LABELS[inputs.industry]);
+    } else {
+      score -= 5;
+    }
+  }
+
+  if (inputs.stage === 'career-change' && school.career_changer) {
+    score += 20;
+    reasons.push("welcomes non-traditional backgrounds");
+  }
+  if (inputs.stage === 'founder' && school.industries.some(i => i.includes('entrepreneur'))) {
+    score += 25;
+    reasons.push("strong entrepreneurship support");
+  }
+  if (inputs.stage === 'exec-track' && school.industries.some(i => i.includes('management') || i.includes('general'))) {
+    score += 18;
+    reasons.push("general management-oriented");
+  }
+
+  if (inputs.region && school.region === inputs.region) {
+    score += 20;
+    reasons.push(school.location + " location fits your region preference");
+  }
+
+  if (inputs.size && school.size_bucket === inputs.size) {
+    score += 15;
+    reasons.push(school.size + "-student class matches your size preference");
+  }
+
+  if (inputs.gmat) {
+    const delta = Math.abs(inputs.gmat - school.gmat);
+    if (delta <= 10) {
+      score += 25;
+      reasons.push("GMAT median (" + school.gmat + ") is right in your range");
+    } else if (delta <= 30) {
+      score += 15;
+    } else if (delta <= 50) {
+      score += 5;
+    } else if (inputs.gmat < school.gmat - 50) {
+      score -= 15;
+    }
+  }
+
+  if (inputs.experience) {
+    if (inputs.experience >= 3 && inputs.experience <= 7) {
+      score += 10;
+    } else if (inputs.experience > 8) {
+      if (school.industries.some(i => i.includes('management'))) score += 8;
+    }
+  }
+
+  if (inputs.budget && inputs.budget < 999999) {
+    if (school.tuition <= inputs.budget) {
+      score += 25;
+      reasons.push("tuition ($" + Math.round(school.tuition/1000) + "K) fits your budget");
+    } else {
+      score -= 30;
+    }
+  }
+
+  if (school.rank <= 7) score += 12;
+  else if (school.rank <= 15) score += 8;
+  else if (school.rank <= 25) score += 5;
+
+  return { score, reasons };
+}
+
+let lastResults = null;
+
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) {
+    for (const k in attrs) {
+      if (k === 'class') e.className = attrs[k];
+      else if (k === 'href') e.setAttribute('href', attrs[k]);
+      else if (k === 'style') e.setAttribute('style', attrs[k]);
+      else e.setAttribute(k, attrs[k]);
+    }
+  }
+  if (children) {
+    if (typeof children === 'string') e.textContent = children;
+    else children.forEach(c => { if (c) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+  }
+  return e;
+}
+
+function buildCard(item) {
+  const s = item.school;
+  const reasonText = item.reasons.length
+    ? "Why it fits: " + item.reasons.slice(0, 3).join(", ") + "."
+    : "Why it fits: solid all-around fit at #" + s.rank + ".";
+
+  const link = el('a', { href: "/schools/" + s.slug + "/", class: "ranking-school-name" }, s.name);
+  const info = el('div', { class: 'ranking-info' }, [
+    link,
+    el('span', { class: 'ranking-location' }, s.location),
+    el('p', { style: 'margin: 6px 0 0; font-size: 13px; color: var(--color-text-secondary);' }, reasonText),
+  ]);
+  const stats = el('div', { class: 'ranking-stats' }, [
+    el('span', { class: 'ranking-stat' }, [el('span', { class: 'label' }, 'GMAT'), document.createTextNode(' ' + s.gmat)]),
+    el('span', { class: 'ranking-stat' }, [el('span', { class: 'label' }, 'Salary'), document.createTextNode(' $' + Math.round(s.salary/1000) + 'K')]),
+  ]);
+  return el('div', { class: 'ranking-row', style: 'margin-bottom: 12px;' }, [
+    el('span', { class: 'ranking-position' }, '#' + s.rank),
+    info,
+    stats,
+  ]);
+}
+
+function recommendSchools() {
+  const inputs = {
+    industry: document.getElementById('rec-industry').value,
+    stage: document.getElementById('rec-stage').value,
+    region: document.getElementById('rec-region').value,
+    size: document.getElementById('rec-size').value,
+    gmat: parseInt(document.getElementById('rec-gmat').value) || null,
+    experience: parseInt(document.getElementById('rec-experience').value) || null,
+    budget: parseInt(document.getElementById('rec-budget').value) || null,
+  };
+
+  const ranked = SCHOOLS_DATA
+    .map(s => ({ school: s, ...scoreSchool(s, inputs) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 7);
+
+  lastResults = ranked;
+
+  const previewWrap = document.getElementById('rec-preview-card');
+  previewWrap.replaceChildren(buildCard(ranked[0]));
+
+  document.getElementById('rec-preview').style.display = 'block';
+  document.getElementById('rec-gate').style.display = 'block';
+  document.getElementById('rec-form-wrap').style.display = 'none';
+
+  document.getElementById('rec-preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'recommender_submitted', { event_category: 'lead_magnet', event_label: 'school_recommender' });
+  }
+}
+
+function unlockResults(e) {
+  e.preventDefault();
+  const email = document.getElementById('rec-email').value;
+  const btn = e.target.querySelector('button');
+  const msg = document.getElementById('rec-msg');
+  btn.disabled = true;
+  btn.textContent = 'Unlocking...';
+
+  fetch('https://newsletter-subscribe.rome-workers.workers.dev/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, list: 'mbaguidance' })
+  }).then(r => r.json()).then(data => {
+    if (data.ok) {
+      msg.style.color = '#059669';
+      msg.textContent = 'Unlocked. Full results below.';
+
+      const list = document.getElementById('rec-results-list');
+      list.replaceChildren(...lastResults.map(r => buildCard(r)));
+
+      const top4 = lastResults.slice(0, 4).map(r => r.school);
+      const compareWrap = document.getElementById('rec-compare-links');
+      const links = [];
+      for (let i = 0; i < top4.length - 1; i++) {
+        const a = top4[i].slug;
+        const b = top4[i + 1].slug;
+        links.push(el('a', { href: "/compare/" + a + "-vs-" + b + "/", class: "btn btn-outline" },
+          top4[i].name + " vs " + top4[i+1].name));
+      }
+      compareWrap.replaceChildren(...links);
+
+      document.getElementById('rec-gate').style.display = 'none';
+      document.getElementById('rec-results').style.display = 'block';
+      document.getElementById('rec-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'newsletter_signup', { event_category: 'engagement', event_label: 'school_recommender_unlock' });
+      }
+    } else {
+      throw new Error(data.error || 'Subscription failed');
+    }
+  }).catch(err => {
+    msg.style.color = '#DC2626';
+    msg.textContent = err.message;
+    btn.disabled = false;
+    btn.textContent = 'Unlock Results';
+  });
+}
+</script>

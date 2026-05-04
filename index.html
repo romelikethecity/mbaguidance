@@ -42,6 +42,7 @@
         <a href="/schools/" class="nav-link">Schools</a>
         <a href="/rankings/overall/" class="nav-link">Rankings</a>
         <a href="/compare/" class="nav-link">Compare</a>
+        <a href="/tools/" class="nav-link">Tools</a>
         <a href="/guides/" class="nav-link">Guides</a>
         <a href="/voices/" class="nav-link">Top Voices</a>
         <a href="/blog/" class="nav-link">Blog</a>
@@ -76,7 +77,7 @@
         </div>
         <div class="ticker-item">
           <span class="ticker-label">Comparisons</span>
-          <span class="ticker-value">169</span>
+          <span class="ticker-value">179</span>
         </div>
       </div>
     </div>
@@ -107,10 +108,15 @@
         <h2>What are you looking for?</h2>
       </div>
       <div class="pathways-grid">
-        <a href="/schools/" class="pathway-card">
-          <span class="pathway-icon">&#x1F3EB;</span>
-          <h3>Find My School</h3>
-          <p>Browse 150 programs by tier, GMAT score, location, or salary. Full profiles with honest verdicts.</p>
+        <a href="/tools/school-recommender/" class="pathway-card">
+          <span class="pathway-icon">&#x1F3AF;</span>
+          <h3>Find My School (60 sec)</h3>
+          <p>Tell us your goals, GMAT, and what matters. We'll rank the top 100 MBA programs by how well they fit you.</p>
+        </a>
+        <a href="/tools/admit-predictor/" class="pathway-card">
+          <span class="pathway-icon">&#x1F4CA;</span>
+          <h3>Predict My Chances</h3>
+          <p>Enter your profile. See realistic admit chances at the top 50 programs plus what's weakening your application.</p>
         </a>
         <a href="/compare/" class="pathway-card">
           <span class="pathway-icon">&#x2696;&#xFE0F;</span>
@@ -131,12 +137,12 @@
     <div class="container">
       <div class="homepage-nl-preview">
         <div class="nl-preview-text">
-          <h2>The Weekly Briefing</h2>
-          <p>Every week I send a free email with the companies hiring MBAs, what they're paying, and which programs are placing. Sourced from live postings, not self-reported surveys.</p>
+          <h2>The MBA Insider</h2>
+          <p>Weekly admissions intel from a Haas MBA grad. The data, decisions, and inside conversations rankings sites won't show you.</p>
           <ul class="nl-preview-list">
-            <li>Hiring companies + open roles + salary ranges</li>
-            <li>Placement trends by school and industry</li>
-            <li>Admissions intel and deadline reminders</li>
+            <li>Anonymous admit profiles + what got them in</li>
+            <li>Scholarship offers we're seeing this cycle</li>
+            <li>GMAT median shifts and round-by-round timing intel</li>
           </ul>
           <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 380px;">
             <input type="email" placeholder="your@email.com" required style="padding: 12px 14px; border: 2px solid #0A1628; border-radius: 2px; font-size: 15px; background: #fff; color: #0A1628; flex: 1;">
@@ -145,7 +151,7 @@
           <div class="nl-msg"></div>
         </div>
         <div class="nl-preview-img">
-          <img src="/assets/newsletter-preview.svg" alt="MBA Guidance Weekly Briefing preview" loading="lazy">
+          <img src="/assets/newsletter-preview.svg" alt="The MBA Insider weekly briefing preview" loading="lazy">
         </div>
       </div>
     </div>
@@ -323,13 +329,23 @@
         <h2>Tools</h2>
       </div>
       <div class="tools-grid">
+        <a href="/tools/school-recommender/" class="tool-card">
+          <span class="tool-icon">&#x1F3AF;</span>
+          <h3>School Recommender</h3>
+          <p>Tell us your goals, GMAT, and what matters. Get 7 best-fit MBA programs ranked.</p>
+        </a>
+        <a href="/tools/admit-predictor/" class="tool-card">
+          <span class="tool-icon">&#x1F4CA;</span>
+          <h3>Admit Predictor</h3>
+          <p>Input your profile. Get realistic admit chances at top programs plus what's weakening your app.</p>
+        </a>
         <a href="/tools/roi-calculator/" class="tool-card">
           <span class="tool-icon">&#x1F4B0;</span>
           <h3>MBA ROI Calculator</h3>
           <p>Input your salary, school costs, and career goals. Get a personalized return-on-investment estimate.</p>
         </a>
         <a href="/tools/gmat-calculator/" class="tool-card">
-          <span class="tool-icon">&#x1F3AF;</span>
+          <span class="tool-icon">&#x1F3C6;</span>
           <h3>GMAT Target Score</h3>
           <p>Select your target school. See the score you need, the competitive range, and prep advice.</p>
         </a>
@@ -342,7 +358,7 @@
     <div class="container">
       <div class="section-header">
         <h2>Popular Comparisons</h2>
-        <a href="/compare/" class="section-link">All 169 &rarr;</a>
+        <a href="/compare/" class="section-link">All 179 &rarr;</a>
       </div>
       <div class="comp-grid">
         <a href="/compare/harvard-business-school-vs-stanford-gsb/" class="comp-link"><span>Harvard Business School</span><span class="vs">vs</span><span>Stanford GSB</span></a>
@@ -359,9 +375,9 @@
   <!-- Newsletter -->
   <section class="section section-dark">
     <div class="container" style="text-align: center; max-width: 600px;">
-      <p class="hero-eyebrow" style="color: var(--color-accent);">Free Weekly Newsletter</p>
-      <h2 style="color: #fff;">Who's hiring MBAs this week?</h2>
-      <p style="color: var(--color-text-on-dark-secondary); margin: 16px auto 24px;">Companies hiring MBA grads, salary trends, and which programs are placing. One email, every week.</p>
+      <p class="hero-eyebrow" style="color: var(--color-accent);">The MBA Insider &middot; Free Weekly Newsletter</p>
+      <h2 style="color: #fff;">The admissions intel rankings sites won't show you.</h2>
+      <p style="color: var(--color-text-on-dark-secondary); margin: 16px auto 24px;">Anonymous admit profiles, scholarship offers we're seeing, GMAT median shifts, and the inside data on this admissions cycle. One email a week from a Haas MBA grad.</p>
       <form onsubmit="handleNewsletterSignup(event)" class="nl-form" style="max-width: 440px; margin: 0 auto;">
         <input type="email" placeholder="your@email.com" required>
         <button type="submit" class="btn btn-accent">Subscribe</button>
