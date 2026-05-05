@@ -12,6 +12,27 @@ import shutil
 CURRENT_YEAR = 2026
 SITE_NAME = "MBA Guidance"
 SITE_URL = "https://mbaguidance.com"
+
+# ============================================================================
+# AFFILIATE LINKS — Replace placeholders with real tracking URLs after signup.
+# See /disclosures/ for FTC-compliant disclosure language.
+# ============================================================================
+AFFILIATE_LINKS = {
+    # GMAT/GRE prep (highest commercial intent)
+    "magoosh_gmat": "https://magoosh.com/gmat/",          # Replace via Impact tracking link, 10% commission
+    "magoosh_gre": "https://gre.magoosh.com/",            # Replace via Impact tracking link, 10% commission
+    "manhattan_prep": "https://www.manhattanprep.com/",   # Replace via Impact (apply directly)
+    "ttp_gmat": "https://gmat.targettestprep.com/",       # Replace via direct partnership inquiry
+    "princeton_review_gmat": "https://www.princetonreview.com/business/gmat-test-prep",  # Replace via Impact
+
+    # MBA loans
+    "mpower": "https://www.mpowerfinancing.com/",         # Replace with referral link, $300/funded loan
+    "prodigy": "https://prodigyfinance.com/",             # Replace with referral link, $100 voucher
+    "sallie_mae": "https://www.salliemae.com/student-loans/graduate-school-loans/",  # Replace via CJ Affiliate
+
+    # Application services / books
+    "wsj_student": "https://store.wsj.com/",              # Replace via Impact, recurring rev
+}
 AUTHOR = "Rome Thorndike"
 AUTHOR_CREDENTIAL = "Berkeley Haas MBA"
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
@@ -8256,7 +8277,7 @@ def footer_html():
     </div>
     <div class="footer-bottom">
       <p>&copy; {CURRENT_YEAR} {SITE_NAME} &middot; {AUTHOR} &middot; {AUTHOR_CREDENTIAL}</p>
-      <p class="footer-disclaimer">Data reflects most recent available admissions cycle. Individual results may vary.</p>
+      <p class="footer-disclaimer">Data reflects most recent available admissions cycle. Individual results may vary. Some links on this site are affiliate links. <a href="/disclosures/">Disclosures &rarr;</a></p>
     </div>
   </div>
 </footer>
@@ -12180,7 +12201,7 @@ def build_sitemap():
     urls.append("/guides/")
     for g in GUIDES:
         urls.append(f"/guides/{g['slug']}/")
-    urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/", "/tools/roi-calculator/", "/tools/gmat-calculator/", "/tools/school-recommender/", "/tools/admit-predictor/", "/tools/essay-review/"])
+    urls.extend(["/about/", "/newsletter/", "/blog/", "/tools/", "/tools/roi-calculator/", "/tools/gmat-calculator/", "/tools/school-recommender/", "/tools/admit-predictor/", "/tools/essay-review/", "/disclosures/"])
     # Blog posts — ALL school ROI posts
     for s in SCHOOLS:
         urls.append(f"/blog/is-{s['slug']}-worth-it/")
@@ -13490,6 +13511,92 @@ EMPLOYERS = [
      "interview": "Two rounds of case interviews plus behavioral. Cases lean toward technology and digital transformation themes. Behavioral interviews emphasize adaptability and willingness to travel, since Accenture's project-based model often requires significant client-site time.",
     },
 ]
+
+
+def build_disclosures():
+    """FTC-compliant affiliate disclosure page at /disclosures/."""
+    bc = breadcrumb_schema([("Home", "/"), ("Disclosures", "/disclosures/")])
+
+    title = f"Disclosures & Affiliate Policy | {SITE_NAME}"
+    meta = "Disclosures, affiliate relationships, and editorial policy for MBA Guidance. We earn commissions from some links. Recommendations are independent."
+
+    content = f"""{html_head(
+        title,
+        meta,
+        "/disclosures/",
+        schema=bc
+    )}
+{nav_html()}
+<main>
+  <section class="hero section-dark hero-sm">
+    <div class="container">
+      <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
+      <h1>Disclosures & Affiliate Policy</h1>
+      <p class="hero-subtitle">How we make money, what's sponsored, and how we keep recommendations independent.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-narrow">
+
+      <div class="school-section">
+        <h2>Affiliate relationships</h2>
+        <p>{SITE_NAME} participates in affiliate programs with companies that serve MBA applicants. When you click certain links on this site and make a purchase, we may earn a commission at no additional cost to you. These are the programs we currently partner with:</p>
+        <ul>
+          <li><strong>Magoosh</strong> (GMAT, GRE prep) via Impact</li>
+          <li><strong>Manhattan Prep</strong> (GMAT, GRE prep) via Impact</li>
+          <li><strong>Princeton Review</strong> (GMAT, GRE prep) via Impact</li>
+          <li><strong>Target Test Prep</strong> (GMAT prep) via direct partnership</li>
+          <li><strong>MPOWER Financing</strong> (international MBA loans) via referral program</li>
+          <li><strong>Prodigy Finance</strong> (international MBA loans) via referral program</li>
+          <li><strong>Sallie Mae</strong> (US graduate loans) via CJ Affiliate</li>
+        </ul>
+      </div>
+
+      <div class="school-section">
+        <h2>How affiliate revenue affects our recommendations</h2>
+        <p>It doesn't. Our school rankings, comparisons, and editorial verdicts are written before any consideration of affiliate relationships. We rank schools by academic quality, career outcomes, and selectivity. We rank test prep options by quality and value. Affiliate commissions don't move ratings or alter our verdicts.</p>
+        <p>The simple rule: we'd rather earn $0 in commissions than recommend a product we don't believe in. The site's value depends on applicants trusting our recommendations. Burning that trust for a few hundred dollars in commissions would be self-defeating.</p>
+        <p>If we recommend a product or service that we earn a commission from, we'll make that relationship clear in the surrounding content or via a footnote near the link.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Paid services we offer directly</h2>
+        <p>We sell essay review services through <a href="/tools/essay-review/">{SITE_URL}/tools/essay-review/</a>. Pricing ranges from $149 to $899 depending on tier. This is a service offered directly by {SITE_NAME}, not an affiliate relationship.</p>
+        <p>Our free tools (School Recommender, Admit Predictor, ROI Calculator, GMAT Target Score) are completely free and don't gate functionality behind paywalls beyond the optional email capture for the recommender and predictor.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Newsletter and email</h2>
+        <p>The MBA Insider newsletter is free. Subscribers may receive occasional sponsored sections clearly labeled as such. We don't sell or rent the email list to third parties. Unsubscribe links work in every email.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Editorial independence</h2>
+        <p>All school profiles, rankings, comparisons, and guides are written by {SITE_NAME} editorial staff. No school, test prep company, or financial services firm has paid for placement, ratings, or editorial coverage on this site. If that ever changes, we'll disclose it in the relevant content and mark the page accordingly.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>FTC compliance</h2>
+        <p>This site complies with the Federal Trade Commission's guidelines on endorsements and testimonials. Material connections (affiliate relationships, sponsorships, gifts received) are disclosed near the relevant content. Disclosures are designed to be clear and conspicuous, not buried in legalese.</p>
+      </div>
+
+      <div class="school-section">
+        <h2>Contact</h2>
+        <p>Questions about our policies, partnerships, or content? Email <a href="mailto:rome@getprovyx.com">rome@getprovyx.com</a>.</p>
+      </div>
+
+      <div class="school-section">
+        <p class="text-secondary" style="font-size: 13px;">Last updated: {CURRENT_YEAR}</p>
+      </div>
+
+      {byline_html()}
+    </div>
+  </section>
+</main>
+{footer_html()}"""
+    write_page(os.path.join(OUTPUT_DIR, "disclosures", "index.html"), content)
+    print("  Built: /disclosures/")
 
 
 def build_essay_review():
@@ -15257,6 +15364,7 @@ def main():
     build_school_recommender()
     build_admit_predictor()
     build_essay_review()
+    build_disclosures()
     build_redirects()
     build_sitemap()
     build_robots()
