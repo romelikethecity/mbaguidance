@@ -13607,34 +13607,27 @@ def build_essay_review():
     bc = breadcrumb_schema([("Home", "/"), ("Tools", "/tools/"), ("Essay Review", "/tools/essay-review/")])
 
     faqs = [
-        ("Who reviews my essay?",
+        ("When will essay review slots open?",
+         "Capacity reopens periodically based on bandwidth. Waitlist members hear first, get priority access, and a 15% discount on their first review. Drop your email above to be notified."),
+        ("Who reviews my essay when slots open?",
          "A Berkeley Haas MBA grad with experience reading and critiquing essays for top MBA programs. The same caliber of feedback you'd get from a $500-$1,000 admissions consultant, with a faster turnaround."),
         ("How is this different from using ChatGPT?",
          "ChatGPT critiques generic essays generically. We critique your essay against the specific school's prompts, culture, and admit profile. The feedback names the program, references the strengths it recruits for, and flags where your draft reads like every other applicant. The judgment is human, the data is school-specific."),
         ("Will using this hurt my application with admissions?",
          "No. We critique your draft. We don't write it. Top schools have explicit policies that AI feedback for editing and idea generation is acceptable; AI generating the essay itself is not. Our critique flags weak strategic focus, vague claims, and missing school-specific evidence so you can rewrite. The words on the page stay yours."),
-        ("How long does the review take?",
+        ("How long does the review take when slots are open?",
          "Single-essay reviews come back within 24-48 hours. Multi-essay packs and the full application audit take 3-5 business days, since we want time to read the whole package as a coherent application rather than essay-by-essay."),
         ("What format do I get the feedback in?",
          "A written critique delivered as a PDF or Google Doc. Each section of your essay gets specific notes: what's working, what's vague, what's generic, what's missing relative to the school's known preferences. Plus a top-line verdict on whether the essay is currently strong enough to send."),
-        ("Can I rewrite and resubmit?",
-         "Each tier includes one round of feedback. For a second round on the same essay, the rate is $75 per follow-up review. Most candidates only need one round if they take the first round seriously."),
         ("Do you write essays for me?",
          "No. We critique. Writing for applicants violates every top program's admissions policy and produces worse outcomes anyway, since admissions readers are good at spotting generic AI essays. The work in your essay has to be yours."),
-        ("What if I'm not happy with the review?",
-         "Email us within 7 days of receiving the review and explain what didn't work. We'll either redo the review or refund the tier. We've never had this happen, and we'd rather make it right than have a dissatisfied customer."),
+        ("What if I'm not on the waitlist when slots open?",
+         "Slots get released to waitlist members first. If capacity remains, they open publicly at standard pricing without the 15% discount. The fastest way to guarantee access is the waitlist."),
     ]
     page_faq = faq_schema(faqs)
 
-    title = f"MBA Essay Review by a Haas MBA Grad ({CURRENT_YEAR}): Get Critiqued in 24-48 Hours"
-    meta = f"MBA essay review by a Berkeley Haas MBA grad. School-specific critique, 24-48 hour turnaround, $149-$899 packages. The feedback consultants charge $500+ for at half the price."
-
-    # Stripe Payment Link placeholders. Rome creates these in Stripe Dashboard
-    # (4 prices: $149, $399, $599, $899) and pastes URLs over these placeholders.
-    PAY_SINGLE = "https://buy.stripe.com/REPLACE_WITH_SINGLE_LINK"
-    PAY_3PACK = "https://buy.stripe.com/REPLACE_WITH_3PACK_LINK"
-    PAY_5PACK = "https://buy.stripe.com/REPLACE_WITH_5PACK_LINK"
-    PAY_AUDIT = "https://buy.stripe.com/REPLACE_WITH_AUDIT_LINK"
+    title = f"MBA Essay Review by a Haas MBA Grad ({CURRENT_YEAR}): Join the Waitlist"
+    meta = f"MBA essay review by a Berkeley Haas MBA grad. School-specific critique at half the price of premium consultants. Currently capacity-constrained, join the waitlist for first access."
 
     faq_items = "".join(
         f'<div class="faq-item"><h3>{q}</h3><p>{a}</p></div>'
@@ -13653,15 +13646,26 @@ def build_essay_review():
     <div class="container">
       <div class="gold-rule" style="width: 48px; margin-bottom: 24px;"></div>
       <h1>MBA Essay Review by a Haas MBA Grad</h1>
-      <p class="hero-subtitle">School-specific critique that names what's working, what's generic, and what's missing. 24-48 hour turnaround. The feedback admissions consultants charge $500+ for, at half the price.</p>
+      <p class="hero-subtitle">School-specific critique that names what's working, what's generic, and what's missing. The feedback admissions consultants charge $500+ for, at half the price.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container content-narrow">
 
+      <div id="waitlist" style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px; margin-bottom: 32px;">
+        <h2 style="margin-top: 0;">Currently capacity-constrained. Join the waitlist.</h2>
+        <p>Demand has exceeded current bandwidth. Drop your email below and you'll be first in line when slots open. Waitlist members get priority access and a 15% discount on their first review.</p>
+        <form onsubmit="joinWaitlist(event)" class="nl-form" style="margin-top: 16px;">
+          <input type="email" id="er-email" placeholder="your@email.com" required>
+          <button type="submit" class="btn btn-accent">Join Waitlist</button>
+        </form>
+        <div class="nl-msg" id="er-msg" style="margin-top: 8px;"></div>
+        <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 12px; opacity: 0.8;">No spam. Unsubscribe anytime. You'll also start getting The MBA Insider weekly newsletter.</p>
+      </div>
+
       <div class="school-section">
-        <h2>What you get</h2>
+        <h2>What you'll get when slots open</h2>
         <p>An MBA essay review from someone who's been through admissions at a top program, knows what each school recruits for, and reads your draft against that bar.</p>
         <ul>
           <li><strong>Section-by-section written critique.</strong> Every paragraph gets specific notes: what's strong, what's vague, what's generic, what's missing.</li>
@@ -13673,43 +13677,44 @@ def build_essay_review():
       </div>
 
       <div class="school-section">
-        <h2>Pricing</h2>
+        <h2>Pricing (when slots reopen)</h2>
+        <p style="font-size: 14px; color: var(--color-text-secondary);">Tier structure for reference. Waitlist members get 15% off their first review at any tier.</p>
         <div class="tools-grid" style="margin-top: 16px;">
           <div class="tool-card" style="border: 2px solid var(--color-border); padding: 24px;">
             <h3 style="margin-top: 0;">Single Essay</h3>
             <div style="font-size: 32px; font-weight: 700; color: var(--color-accent); margin: 8px 0;">$149</div>
             <p style="font-size: 14px;">One essay critique. 24-48 hour turnaround. Ideal for stress-testing a single school's lead essay.</p>
-            <a href="{PAY_SINGLE}" class="btn btn-outline" style="display: block; text-align: center; margin-top: 12px;">Get started</a>
+            <a href="#waitlist" class="btn btn-outline" style="display: block; text-align: center; margin-top: 12px;">Notify me</a>
           </div>
           <div class="tool-card" style="border: 2px solid var(--color-accent); padding: 24px; position: relative;">
             <span style="position: absolute; top: -12px; right: 16px; background: var(--color-accent); color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">MOST POPULAR</span>
             <h3 style="margin-top: 0;">3-Essay Pack</h3>
             <div style="font-size: 32px; font-weight: 700; color: var(--color-accent); margin: 8px 0;">$399</div>
             <p style="font-size: 14px;">All three essays for one school's full application. Reviewed as a coherent set, not in isolation. Saves $48 vs single-essay rate.</p>
-            <a href="{PAY_3PACK}" class="btn btn-accent" style="display: block; text-align: center; margin-top: 12px;">Get started</a>
+            <a href="#waitlist" class="btn btn-accent" style="display: block; text-align: center; margin-top: 12px;">Notify me</a>
           </div>
           <div class="tool-card" style="border: 2px solid var(--color-border); padding: 24px;">
             <h3 style="margin-top: 0;">5-Essay Pack</h3>
             <div style="font-size: 32px; font-weight: 700; color: var(--color-accent); margin: 8px 0;">$599</div>
             <p style="font-size: 14px;">Five essays across two schools. The right call for an R1 sprint at multiple programs. Saves $146 vs single-essay rate.</p>
-            <a href="{PAY_5PACK}" class="btn btn-outline" style="display: block; text-align: center; margin-top: 12px;">Get started</a>
+            <a href="#waitlist" class="btn btn-outline" style="display: block; text-align: center; margin-top: 12px;">Notify me</a>
           </div>
           <div class="tool-card" style="border: 2px solid var(--color-border); padding: 24px;">
             <h3 style="margin-top: 0;">Full Application Audit</h3>
             <div style="font-size: 32px; font-weight: 700; color: var(--color-accent); margin: 8px 0;">$899</div>
             <p style="font-size: 14px;">Essays + resume + recommender brief + interview prep doc, all reviewed as one application. 3-5 business days.</p>
-            <a href="{PAY_AUDIT}" class="btn btn-outline" style="display: block; text-align: center; margin-top: 12px;">Get started</a>
+            <a href="#waitlist" class="btn btn-outline" style="display: block; text-align: center; margin-top: 12px;">Notify me</a>
           </div>
         </div>
       </div>
 
       <div class="school-section">
-        <h2>How it works</h2>
+        <h2>How it works (when reopened)</h2>
         <ol>
+          <li><strong>Get notified when slots open.</strong> Waitlist members hear first and get a 15% discount code.</li>
           <li><strong>Pick your tier and pay via Stripe.</strong> Secure checkout, takes 30 seconds.</li>
-          <li><strong>Submit your essay(s).</strong> After payment, you'll get an email with the upload form. Send your draft, the school name, the prompt you're answering, and a brief context note (career goals, year applying).</li>
-          <li><strong>Receive your critique.</strong> 24-48 hours for single-essay reviews. 3-5 business days for multi-essay packs and full audits. Delivered as a PDF or Google Doc with inline comments and a summary.</li>
-          <li><strong>Rewrite and ship.</strong> The critique tells you what to change. The rewrite is yours.</li>
+          <li><strong>Submit your essay(s).</strong> After payment, you'll get an email with the upload form. Send your draft, the school name, the prompt you're answering, and a brief context note.</li>
+          <li><strong>Receive your critique.</strong> 24-48 hours for single-essay reviews. 3-5 business days for multi-essay packs and full audits. Delivered as a PDF or Google Doc.</li>
         </ol>
       </div>
 
@@ -13751,9 +13756,42 @@ def build_essay_review():
     </div>
   </section>
 </main>
-{footer_html()}"""
+{footer_html()}
+<script>
+function joinWaitlist(e) {{
+  e.preventDefault();
+  const email = document.getElementById('er-email').value;
+  const btn = e.target.querySelector('button');
+  const msg = document.getElementById('er-msg');
+  btn.disabled = true;
+  btn.textContent = 'Adding...';
+
+  fetch('https://newsletter-subscribe.rome-workers.workers.dev/subscribe', {{
+    method: 'POST',
+    headers: {{ 'Content-Type': 'application/json' }},
+    body: JSON.stringify({{ email, list: 'mbaguidance' }})
+  }}).then(r => r.json()).then(data => {{
+    if (data.ok) {{
+      msg.style.color = '#059669';
+      msg.textContent = "You're on the waitlist. We'll email when slots open with your 15% discount code.";
+      document.getElementById('er-email').value = '';
+      btn.textContent = 'On the waitlist';
+      if (typeof gtag === 'function') {{
+        gtag('event', 'waitlist_signup', {{ event_category: 'lead_magnet', event_label: 'essay_review' }});
+      }}
+    }} else {{
+      throw new Error(data.error || 'Subscription failed');
+    }}
+  }}).catch(err => {{
+    msg.style.color = '#DC2626';
+    msg.textContent = err.message;
+    btn.disabled = false;
+    btn.textContent = 'Join Waitlist';
+  }});
+}}
+</script>"""
     write_page(os.path.join(OUTPUT_DIR, "tools", "essay-review", "index.html"), content)
-    print(f"  Built: /tools/essay-review/")
+    print(f"  Built: /tools/essay-review/ (waitlist mode)")
 
 
 def build_tools_index():
@@ -13793,8 +13831,8 @@ def build_tools_index():
         </a>
         <a href="/tools/essay-review/" class="tool-card">
           <span class="tool-icon">&#x270D;&#xFE0F;</span>
-          <h3>Essay Review</h3>
-          <p>Get your MBA essay critiqued by a Haas MBA grad in 24-48 hours. School-specific feedback at half the price of premium consultants. From $149.</p>
+          <h3>Essay Review (Waitlist)</h3>
+          <p>School-specific MBA essay critique by a Haas MBA grad. Currently capacity-constrained. Join the waitlist for first access plus a 15% discount.</p>
         </a>
         <a href="/tools/roi-calculator/" class="tool-card">
           <span class="tool-icon">&#x1F4B0;</span>
@@ -14374,8 +14412,8 @@ def build_admit_predictor():
         <div id="ap-weaknesses"></div>
 
         <div style="margin-top: 32px;">
-          <p>Get personalized essay feedback to strengthen your application:</p>
-          <a href="/tools/essay-review/" class="btn btn-primary">Essay Review by a Haas MBA &rarr;</a>
+          <p>Strong essays can lift your prediction 1-2 buckets. Join the waitlist for personalized essay feedback:</p>
+          <a href="/tools/essay-review/" class="btn btn-primary">Essay Review Waitlist (Haas MBA grad) &rarr;</a>
         </div>
       </div>
 
