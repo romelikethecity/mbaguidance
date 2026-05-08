@@ -26,7 +26,7 @@ AFFILIATE_LINKS = {
     "princeton_review_gmat": "https://www.princetonreview.com/business/gmat-test-prep",  # Replace via Impact
 
     # MBA loans
-    "mpower": "https://www.mpowerfinancing.com/",         # Replace with referral link, $300/funded loan
+    "mpower": "https://app.mpowerfinancing.com/?ref_code=romejhop",  # Active referral link, $300/funded loan
     "prodigy": "https://prodigyfinance.com/",             # Replace with referral link, $100 voucher
     "sallie_mae": "https://www.salliemae.com/student-loans/graduate-school-loans/",  # Replace via CJ Affiliate
 
@@ -8181,6 +8181,7 @@ def html_head(title, description, canonical_path, og_image=None, schema=""):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="impact-site-verification" value="9d3c1f53-c895-45bf-abc0-4748dd898d74">
   <title>{title}</title>
   <meta name="description" content="{description}">
   <link rel="canonical" href="{canonical}">
