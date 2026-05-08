@@ -72,8 +72,8 @@
       <div id="waitlist" style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px; margin-bottom: 32px;">
         <h2 style="margin-top: 0;">Currently capacity-constrained. Join the waitlist.</h2>
         <p>Demand has exceeded current bandwidth. Drop your email below and you'll be first in line when slots open. Waitlist members get priority access and a 15% discount on their first review.</p>
-        <form onsubmit="joinWaitlist(event)" class="nl-form" style="margin-top: 16px;">
-          <input type="email" id="er-email" placeholder="your@email.com" required>
+        <form onsubmit="joinWaitlist(event)" class="nl-form" style="margin-top: 16px; max-width: 480px;">
+          <input type="email" id="er-email" placeholder="your@email.com" required style="padding: 14px 16px; border: 2px solid #0A1628; border-radius: 2px; font-size: 16px; background: #fff; color: #0A1628; flex: 1;">
           <button type="submit" class="btn btn-accent">Join Waitlist</button>
         </form>
         <div class="nl-msg" id="er-msg" style="margin-top: 8px;"></div>

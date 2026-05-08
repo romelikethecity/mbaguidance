@@ -13656,8 +13656,8 @@ def build_essay_review():
       <div id="waitlist" style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px; margin-bottom: 32px;">
         <h2 style="margin-top: 0;">Currently capacity-constrained. Join the waitlist.</h2>
         <p>Demand has exceeded current bandwidth. Drop your email below and you'll be first in line when slots open. Waitlist members get priority access and a 15% discount on their first review.</p>
-        <form onsubmit="joinWaitlist(event)" class="nl-form" style="margin-top: 16px;">
-          <input type="email" id="er-email" placeholder="your@email.com" required>
+        <form onsubmit="joinWaitlist(event)" class="nl-form" style="margin-top: 16px; max-width: 480px;">
+          <input type="email" id="er-email" placeholder="your@email.com" required style="padding: 14px 16px; border: 2px solid #0A1628; border-radius: 2px; font-size: 16px; background: #fff; color: #0A1628; flex: 1;">
           <button type="submit" class="btn btn-accent">Join Waitlist</button>
         </form>
         <div class="nl-msg" id="er-msg" style="margin-top: 8px;"></div>
@@ -14031,8 +14031,8 @@ def build_school_recommender():
         <div style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px;">
           <h3 style="margin-top: 0;">Unlock your full top 7 + reasoning</h3>
           <p>Drop your email below to see all 7 best-fit schools ranked, each with a specific reason it matches your profile. You'll also start receiving The MBA Insider, our weekly admissions intel newsletter.</p>
-          <form onsubmit="unlockResults(event)" class="nl-form" style="margin-top: 16px;">
-            <input type="email" id="rec-email" placeholder="your@email.com" required>
+          <form onsubmit="unlockResults(event)" class="nl-form" style="margin-top: 16px; max-width: 480px;">
+            <input type="email" id="rec-email" placeholder="your@email.com" required style="padding: 14px 16px; border: 2px solid #0A1628; border-radius: 2px; font-size: 16px; background: #fff; color: #0A1628; flex: 1;">
             <button type="submit" class="btn btn-accent">Unlock Results</button>
           </form>
           <div class="nl-msg" id="rec-msg" style="margin-top: 8px;"></div>
@@ -14395,8 +14395,8 @@ def build_admit_predictor():
         <div style="background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); padding: 24px; border-radius: 4px;">
           <h3 style="margin-top: 0;">Unlock your full prediction + weakness diagnosis</h3>
           <p>Drop your email to see your admit chances at every target school, plus the 2-3 things weakening your application most. You'll also start receiving The MBA Insider, our weekly admissions intel newsletter.</p>
-          <form onsubmit="unlockPrediction(event)" class="nl-form" style="margin-top: 16px;">
-            <input type="email" id="ap-email" placeholder="your@email.com" required>
+          <form onsubmit="unlockPrediction(event)" class="nl-form" style="margin-top: 16px; max-width: 480px;">
+            <input type="email" id="ap-email" placeholder="your@email.com" required style="padding: 14px 16px; border: 2px solid #0A1628; border-radius: 2px; font-size: 16px; background: #fff; color: #0A1628; flex: 1;">
             <button type="submit" class="btn btn-accent">Unlock Prediction</button>
           </form>
           <div class="nl-msg" id="ap-msg" style="margin-top: 8px;"></div>
