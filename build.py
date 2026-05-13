@@ -9627,6 +9627,11 @@ def build_school_subpages():
         <p>{name} is particularly strong for careers in {", ".join(best_for)}. The school's <a href="/schools/{s['slug']}/">full profile</a> details specific employer relationships and career pipelines.</p>
       </div>
       <div class="school-section">
+        <h2>What Graduates Actually Do (Per {name} Reporting)</h2>
+        {s.get("careers", f"<p>{name} graduates concentrate in {', '.join(strengths[:3])}. Specific employer relationships and recent placement trends are detailed in the school's annual employment report. The strengths above shape both recruiting concentration and alumni network reach in those sectors.</p>")}
+        <p>For applicants choosing between {name} and a peer program, the question is whether the recruiter list and alumni network align with your target industry. Salary and employment rate are signals; the more important comparison is which firms actively recruit and where graduates land in your target function.</p>
+      </div>
+      <div class="school-section">
         <h2>Salary by Industry</h2>
         <p>Average starting salaries vary significantly by industry:</p>
         <ul>
