@@ -9223,6 +9223,11 @@ def build_school_subpages():
         </ul>
       </div>
       <div class="school-section">
+        <h2>Who Tends to Get Into {name}</h2>
+        {s.get("who_should_apply", f"<p>{name} admits at {ar}% favors candidates with clear positioning around the school's strengths and demonstrable career trajectory that the MBA accelerates rather than starts. Generic applications get filtered fast at this selectivity tier.</p>")}
+        {s.get("watch_out", "")}
+      </div>
+      <div class="school-section">
         <h2>Acceptance Rate Trends</h2>
         <p>MBA acceptance rates at top programs have generally tightened over the past decade as application volumes have increased. {name}'s {ar}% rate reflects the current competitive landscape for the class of {CURRENT_YEAR}. Application volume fluctuates with the economy: acceptance rates typically tighten during recessions (more applicants) and loosen during strong job markets (fewer applicants).</p>
       </div>
@@ -9294,6 +9299,10 @@ def build_school_subpages():
         <h2>Professional Background</h2>
         <p>{name} attracts students from diverse professional backgrounds. Common pre-MBA industries include consulting, financial services, technology, and non-profit/government. The school particularly values candidates whose backgrounds align with its strengths in {strengths}.</p>
         <p>Diversity of background is a deliberate admissions strategy. Schools build classes where a former investment banker sits next to a Peace Corps volunteer sits next to a software engineer. This diversity is the source of the MBA classroom's value.</p>
+      </div>
+      <div class="school-section">
+        <h2>Culture and Community at {name}</h2>
+        {s.get("culture", f"<p>{name} attracts students with shared interest in {', '.join(strengths.split(',')[:2])} as much as a credential. Community size of {cs} shapes how often you'll cross paths with the same classmates and how dense the alumni network feels post-graduation.</p>")}
       </div>
       <div class="school-section">
         <h2>What This Means for Applicants</h2>
@@ -9374,6 +9383,10 @@ def build_school_subpages():
           <li><strong>Transcripts:</strong> Official transcripts from all undergraduate and graduate institutions.</li>
           <li><strong>Application fee:</strong> Typically $200-$275. Fee waivers are available for candidates demonstrating need or through campus visits.</li>
         </ul>
+      </div>
+      <div class="school-section">
+        <h2>How to Position Your {name} Application</h2>
+        {s.get("who_should_apply", f"<p>Round selection matters less than fit. {name} reads applications for evidence of distinctive trajectory and clear reasons this specific program accelerates your goals. Strong applications use deadlines as forcing functions for clarity, not the other way around.</p>")}
       </div>
       <div class="school-section">
         <h2>{name} MBA Application Deadlines for {CURRENT_YEAR}: Detailed Breakdown</h2>
