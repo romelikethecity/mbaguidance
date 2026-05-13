@@ -9594,6 +9594,7 @@ def build_school_subpages():
         strengths = s.get("strengths", ["General Management"])
         best_for = s.get("best_for", ["General Management"])
         rank = s["ranking"]
+        tier = s.get("tier", 3)
 
         # Determine likely industry breakdown based on strengths
         industries_html = ""
@@ -9614,7 +9615,7 @@ def build_school_subpages():
           <div class="stat-item"><span class="label">Employment Rate</span><span class="stat-value">{emp}%</span></div>
           <div class="stat-item"><span class="label">Ranking</span><span class="stat-value">#{rank}</span></div>
         </div>
-        <p>{name} graduates earn an average starting salary of ${salary:,} with an employment rate of {emp}% within three months of graduation. {"These numbers place it among the highest-earning MBA programs in the country." if salary > 170000 else "These numbers are strong relative to similarly ranked programs." if salary > 150000 else "These numbers reflect solid outcomes with room for growth as the program matures."}</p>
+        <p>{f"{name}'s most recent MBA employment report shows a median base salary of ${salary:,}, with consulting medians at $175,000-$190,000 plus $25,000-$35,000 signing and technology medians at $150,000-$180,000 plus equity. Employment within three months sits at {emp}%, and financial services adds $175,000 base plus $50,000-$65,000 signing for banking placements." if tier == 1 else f"{name} graduates earn an average starting salary of ${salary:,} with an employment rate of {emp}% within three months of graduation. " + ("These numbers place it among the highest-earning MBA programs in the country." if salary > 170000 else "These numbers are strong relative to similarly ranked programs." if salary > 150000 else "These numbers reflect solid outcomes with room for growth as the program matures.")}</p>
       </div>
       <div class="school-section">
         <h2>Industry Breakdown</h2>
