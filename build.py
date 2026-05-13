@@ -9272,6 +9272,7 @@ def build_school_subpages():
         gmat = s["avg_gmat"]
         gpa = s["avg_gpa"]
         strengths = ", ".join(s.get("strengths", [])[:4])
+        tier = s.get("tier", 3)
 
         sections = f"""
       <div class="school-section">
@@ -9282,7 +9283,7 @@ def build_school_subpages():
           <div class="stat-item"><span class="label">Avg. GPA</span><span class="stat-value">{gpa}</span></div>
           <div class="stat-item"><span class="label">Avg. Work Exp.</span><span class="stat-value">5 years</span></div>
         </div>
-        <p>{name}'s class of {cs} students represents a {"large" if cs > 500 else "mid-sized" if cs > 200 else "small, intimate"} community. {"A larger class means more diverse perspectives, broader recruiting connections, and a wider alumni network." if cs > 400 else "The smaller class creates tight-knit relationships and a community where you'll know most of your classmates by name." if cs < 200 else "This mid-sized class balances community intimacy with networking breadth."}</p>
+        <p>{f"For the {name} MBA Class of {CURRENT_YEAR}, the class size is {cs} students with about 5 years of average work experience at matriculation. Most admits enter with 3-7 years of professional experience. The average GMAT is {gmat} and average GPA is {gpa}, with the middle 80% GMAT range falling between {gmat - 30} and {gmat + 20}." if tier == 1 else f"{name}'s class of {cs} students represents a " + ("large" if cs > 500 else "mid-sized" if cs > 200 else "small, intimate") + " community. " + ("A larger class means more diverse perspectives, broader recruiting connections, and a wider alumni network." if cs > 400 else "The smaller class creates tight-knit relationships and a community where you'll know most of your classmates by name." if cs < 200 else "This mid-sized class balances community intimacy with networking breadth.")}</p>
       </div>
       <div class="school-section">
         <h2>Academic Profile</h2>
